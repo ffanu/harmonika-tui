@@ -1,8 +1,8 @@
 # Atribusi dan batas distribusi
 
-Harmonika Terminal memakai basis TUI Crush 0.98.1, Copyright 2025–2026
-Charmbracelet, Inc. Perubahan merek tidak menghapus lisensi atau atribusi basis
-tersebut. Teks lisensinya disertakan di UPSTREAM-LICENSE.md.
+Komponen dasar TUI versi 0.98.1: Copyright 2025–2026 Charmbracelet, Inc.
+Perubahan merek tidak menghapus lisensi atau atribusi komponen tersebut.
+Teks lisensinya disertakan di UPSTREAM-LICENSE.md.
 
 Lapisan launcher, tool dan skill Harmonika dikelola terpisah. Tidak ada pemberian
 hak ke akun pemilik, key internal, sesi browser, SSH, database pelanggan, maupun

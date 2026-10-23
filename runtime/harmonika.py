@@ -51,7 +51,7 @@ def active(root=ROOT):
     if selected.parent!=(root/'versions').resolve() or not RELEASE_RE.fullmatch(selected.name):raise ValueError('invalid_release_pointer')
     manifest=verify_envelope((selected/'release.json').read_bytes(),root)
     if manifest.get('release')!=selected.name:raise ValueError('release_identity_mismatch')
-    binary=selected/'crush'
+    binary=selected/'harmonika'
     if binary.is_symlink() or digest(binary)!=manifest['binary_sha256']:raise ValueError('binary_checksum_mismatch')
     return selected,manifest
 
@@ -71,7 +71,7 @@ def switch(release,root=ROOT):
 
 def preflight(directory,manifest):
     verify_files(directory,manifest)
-    result=subprocess.run([str(directory/'crush'),'--version'],capture_output=True,text=True,timeout=10)
+    result=subprocess.run([str(directory/'harmonika'),'--version'],capture_output=True,text=True,timeout=10)
     if result.returncode or 'v0.98.1' not in result.stdout:raise ValueError('binary_preflight_failed')
     for name in manifest['files']:
         if name.endswith('.cjs'):
@@ -119,8 +119,8 @@ def _install_package(package,root=ROOT):
                 destination=stage/name;destination.parent.mkdir(parents=True,exist_ok=True)
                 with open(destination,'xb') as out:out.write(archive.read(name))
                 os.chmod(destination,0o600 if name=='release.json' else 0o644)
-            shutil.copy2(current/'crush',stage/'crush')
-            os.chmod(stage/'crush',0o755)
+            shutil.copy2(current/'harmonika',stage/'harmonika')
+            os.chmod(stage/'harmonika',0o755)
             preflight(stage,manifest)
             stage.rename(target)
             atomic_state(root/'previous',current.name)
@@ -139,7 +139,7 @@ def _rollback(root=ROOT):
     target=root/'versions'/release
     manifest=verify_envelope((target/'release.json').read_bytes(),root)
     if target.is_symlink() or manifest.get('release')!=release:raise ValueError('invalid_rollback_target')
-    if digest(target/'crush')!=manifest['binary_sha256']:raise ValueError('binary_checksum_mismatch')
+    if digest(target/'harmonika')!=manifest['binary_sha256']:raise ValueError('binary_checksum_mismatch')
     preflight(target,manifest)
     switch(release,root)
     atomic_state(root/'previous',current.name)
@@ -192,10 +192,10 @@ def main():
         directory,manifest=active()
         verify_files(directory,manifest)
         env=dict(os.environ,
-            CRUSH_DISABLE_PROVIDER_AUTO_UPDATE='1',
-            CRUSH_GLOBAL_CONFIG=os.environ.get('CRUSH_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')),
-            CRUSH_GLOBAL_DATA=os.environ.get('CRUSH_GLOBAL_DATA',str(Path.home()/'.local/share/harmonika')))
-        os.execve(str(directory/'crush'),['harmonika',*args],env)
+            HARMONIKA_DISABLE_PROVIDER_AUTO_UPDATE='1',
+            HARMONIKA_GLOBAL_CONFIG=os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')),
+            HARMONIKA_GLOBAL_DATA=os.environ.get('HARMONIKA_GLOBAL_DATA',str(Path.home()/'.local/share/harmonika')))
+        os.execve(str(directory/'harmonika'),['harmonika',*args],env)
         return
     print(json.dumps(result,ensure_ascii=False,indent=2))
 

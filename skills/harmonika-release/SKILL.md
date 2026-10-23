@@ -3,7 +3,7 @@ name: harmonika-release
 description: Prepare a manual Harmonika release with preflight checks, backups, checksums and an explicit rollback plan.
 ---
 
-Use when preparing or reviewing a Harmonika release or manual update. Read the project README and actual root CLI help/source before choosing commands; do not invent updater subcommands or replace the user's patched Crush/Harmonika binary. Skills do not implement an updater.
+Use when preparing or reviewing a Harmonika release or manual update. Read the project README and actual root CLI help/source before choosing commands; do not invent updater subcommands or replace the user's patched Harmonika/Harmonika binary. Skills do not implement an updater.
 
 Inspect version, platform/architecture, current installation path, working-tree state and declared package contents. Run the project's actual release checks. Prepare reviewable artifacts in the project and compute SHA-256 checksums with an available local utility. Check package contents for credentials and unintended config before handoff without printing their values.
 

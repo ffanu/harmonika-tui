@@ -2,7 +2,7 @@
 <style>body{margin:0;background:#11151b;color:#e7ebf0;font:16px/1.7 system-ui,sans-serif}main{max-width:800px;margin:auto;padding:48px 24px}h1,h2{line-height:1.2}h1{font-size:40px}h2{margin-top:32px;font-size:22px}p,li{color:#c0cad6}code,pre{font-family:ui-monospace,monospace}pre{padding:16px;background:#1b232e;border:1px solid #334052;border-radius:8px;overflow:auto}a{color:#79c9ff}.tag{display:inline-block;border:1px solid #3a4d64;border-radius:20px;padding:3px 12px;font-size:13px}footer{margin-top:40px;border-top:1px solid #334052;padding-top:20px;font-size:13px}</style>
 <main><span class="tag">Pembaruan manual • paket bertanda tangan</span><h1>Harmonika Terminal</h1><p>TUI kustom Harmonika untuk coding, dokumen, browser QA dan tool multimodal. Konfigurasi serta token tetap tersimpan privat di perangkat pemilik.</p>
 <h2>Mulai</h2><pre>harmonika
-harmonika doctor</pre><p>Perintah <code>crush</code> tetap tersedia. Versi dasar TUI dikunci ke binary kustom 0.98.1; tidak ada pemeriksaan atau pemasangan update otomatis saat startup.</p>
+harmonika doctor</pre><p>Perintah <code>harmonika</code> tetap tersedia. Versi dasar TUI dikunci ke binary kustom 0.98.1; tidak ada pemeriksaan atau pemasangan update otomatis saat startup.</p>
 <h2>Skill</h2><ul><li>UI responsif dan aksesibilitas</li><li>Debug dengan reproduksi dan pengujian</li><li>Browser QA serta screenshot desktop/mobile</li><li>Baca/buat DOCX, XLSX, PPTX; PDF teks melalui MCP</li><li>Git review dan alur perubahan aman</li><li>Rilis manual, verifikasi, rollback</li></ul>
 <h2>Tool</h2><p>Membuat folder, pencarian web, analisis gambar, PDF teks, transkripsi audio lokal, analisis frame video, dan pembuatan gambar melalui Harmonika AI. Kemampuan mengikuti ketersediaan worker. PDF scan belum didukung; video memakai enam frame tanpa analisis suara; transkripsi maksimal 120 detik pertama.</p>
 <pre>harmonika skill documents capabilities
@@ -11,4 +11,4 @@ harmonika update --check
 harmonika update --apply /path/paket-rilis.zip
 harmonika rollback</pre>
 <p>Update hanya menerima paket runtime bertanda tangan yang cocok dengan binary yang dikunci. Token, cookie, history dan binary upstream tidak disertakan dalam unduhan runtime.</p><p><a href="stable.json">Katalog rilis bertanda tangan</a> · <a href="trusted-public.pem">Public key verifikasi</a> · <a href="UPSTREAM-LICENSE.md">Lisensi dasar TUI</a> · <a href="https://chat.harmonika.id">Panel Harmonika AI</a> · <a href="https://hai.harmonika.id">Harmonika AI</a></p>
-<footer>Basis TUI: Crush 0.98.1, Copyright Charmbracelet. Lapisan skill, tool, launcher dan katalog pembaruan dikelola Harmonika. Ini bukan fork penuh source TUI; lisensi dan atribusi upstream tetap berlaku.</footer></main></html>
+<footer>Komponen dasar TUI versi 0.98.1: Copyright Charmbracelet. Lapisan skill, tool, launcher dan katalog pembaruan dikelola Harmonika. Lisensi dan atribusi komponen pihak ketiga tetap berlaku.</footer></main></html>

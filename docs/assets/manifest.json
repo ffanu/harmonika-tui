@@ -1,0 +1,14 @@
+{
+  "harmonika-demo.gif": {
+    "sha256": "bc80bd4b2c732f2e32396bb32a3548499170284e7cb488d897425ef212f1378e",
+    "size_bytes": 63473
+  },
+  "harmonika-demo.mp4": {
+    "sha256": "f5ccf02d3dc1c0d00235e38f4826ee9e36d31656cd43ead33667684d2891c43f",
+    "size_bytes": 62422
+  },
+  "harmonika-terminal.png": {
+    "sha256": "e2e8cb2a27c9702d037a166a66453eff790aaadb721eb0916614619375c6a0a3",
+    "size_bytes": 40042
+  }
+}

@@ -19,12 +19,12 @@ class Releases(unittest.TestCase):
         self.root=Path(self.temp.name);(self.root/'versions').mkdir()
         js="const fs=require('fs'),c=require('crypto');const k=c.generateKeyPairSync('ed25519');fs.writeFileSync(process.argv[1],k.privateKey.export({type:'pkcs8',format:'pem'}));fs.writeFileSync(process.argv[2],k.publicKey.export({type:'spki',format:'pem'}));"
         subprocess.run([m.NODE,'-e',js,str(self.root/'private.pem'),str(self.root/'trusted-public.pem')],check=True)
-        self.binary=b'#!/bin/sh\necho "crush version v0.98.1"\n'
+        self.binary=b'#!/bin/sh\necho "harmonika version v0.98.1"\n'
         self.files={'tools/protocol-check.cjs':b'process.stdout.write("ok");','tools/helper.cjs':b'"use strict";'}
         directory=self.root/'versions/2026.10.24.1';directory.mkdir()
         for name,data in self.files.items():
             file=directory/name;file.parent.mkdir(parents=True,exist_ok=True);file.write_bytes(data)
-        (directory/'crush').write_bytes(self.binary);os.chmod(directory/'crush',0o755)
+        (directory/'harmonika').write_bytes(self.binary);os.chmod(directory/'harmonika',0o755)
         (directory/'release.json').write_bytes(self.envelope(self.manifest('2026.10.24.1')))
         m.switch('2026.10.24.1',self.root)
 
@@ -64,7 +64,7 @@ class Releases(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'javascript_preflight'):m.install_package(self.package(),self.root)
         self.unchanged()
     def test_fails_closed_on_modified_binary(self):
-        current,_=m.active(self.root);(current/'crush').write_bytes(b'broken')
+        current,_=m.active(self.root);(current/'harmonika').write_bytes(b'broken')
         with self.assertRaisesRegex(ValueError,'binary_checksum'):m.active(self.root)
     def test_concurrent_install_refused(self):
         with m.installation_lock(self.root):

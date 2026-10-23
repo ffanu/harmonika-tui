@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * Harmonika Crush Tools - MCP core (framework-agnostic).
+ * Harmonika Harmonika Tools - MCP core (framework-agnostic).
  * Dependency-injected: rpc (backend SSH), asr (local transcribe.py),
  * ffprobe, extractFrames. Callers/tests replace any of them.
  */
@@ -50,10 +50,10 @@ const RPC_SSH_ARGS = Object.freeze([
   '-oStrictHostKeyChecking=yes',
   '-i', process.env.HARMONIKA_OWNER_SSH_KEY||'',
   process.env.HARMONIKA_OWNER_SSH_TARGET||'',
-  'harmonika-crush-tools',
+  'harmonika-terminal-tools',
 ]);
 
-const SERVER_INFO = Object.freeze({ name: 'harmonika-crush-tools', version: '1.0.0' });
+const SERVER_INFO = Object.freeze({ name: 'harmonika-terminal-tools', version: '1.0.0' });
 const DISPLAY_PROVIDER = 'Harmonika Ai';
 const CONTENT_FIELDS = new Set(['text','answer','analysis','description','summary','page_state','text_detected','ui_elements','topics','brand_product_mentions','safety_notes','sources','results','query','prompt','transcript','source_prompt']);
 function publicMetadata(value) {
@@ -101,7 +101,7 @@ const PRIVATE_BASENAME_RE = Object.freeze([
   /^\.git-credentials$/i,
   /^\.npmrc$/i,
 ]);
-const PRIVATE_SEGMENTS = Object.freeze(new Set(['.ssh', '.aws', '.gnupg', '.gcloud', '.kube', '.config', '.codex', '.claude', '.crush', '.harmonika', '.git', 'secrets', 'credentials']));
+const PRIVATE_SEGMENTS = Object.freeze(new Set(['.ssh', '.aws', '.gnupg', '.gcloud', '.kube', '.config', '.codex', '.claude', '.harmonika', '.git', 'secrets', 'credentials']));
 
 class ToolError extends Error {
   constructor(code) {
@@ -123,6 +123,8 @@ function isUnder(parent, child) {
 
 function isPrivatePath(p) {
   const segments = p.split(path.sep).filter(Boolean);
+  const sourceFolders=new Set(['.github','.vscode','.cursor','.agents']);
+  if(segments.some((part,index)=>part.startsWith('.')&&!sourceFolders.has(part)&&(index<segments.length-1||(fs.existsSync(p)&&fs.statSync(p).isDirectory()))))return true;
   for (const seg of segments) {
     if (PRIVATE_SEGMENTS.has(seg.toLowerCase())) return true;
   }

@@ -14,7 +14,7 @@ import zipfile
 SOURCE=Path(__file__).resolve().parent.parent
 ROOT=Path(os.environ.get('HARMONIKA_TERMINAL_HOME',str(Path.home()/'.config/harmonika-terminal')))
 NODE=os.environ.get('HARMONIKA_NODE') or shutil.which('node') or str(Path.home()/'.local/node/bin/node')
-BINARY=Path(os.environ.get('HARMONIKA_BINARY_SOURCE',str(Path.home()/'.local/node/lib/node_modules/@charmland/crush/bin/crush')))
+BINARY=Path(os.environ.get('HARMONIKA_BINARY_SOURCE',str(ROOT/'current/harmonika')))
 SIGN_JS="""const fs=require('fs'),c=require('crypto');const p=fs.readFileSync(0);process.stdout.write(JSON.stringify({payload:p.toString('base64'),signature:c.sign(null,p,fs.readFileSync(process.argv[1])).toString('base64')}));"""
 
 def sha(file):return hashlib.sha256(Path(file).read_bytes()).hexdigest()

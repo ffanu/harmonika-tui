@@ -2,7 +2,7 @@
 'use strict';
 
 /*
- * Harmonika Crush Tools - MCP stdio server (low-level Server + StdioServerTransport).
+ * Harmonika Harmonika Tools - MCP stdio server (low-level Server + StdioServerTransport).
  * stdout carries MCP protocol frames only; tool output is returned as
  * CallToolResult text. No logging of prompts/secrets anywhere.
  */

@@ -11,7 +11,9 @@ credentials*
 .env.*
 !.env.example
 .harmonika/
-.crush/
+**/.*/
+!**/.github/
+!**/.github/**
 .config/
 .ssh/
 harmonika-api-key

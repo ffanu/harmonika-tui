@@ -20,7 +20,9 @@ function canonical(value) {
 function privatePath(value) {
   if(inside(path.join(os.homedir(),'Library'),value)) return true;
   const parts=value.split(path.sep).map(p=>p.toLowerCase());
-  if(parts.some(p=>['.ssh','.config','.codex','.claude','.crush','.harmonika','.aws','.gnupg','.git','secrets','credentials','node_modules','.venv','venv'].includes(p))) return true;
+  const sourceFolders=new Set(['.github','.vscode','.cursor','.agents']);
+  if(parts.some((p,index)=>p.startsWith('.')&&!sourceFolders.has(p)&&(index<parts.length-1||(fs.existsSync(value)&&fs.statSync(value).isDirectory()))))return true;
+  if(parts.some(p=>['.ssh','.config','.codex','.claude','.harmonika','.aws','.gnupg','.git','secrets','credentials','node_modules','.venv','venv'].includes(p))) return true;
   const name=parts.at(-1)||'';
   return (name==='.env' || (name.startsWith('.env.')&&!['.env.example','.env.sample','.env.template'].includes(name))) || /\.(pem|p12|pfx|key|keystore|tfstate)(\.backup)?$/.test(name) || /^(credentials(?:\.|$)|service[-_]account.*\.json$|.*firebase-adminsdk.*\.json$|google-credentials.*\.json$)/.test(name) || ['harmonika-api-key','id_rsa','id_ed25519','.npmrc','.netrc','.pypirc'].includes(name);
 }
@@ -66,11 +68,11 @@ function evaluate(payload) {
     if(LSP_TOOLS.has(name)&&!input.file_path&&!input.path) return {};
     const supplied=['view','write','edit','multiedit'].includes(name)?input.file_path:(input.file_path??input.path??'.');
     if(typeof supplied!=='string'||!supplied||supplied.includes('\0')||supplied.startsWith('~')) return deny('Gunakan path file yang valid di dalam proyek.');
-    if(name==='view'&&supplied.startsWith('crush:')) return {};
+    if(name==='view'&&supplied.startsWith('harmonika:')) return {};
     const lexical=path.resolve(declaredRoot,supplied), resolved=canonical(lexical);
     if(!inside(root,resolved)||privatePath(lexical)||privatePath(resolved)) return deny('Akses di luar folder proyek, data privat, dependensi, atau berkas kredensial ditolak.');
     if(name==='glob'&&typeof input.pattern==='string'&&(path.isAbsolute(input.pattern)||input.pattern.split(/[\\/]/).includes('..'))) return deny('Pola pencarian tidak boleh keluar dari proyek.');
-    // No allow decision: keep native Crush permission checks and edit previews.
+    // No allow decision: keep native Harmonika permission checks and edit previews.
     return {};
   } catch (_) { return deny('Path tidak dapat diverifikasi dengan aman. Pilih file di dalam proyek.'); }
 }

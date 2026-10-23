@@ -15,7 +15,7 @@ import zipfile
 SOURCE=Path(__file__).resolve().parent.parent
 spec=importlib.util.spec_from_file_location('launcher',SOURCE/'runtime/harmonika.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 ROOT=m.ROOT
-BINARY=Path(os.environ.get('HARMONIKA_BINARY_SOURCE',str(Path.home()/'.local/node/lib/node_modules/@charmland/crush/bin/crush')))
+BINARY=Path(os.environ.get('HARMONIKA_BINARY_SOURCE',str(ROOT/'current/harmonika')))
 
 def atomic_text(file,text,mode=0o600):
     pending=file.with_name(file.name+'.next-'+uuid4().hex)
@@ -52,7 +52,7 @@ def _prepare(package,stage):
             file=stage/name;file.parent.mkdir(parents=True,exist_ok=True)
             file.write_bytes(archive.read(name))
         if m.digest(BINARY)!=manifest['binary_sha256']:raise ValueError('custom_binary_changed')
-        shutil.copy2(BINARY,stage/'crush');os.chmod(stage/'crush',0o755)
+        shutil.copy2(BINARY,stage/'harmonika');os.chmod(stage/'harmonika',0o755)
         m.preflight(stage,manifest)
 
 def main(package):
@@ -69,7 +69,7 @@ def activate(stage,manifest):
     config=json.loads(configfile.read_text())
     config['options']['disable_provider_auto_update']=True
     config['options']['data_directory']='.harmonika'
-    incompatible=['built-in-browser','chrome-browser','computer-use','crush-config','crush-hooks','deep-research','docs','docx','google-workspace','import-memory','jq','learn','morning','pdf','pptx','setup-writing-style','skill-creator','theme-factory','xlsx']
+    incompatible=['built-in-browser','chrome-browser','computer-use','harmonika-config','harmonika-hooks','deep-research','docs','docx','google-workspace','import-memory','jq','learn','morning','pdf','pptx','setup-writing-style','skill-creator','theme-factory','xlsx']
     disabled=config['options'].setdefault('disabled_skills',[])
     for name in incompatible:
         if name not in disabled:disabled.append(name)
@@ -81,7 +81,7 @@ def activate(stage,manifest):
         if 'project-file-guard.cjs' in hook.get('command',''):
             hook['command']=m.NODE+' '+str(ROOT/'current/tools/project-file-guard.cjs')
     # Validate proposed configuration on stdin before touching live files/pointers.
-    schema=SOURCE/'runtime/crush-schema.json'
+    schema=SOURCE/'runtime/harmonika-schema.json'
     js="const fs=require('fs'),{Ajv2020}=require(process.argv[2]);const v=new Ajv2020({strict:false,validateFormats:false}).compile(JSON.parse(fs.readFileSync(process.argv[1])));if(!v(JSON.parse(fs.readFileSync(0,'utf8'))))process.exit(1);"
     encoded=json.dumps(config,indent=2)+'\n'
     dependency=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(Path.home()/'.config/harmonika/harmonika-tools')))/'node_modules/ajv/dist/2020'
@@ -99,7 +99,7 @@ def activate(stage,manifest):
     m.switch(release,ROOT)
     atomic_text(configfile,encoded)
     wrapper='#!/bin/sh\nexec /usr/bin/python3 "$HOME/.config/harmonika-terminal/launcher.py" "$@"\n'
-    for file in [Path.home()/'.local/bin/harmonika',Path.home()/'.local/node/bin/harmonika',Path.home()/'.local/bin/crush',Path.home()/'.local/node/bin/crush']:
+    for file in [Path.home()/'.local/bin/harmonika',Path.home()/'.local/node/bin/harmonika']:
         file.parent.mkdir(parents=True,exist_ok=True)
         # Replace the symlink itself atomically, never the npm target or live binary.
         atomic_text(file,wrapper,0o755)

@@ -6,7 +6,7 @@ Source preview Harmonika TUI, 24 Oktober 2026.
 
 - Instalasi pemilik: rilis 2026.10.24.8, identitas Harmonika, enam skill,
   delapan tool MCP, lima LSP, dokumen Office dan browser Chromium.
-- Source: **83 tes lulus**, terdiri dari 54 tes Node.js dan 29 tes Python.
+- Source: **85 tes lulus**, terdiri dari 55 tes Node.js dan 30 tes Python.
 - Browser smoke desktop 1440×900 dan mobile 390×844 dijalankan dengan fixture lokal.
 - HOME baru dengan dependency yang diprovisikan eksplisit dapat memulai MCP dan
   membuat proyek. Media ditolak dengan jelas ketika transport publik tidak ada.
@@ -35,3 +35,8 @@ audit privat, atau direktori dependency pengguna.
 
 Basis TUI tetap menggunakan perangkat lunak upstream dengan lisensi yang
 disertakan. Perubahan merek tidak menghapus lisensi dan atribusinya.
+
+Source preview ini memakai identitas dan kontrak artefak `harmonika`, termasuk
+nama executable serta environment `HARMONIKA_*`. Source bukan paket update
+langsung untuk artefak lama; build native dan installer publik yang cocok masih
+harus disiapkan. Perubahan repository tidak mengganti binary pemilik yang aktif.

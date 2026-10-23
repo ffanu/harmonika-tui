@@ -1,6 +1,6 @@
 # Harmonika Terminal
 
-- Pertahankan binary bermerek pengguna dan crush.orig; jangan patch byte binary.
+- Pertahankan binary bermerek pengguna dan cadangan aslinya; jangan patch byte binary.
 - Jangan hentikan atau attach writer sesi pengguna. Uji dengan host/socket dan
   data-dir terpisah. Jangan sentuh proyek ERP atau layanan finansial/CS.
 - Semua update manual, verified, atomic dan dapat di-rollback. Tidak ada auto-update.

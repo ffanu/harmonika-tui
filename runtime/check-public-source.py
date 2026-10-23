@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Offline Git-index/source review; prints locations, never matched secrets."""
 import json
+import hashlib
 from pathlib import Path
 import re
 import subprocess
@@ -24,6 +25,15 @@ def review(files,root):
             findings.append({'file':str(relative),'code':'private_file'});continue
         if file.stat().st_size>2*1024*1024:findings.append({'file':str(relative),'code':'large_artifact_requires_review'});continue
         raw=file.read_bytes()
+        media={'docs/assets/harmonika-demo.gif':'gif','docs/assets/harmonika-demo.mp4':'mp4','docs/assets/harmonika-terminal.png':'png'}
+        kind=media.get(str(relative))
+        if kind:
+            try:
+                manifest=json.loads((root/'docs/assets/manifest.json').read_text())
+                valid=(kind=='gif' and raw.startswith((b'GIF87a',b'GIF89a'))) or (kind=='png' and raw.startswith(b'\x89PNG\r\n\x1a\n')) or (kind=='mp4' and raw[4:8]==b'ftyp')
+                if valid and manifest[file.name]['sha256']==hashlib.sha256(raw).hexdigest():continue
+            except (OSError,ValueError,KeyError):pass
+            findings.append({'file':str(relative),'code':'public_media_checksum_or_signature_failed'});continue
         if b'\0' in raw[:8192]:findings.append({'file':str(relative),'code':'binary_requires_separate_release_review'});continue
         for line_number,line in enumerate(raw.decode('utf8',errors='replace').splitlines(),1):
             for code,pattern in PATTERNS.items():

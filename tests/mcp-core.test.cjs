@@ -655,7 +655,7 @@ test('mcp-server.cjs speaks MCP: initialize + tools/list over stdio, stdout prot
       capabilities: {},
       clientInfo: { name: 'protocol-test', version: '0.0.0' },
     });
-    assert.equal(init.serverInfo.name, 'harmonika-crush-tools');
+    assert.equal(init.serverInfo.name, 'harmonika-terminal-tools');
     assert.ok(typeof init.protocolVersion === 'string' && init.protocolVersion.length > 0);
     assert.ok(init.capabilities && init.capabilities.tools);
     child.stdin.write(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' }) + '\n');

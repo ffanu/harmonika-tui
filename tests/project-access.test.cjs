@@ -3,7 +3,7 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const {createAccess}=require('../runtime/tools/project-access.cjs');
-function setup(t){const home=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'crush-directory-')));t.after(()=>fs.rmSync(home,{recursive:true,force:true}));return {home,access:createAccess({home})};}
+function setup(t){const home=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'harmonika-directory-')));t.after(()=>fs.rmSync(home,{recursive:true,force:true}));return {home,access:createAccess({home})};}
 test('creates nested folder with spaces and remembers scoped root',t=>{
   const {home,access}=setup(t),directory=path.join(home,'Downloads','uji coba','src');
   const result=access.createDirectory(directory);

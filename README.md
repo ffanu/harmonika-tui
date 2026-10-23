@@ -1,109 +1,140 @@
-# Harmonika TUI
+<div align="center">
 
-Terminal AI kustom dengan enam skill Harmonika, tool MCP, LSP, dan pembaruan
-manual bertanda tangan. **Status: source preview; installer publik belum siap.**
+# HARMONIKA TUI
 
-Paket kustom Harmonika untuk TUI dasar 0.98.1: binary bermerek milik pemilik,
-skill proyek, tool MCP, LSP, dan pembaruan manual dengan verifikasi serta rollback.
+### Satu terminal. Satu ruang kerja. Harmonika Ai.
 
-Tidak mengunduh update saat startup. Binary `crush.orig` tetap disimpan oleh pemilik.
-Skill impor Claude yang belum kompatibel dinonaktifkan pada konfigurasi Crush;
-file asli tidak dihapus. Gunakan enam skill Harmonika yang diuji di paket ini.
-API model memakai `https://chat.harmonika.id/v1`; kredensial tetap di konfigurasi
-privat pengguna dan tidak masuk paket rilis. Basis TUI tetap Crush; atribusi dan
-lisensi upstream harus dipertahankan, bukan diganti dengan klaim karya asli.
+Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal yang terkontrol.
 
-## Alur kerja
+**6 skill resmi** · **8 tool MCP** · **5 LSP** · **Update manual terverifikasi**
 
-1. Jalankan `harmonika doctor` sebelum mengubah instalasi.
-2. Buka `harmonika` atau `crush` di folder proyek. Dari Home, gunakan tool
-   `create_directory` untuk membuat proyek Downloads/Projects.
-3. Skill memberikan alur UI, debug, pengujian browser, dokumen, Git, dan rilis.
-4. `harmonika update --check` hanya memeriksa katalog rilis Harmonika.
-5. Pemasangan rilis dilakukan manual dari paket bertanda tangan; versi sebelumnya
-   tetap tersedia untuk `harmonika rollback`. Sesi aktif tidak dihentikan.
+[Website](https://hai.harmonika.id) · [Panel & API](https://chat.harmonika.id) · [Status rilis](docs/STATUS.md) · [Dokumentasi](#mulai)
 
-## Status sebelum publikasi GitHub
+![Demo terminal Harmonika](docs/assets/harmonika-demo.gif)
 
-Instalasi pemilik sudah berjalan pada rilis **2026.10.24.8**. Repository ini
-**belum merupakan installer publik siap pakai**. Pemeriksaan publik memiliki
-perintah terpisah:
+[▶ Tonton video MP4](docs/assets/harmonika-demo.mp4) · [Lihat screenshot](docs/assets/harmonika-terminal.png)
 
-```sh
-python3 runtime/check-public-source.py
-python3 runtime/public-preflight.py
-python3 runtime/license.py check
-```
+</div>
 
-Source checker menghindari mencetak secret dan meninjau Git index bila repository
-sudah dibuat. Tanpa Git, ia memeriksa allowlist source. Preflight publik sengaja
-gagal sampai blocker distribusi diselesaikan. Audit/log, signing key privat,
-key API, SSH key, database, backup binary dan history tidak boleh masuk GitHub.
+> **Source preview** — aplikasi lokal sudah diuji. Installer publik, distribusi binary, dan entitlement key terminal masih disiapkan. Jangan membagikan credential instalasi pemilik. [Lihat kesiapan publik →](docs/STATUS.md)
 
-Persiapan saat ini: SDK/Node/tool paths memakai HOME atau environment yang
-eksplisit, tidak lagi username pemilik; SSH pemilik menjadi opt-in tanpa target
-default. Perubahan source ini belum dipasang di rilis pemilik. Key individual
-dapat diperiksa ke endpoint HTTPS Harmonika melalui `license.py`; aktivasi
-memakai prompt rahasia, mode file 0600, dan tidak mengganti key lama bila gagal.
+## Ruang kerja yang menyatu
 
-Yang masih memblokir publik: artefak binary kustom untuk fresh install, transport
-media HTTPS yang terisolasi per key, dan entitlement key terminal pada server.
-Token standar bot Telegram saat ini belum memberi coding/tool calling atau
-unlimited. Jangan membagikan token internal pemilik untuk mengatasi hal tersebut.
+| | Kemampuan | Yang tersedia |
+|---|---|---|
+| ⌨️ | **Coding & terminal** | Baca/edit file, membuat folder proyek, bash dengan persetujuan pengguna, dan diagnostik LSP. |
+| 🧩 | **Skill terarah** | Alur UI, debug, browser QA, dokumen, Git, dan rilis. |
+| 🌐 | **Browser QA** | Screenshot desktop/mobile, pemeriksaan overflow, serta pencatatan error halaman. |
+| 📄 | **Dokumen** | Membaca dan membuat DOCX, XLSX, PPTX; ekstraksi teks PDF melalui MCP. |
+| 🖼️ | **Media** | Analisis gambar, frame video, transkripsi audio lokal, dan permintaan gambar melalui layanan Harmonika Ai. |
+| 🔑 | **Kontrol key** | Validasi key ke server, pemeriksaan entitlement, dan penyimpanan key privat. |
+| 🛡️ | **Pembaruan terkendali** | Signature Ed25519, checksum SHA-256, preflight, dan rollback. Tidak ada auto-update. |
 
-Alur rilis yang dituju: admin membuat satu key untuk satu pengguna lewat Telegram,
-memilih entitlement unlimited bila diizinkan, memberikan key secara privat,
-pengguna mengaktifkan di terminal, dan backend memvalidasi/revoke key pada setiap
-request. Unlimited merujuk kuota request key; concurrency dan kapasitas worker
-tetap berlaku. Source client tidak bisa menaikkan hak akses server.
+### Skill resmi
 
-Helper aktivasi yang disiapkan: `python3 runtime/license.py activate`. Key diminta
-melalui prompt tersembunyi, bukan argumen command line. Hak coding harus sudah
-diberikan backend; helper akan menolak key standar yang belum mendapat hak itu.
+| Skill | Fokus |
+|---|---|
+| `harmonika-ui` | Implementasi UI responsif, aksesibilitas, dan kesesuaian referensi. |
+| `harmonika-debug` | Reproduksi bug, diagnosis berbasis bukti, serta pengujian regresi. |
+| `harmonika-browser-qa` | Bukti browser nyata pada viewport desktop dan mobile. |
+| `harmonika-documents` | Baca/buat dokumen melalui runtime lokal yang terdeteksi. |
+| `harmonika-git` | Review perubahan dan alur Git tanpa tindakan destruktif otomatis. |
+| `harmonika-release` | Pemeriksaan rilis, paket, verifikasi, dan rencana pemulihan. |
 
-Target yang telah diuji baru Mac Apple Silicon; dukungan Windows/Linux belum
-diverifikasi. Lihat NOTICE.md dan UPSTREAM-LICENSE.md sebelum distribusi.
+## Demo yang nyata
 
-## Pengembangan
+GIF dan video di atas direkam dari aplikasi Harmonika yang berjalan pada **PTY terisolasi**. Demo menampilkan pemanggilan terminal, versi, pemeriksaan kesehatan, banner HARMONIKA, skill, dan koneksi MCP. Tidak memakai mockup percakapan, token contoh yang menyerupai key nyata, atau data pelanggan.
 
-- `runtime/`: launcher, installer/paket rilis, pemeriksaan kesehatan.
-- `skills/`: paket SKILL.md dan skrip pendukung.
-- `tests/`: pengujian terisolasi; jangan gunakan sesi atau dokumen pelanggan.
-- `docs/`: status kesiapan dan batas distribusi publik. Audit privat tidak diunggah.
+Script perekam tersedia di [`docs/assets/record-demo.py`](docs/assets/record-demo.py). Perekaman memerlukan aplikasi terpasang, Pillow, pyte, serta font monospace yang sesuai platform. Video dapat dibuat dari GIF dengan encoder lokal. Demo bukan bukti bahwa fresh installer publik sudah tersedia.
 
-Verifikasi lokal:
+## Mulai
+
+Pada instalasi Harmonika yang sudah disiapkan:
 
 ```sh
-node --test tests/mcp-core.test.cjs tests/project-access.test.cjs tests/project-file-guard.test.cjs tests/skills_browser_test.cjs
-$HOME/.config/harmonika-terminal/document-runtime/bin/python -m unittest discover -s tests -p '*test*.py' -v
-node tests/skills_browser_integration.cjs
-```
-
-Rilis pemilik: `python3 runtime/package-release.py YYYY.MM.DD.N`, lalu
-`harmonika update --apply dist/harmonika-terminal-YYYY.MM.DD.N.zip`.
-Penandatanganan hanya memakai key lokal pemilik; kunci privat tidak ikut paket.
-Untuk bootstrap pertama pada instalasi Mac ARM64 ini, gunakan `runtime/install.py`
-dengan paket yang sudah disiapkan. Jangan jalankan bootstrap ulang pada instalasi
-aktif. Status kesiapan dan batas distribusi ada di [docs/STATUS.md](docs/STATUS.md).
-
-## Perintah skill
-
-```sh
+harmonika
+harmonika doctor
 harmonika skill documents capabilities
 harmonika skill browser --url http://localhost:3000 --out /path/proyek/qa
 ```
 
-Helper dijalankan melalui launcher yang diverifikasi. Model tidak perlu menjalankan
-path privat `.config` melalui bash. Chromium memakai profil uji terisolasi; tidak
-meminjam cookie browser pelanggan. Pembuatan Office memakai pustaka lokal dan tidak
-mengeksekusi formula Excel. Browser QA adalah smoke test, bukan jaminan aksesibilitas
-atau keamanan penuh. DOCX/XLSX/PPTX menggunakan versi dependensi yang dipasang manual.
+Dari Home, minta AI membuat folder melalui `create_directory` di Downloads atau Projects. Operasi file berikutnya menggunakan folder proyek tersebut; direktori privat dan credential tetap dilindungi.
 
-Dokumentasi/katalog rilis: `https://chat.harmonika.id/assets/harmonika-terminal/`.
-Paket publik hanya runtime/skill, tidak berisi binary, token, cookie atau riwayat.
+### Untuk pengembang
 
-Jangan commit token, kunci SSH, signing key privat, konfigurasi akun, atau history.
-Jangan upgrade paket npm Crush karena itu melewati paket kustom yang dikunci.
-Runtime Python/Node, LSP, Whisper, Playwright, dan pustaka dokumen adalah dependensi
-yang harus diuji serta dicatat; paket ini tidak menjanjikan semua fitur tersedia
-ketika dependensinya belum dipasang. Tidak ada update otomatis dependensi.
+```sh
+git clone git@github.com:ffanu/harmonika-tui.git
+cd harmonika-tui
+python3 runtime/check-public-source.py
+python3 runtime/public-preflight.py
+```
+
+`public-preflight.py` sengaja mengembalikan `public_ready=false` selama penghalang distribusi belum diselesaikan. Repository ini belum menyediakan perintah instalasi satu baris untuk perangkat baru.
+
+## Key & layanan
+
+**Base URL:** `https://chat.harmonika.id/v1`<br>
+**Identitas layanan:** Harmonika Ai
+
+Setiap pengguna harus memiliki key sendiri yang diterbitkan serta dapat dicabut oleh server. Hak coding dan unlimited berasal dari entitlement server; mengubah konfigurasi client tidak memberikan hak tambahan.
+
+```sh
+python3 runtime/license.py check
+python3 runtime/license.py activate
+```
+
+Aktivasi meminta key melalui prompt tersembunyi, bukan argumen shell. Key disimpan dengan permission `0600`. Aktivasi gagal tidak mengganti key sebelumnya. Token standar Telegram saat ini belum otomatis memberi coding/unlimited. Jalur penerbitan key terminal masih menjadi bagian pekerjaan backend publik.
+
+Unlimited mengacu pada kuota request key, sementara concurrency, waktu proses, dan ketersediaan worker tetap berlaku. Source tidak memberikan akses ke akun, SSH, browser pribadi, CS, ERP, atau database pelanggan.
+
+## Update dari Harmonika
+
+```sh
+harmonika update --check
+harmonika update --apply /path/paket-rilis.zip
+harmonika rollback
+```
+
+Pembaruan dilakukan atas perintah pengguna. Paket diverifikasi sebelum diaktifkan; versi sebelumnya disimpan untuk pemulihan. Key, cookie, history, dan signing key privat tidak disertakan dalam paket publik.
+
+[Katalog layanan & dokumentasi Harmonika](https://chat.harmonika.id/assets/harmonika-terminal/)
+
+## Verifikasi & batas kemampuan
+
+Source telah diuji pada **Mac Apple Silicon**. Pengujian meliputi tool MCP, pembatasan path, branding, dokumen, lisensi key, bootstrap, signature, rollback, serta HOME terisolasi dengan dependency yang disediakan.
+
+- Browser QA diuji pada desktop **1440 × 900** dan mobile **390 × 844**.
+- Dokumen Office mendukung konten dasar, bukan jaminan pelestarian layout kompleks atau makro.
+- PDF: teks maksimal **20 halaman**; PDF scan/OCR belum didukung.
+- Audio: maksimal **120 detik pertama**.
+- Video: **6 frame sampel**; suara tidak ikut dianalisis.
+- Media menggunakan path file melalui MCP; bukan upload native UI.
+- Kemampuan layanan tetap mengikuti entitlement key dan kesiapan worker.
+- Windows/Linux dan instalasi lengkap pada perangkat baru belum diverifikasi.
+
+[Status terperinci dan penghalang publik →](docs/STATUS.md)
+
+## Struktur repository
+
+```text
+runtime/      Launcher, validasi key, pemeriksaan rilis, dan tool MCP
+skills/       Enam skill resmi beserta helper
+tests/       Pengujian terisolasi
+docs/        Status, demo GIF/video, dan screenshot
+```
+
+Credential, binary pribadi, database, cookie, sesi pengguna, audit privat, dan direktori dependency tidak dimasukkan ke repository.
+
+## Lisensi & pemberitahuan
+
+Komponen pihak ketiga tetap mengikuti pemberitahuan hak cipta dan ketentuan lisensinya. Lihat [NOTICE.md](NOTICE.md) dan [UPSTREAM-LICENSE.md](UPSTREAM-LICENSE.md). Perubahan merek tidak menghapus kewajiban tersebut.
+
+---
+
+<div align="center">
+
+**Harmonika Ai — ruang kerja Anda, tetap dalam kendali Anda.**
+
+[hai.harmonika.id](https://hai.harmonika.id) · [chat.harmonika.id](https://chat.harmonika.id)
+
+</div>
