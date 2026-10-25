@@ -478,7 +478,58 @@ def prompt_startup_update(root=ROOT,force_output=False):
                     shutil.copyfileobj(r,out)
                 if newest.get('package_sha256') and digest(tmp_pkg)!=newest['package_sha256']:
                     raise ValueError('package_checksum_mismatch')
-                install_package(tmp_pkg,root)
+                # If platform binary was also updated in signed binaries.json, download & verify it before applying package
+                cur_dir,cur_manifest=active(root)
+                with zipfile.ZipFile(tmp_pkg) as zchk:
+                    pkg_manifest=verify_envelope(zchk.read('release.json'),root)
+                if pkg_manifest.get('binary_sha256')!=cur_manifest.get('binary_sha256'):
+                    bins_url='https://chat.harmonika.id/assets/harmonika-terminal/binaries.json'
+                    with urllib.request.build_opener(SameOrigin()).open(bins_url,timeout=30) as br:
+                        bins_env=verify_envelope(br.read(1024*1024),root)
+                    sys_name=platform.system().lower()
+                    arch=platform.machine().lower()
+                    arch='x64' if arch in ('x86_64','amd64') else ('arm64' if arch in ('aarch64','arm64') else arch)
+                    plat_key=f"{sys_name}-{arch}"
+                    pinfo=bins_env.get('platforms',{}).get(plat_key)
+                    if pinfo:
+                        tmp_bin=root/('auto-bin-'+bin_name())
+                        try:
+                            with urllib.request.build_opener(SameOrigin()).open(pinfo['url'],timeout=300) as br2, open(tmp_bin,'wb') as bout:
+                                shutil.copyfileobj(br2,bout)
+                            if digest(tmp_bin)!=pinfo['sha256']:
+                                raise ValueError('platform_binary_checksum_mismatch')
+                            os.chmod(tmp_bin,0o755)
+                            bname=bin_name() if (cur_dir/bin_name()).exists() else 'harmonika'
+                            shutil.copy2(tmp_bin,cur_dir/bname)
+                            os.chmod(cur_dir/bname,0o755)
+                            if os.name=='nt':
+                                (cur_dir/'binary.sha256').write_text(digest(cur_dir/bname))
+                            # Update cur_dir/release.json payload in-memory not needed if we extract directly:
+                            stage=Path(tempfile.mkdtemp(prefix='.stage-',dir=str(root/'versions')))
+                            try:
+                                with zipfile.ZipFile(tmp_pkg) as zf:
+                                    for name in zf.namelist():
+                                        dest=stage/name;dest.parent.mkdir(parents=True,exist_ok=True)
+                                        dest.write_bytes(zf.read(name))
+                                        os.chmod(dest,0o600 if name=='release.json' else 0o644)
+                                shutil.copy2(cur_dir/bname,stage/bname)
+                                os.chmod(stage/bname,0o755)
+                                if os.name=='nt':
+                                    (stage/'binary.sha256').write_text(digest(stage/bname))
+                                preflight(stage,pkg_manifest)
+                                target=root/'versions'/release
+                                if target.exists():shutil.rmtree(target)
+                                stage.rename(target)
+                                atomic_state(root/'previous',cur_dir.name)
+                                switch(release,root)
+                            finally:
+                                if stage.exists():shutil.rmtree(stage)
+                        finally:
+                            tmp_bin.unlink(missing_ok=True)
+                    else:
+                        install_package(tmp_pkg,root)
+                else:
+                    install_package(tmp_pkg,root)
                 new_dir,_=active(root)
                 if (new_dir/'tools/harmonika.py').is_file():
                     atomic_state(root/'launcher.py',(new_dir/'tools/harmonika.py').read_text())
