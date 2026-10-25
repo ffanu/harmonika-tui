@@ -74,7 +74,10 @@ function evaluate(payload) {
     if(typeof supplied!=='string'||!supplied||supplied.includes('\0')||supplied.startsWith('~')) return deny('Gunakan path file yang valid di dalam proyek.');
     if(name==='view'&&supplied.startsWith('harmonika:')) return {};
     const lexical=path.resolve(declaredRoot,supplied), resolved=canonical(lexical);
-    if(!inside(root,resolved)||privatePath(lexical)||privatePath(resolved)) return deny('Akses di luar folder proyek, data privat, dependensi, atau berkas kredensial ditolak.');
+    const autoBase=path.join(home,'Downloads','harmonika-ai');
+    const inAutoDownload=inside(autoBase,lexical)&&!privatePath(lexical)&&!privatePath(resolved);
+    if(inAutoDownload&&typeof projectAccess.ensureAutoFolders==='function')projectAccess.ensureAutoFolders();
+    if((!inside(root,resolved)&&!inAutoDownload)||privatePath(lexical)||privatePath(resolved)) return deny('Akses di luar folder proyek, data privat, dependensi, atau berkas kredensial ditolak.');
     if(name==='glob'&&typeof input.pattern==='string'&&(path.isAbsolute(input.pattern)||input.pattern.split(/[\\/]/).includes('..'))) return deny('Pola pencarian tidak boleh keluar dari proyek.');
     // No allow decision: keep native Harmonika permission checks and edit previews.
     return {};

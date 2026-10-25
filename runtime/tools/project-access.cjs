@@ -7,12 +7,35 @@ const {createHash} = require('node:crypto');
 function createAccess({home=os.homedir(), stateDir=path.join(home,'.config/harmonika/project-access')}={}) {
   const inside=(root,target)=>{const r=path.relative(root,target);return r===''||(!r.startsWith('..'+path.sep)&&r!=='..'&&!path.isAbsolute(r));};
   const containers=['Downloads','Projects'].map(n=>path.join(home,n));
+  const autoRoot=path.join(home,'Downloads','harmonika-ai');
+  const autoSubfolders=['gambar','document','zip'];
+  function ensureAutoFolders() {
+    try {
+      const dl=path.join(home,'Downloads');
+      fs.mkdirSync(dl,{recursive:true});
+      if(fs.lstatSync(dl).isSymbolicLink())return null;
+      fs.mkdirSync(autoRoot,{recursive:true,mode:0o755});
+      if(fs.lstatSync(autoRoot).isSymbolicLink())return null;
+      for(const sub of autoSubfolders) {
+        const sp=path.join(autoRoot,sub);
+        fs.mkdirSync(sp,{recursive:true,mode:0o755});
+      }
+      return fs.realpathSync(autoRoot);
+    } catch {
+      return null;
+    }
+  }
   function allowed(target) {
     return containers.some(base=>target!==base&&inside(base,target)) &&
       !path.relative(home,target).split(path.sep).some(p=>p.startsWith('.')||['secrets','credentials','node_modules','venv'].includes(p.toLowerCase()));
   }
   function findRoot(target) {
     if(typeof target!=='string'||!path.isAbsolute(target))return null;
+    const resolvedTarget=path.resolve(target);
+    if(inside(autoRoot,resolvedTarget)&&allowed(resolvedTarget)) {
+      const ensured=ensureAutoFolders();
+      if(ensured)return ensured;
+    }
     let names;try{names=fs.readdirSync(stateDir).filter(n=>/^[a-f0-9]{64}\.json$/.test(n));}catch{return null;}
     const matches=[];
     for(const name of names.slice(0,512)) {
@@ -21,7 +44,7 @@ function createAccess({home=os.homedir(), stateDir=path.join(home,'.config/harmo
         if(!stat.isFile()||stat.size>4096)continue;
         const record=JSON.parse(fs.readFileSync(file,'utf8'));
         if(!allowed(record.root)||fs.realpathSync(record.root)!==record.root||!fs.statSync(record.root).isDirectory())continue;
-        if(inside(record.root,path.resolve(target)))matches.push(record.root);
+        if(inside(record.root,resolvedTarget))matches.push(record.root);
       }catch{}
     }
     return matches.sort((a,b)=>b.length-a.length)[0]||null;
@@ -53,6 +76,6 @@ function createAccess({home=os.homedir(), stateDir=path.join(home,'.config/harmo
     return {ok:true,status:'ok',directory:root,created,
       usage:'Gunakan path absolut di directory ini untuk tool file; bash memakai working_dir directory ini. Tidak perlu membuat folder secara manual.'};
   }
-  return {findRoot,createDirectory};
+  return {findRoot,createDirectory,ensureAutoFolders};
 }
 module.exports={createAccess,...createAccess()};

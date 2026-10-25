@@ -29,3 +29,11 @@ test('does not authorize symlink replacement of a selected project',t=>{
   access.createDirectory(directory);fs.rmdirSync(directory);fs.symlinkSync(home,directory);
   assert.equal(access.findRoot(path.join(directory,'sensitive')),null);
 });
+test('auto-creates Downloads/harmonika-ai with gambar, document, and zip subfolders on access',t=>{
+  const {home,access}=setup(t),autoRoot=path.join(home,'Downloads','harmonika-ai');
+  const resolved=access.findRoot(path.join(autoRoot,'gambar','poster.png'));
+  assert.equal(resolved,fs.realpathSync(autoRoot));
+  for(const sub of ['gambar','document','zip']){
+    assert.ok(fs.statSync(path.join(autoRoot,sub)).isDirectory());
+  }
+});

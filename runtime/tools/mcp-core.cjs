@@ -766,8 +766,20 @@ function createCore(overrides) {
 
   function resolveOutputFile(rawPath) {
     if (typeof rawPath !== 'string' || rawPath.trim() === '') throw new ToolError('invalid_output_path');
-    const abs = path.resolve(deps.callerCwd, rawPath);
-    const projectRoot = validateProjectCwd(deps.callerCwd, deps.homedir, abs);
+    let abs = path.resolve(deps.callerCwd, rawPath);
+    const autoGambarDir = path.join(deps.downloadsDir || path.join(deps.homedir, 'Downloads'), 'harmonika-ai', 'gambar');
+    const isBroadCwd = [deps.homedir, path.join(deps.homedir, 'Downloads'), path.join(deps.homedir, 'Projects')].includes(path.resolve(deps.callerCwd));
+    if (!path.isAbsolute(rawPath) && isBroadCwd && !rawPath.split(/[\\/]/).includes('..')) {
+      fs.mkdirSync(autoGambarDir, { recursive: true, mode: 0o755 });
+      abs = path.join(autoGambarDir, path.basename(rawPath));
+    }
+    const autoRoot = path.join(deps.downloadsDir || path.join(deps.homedir, 'Downloads'), 'harmonika-ai');
+    if (isUnderOrEqual(autoRoot, abs)) {
+      fs.mkdirSync(path.dirname(abs), { recursive: true, mode: 0o755 });
+    }
+    const projectRoot = isUnderOrEqual(autoRoot, abs)
+      ? fs.realpathSync(autoRoot)
+      : validateProjectCwd(deps.callerCwd, deps.homedir, abs);
     if (path.extname(abs).toLowerCase() !== '.png') throw new ToolError('output_must_be_png');
     if (isPrivatePath(abs)) throw new ToolError('private_file_not_allowed');
     let parentReal;

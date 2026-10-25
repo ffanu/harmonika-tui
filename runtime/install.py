@@ -110,6 +110,7 @@ def ensure_default_config(root=ROOT):
         except Exception:pass
     crush_alias=cfg_dir/'crush.json'
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
+    m.ensure_harmonika_downloads(cfg_dir)
 
 def fetch_remote_bootstrap(root=ROOT):
     ensure_public_key(root)

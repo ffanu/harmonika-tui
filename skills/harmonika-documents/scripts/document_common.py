@@ -5,6 +5,19 @@ MAX_SIZE = 20 * 1024 * 1024
 
 def scoped(root_value, value):
     root, candidate = Path(root_value), Path(value)
+    auto_root = Path.home() / 'Downloads' / 'harmonika-ai'
+    auto_doc = auto_root / 'document'
+    if not candidate.is_absolute() and root.resolve() in (Path.home().resolve(), (Path.home() / 'Downloads').resolve()):
+        auto_doc.mkdir(parents=True, exist_ok=True)
+        root = auto_root
+        candidate = auto_doc / candidate.name
+    elif candidate.is_absolute():
+        try:
+            if candidate.resolve().is_relative_to(auto_root.resolve()):
+                candidate.parent.mkdir(parents=True, exist_ok=True)
+                root = auto_root
+        except Exception:
+            pass
     if not root.is_absolute() or not candidate.is_absolute():
         raise ValueError('Root and file paths must be absolute')
     for p in (root, candidate):

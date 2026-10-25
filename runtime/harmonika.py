@@ -284,6 +284,101 @@ def doctor(root=ROOT):
         'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,
         'automatic_update':False,'active_sessions_untouched':True}
 
+def ensure_harmonika_downloads(cfg_dir=None):
+    cdir=Path(cfg_dir) if cfg_dir else (Path.home()/'.config/harmonika')
+    dl_root=Path.home()/'Downloads'/'harmonika-ai'
+    subfolders=('gambar','document','zip')
+    access_dir=cdir/'project-access'
+    try:
+        dl_root.mkdir(parents=True,exist_ok=True)
+        access_dir.mkdir(parents=True,exist_ok=True)
+        for folder in [dl_root,*[dl_root/s for s in subfolders]]:
+            folder.mkdir(parents=True,exist_ok=True)
+            real_str=str(folder.resolve())
+            rec_file=access_dir/(hashlib.sha256(real_str.encode('utf-8')).hexdigest()+'.json')
+            if not rec_file.exists():
+                rec_file.write_text(json.dumps({'root':real_str}))
+        guide_file=cdir/'HARMONIKA.md'
+        dl_abs=str(dl_root.resolve())
+        gambar_abs=str((dl_root/'gambar').resolve())
+        doc_abs=str((dl_root/'document').resolve())
+        zip_abs=str((dl_root/'zip').resolve())
+        guide_text=(
+            "# Aturan Penyimpanan File Otomatis Harmonika AI\n\n"
+            "1. **Sesuai Permintaan User (Custom Folder):**\n"
+            "   Jika pengguna meminta secara spesifik untuk membuat folder baru (di `Downloads` atau `Projects`) atau menyimpan di folder proyek tertentu, ikuti permintaan pengguna dan gunakan tool `create_directory` bila membuat folder proyek baru.\n\n"
+            "2. **Inisiatif Penyimpanan Otomatis Berdasarkan Jenis File (`Downloads/harmonika-ai`):**\n"
+            "   Jika pengguna meminta membuat/mengunduh/menyimpan file tanpa menentukan folder tujuan spesifik, atau meminta disimpan di Downloads, simpan secara otomatis dan terfokus di dalam folder khusus berikut yang sudah siap pakai (auto-created):\n"
+            f"   - **Folder Utama Harmonika AI:** `{dl_abs}`\n"
+            f"   - **File Gambar** (`.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`, `.gif` — hasil generate gambar, desain, poster, screenshot): simpan di `{gambar_abs}`\n"
+            f"   - **File Dokumen** (`.pdf`, `.docx`, `.xlsx`, `.pptx`, `.csv`, `.txt`, `.md`, `.html` — hasil dokumen, laporan, tabel, presentasi): simpan di `{doc_abs}`\n"
+            f"   - **File Arsip / Bundle** (`.zip`, `.tar.gz`, `.tgz`, `.7z` — hasil kompresi atau paket kode/file): simpan di `{zip_abs}`\n"
+        )
+        guide_file.write_text(guide_text,encoding='utf-8')
+    except Exception:
+        pass
+    return dl_root
+
+def prompt_startup_update(root=ROOT,force_output=False):
+    try:
+        _,current=active(root)
+        with urllib.request.build_opener(SameOrigin()).open(CATALOG,timeout=4) as response:
+            raw=response.read(1024*1024+1)
+        newest=verify_envelope(raw,root)
+        release=newest.get('release','')
+        if not RELEASE_RE.fullmatch(release):
+            return None
+        cur_ver=current['release']
+        is_newer=tuple(map(int,release.split('.')))>tuple(map(int,cur_ver.split('.')))
+        pkg_url=newest.get('package_url','')
+        if not is_newer or not pkg_url:
+            if force_output:
+                print(f"\033[38;2;63;185;80m✓ Harmonika AI sudah menggunakan versi terbaru ({cur_ver}).\033[0m")
+            return {'ok':True,'updated':False,'current':cur_ver,'latest':release}
+        O='\033[38;2;255;123;0m';B='\033[1m';G='\033[38;2;63;185;80m';C='\033[38;2;88;166;255m';R='\033[0m'
+        print(f"\n{O}╭──────────────────────────────────────────────────────────────────────────╮{R}")
+        print(f"{O}│{R}  {B}{O}HARMONIKA AI — PEMBARUAN TERBARU TERSEDIA{R}                               {O}│{R}")
+        print(f"{O}│{R}                                                                          {O}│{R}")
+        print(f"{O}│{R}  Versi Saat Ini : {C}{cur_ver:<54}{R} {O}│{R}")
+        print(f"{O}│{R}  Versi Terbaru  : {G}{B}{release:<54}{R} {O}│{R}")
+        print(f"{O}│{R}                                                                          {O}│{R}")
+        print(f"{O}│{R}  Pilih tindakan pembaruan:                                               {O}│{R}")
+        print(f"{O}│{R}    {B}[Y] Yes{R}   — Update otomatis sekarang ke versi terbaru                 {O}│{R}")
+        print(f"{O}│{R}    {B}[N] No{R}    — Tidak sekarang, langsung buka Harmonika AI                {O}│{R}")
+        print(f"{O}│{R}    {B}[L] Later{R} — Ingatkan lagi nanti saat membuka Harmonika AI             {O}│{R}")
+        print(f"{O}╰──────────────────────────────────────────────────────────────────────────╯{R}")
+        try:
+            ans=input(f"{O}Pilihan Anda [Y/n/l] (Enter = Yes): {R}").strip().lower()
+        except (EOFError,KeyboardInterrupt):
+            print()
+            ans='l'
+        if ans in ('','y','yes','ya'):
+            print(f"{O}↻ Mengunduh dan memasang pembaruan Harmonika AI v{release}...{R}")
+            tmp_pkg=root/('auto-update-'+release+'.zip')
+            try:
+                with urllib.request.build_opener(SameOrigin()).open(pkg_url,timeout=120) as r, open(tmp_pkg,'wb') as out:
+                    shutil.copyfileobj(r,out)
+                if newest.get('package_sha256') and digest(tmp_pkg)!=newest['package_sha256']:
+                    raise ValueError('package_checksum_mismatch')
+                install_package(tmp_pkg,root)
+                new_dir,_=active(root)
+                if (new_dir/'tools/harmonika.py').is_file():
+                    atomic_state(root/'launcher.py',(new_dir/'tools/harmonika.py').read_text())
+                print(f"{G}✓ Berhasil diperbarui ke Harmonika AI v{release}!{R}\n")
+                return {'ok':True,'updated':True,'release':release,'previous':cur_ver}
+            finally:
+                tmp_pkg.unlink(missing_ok=True)
+        elif ans in ('n','no','tidak'):
+            print(f"{C}ℹ Pembaruan dilewati untuk sesi ini (tetap standby saat Anda memanggil harmonika kembali).{R}\n")
+            return {'ok':True,'updated':False,'choice':'no','current':cur_ver,'latest':release}
+        else:
+            print(f"{C}ℹ Pembaruan ditunda ke sesi berikutnya (Later). Membuka Harmonika AI...{R}\n")
+            return {'ok':True,'updated':False,'choice':'later','current':cur_ver,'latest':release}
+    except Exception as exc:
+        if force_output:
+            print(f"Gagal memeriksa/memasang pembaruan: {exc}",file=sys.stderr)
+        return None
+
 def run_exec(command, env=None):
     if os.name == 'nt':
         res = subprocess.run(command, env=env)
@@ -296,6 +391,9 @@ def run_exec(command, env=None):
 def main():
     args=sys.argv[1:]
     if args==['doctor']:result=doctor()
+    elif args==['update']:
+        res=prompt_startup_update(ROOT,force_output=True)
+        result=res or check_update()
     elif args==['update','--check']:result=check_update()
     elif len(args)==3 and args[:2]==['update','--apply']:result=install_package(args[2])
     elif args==['rollback']:result=rollback()
@@ -378,6 +476,7 @@ def main():
         verify_files(directory,manifest)
         cfg_dir=os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika'))
         data_dir=os.environ.get('HARMONIKA_GLOBAL_DATA',str(Path.home()/'.local/share/harmonika'))
+        dl_root=ensure_harmonika_downloads(cfg_dir)
         key_file=Path(cfg_dir)/'harmonika-api-key'
         if not args and sys.stdin.isatty() and not key_file.is_file():
             lic_script=directory/'tools/license.py'
@@ -386,6 +485,11 @@ def main():
                 res=subprocess.run([sys.executable,'-I',str(lic_script),'activate'])
                 if res.returncode!=0 or not key_file.is_file():
                     sys.exit(res.returncode or 1)
+        if not args and sys.stdin.isatty() and sys.stdout.isatty():
+            upd=prompt_startup_update(ROOT,force_output=False)
+            if upd and upd.get('updated'):
+                directory,manifest=active()
+                verify_files(directory,manifest)
         api_key_val=''
         if key_file.is_file():
             try:api_key_val=key_file.read_text().strip()
@@ -442,6 +546,10 @@ def main():
             CRUSH_GLOBAL_DATA=data_dir,
             HARMONIKA_DEVICE_ID=dev_id,
             HARMONIKA_DEVICE_NAME=dev_nm,
+            HARMONIKA_DOWNLOADS_DIR=str(dl_root),
+            HARMONIKA_IMAGES_DIR=str(dl_root/'gambar'),
+            HARMONIKA_DOCUMENTS_DIR=str(dl_root/'document'),
+            HARMONIKA_ZIP_DIR=str(dl_root/'zip'),
             **({'HARMONIKA_API_KEY':api_key_val} if api_key_val else {}))
         bpath=directory/bin_name()
         if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'
