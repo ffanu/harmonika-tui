@@ -170,7 +170,9 @@ def _prepare(package,stage):
             if name!='release.json' and not (name.startswith('tools/') or name.startswith('skills/') or name=='README.md'):raise ValueError('unsupported_runtime_file')
             file=stage/name;file.parent.mkdir(parents=True,exist_ok=True)
             file.write_bytes(archive.read(name))
-        if os.environ.get('HARMONIKA_SKIP_BINARY_SHA_CHECK')!='1' and m.digest(BINARY)!=manifest['binary_sha256']:raise ValueError('custom_binary_changed')
+        # A legacy bootstrap flag must never bypass signed per-platform pins.
+        expected=m.expected_binary_sha(manifest,detect_platform())
+        if ('binary_hashes' in manifest or os.environ.get('HARMONIKA_SKIP_BINARY_SHA_CHECK')!='1') and m.digest(BINARY)!=expected:raise ValueError('custom_binary_changed')
         bname=m.bin_name() if BINARY.name.endswith('.exe') else 'harmonika'
         shutil.copy2(BINARY,stage/bname);os.chmod(stage/bname,0o755)
         if os.name=='nt':

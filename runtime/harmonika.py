@@ -103,6 +103,22 @@ def device_name():
 def bin_name():
     return 'harmonika.exe' if os.name == 'nt' else 'harmonika'
 
+def platform_id():
+    arch=platform.machine().lower()
+    arch='x64' if arch in ('x86_64','amd64') else 'arm64' if arch in ('aarch64','arm64') else arch
+    return platform.system().lower()+'-'+arch
+
+def expected_binary_sha(manifest,platform_key=None):
+    """New releases bind every platform checksum inside the signed envelope."""
+    if 'binary_hashes' in manifest:
+        hashes=manifest['binary_hashes']
+        if not isinstance(hashes,dict):raise ValueError('invalid_platform_checksums')
+        value=hashes.get(platform_key or platform_id())
+        if value is None:raise ValueError('platform_binary_unavailable')
+    else:value=manifest.get('binary_sha256')
+    if not isinstance(value,str) or not re.fullmatch('[a-f0-9]{64}',value):raise ValueError('invalid_binary_checksum')
+    return value
+
 def active(root=ROOT):
     selected=None
     ver_file=root/'current.version'
@@ -123,9 +139,9 @@ def active(root=ROOT):
     if manifest.get('release')!=selected.name:raise ValueError('release_identity_mismatch')
     binary=selected/bin_name()
     if not binary.exists() and (selected/'harmonika').exists():binary=selected/'harmonika'
-    expected_sha=manifest['binary_sha256']
+    expected_sha=expected_binary_sha(manifest)
     plat_sha_file=selected/'binary.sha256'
-    if os.name=='nt' and plat_sha_file.is_file():
+    if 'binary_hashes' not in manifest and os.name=='nt' and plat_sha_file.is_file():
         expected_sha=plat_sha_file.read_text().strip()
     if binary.is_symlink() or digest(binary)!=expected_sha:raise ValueError('binary_checksum_mismatch')
     return selected,manifest
@@ -159,6 +175,7 @@ def preflight(directory,manifest):
     verify_files(directory,manifest)
     bpath=directory/bin_name()
     if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'
+    if 'binary_hashes' in manifest and digest(bpath)!=expected_binary_sha(manifest):raise ValueError('binary_checksum_mismatch')
     result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,timeout=10)
     if result.returncode or 'v0.98.1' not in result.stdout:raise ValueError('binary_preflight_failed')
     for name in manifest['files']:
@@ -194,10 +211,10 @@ def installation_lock(root):
         else:
             yield
 
-def install_package(package,root=ROOT):
-    with installation_lock(root):return _install_package(package,root)
+def install_package(package,root=ROOT,*,binary_source=None):
+    with installation_lock(root):return _install_package(package,root,binary_source=binary_source)
 
-def _install_package(package,root=ROOT):
+def _install_package(package,root=ROOT,*,binary_source=None):
     package=Path(package)
     current,previous=active(root)
     if package.stat().st_size>20*1024*1024:raise ValueError('package_too_large')
@@ -212,7 +229,12 @@ def _install_package(package,root=ROOT):
             if total>20*1024*1024:raise ValueError('package_unpacked_too_large')
         manifest=verify_envelope(archive.read('release.json'),root)
         release=manifest.get('release','')
-        if not RELEASE_RE.fullmatch(release) or manifest.get('binary_sha256')!=previous['binary_sha256']:raise ValueError('unsupported_binary_change')
+        if not RELEASE_RE.fullmatch(release):raise ValueError('invalid_release')
+        expected=expected_binary_sha(manifest)
+        if binary_source is None:
+            if expected!=expected_binary_sha(previous):raise ValueError('unsupported_binary_change')
+        elif 'binary_hashes' not in manifest or Path(binary_source).is_symlink() or digest(binary_source)!=expected:
+            raise ValueError('platform_binary_checksum_mismatch')
         if set(names)!=set(manifest['files'])|{'release.json'}:raise ValueError('package_file_list_mismatch')
         for name in manifest['files']:
             if not (name.startswith('tools/') or name.startswith('skills/') or name=='README.md'):raise ValueError('unsupported_runtime_file')
@@ -225,7 +247,7 @@ def _install_package(package,root=ROOT):
                 with open(destination,'xb') as out:out.write(archive.read(name))
                 os.chmod(destination,0o600 if name=='release.json' else 0o644)
             bname=bin_name() if (current/bin_name()).exists() else 'harmonika'
-            shutil.copy2(current/bname,stage/bname)
+            shutil.copy2(binary_source or current/bname,stage/bname)
             os.chmod(stage/bname,0o755)
             if os.name=='nt':
                 (stage/'binary.sha256').write_text(digest(stage/bname))
@@ -248,7 +270,7 @@ def _rollback(root=ROOT):
     manifest=verify_envelope((target/'release.json').read_bytes(),root)
     if target.is_symlink() or manifest.get('release')!=release:raise ValueError('invalid_rollback_target')
     bname=bin_name() if (target/bin_name()).exists() else 'harmonika'
-    if digest(target/bname)!=manifest['binary_sha256']:raise ValueError('binary_checksum_mismatch')
+    if digest(target/bname)!=expected_binary_sha(manifest):raise ValueError('binary_checksum_mismatch')
     preflight(target,manifest)
     switch(release,root)
     atomic_state(root/'previous',current.name)
@@ -484,52 +506,25 @@ def prompt_startup_update(root=ROOT,force_output=False):
                 cur_dir,cur_manifest=active(root)
                 with zipfile.ZipFile(tmp_pkg) as zchk:
                     pkg_manifest=verify_envelope(zchk.read('release.json'),root)
-                if pkg_manifest.get('binary_sha256')!=cur_manifest.get('binary_sha256'):
+                if expected_binary_sha(pkg_manifest)!=expected_binary_sha(cur_manifest):
                     bins_url='https://chat.harmonika.id/assets/harmonika-terminal/binaries.json'
                     with urllib.request.build_opener(SameOrigin()).open(bins_url,timeout=30) as br:
                         bins_env=verify_envelope(br.read(1024*1024),root)
-                    sys_name=platform.system().lower()
-                    arch=platform.machine().lower()
-                    arch='x64' if arch in ('x86_64','amd64') else ('arm64' if arch in ('aarch64','arm64') else arch)
-                    plat_key=f"{sys_name}-{arch}"
-                    pinfo=bins_env.get('platforms',{}).get(plat_key)
-                    if pinfo:
-                        tmp_bin=root/('auto-bin-'+bin_name())
-                        try:
-                            with urllib.request.build_opener(SameOrigin()).open(pinfo['url'],timeout=300) as br2, open(tmp_bin,'wb') as bout:
-                                shutil.copyfileobj(br2,bout)
-                            if digest(tmp_bin)!=pinfo['sha256']:
-                                raise ValueError('platform_binary_checksum_mismatch')
-                            os.chmod(tmp_bin,0o755)
-                            bname=bin_name() if (cur_dir/bin_name()).exists() else 'harmonika'
-                            shutil.copy2(tmp_bin,cur_dir/bname)
-                            os.chmod(cur_dir/bname,0o755)
-                            if os.name=='nt':
-                                (cur_dir/'binary.sha256').write_text(digest(cur_dir/bname))
-                            # Update cur_dir/release.json payload in-memory not needed if we extract directly:
-                            stage=Path(tempfile.mkdtemp(prefix='.stage-',dir=str(root/'versions')))
-                            try:
-                                with zipfile.ZipFile(tmp_pkg) as zf:
-                                    for name in zf.namelist():
-                                        dest=stage/name;dest.parent.mkdir(parents=True,exist_ok=True)
-                                        dest.write_bytes(zf.read(name))
-                                        os.chmod(dest,0o600 if name=='release.json' else 0o644)
-                                shutil.copy2(cur_dir/bname,stage/bname)
-                                os.chmod(stage/bname,0o755)
-                                if os.name=='nt':
-                                    (stage/'binary.sha256').write_text(digest(stage/bname))
-                                preflight(stage,pkg_manifest)
-                                target=root/'versions'/release
-                                if target.exists():shutil.rmtree(target)
-                                stage.rename(target)
-                                atomic_state(root/'previous',cur_dir.name)
-                                switch(release,root)
-                            finally:
-                                if stage.exists():shutil.rmtree(stage)
-                        finally:
-                            tmp_bin.unlink(missing_ok=True)
-                    else:
-                        install_package(tmp_pkg,root)
+                    pinfo=bins_env.get('platforms',{}).get(platform_id())
+                    if not pinfo or pinfo.get('sha256')!=expected_binary_sha(pkg_manifest):
+                        raise ValueError('platform_catalog_mismatch')
+                    tmp_bin=root/('update-bin-'+bin_name())
+                    try:
+                        with urllib.request.build_opener(SameOrigin()).open(pinfo['url'],timeout=300) as br2, open(tmp_bin,'wb') as bout:
+                            shutil.copyfileobj(br2,bout)
+                        if digest(tmp_bin)!=pinfo['sha256']:
+                            raise ValueError('platform_binary_checksum_mismatch')
+                        os.chmod(tmp_bin,0o755)
+                        # Stage and verify the new binary; never overwrite the
+                        # active or rollback release while updating metadata.
+                        install_package(tmp_pkg,root,binary_source=tmp_bin)
+                    finally:
+                        tmp_bin.unlink(missing_ok=True)
                 else:
                     install_package(tmp_pkg,root)
                 new_dir,_=active(root)
