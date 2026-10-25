@@ -421,7 +421,9 @@ def ensure_harmonika_downloads(cfg_dir=None):
             f"   - **File Gambar** (`.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`, `.gif` — hasil generate gambar, desain, poster, screenshot): simpan di `{gambar_abs}`\n"
             f"   - **File Dokumen** (`.pdf`, `.docx`, `.xlsx`, `.pptx`, `.csv`, `.txt`, `.md`, `.html` — hasil dokumen, laporan, tabel, presentasi): simpan di `{doc_abs}`\n"
             f"   - **File Arsip / Bundle** (`.zip`, `.tar.gz`, `.tgz`, `.7z` — hasil kompresi atau paket kode/file): simpan di `{zip_abs}` (bisa juga menjalankan `harmonika zip <path_folder> [nama.zip]`)\n\n"
-            "3. **Gaya Respons & Pembuatan Gambar Modern di Terminal:**\n"
+            "3. **Gaya Respons, Coding & Pembuatan Gambar Modern di Terminal:**\n"
+            "   - Untuk tugas coding atau analisis multi-langkah, sajikan tahapan kerja yang rapi (contoh: `1. ✓ Parse permintaan` • `2. ✓ Analisis kode` • `3. ✓ Implementasi solusi`) serta gunakan indikator status jelas (`✓ Sukses`, `⚠ Catatan`, `✗ Error`, `ℹ Info`).\n"
+            "   - Gunakan format Markdown yang terstruktur (bold, list, tabel ringkasan, dan blok kode dengan nama bahasa untuk syntax highlighting).\n"
             f"   - Saat pengguna meminta membuat gambar (`generate_image`), gunakan path output di dalam `{gambar_abs}/<nama-unik>.png` (kecuali diminta di folder lain).\n"
             "   - Sajikan informasi hasil pembuatan gambar dengan rapi (Nama File, Dimensi, Ukuran File, Lokasi Penyimpanan, dan informasikan bahwa pengguna dapat mengetik `harmonika preview` di terminal untuk melihat pratinjau warna gambar langsung di terminal).\n"
         )
