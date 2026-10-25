@@ -39,6 +39,7 @@ def build(release):
     (tools/'project-file-guard.cjs').write_text(guard)
     shutil.copy2(SOURCE/'runtime/protocol-check.cjs',tools/'protocol-check.cjs')
     shutil.copy2(SOURCE/'runtime/harmonika.py',tools/'harmonika.py')
+    shutil.copy2(SOURCE/'runtime/license.py',tools/'license.py')
     shutil.copytree(SOURCE/'skills',destination/'skills',ignore=shutil.ignore_patterns('__pycache__','.*','*~','*.orig','*.pyc'))
     # Fail build rather than ship dependency specifications that disagree.
     if (SOURCE/'skills/harmonika-documents/requirements.txt').read_bytes() != (SOURCE/'runtime/documents-requirements.lock').read_bytes():

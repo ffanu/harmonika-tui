@@ -53,6 +53,26 @@ def ensure_dependencies(root=ROOT):
 def ensure_default_config(root=ROOT):
     cfg_dir=Path.home()/'.config/harmonika'
     cfg_dir.mkdir(parents=True,exist_ok=True)
+    themes_dir=cfg_dir/'themes'
+    themes_dir.mkdir(parents=True,exist_ok=True)
+    orange_dark_theme={
+        'base':'charmtone-panther','primary':'#ff7b00','secondary':'#ff9e00','accent':'#ffa657','on_primary':'#0d1117',
+        'bg_base':'#0d1117','bg_less_visible':'#161b22','bg_least_visible':'#21262d','bg_most_visible':'#30363d',
+        'fg_base':'#f0f6fc','fg_subtle':'#c9d1d9','fg_more_subtle':'#8b949e','fg_most_subtle':'#6e7681','button_subtle':'#21262d',
+        'info':'#58a6ff','info_more_subtle':'#1f6feb','info_most_subtle':'#0d419d',
+        'success':'#3fb950','success_more_subtle':'#238636','success_most_subtle':'#12261e',
+        'warning':'#ff9e00','warning_subtle':'#9e6a03','error':'#f85149','plan':'#ff7b00','plan_more_subtle':'#3d2200',
+        'diff_insert_fg':'#7ee787','diff_insert_code_bg':'#12261e','diff_insert_gutter_bg':'#19362a',
+        'diff_delete_fg':'#ff7b72','diff_delete_code_bg':'#2d1619','diff_delete_gutter_bg':'#3d1d21',
+        'ansi_black':'#484f58','ansi_red':'#ff7b72','ansi_green':'#3fb950','ansi_yellow':'#ffa657',
+        'ansi_blue':'#58a6ff','ansi_magenta':'#d2a8ff','ansi_cyan':'#39c5cf','ansi_white':'#b1bac4',
+        'ansi_bright_black':'#6e7681','ansi_bright_red':'#ffa198','ansi_bright_green':'#7ee787','ansi_bright_yellow':'#ffdf5d',
+        'ansi_bright_blue':'#79c0ff','ansi_bright_magenta':'#e2c5ff','ansi_bright_cyan':'#56d4dd','ansi_bright_white':'#ffffff'
+    }
+    (themes_dir/'harmonika-dark.json').write_text(json.dumps(orange_dark_theme,indent=2)+'\n')
+    share_dir=Path.home()/'.local/share/harmonika'
+    share_dir.mkdir(parents=True,exist_ok=True)
+    (share_dir/'crush.json').write_text('{"options":{"tui":{"transparent":false,"active_theme":"harmonika-dark"}}}\n')
     cfg_file=cfg_dir/'harmonika.json'
     key_file=cfg_dir/'harmonika-api-key'
     key_cmd=f'$(cat {key_file})' if os.name!='nt' else '$HARMONIKA_API_KEY'
@@ -65,7 +85,7 @@ def ensure_default_config(root=ROOT):
                 'progress':True,'auto_lsp':False,'data_directory':'.harmonika','disable_provider_auto_update':True,
                 'disabled_skills':['built-in-browser','chrome-browser','computer-use','crush-config','crush-hooks','harmonika-config','harmonika-hooks','deep-research','docs','docx','google-workspace','import-memory','jq','learn','morning','pdf','pptx','setup-writing-style','skill-creator','theme-factory','xlsx'],
                 'request_timeout':120,
-                'tui':{'compact_mode':True,'diff_mode':'unified','active_theme':'gruvbox-dark','scrollbar':'always','mouse':True,'exit_banner':'compact'},
+                'tui':{'compact_mode':True,'diff_mode':'unified','active_theme':'harmonika-dark','scrollbar':'always','mouse':True,'exit_banner':'compact'},
                 'skills_paths':[str(root/'current/skills')]
             },
             'permissions':{'allowed_tools':[]},

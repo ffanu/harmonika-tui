@@ -8,7 +8,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 **19 panduan skill** · **8 tool MCP** · **5 LSP** · **Update manual terverifikasi**
 
-[Website](https://hai.harmonika.id) · [Panel & API](https://chat.harmonika.id) · [Status rilis](docs/STATUS.md) · [Dokumentasi](#mulai)
+[Website](https://harmonika.id) · [Status rilis](docs/STATUS.md) · [Dokumentasi](#mulai)
 
 ![Demo terminal Harmonika](docs/assets/harmonika-demo.gif)
 
@@ -64,7 +64,7 @@ Kontrak `AIRequest → AIIntegration → AIAdapter` memisahkan TUI dari model gu
 
 ## Unified engine backend
 
-Backend `chat.harmonika.id/v1/unified` menyediakan sesi privat, job, routing otomatis,
+Backend `harmonika.id` menyediakan sesi privat, job, routing otomatis,
 Stop dan replay SSE. Tepat70 ID blueprint:57 callable,12 mekanisme internal,1 transport WSS;
 seluruh70 ID konkret terhubung. GraphQL, event bus, knowledge API dan secret connector
 tersedia sesuai scope. Perencanaan web/mobile memakai engine yang sudah ada; bukan klaim build
@@ -234,10 +234,12 @@ python3 runtime/public-preflight.py
 
 ## Key & layanan
 
-**Base URL:** `https://chat.harmonika.id/v1`<br>
-**Identitas layanan:** Harmonika Ai
+**Domain layanan:** `https://harmonika.id`<br>
+**Identitas layanan:** Harmonika Ai<br>
+**Kebijakan lisensi:** 1 API Key = 1 Perangkat (Single Device)<br>
+**Permintaan API Key (WhatsApp):** `085771378237`
 
-Setiap pengguna harus memiliki key sendiri yang diterbitkan serta dapat dicabut oleh server. Hak coding dan unlimited berasal dari entitlement server; mengubah konfigurasi client tidak memberikan hak tambahan.
+Setiap pengguna wajib memiliki API Key lisensi sendiri yang diterbitkan serta dapat dicabut oleh server (1 Key hanya untuk 1 perangkat). Saat pertama kali menjalankan `harmonika`, kotak aktivasi lisensi akan muncul secara otomatis di terminal.
 
 ```sh
 python3 runtime/license.py check
@@ -298,7 +300,7 @@ Komponen pihak ketiga tetap mengikuti pemberitahuan hak cipta dan ketentuan lise
 
 **Harmonika Ai — ruang kerja Anda, tetap dalam kendali Anda.**
 
-[hai.harmonika.id](https://hai.harmonika.id) · [chat.harmonika.id](https://chat.harmonika.id)
+[harmonika.id](https://harmonika.id)
 
 </div>
 
