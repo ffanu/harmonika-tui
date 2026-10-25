@@ -1,0 +1,899 @@
+{
+  "claimed": 221,
+  "actual": 99,
+  "lines": 228,
+  "sha256": "01db020869c5a7344fd967449e3bf9363f947ae358745fb46cd4e3dc1f1b6c45",
+  "skills": [
+    {
+      "number": 1,
+      "id": "intent.detect.legal",
+      "requested_description": "Deteksi intent: pelapor / terlapor / edukasi",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 2,
+      "id": "intent.detect.emergency",
+      "requested_description": "Deteksi emergency (ancaman, kekerasan)",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 3,
+      "id": "intent.detect.layanan",
+      "requested_description": "Deteksi kebutuhan: lapor polisi / advokasi / edukasi",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 4,
+      "id": "persona.detect.expert",
+      "requested_description": "Detect persona yang diminta (ahli ITE, dll)",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 5,
+      "id": "persona.activate.ite",
+      "requested_description": "Aktifkan persona \"Ahli Hukum ITE\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 6,
+      "id": "persona.activate.pidana",
+      "requested_description": "Aktifkan persona \"Ahli Hukum Pidana\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 7,
+      "id": "persona.activate.perdata",
+      "requested_description": "Aktifkan persona \"Ahli Hukum Perdata\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 8,
+      "id": "persona.activate.keluarga",
+      "requested_description": "Aktifkan persona \"Ahli Hukum Keluarga\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 9,
+      "id": "persona.activate.tenagakerja",
+      "requested_description": "Aktifkan persona \"Ahli Hukum Ketenagakerjaan\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 10,
+      "id": "persona.activate.konsumen",
+      "requested_description": "Aktifkan persona \"Ahli Hukum Perlindungan Konsumen\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 11,
+      "id": "persona.activate.pdp",
+      "requested_description": "Aktifkan persona \"Ahli PDP (Privacy)\"",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 12,
+      "id": "persona.deactivate",
+      "requested_description": "Deactivate persona, kembali ke mode edukasi",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      }
+    },
+    {
+      "number": 13,
+      "id": "evidence.image.upload",
+      "requested_description": "Upload gambar (screenshot, foto, dokumen)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 14,
+      "id": "evidence.video.upload",
+      "requested_description": "Upload video (rekaman, CCTV)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 15,
+      "id": "evidence.voice.upload",
+      "requested_description": "Upload voice note",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 16,
+      "id": "evidence.document.upload",
+      "requested_description": "Upload dokumen (PDF, Word)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 17,
+      "id": "evidence.ocr.extract",
+      "requested_description": "OCR: extract teks dari gambar",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 18,
+      "id": "evidence.vlm.analyze",
+      "requested_description": "VLM: deskripsikan isi gambar/video",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 19,
+      "id": "evidence.asr.transcribe",
+      "requested_description": "ASR: transcribe voice ke teks",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 20,
+      "id": "evidence.document.parse",
+      "requested_description": "Parse PDF/Word ke teks",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 21,
+      "id": "evidence.metadata.extract",
+      "requested_description": "Extract metadata (timestamp, lokasi, device)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 22,
+      "id": "evidence.authenticity.check",
+      "requested_description": "Cek keaslian bukti (basic, bukan forensik)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 23,
+      "id": "evidence.chain.custody",
+      "requested_description": "Chain of custody (legal-grade log)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 24,
+      "id": "evidence.categorize",
+      "requested_description": "Kategorisasi bukti (dokumen, saksi, digital)",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 25,
+      "id": "evidence.relevance.assess",
+      "requested_description": "Assess relevance ke kasus",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 26,
+      "id": "evidence.store.secure",
+      "requested_description": "Simpan bukti encrypted",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 27,
+      "id": "evidence.privacy.redact",
+      "requested_description": "Redact PII sebelum simpan",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      }
+    },
+    {
+      "number": 28,
+      "id": "kb.uu.search",
+      "requested_description": "Search di database UU Indonesia",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 29,
+      "id": "kb.uu.get",
+      "requested_description": "Get UU by nomor & tahun",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 30,
+      "id": "kb.uu.pasal.get",
+      "requested_description": "Get pasal spesifik dari UU",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 31,
+      "id": "kb.uu.history.track",
+      "requested_description": "Track history (amandemen, pencabutan)",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 32,
+      "id": "kb.uu.replace.check",
+      "requested_description": "Cek apakah UU sudah diganti",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 33,
+      "id": "kb.putusan.ma.search",
+      "requested_description": "Search putusan Mahkamah Agung",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 34,
+      "id": "kb.putusan.mk.search",
+      "requested_description": "Search putusan Mahkamah Konstitusi",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 35,
+      "id": "kb.putusan.pengadilan.search",
+      "requested_description": "Search putusan pengadilan lain",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 36,
+      "id": "kb.pp.search",
+      "requested_description": "Search Peraturan Pemerintah",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 37,
+      "id": "kb.perpres.search",
+      "requested_description": "Search Peraturan Presiden",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 38,
+      "id": "kb.permendagri.search",
+      "requested_description": "Search Permendagri",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 39,
+      "id": "kb.perda.search",
+      "requested_description": "Search Peraturan Daerah",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 40,
+      "id": "kb.sirclo.search",
+      "requested_description": "Search sirkulasi internal (JDIH)",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 41,
+      "id": "kb.intl.law.search",
+      "requested_description": "Search hukum internasional",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 42,
+      "id": "kb.intl.case.search",
+      "requested_description": "Search putusan internasional",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 43,
+      "id": "kb.article.legal.search",
+      "requested_description": "Search artikel hukum (jurnal, blog ahli)",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 44,
+      "id": "kb.konsil.yudisial",
+      "requested_description": "Search data konsil yudisial",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 45,
+      "id": "kb.advokat.verify",
+      "requested_description": "Verify nomor lisensi advokat",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 46,
+      "id": "kb.lbh.search",
+      "requested_description": "Search Lembaga Bantuan Hukum terdekat",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 47,
+      "id": "kb.update.sync",
+      "requested_description": "Sync database UU terbaru",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      }
+    },
+    {
+      "number": 48,
+      "id": "uu.status.check",
+      "requested_description": "Cek status UU (berlaku/diubah/dicabut)",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 49,
+      "id": "uu.amandemen.track",
+      "requested_description": "Track amandemen UU",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 50,
+      "id": "uu.replace.find",
+      "requested_description": "Cari UU pengganti",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 51,
+      "id": "uu.consolidated.get",
+      "requested_description": "Get UU konsolidasi (gabungan amandemen)",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 52,
+      "id": "uu.effective.date",
+      "requested_description": "Cek tanggal berlaku",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 53,
+      "id": "uu.transition.rule",
+      "requested_description": "Cek aturan transisi (kalau ada)",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 54,
+      "id": "uu.implementing.regulation",
+      "requested_description": "Cek PP/Perpres pelaksana",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 55,
+      "id": "uu.cross_reference",
+      "requested_description": "Cross-reference UU terkait",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 56,
+      "id": "uu.multiple_source.verify",
+      "requested_description": "Verify dari multiple source",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 57,
+      "id": "uu.alert.new",
+      "requested_description": "Alert user kalau ada UU baru terkait",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      }
+    },
+    {
+      "number": 58,
+      "id": "expert.ite.assess",
+      "requested_description": "Ahli ITE: analisa tindak pidana ITE",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 59,
+      "id": "expert.ite.unsur_breakdown",
+      "requested_description": "Breakdown unsur pasal ITE (27, 28, 30, 45)",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 60,
+      "id": "expert.ite.bukti_digital",
+      "requested_description": "Analisa bukti digital (screenshot, WA)",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 61,
+      "id": "expert.pidana.assess",
+      "requested_description": "Ahli Pidana: analisa tindak pidana umum",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 62,
+      "id": "expert.pidana.unsur_breakdown",
+      "requested_description": "Breakdown unsur pasal pidana",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 63,
+      "id": "expert.pidana.sifat_perbuatan",
+      "requested_description": "Analisa sifat perbuatan (sengaja, dll)",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 64,
+      "id": "expert.perdata.assess",
+      "requested_description": "Ahli Perdata: analisa sengketa perdata",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 65,
+      "id": "expert.perdata.wanprestasi",
+      "requested_description": "Analisa wanprestasi",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 66,
+      "id": "expert.perdata.perbuatan_lawan",
+      "requested_description": "Analisa perbuatan melawan hukum",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 67,
+      "id": "expert.keluarga.assess",
+      "requested_description": "Ahli Keluarga: cerai, hak asuh, harta",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 68,
+      "id": "expert.keluarga.nafkah",
+      "requested_description": "Analisa nafkah & iwariah",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 69,
+      "id": "expert.tenagakerja.assess",
+      "requested_description": "Ahli Ketenagakerjaan: PHK, upah, kontrak",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 70,
+      "id": "expert.konsumen.assess",
+      "requested_description": "Ahli Konsumen: produk cacat, penipuan",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 71,
+      "id": "expert.pdp.assess",
+      "requested_description": "Ahli PDP: kebocoran data, pelanggaran",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 72,
+      "id": "expert.opinion.generate",
+      "requested_description": "Generate opini profesional dengan caveat",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      }
+    },
+    {
+      "number": 73,
+      "id": "ite.pasal.27",
+      "requested_description": "Pasal 27: muatan mengganggu, penipuan",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 74,
+      "id": "ite.pasal.27.ayat1",
+      "requested_description": "Ayat 1: pencemaran nama baik",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 75,
+      "id": "ite.pasal.27.ayat3",
+      "requested_description": "Ayat 3: penghinaan atau penyebaran",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 76,
+      "id": "ite.pasal.27.ayat4",
+      "requested_description": "Ayat 4: pengancaman kekerasan",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 77,
+      "id": "ite.pasal.28",
+      "requested_description": "Pasal 28: berita kebencian & palsu",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 78,
+      "id": "ite.pasal.28.ayat1",
+      "requested_description": "Ayat 1: berita kebencian SARA",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 79,
+      "id": "ite.pasal.28.ayat2",
+      "requested_description": "Ayat 2: ancaman kekerasan",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 80,
+      "id": "ite.pasal.30",
+      "requested_description": "Pasal 30: akses ilegal & gangguan",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 81,
+      "id": "ite.pasal.30.ayat1",
+      "requested_description": "Ayat 1: akses tidak sah",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 82,
+      "id": "ite.pasal.32",
+      "requested_description": "Pasal 32: intersepsi & wiretapping",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 83,
+      "id": "ite.pasal.35",
+      "requested_description": "Pasal 35: perbuatan tidak menyenangkan",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 84,
+      "id": "ite.pasal.45",
+      "requested_description": "Pasal 45: ancaman pidana",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      }
+    },
+    {
+      "number": 85,
+      "id": "kuhp.pasal.pencurian",
+      "requested_description": "Analisa pencurian (Pasal 362)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 86,
+      "id": "kuhp.pasal.penggelapan",
+      "requested_description": "Analisa penggelapan (Pasal 372)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 87,
+      "id": "kuhp.pasal.penipuan",
+      "requested_description": "Analisa penipuan (Pasal 378)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 88,
+      "id": "kuhp.pasal.pemerasan",
+      "requested_description": "Analisa pemerasan (Pasal 368)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 89,
+      "id": "kuhp.pasal.pengancaman",
+      "requested_description": "Analisa pengancaman (Pasal 369)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 90,
+      "id": "kuhp.pasal.pencemaran",
+      "requested_description": "Analisa pencemaran nama baik (Pasal 310-311)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 91,
+      "id": "kuhp.pasal.penghinaan",
+      "requested_description": "Analisa penghinaan (Pasal 312-321)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 92,
+      "id": "kuhp.pasal.perlindungan_anak",
+      "requested_description": "Analisa pasal anak (Pasal 76-81)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 93,
+      "id": "kuhp.pasal.kdrt",
+      "requested_description": "Analisa KDRT (Pasal 44 UU PKDRT)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 94,
+      "id": "kuhp.pasal.pembunuhan",
+      "requested_description": "Analisa pembunuhan (Pasal 338-350)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 95,
+      "id": "kuhp.pasal.penganiayaan",
+      "requested_description": "Analisa penganiayaan (Pasal 351-358)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 96,
+      "id": "kuhp.pasal.perkosaan",
+      "requested_description": "Analisa perkosaan (Pasal 285 UU HP)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 97,
+      "id": "kuhp.pasal.korupsi",
+      "requested_description": "Analisa korupsi (Pasal 2-3 UU Tipikor)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 98,
+      "id": "kuhp.pasal.narkotika",
+      "requested_description": "Analisa narkotika (Pasal 111-148 UU Narkotika)",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    },
+    {
+      "number": 99,
+      "id": "kuhp.baru.2026",
+      "requested_description": "KUHP Baru (UU 1/2023) - efektif 2026",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      }
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+
+
+## 🏗️ Arsitektur Skill Backend (Shared Core)
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Interface Layer                                    │
+│  ┌─────────────┐    ┌─────────────────┐            │
+│  │  Web UI     │    │  Terminal TUI   │            │
+│  │ (Next.js)   │    │  (Rust/Go/TS)   │            │
+│  └──────┬──────┘    └────────┬────────┘            │
+│         │                    │                      │
+└─────────┼────────────────────┼──────────────────────┘
+          │                    │
+          ▼                    ▼
+┌─────────────────────────────────────────────────────┐
+│  API Gateway / Skill Orchestrator                   │
+│  (REST + WebSocket + MCP)                           │
+└──────────────────────┬──────────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│  Skill Backend (Shared Core)                        │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐            │
+│  │ File     │ │ Shell    │ │ Code     │ ...        │
+│  │ Ops      │ │ Exec     │ │ Runner   │            │
+│  └──────────┘ └──────────┘ └──────────┘            │
+└──────────────────────┬──────────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│  System Layer (OS / FS / Network / Hardware)        │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📦 Daftar Lengkap Skill AI Backend
+
+### 🟢 Layer 1: Core Skills (WAJIB — fondasi)
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 1 | `file.read` | Baca isi file (text, binary) | `read_file(path)` |
+| 2 | `file.write` | Tulis/buat file baru | `write_file(path, content)` |
+| 3 | `file.edit` | Edit sebagian file (find-replace) | `edit_file(path, old, new)` |
+| 4 | `file.delete` | Hapus file atau folder | `delete_file(path)` |
+| 5 | `file.search` | Cari file berdasarkan nama/pattern | `search_files(pattern)` |
+| 6 | `file.grep` | Cari konten dalam file | `grep_files(pattern, path)` |
+| 7 | `file.move` | Pindah/rename file | `move_file(src, dst)` |
+| 8 | `file.list` | List isi direktori | `list_dir(path)` |
+| 9 | `shell.exec` | Jalankan command shell | `exec(cmd, timeout)` |
+| 10 | `shell.background` | Run command di background | `bg_exec(cmd)` |
+| 11 | `process.list` | List running process | `list_procs()` |
+| 12 | `process.kill` | Kill process by PID | `kill_proc(pid)` |
+
+---
+
+### 🔵 Layer 2: Code Execution Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 13 | `code.run.python` | Eksekusi Python script | `run_python(code)` |
+| 14 | `code.run.node` | Eksekusi Node.js script | `run_node(code)` |
+| 15 | `code.run.shell` | Eksekusi shell script | `run_shell(code)` |
+| 16 | `code.run.sql` | Eksekusi SQL query | `run_sql(query, db)` |
+| 17 | `code.lint` | Linting kode (eslint, ruff) | `lint_code(path)` |
+| 18 | `code.format` | Format kode (prettier, black) | `format_code(path)` |
+| 19 | `code.test` | Run unit test | `run_test(path)` |
+| 20 | `code.scaffold` | Init project baru | `scaffold(type, name)` |
+
+---
+
+### 🟣 Layer 3: Web & Network Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 21 | `web.fetch` | Ambil konten URL | `fetch_url(url)` |
+| 22 | `web.search` | Cari di internet | `web_search(query)` |
+| 23 | `web.scrape` | Scrape halaman web | `scrape_page(url)` |
+| 24 | `web.preview` | Serve & preview web app | `preview_app(path, port)` |
+| 25 | `web.screenshot` | Screenshot URL | `screenshot(url)` |
+| 26 | `http.request` | Custom HTTP request | `http_req(method, url, body)` |
+| 27 | `api.call` | Call REST/GraphQL API | `api_call(endpoint, params)` |
+| 28 | `webhook.send` | Kirim webhook | `send_webhook(url, data)` |
+
+---
+
+### 🟡 Layer 4: Data & Analysis Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 29 | `data.read_csv` | Baca file CSV | `read_csv(path)` |
+| 30 | `data.read_json` | Baca JSON | `read_json(path)` |
+| 31 | `data.read_excel` | Baca XLSX | `read_excel(path)` |
+| 32 | `data.transform` | Transform data (pandas) | `transform_data(df, ops)` |
+| 33 | `data.analyze` | Analisis statistik | `analyze_data(df)` |
+| 34 | `data.visualize` | Buat chart/plot | `plot_data(df, type)` |
+| 35 | `data.export` | Export ke CSV/JSON/XLSX | `export_data(df, format)` |
+| 36 | `db.connect` | Connect ke database | `db_connect(conn_str)` |
+| 37 | `db.query` | Run SQL query | `db_query(sql)` |
+| 38 | `db.migrate` | Run DB migration | `db_migrate(path)` |
+
+---
+
+### 🟠 Layer 5: Document Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 39 | `doc.read_pdf` | Extract teks PDF | `read_pdf(path)` |
+| 40 | `doc.read_docx` | Baca Word doc | `read_docx(path)` |
+| 41 | `doc.create_pdf` | Buat PDF | `create_pdf(content)` |
+| 42 | `doc.create_docx` | Buat Word | `create_docx(content)` |
+| 43 | `doc.create_xlsx` | Buat Excel | `create_xlsx(data)` |
+| 44 | `doc.create_pptx` | Buat PowerPoint | `create_pptx(slides)` |
+| 45 | `doc.convert` | Konversi format dokumen | `convert_doc(path, to)` |
+| 46 | `doc.ocr` | OCR gambar ke teks | `ocr_image(path)` |
+
+---
+
+### 🔴 Layer 6: AI & ML Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 47 | `llm.chat` | Chat dengan LLM | `llm_chat(messages)` |
+| 48 | `llm.complete` | Text completion | `llm_complete(prompt)` |
+| 49 | `llm.embed` | Generate embedding | `embed_text(text)` |
+| 50 | `vision.analyze` | Analisis gambar | `analyze_image(path)` |
+| 51 | `image.generate` | Generate gambar (SD local) | `generate_image(prompt)` |
+| 52 | `image.edit` | Edit gambar | `edit_image(path, prompt)` |
+| 53 | `audio.transcribe` | Speech-to-text | `transcribe_audio(path)` |
+| 54 | `audio.synthesize` | Text-to-speech | `synthesize_speech(text)` |
+| 55 | `video.analyze` | Analisis video | `analyze_video(path)` |
+| 46 | `rag.query` | Query knowledge base | `rag_query(question)` |
+| 57 | `rag.index` | Index dokumen ke vector DB | `index_doc(path)` |
+
+---
+
+### 🟤 Layer 7: DevOps & Infrastructure Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 58 | `git.status` | Cek git status | `git_status()` |
+| 59 | `git.commit` | Commit changes | `git_commit(msg)` |
+| 60 | `git.push` | Push ke remote | `git_push()` |
+| 61 | `git.diff` | Lihat diff | `git_diff(file)` |
+| 62 | `docker.build` | Build Docker image | `docker_build(tag)` |
+| 63 | `docker.run` | Run container | `docker_run(image)` |
+| 64 | `docker.ps` | List container | `docker_ps()` |
+| 65 | `env.get` | Get env variable | `get_env(key)` |
+| 66 | `env.set` | Set env variable | `set_env(key, val)` |
+| 67 | `secret.get` | Get secret (vault) | `get_secret(key)` |
+| 68 | `cron.add` | Tambah cron job | `add_cron(schedule, cmd)` |
+| 69 | `cron.list` | List cron jobs | `list_cron()` |
+
+---
+
+### ⚫ Layer 8: Memory & Knowledge Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 70 | `memory.set` | Simpan ke memory | `memory_set(key, val)` |
+| 71 | `memory.get` | Ambil dari memory | `memory_get(key)` |
+| 72 | `memory.search` | Cari di memory | `memory_search(query)` |
+| 73 | `memory.clear` | Hapus memory | `memory_clear(scope)` |
+| 74 | `knowledge.add` | Tambah ke knowledge base | `kb_add(doc)` |
+| 75 | `knowledge.search` | Semantic search KB | `kb_search(query)` |
+| 76 | `knowledge.graph` | Query knowledge graph | `kg_query(cypher)` |
+
+---
+
+### 🟢 Layer 9: Communication Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 77 | `email.send` | Kirim email | `send_email(to, subj, body)` |
+| 78 | `email.read` | Baca inbox | `read_email(folder)` |
+| 79 | `chat.send` | Kirim ke Slack/Discord/Telegram | `send_chat(channel, msg)` |
+| 80 | `notification.push` | Push notification | `push_notify(title, msg)` |
+| 81 | `sms.send` | Kirim SMS | `send_sms(to, msg)` |
+| 82 | `calendar.create` | Buat event kalender | `create_event(...)` |
+| 83 | `calendar.list` | List event | `list_events(range)` |
+
+---
+
+### 🔵 Layer 10: System & Hardware Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 84 | `system.info` | Info CPU/RAM/Disk | `sys_info()` |
+| 85 | `system.monitor` | Monitor resource | `sys_monitor(metric)` |
+| 86 | `system.network` | Info jaringan | `sys_network()` |
+| 87 | `system.battery` | Status baterai | `sys_battery()` |
+| 88 | `system.screenshot` | Screenshot layar | `sys_screenshot()` |
+| 89 | `system.clipboard` | Read/write clipboard | `clipboard(op, val)` |
+| 90 | `system.notify` | Desktop notification | `desktop_notify(msg)` |
+| 91 | `system.audio` | Play/record audio | `audio_action(op)` |
+| 92 | `system.open` | Buka file dengan app default | `open_file(path)` |
+| 93 | `system.url` | Buka URL di browser | `open_url(url)` |
+
+---
+
+### 🟣 Layer 11: Automation & Workflow Skills
+
+| # | Skill ID | Fungsi | Interface |
+|---|----------|--------|-----------|
+| 94 | `workflow.define` | Define workflow DAG | `define_wf(steps)` |
+| 95 | `workflow.run` | Eksekusi workflow | `run_wf(id)` |
+| 96 | `workflow.schedule` | Jadwalkan workflow | `schedule_wf(id, cron)` |
+| 97 | `trigger.on_event` | Trigger saat event | `on_event(type, fn)` |
+| 98 | `macro.record` | Record macro (UI actions) | `record_macro()` |
+| 99 | `macro.play` | Playback macro | `play_macro(id)` |
+
+---
+
+## 📋 Skill Interface Contract (Standar)
+
+Setiap skill WAJIB punya:
+
+```yaml
+skill:
+  id: "file.read"
+  name: "Read File"
+  description: "Baca isi file teks atau binary"
+  
+  input_schema:
+    type: object
+    properties:
+      path:
+        type: string
+        description: "Path absolut ke file"
+      encoding:
+        type: string
+        default: "utf-8"
+    required: [path]
+  
+  output_schema:
+    type: object
+    properties:
+      content:
+        type: string
+      size:
+        type: integer
+      modified:
+        type: string
+        format: date-time
+  
+  permissions:
+    filesystem: ["read"]
+    network: false
+    shell: false
+  
+  rate_limit:
+    calls_per_minute: 100
+  
+  timeout: 30s
+  
+  access:
+    - web_ui: true
+    - tui: true
+    - api: true
+```
+
+---
+
+## 🎯 Prioritas Build (Phased Approach)
+
+### Phase 1 — MVP (Minggu 1-4) 🚀
+```
+file.read, file.write, file.edit, file.search, file.grep,
+shell.exec, code.run.python, code.run.node,
+web.fetch, web.search, web.preview,
+memory.set, memory.get, system.info
+```
+**= 13 skills** → Cukup untuk Codex-style agent
+
+### Phase 2 — Power User (Minggu 5-8) ⚡
+```
+code.scaffold, code.test, code.lint, code.format,
+git.*, docker.run, env.*, data.read_csv, data.read_json,
+doc.read_pdf, doc.read_docx, llm.chat, vision.analyze,
+rag.query, knowledge.search
+```
+
+### Phase 3 — Advanced (Minggu 9-12) 🔥
+```
+web.scrape, web.screenshot, data.analyze, data.visualize,
+doc.create_*, image.generate, audio.transcribe,
+workflow.*, cron.add, secret.get
+```
+
+### Phase 4 — Enterprise (Bulan 4+) 🏢
+```
+email.*, chat.send, calendar.*, 
+system.screenshot, system.clipboard, macro.*,
+knowledge.graph, db.migrate
+```
+
+---
+
+## 🔒 Security & Permission Matrix
+
+Setiap skill punya permission level:
+
+| Level | Contoh Skill | Konfirmasi User? |
+|-------|--------------|-------------------|
+| 🟢 Safe | file.read, web.search, memory.get | Tidak |
+| 🟡 Medium | file.write, shell.exec (read-only) | Konfirmasi pertama |
+| 🟠 Risky | shell.exec (write), file.delete | Selalu konfirmasi |
+| 🔴 Critical | system.screenshot, email.send, secret.get | Konfirmasi + log audit |
+
+---
+
+## 📐 Shared Backend — Web UI & TUI Pakai API yang Sama
+
+```
+Backend Service (FastAPI / Go / Rust)
+├── REST API   → /api/v1/skills/{skill_id}/execute
+├── WebSocket  → ws://stream (untuk streaming output)
+├── MCP Server → Model Context Protocol (untuk LLM agent)
+└── gRPC (internal, untuk performa tinggi)
+
+Web UI (Next.js)
+└── Pakai REST + WebSocket
+
+Terminal TUI (Bubbletea / Ratatui / blessed)
+└── Pakai REST + WebSocket juga (atau langsung gRPC)
+```
+
+**Backend-nya SATU, interfacenya BISA DUA.** ✅
+
+---
+
+## 📊 Total Skills: 99
+
+Distribusi:
+- Core: 12
+- Code: 8
+- Web: 8
+- Data: 10
+- Document: 8
+- AI/ML: 11
+- DevOps: 12
+- Memory: 7
+- Communication: 7
+- System: 10
+- Automation: 6
+

@@ -1,0 +1,2791 @@
+[
+  {
+    "id": "core.perceive",
+    "description": "Bounded perceive stage",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "messages": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 40,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "system",
+                      "user",
+                      "assistant"
+                    ]
+                  },
+                  "content": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 16000
+                  }
+                },
+                "required": [
+                  "role",
+                  "content"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "messages"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "media": {
+              "type": "object",
+              "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+            }
+          },
+          "required": [
+            "media"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "core.understand",
+    "description": "Bounded understand stage",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "core.reason",
+    "description": "Bounded reason stage",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "core.retrieve",
+    "description": "Bounded retrieve stage",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "sources": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 4000
+              },
+              "verified": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "core.decide",
+    "description": "Bounded decide stage",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "core.act",
+    "description": "Bounded act stage",
+    "status": "available",
+    "mode": "async_job",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "media": {
+          "type": "object",
+          "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "core.learn",
+    "description": "Bounded learn stage",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "consent": {
+          "type": "boolean",
+          "const": true
+        },
+        "key": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "value": {}
+      },
+      "required": [
+        "consent",
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.receive.request",
+    "description": "Terima request dari WebUI/Terminal/API",
+    "status": "available",
+    "mode": "async_job",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "media": {
+          "type": "object",
+          "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.parse.input",
+    "description": "Parse input multi-modal",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.detect.channel",
+    "description": "Detect channel (chat, voice, terminal)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.detect.user",
+    "description": "Identify user (auth, profile)",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.detect.session",
+    "description": "Detect session (new vs existing)",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "session_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.detect.urgency",
+    "description": "Urgency detection (low/med/high/crisis)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.detect.privacy",
+    "description": "Privacy level (public/private/confidential)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.queue.request",
+    "description": "Queue request kalau overload",
+    "status": "available",
+    "mode": "async_job",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "media": {
+          "type": "object",
+          "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.intent.classify",
+    "description": "Klasifikasi intent (chat/build/legal/dll)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.context.load",
+    "description": "Load context (session, history, profile)",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "session_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.domain.detect",
+    "description": "Detect domain (legal/tech/business/personal)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.complexity.assess",
+    "description": "Assess complexity (simple/medium/complex)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.multi_intent.detect",
+    "description": "Detect multi-intent (user mau beberapa hal)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.ambiguity.detect",
+    "description": "Detect ambiguity (perlu klarifikasi)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.clarify.request",
+    "description": "Minta klarifikasi ke user",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.scope.define",
+    "description": "Define scope request",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.chat",
+    "description": "Route ke Chat 1:1 Engine",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.legal",
+    "description": "Route ke Legal Assistant Engine",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.web_builder",
+    "description": "Route ke Web Full-Stack Builder",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.mobile_builder",
+    "description": "Route ke Mobile App Builder",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.browser_auto",
+    "description": "Route ke Browser Automation Engine",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.text_typo",
+    "description": "Route ke Text Typo Engine",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.multi",
+    "description": "Route ke multiple engines (parallel)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.fallback",
+    "description": "Fallback ke Core kalau specialist gagal",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.human",
+    "description": "Escalate ke human agent",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.route.crisis",
+    "description": "Crisis routing (immediate human)",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.exec.start",
+    "description": "Start execution di engine target",
+    "status": "available",
+    "mode": "async_job",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "media": {
+          "type": "object",
+          "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.exec.monitor",
+    "description": "Monitor execution progress",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.exec.timeout",
+    "description": "Handle timeout",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.exec.retry",
+    "description": "Retry kalau gagal",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.exec.cancel",
+    "description": "Cancel execution kalau user minta",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.aggregate.single",
+    "description": "Aggregate result dari 1 engine",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "engine"
+            ],
+            "properties": {
+              "engine": {
+                "type": "string",
+                "maxLength": 60
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.aggregate.multi",
+    "description": "Aggregate result dari multiple engines",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "engine"
+            ],
+            "properties": {
+              "engine": {
+                "type": "string",
+                "maxLength": 60
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.aggregate.conflict",
+    "description": "Resolve conflict antar engine results",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "engine"
+            ],
+            "properties": {
+              "engine": {
+                "type": "string",
+                "maxLength": 60
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "orch.aggregate.format",
+    "description": "Format final response per channel",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "engine"
+            ],
+            "properties": {
+              "engine": {
+                "type": "string",
+                "maxLength": 60
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.publish.event",
+    "description": "Publish event ke message bus",
+    "status": "available",
+    "mode": "tenant_extension",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]{1,80}$"
+        },
+        "payload": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "topic",
+        "payload"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.subscribe.event",
+    "description": "Subscribe ke event",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "job_id": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "required": [
+            "job_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "topic": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "after_sequence": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "topic"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.request.response",
+    "description": "Request-response pattern",
+    "status": "available",
+    "mode": "async_job",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "media": {
+          "type": "object",
+          "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.async.task",
+    "description": "Async task execution",
+    "status": "available",
+    "mode": "async_job",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "media": {
+          "type": "object",
+          "description": "type=image|audio|video plus image_base64/audio_base64/frames_base64; no caller URL. <=128KiB total request; max3 frames."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.priority.queue",
+    "description": "Priority queue management",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.dead_letter",
+    "description": "Dead letter queue (failed messages)",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.retry.policy",
+    "description": "Retry policy (exponential backoff)",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "bus.circuit.breaker",
+    "description": "Circuit breaker (anti cascade failure)",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.shared.memory",
+    "description": "Shared memory antar engines",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "memory.get",
+            "memory.set",
+            "memory.search",
+            "memory.clear"
+          ]
+        },
+        "input": {
+          "type": "object",
+          "description": "Exact matching core memory operation schema"
+        }
+      },
+      "required": [
+        "operation",
+        "input"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.context.pass",
+    "description": "Pass context antar engines",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "value": {}
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.serialize",
+    "description": "Serialize data untuk transfer",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "value": {}
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.deserialize",
+    "description": "Deserialize data dari transfer",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 65536
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.validate",
+    "description": "Validate data antar engines",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "value": {}
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.transform",
+    "description": "Transform data format antar engines",
+    "status": "available",
+    "mode": "bounded_analysis",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 500
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        }
+      },
+      "required": [
+        "rows",
+        "operations"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.encrypt",
+    "description": "Encrypt sensitive data transfer",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "data.audit.log",
+    "description": "Audit log semua data flow",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.auth",
+    "description": "Shared authentication",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.memory",
+    "description": "Shared memory store (Redis)",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "memory.get",
+            "memory.set",
+            "memory.search",
+            "memory.clear"
+          ]
+        },
+        "input": {
+          "type": "object",
+          "description": "Exact matching core memory operation schema"
+        }
+      },
+      "required": [
+        "operation",
+        "input"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.knowledge",
+    "description": "Shared knowledge base (Vector DB)",
+    "status": "available",
+    "mode": "tenant_extension",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.user_profile",
+    "description": "Shared user profile",
+    "status": "available",
+    "mode": "tenant_state",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "consent": {
+          "type": "boolean",
+          "const": true
+        },
+        "key": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "value": {}
+      },
+      "required": [
+        "consent",
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.audit_log",
+    "description": "Shared audit log",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.monitoring",
+    "description": "Shared monitoring (Prometheus)",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "shared.secrets",
+    "description": "Shared secrets management (Vault)",
+    "status": "available",
+    "mode": "tenant_extension",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "set",
+            "metadata",
+            "delete"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$"
+        },
+        "value": {
+          "type": "string",
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "operation",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities",
+    "required_scopes_by_operation": {
+      "set": "secrets:write",
+      "delete": "secrets:write",
+      "metadata": "secrets:read"
+    }
+  },
+  {
+    "id": "gateway.rest",
+    "description": "REST API gateway",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "gateway.graphql",
+    "description": "GraphQL gateway",
+    "status": "available",
+    "mode": "read_only_graphql",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": true,
+    "reason": null,
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "variables": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "operationName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "gateway.websocket",
+    "description": "WebSocket gateway",
+    "status": "native_endpoint",
+    "mode": "native_websocket",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "use_authenticated_websocket_endpoint",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities",
+    "endpoint": "/v1/unified/ws"
+  },
+  {
+    "id": "gateway.rate_limit",
+    "description": "Rate limiting per engine",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  },
+  {
+    "id": "gateway.auth",
+    "description": "Auth & authorization gateway",
+    "status": "internal_only",
+    "mode": "enforced_boundary",
+    "engine": "unified",
+    "execution_target": "unified_backend",
+    "directly_invocable": false,
+    "reason": "internal_boundary_not_public_tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "type": "object"
+    },
+    "runtime_readiness_endpoint": "/v1/unified/capabilities"
+  }
+]

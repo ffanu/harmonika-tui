@@ -27,3 +27,7 @@ config-before.json
 *.sqlite*
 *.orig
 audit/
+
+.coverage
+CONTRACT.txt
+docs/mockups/

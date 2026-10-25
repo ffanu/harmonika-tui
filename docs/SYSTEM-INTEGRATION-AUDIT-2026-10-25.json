@@ -1,0 +1,302 @@
+{
+  "audit_status": "partial_readiness_not_all_skills_active",
+  "audited_at_utc": "2026-10-25T00:15:34.164119+00:00",
+  "production_code_changed": false,
+  "services_restarted": false,
+  "user_sessions_or_clipboard_modified": false,
+  "catalog": {
+    "catalog_size": 1951,
+    "readiness": {
+      "available": 30,
+      "context_required": 665,
+      "local_only": 27,
+      "unavailable": 1168,
+      "restricted": 54,
+      "domain_ambiguous": 7
+    },
+    "features": {
+      "consolidated_catalog": true,
+      "defensive_input_analysis": true,
+      "isolated_html_browser": true,
+      "registered_browser_profiles_access": false,
+      "autonomous_exploitation": false,
+      "stealth_bypass": false,
+      "live_customer_access": false,
+      "runtime_discovery": true,
+      "hot_skill_registration": true
+    },
+    "discovery": {
+      "status": "ready",
+      "generation": 149,
+      "finished_at": "2026-10-25T00:09:06Z",
+      "duration_ms": 1.108,
+      "scanned_dirs": 1,
+      "valid": 1,
+      "rejected": 0,
+      "registered": 1,
+      "skill_ids": [
+        "text.metrics"
+      ],
+      "error_codes": {},
+      "truncated": false,
+      "result": "OK",
+      "scanning": false,
+      "db_result": "OK"
+    }
+  },
+  "discovery_operator_modules": [
+    {
+      "module": "text-metrics",
+      "hash_matches": true,
+      "source_bytes": 719
+    }
+  ],
+  "discovery_limits": {
+    "max_modules": 512,
+    "scan_seconds": 5,
+    "current_runtime_modules": 1,
+    "historical_benchmark_modules": 256,
+    "two_thousand_runtime_module_load_test": false
+  },
+  "live_poll": {
+    "before": {
+      "discovery_generation": 214,
+      "discovery_status": "ready",
+      "systemd": {
+        "MainPID": "1185286",
+        "NRestarts": "0",
+        "MemoryCurrent": "36921344",
+        "MemoryPeak": "47792128"
+      }
+    },
+    "after": {
+      "discovery_generation": 215,
+      "discovery_status": "ready",
+      "systemd": {
+        "MainPID": "1185286",
+        "NRestarts": "0",
+        "MemoryCurrent": "36921344",
+        "MemoryPeak": "47792128"
+      }
+    },
+    "poll_advanced_without_restart": true
+  },
+  "backend_sqlite": {
+    "discovery": {
+      "exists": true,
+      "journal_mode": "delete",
+      "quick_check": "ok",
+      "mode": "0o600",
+      "db_bytes": 24576,
+      "wal_bytes": 0,
+      "shm_bytes": 0,
+      "statuses": [
+        [
+          "OK",
+          1
+        ]
+      ]
+    },
+    "unified": {
+      "exists": true,
+      "journal_mode": "delete",
+      "quick_check": "ok",
+      "mode": "0o600",
+      "db_bytes": 118784,
+      "wal_bytes": 0,
+      "shm_bytes": 0,
+      "jobs_by_status": [],
+      "session_count": 0
+    },
+    "core": {
+      "exists": true,
+      "journal_mode": "delete",
+      "quick_check": "ok",
+      "mode": "0o600",
+      "db_bytes": 49152,
+      "wal_bytes": 0,
+      "shm_bytes": 0
+    }
+  },
+  "unified_registry": {
+    "available": 57,
+    "internal_only": 12,
+    "native_endpoint": 1,
+    "unavailable": 0
+  },
+  "binary_and_local_runtime": {
+    "ok": true,
+    "release": "2026.10.25.29",
+    "upstream": "0.98.1",
+    "binary_verified": true,
+    "runtime_verified": true,
+    "mcp_protocol": "ok",
+    "skills": 19,
+    "lsp": [
+      "css",
+      "html",
+      "json",
+      "python",
+      "typescript"
+    ],
+    "documents": {
+      ".docx": true,
+      ".xlsx": true,
+      ".pptx": true,
+      ".pdf": true
+    },
+    "browser": {
+      "chromium": true
+    },
+    "automatic_update": false,
+    "active_sessions_untouched": true
+  },
+  "local_gateway": {
+    "provider": "Harmonika Ai",
+    "gateway_running": true,
+    "integration_contract_available": 1,
+    "integration_contract_active": true,
+    "reasoning_parser_active": true,
+    "local": {
+      "ready": false,
+      "reason": "local_runtime_unavailable"
+    },
+    "port": 18184,
+    "fallback_enabled": true
+  },
+  "live_wrapper_sse": {
+    "status": "passed",
+    "http_status": 200,
+    "answer_delta_events": 1,
+    "done_events": 1,
+    "terminal_events": 1,
+    "error_events": 0,
+    "seconds": 3.358,
+    "tools_enabled": false,
+    "chat_text_or_key_logged": false
+  },
+  "local_native_status": {
+    "status": "degraded",
+    "error": "native_store_unavailable",
+    "integrity": "not_verified",
+    "storage": null
+  },
+  "local_cache": {
+    "status": "empty",
+    "entries": 0,
+    "expired_entries": 0,
+    "recent_checkpoints": [],
+    "size_bytes": 0
+  },
+  "local_state_metadata_only": true,
+  "native_history_encrypted": false,
+  "key_storage": {
+    "plaintext_private_file": true,
+    "permissions": "0600",
+    "symlink": false,
+    "encrypted_vault_or_keychain": false,
+    "actual_cache_empty_or_missing": true,
+    "no_key_value_logged": true
+  },
+  "isolated_state_checks": {
+    "wal_with_writer_open": {
+      "status": "ok",
+      "integrity": "ok",
+      "storage": {
+        "database_bytes": 4096,
+        "wal_bytes": 20632,
+        "shm_bytes": 32768,
+        "total_bytes": 57496
+      }
+    },
+    "wal_after_last_writer_close": {
+      "status": "ok",
+      "integrity": "ok",
+      "error": null,
+      "wal_exists": true,
+      "shm_exists": true
+    },
+    "cache": {
+      "rows_after130_puts": 128,
+      "columns": [
+        "project_hash",
+        "session_id",
+        "updated_at"
+      ],
+      "journal_mode": "delete"
+    }
+  },
+  "native_readonly_diagnostic": {
+    "observed_error": "native_store_unavailable",
+    "underlying_sqlite_error": "unable to open database file",
+    "native_header_journal_mode": "WAL",
+    "wal_shm_absent_at_initial_probe": true,
+    "readwrite_open_of_disposable_copy_quick_check": "ok",
+    "scope_warning": "Copy is a diagnostic artifact, not a transaction-consistent backup or proof of live original integrity; no repair/write performed on original."
+  },
+  "clipboard": {
+    "ok": true,
+    "available": true,
+    "osc52": false
+  },
+  "mouse": {
+    "configured": true,
+    "scrollbar": "always",
+    "implemented_in_native_binary": true,
+    "new_mouse_tracking_backend_module": false,
+    "physical_mouse_selection_test_this_audit": false
+  },
+  "offline": {
+    "wrapper_available": true,
+    "local_runtime_ready": false,
+    "live_daemon_model_failover_proven": false,
+    "implemented_transport": "OpenAI-compatible SSE /v1/chat/completions",
+    "backlog_drift": "TUI-BACKLOG.md references NDJSON /api/chat; actual accepted implementation uses compatible SSE."
+  },
+  "tests": {
+    "root_current_batch": {
+      "run": 160,
+      "passed": 158,
+      "failed": 1,
+      "skipped_linux_root_only": 1,
+      "failed_test": "test_runtime_error_is_safe_and_service_survives",
+      "failure": "Expected200, received422 during hot reload."
+    },
+    "targeted_repeat": {
+      "run": 20,
+      "passed": 20
+    },
+    "deterministic_refresh_probe": {
+      "refresh_during_scan": "E_SCAN_BUSY",
+      "before_new_snapshot_http": 422,
+      "after_expected_snapshot_http": 200,
+      "diagnosis": "test helper must await target snapshot after E_SCAN_BUSY; old immutable snapshot remains valid until publication"
+    },
+    "OpenCode_independent_suite": {
+      "run": 90,
+      "passed": 90,
+      "scope": [
+        "stream_protocol23",
+        "tui_gateway14",
+        "ai_integration32",
+        "clipboard3",
+        "state_store18"
+      ]
+    }
+  },
+  "before_next_pipeline": [
+    "Synchronize hot-reload test with target hash/generation instead of treating E_SCAN_BUSY as completion.",
+    "Resolve native read-only inspection failure without unsafe immutable fallback or writing to a live user DB.",
+    "Reconcile offline protocol acceptance criteria and smoke an actual installed loopback model.",
+    "Perform physical terminal clipboard/mouse/selection/resize checks before claiming full interaction readiness."
+  ],
+  "contributors": {
+    "Codex": "Live SSH/service/capability/hash/SQLite checks, live wrapper SSE, actual local status probes and deterministic test-race diagnosis.",
+    "OpenCode": "Read-only source/backlog audit and90 focused tests.",
+    "Claude": "Not involved."
+  },
+  "sources": {
+    "sqlite_readonly_wal": "https://www.sqlite.org/wal.html#read_only_databases",
+    "sqlite_wal_file_format": "https://www.sqlite.org/walformat.html"
+  }
+}

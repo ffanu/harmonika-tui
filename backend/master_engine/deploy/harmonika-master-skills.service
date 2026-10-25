@@ -1,0 +1,25 @@
+[Unit]
+Description=Harmonika consolidated skill discovery and defensive analysis
+After=network.target docker.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/builder-venv/bin/python -m master_engine.service
+Environment=HARMONIKA_MASTER_PORT=18193
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/nonexistent
+UMask=0077
+MemoryMax=512M
+CPUQuota=100%
+TasksMax=64
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=50
+[Install]
+WantedBy=multi-user.target

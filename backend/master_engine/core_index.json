@@ -1,0 +1,1757 @@
+[
+  {
+    "number": 1,
+    "id": "file.read",
+    "description": "Baca isi file (text, binary)",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "fs.read",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "start_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 2,
+    "id": "file.write",
+    "description": "Tulis/buat file baru",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "fs.write",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "content": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "overwrite": {
+          "type": "boolean"
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": true,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 3,
+    "id": "file.edit",
+    "description": "Edit sebagian file (find-replace)",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "code.edit",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "old": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "new": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "old",
+        "new"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": true,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 4,
+    "id": "file.delete",
+    "description": "Hapus file atau folder",
+    "status": "unavailable",
+    "reason": "scoped_adapter_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 5,
+    "id": "file.search",
+    "description": "Cari file berdasarkan nama/pattern",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "fs.glob",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "pattern"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 6,
+    "id": "file.grep",
+    "description": "Cari konten dalam file",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "code.grep",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "literal": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "pattern"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 7,
+    "id": "file.move",
+    "description": "Pindah/rename file",
+    "status": "unavailable",
+    "reason": "scoped_adapter_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 8,
+    "id": "file.list",
+    "description": "List isi direktori",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "fs.list",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 9,
+    "id": "shell.exec",
+    "description": "Jalankan command shell",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "exec.shell",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "maxLength": 16384
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 10,
+    "id": "shell.background",
+    "description": "Run command di background",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "exec.background",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "maxLength": 16384
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 11,
+    "id": "process.list",
+    "description": "List running process",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 12,
+    "id": "process.kill",
+    "description": "Kill process by PID",
+    "status": "unavailable",
+    "reason": "scoped_adapter_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 13,
+    "id": "code.run.python",
+    "description": "Eksekusi Python script",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "exec.python",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "args": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 14,
+    "id": "code.run.node",
+    "description": "Eksekusi Node.js script",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "exec.node",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "args": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 15,
+    "id": "code.run.shell",
+    "description": "Eksekusi shell script",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "exec.shell",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "maxLength": 16384
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 16,
+    "id": "code.run.sql",
+    "description": "Eksekusi SQL query",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 17,
+    "id": "code.lint",
+    "description": "Linting kode (eslint, ruff)",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "lint.run",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript"
+          ]
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 18,
+    "id": "code.format",
+    "description": "Format kode (prettier, black)",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "code.format",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript",
+            "json"
+          ]
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": true,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 19,
+    "id": "code.test",
+    "description": "Run unit test",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "test.run",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "runner": {
+          "type": "string",
+          "enum": [
+            "python_unittest",
+            "node_test",
+            "npm_test"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "filter": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "runner"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 20,
+    "id": "code.scaffold",
+    "description": "Init project baru",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "scaffold.project",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "template": {
+          "type": "string",
+          "enum": [
+            "python_http",
+            "node_http"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "path",
+        "template",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": true,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 21,
+    "id": "web.fetch",
+    "description": "Ambil konten URL",
+    "status": "unavailable",
+    "reason": "network_adapter_not_bound",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 22,
+    "id": "web.search",
+    "description": "Cari di internet",
+    "status": "unavailable",
+    "reason": "network_adapter_not_bound",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 23,
+    "id": "web.scrape",
+    "description": "Scrape halaman web",
+    "status": "unavailable",
+    "reason": "network_adapter_not_bound",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 24,
+    "id": "web.preview",
+    "description": "Serve & preview web app",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 25,
+    "id": "web.screenshot",
+    "description": "Screenshot URL",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 26,
+    "id": "http.request",
+    "description": "Custom HTTP request",
+    "status": "unavailable",
+    "reason": "network_adapter_not_bound",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 27,
+    "id": "api.call",
+    "description": "Call REST/GraphQL API",
+    "status": "unavailable",
+    "reason": "network_adapter_not_bound",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 28,
+    "id": "webhook.send",
+    "description": "Kirim webhook",
+    "status": "unavailable",
+    "reason": "network_adapter_not_bound",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 29,
+    "id": "data.read_csv",
+    "description": "Parse bounded CSV text into columns and rows from the provided text (never from host paths). Cell values stay strings; no type guessing. Rejects duplicate or empty column names and malformed rows.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "delimiter": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 30,
+    "id": "data.read_json",
+    "description": "Parse bounded JSON text. Rejects duplicate object keys, non-finite constants, nesting deeper than 12 and more than 10000 nodes.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 31,
+    "id": "data.read_excel",
+    "description": "Baca XLSX",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 32,
+    "id": "data.transform",
+    "description": "Apply allowlisted deterministic row operations: select, filter, sort, limit. No eval, no expressions, no mutation of the input rows. Cells must be JSON scalars.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 500
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        }
+      },
+      "required": [
+        "rows",
+        "operations"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 33,
+    "id": "data.analyze",
+    "description": "Per-column counts, missing values, min, max and mean using bounded-precision Decimal aggregation (1000 digits internally; fractional JSON output may round). Numeric cells are JSON numbers or strictly formatted numeric text (booleans never count as numbers). Missing values are skipped; there is no imputation.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 500
+        }
+      },
+      "required": [
+        "rows"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 34,
+    "id": "data.visualize",
+    "description": "Return a bounded Vega-Lite JSON specification (bar, line or scatter) with the data inlined. Spec only: nothing is rendered, no image, no URLs to fetch, no scripts or HTML. The y column must be numeric.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 500
+        },
+        "chart_type": {
+          "type": "string",
+          "enum": [
+            "bar",
+            "line",
+            "scatter"
+          ]
+        },
+        "x": {
+          "type": "string"
+        },
+        "y": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rows",
+        "chart_type",
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 35,
+    "id": "data.export",
+    "description": "Serialize rows to CSV or JSON text with mime type and filename. CSV text cells that could be read as spreadsheet formulas (=, +, -, @, tab, CR, also after leading whitespace) get a leading apostrophe; JSON numeric cells such as negative numbers stay numeric. Excel and other formats are not supported.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 500
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "csv",
+            "json"
+          ]
+        }
+      },
+      "required": [
+        "rows",
+        "format"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 36,
+    "id": "db.connect",
+    "description": "Connect ke database",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 37,
+    "id": "db.query",
+    "description": "Run SQL query",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 38,
+    "id": "db.migrate",
+    "description": "Run DB migration",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 39,
+    "id": "doc.read_pdf",
+    "description": "Extract teks PDF",
+    "status": "local_only",
+    "reason": "local_document_runtime_required",
+    "execution_target": "local_worker",
+    "directly_invocable": false,
+    "engine": "documents",
+    "runtime_readiness_command": "harmonika skill documents capabilities"
+  },
+  {
+    "number": 40,
+    "id": "doc.read_docx",
+    "description": "Baca Word doc",
+    "status": "local_only",
+    "reason": "local_document_runtime_required",
+    "execution_target": "local_worker",
+    "directly_invocable": false,
+    "engine": "documents",
+    "runtime_readiness_command": "harmonika skill documents capabilities"
+  },
+  {
+    "number": 41,
+    "id": "doc.create_pdf",
+    "description": "Buat PDF",
+    "status": "local_only",
+    "reason": "local_document_runtime_required",
+    "execution_target": "local_worker",
+    "directly_invocable": false,
+    "engine": "documents",
+    "runtime_readiness_command": "harmonika skill documents capabilities"
+  },
+  {
+    "number": 42,
+    "id": "doc.create_docx",
+    "description": "Buat Word",
+    "status": "local_only",
+    "reason": "local_document_runtime_required",
+    "execution_target": "local_worker",
+    "directly_invocable": false,
+    "engine": "documents",
+    "runtime_readiness_command": "harmonika skill documents capabilities"
+  },
+  {
+    "number": 43,
+    "id": "doc.create_xlsx",
+    "description": "Buat Excel",
+    "status": "local_only",
+    "reason": "local_document_runtime_required",
+    "execution_target": "local_worker",
+    "directly_invocable": false,
+    "engine": "documents",
+    "runtime_readiness_command": "harmonika skill documents capabilities"
+  },
+  {
+    "number": 44,
+    "id": "doc.create_pptx",
+    "description": "Buat PowerPoint",
+    "status": "local_only",
+    "reason": "local_document_runtime_required",
+    "execution_target": "local_worker",
+    "directly_invocable": false,
+    "engine": "documents",
+    "runtime_readiness_command": "harmonika skill documents capabilities"
+  },
+  {
+    "number": 45,
+    "id": "doc.convert",
+    "description": "Konversi format dokumen",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 46,
+    "id": "doc.ocr",
+    "description": "OCR gambar ke teks",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 47,
+    "id": "llm.chat",
+    "description": "Chat dengan LLM",
+    "status": "native_endpoint",
+    "reason": "existing_chat_gateway",
+    "execution_target": "chat_gateway",
+    "directly_invocable": true,
+    "engine": "chat",
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "user",
+                  "assistant"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "role",
+              "content"
+            ]
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
+    "runtime_readiness_endpoint": "/v1/public-ai/capabilities"
+  },
+  {
+    "number": 48,
+    "id": "llm.complete",
+    "description": "Text completion",
+    "status": "native_endpoint",
+    "reason": "existing_chat_gateway",
+    "execution_target": "chat_gateway",
+    "directly_invocable": true,
+    "engine": "chat",
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16000
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "runtime_readiness_endpoint": "/v1/public-ai/capabilities"
+  },
+  {
+    "number": 49,
+    "id": "llm.embed",
+    "description": "Generate embedding",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 50,
+    "id": "vision.analyze",
+    "description": "Analisis gambar",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 51,
+    "id": "image.generate",
+    "description": "Generate gambar (SD local)",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 52,
+    "id": "image.edit",
+    "description": "Edit gambar",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 53,
+    "id": "audio.transcribe",
+    "description": "Speech-to-text",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 54,
+    "id": "audio.synthesize",
+    "description": "Text-to-speech",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 55,
+    "id": "video.analyze",
+    "description": "Analisis video",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 46,
+    "id": "rag.query",
+    "description": "Query knowledge base",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 57,
+    "id": "rag.index",
+    "description": "Index dokumen ke vector DB",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 58,
+    "id": "git.status",
+    "description": "Cek git status",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "git.status",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 59,
+    "id": "git.commit",
+    "description": "Commit changes",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "git.commit",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "paths": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "author_name": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "author_email": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": true,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 60,
+    "id": "git.push",
+    "description": "Push ke remote",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 61,
+    "id": "git.diff",
+    "description": "Lihat diff",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "git.diff",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "staged": {
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "requires_approval": false,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 62,
+    "id": "docker.build",
+    "description": "Build Docker image",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 63,
+    "id": "docker.run",
+    "description": "Run container",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 64,
+    "id": "docker.ps",
+    "description": "List container",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 65,
+    "id": "env.get",
+    "description": "Get env variable",
+    "status": "unavailable",
+    "reason": "scoped_adapter_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 66,
+    "id": "env.set",
+    "description": "Set env variable",
+    "status": "unavailable",
+    "reason": "scoped_adapter_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 67,
+    "id": "secret.get",
+    "description": "Get secret (vault)",
+    "status": "unavailable",
+    "reason": "scoped_adapter_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 68,
+    "id": "cron.add",
+    "description": "Tambah cron job",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 69,
+    "id": "cron.list",
+    "description": "List cron jobs",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 70,
+    "id": "memory.set",
+    "description": "Seal actor-scoped JSON memory with a bounded TTL; idempotency required.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "default": "default"
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "value": {},
+        "ttl_seconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 604800,
+          "default": 86400
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 71,
+    "id": "memory.get",
+    "description": "Read unexpired memory owned by the authenticated actor and scope.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "default": "default"
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 72,
+    "id": "memory.search",
+    "description": "Bounded literal case-insensitive search over owned keys and JSON values.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "default": "default"
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20,
+          "default": 10
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 0
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 73,
+    "id": "memory.clear",
+    "description": "Clear one explicit actor-owned scope with all=true; idempotency required.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "default": "default"
+        },
+        "all": {
+          "const": true
+        }
+      },
+      "required": [
+        "scope",
+        "all"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 74,
+    "id": "knowledge.add",
+    "description": "Tambah ke knowledge base",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 75,
+    "id": "knowledge.search",
+    "description": "Semantic search KB",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 76,
+    "id": "knowledge.graph",
+    "description": "Query knowledge graph",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 77,
+    "id": "email.send",
+    "description": "Kirim email",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 78,
+    "id": "email.read",
+    "description": "Baca inbox",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 79,
+    "id": "chat.send",
+    "description": "Kirim ke Slack/Discord/Telegram",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 80,
+    "id": "notification.push",
+    "description": "Push notification",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 81,
+    "id": "sms.send",
+    "description": "Kirim SMS",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 82,
+    "id": "calendar.create",
+    "description": "Buat event kalender",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 83,
+    "id": "calendar.list",
+    "description": "List event",
+    "status": "unavailable",
+    "reason": "authorized_connector_required",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 84,
+    "id": "system.info",
+    "description": "Info OS/CPU/disk dalam sandbox workspace milik token; tidak membuka info host server.",
+    "status": "context_required",
+    "reason": "coding_workspace_required",
+    "execution_target": "coding_workspace",
+    "directly_invocable": true,
+    "engine": "coding",
+    "resolved_skill_id": "exec.python",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "requires_approval": true,
+    "write_permission": false,
+    "runtime_readiness_endpoint": "/v1/coding/capabilities"
+  },
+  {
+    "number": 85,
+    "id": "system.monitor",
+    "description": "Monitor resource",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 86,
+    "id": "system.network",
+    "description": "Info jaringan",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 87,
+    "id": "system.battery",
+    "description": "Status baterai",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 88,
+    "id": "system.screenshot",
+    "description": "Screenshot layar",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 89,
+    "id": "system.clipboard",
+    "description": "Read/write clipboard",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 90,
+    "id": "system.notify",
+    "description": "Desktop notification",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 91,
+    "id": "system.audio",
+    "description": "Play/record audio",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 92,
+    "id": "system.open",
+    "description": "Buka file dengan app default",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 93,
+    "id": "system.url",
+    "description": "Buka URL di browser",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 94,
+    "id": "workflow.define",
+    "description": "Seal a DAG of allowlisted pure input tools; no interpolation or schedules.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+                "maxLength": 40
+              },
+              "skill_id": {
+                "type": "string",
+                "enum": [
+                  "behavior.velocity",
+                  "bot.useragent.analyze",
+                  "data.analyze",
+                  "data.export",
+                  "data.read_csv",
+                  "data.read_json",
+                  "data.transform",
+                  "data.visualize",
+                  "ip.lookup",
+                  "nlu.spam.detect",
+                  "payment.velocity.check",
+                  "security.pii.mask"
+                ]
+              },
+              "input": {
+                "type": "object"
+              },
+              "depends_on": {
+                "type": "array",
+                "maxItems": 12,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+                  "maxLength": 40
+                }
+              }
+            },
+            "required": [
+              "id",
+              "skill_id",
+              "input"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "steps"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 95,
+    "id": "workflow.run",
+    "description": "Run owned DAG sequentially with durable idempotency; uncertain runs require recovery.",
+    "status": "available",
+    "reason": null,
+    "execution_target": "tenant_core",
+    "directly_invocable": true,
+    "engine": "core",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "workflow_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
+        }
+      },
+      "required": [
+        "workflow_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "number": 96,
+    "id": "workflow.schedule",
+    "description": "Jadwalkan workflow",
+    "status": "unavailable",
+    "reason": "scheduler_not_configured",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 97,
+    "id": "trigger.on_event",
+    "description": "Trigger saat event",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 98,
+    "id": "macro.record",
+    "description": "Record macro (UI actions)",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  },
+  {
+    "number": 99,
+    "id": "macro.play",
+    "description": "Playback macro",
+    "status": "unavailable",
+    "reason": "implementation_missing",
+    "execution_target": "not_implemented",
+    "directly_invocable": false
+  }
+]

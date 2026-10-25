@@ -1,0 +1,28 @@
+[Unit]
+Description=Harmonika tenant-isolated telecommunications domain engine
+After=network.target
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/coding-venv/bin/python -m telco_engine.service
+Environment=HARMONIKA_TELCO_ROOT=/var/lib/harmonika-telco
+Environment=HARMONIKA_TELCO_PORT=18189
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/nonexistent
+UMask=0077
+MemoryMax=256M
+TasksMax=64
+CPUQuota=100%
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-telco
+ReadOnlyPaths=/etc/harmonika-ai/telco-engine.token /etc/harmonika-ai/internal-agent.token
+IPAddressDeny=any
+IPAddressAllow=localhost
+TimeoutStopSec=15
+[Install]
+WantedBy=multi-user.target

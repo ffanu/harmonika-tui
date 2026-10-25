@@ -1,0 +1,799 @@
+{
+  "release": "2026.10.24.24",
+  "catalog": "legal",
+  "catalog_size": 99,
+  "production_implemented_handlers": 99,
+  "production_readiness": {
+    "available": 98,
+    "degraded": 1,
+    "unavailable": 0
+  },
+  "source_files_verified": 32,
+  "tests": {
+    "legal_macos": {
+      "passed": 269,
+      "skipped": 0
+    },
+    "legal_linux": {
+      "passed": 269,
+      "skipped": 0
+    },
+    "node": {
+      "passed": 55,
+      "skipped": 0
+    },
+    "python_regression": {
+      "discovered": 1361,
+      "passed": 1179,
+      "skipped": 182
+    },
+    "https_live": {
+      "tested": 99,
+      "completed": 91,
+      "degraded": 8,
+      "failed": [],
+      "extra": [
+        {
+          "skill_id": "evidence.vlm.analyze",
+          "status": "completed",
+          "http_status": 200,
+          "analysis_performed": true,
+          "sampled_frames": 2
+        },
+        {
+          "skill_id": "uu.alert.new",
+          "status": "completed",
+          "http_status": 200,
+          "analysis_performed": null,
+          "sampled_frames": 0
+        }
+      ],
+      "cross_tenant_404": true,
+      "sse_complete": true,
+      "actor": null
+    }
+  },
+  "https_skills": [
+    {
+      "skill_id": "intent.detect.legal",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "intent.detect.emergency",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "intent.detect.layanan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.detect.expert",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.activate.ite",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.activate.pidana",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.activate.perdata",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.activate.keluarga",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.activate.tenagakerja",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "persona.activate.konsumen",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.activate.pdp",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "persona.deactivate",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.image.upload",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.video.upload",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.voice.upload",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.document.upload",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.ocr.extract",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 24.08,
+      "live_media_check": true
+    },
+    {
+      "skill_id": "evidence.vlm.analyze",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07,
+      "live_media_check": true
+    },
+    {
+      "skill_id": "evidence.asr.transcribe",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 5.36,
+      "live_media_check": true
+    },
+    {
+      "skill_id": "evidence.document.parse",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.21
+    },
+    {
+      "skill_id": "evidence.metadata.extract",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.authenticity.check",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.chain.custody",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.categorize",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.relevance.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.17
+    },
+    {
+      "skill_id": "evidence.store.secure",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "evidence.privacy.redact",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.18
+    },
+    {
+      "skill_id": "kb.uu.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kb.uu.get",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "kb.uu.pasal.get",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "kb.uu.history.track",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "kb.uu.replace.check",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "kb.putusan.ma.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 8.47,
+      "records": 0
+    },
+    {
+      "skill_id": "kb.putusan.mk.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.42,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.putusan.pengadilan.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 9.6,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.pp.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.29,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.perpres.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 2.02,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.permendagri.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 2.05,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.perda.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 2.03,
+      "records": 3
+    },
+    {
+      "skill_id": "kb.sirclo.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.22,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.intl.law.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.99,
+      "records": 0
+    },
+    {
+      "skill_id": "kb.intl.case.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 2.55,
+      "records": 0
+    },
+    {
+      "skill_id": "kb.article.legal.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 2.23,
+      "records": 5
+    },
+    {
+      "skill_id": "kb.konsil.yudisial",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 1.39,
+      "records": 5
+    },
+    {
+      "skill_id": "kb.advokat.verify",
+      "http_status": 200,
+      "status": "degraded",
+      "error": {
+        "code": "portal_search_component_unavailable"
+      },
+      "seconds": 0.29
+    },
+    {
+      "skill_id": "kb.lbh.search",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 2.09,
+      "records": 1
+    },
+    {
+      "skill_id": "kb.update.sync",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.72
+    },
+    {
+      "skill_id": "uu.status.check",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.amandemen.track",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "uu.replace.find",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.consolidated.get",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.effective.date",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.transition.rule",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.implementing.regulation",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.07
+    },
+    {
+      "skill_id": "uu.cross_reference",
+      "http_status": 200,
+      "status": "degraded",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.multiple_source.verify",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.08
+    },
+    {
+      "skill_id": "uu.alert.new",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.ite.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "expert.ite.unsur_breakdown",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.ite.bukti_digital",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.11
+    },
+    {
+      "skill_id": "expert.pidana.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "expert.pidana.unsur_breakdown",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.11
+    },
+    {
+      "skill_id": "expert.pidana.sifat_perbuatan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "expert.perdata.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.perdata.wanprestasi",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.perdata.perbuatan_lawan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.keluarga.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.keluarga.nafkah",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.tenagakerja.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "expert.konsumen.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "expert.pdp.assess",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.11
+    },
+    {
+      "skill_id": "expert.opinion.generate",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.27",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.27.ayat1",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.11
+    },
+    {
+      "skill_id": "ite.pasal.27.ayat3",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.11
+    },
+    {
+      "skill_id": "ite.pasal.27.ayat4",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.28",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "ite.pasal.28.ayat1",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.28.ayat2",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.30",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.30.ayat1",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.32",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "ite.pasal.35",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.11
+    },
+    {
+      "skill_id": "ite.pasal.45",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "kuhp.pasal.pencurian",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.penggelapan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.penipuan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.pemerasan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "kuhp.pasal.pengancaman",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "kuhp.pasal.pencemaran",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.penghinaan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.perlindungan_anak",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.kdrt",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.pembunuhan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.09
+    },
+    {
+      "skill_id": "kuhp.pasal.penganiayaan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.pasal.perkosaan",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "kuhp.pasal.korupsi",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    },
+    {
+      "skill_id": "kuhp.pasal.narkotika",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.1
+    },
+    {
+      "skill_id": "kuhp.baru.2026",
+      "http_status": 200,
+      "status": "completed",
+      "error": null,
+      "seconds": 0.12
+    }
+  ],
+  "unrelated_services_restarted": false,
+  "aes_master_key_changed": false,
+  "automatic_update": false,
+  "known_limitations": [
+    "issuer_advocate_registry_unavailable",
+    "seven_status_checks_degraded_until_human_review",
+    "video_two_sampled_frames_only",
+    "media_best_effort_human_confirmation",
+    "legal_currentness_identity_and_authenticity_not_certified"
+  ],
+  "release_verification": {
+    "status": "passed",
+    "release": "2026.10.24.24",
+    "signed_package_installed": true,
+    "doctor_ok": true,
+    "public_catalog_verified": true,
+    "native_binary_unchanged": true,
+    "guides": 15,
+    "descriptors": 440,
+    "automatic_update": false,
+    "api_cli_capabilities": 99,
+    "release_tests_passed": 10,
+    "https_package_checksum_verified": true
+  },
+  "fixture_cleanup": {
+    "temporary_tokens_remaining": 0,
+    "synthetic_case_records_remaining": 0,
+    "customer_records_untouched": true,
+    "staging_fixtures_removed": true
+  }
+}

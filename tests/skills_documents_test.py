@@ -34,7 +34,7 @@ class DocumentTests(unittest.TestCase):
             with self.assertRaises(Exception): docs.inspect(target)
         self.assertEqual(target.read_text(), 'not a zip file')
     def test_capabilities_are_actual_booleans(self):
-        self.assertEqual(set(docs.capabilities()), {'.docx','.xlsx','.pptx'})
+        self.assertEqual(set(docs.capabilities()), {'.docx','.xlsx','.pptx','.pdf'})
         self.assertTrue(all(isinstance(x,bool) for x in docs.capabilities().values()))
     def roundtrip(self, ext, data, expected):
         if not docs.capabilities()[ext]: self.skipTest('optional module absent: '+docs.MODULES[ext])

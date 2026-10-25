@@ -1,0 +1,52 @@
+{
+  "documents": [
+    {
+      "id": "unified-auth",
+      "title": "Autentikasi dan isolasi token Harmonika API",
+      "text": "Endpoint REST /v1/unified menggunakan Authorization Bearer; WebSocket juga menerima ticket sekali pakai. Identitas actor berasal dari token, bukan field body. Session dan job token lain mengembalikan not_found. Key API tidak dimasukkan ke URL.",
+      "source": "https://chat.harmonika.id/v1/unified/capabilities",
+      "sha256": "941ed4e6b40eb02f44174a93ef31f8f500b0789096cc825061cedd1d9bf7c172",
+      "verified_at": "2026-10-24"
+    },
+    {
+      "id": "unified-jobs",
+      "title": "Status job, Stop, recovery, idempotency",
+      "text": "POST /v1/unified/jobs menerima messages dan session_id opsional serta Idempotency-Key. Status queued, running, completed, failed, stopped, recovery_required. Key sama dengan payload sama mengembalikan job yang sama. Stop terminal. Restart tidak otomatis mengulang job. Job disimpan24jam; session7hari.",
+      "source": "https://chat.harmonika.id/v1/unified/capabilities",
+      "sha256": "8dc6f11e1804b041f9f72f3d31c8468791b1ab3292644633de86033717ca3167",
+      "verified_at": "2026-10-24"
+    },
+    {
+      "id": "unified-streams",
+      "title": "GraphQL dan WebSocket API Harmonika",
+      "text": "POST /v1/unified/graphql adalah GraphQL read-only untuk capability, skill, job, session, events dan knowledge. WSS /v1/unified/ws memakai Bearer atau ticket satu kali dari POST /v1/unified/ticket. Frame hello, ping, pong, resume; koneksi hanya membaca status/event. Job dibuat lewat REST. Tidak ada delta token teks pada stream job ini.",
+      "source": "https://chat.harmonika.id/v1/unified/capabilities",
+      "sha256": "1829b9fb2b8049ff1cac3c5bf9c69bef5d165c9b99b83d22d99fc0cad24ca4a2",
+      "verified_at": "2026-10-24"
+    },
+    {
+      "id": "unified-knowledge",
+      "title": "Provenance dan batas knowledge",
+      "text": "Knowledge awal berisi kontrak API Harmonika yang disetujui operator, dengan SHA256 isi dan verified_at. Retrieval BM25 mengembalikan source dan hash, bukan sertifikat kebenaran hukum, harga, pembayaran atau coverage. Input caller verified=true bukan kewenangan memverifikasi sumber. Tidak ada training otomatis dari history.",
+      "source": "https://chat.harmonika.id/v1/unified/capabilities",
+      "sha256": "2cde14fe6c478478b337c4a42e99b7064a75609bb089a731339690e69de95a2e",
+      "verified_at": "2026-10-24"
+    },
+    {
+      "id": "unified-secrets",
+      "title": "Secret connector privat per token",
+      "text": "shared.secrets menyimpan nilai connector privat per token dalam AES-GCM. Metadata tidak mengembalikan nilai atau ciphertext. Write membutuhkan secrets:write dan metadata secrets:read. Ini tidak membuka env/key provider/root server.",
+      "source": "https://chat.harmonika.id/v1/unified/capabilities",
+      "sha256": "1534cc04ea1e8107bba26a26d512e4196cc064686a6769c28dd145fc182886ad",
+      "verified_at": "2026-10-24"
+    },
+    {
+      "id": "shared-core",
+      "title": "Shared core data dan memory Harmonika",
+      "text": "GET /v1/core/capabilities menunjukkan pengolahan CSV/JSON terbatas, memory per token dan workflow DAG. Data.visualize menghasilkan spesifikasi Vega-Lite, bukan PNG yang dirender. Memory memiliki TTL dan quota. Workflow tidak menjalankan shell atau network.",
+      "source": "https://chat.harmonika.id/v1/core/capabilities",
+      "sha256": "1893eec8054930715bd1fbb6e0faba318b368d29990ccfe73d6e64e1bf68e9ba",
+      "verified_at": "2026-10-24"
+    }
+  ]
+}

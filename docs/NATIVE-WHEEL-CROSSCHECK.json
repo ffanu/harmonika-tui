@@ -1,0 +1,74 @@
+{
+  "product": "Harmonika Terminal",
+  "tool": "pyte cross-emulator wheel validation",
+  "checkpoints": [
+    {
+      "label": "bottom_after_down_burst",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 153,
+      "pyte_top_marker": 153
+    },
+    {
+      "label": "single_wheel_up_tick_1",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 152,
+      "pyte_top_marker": 152
+    },
+    {
+      "label": "single_wheel_up_tick_2",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 151,
+      "pyte_top_marker": 151
+    },
+    {
+      "label": "single_wheel_down_tick_1",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 152,
+      "pyte_top_marker": 152
+    },
+    {
+      "label": "single_wheel_down_tick_2",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 153,
+      "pyte_top_marker": 153
+    },
+    {
+      "label": "single_wheel_down_tick_3",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 153,
+      "pyte_top_marker": 153
+    },
+    {
+      "label": "coalesced_wheel_down_burst_16",
+      "emulators_agree_full_text": true,
+      "emulators_agree_markers": true,
+      "miniterm_top_marker": 153,
+      "pyte_top_marker": 153
+    }
+  ],
+  "summary": {
+    "emulators_agree_markers_every_checkpoint": true,
+    "pyte_rebuilds": 0,
+    "top_marker_trace": [
+      153,
+      152,
+      151,
+      152,
+      153,
+      153,
+      153
+    ],
+    "single_wheel_down_deltas": [
+      1,
+      0
+    ],
+    "single_wheel_down_moves": true,
+    "verdict": "MiniTerm and pyte agree on every checkpoint; singleton wheel-down scrolls +1 line per tick in both"
+  }
+}

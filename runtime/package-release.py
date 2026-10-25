@@ -24,6 +24,7 @@ def sign(data):
     return subprocess.run([NODE,'-e',SIGN_JS,str(ROOT/'signing-private.pem')],input=raw,capture_output=True,check=True).stdout
 
 def build(release):
+    if (SOURCE/'runtime/tools/coding_catalog.py').read_bytes() != (SOURCE/'backend/coding_runtime/catalog.py').read_bytes():raise ValueError('coding_catalog_mismatch')
     ROOT.mkdir(parents=True,exist_ok=True,mode=0o700)
     os.chmod(ROOT,0o700)
     if not (ROOT/'signing-private.pem').exists():
@@ -32,14 +33,19 @@ def build(release):
     destination=SOURCE/'dist'/release
     destination.mkdir(parents=True,exist_ok=False)
     tools=destination/'tools';tools.mkdir()
-    for name in ['mcp-core.cjs','mcp-server.cjs','project-access.cjs','paths.cjs','transcribe.py']:
+    for name in ['mcp-core.cjs','mcp-server.cjs','media_bridge.cjs','project-access.cjs','paths.cjs','transcribe.py','state_store.py','tui_gateway.py','clipboard.py','ai_integration.py','ai_adapters.py','skill_registry.py','skill_executor.py','document_skill_worker.py','skill_cli.py','coding_catalog.py','coding_cli.py','telco_cli.py','telco_catalog.json','legal_cli.py','legal_catalog.json','builder_cli.py','builder_catalog.json','master_cli.py','mobile_cli.py','core_cli.py','seo_network.py','seo_extra.py','seo_visual.py','seo_visual.cjs','seo_skill_worker.py','engineering_evidence.py','engineering_skill_worker.py']:
         shutil.copy2(SOURCE/'runtime/tools'/name,tools/name)
     guard=(SOURCE/'runtime/tools/project-file-guard.cjs').read_text()
     (tools/'project-file-guard.cjs').write_text(guard)
     shutil.copy2(SOURCE/'runtime/protocol-check.cjs',tools/'protocol-check.cjs')
     shutil.copy2(SOURCE/'runtime/harmonika.py',tools/'harmonika.py')
-    shutil.copytree(SOURCE/'skills',destination/'skills')
+    shutil.copytree(SOURCE/'skills',destination/'skills',ignore=shutil.ignore_patterns('__pycache__','.*','*~','*.orig','*.pyc'))
+    # Fail build rather than ship dependency specifications that disagree.
+    if (SOURCE/'skills/harmonika-documents/requirements.txt').read_bytes() != (SOURCE/'runtime/documents-requirements.lock').read_bytes():
+        raise ValueError('documents_dependency_lock_mismatch')
     shutil.copy2(SOURCE/'README.md',destination/'README.md')
+    (tools/'docs').mkdir()
+    for name in ('LEGAL-ENGINE.md','LEGAL-AUDIT.md','WEB-BUILDER.md','WEB-BUILDER-AUDIT.md','MASTER-SKILLS.md','MOBILE-BUILDER.md','CORE-FOUNDATION.md'):shutil.copy2(SOURCE/'docs'/name,tools/'docs'/name)
     shutil.copy2(SOURCE/'UPSTREAM-LICENSE.md',tools/'UPSTREAM-LICENSE.md')
     files={str(p.relative_to(destination)):{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
     manifest={'release':release,'product':'Harmonika Terminal','upstream_version':'0.98.1','platform':'darwin-arm64',

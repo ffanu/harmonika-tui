@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "action": "activated",
+  "release": "2026.10.24.14",
+  "rollback_release": "2026.10.24.13",
+  "preflight": {
+    "target": "2026.10.24.14",
+    "rollback": "2026.10.24.13",
+    "signature": "verified",
+    "binary_unchanged": true
+  },
+  "checks": {
+    "health_contract": 1,
+    "unauthenticated_http": 401,
+    "models": "ok",
+    "sse": "passed",
+    "terminal_events": 1,
+    "done_events": 1,
+    "sse_seconds": 3.65,
+    "native": {
+      "passed": true,
+      "seconds": 4.48,
+      "isolated_session": true,
+      "tools_disabled": true
+    },
+    "doctor": "ok"
+  }
+}

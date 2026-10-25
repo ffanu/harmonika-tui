@@ -1,0 +1,73 @@
+--- a/main.go
++++ b/main.go
+@@ -257,6 +257,7 @@
+ 	mux.HandleFunc("/v1/member-ai/chat/stop", a.mobileChatStop)
+ 	mux.HandleFunc("/v1/coding/", a.publicCodingAPI)
+ 	mux.HandleFunc("/v1/telco/", a.publicTelcoAPI)
++	mux.HandleFunc("/v1/legal/", a.publicLegalAPI)
+ 	mux.HandleFunc("/v1/models", a.publicAIModels)
+ 	mux.HandleFunc("/v1/chat/completions", a.publicAIChatCompletions)
+ 	mux.HandleFunc("/v1/public-ai/capabilities", a.publicAICapabilities)
+@@ -10544,6 +10545,8 @@
+ 
+ type publicAIChatCompletionRequest struct {
+ 	Telco             bool                  `json:"telco,omitempty"`
++	Legal bool `json:"legal,omitempty"`
++	LegalCaseID string `json:"legal_case_id,omitempty"`
+ 	WorkspaceID       string                `json:"workspace_id,omitempty"`
+ 	AttachmentIDs     []string              `json:"attachment_ids,omitempty"`
+ 	Model             string                `json:"model"`
+@@ -10931,6 +10934,7 @@
+ 		jsonOut(w, 400, map[string]any{"error": map[string]any{"code": "messages_required", "message": "messages is required"}})
+ 		return
+ 	}
++	if input.Legal { a.publicLegalChat(w,r,tok,input); return }
+ 	if input.Telco {
+ 		a.publicTelcoChat(w, r, tok, input)
+ 		return
+--- a/public_api_docs.go
++++ b/public_api_docs.go
+@@ -6,7 +6,7 @@
+ 	"strings"
+ )
+ 
+-const publicAPIDocumentationVersion = "2026-10-24-telco-domain"
++const publicAPIDocumentationVersion = "2026-10-24-legal-domain"
+ 
+ type publicAPIEndpoint struct {
+ 	Method      string `json:"method"`
+@@ -17,6 +17,17 @@
+ 
+ func publicAPIEndpoints() []publicAPIEndpoint {
+ 	return []publicAPIEndpoint{
++ {"GET","/v1/legal/capabilities","Readiness legal edukasi dan batas sumber","application/json"},
++ {"POST","/v1/legal/cases","Buat perkara terisolasi terenkripsi","application/json"},
++ {"GET","/v1/legal/cases/{id}","Perkara milik token","application/json"},
++ {"POST","/v1/legal/files","Unggah bukti privat ke perkara; AES-GCM","application/json"},
++ {"GET","/v1/legal/files/{id}/download","Bukti asli privat Bearer","binary"},
++ {"POST","/v1/legal/invoke","Skill legal berbasis sumber","application/json"},
++ {"POST","/v1/legal/chat","Percakapan edukasi per perkara","application/json | text/event-stream"},
++ {"GET","/v1/legal/requests/{id}","Recovery legal milik token","application/json"},
++ {"GET","/v1/legal/requests/{id}/events","Replay event legal","application/json | text/event-stream"},
++ {"GET","/v1/legal/sources","Daftar sumber resmi terbatas","application/json"},
++ {"POST","/v1/legal/sources/refresh","Ambil ulang dokumen resmi allowlist","application/json"},
+ 		{"GET", "/v1/telco/capabilities", "Katalog276 ID dan readiness lokal per tenant; bukan akses jaringan/billing perusahaan", "application/json"},
+ 		{"POST", "/v1/telco/invoke", "Operasi domain lokal; mutasi menunggu approval", "application/json"},
+ 		{"POST", "/v1/telco/agent", "Pemilihan skill telco otomatis dalam tenant terisolasi", "application/json | text/event-stream"},
+@@ -51,7 +62,7 @@
+ 	return map[string]any{
+ 		"chat": true, "streaming": true, "openai_compatible": true,
+ 		"coding_phase2": publicCodingPhase2Ready(), "coding_debugger": publicCodingPhase2Ready(), "coding_refactor": publicCodingPhase2Ready(),
+-		"coding_workspaces": publicCodingReady(), "telco_domain_engine": publicTelcoReady(), "telco_network_live": false, "telco_payment_gateway": false,
++		"coding_workspaces": publicCodingReady(), "telco_domain_engine": publicTelcoReady(), "legal_assistant": publicLegalReady(), "legal_currentness_certified":false, "legal_licensed_expert":false, "telco_network_live": false, "telco_payment_gateway": false,
+ 		"coding_agent": publicCodingReady(), "coding_sandbox": publicCodingReady(),
+ 		"orchestration": true, "model_fallback": true, "web_grounding": true,
+ 		"endpoint_catalog": true, "guide_download": true, "tool_calls": false, "tool_execution": false,
+@@ -227,6 +238,7 @@
+ - Tinjau preview lalu POST /v1/coding/jobs/{id}/approve body {"decision":"approve","input_hash":"HASH_DARI_JOB"}. Hanya aksi persetujuan client, bukan model AI, yang memanggil endpoint ini.
+ - Approval kedaluwarsa 5 menit; perubahan workspace membatalkannya. Retry input sama memakai key sama; input berbeda memakai key baru.
+ - GET /v1/coding/jobs/{id}, /events; POST /stop untuk recovery/Stop. Event mendukung after_sequence/Last-Event-ID. Recovery dan Stop tidak memakai kuota mutasi.
++- Legal: /v1/legal/capabilities, cases, files, invoke dan chat. Edukasi hukum, bukan layanan advokat. Sumber diperiksa sebelum jawaban; status keberlakuan belum disertifikasi. Bukti privat AES-GCM; vision/OCR/ASR tidak dianggap aktif tanpa analyzer nyata.
+ - Telco: gunakan /v1/telco/capabilities dan invoke/agent, atau telco=true pada /chat/completions dengan Idempotency-Key. Tenant terisolasi per key; company_data_connected=false. Tidak memberi akses OLT/billing/payment perusahaan. Periksa readiness setiap ID; unavailable bukan hasil kosong/sukses. Semua mutasi memerlukan approval client.
+ - Phase2 hanya aktif jika features.coding_phase2=true; schema/dukungan bahasa/paket dibaca dari /v1/coding/capabilities.
+ - pkg.install hanya paket offline ber-versi yang diizinkan, bukan arbitrary internet install. Debugger Python hanya debug_session_id milik workspace; tidak menerima PID host.

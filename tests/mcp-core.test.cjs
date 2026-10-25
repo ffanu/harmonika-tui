@@ -695,3 +695,48 @@ test('mcp-server.cjs speaks MCP: initialize + tools/list over stdio, stdout prot
     });
   }
 });
+
+
+test('GPU bridge writes guarded PNG without calling mentor RPC',async()=>{
+ const project=mkProject('bridge-output');let closed=false;
+ const core=createCore({callerCwd:project,rpc:neverRpc,mediaBridge:{generate:async()=>({handled:true,ok:true,status:'ok',mime_type:'image/png',image_base64:pngBuffer().toString('base64')}),close:()=>{closed=true;}}});
+ const res=await core.callTool('generate_image',{prompt:'test',output_file:'gpu.png'});assert.notEqual(res.isError,true);assert.deepEqual(fs.readFileSync(path.join(project,'gpu.png')),pngBuffer());assert.equal(parseResult(res).image_base64,undefined);core.shutdown();assert.equal(closed,true);
+});
+test('mentor fallback is allowed only when GPU explicitly did not dispatch',async()=>{
+ const project=mkProject('bridge-fallback');let calls=0;
+ const core=createCore({callerCwd:project,rpc:async()=>{calls++;return {ok:true,status:'ok',mime_type:'image/png',image_base64:pngBuffer().toString('base64')};},mediaBridge:{generate:async()=>({handled:false,not_dispatched:true}),close(){}}});
+ assert.notEqual((await core.callTool('generate_image',{prompt:'test',output_file:'fallback.png'})).isError,true);assert.equal(calls,1);
+});
+test('uncertain GPU submission never falls back or writes a second image',async()=>{
+ const project=mkProject('bridge-uncertain');const core=createCore({callerCwd:project,rpc:neverRpc,mediaBridge:{generate:async()=>{const e=new Error('media_submission_unknown');e.code='media_submission_unknown';e.uncertain=true;throw e;},close(){}}});
+ const res=await core.callTool('generate_image',{prompt:'test',output_file:'uncertain.png'});assert.equal(res.isError,true);assert.equal(parseResult(res).retry_safe,false);assert.equal(fs.existsSync(path.join(project,'uncertain.png')),false);
+});
+
+test('unavailable local vision is explicit degraded and never calls a mentor',async()=>{
+ const project=mkProject('local-vision-degraded');fs.writeFileSync(path.join(project,'input.png'),pngBuffer());
+ const core=createCore({callerCwd:project,rpc:neverRpc,mediaBridge:{analyze:async()=>{const e=new Error('local_vision_unavailable');e.code='local_vision_unavailable';throw e;},close(){}}});
+ const result=await core.callTool('analyze_image',{file_path:'input.png',prompt:'describe'});assert.equal(result.isError,true);const value=parseResult(result);assert.equal(value.status,'degraded');assert.equal(value.analysis_performed,false);assert.equal(value.processing_mode,'local_only');core.shutdown();
+});
+
+
+test('media readiness uses HTTPS bridge rather than unavailable legacy RPC', async () => {
+  let legacyCalls=0;
+  const core=createCore({rpc:async()=>{legacyCalls++;throw new Error('legacy unavailable');},mediaBridge:{capabilities:async()=>({ok:true,features:{image_generation:true,image_analysis:false},queue_ready:true}),close(){}}});
+  try {
+    const response=await core.callTool('capabilities',{}), data=parseResult(response);
+    assert.equal(response.isError,false);
+    assert.equal(data.backend.available,true);
+    assert.equal(data.backend.capabilities.image_generation,true);
+    assert.equal(data.backend.capabilities.image_analysis,false);
+    assert.equal(legacyCalls,0);
+  } finally {core.shutdown();}
+});
+
+test('failed media readiness never falsely reports generation ready or uses SSH', async () => {
+  let legacyCalls=0;
+  const core=createCore({rpc:async()=>{legacyCalls++;return {ok:true,features:{image_generation:true}};},mediaBridge:{capabilities:async()=>{throw new Error('offline');},close(){}}});
+  try {
+    const response=await core.callTool('capabilities',{}), data=parseResult(response);
+    assert.equal(response.isError,true);assert.equal(data.backend.available,false);assert.equal(legacyCalls,0);
+  } finally {core.shutdown();}
+});

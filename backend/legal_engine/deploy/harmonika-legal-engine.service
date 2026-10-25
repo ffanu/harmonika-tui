@@ -1,0 +1,28 @@
+[Unit]
+Description=Harmonika source-grounded encrypted legal educational core
+After=network.target harmonika-legal-media.service
+Wants=harmonika-legal-media.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/legal-venv/bin/python -m legal_engine.service
+Environment=HARMONIKA_LEGAL_ROOT=/var/lib/harmonika-legal
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HARMONIKA_LEGAL_VISION_READY=1
+UMask=0077
+MemoryMax=1G
+CPUQuota=100%
+TasksMax=64
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-legal
+ReadOnlyPaths=/etc/harmonika-ai/legal-engine.token /etc/harmonika-ai/legal-master.key
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+[Install]
+WantedBy=multi-user.target

@@ -12,6 +12,9 @@ PATTERNS={
  'private_key':re.compile(r'-----BEGIN (?:[A-Z0-9]+ )?PRIVATE KEY-----'),
  'api_token':re.compile(r'\bhai_(?:live|internal)_[a-fA-F0-9]{40,}\b'),
  'telegram_bot_secret':re.compile(r'\b[0-9]{8,12}:[A-Za-z0-9_-]{30,}\b'),
+ 'google_oauth_access_token':re.compile(r'\bya29\.[A-Za-z0-9._-]{20,}\b'),
+ 'google_client_secret':re.compile(r'\bGOCSPX-[A-Za-z0-9_-]{16,}\b'),
+ 'google_api_key':re.compile(r'\bAIza[A-Za-z0-9_-]{35}\b'),
  'cloud_token':re.compile(r'\bcf(?:at|ut)_[A-Za-z0-9_-]{25,}\b'),
 }
 def review(files,root):

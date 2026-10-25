@@ -1,0 +1,71 @@
+--- a/main.go
++++ b/main.go
+@@ -10720,7 +10720,7 @@
+ 		"documentation": publicAIDocumentationLinks(),
+ 		"models":        []string{"harmonika-ai", "harmonika-ai-google", "harmonika-ai-codex"},
+ 		"tier":          tok.Tier,
+-		"limits":        map[string]any{"max_message_bytes": publicAIMaxMessageBytes, "max_body_bytes": 2 << 20, "requests_per_day_default": defaultLimit, "requests_per_day": tok.RequestLimit, "unlimited": tok.Tier == "internal" && tok.Unlimited, "max_tools": 32, "tool_max_active_jobs": 2, "tool_timeout_seconds": 90},
++		"limits":        map[string]any{"max_message_bytes": publicAIMaxMessageBytes, "max_body_bytes": 2 << 20, "requests_per_day_default": defaultLimit, "requests_per_day": tok.RequestLimit, "unlimited": tok.Tier == "internal" && tok.Unlimited, "max_tools": 32, "tool_max_active_jobs": 2, "tool_timeout_seconds": 90, "automatic_context_max_bytes": 245760, "automatic_max_tools": 3, "automatic_max_active_per_token": 1, "automatic_max_active_global": 2, "automatic_timeout_seconds": 150},
+ 	})
+ }
+ 
+@@ -10925,6 +10925,9 @@
+ 	}
+ 	if len(input.Messages) == 0 {
+ 		jsonOut(w, 400, map[string]any{"error": map[string]any{"code": "messages_required", "message": "messages is required"}})
++		return
++	}
++	if a.publicAIAutomaticSkills(w, r, tok, input) {
+ 		return
+ 	}
+ 	if len(input.Tools) > 0 || publicAIHasToolHistory(input) || input.ToolChoice != nil || tok.Tier == "internal" {
+--- a/public_ai_internal.go
++++ b/public_ai_internal.go
+@@ -74,6 +74,14 @@
+ 	f["tool_calls"] = tok.Tier == "internal"
+ 	f["function_calling"] = tok.Tier == "internal"
+ 	f["tool_execution"] = false
++	f["automatic_skills"] = len(autoSkillCatalog()) > 0
++	f["automatic_seo"] = len(autoSkillCatalog()) > 0
++	f["automatic_engineering"] = len(autoSkillCatalog()) > 0
++	f["engineering_source_input"] = len(autoSkillCatalog()) > 0
++	f["engineering_repository_connector"] = false
++	f["engineering_code_execution"] = false
++	f["seo_search_console_connected"] = false
++	f["seo_ga4_connected"] = false
+ 	if tok.Tier == "internal" {
+ 		f["model_fallback"] = false
+ 		f["web_grounding"] = false
+--- a/public_api_docs.go
++++ b/public_api_docs.go
+@@ -6,7 +6,7 @@
+ 	"strings"
+ )
+ 
+-const publicAPIDocumentationVersion = "2026-10-20"
++const publicAPIDocumentationVersion = "2026-10-24"
+ 
+ type publicAPIEndpoint struct {
+ 	Method      string `json:"method"`
+@@ -164,6 +164,10 @@
+ Native selalu SSE meskipun stream tidak dikirim. session_id pada event started saat ini adalah ID respons, jangan menimpanya ke ID percakapan aplikasi Anda.
+ 
+ PAYLOAD DAN KONTEKS
++- Skill SEO read-only dan workflow engineering dipilih otomatis dari permintaan chat dan konteks yang dikirim. Tidak perlu memilih skill atau mengganti key Telegram. Hasil audit berasal dari tool, bukan perkiraan model.
++- Engineering: review kode/diff, debug log, rencana pengujian dan dokumentasi dari bukti yang dikirim. Tidak perlu memilih skill. Hasil worker tersedia di harmonika.reports; untuk SSE ada pada chunk terminal.
++- Engineering tidak membaca repository privat atau menjalankan kode/test. Nomor baris snippet merujuk potongan yang dikirim, bukan klaim membaca file disk. Konteks otomatis maksimal 240 KiB.
++- Automatic SEO tidak mengaktifkan shell/file client, browser privat, screenshot visual/drift, atau koneksi Search Console/GA4. Data Google memerlukan koneksi akun terotorisasi.
+ - /chat/completions: messages wajib array role/content teks. Kirim riwayat relevan sendiri untuk percakapan lanjutan. session_id, external_user_id dan user merupakan identifier opsional, bukan jaminan penyimpanan riwayat server.
+ - /public-ai/chat/messages: message wajib teks; session_id atau external_user_id opsional. Endpoint ini tidak menerima array history.
+ - Pisahkan identifier per aplikasi/pengguna/percakapan. Hindari nomor telepon atau data pribadi sebagai identifier.
+--- a/public_api_docs_test.go
++++ b/public_api_docs_test.go
+@@ -48,7 +48,7 @@
+ 			t.Errorf("missing %s", ep.Path)
+ 		}
+ 	}
+-	for _, text := range []string{"2026-10-20", "102.400 BYTE", "24 jam bergulir", "choices[0].message.content", "data: [DONE]", "\"type\":\"started\"", "/panduan", "AUTENTIKASI TERPISAH", "belum dijamin", "quota_unavailable", "stream_interrupted"} {
++	for _, text := range []string{publicAPIDocumentationVersion, "102.400 BYTE", "24 jam bergulir", "choices[0].message.content", "data: [DONE]", "\"type\":\"started\"", "/panduan", "AUTENTIKASI TERPISAH", "belum dijamin", "quota_unavailable", "stream_interrupted"} {
+ 		if !strings.Contains(guide, text) {
+ 			t.Errorf("missing %q", text)
+ 		}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "release": "2026.10.24.16",
+  "status": "verified",
+  "python_tests": 159,
+  "legacy_document_tests": 7,
+  "node_tests": 55,
+  "total_tests": 221,
+  "failed_tests": 0,
+  "skipped_in_owner_runtime": 0,
+  "installed_cli_smoke": [
+    {
+      "format": "pdf",
+      "created": true,
+      "read_back": true,
+      "bytes": 1433,
+      "seconds": 1.191
+    },
+    {
+      "format": "docx",
+      "created": true,
+      "read_back": true,
+      "bytes": 36599,
+      "seconds": 0.844
+    },
+    {
+      "format": "xlsx",
+      "created": true,
+      "read_back": true,
+      "bytes": 4851,
+      "seconds": 0.96
+    },
+    {
+      "format": "pptx",
+      "created": true,
+      "read_back": true,
+      "bytes": 28259,
+      "seconds": 0.979
+    }
+  ],
+  "installed_pdf_edit": true,
+  "installed_pythonpath_isolation": true,
+  "doctor": {
+    "ok": true,
+    "runtime_verified": true,
+    "binary_verified": true,
+    "mcp_protocol": "ok"
+  },
+  "customer_data_used": false,
+  "network_used_by_documents": false,
+  "automatic_update": false,
+  "services_restarted": false,
+  "active_user_sessions_terminated": false,
+  "scope": "owner local signed runtime; backend RPC read_pdf unchanged",
+  "team": {
+    "codex": "implementation, integration and release verification",
+    "opencode": "independent read-only audit completed; document suites verified and test-dispatch gaps closed",
+    "claude": "independent read-only audit completed; import isolation, Python preflight, PDF action removal, fonts, publication, input budget and worker entrypoint findings addressed"
+  },
+  "known_limits": [
+    "OCR unavailable",
+    "PDF edits are page-level; not arbitrary text replacement",
+    "PDF edit removes annotations, forms and active-action catalogs; not a universal malware scan",
+    "macOS worker has wall/CPU bounds; Linux additionally has address-space limit",
+    "Owner venv depends on its installed base Python; rebuilding required if base interpreter moves",
+    "Dependency versions pinned; wheel hashes not included",
+    "Office edit and MD/HTML/EPUB/RTF handlers disabled",
+    "No cross-format conversion"
+  ],
+  "activation_note": "Missing branded binary path in prior local release restored using a signed checksum-matching binary; binary bytes unchanged."
+}

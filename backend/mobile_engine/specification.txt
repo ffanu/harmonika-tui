@@ -1,0 +1,1239 @@
+================================================================================
+     HARMONIKA AI - MOBILE APP BUILDER ENGINE SKILLS (BACKEND)
+          Engine untuk Membangun Aplikasi Android & iOS
+          - Cross-Platform (React Native / Flutter)
+          - Native (Kotlin / Swift)
+          - Dari Spec ke Play Store & App Store
+          - OTA Updates, Push Notif, In-App Purchase
+================================================================================
+
+Tujuan: AI menerima instruksi untuk membangun aplikasi mobile Android & iOS,
+       lalu OTONOM:
+       1. Baca spec dari notes/notebook user
+       2. Pilih tech stack (cross-platform atau native)
+       3. Desain UI/UX mobile ( Material / Cupertino )
+       4. Setup project (Expo, React Native CLI, Flutter, dll)
+       5. Build komponen mobile (screen, navigation, state)
+       6. Integrate API & backend
+       7. Add native features (camera, GPS, notif, biometric)
+       8. Testing (unit, integration, E2E)
+       9. Build APK / AAB / IPA
+      10. Deploy ke Play Store & App Store
+      11. OTA updates (CodePush)
+      12. Monitoring & analytics
+
+
+================================================================================
+  ALUR KERJA UTAMA
+================================================================================
+
+  [User Memberi Perintah dari WebUI / Terminal TUI]
+       Contoh:
+       - "Buatkan aplikasi mobile untuk toko online dari spec.md"
+       - "Deploy app ke Play Store dan App Store"
+       - "Add fitur push notification ke app existing"
+              |
+              v
+  [Spec Reader - parse notes/notebook user]
+       - Baca spec (markdown, txt, json)
+       - Extract requirements mobile-specific
+       - Identify: platform (Android/iOS/both), target users
+              |
+              v
+  [Tech Stack Selector - Mobile]
+       - Cross-platform vs Native decision
+       - Framework: React Native / Flutter / Kotlin / Swift
+       - State management library
+       - Navigation library
+       - Backend API integration
+              |
+              v
+  [Mobile Architecture Designer]
+       - Desain screen flow
+       - Desain state management
+       - Desain offline strategy
+       - Desain local storage
+       - Desain security (keystore, keychain)
+              |
+              v
+  [Project Scaffolder - Mobile]
+       - Init React Native (Expo / CLI)
+       - Init Flutter
+       - Init Native Android (Kotlin)
+       - Init Native iOS (Swift)
+              |
+              v
+  [UI/UX Builder - Mobile]
+       - Generate screens (login, home, detail, profile)
+       - Generate components (button, card, input)
+       - Apply Material Design (Android)
+       - Apply Cupertino (iOS)
+       - Responsive untuk tablet & foldable
+              |
+              v
+  [Feature Builder - Mobile]
+       - Navigation (stack, tab, drawer)
+       - State management (Redux, Zustand, Riverpod, Bloc)
+       - API integration (REST, GraphQL, WebSocket)
+       - Local storage (AsyncStorage, SQLite, Hive)
+       - Authentication (biometric, OTP, OAuth)
+       - Push notification (FCM, APNs)
+       - Camera & media
+       - GPS & maps
+       - Sensors (accelerometer, gyroscope)
+       - Offline support
+              |
+              v
+  [Native Bridge - kalau perlu]
+       - Write native Kotlin module (Android)
+       - Write native Swift module (iOS)
+       - Bridge ke JS / Dart
+              |
+              v
+  [Testing - Mobile]
+       - Unit test (Jest, Flutter Test)
+       - Widget test (Flutter)
+       - E2E test (Detox, Maestro, Appium)
+       - Device farm testing (AWS, Firebase)
+              |
+              v
+  [Build & Sign]
+       - Build APK / AAB (Android)
+       - Build IPA (iOS)
+       - Code signing (keystore, provisioning profile)
+       - Version management
+              |
+              v
+  [Deploy to Store]
+       - Upload ke Google Play Console
+       - Upload ke Apple App Store Connect
+       - Store listing (description, screenshots, icon)
+       - Rollout management (staged, full)
+              |
+              v
+  [Post-Deploy]
+       - Crash reporting (Crashlytics, Sentry)
+       - Analytics (Firebase, Mixpanel)
+       - OTA updates (CodePush, Shorebird)
+       - User feedback monitoring
+       - Version management & updates
+
+
+================================================================================
+  DAFTAR LENGKAP SKILL (165 SKILLS)
+================================================================================
+
+--------------------------------------------------------------------------------
+[Layer 1] SPEC & REQUIREMENTS READER (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+1   | spec.read.mobile                | Baca spec khusus mobile app
+2   | spec.parse.platform             | Parse target platform (Android/iOS/both)
+3   | spec.parse.screens              | Parse daftar screen yang dibutuhkan
+4   | spec.parse.features.mobile      | Parse fitur mobile (camera, GPS, dll)
+5   | spec.parse.offline              | Parse kebutuhan offline support
+6   | spec.parse.auth.mobile          | Parse auth strategy (biometric, OTP)
+7   | spec.parse.push_notif           | Parse kebutuhan push notification
+8   | spec.parse.iap                  | Parse in-app purchase requirements
+9   | spec.parse.design_pref.mobile   | Parse preferensi desain mobile
+10  | spec.clarify.mobile             | Clarify ambiguities mobile-specific
+
+
+--------------------------------------------------------------------------------
+[Layer 2] TECH STACK SELECTOR - MOBILE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+11  | stack.mobile.analyze            | Analisa requirements untuk pilih stack
+12  | stack.select.react_native       | Pilih React Native (Expo / CLI)
+13  | stack.select.flutter            | Pilih Flutter
+14  | stack.select.kotlin             | Pilih Native Android (Kotlin)
+15  | stack.select.swift              | Pilih Native iOS (Swift)
+16  | stack.select.ionic              | Pilih Ionic (Capacitor)
+17  | stack.select.state_mgmt         | Pilih state management library
+18  | stack.select.navigation         | Pilih navigation library
+19  | stack.select.network            | Pilih network library (Axios, tRPC, GraphQL)
+20  | stack.select.local_db           | Pilih local database (SQLite, Watermelon, Hive)
+21  | stack.select.di                 | Pilih dependency injection
+22  | stack.recommend.combination.mobile | Rekomendasi kombinasi optimal
+
+
+--------------------------------------------------------------------------------
+[Layer 3] MOBILE ARCHITECTURE DESIGNER (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+23  | arch.mobile.system              | Desain arsitektur mobile high-level
+24  | arch.mobile.screen_flow         | Desain screen flow & navigation
+25  | arch.mobile.state               | Desain state management architecture
+26  | arch.mobile.offline             | Desain offline-first strategy
+27  | arch.mobile.sync                | Desain sync strategy (local ↔ remote)
+28  | arch.mobile.cache               | Desain cache strategy
+29  | arch.mobile.security            | Desain security (keystore, keychain, SSL pinning)
+30  | arch.mobile.local_storage       | Desain local storage schema
+31  | arch.mobile.push_notif         | Desain push notification architecture
+32  | arch.mobile.deep_link           | Desain deep link strategy
+33  | arch.mobile.iap                 | Desain in-app purchase flow
+34  | arch.mobile.diagram             | Generate diagram (Mermaid)
+
+
+--------------------------------------------------------------------------------
+[Layer 4] PROJECT SCAFFOLDER - MOBILE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+35  | scaffold.expo                   | Init Expo project (managed / bare)
+36  | scaffold.react_native_cli       | Init React Native CLI project
+37  | scaffold.flutter                | Init Flutter project
+38  | scaffold.kotlin_android         | Init Native Android (Kotlin + Jetpack Compose)
+39  | scaffold.swift_ios              | Init Native iOS (Swift + SwiftUI)
+40  | scaffold.ionic                  | Init Ionic + Capacitor project
+41  | scaffold.monorepo.mobile        | Setup monorepo (Nx, Turborepo)
+42  | scaffold.ci_cd.mobile           | Setup CI/CD untuk mobile (Fastlane, EAS)
+43  | scaffold.env_config             | Setup environment config (dev, staging, prod)
+44  | scaffold.linting.mobile         | Setup ESLint / Dart analyze / SwiftLint
+
+
+--------------------------------------------------------------------------------
+[Layer 5] UI/UX BUILDER - MOBILE (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+45  | mobile.gen.screen               | Generate screen (login, home, detail, profile)
+46  | mobile.gen.component            | Generate reusable component
+47  | mobile.gen.form                 | Generate form with validation
+48  | mobile.gen.list                 | Generate list (FlatList, ListView)
+49  | mobile.gen.card                 | Generate card component
+50  | mobile.gen.modal                | Generate modal / bottom sheet
+51  | mobile.gen.tab_bar              | Generate tab bar navigation
+52  | mobile.gen.drawer               | Generate drawer navigation
+53  | mobile.gen.skeleton             | Generate skeleton loader
+54  | mobile.gen.empty_state          | Generate empty state
+55  | mobile.style.material           | Apply Material Design 3 (Android)
+56  | mobile.style.cupertino          | Apply Cupertino style (iOS)
+57  | mobile.style.adaptive           | Adaptive platform-specific styling
+58  | mobile.responsive.tablet        | Responsive untuk tablet & foldable
+59  | mobile.theme.dark_mode          | Setup dark mode support
+
+
+--------------------------------------------------------------------------------
+[Layer 6] NAVIGATION BUILDER (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+60  | nav.setup.stack                 | Setup stack navigation
+61  | nav.setup.tab                   | Setup tab navigation
+62  | nav.setup.drawer                | Setup drawer navigation
+63  | nav.setup.modal                 | Setup modal navigation
+64  | nav.deep_link                   | Setup deep link (URL scheme, universal link)
+65  | nav.push_notif_link             | Navigate dari push notification
+66  | nav.auth_flow                   | Auth flow (login → main app)
+67  | nav.guard                       | Navigation guard (protected routes)
+68  | nav.transition.custom           | Custom transition animation
+69  | nav.analytics                   | Track screen view analytics
+
+
+--------------------------------------------------------------------------------
+[Layer 7] STATE MANAGEMENT (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+70  | state.setup.redux               | Setup Redux Toolkit (React Native)
+71  | state.setup.zustand             | Setup Zustand (React Native)
+72  | state.setup.riverpod            | Setup Riverpod (Flutter)
+73  | state.setup.bloc                | Setup Bloc (Flutter)
+74  | state.setup.mobx                | Setup MobX
+75  | state.persist                   | Persist state ke local storage
+76  | state.hydrate                   | Hydrate state dari storage on startup
+77  | state.sync.remote               | Sync state dengan remote API
+78  | state.middleware                | Setup middleware (logging, analytics)
+79  | state.devtools                  | Setup devtools (Redux DevTools, Flipper)
+
+
+--------------------------------------------------------------------------------
+[Layer 8] NETWORK & API INTEGRATION (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+80  | net.setup.axios                 | Setup Axios dengan interceptors
+81  | net.setup.fetch                 | Setup fetch dengan wrapper
+82  | net.setup.graphql               | Setup Apollo / urql GraphQL client
+83  | net.setup.websocket             | Setup WebSocket client
+84  | net.setup.trpc                  | Setup tRPC client
+85  | net.auth.token                  | Token management (refresh, rotate)
+86  | net.retry                       | Retry strategy (exponential backoff)
+87  | net.cache                       | Network cache (React Query, SWR)
+88  | net.upload.file                 | File upload (multipart, presigned URL)
+89  | net.ssl.pinning                 | SSL pinning untuk security
+
+
+--------------------------------------------------------------------------------
+[Layer 9] LOCAL STORAGE & OFFLINE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+90  | local.async_storage             | Setup AsyncStorage (key-value)
+91  | local.sqlite                    | Setup SQLite (relational)
+92  | local.watermelon                | Setup WatermelonDB (offline-first)
+93  | local.hive                      | Setup Hive (Flutter, fast NoSQL)
+94  | local.realm                     | Setup Realm Database
+95  | local.secure_store              | Secure storage (Keychain, Keystore)
+96  | local.sync.engine               | Sync engine (local ↔ remote)
+97  | local.conflict.resolve          | Conflict resolution strategy
+98  | local.migration                 | Local DB migration
+99  | local.backup                    | Backup local data
+
+
+--------------------------------------------------------------------------------
+[Layer 10] AUTHENTICATION & SECURITY (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+100 | auth.mobile.login               | Login (email/password, OTP)
+101 | auth.mobile.oauth               | OAuth (Google, Apple, Facebook)
+102 | auth.mobile.biometric           | Biometric (Face ID, Touch ID, Fingerprint)
+103 | auth.mobile.pin                 | PIN code auth
+104 | auth.mobile.jwt                 | JWT token management
+105 | auth.mobile.refresh             | Refresh token rotation
+106 | auth.mobile.logout              | Logout & cleanup
+107 | auth.mobile.device_binding      | Device binding (anti-sharing)
+108 | auth.mobile.jailbreak_detect    | Detect jailbreak / root
+109 | auth.mobile.tamper_detect       | Tamper detection
+
+
+--------------------------------------------------------------------------------
+[Layer 11] PUSH NOTIFICATION (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+110 | push.setup.fcm                  | Setup Firebase Cloud Messaging (Android)
+111 | push.setup.apns                 | Setup Apple Push Notification Service (iOS)
+112 | push.setup.onesignal            | Setup OneSignal (cross-platform)
+113 | push.permission.request         | Request permission (iOS ATT, Android 13+)
+114 | push.handle.foreground          | Handle foreground notification
+115 | push.handle.background          | Handle background notification
+116 | push.handle.tap                 | Handle notification tap (deep link)
+117 | push.schedule.local             | Schedule local notification
+
+
+--------------------------------------------------------------------------------
+[Layer 12] NATIVE DEVICE FEATURES (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+118 | device.camera                   | Camera access (take photo, video)
+119 | device.gallery                  | Gallery / photo picker
+120 | device.gps                      | GPS & location services
+121 | device.maps                     | Maps integration (Google Maps, Mapbox)
+122 | device.accelerometer            | Accelerometer sensor
+123 | device.gyroscope                | Gyroscope sensor
+124 | device.bluetooth                | Bluetooth (BLE)
+125 | device.nfc                      | NFC
+126 | device.biometric                | Biometric scanner
+127 | device.contacts                 | Contacts access
+128 | device.sms                      | SMS sending
+129 | device.phone                    | Phone call
+130 | device.sharing                  | Social sharing (Share sheet)
+131 | device.file_system              | File system access
+132 | device.permissions              | Permissions management (Android 13+, iOS)
+
+
+--------------------------------------------------------------------------------
+[Layer 13] MEDIA & ANIMATION (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+133 | media.audio.record              | Audio recording
+134 | media.audio.play                | Audio playback
+135 | media.video.record              | Video recording
+136 | media.video.play                | Video playback
+137 | media.image.process             | Image processing (filter, crop, compress)
+138 | media.lottie                    | Lottie animation
+139 | media.reanimated                | Reanimated (React Native) animation
+140 | media.gesture                   | Gesture handler (swipe, pinch, pan)
+
+
+--------------------------------------------------------------------------------
+[Layer 14] IN-APP PURCHASE & MONETIZATION (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+141 | iap.setup.play_billing          | Setup Google Play Billing
+142 | iap.setup.storekit              | Setup Apple StoreKit
+143 | iap.setup.revenue_cat           | Setup RevenueCat (cross-platform)
+144 | iap.product.fetch               | Fetch products dari store
+145 | iap.purchase                    | Process purchase
+146 | iap.restore                     | Restore purchases
+147 | iap.subscription                | Subscription management
+148 | iap.validate                    | Validate receipt server-side
+
+
+--------------------------------------------------------------------------------
+[Layer 15] NATIVE BRIDGE & MODULES (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+149 | bridge.kotlin.module            | Write native Kotlin module (Android)
+150 | bridge.swift.module             | Write native Swift module (iOS)
+151 | bridge.react_native             | Bridge ke React Native JS
+152 | bridge.flutter_platform_channel | Bridge ke Flutter Dart
+153 | bridge.method_channel           | Method channel (Flutter)
+154 | bridge.event_channel            | Event channel (Flutter)
+155 | bridge.type_safe                | Type-safe bridge (TypeScript / Dart)
+156 | bridge.publish.npm              | Publish native module ke npm/pub
+
+
+--------------------------------------------------------------------------------
+[Layer 16] TESTING - MOBILE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+157 | test.unit.jest                  | Unit test dengan Jest (React Native)
+158 | test.unit.flutter               | Unit test dengan Flutter Test
+159 | test.unit.kotlin                | Unit test dengan JUnit (Android)
+160 | test.unit.swift                 | Unit test dengan XCTest (iOS)
+161 | test.widget.flutter             | Widget test (Flutter)
+162 | test.component.rntl             | Component test (React Native Testing Library)
+163 | test.e2e.detox                  | E2E test dengan Detox (React Native)
+164 | test.e2e.maestro                | E2E test dengan Maestro (cross-platform)
+165 | test.e2e.appium                 | E2E test dengan Appium
+166 | test.screenshot                 | Screenshot test (Fastlane Snapshot)
+167 | test.device_farm                | Test di device farm (AWS, Firebase)
+168 | test.performance.mobile         | Performance test (startup, memory)
+
+
+--------------------------------------------------------------------------------
+[Layer 17] BUILD & SIGN (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+169 | build.android.apk               | Build APK (debug / release)
+170 | build.android.aab               | Build AAB (App Bundle untuk Play Store)
+171 | build.ios.ipa                   | Build IPA (untuk App Store / TestFlight)
+172 | build.android.sign              | Sign Android dengan keystore
+173 | build.ios.sign                  | Sign iOS dengan provisioning profile
+174 | build.version.manage            | Version code & version name management
+175 | build.proguard                  | ProGuard / R8 obfuscation (Android)
+176 | build.ios.export                | iOS export method (App Store, Ad Hoc, Dev)
+177 | build.eas.submit                | EAS Build & Submit (Expo)
+178 | build.fastlane                  | Fastlane build automation
+
+
+--------------------------------------------------------------------------------
+[Layer 18] DEPLOY TO STORE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+179 | deploy.play_store               | Upload ke Google Play Console
+180 | deploy.app_store                | Upload ke Apple App Store Connect
+181 | deploy.testflight               | Upload ke TestFlight (beta testing)
+182 | deploy.internal_testing         | Play Store Internal Testing
+183 | deploy.closed_testing           | Play Store Closed Testing (alpha/beta)
+184 | deploy.staged_rollout           | Staged rollout (1% → 100%)
+185 | deploy.store_listing            | Setup store listing (description, screenshots)
+186 | deploy.store_screenshot         | Generate store screenshots
+187 | deploy.store_icon               | Generate store icon
+188 | deploy.promo_content            | Generate promo content (feature graphic)
+
+
+--------------------------------------------------------------------------------
+[Layer 19] OTA & UPDATES (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+189 | ota.setup.codepush              | Setup CodePush (React Native)
+190 | ota.setup.eas_update            | Setup EAS Update (Expo)
+191 | ota.setup.shorebird             | Setup Shorebird (Flutter)
+192 | ota.release.update              | Release OTA update
+193 | ota.rollback                    | Rollback OTA update
+194 | ota.targeting                   | Targeting update (by version, channel)
+195 | ota.mandatory                   | Mandatory update enforcement
+196 | ota.monitoring                  | Monitor OTA adoption rate
+
+
+--------------------------------------------------------------------------------
+[Layer 20] MONITORING & ANALYTICS (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+197 | monitor.crashlytics             | Setup Firebase Crashlytics
+198 | monitor.sentry.mobile           | Setup Sentry mobile
+199 | monitor.bugsnag                 | Setup Bugsnag
+200 | analytics.firebase              | Setup Firebase Analytics
+201 | analytics.mixpanel              | Setup Mixpanel
+202 | analytics.amplitude             | Setup Amplitude
+203 | analytics.event_track           | Track custom event
+204 | analytics.funnel                | Funnel analysis
+205 | analytics.retention             | Retention tracking
+206 | analytics.heatmap               | Heatmap (FullStory, LogRocket)
+
+
+--------------------------------------------------------------------------------
+[Layer 21] CI/CD - MOBILE (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+207 | cicd.github_actions.mobile      | GitHub Actions untuk mobile
+208 | cicd.gitlab_ci.mobile           | GitLab CI untuk mobile
+209 | cicd.fastlane.lane              | Fastlane lane automation
+210 | cicd.bitrise                    | Bitrise CI/CD
+211 | cicd.codemagic                  | Codemagic CI/CD (Flutter)
+212 | cicd.eas.pipeline               | EAS Pipeline (Expo)
+213 | cicd.auto_version               | Auto version bump
+214 | cicd.auto_tag                   | Auto git tag release
+
+
+================================================================================
+  TECH STACK RECOMMENDATION MATRIX
+================================================================================
+
+--------------------------------------------------------------------------------
+SENARIO 1: Cross-Platform MVP (Startup)
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Framework : React Native (Expo)
+  State     : Zustand
+  Navigation: Expo Router
+  Network   : TanStack Query (React Query)
+  Local DB  : AsyncStorage + SQLite (expo-sqlite)
+  Auth      : Firebase Auth / Supabase Auth
+  Push      : Expo Notifications
+  Analytics : Firebase Analytics
+  CI/CD     : EAS Build & Submit
+  Time      : 4-8 minggu
+  Cost      : $0-50/bln (Expo free tier)
+
+
+--------------------------------------------------------------------------------
+SENARIO 2: Cross-Platform Production
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Framework : React Native (CLI / Bare)
+  State     : Redux Toolkit
+  Navigation: React Navigation 6+
+  Network   : Axios + React Query
+  Local DB  : WatermelonDB (offline-first)
+  Auth      : Custom OAuth2 + Biometric
+  Push      : OneSignal
+  Crash     : Sentry
+  Analytics : Mixpanel
+  CI/CD     : Fastlane + GitHub Actions
+  Time      : 3-6 bulan
+  Cost      : $50-200/bln
+
+
+--------------------------------------------------------------------------------
+SENARIO 3: Flutter Cross-Platform
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Framework : Flutter 3.x
+  State     : Riverpod
+  Navigation: GoRouter
+  Network   : Dio + retrofit
+  Local DB  : Hive (NoSQL) / Drift (SQL)
+  Auth      : FirebaseAuth / Supabase
+  Push      : Firebase Messaging
+  Crash     : Firebase Crashlytics
+  Analytics : Firebase Analytics
+  CI/CD     : Codemagic
+  Time      : 4-12 minggu
+  Cost      : $0-100/bln
+
+
+--------------------------------------------------------------------------------
+SENARIO 4: Native Android (Performance-Critical)
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Language   : Kotlin
+  UI         : Jetpack Compose
+  State      : ViewModel + StateFlow
+  Navigation : Navigation Compose
+  Network    : Retrofit + OkHttp
+  Local DB   : Room (SQLite)
+  DI         : Hilt / Dagger
+  Auth       : Firebase Auth / Credential Manager
+  Push       : Firebase Cloud Messaging
+  Analytics  : Firebase Analytics
+  CI/CD      : GitHub Actions + Fastlane
+  Time       : 2-4 bulan
+
+
+--------------------------------------------------------------------------------
+SENARIO 5: Native iOS (Apple Ecosystem)
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Language   : Swift
+  UI         : SwiftUI
+  State      : @StateObject + @EnvironmentObject
+  Navigation : NavigationStack (iOS 16+)
+  Network    : URLSession + async/await
+  Local DB   : Core Data / SwiftData (iOS 17+)
+  DI         : Swift Inject
+  Auth       : Sign in with Apple + Keychain
+  Push       : APNs
+  Analytics  : Firebase Analytics
+  CI/CD      : Xcode Cloud / Fastlane
+  Time       : 2-4 bulan
+
+
+--------------------------------------------------------------------------------
+SENARIO 6: Hybrid Web App (PWA Wrapper)
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Framework  : Ionic + Capacitor
+  UI         : Ionic UI Components
+  State      : Zustand / Pinia
+  Network    : Axios
+  Local DB   : IndexedDB / SQLite (capacitor-sqlite)
+  Push       : OneSignal
+  CI/CD      : Fastlane
+  Time       : 2-4 minggu
+  Cost       : $0-50/bln
+
+
+--------------------------------------------------------------------------------
+SENARIO 7: Game App
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Engine     : Unity / Godot
+  Language   : C# (Unity) / GDScript (Godot)
+  Export     : Android, iOS
+  Ads        : AdMob / Unity Ads
+  IAP        : Unity IAP
+  Analytics  : Unity Analytics
+  CI/CD      : Unity Cloud Build
+  Time       : 1-6 bulan
+
+
+--------------------------------------------------------------------------------
+SENARIO 8: Enterprise App (Internal)
+--------------------------------------------------------------------------------
+Rekomendasi:
+  Framework  : React Native (Bare workflow)
+  State      : Redux Toolkit + RTK Query
+  Navigation : React Navigation
+  Network    : Axios + msw (mock)
+  Local DB   : WatermelonDB
+  Auth       : Keycloak SSO + Biometric
+  MDM        : Microsoft Intune / AirWatch
+  Push       : Amazon SNS
+  Analytics  : Custom + Datadog
+  CI/CD      : Bitrise + Fastlane
+  Time       : 3-6 bulan
+
+
+================================================================================
+  CONTOH WORKFLOW: BUILD APP TOKO ONLINE DARI SPEC
+================================================================================
+
+User: "Harmonika, buatkan aplikasi mobile toko online Android & iOS
+       dari spec di /notes/toko-app-spec.md, deploy ke Play Store & App Store"
+
+AI eksekusi:
+
+# Phase 1: BACA SPEC
+spec.read.mobile("/notes/toko-app-spec.md")
+  -> Spec extract:
+     - Nama: "Toko Maju Jaya"
+     - Platform: Android + iOS
+     - Fitur: catalog, cart, checkout, payment, order tracking
+     - Auth: email + Google + Apple
+     - Push notif: order status
+     - Offline: cache catalog
+     - Target: Indonesia
+
+# Phase 2: PILIH TECH STACK
+stack.mobile.analyze({...})
+  -> Recommendation:
+     Framework: React Native (Expo)
+     State: Zustand
+     Navigation: Expo Router
+     Network: TanStack Query
+     Local DB: expo-sqlite
+     Auth: Firebase Auth (Google, Apple)
+     Push: Expo Notifications + FCM
+     Payment: Midtrans SDK
+     Analytics: Firebase Analytics
+     Crash: Sentry
+
+# Phase 3: DESIGN ARCHITECTURE
+arch.mobile.screen_flow({...})
+  -> Screens: Splash, Login, Home, Catalog, ProductDetail,
+              Cart, Checkout, OrderTracking, Profile, Settings
+arch.mobile.state({...})
+  -> Stores: authStore, cartStore, catalogStore, orderStore
+arch.mobile.offline({...})
+  -> Strategy: cache catalog di SQLite, sync saat online
+
+# Phase 4: SCAFFOLD PROJECT
+scaffold.expo({
+    name: "TokoMajuJaya",
+    template: "expo-template-blank-typescript",
+    workflow: "managed"
+})
+
+# Phase 5: BUILD UI/UX
+mobile.gen.screen.login({...})
+mobile.gen.screen.home({...})
+mobile.gen.screen.catalog({...})
+mobile.gen.screen.product_detail({...})
+mobile.gen.screen.cart({...})
+mobile.gen.screen.checkout({...})
+mobile.gen.screen.order_tracking({...})
+mobile.gen.screen.profile({...})
+mobile.style.material({...})  # Android
+mobile.style.cupertino({...})  # iOS
+mobile.theme.dark_mode({...})
+
+# Phase 6: NAVIGATION
+nav.setup.stack({...})
+nav.setup.tab({...})  # Home, Cart, Order, Profile
+nav.auth_flow({...})
+nav.deep_link({...})  # toko-majujaya://product/123
+
+# Phase 7: STATE MANAGEMENT
+state.setup.zustand({...})
+state.persist({...})  # cart persist ke AsyncStorage
+
+# Phase 8: NETWORK & API
+net.setup.axios({...})  # base URL, interceptors
+net.auth.token({...})  # JWT auto-attach
+net.cache({...})  # TanStack Query untuk caching
+net.retry({...})  # exponential backoff
+
+# Phase 9: LOCAL STORAGE
+local.async_storage({...})  # cart, settings
+local.sqlite({...})  # catalog cache
+local.secure_store({...})  # auth token
+
+# Phase 10: AUTH
+auth.mobile.login({...})  # email/password
+auth.mobile.oauth({...})  # Google, Apple
+auth.mobile.biometric({...})  # Face ID / Touch ID
+auth.mobile.jwt({...})
+auth.mobile.refresh({...})
+
+# Phase 11: PUSH NOTIFICATION
+push.setup.fcm({...})  # Android
+push.setup.apns({...})  # iOS
+push.permission.request({...})
+push.handle.tap({...})  # order detail dari notif
+
+# Phase 12: NATIVE FEATURES
+device.camera({...})  # upload product photo
+device.gps({...})  # shipping address
+device.maps({...})  # Google Maps
+device.sharing({...})  # share product
+device.permissions({...})
+
+# Phase 13: IAP (kalau ada)
+iap.setup.revenue_cat({...})
+
+# Phase 14: TESTING
+test.unit.jest({...})  # 47 tests passed
+test.component.rntl({...})  # 23 tests passed
+test.e2e.detox({...})  # 15 tests passed
+test.screenshot({...})
+
+# Phase 15: BUILD & SIGN
+build.android.aab({...})
+build.android.sign({keystore: "production.keystore"})
+build.ios.ipa({...})
+build.ios.sign({provisioning_profile: "production"})
+build.version.manage({version: "1.0.0", build: "1"})
+
+# Phase 16: DEPLOY
+deploy.play_store({
+    aab: "toko-majujaya-1.0.0.aab",
+    track: "internal_testing"
+})
+deploy.app_store({
+    ipa: "toko-majujaya-1.0.0.ipa",
+    skip_waiting_for_build_processing: true
+})
+deploy.testflight({...})  # beta testers
+
+# Phase 17: STORE LISTING
+deploy.store_listing({
+    title: "Toko Maju Jaya - Belanja Online",
+    description: "...",
+    keywords: "toko, online, belanja, elektronik",
+    category: "SHOPPING",
+    screenshots: [...],
+    icon: "icon-512.png"
+})
+
+# Phase 18: STAGED ROLLOUT
+deploy.staged_rollout({
+    track: "production",
+    rollout: 10  # 10% dulu
+})
+  -> Monitor crash & feedback
+  -> After 7 days OK → 50% → 100%
+
+# Phase 19: OTA SETUP
+ota.setup.eas_update({...})
+
+# Phase 20: MONITORING
+monitor.crashlytics({...})
+monitor.sentry.mobile({...})
+analytics.firebase({...})
+analytics.event_track({...})  # track key events
+
+# Phase 21: REPORT
+  -> App live di Play Store: com.majujaya.app
+  -> App live di App Store: 1234567890
+  -> Crash-free rate: 99.5%
+  -> DAU: 1,234 (week 1)
+
+
+================================================================================
+  CONTOH SPEC NOTEBOOK (INPUT DARI USER)
+================================================================================
+
+# Spec App: Toko Maju Jaya Mobile
+
+## Deskripsi
+Aplikasi mobile toko online untuk produk elektronik.
+
+## Platform
+- Android (min SDK 24 / Android 7.0)
+- iOS (min iOS 14)
+
+## Fitur Utama
+- [ ] Catalog produk (50+ produk, search, filter)
+- [ ] Detail produk (gambar, spec, review)
+- [ ] Shopping cart (offline support)
+- [ ] Checkout (shipping address, payment)
+- [ ] Payment via Midtrans
+- [ ] Auth: email + Google + Apple
+- [ ] Order tracking (real-time)
+- [ ] Push notification (order status)
+- [ ] Profile & settings
+- [ ] Dark mode
+
+## Target User
+- Konsumen Indonesia, usia 18-45
+- Mobile-only (80% Android, 20% iOS)
+
+## Brand Identity
+- Nama: Toko Maju Jaya
+- Warna: Biru (#2563EB) + Putih
+- Tone: Modern, profesional
+
+## Constraint
+- APK size < 50MB
+- Startup time < 3 detik
+- Offline: catalog bisa di-browse tanpa internet
+- Crash-free rate > 99%
+
+AI akan baca spec ini, lalu eksekusi semua phase di atas otonom.
+
+
+================================================================================
+  EXPO vs REACT NATIVE CLI vs FLUTTER
+================================================================================
+
+EXPO (Managed):
+  + Setup cepat (5 menit)
+  + EAS Build & Submit (no Xcode needed)
+  + OTA updates built-in
+  + Ideal untuk startup & MVP
+  - Bundle size lebih besar
+  - Beberapa native module tidak support
+
+REACT NATATIVE CLI (Bare):
+  + Full control native code
+  + Smaller bundle size
+  + Native module tidak terbatas
+  - Setup lebih rumit
+  - Butuh Xcode + Android Studio
+  - Manual build & deploy
+
+FLUTTER:
+  + Single codebase (Dart)
+  + Performance baik (compiled to native)
+  + Widget system konsisten
+  + Hot reload
+  - Bundle size besar (5-20MB minimum)
+  - Dart (kurang populer dari JS/TS)
+  - Native integration lebih rumit
+
+
+================================================================================
+  ANDROID vs iOS DEPLOYMENT DIFFERENCES
+================================================================================
+
+ANDROID (Google Play):
+  - Build: AAB (App Bundle)
+  - Sign: keystore (.jks)
+  - Review: 1-3 hari (auto + manual)
+  - Rollout: staged (1% → 100%)
+  - Update: 1-3 hari sampai user
+  - Cost: $25 (one-time)
+  - Test: Internal, Closed, Open testing
+
+IOS (App Store):
+  - Build: IPA
+  - Sign: provisioning profile + certificate
+  - Review: 24-48 jam (manual)
+  - Rollout: phased (1% → 100% dalam 7 hari)
+  - Update: 24-48 jam sampai user
+  - Cost: $99/tahun
+  - Test: TestFlight (internal + external)
+  - BUTUH: macOS untuk build (Xcode)
+
+
+================================================================================
+  TECH STACK MASTER LIST - MOBILE
+================================================================================
+
+CROSS-PLATFORM FRAMEWORKS:
+  - React Native (Expo / Bare) - JavaScript/TypeScript
+  - Flutter - Dart
+  - Ionic + Capacitor - Web tech
+  - .NET MAUI - C#
+  - KMP (Kotlin Multiplatform) - Kotlin
+
+NATIVE:
+  - Android: Kotlin + Jetpack Compose
+  - iOS: Swift + SwiftUI
+  - Legacy: Java (Android), Objective-C (iOS)
+
+STATE MANAGEMENT:
+  React Native: Redux Toolkit, Zustand, Recoil, Jotai
+  Flutter: Riverpod, Bloc, Provider, GetX
+  Native Android: ViewModel + StateFlow
+  Native iOS: @StateObject, @EnvironmentObject
+
+NAVIGATION:
+  React Native: React Navigation, Expo Router
+  Flutter: GoRouter, Navigator 2.0
+  Android: Navigation Compose
+  iOS: NavigationStack, TabView
+
+NETWORK:
+  - Axios (React Native)
+  - TanStack Query (React Query)
+  - Dio (Flutter)
+  - Retrofit (Android)
+  - URLSession (iOS)
+  - Apollo (GraphQL)
+
+LOCAL DATABASE:
+  - AsyncStorage / SecureStore (React Native)
+  - SQLite (expo-sqlite, react-native-sqlite-storage)
+  - WatermelonDB (offline-first React Native)
+  - Hive (Flutter, fast NoSQL)
+  - Drift / Moor (Flutter, SQLite)
+  - Realm (cross-platform)
+  - Room (Native Android)
+  - Core Data / SwiftData (Native iOS)
+
+AUTH:
+  - Firebase Auth (Google, Apple, Facebook, email)
+  - Supabase Auth
+  - Auth0
+  - Custom OAuth2 + JWT
+  - Biometric: expo-local-authentication, react-native-biometrics
+  - Keychain (iOS), Keystore (Android)
+
+PUSH NOTIFICATION:
+  - Firebase Cloud Messaging (FCM) - Android
+  - Apple Push Notification Service (APNs) - iOS
+  - OneSignal (cross-platform)
+  - Expo Notifications
+
+ANALYTICS:
+  - Firebase Analytics
+  - Mixpanel
+  - Amplitude
+  - Datadog RUM
+  - PostHog
+
+CRASH REPORTING:
+  - Firebase Crashlytics (free, popular)
+  - Sentry (cross-platform)
+  - Bugsnag
+  - Datadog
+
+CI/CD:
+  - GitHub Actions (custom)
+  - Fastlane (industry standard)
+  - Bitrise (mobile-focused)
+  - Codemagic (Flutter-focused)
+  - EAS (Expo)
+  - Xcode Cloud (iOS only)
+
+DEVICE FARM:
+  - AWS Device Farm
+  - Firebase Test Lab
+  - BrowserStack App Live
+  - Sauce Labs
+
+IAP:
+  - RevenueCat (recommended, cross-platform)
+  - Google Play Billing Library
+  - Apple StoreKit 2
+  - Adapty
+
+OTA UPDATES:
+  - CodePush (React Native, deprecated)
+  - EAS Update (Expo, recommended)
+  - Shorebird (Flutter)
+
+
+================================================================================
+  PRIORITAS BUILD (PHASED APPROACH)
+================================================================================
+
+Phase 1 - MVP "Mobile Builder" (Bulan 1-2)
+  Goal: Baca spec, scaffold Expo, deploy ke store
+  WAJIB (15 skills):
+  - spec.read.mobile
+  - spec.parse.platform
+  - stack.mobile.analyze
+  - stack.select.react_native
+  - arch.mobile.system
+  - scaffold.expo
+  - mobile.gen.screen
+  - mobile.gen.component
+  - nav.setup.stack
+  - state.setup.zustand
+  - net.setup.axios
+  - local.async_storage
+  - auth.mobile.login
+  - build.android.aab
+  - deploy.play_store
+
+Phase 2 - "Full Mobile App" (Bulan 3-4)
+  Goal: Cross-platform iOS, push notif, biometric
+  Tambahkan (15 skills):
+  - scaffold.flutter
+  - mobile.style.material
+  - mobile.style.cupertino
+  - nav.setup.tab
+  - state.setup.riverpod
+  - net.setup.graphql
+  - local.sqlite
+  - local.secure_store
+  - auth.mobile.biometric
+  - auth.mobile.oauth
+  - push.setup.fcm
+  - push.setup.apns
+  - build.ios.ipa
+  - build.ios.sign
+  - deploy.app_store
+
+Phase 3 - "Pro Mobile App" (Bulan 5-6)
+  Goal: Native features, IAP, testing, OTA
+  Tambahkan (15 skills):
+  - device.camera
+  - device.gps
+  - device.maps
+  - device.bluetooth
+  - media.lottie
+  - media.reanimated
+  - iap.setup.revenue_cat
+  - iap.purchase
+  - iap.subscription
+  - test.e2e.detox
+  - test.e2e.maestro
+  - test.device_farm
+  - ota.setup.eas_update
+  - ota.release.update
+  - monitor.crashlytics
+
+Phase 4 - "Enterprise Mobile" (Bulan 7+)
+  Goal: Native bridge, complex CI/CD, scaling
+  Tambahkan (15 skills):
+  - bridge.kotlin.module
+  - bridge.swift.module
+  - bridge.flutter_platform_channel
+  - scaffold.kotlin_android
+  - scaffold.swift_ios
+  - local.watermelon
+  - local.sync.engine
+  - auth.mobile.device_binding
+  - auth.mobile.jailbreak_detect
+  - net.ssl.pinning
+  - test.performance.mobile
+  - build.proguard
+  - cicd.fastlane.lane
+  - cicd.codemagic
+  - deploy.staged_rollout
+
+
+================================================================================
+  ANTI-HALLUCINATION & SAFETY (MOBILE)
+================================================================================
+
+1. SPEC-DRIVEN
+   - Tidak nambah fitur yang tidak di-spec
+   - Kalau ada ambigu, tanya user
+   - Tidak assume requirements
+
+2. TEST BEFORE DEPLOY
+   - Wajib unit test
+   - Wajib E2E test di emulator
+   - Wajib test di real device (device farm)
+
+3. STORE POLICY COMPLIANCE
+   - Play Store Policy (data safety, target SDK)
+   - App Store Review Guidelines (Human Interface)
+   - GDPR / CCPA consent dialog
+   - ATT (App Tracking Transparency) untuk iOS
+
+4. SECRETS MANAGEMENT
+   - API keys di environment variables
+   - Tidak hardcode secrets di code
+   - Keystore & provisioning profile di secure storage
+
+5. SIGNING SAFETY
+   - Backup keystore & passwords
+   - Backup provisioning profile & certificates
+   - Tidak commit keystore ke git
+
+6. ROLLOUT SAFETY
+   - Staged rollout (10% → 50% → 100%)
+   - Monitor crash rate post-deploy
+   - Ready untuk rollback / hotfix
+
+7. PERMISSION JUSTIFICATION
+   - Request permission only when needed
+   - Jelaskan kenapa butuh permission
+   - Graceful fallback jika denied
+
+
+================================================================================
+  DECISION MATRIX: NATIVE vs CROSS-PLATFORM
+================================================================================
+
+Skenario                                | Strategy
+----------------------------------------|----------------------
+Startup MVP, budget kecil               | Expo (React Native)
+App dengan offline-first                | React Native + WatermelonDB
+App butuh performance tinggi            | Native (Kotlin / Swift)
+App game                                | Unity / Godot
+App internal enterprise                 | React Native
+App butuh AR/VR                         | Native (ARKit / ARCore)
+App butuh heavy 3D                      | Flutter (Impeller) atau Native
+App simple, web-based                   | Ionic + Capacitor
+App butuh Apple Watch / Wear OS         | Native
+App dengan video editing                | Native (performance)
+
+
+================================================================================
+  CONTOH PERINTAH DARI TERMINAL TUI
+================================================================================
+
+$ harmonika mobile build from /notes/app-spec.md
+$ harmonika mobile deploy play_store --track=internal
+$ harmonika mobile deploy app_store --testflight
+$ harmonika mobile add feature "push_notification"
+$ harmonika mobile add feature "biometric_login"
+$ harmonika mobile ota release --channel=staging
+$ harmonika mobile rollback ota
+$ harmonika mobile test e2e --device-farm
+$ harmonika mobile sign --platform=android --keystore=prod.jks
+$ harmonika mobile screenshot generate --devices=all
+
+
+================================================================================
+  SUMMARY
+================================================================================
+
+| Layer                          | Skills | Fungsi                  |
+|--------------------------------|--------|-------------------------|
+| Spec & Requirements Reader     |   10   | Baca spec mobile        |
+| Tech Stack Selector            |   12   | Pilih framework         |
+| Architecture Designer          |   12   | Desain arsitektur       |
+| Project Scaffolder             |   10   | Init project            |
+| UI/UX Builder                  |   15   | Build UI mobile         |
+| Navigation Builder             |   10   | Setup navigation        |
+| State Management               |   10   | Setup state             |
+| Network & API                  |   10   | API integration         |
+| Local Storage & Offline        |   10   | Offline support         |
+| Authentication & Security      |   10   | Auth + biometric        |
+| Push Notification              |    8   | FCM, APNs, OneSignal    |
+| Native Device Features         |   15   | Camera, GPS, BLE, NFC   |
+| Media & Animation              |    8   | Audio, video, animasi   |
+| In-App Purchase                |    8   | IAP + subscription      |
+| Native Bridge & Modules        |    8   | Native code bridge      |
+| Testing                        |   12   | Unit, E2E, device farm  |
+| Build & Sign                   |   10   | Build APK/IPA + sign    |
+| Deploy to Store                |   10   | Play Store, App Store   |
+| OTA & Updates                  |    8   | CodePush, EAS Update    |
+| Monitoring & Analytics         |   10   | Crashlytics, analytics  |
+| CI/CD                          |    8   | Fastlane, Bitrise, EAS  |
+| TOTAL                          |  214   |                         |
+
+
+================================================================================
+  REKOMENDASI STARTER PACK (MVP)
+================================================================================
+
+Untuk MVP yang langsung berguna, bangun 15 skill Phase 1 ini:
+
+- spec.read.mobile
+- spec.parse.platform
+- stack.mobile.analyze
+- stack.select.react_native
+- arch.mobile.system
+- scaffold.expo
+- mobile.gen.screen
+- mobile.gen.component
+- nav.setup.stack
+- state.setup.zustand
+- net.setup.axios
+- local.async_storage
+- auth.mobile.login
+- build.android.aab
+- deploy.play_store
+
+Tech stack minimal:
+- Node.js 20+
+- Expo CLI
+- EAS CLI
+- Android Studio (untuk Android build)
+- Xcode (untuk iOS build, macOS only)
+- Fastlane (deployment automation)
+- LLM (GPT-4o / Claude 3.5) untuk code generation
+
+Estimasi build MVP: 10-12 minggu
+
+Dengan MVP ini, kamu bisa:
+- Baca spec dari markdown
+- Pilih tech stack mobile otomatis
+- Scaffold Expo project
+- Build screens & components
+- Setup navigation & state
+- Integrate API
+- Build AAB & deploy ke Play Store
+
+
+================================================================================
+  END OF DOCUMENT
+================================================================================

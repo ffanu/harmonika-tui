@@ -1,0 +1,19 @@
+type Query {
+  capabilities: JSON
+  skills: [Skill]
+  job(id: String): JSON
+  session(id: String): JSON
+  knowledge(query: String, limit: Int = 5): JSON
+  events(topic: String, after: Int = 0, limit: Int = 100): JSON
+  secretMetadata(name: String): JSON
+}
+
+"""Bounded JSON output; never arbitrary code or a data-fetching URL."""
+scalar JSON
+
+type Skill {
+  id: String
+  status: String
+  mode: String
+  description: String
+}

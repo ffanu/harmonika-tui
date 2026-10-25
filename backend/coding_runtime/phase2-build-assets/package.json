@@ -1,0 +1,13 @@
+{
+  "name": "harmonika-phase2-node-toolchain",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@types/node": "22.14.1",
+    "@types/react": "19.1.2",
+    "esbuild": "0.25.3",
+    "prettier": "3.5.3",
+    "react": "19.1.0",
+    "typescript": "5.8.3"
+  }
+}

@@ -1,0 +1,6445 @@
+{
+  "checked_at": "2026-10-24T16:49:37.675311+00:00",
+  "master_source_audit": {
+    "schema_version": 1,
+    "source_sha256": "f7bf3f4fc34d6b0063ac7d8f1ce6b9a5fd08ce594bbb95317067b97302dee31a",
+    "primary_ids": 1200,
+    "unique_ids": 1200,
+    "total_index_entries": 1203,
+    "duplicate_occurrences": 3,
+    "declared_total_skills": 1507,
+    "detailed_breakdown_skills": 1408,
+    "declared_minus_breakdown": 99,
+    "declared_engines": 12,
+    "detailed_engines": 11,
+    "narrative_only_engines": 1,
+    "phase_plan_skills_sum": 1507,
+    "status_counts": {
+      "restricted_catalog_only": 47,
+      "exact_registered": 7,
+      "connector_unconfigured": 14,
+      "implementation_missing": 1132
+    },
+    "exact_registered_ids": [
+      "debug.attach",
+      "debug.breakpoint",
+      "evidence.chain.custody",
+      "evidence.store.secure",
+      "test.coverage",
+      "test.run",
+      "test.single"
+    ],
+    "restricted_by_category": {
+      "exploit_execution": 15,
+      "credential_attacks": 11,
+      "post_exploitation": 6,
+      "binary_injection": 10,
+      "stealth_anti_bot_bypass": 5
+    },
+    "registry_descriptors": 601,
+    "registry_drift": null,
+    "operational_skills": 0,
+    "registered_implies_operational": false
+  },
+  "live_readiness": {
+    "schema_version": 1,
+    "declared_skills": 1507,
+    "declared_engine_total": 1408,
+    "source_occurrences": 1203,
+    "source_unique": 1200,
+    "duplicates": {
+      "rebuild.apply_diff": 4
+    },
+    "source_sha256": "f7bf3f4fc34d6b0063ac7d8f1ce6b9a5fd08ce594bbb95317067b97302dee31a",
+    "master_exact_registered": 7,
+    "master_domain_ambiguous": 7,
+    "existing_registered": 601,
+    "catalog_size": 1795,
+    "readiness": {
+      "available": 29,
+      "context_required": 567,
+      "local_only": 27,
+      "unavailable": 1111,
+      "restricted": 54,
+      "domain_ambiguous": 7
+    },
+    "features": {
+      "consolidated_catalog": true,
+      "defensive_input_analysis": true,
+      "isolated_html_browser": true,
+      "registered_browser_profiles_access": false,
+      "autonomous_exploitation": false,
+      "stealth_bypass": false,
+      "live_customer_access": false
+    },
+    "limits": {
+      "request_bytes": 1048576,
+      "analyzer_json_bytes": 262144,
+      "output_bytes": 262144,
+      "json_depth": 20,
+      "global_active": 2,
+      "per_actor_active": 1,
+      "analyses_per_minute": 60,
+      "analysis_timeout_seconds": 15,
+      "browser_timeout_seconds": 40
+    },
+    "registration_is_not_runtime_readiness": true
+  },
+  "public_smoke": {
+    "analyzers_and_browser_tested": 29,
+    "passed": 29,
+    "catalog_pagination": 1795,
+    "unimplemented_restricted_unknown_errors": true,
+    "credential_identity_injection_rejected": true,
+    "namespace_confirmation_required": true,
+    "real_engine_ownership_404": true,
+    "positive_builder_job_route": true,
+    "capabilities": {
+      "schema_version": 1,
+      "declared_skills": 1507,
+      "declared_engine_total": 1408,
+      "source_occurrences": 1203,
+      "source_unique": 1200,
+      "duplicates": {
+        "rebuild.apply_diff": 4
+      },
+      "source_sha256": "f7bf3f4fc34d6b0063ac7d8f1ce6b9a5fd08ce594bbb95317067b97302dee31a",
+      "master_exact_registered": 7,
+      "master_domain_ambiguous": 7,
+      "existing_registered": 601,
+      "catalog_size": 1795,
+      "readiness": {
+        "available": 29,
+        "context_required": 567,
+        "local_only": 27,
+        "unavailable": 1111,
+        "restricted": 54,
+        "domain_ambiguous": 7
+      },
+      "features": {
+        "consolidated_catalog": true,
+        "defensive_input_analysis": true,
+        "isolated_html_browser": true,
+        "registered_browser_profiles_access": false,
+        "autonomous_exploitation": false,
+        "stealth_bypass": false,
+        "live_customer_access": false
+      },
+      "limits": {
+        "request_bytes": 1048576,
+        "analyzer_json_bytes": 262144,
+        "output_bytes": 262144,
+        "json_depth": 20,
+        "global_active": 2,
+        "per_actor_active": 1,
+        "analyses_per_minute": 60,
+        "analysis_timeout_seconds": 15,
+        "browser_timeout_seconds": 40
+      },
+      "registration_is_not_runtime_readiness": true
+    },
+    "results": [
+      {
+        "id": "static.ast.parse",
+        "status": "completed",
+        "seconds": 0.074
+      },
+      {
+        "id": "static.complexity",
+        "status": "completed",
+        "seconds": 0.071
+      },
+      {
+        "id": "static.duplication",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "code.secret.scan",
+        "status": "completed",
+        "seconds": 0.082
+      },
+      {
+        "id": "malware.hash.check",
+        "status": "completed",
+        "seconds": 0.069
+      },
+      {
+        "id": "malware.ioc.extract",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "binary.inspect.pe",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "binary.inspect.elf",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "binary.inspect.macho",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "binary.strings.extract",
+        "status": "completed",
+        "seconds": 0.069
+      },
+      {
+        "id": "web.headers.check",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "web.csp.test",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "web.cookies.analyze",
+        "status": "completed",
+        "seconds": 0.077
+      },
+      {
+        "id": "ip.lookup",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "bot.useragent.analyze",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "payment.velocity.check",
+        "status": "completed",
+        "seconds": 0.069
+      },
+      {
+        "id": "behavior.velocity",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "nlu.spam.detect",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "security.pii.mask",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "antipattern.detect",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "score.burstiness",
+        "status": "completed",
+        "seconds": 0.069
+      },
+      {
+        "id": "brief.outline.create",
+        "status": "completed",
+        "seconds": 0.069
+      },
+      {
+        "id": "normalize.cve_schema",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "sort.by_date.desc",
+        "status": "completed",
+        "seconds": 0.068
+      },
+      {
+        "id": "sort.by_date.asc",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "sort.by_severity.desc",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "filter.by_date_range",
+        "status": "completed",
+        "seconds": 0.067
+      },
+      {
+        "id": "filter.by_severity",
+        "status": "completed",
+        "seconds": 0.066
+      },
+      {
+        "id": "workflow.browser",
+        "status": "completed",
+        "seconds": 2.459
+      }
+    ]
+  },
+  "private_smoke": {
+    "analyzers_and_browser_tested": 29,
+    "passed": 29,
+    "catalog_pagination": 1795,
+    "unimplemented_restricted_unknown_errors": true,
+    "credential_identity_injection_rejected": true,
+    "namespace_confirmation_required": false,
+    "real_engine_ownership_404": false,
+    "positive_builder_job_route": false,
+    "capabilities": {
+      "schema_version": 1,
+      "declared_skills": 1507,
+      "declared_engine_total": 1408,
+      "source_occurrences": 1203,
+      "source_unique": 1200,
+      "duplicates": {
+        "rebuild.apply_diff": 4
+      },
+      "source_sha256": "f7bf3f4fc34d6b0063ac7d8f1ce6b9a5fd08ce594bbb95317067b97302dee31a",
+      "master_exact_registered": 7,
+      "master_domain_ambiguous": 7,
+      "existing_registered": 601,
+      "catalog_size": 1795,
+      "readiness": {
+        "available": 29,
+        "context_required": 567,
+        "local_only": 27,
+        "unavailable": 1111,
+        "restricted": 54,
+        "domain_ambiguous": 7
+      },
+      "features": {
+        "consolidated_catalog": true,
+        "defensive_input_analysis": true,
+        "isolated_html_browser": true,
+        "registered_browser_profiles_access": false,
+        "autonomous_exploitation": false,
+        "stealth_bypass": false,
+        "live_customer_access": false
+      },
+      "limits": {
+        "request_bytes": 1048576,
+        "analyzer_json_bytes": 262144,
+        "output_bytes": 262144,
+        "json_depth": 20,
+        "global_active": 2,
+        "per_actor_active": 1,
+        "analyses_per_minute": 60,
+        "analysis_timeout_seconds": 15,
+        "browser_timeout_seconds": 40
+      },
+      "registration_is_not_runtime_readiness": true
+    },
+    "results": [
+      {
+        "id": "static.ast.parse",
+        "status": "completed",
+        "seconds": 0.002
+      },
+      {
+        "id": "static.complexity",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "static.duplication",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "code.secret.scan",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "malware.hash.check",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "malware.ioc.extract",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "binary.inspect.pe",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "binary.inspect.elf",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "binary.inspect.macho",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "binary.strings.extract",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "web.headers.check",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "web.csp.test",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "web.cookies.analyze",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "ip.lookup",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "bot.useragent.analyze",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "payment.velocity.check",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "behavior.velocity",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "nlu.spam.detect",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "security.pii.mask",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "antipattern.detect",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "score.burstiness",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "brief.outline.create",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "normalize.cve_schema",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "sort.by_date.desc",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "sort.by_date.asc",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "sort.by_severity.desc",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "filter.by_date_range",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "filter.by_severity",
+        "status": "completed",
+        "seconds": 0.001
+      },
+      {
+        "id": "workflow.browser",
+        "status": "completed",
+        "seconds": 2.523
+      }
+    ]
+  },
+  "activation": {
+    "status": "activated",
+    "available_analyses_and_browser": 29,
+    "source_primary_unique": 1200,
+    "catalog_merged": 1795,
+    "readiness": {
+      "available": 29,
+      "context_required": 567,
+      "local_only": 27,
+      "unavailable": 1111,
+      "restricted": 54,
+      "domain_ambiguous": 7
+    },
+    "other_six_engine_pids_unchanged": true,
+    "backup": "/var/backups/harmonika-master/20261024-164718",
+    "master_source_files": 21
+  },
+  "tests": {
+    "mandatory_master_mac": {
+      "run": 86,
+      "passed": 86,
+      "skipped": 0
+    },
+    "mandatory_master_linux": {
+      "run": 86,
+      "passed": 86,
+      "skipped": 0
+    },
+    "python_regression": {
+      "run": 1607,
+      "passed": 1517,
+      "skipped": 90,
+      "failed": 0
+    },
+    "node": {
+      "passed": 55,
+      "failed": 0
+    },
+    "gateway_go": "passed",
+    "all_unavailable_descriptors_fail_without_execution": true,
+    "binary_truncation_boundaries_checked": true,
+    "redaction_and_regex_long_input_checked": true,
+    "namespace_confirmation_checked": true
+  },
+  "terminal": {
+    "release": "2026.10.24.26",
+    "guides": 17,
+    "core_registry": 601,
+    "merged_discovery": 1795,
+    "native_binary_change": false,
+    "automatic_update": false,
+    "doctor_ok": true,
+    "signed_package_installed": true,
+    "cli_real_analysis_passed": true,
+    "shared_registry_unchanged": 601,
+    "signed_public_distribution_verified": true
+  },
+  "team": {
+    "codex": "Scope/integration, namespace/auth boundaries, browser sandbox, numeric/parser/regex fixes, tests and activation.",
+    "opencode": "Full source catalog reconciliation, 28 pure analyzers and test baselines.",
+    "claude_used": false
+  },
+  "fixed_findings": [
+    "Quadratic email/domain patterns bounded",
+    "IOC placeholders separated globally and addresses defanged",
+    "PE/ELF/Mach-O length/command bounds checked before parsing",
+    "Mach-O type constants corrected",
+    "Maximum amount/count windows calculated independently, finite nonnegative bounded amounts",
+    "Duplication uses union coverage",
+    "Fractional dates sorted as UTC instants",
+    "Nested required fields enforced",
+    "First CSP duplicate directive wins",
+    "All7 cross-domain collisions require engine confirmation",
+    "Browser deadline covers sandbox lifecycle"
+  ],
+  "gap_catalog": [
+    {
+      "id": "account.brute_force",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.credential_stuff",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.device.binding",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.fake.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.mfa.bypass",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.multi_account",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.password.spray",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.quarantine",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.recovery.abuse",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.session.fixation",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.session.hijack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "account.stepup_auth",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.suspicious_login",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.takeover.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.velocity.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.account.query",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.account.update",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.activate.service",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.billing.invoice",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.billing.refund",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.billing.waive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.escalate.human",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.notify.team",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.schedule.callback",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.suspend.service",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.ticket.create",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "action.ticket.update",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.boilerplate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.cliche",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.conclusion",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.filler",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.generic",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.hedge.words",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.listicle",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.parallelism",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "antipattern.transition",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.context.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.destination.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.dynamics.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.media_capabilities",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.oscillator.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.stream.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.anomaly",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.baseline",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.clustering",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.deviation",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.dwell_time",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.heatmap",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.journey",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.risk_score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.session.replay",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.detect_compiler",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.detect_language",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.detect_packer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.entry_point",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.list_exports",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.list_imports",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.list_resources",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "binary.list_sections",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.behavior.score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.captcha.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.challenge",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.crawler.identify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.headless.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.keyboard.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.mouse.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.scraper.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.scroll.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.selenium.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.trap.deploy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.webdriver.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.angle.suggest",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.competitor.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.content_gap",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.headline.gen",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.platform.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.seo.keywords",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.tone.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "brief.voice.profile",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.auth.basic",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.auth.login",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.back",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.close",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.cookies.clear",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.cookies.get",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.cookies.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.download",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.forward",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.launch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.navigate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.profile.create",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.proxy.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.refresh",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.tabs.close",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.tabs.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.tabs.new",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.tabs.switch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.upload",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "browser.useragent.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.cmake.project",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.cpp.clang",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.cpp.gcc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.cpp.msvc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.csharp.dotnet",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.delphi.dcc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.electron.packager",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.go.build",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.lazarus.fpc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.make.project",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.msbuild.project",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.node.pkg",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.python.nuitka",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.python.pyinstaller",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "build.rust.cargo",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.font.render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.gradient.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.image.process",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.noise.inject",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.path.render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.pixel.offset",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.seed.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.shadow.render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.text.metrics",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "canvas.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.authenticator",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.captcha",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.device_check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.email_verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.js_pow",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.sms_otp",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.trust_token",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.voice_otp",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.email.receive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.email.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.facebook.messenger",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.instagram.dm",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.marketplace.chat",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.telegram.receive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.telegram.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.voice.receive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.voice.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.wa.media",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.wa.receive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.wa.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.wa.template",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.webchat.receive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "channel.webchat.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.auth_pages",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.dynamic_content",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.forms",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.infinite_scroll",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.interactions",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.pagination",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.advanced.spa_render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.accessibility",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.animations",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.breakpoints",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.colors",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.components",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.design_system",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.forms",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.icons",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.images_meta",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.layout",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.navigation",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.screen",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.seo",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.spacing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.typography",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.analyze.vision",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.cloudflare",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.dns",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.docker",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.github_pages",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.local",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.netlify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.ssl",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.static_host",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.vercel",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.deploy.vps",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.api",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.assets",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.dependencies",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.depth",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.framework",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.pages",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.robots",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.routes",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.sitemap",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.discover.tech_stack",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.css",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.data_json",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.documents",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.fonts",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.html",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.icons",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.images",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.js",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.media",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.raw",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.scripts_inline",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.fetch.styles_inline",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.assets",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.components",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.config",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.content",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.layout",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.manifest",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.pages",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.robots",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.routing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.seo",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.styles",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.gen.types",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.branding",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.colors",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.components",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.content",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.fonts",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.images",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.layout",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.localize",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.minify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.optimize",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.theme",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.modify.translate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.reconstruct.astro",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.reconstruct.nextjs",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.reconstruct.react",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.reconstruct.static",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.reconstruct.vue",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.reconstruct.wordpress",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.accessibility",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.diff",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.fidelity",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.links",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.performance",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.responsive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.screenshot_compare",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "clone.verify.seo",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.audit.ai",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.audit.smart_contract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.backdoor.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.dependency.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.hardcoded.creds",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.license.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.malware.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.sast.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "code.taint.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.auto.responder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.campaign.bulk",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.chat.internal",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.email.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.push.notify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.sms.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.template.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "comm.wa.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "connector.hubspot",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.mandrill",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.midtrans",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.plesk",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.salesforce",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.shopee",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.shopify",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.telegram.bot",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.tokopedia",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.whm.cpanel",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.woocommerce",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.wordpress",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.xendit",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "connector.zoho",
+      "status": "unavailable",
+      "reason": "connector_unconfigured"
+    },
+    {
+      "id": "crash.dump.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crash.frame.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crash.stack.unwind",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crypto.certs.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crypto.cipher.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crypto.hash.crack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "crypto.hash.identify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crypto.jwt.crack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "crypto.rng.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "crypto.rsa.attack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "crypto.tls.audit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.history.fetch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.identify.by_email",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.identify.by_order_id",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.identify.by_phone",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.identify.by_username",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.lifetime.value",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.preference.learn",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.profile.fetch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.sentiment.profile",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.tickets.fetch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.tier.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "customer.transactions.fetch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "debug.attach",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "debug.breakpoint",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "debug.call_stack",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "debug.inspect_memory",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "debug.inspect_registers",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "debug.launch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "debug.step_trace",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.cfr",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.dnspy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.dotpeek",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.ghidra",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.hexrays",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.ilspy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.javap",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.procyon",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.pycdc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "decompile.uncompyle6",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dedup.merge",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "disasm.ghidra",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "disasm.ida_pro",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "disasm.objdump",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "disasm.radare2",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "disasm.x64dbg",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.attrs",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.click",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.click_role",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.click_text",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.fill",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.focus",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.form.fill",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.form.submit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.frame.switch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.hover",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.list_interactive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.query",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.screenshot",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.scroll",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.select",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.shadow.open",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.text",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.wait",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.wait_clickable",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.wait_visible",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dom.xpath",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.breakpoint.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.call_stack",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.debug.attach",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.fuzz.input",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.load.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.memory.inspect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.profile.cpu",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.profile.io",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.profile.memory",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.reproduce",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.step_trace",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.trace.file",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.trace.network",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.trace.system",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "dynamic.var.watch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "emotion.detect.realtime",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "emotion.response.adjust",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "emotion.threshold.alert",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "emotion.trend.track",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.dashboard.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.form.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.industry.template",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.menu.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.page.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.report.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.role.permission",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.scaffold.module",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.scaffold.project",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "erp.workflow.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.agent.assign",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.context.transfer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.notify.agent",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.queue.manage",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.summary.generate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.trigger.angry",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.trigger.complex",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.trigger.high_value",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.trigger.low_conf",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "escalate.trigger.vip",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.chain.custody",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "evidence.config.capture",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.disk.snapshot",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.env.capture",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.hash.compute",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.log.capture",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.memory.dump",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.network.capture",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.process.snapshot",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.stack.trace",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "evidence.store.secure",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "evidence.timeline.build",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "exploit.cve.lookup",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.exploitdb.fetch",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.github.search",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.hash.crack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.metasploit.search",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.msfrpc",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.payload.gen",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.privesc.linux",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.privesc.windows",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.reverse_shell",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.search",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.sqli.dump",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.ssh.brute",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.webshell.deploy",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "exploit.xss.payload",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "export.structured",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.accounts.payable",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.accounts.receivable",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.budgeting",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.cash.bank",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.cost.accounting",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.financial.statement",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.fixed.assets",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.general.ledger",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.invoice",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.payment.processing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.reconciliation",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "finance.tax.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.audio",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.browser",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.canvas",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.combine",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.cookie",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.device",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.fonts",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.http",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.local_storage",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.plugins",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.screen",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.tls",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.alert.anomaly",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.backup.create",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.monitor.post",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.production.deploy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.rollback.execute",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.rollback.plan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.staging.apply",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.test.integration",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.test.regression",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.test.unit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.verify.no_regression",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fix.verify.solution",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.ascent.descent",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.fallback.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.glyph.render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.list.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.metrics.modify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.unicode.range",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fonts.width.table",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.audio",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.battery",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.bluetooth",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.canvas",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.fonts",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.full",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.hardware",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.locale",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.media_devices",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.navigator",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.screen",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.sensors",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.storage_estimate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.timezone",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fp.generate.webgl",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "gen_skeleton",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.battery",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.bluetooth",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.cpu.cores",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.display",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.gamepad",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.gpu.emulate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.media_devices",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.ram.size",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.sensors",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.serial_ports",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.touch_support",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hardware.usb_devices",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.attendance",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.bpjs",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.employee.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.leave.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.organization.structure",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.payroll",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.performance.review",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.recruitment",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.tax.pph21",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "hr.training",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.anecdote.inject",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.burstiness",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.colloquial.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.contrast.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.em.dash",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.fragment.use",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.opinion.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.parenthetical",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.perplexity",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.question.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.repetition.break",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.sentence.merge",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.sentence.split",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.start.varied",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "humanize.transition.varied",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "inject.api_hook",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.code_cave",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.detours",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.dll_hijack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.dll_proxy",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.iat_hook",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.inline_hook",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.minhook",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.pe_add_section",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "inject.trampoline",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "installer.advanced_installer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.bootstrapper",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.inno_setup",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.installshield",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.msix",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.nsis",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.portable",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.self_extract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.wix",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "installer.zip_portable",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.api.graphql",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.api.grpc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.api.rest",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.api.websocket",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.auth.api_key",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.auth.jwt",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.auth.oauth2",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.connector.builder",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.data.sync",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.etl.pipeline",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.event.bus",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.message.queue",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.scheduler",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.webhook.receive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "integration.webhook.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.add_feature",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.build_from_source",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.classify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.patch_exe",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.rebuild_existing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.repackage_installer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intent.reverse_engineer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "inventory.barcode",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "inventory.product.master",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "inventory.stock.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "inventory.stock.opname",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "inventory.warehouse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.asn.info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.blacklist.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.botnet.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.datacenter.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.geo.locate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.history.lookup",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.lease.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.proxy.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.reputation.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.residential.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.shared.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.threat.score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.tor.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.vpn.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.bandwidth.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.billing.cycle",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.customer.subscriber",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.invoice.recurring",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.ip.address.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.network.monitoring",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.olt.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.onu.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.payment.collection",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.service.plan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.suspension.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "isp.ticket.troubleshooting",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.article.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.bug.pattern.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.company.info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.convention.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.faq.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.history.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.learn.from.fix",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.policy.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.pricing.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.product.catalog",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.routing.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.runbook.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.service.info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.share.organization",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.sop.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.terms.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.troubleshooting",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.tutorial.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.update.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.update.edit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "kb.version.track",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "keyboard.clear",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "keyboard.hold",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "keyboard.hotkey",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "keyboard.paste",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "keyboard.press",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "keyboard.type",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.ab.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.agent.coaching",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.csat.track",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.feedback.collect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.fine_tune.dataset",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.interaction.log",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.knowledge.gap",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.knowledge.update",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.pattern.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "learn.report.monthly",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.alert.send",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.compliance.export",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.event.append",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.evidence.collect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.export.siem",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.query",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.report.fraud",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.timeline.build",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.c2.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.decompile",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.disassemble",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.family.classify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.file.behavior",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.heuristic.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.network.behavior",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.persistence.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.registry.behavior",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.sandbox.run",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.signature.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.string.extract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "malware.unpack",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.bom",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.maintenance",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.mrp",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.production.costing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.production.order",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.quality.control",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.routing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mfg.work.center",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.attachment.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.audit.log",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.auth.mfa",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.auth.role",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.auth.sso",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.auth.user",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.file.storage",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.localization",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.notification",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.settings.config",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.tenant.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "module.timezone.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.alert.critical",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.alert.new",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.anomaly.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.digest.daily",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.digest.weekly",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.health.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.incident.auto",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.poll",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.slo.track",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.subscribe",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.threshold.alert",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.trend.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.unsubscribe",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.uptime.track",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "monitor.webhook.notify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.click",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.double_click",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.drag",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.hover",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.human_move",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.move",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.move_to",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "mouse.scroll",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "net.arp.spoof",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.dns.spoof",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.firewall.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "net.mitm",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.proxy.pivot",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.sniff",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "net.vlan.hop",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.wifi.crack",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.wifi.handshake",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "net.wifi.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.accept_encoding",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.accept_language",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.block",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.dns.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.dnt.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.har",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.http2.fingerprint",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.intercept",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.mock",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.proxy.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.quic.fingerprint",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.sec_ch_ua",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.throttle",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.time_sync",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.tls.fingerprint",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.useragent.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "network.webrtc.ip",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.ambiguity.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.context.tracking",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.coreference.resolve",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.disambiguate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.emotion.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.entity.extract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.intent.confidence",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.intent.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.language.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.multiturn.state",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.sarcasm.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.sentiment.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.topic.classify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "nlu.urgency.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.add_feature",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.add_plugin_hook",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.build_custom",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.check_compliance",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.fetch_repo",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.locate_code",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.modify_behavior",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.read_license",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.release_custom",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "opensource.test_modified",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.apply_patch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.build",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.byte_replace",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.chromium.angle",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.chromium.apply",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.chromium.blink",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.chromium.fetch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.chromium.skia",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.chromium.v8",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.export_add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.firefox.apply",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.firefox.fetch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.firefox.gecko",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.hex_edit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.icon_replace",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.import_add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.jump_redirect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.manifest_edit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.nop_out",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.resource_edit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.section_add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.string_replace",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "patch.version_info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.affected_versions",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.attack_flow",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.mitigation",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.patch_info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.remediation",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.root_cause",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.vuln_type",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.explain.why_works",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.extract.from_advisory",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.fetch.exploitdb",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.fetch.github",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.fetch.metasploit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.fetch.packetstorm",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payload.fetch.vendor",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.bin.lookup",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.block",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.card.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.chargeback.pattern",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.geo.mismatch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.giftcard.abuse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.refund.abuse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.synthetic_identity",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.gantt.chart",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.issue.tracking",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.milestone",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.project.billing",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.project.master",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.resource.allocation",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.task.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pm.time.tracking",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pos.cash.management",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pos.cashier",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pos.customer.display",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "pos.transaction",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "post.cover.tracks",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "post.creds.dump",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "post.enum.linux",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "post.enum.windows",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "post.lateral.move",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "post.persist",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "proactive.anniversary",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.birthday",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.cross_sell",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.educational",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.followup",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.survey",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.upsell",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proactive.winback",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proc.info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proc.kill",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proc.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.create",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.decrypt",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.delete",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.duplicate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.encrypt",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.export",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.import",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.restart",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.start",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.stop",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "profile.tag",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "project.detect_language",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "project.detect_toolchain",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "project.scaffold",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.chain",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.datacenter.buy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.fingerprint.match",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.geo.target",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.health_check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.http.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.mobile.buy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.residential.buy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.rotate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "proxy.socks5.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.audit.random",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.fact.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.policy.compliance",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.response.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.scorecard",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.sensitive.filter",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.tone.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "qa.toxicity.filter",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.filter.parse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.intent.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.parse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.payload_requested",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.scope.define",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.sort.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.target.extract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "query.version.extract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.adaptive",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.ban",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.shadow_ban",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.slowdown",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.throttle",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.whitelist",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.cause_effect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.change.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.contributing.factor",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.environment.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.fault_tree",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.fishbone",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.five_why",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.human.factor",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.report.generate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.symptom_vs_root",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.timing.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rca.upstream.dependency",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.apply_diff",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.apply_patch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.checkout_version",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.compile",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.fetch_source",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.link",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.modify_source",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.optimize",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.strip_debug",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rebuild.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.banner.grab",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.dns.enum",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.domain.info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.email.harvest",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.github.dork",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.google.dork",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.ip.info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.os.fingerprint",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.ports.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.service.detect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.shodan.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.social.osint",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.subdomain.find",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.wayback",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "recon.web.tech",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "record.play",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "record.start",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "record.stop",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "record.to_code",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.a_b.variant",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.batch.process",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.export.final",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.heatmap.flag",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.history.track",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.loop",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.segment.flagged",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "refine.threshold.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "repack.aspack",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "repack.mpresse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "repack.upx",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.custom.query",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.cve.detail",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.cve.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.export.csv",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.export.excel",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.export.html",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.export.json",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.export.markdown",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.export.pdf",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.financial.statement",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.payload.explain",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.remediation.guide",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "report.schedule",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.format.email",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.format.telegram",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.format.voice",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.format.wa",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.generate.natural",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.language.match",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.personalize",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.tone.casual",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.tone.empathy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "response.tone.formal",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sandbox.run",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scale.cluster",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scale.load_balancer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scanner.droopescan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scanner.joomscan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scanner.magereport",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scanner.wpscan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.api_reverse",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.dynamic",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.html",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.images",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.links",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.pagination",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.schema",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.table",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "scrape.text",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.capture",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.capture_window",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.compare",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.detect_layout",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.detect_ui",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.find_button",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.find_icon",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.find_image",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.find_input",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.find_menu",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.find_text",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.ocr",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "screen.region",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sec.ch_ua.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.audit.log",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.auth.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.consent.manage",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.data.retention",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.encryption.at_rest",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.permission.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "security.right_to_erasure",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sentiment.before.after",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sentiment.churn.risk",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sentiment.csat.predict",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sentiment.loyalty.score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sign.authenticode",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sign.ev_cert",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sign.selfsigned",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sign.timestamp",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sign.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.anti_bot_bypass",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "smart.click",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.fill",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.find_and_click",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.form_autofill",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.navigate_menu",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.retry",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.scroll_to",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "smart.wait_and_click",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.alternative.give",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.alternative.if_fail",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.blast.radius",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.cite.source",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.confidence.score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.context.build",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.cost.benefit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.document.rationale",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.escalate.decision",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.escalate.if_uncertain",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.generate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.limit.scope",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.options.generate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.peer.review",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.personalize",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.rag.rerank",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.rag.retrieve",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.recommend.safest",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.risk.assess",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.step_by_step",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.tone.adjust",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.verify.anti_halluc",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.verify.evidence",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.verify.fact_check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "solution.verify.policy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sort.by_exploitability",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.context.window",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.fsm.transition",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.handoff.preserve",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.memory.long_term",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.memory.short_term",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.session.create",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.session.update",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "state.timeout.expire",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.code.review",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.commit.history",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.control_flow",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.cross_ref",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.data_flow",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.dead_code",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.dependencies",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.lint.run",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.pattern.match",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.symbolic.exec",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.type.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "static.versions.diff",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "stealth.fingerprint",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "stealth.patch",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "stealth.rotate_proxy",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "stealth.rotate_ua",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "storage.bookmarks.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.cache.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.cookies.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.file_system.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.history.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.indexed_db.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.local_storage.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.passwords.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.service_worker.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "storage.session_storage.isolate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "svc.start",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "svc.status",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "svc.stop",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sync.cloud",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "sync.s3",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "team.profile.share",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "team.role.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "team.user.create",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "test.coverage",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "test.crash_analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "test.fuzz",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "test.run",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "test.run_sandbox",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "test.single",
+      "status": "domain_ambiguous",
+      "reason": "explicit_engine_confirmation_required"
+    },
+    {
+      "id": "test.watch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.affected.components",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.business_impact",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.classify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.duplicate.check",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.escalate.urgent",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.impact.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.priority.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.route",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.severity.assess",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "triage.user_impact",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "unpack.aspack",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "unpack.generic",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "unpack.themida",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "unpack.upx",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "unpack.vmprotect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.amiunique",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.audio_consistency",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.browserleaks",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.canary.deploy",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.canvas_render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.code.review",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.creepjs",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.device_info",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.edge.case",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.fingerprintjs",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.full_audit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.full_pass",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.load.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.reproduce.fixed",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.reproduce.original",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.security.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.smoke.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.tls_consistency",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.user.acceptance",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "verify.webgl_render",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vision.describe",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vision.find_element",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vision.read_chart",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vision.read_table",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.anecdote.freq",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.demographic.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.humor.level",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.imperfection.level",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.opinion.strength",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.persona.select",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.punctuation.style",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.sentence.rhythm",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.tone.calibrate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "voice.vocabulary.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.attack.surface",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.auth.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.business_logic.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.cmd_injection.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.csrf.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.cve.match",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.cvss.score",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.cwe.classify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.dependency.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.exploitability",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.file.upload.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.idor.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.impact.assess",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.jwt.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.lfi_rfi.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.network.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.owasp_top10",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.secret.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.sqli.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.ssrf.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.threat.model",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.web.scan",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.xss.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vuln.xxe.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.api.fuzz",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.cors.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.crawl.auth",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.fuzz.dir",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.fuzz.param",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.graphql.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.session.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.spider",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.websocket.test",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.context.attributes",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.extensions.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.framebuffer",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.params.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.render.output",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.renderer.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.shader.emulate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.shading_lang",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.texture.bind",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.validate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.vendor.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.verify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "webgl.version.set",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.action.call_api",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.action.create_task",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.action.send_email",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.action.update_record",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.captcha_solve",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled"
+    },
+    {
+      "id": "workflow.condition.branch",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.data_extract",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.define",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.paginate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.parallel.split",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.run",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.schedule",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.trigger.event",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.trigger.schedule",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.trigger.webhook",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    }
+  ],
+  "limitations": [
+    "This is consolidated discovery +29 real analyses/workflow, not1507 completed tools.",
+    "1111 listed operations still unavailable; external/proprietary/live-company adapters are not fabricated.",
+    "54 autonomous attack/bypass operations restricted.",
+    "Existing567 remote registrations require original context and runtime capabilities;27 are local-only.",
+    "No real CVE feed, geolocation/reputation provider, malware detonation, proprietary binary toolchain, or live company financial/CS connector was activated."
+  ],
+  "cleanup": {
+    "fixture_tokens_deleted": 2,
+    "fixture_projects_deleted": 1,
+    "fixture_jobs_deleted": 2,
+    "staging_service_stopped": true,
+    "customer_data_modified": false,
+    "fixture_token_quota_rows_verified_absent": true,
+    "remaining_test_containers": 0
+  },
+  "readiness_caveat": "Registration/available analysis are distinct from operational readiness of external engines and integrations.",
+  "backend_source_files_verified": 20
+}

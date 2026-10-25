@@ -1,0 +1,201 @@
+{
+  "status": "active_verified",
+  "domain": "chat.harmonika.id",
+  "module": "harmonika-engine-registry",
+  "verified_at": "2026-10-25T00:02:31.810795+00:00",
+  "specification": {
+    "file": "backend/engine_registry/specification.txt",
+    "lines": 43,
+    "sha256": "fa6082ba85b0411780a6ed781eacf506b631f5049e3040509c204deb6975ea01"
+  },
+  "features": {
+    "boot_scan": true,
+    "hot_poll_seconds": 5,
+    "strict_signature_and_metadata": true,
+    "atomic_snapshot": true,
+    "immutable_source_execution": true,
+    "duplicate_all_rejected": true,
+    "reserved_ids_including_mobile": true,
+    "per_module_error_isolation": true,
+    "sqlite_discovery_and_execution_audit": true,
+    "signed_status_helper": true
+  },
+  "deployment": {
+    "status": "active_verified",
+    "backup": "/var/backups/harmonika-master/discovery-20261024T235643Z",
+    "master_catalog": 1951,
+    "direct_handlers": 30,
+    "dynamic_registered": 1,
+    "other_nine_pids_unchanged": true,
+    "gateway_binary_changed": false,
+    "session_databases_modified": false,
+    "customer_data_modified": false,
+    "new_database": "/var/lib/harmonika-master/discovery.sqlite3",
+    "public_acceptance": "passed",
+    "fixture_plugin_directories_removed": true,
+    "fixture_execution_rows_removed": 1,
+    "database_integrity": "ok",
+    "active_source_matches_tested": true
+  },
+  "public_endpoints": [
+    "GET /v1/skills/capabilities",
+    "GET /v1/skills/discovery",
+    "GET /v1/skills?engine=discovery",
+    "GET /v1/skills/{skill_id}",
+    "POST /v1/skills/invoke"
+  ],
+  "installed_dynamic_skills": [
+    "text.metrics"
+  ],
+  "legacy_catalog_preserved": 1950,
+  "catalog_total_after_activation": 1951,
+  "direct_handlers_after_activation": 30,
+  "tests": {
+    "discovery_macos": {
+      "run": 63,
+      "passed": 62,
+      "skipped_linux_root_only": 1
+    },
+    "discovery_linux": {
+      "run": 63,
+      "passed": 63,
+      "skipped": 0,
+      "privilege_drop_before_plugin": "passed"
+    },
+    "regression_batch": {
+      "run": 493,
+      "passed": 492,
+      "skipped_linux_root_only": 1,
+      "result": "passed"
+    },
+    "go_gateway_tests": "passed",
+    "go_gateway_build": "passed",
+    "private_http": "passed",
+    "public_https": {
+      "status": "passed",
+      "private": false,
+      "scenarios": [
+        "real_skill",
+        "strict_payload",
+        "hot_register_and_invoke",
+        "tamper_withdrawal",
+        "broken_duplicate_and_reserved_isolation",
+        "no_gateway_or_master_restart_during_hot_changes"
+      ],
+      "final_registered": 1,
+      "fixture_directories_removed": true,
+      "gateway_binary_changed": false
+    },
+    "temporary_token_cleanup": "passed",
+    "database_quick_check": "ok",
+    "new_backend_tracebacks": 0
+  },
+  "coverage": {
+    "combined_line_and_branch_percent": 93.75,
+    "contract_signature_validation": {
+      "covered_lines": 22,
+      "num_statements": 22,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "num_branches": 14,
+      "num_partial_branches": 0,
+      "covered_branches": 14,
+      "missing_branches": 0
+    },
+    "metadata_validation": {
+      "covered_lines": 39,
+      "num_statements": 39,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "num_branches": 38,
+      "num_partial_branches": 0,
+      "covered_branches": 38,
+      "missing_branches": 0
+    },
+    "scope_note": "100% applies to signature/metadata rejection validators, not the entire engine."
+  },
+  "benchmark": {
+    "status": "passed",
+    "modules": 256,
+    "cold_seconds": 16.644,
+    "warm_seconds": 0.092,
+    "max_event_loop_gap_seconds": 0.022,
+    "sample_execute": "passed",
+    "temporary_state_removed": true
+  },
+  "client_helper": {
+    "activation": {
+      "status": "active",
+      "release": "2026.10.25.29",
+      "previous": "2026.10.25.28",
+      "signed_preflight": "passed",
+      "binary_unchanged": true,
+      "session_files_modified": false,
+      "automatic_update": false,
+      "changed_helpers": [
+        "state_store.py",
+        "master_cli.py"
+      ]
+    },
+    "doctor": {
+      "ok": true,
+      "release": "2026.10.25.29",
+      "upstream": "0.98.1",
+      "binary_verified": true,
+      "runtime_verified": true,
+      "mcp_protocol": "ok",
+      "skills": 19,
+      "lsp": [
+        "css",
+        "html",
+        "json",
+        "python",
+        "typescript"
+      ],
+      "documents": {
+        ".docx": true,
+        ".xlsx": true,
+        ".pptx": true,
+        ".pdf": true
+      },
+      "browser": {
+        "chromium": true
+      },
+      "automatic_update": false,
+      "active_sessions_untouched": true
+    },
+    "status_command": "harmonika state status --format text",
+    "observed": "Engine discovery: ready | Aktif: 1 | Ditolak: 0",
+    "offline_flag_verified": true,
+    "binary_unchanged": true,
+    "auto_update": false,
+    "public_release_catalog_changed": false
+  },
+  "contributors": {
+    "Codex": "Gateway integration, strict schema, hardening, regression coverage, Linux/HTTPS acceptance, activation, signed helper and final audit.",
+    "OpenCode": "Initial scanner and24 tests, two independent audits, final review reported no blockers.",
+    "Claude": "Not involved."
+  },
+  "security_boundaries": [
+    "Only operator-reviewed Python modules; no public code install/reload API.",
+    "Pinned source SHA256 is not a digital signature or independent security review.",
+    "Subprocess limits and Linux privilege drop do not sandbox hostile code.",
+    "Runtime currently admits no extra dependencies or chat/tool context; existing specialized gateways remain separate.",
+    "JSON byte budgets conservatively bounded by declared token limits; no tokenizer claim.",
+    "Missing/replaced DB fails closed without recreation; successful result requires audit; original cancel/error preserved if audit also fails.",
+    "512 modules,16MB source,30s scan budget; truncated scan never publishes partial registry.",
+    "API paths and existing session/customer databases unchanged; no automatic model training."
+  ],
+  "opencode_review_dispositions": {
+    "nested_top_level_loops": "Static If/Try/With rejection plus timeout guard.",
+    "deleted_or_foreign_db": "Pinned inode and mode=rw; no file recreation/write to replacement.",
+    "audit_error_policy": "Intentional fail-closed for successful execute, preserve original cancellation/error.",
+    "mobile_id_collision": "Reserve all214 current mobile IDs.",
+    "macOS_symlink_ancestors": "Explicit resolved paths required; tested and documented.",
+    "truncated_scan_reporting": "Degraded result with no published entries."
+  }
+}

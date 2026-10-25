@@ -1,0 +1,812 @@
+{
+  "document_sha256": "a8de2493e81299df8c4133a32acd11814d0d47b83368b5fecd241c7238ff3fda",
+  "document_claimed_skills": 155,
+  "document_actual_skills": 161,
+  "skills": [
+    {
+      "number": 1,
+      "id": "spec.read.markdown",
+      "description": "Baca spec dari markdown file"
+    },
+    {
+      "number": 2,
+      "id": "spec.read.txt",
+      "description": "Baca spec dari txt file"
+    },
+    {
+      "number": 3,
+      "id": "spec.read.json",
+      "description": "Baca spec dari JSON file"
+    },
+    {
+      "number": 4,
+      "id": "spec.read.notation",
+      "description": "Baca dari Notion API"
+    },
+    {
+      "number": 5,
+      "id": "spec.read.obsidian",
+      "description": "Baca dari Obsidian vault"
+    },
+    {
+      "number": 6,
+      "id": "spec.read.voice",
+      "description": "Transcribe voice note jadi spec"
+    },
+    {
+      "number": 7,
+      "id": "spec.parse.requirements",
+      "description": "Parse requirements dari spec"
+    },
+    {
+      "number": 8,
+      "id": "spec.parse.user_stories",
+      "description": "Parse user stories"
+    },
+    {
+      "number": 9,
+      "id": "spec.parse.features",
+      "description": "Parse fitur yang diminta"
+    },
+    {
+      "number": 10,
+      "id": "spec.parse.constraints",
+      "description": "Parse constraints (budget, deadline)"
+    },
+    {
+      "number": 11,
+      "id": "spec.parse.design_pref",
+      "description": "Parse preferensi desain"
+    },
+    {
+      "number": 12,
+      "id": "spec.clarify",
+      "description": "Auto-clarify ambiguities (tanya user)"
+    },
+    {
+      "number": 13,
+      "id": "stack.analyze.requirements",
+      "description": "Analisa requirements untuk pilih stack"
+    },
+    {
+      "number": 14,
+      "id": "stack.select.frontend",
+      "description": "Pilih frontend framework"
+    },
+    {
+      "number": 15,
+      "id": "stack.select.backend",
+      "description": "Pilih backend framework"
+    },
+    {
+      "number": 16,
+      "id": "stack.select.database",
+      "description": "Pilih database engine"
+    },
+    {
+      "number": 17,
+      "id": "stack.select.hosting",
+      "description": "Pilih hosting platform"
+    },
+    {
+      "number": 18,
+      "id": "stack.select.auth",
+      "description": "Pilih auth strategy"
+    },
+    {
+      "number": 19,
+      "id": "stack.select.payment",
+      "description": "Pilih payment gateway"
+    },
+    {
+      "number": 20,
+      "id": "stack.select.storage",
+      "description": "Pilih file storage (S3, local)"
+    },
+    {
+      "number": 21,
+      "id": "stack.select.cache",
+      "description": "Pilih cache (Redis, Memcached)"
+    },
+    {
+      "number": 22,
+      "id": "stack.select.search",
+      "description": "Pilih search engine (ES, Algolia)"
+    },
+    {
+      "number": 23,
+      "id": "stack.select.monitoring",
+      "description": "Pilih monitoring stack"
+    },
+    {
+      "number": 24,
+      "id": "stack.recommend.combination",
+      "description": "Rekomendasi kombinasi optimal"
+    },
+    {
+      "number": 25,
+      "id": "db.engine.match",
+      "description": "Match requirements ke engine"
+    },
+    {
+      "number": 26,
+      "id": "db.engine.postgresql",
+      "description": "Setup PostgreSQL (relational, complex)"
+    },
+    {
+      "number": 27,
+      "id": "db.engine.mysql",
+      "description": "Setup MySQL (relational, simple)"
+    },
+    {
+      "number": 28,
+      "id": "db.engine.mongodb",
+      "description": "Setup MongoDB (document, flexible)"
+    },
+    {
+      "number": 29,
+      "id": "db.engine.redis",
+      "description": "Setup Redis (cache, queue)"
+    },
+    {
+      "number": 30,
+      "id": "db.engine.elasticsearch",
+      "description": "Setup Elasticsearch (search, log)"
+    },
+    {
+      "number": 31,
+      "id": "db.engine.sqlite",
+      "description": "Setup SQLite (small, embedded)"
+    },
+    {
+      "number": 32,
+      "id": "db.engine.duckdb",
+      "description": "Setup DuckDB (analytics, OLAP)"
+    },
+    {
+      "number": 33,
+      "id": "db.engine.influxdb",
+      "description": "Setup InfluxDB (time-series, IoT)"
+    },
+    {
+      "number": 34,
+      "id": "db.engine.surrealdb",
+      "description": "Setup SurrealDB (multi-model)"
+    },
+    {
+      "number": 35,
+      "id": "arch.design.system",
+      "description": "Desain arsitektur high-level"
+    },
+    {
+      "number": 36,
+      "id": "arch.design.database_schema",
+      "description": "Desain schema database"
+    },
+    {
+      "number": 37,
+      "id": "arch.design.api",
+      "description": "Desain API (REST/GraphQL)"
+    },
+    {
+      "number": 38,
+      "id": "arch.design.component_tree",
+      "description": "Desain component tree frontend"
+    },
+    {
+      "number": 39,
+      "id": "arch.design.folder_structure",
+      "description": "Desain struktur folder"
+    },
+    {
+      "number": 40,
+      "id": "arch.design.data_flow",
+      "description": "Desain data flow diagram"
+    },
+    {
+      "number": 41,
+      "id": "arch.design.auth_flow",
+      "description": "Desain auth flow"
+    },
+    {
+      "number": 42,
+      "id": "arch.design.deployment",
+      "description": "Desain deployment architecture"
+    },
+    {
+      "number": 43,
+      "id": "arch.design.scaling",
+      "description": "Desain scaling strategy"
+    },
+    {
+      "number": 44,
+      "id": "arch.design.security",
+      "description": "Desain security architecture"
+    },
+    {
+      "number": 45,
+      "id": "arch.diagram.generate",
+      "description": "Generate diagram (Mermaid, PlantUML)"
+    },
+    {
+      "number": 46,
+      "id": "arch.document.generate",
+      "description": "Generate ADR (Architecture Decision Record)"
+    },
+    {
+      "number": 47,
+      "id": "scaffold.nextjs",
+      "description": "Scaffold Next.js project"
+    },
+    {
+      "number": 48,
+      "id": "scaffold.nuxt",
+      "description": "Scaffold Nuxt.js project"
+    },
+    {
+      "number": 49,
+      "id": "scaffold.sveltekit",
+      "description": "Scaffold SvelteKit project"
+    },
+    {
+      "number": 50,
+      "id": "scaffold.remix",
+      "description": "Scaffold Remix project"
+    },
+    {
+      "number": 51,
+      "id": "scaffold.express",
+      "description": "Scaffold Express.js backend"
+    },
+    {
+      "number": 52,
+      "id": "scaffold.nestjs",
+      "description": "Scaffold NestJS backend"
+    },
+    {
+      "number": 53,
+      "id": "scaffold.fastapi",
+      "description": "Scaffold FastAPI backend"
+    },
+    {
+      "number": 54,
+      "id": "scaffold.django",
+      "description": "Scaffold Django backend"
+    },
+    {
+      "number": 55,
+      "id": "scaffold.laravel",
+      "description": "Scaffold Laravel backend"
+    },
+    {
+      "number": 56,
+      "id": "scaffold.monorepo",
+      "description": "Setup monorepo (Turborepo, Nx)"
+    },
+    {
+      "number": 57,
+      "id": "fe.gen.layout",
+      "description": "Generate layout (header, footer, sidebar)"
+    },
+    {
+      "number": 58,
+      "id": "fe.gen.page",
+      "description": "Generate page (home, about, contact)"
+    },
+    {
+      "number": 59,
+      "id": "fe.gen.component",
+      "description": "Generate reusable component"
+    },
+    {
+      "number": 60,
+      "id": "fe.gen.form",
+      "description": "Generate form (with validation)"
+    },
+    {
+      "number": 61,
+      "id": "fe.gen.table",
+      "description": "Generate data table (with pagination)"
+    },
+    {
+      "number": 62,
+      "id": "fe.gen.chart",
+      "description": "Generate chart (Chart.js, Recharts)"
+    },
+    {
+      "number": 63,
+      "id": "fe.gen.modal",
+      "description": "Generate modal/dialog"
+    },
+    {
+      "number": 64,
+      "id": "fe.gen.auth_page",
+      "description": "Generate login/register page"
+    },
+    {
+      "number": 65,
+      "id": "fe.gen.dashboard",
+      "description": "Generate admin dashboard"
+    },
+    {
+      "number": 66,
+      "id": "fe.gen.landing_page",
+      "description": "Generate landing page"
+    },
+    {
+      "number": 67,
+      "id": "fe.gen.ecommerce",
+      "description": "Generate ecommerce pages"
+    },
+    {
+      "number": 68,
+      "id": "fe.gen.blog",
+      "description": "Generate blog pages (list, detail)"
+    },
+    {
+      "number": 69,
+      "id": "fe.style.tailwind",
+      "description": "Style dengan Tailwind CSS"
+    },
+    {
+      "number": 70,
+      "id": "fe.style.shadcn",
+      "description": "Style dengan shadcn/ui"
+    },
+    {
+      "number": 71,
+      "id": "fe.responsive.optimize",
+      "description": "Optimize responsive (mobile, tablet)"
+    },
+    {
+      "number": 72,
+      "id": "be.gen.api.crud",
+      "description": "Generate CRUD API endpoints"
+    },
+    {
+      "number": 73,
+      "id": "be.gen.api.custom",
+      "description": "Generate custom business logic API"
+    },
+    {
+      "number": 74,
+      "id": "be.gen.auth.jwt",
+      "description": "Generate JWT auth (login, register, refresh)"
+    },
+    {
+      "number": 75,
+      "id": "be.gen.auth.oauth",
+      "description": "Generate OAuth (Google, GitHub, etc)"
+    },
+    {
+      "number": 76,
+      "id": "be.gen.middleware",
+      "description": "Generate middleware (auth, logging, CORS)"
+    },
+    {
+      "number": 77,
+      "id": "be.gen.validation",
+      "description": "Generate request validation (Zod, Joi)"
+    },
+    {
+      "number": 78,
+      "id": "be.gen.orm.model",
+      "description": "Generate ORM model (Prisma, TypeORM, Drizzle)"
+    },
+    {
+      "number": 79,
+      "id": "be.gen.service",
+      "description": "Generate service layer (business logic)"
+    },
+    {
+      "number": 80,
+      "id": "be.gen.controller",
+      "description": "Generate controller (route handler)"
+    },
+    {
+      "number": 81,
+      "id": "be.gen.dto",
+      "description": "Generate DTO (Data Transfer Object)"
+    },
+    {
+      "number": 82,
+      "id": "be.gen.websocket",
+      "description": "Generate WebSocket endpoint"
+    },
+    {
+      "number": 83,
+      "id": "be.gen.cron",
+      "description": "Generate cron job (scheduled task)"
+    },
+    {
+      "number": 84,
+      "id": "be.gen.queue",
+      "description": "Generate queue (BullMQ, Celery)"
+    },
+    {
+      "number": 85,
+      "id": "be.gen.upload",
+      "description": "Generate file upload handler"
+    },
+    {
+      "number": 86,
+      "id": "be.gen.payment",
+      "description": "Generate payment integration"
+    },
+    {
+      "number": 87,
+      "id": "db.gen.schema",
+      "description": "Generate schema dari ORM model"
+    },
+    {
+      "number": 88,
+      "id": "db.gen.migration",
+      "description": "Generate migration file"
+    },
+    {
+      "number": 89,
+      "id": "db.gen.seed",
+      "description": "Generate seed data"
+    },
+    {
+      "number": 90,
+      "id": "db.run.migration",
+      "description": "Run migration (apply schema)"
+    },
+    {
+      "number": 91,
+      "id": "db.run.seed",
+      "description": "Run seed (insert sample data)"
+    },
+    {
+      "number": 92,
+      "id": "db.gen.indexes",
+      "description": "Generate indexes (optimize query)"
+    },
+    {
+      "number": 93,
+      "id": "db.gen.relations",
+      "description": "Setup relations (1-1, 1-N, N-N)"
+    },
+    {
+      "number": 94,
+      "id": "db.gen.triggers",
+      "description": "Generate triggers (audit log)"
+    },
+    {
+      "number": 95,
+      "id": "db.gen.stored_proc",
+      "description": "Generate stored procedure"
+    },
+    {
+      "number": 96,
+      "id": "db.backup.automate",
+      "description": "Setup auto backup"
+    },
+    {
+      "number": 97,
+      "id": "ssh.connect",
+      "description": "Connect ke server via SSH"
+    },
+    {
+      "number": 98,
+      "id": "ssh.exec",
+      "description": "Eksekusi command di server"
+    },
+    {
+      "number": 99,
+      "id": "ssh.upload",
+      "description": "Upload file ke server (SCP/SFTP)"
+    },
+    {
+      "number": 100,
+      "id": "ssh.download",
+      "description": "Download file dari server"
+    },
+    {
+      "number": 101,
+      "id": "ssh.tunnel",
+      "description": "SSH tunnel (port forward)"
+    },
+    {
+      "number": 102,
+      "id": "ssh.setup.node",
+      "description": "Setup Node.js di server"
+    },
+    {
+      "number": 103,
+      "id": "ssh.setup.python",
+      "description": "Setup Python di server"
+    },
+    {
+      "number": 104,
+      "id": "ssh.setup.docker",
+      "description": "Setup Docker di server"
+    },
+    {
+      "number": 105,
+      "id": "ssh.setup.nginx",
+      "description": "Setup nginx reverse proxy"
+    },
+    {
+      "number": 106,
+      "id": "ssh.setup.certbot",
+      "description": "Setup Let's Encrypt SSL"
+    },
+    {
+      "number": 107,
+      "id": "ssh.setup.firewall",
+      "description": "Configure UFW firewall"
+    },
+    {
+      "number": 108,
+      "id": "ssh.setup.fail2ban",
+      "description": "Setup fail2ban (anti-brute force)"
+    },
+    {
+      "number": 109,
+      "id": "deploy.vercel",
+      "description": "Deploy ke Vercel"
+    },
+    {
+      "number": 110,
+      "id": "deploy.netlify",
+      "description": "Deploy ke Netlify"
+    },
+    {
+      "number": 111,
+      "id": "deploy.cloudflare",
+      "description": "Deploy ke Cloudflare Pages"
+    },
+    {
+      "number": 112,
+      "id": "deploy.vps.docker",
+      "description": "Deploy ke VPS via Docker"
+    },
+    {
+      "number": 113,
+      "id": "deploy.vps.pm2",
+      "description": "Deploy ke VPS via PM2"
+    },
+    {
+      "number": 114,
+      "id": "deploy.vps.systemd",
+      "description": "Deploy ke VPS via systemd service"
+    },
+    {
+      "number": 115,
+      "id": "deploy.kubernetes",
+      "description": "Deploy ke Kubernetes cluster"
+    },
+    {
+      "number": 116,
+      "id": "deploy.ssh.direct",
+      "description": "Deploy langsung via SSH (git pull)"
+    },
+    {
+      "number": 117,
+      "id": "deploy.docker.compose",
+      "description": "Deploy via docker-compose"
+    },
+    {
+      "number": 118,
+      "id": "deploy.nginx.config",
+      "description": "Configure nginx untuk app"
+    },
+    {
+      "number": 119,
+      "id": "deploy.ssl.setup",
+      "description": "Setup SSL (Let's Encrypt)"
+    },
+    {
+      "number": 120,
+      "id": "deploy.domain.dns",
+      "description": "Configure DNS (A, CNAME)"
+    },
+    {
+      "number": 121,
+      "id": "deploy.cdn.setup",
+      "description": "Setup CDN (Cloudflare)"
+    },
+    {
+      "number": 122,
+      "id": "deploy.rollback",
+      "description": "Rollback ke versi sebelumnya"
+    },
+    {
+      "number": 123,
+      "id": "deploy.blue_green",
+      "description": "Blue-green deployment"
+    },
+    {
+      "number": 124,
+      "id": "test.gen.unit",
+      "description": "Generate unit tests"
+    },
+    {
+      "number": 125,
+      "id": "test.gen.integration",
+      "description": "Generate integration tests"
+    },
+    {
+      "number": 126,
+      "id": "test.gen.e2e",
+      "description": "Generate E2E tests (Playwright)"
+    },
+    {
+      "number": 127,
+      "id": "test.run.unit",
+      "description": "Run unit tests"
+    },
+    {
+      "number": 128,
+      "id": "test.run.integration",
+      "description": "Run integration tests"
+    },
+    {
+      "number": 129,
+      "id": "test.run.e2e",
+      "description": "Run E2E tests"
+    },
+    {
+      "number": 130,
+      "id": "test.coverage.report",
+      "description": "Generate coverage report"
+    },
+    {
+      "number": 131,
+      "id": "test.lint.run",
+      "description": "Run linter (ESLint, Prettier)"
+    },
+    {
+      "number": 132,
+      "id": "test.type.check",
+      "description": "Run type check (TypeScript)"
+    },
+    {
+      "number": 133,
+      "id": "test.performance",
+      "description": "Performance test (Lighthouse)"
+    },
+    {
+      "number": 134,
+      "id": "design.color.palette",
+      "description": "Generate color palette"
+    },
+    {
+      "number": 135,
+      "id": "design.typography",
+      "description": "Pilih typography (font pair)"
+    },
+    {
+      "number": 136,
+      "id": "design.layout.grid",
+      "description": "Setup layout grid"
+    },
+    {
+      "number": 137,
+      "id": "design.icon.set",
+      "description": "Pilih icon set (Lucide, Heroicons)"
+    },
+    {
+      "number": 138,
+      "id": "design.illustration",
+      "description": "Generate illustration (SVG)"
+    },
+    {
+      "number": 139,
+      "id": "design.logo",
+      "description": "Generate logo"
+    },
+    {
+      "number": 140,
+      "id": "design.favicon",
+      "description": "Generate favicon"
+    },
+    {
+      "number": 141,
+      "id": "design.og_image",
+      "description": "Generate Open Graph image"
+    },
+    {
+      "number": 142,
+      "id": "design.theme",
+      "description": "Generate theme (light, dark)"
+    },
+    {
+      "number": 143,
+      "id": "design.prototype",
+      "description": "Generate clickable prototype"
+    },
+    {
+      "number": 144,
+      "id": "content.gen.placeholder",
+      "description": "Generate placeholder content"
+    },
+    {
+      "number": 145,
+      "id": "content.gen.copy",
+      "description": "Generate copy (headline, tagline)"
+    },
+    {
+      "number": 146,
+      "id": "seo.gen.meta",
+      "description": "Generate meta tags"
+    },
+    {
+      "number": 147,
+      "id": "seo.gen.sitemap",
+      "description": "Generate sitemap.xml"
+    },
+    {
+      "number": 148,
+      "id": "seo.gen.robots",
+      "description": "Generate robots.txt"
+    },
+    {
+      "number": 149,
+      "id": "seo.gen.schema",
+      "description": "Generate schema.org markup"
+    },
+    {
+      "number": 150,
+      "id": "seo.gen.og",
+      "description": "Generate Open Graph tags"
+    },
+    {
+      "number": 151,
+      "id": "seo.optimize.performance",
+      "description": "Optimize SEO (Core Web Vitals)"
+    },
+    {
+      "number": 152,
+      "id": "monitor.uptime",
+      "description": "Setup uptime monitoring"
+    },
+    {
+      "number": 153,
+      "id": "monitor.error.track",
+      "description": "Setup error tracking (Sentry)"
+    },
+    {
+      "number": 154,
+      "id": "monitor.performance",
+      "description": "Setup performance monitoring"
+    },
+    {
+      "number": 155,
+      "id": "monitor.logs",
+      "description": "Setup log aggregation"
+    },
+    {
+      "number": 156,
+      "id": "monitor.alerts",
+      "description": "Configure alerts"
+    },
+    {
+      "number": 157,
+      "id": "maintain.backup",
+      "description": "Setup auto backup"
+    },
+    {
+      "number": 158,
+      "id": "maintain.update",
+      "description": "Auto-update dependencies"
+    },
+    {
+      "number": 159,
+      "id": "maintain.security.patch",
+      "description": "Security patch automation"
+    },
+    {
+      "number": 160,
+      "id": "maintain.cdn_cache",
+      "description": "CDN cache management"
+    },
+    {
+      "number": 161,
+      "id": "maintain.scale",
+      "description": "Auto-scale configuration"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+#### HARMONIKA CORE ENGINE DEVELOPMENT TASK
+
+#### Target Version: Next Minor Release
+
+#### Module: harmonika-engine-registry
+
+#### OBJECTIVE
+
+Build and implement an automated **Auto-Discovery Mechanism** within the Harmonika Core Engine. The system must dynamically scan, validate, and register hundreds of modular skills at runtime without requiring manual registration or hardcoded definitions in the registry adapter. 
+
+#### SPECIFICATIONS & REQUIREMENT CRITERIA
+
+#### 1. Dynamic Directory Scanning (Auto-Scan)
+
+* **Action:** The engine must scan the designated skills directory (e.g., /pkg/skills/ or internal module path) during boot time.
+* **Behavior:** Implement a lazy-loading or dynamic file-system path walker to read code signatures of all available sub-modules.
+
+#### 2. Interface Contract Enforcement (Strict Verification)
+
+* **Action:** Every discovered skill must be strictly validated against the active Harmonika Skill Interface Contract.
+* **Criteria:** A module is only valid if it explicitly implements: 
+
+  * GetSkillIdentity() -> Returns structural metadata (Name, Core Capabilities, Requirements).
+  * Execute(payload) -> Handles async runtime tasks.
+  * GetContextRequirements() -> Declares the token and chat boundaries needed.
+* **Error Handling:** If a skill fails the contract audit, isolate the module, log the signature error to SQLite, and continue scanning without crashing the engine.
+
+#### 3. Dynamic Registry Mapping
+
+* **Action:** Automatically map valid discovered skills into the active Gateway Engine Registry.
+* **Behavior:** Ensure newly discovered capabilities are immediately exposed to the TUI routing controllers upon successful registration without requiring a gateway restart.
+
+#### 4. Database Logging & Status Persistence
+
+* **Action:** Record the discovery status into the native SQLite database.
+* **Data Points:** Timestamp of discovery, execution latency check, and binary verification status.
+* **Integration:** The discovery summary must be visible when executing harmonika state status.
+
+#### EXPECTED OUTPUT
+
+* A fully functional registry package (/pkg/engine/discovery).
+* Verification suite achieving 100% test coverage for broken/malformed skill modules.
+* Zero impact on existing session persistence and active database states.

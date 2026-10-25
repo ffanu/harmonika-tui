@@ -1,0 +1,63 @@
+# Harmonika Phase2 toolchain inventory (TOOLS worker scope)
+# Pinned build-time dependencies for Dockerfile.phase2 (node:22-bookworm-slim,
+# Debian bookworm, CPython 3.11, x86_64). Public registries are used at image
+# BUILD time only; the sandbox runs with network=none and installs packages
+# exclusively from the offline caches baked in below.
+#
+# Hashes below are the sha256 of the exact artifacts a linux x86_64 build
+# resolves today (downloaded and hashed by the TOOLS worker; see commands at
+# the bottom). If pip/npm resolve a different artifact name at build time,
+# the build MUST fail closed on hash mismatch and this file must be updated.
+# Root reviews this manifest before packaging.
+
+[python-tools-venv]  # /opt/harmonika/tools-venv (pip install --no-cache-dir)
+black==25.1.0
+    black-25.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl
+    sha256 = bce2e264d59c91e52d8000d507eb20a9aca4a778731a08cfff7e5ac4a4bb7096
+ruff==0.11.8
+    ruff-0.11.8-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+    sha256 = 7f024d32e62faad0f76b2d6afd141b8c171515e4fb91ce9fd6464335c81244e5
+mypy==1.15.0
+    mypy-1.15.0-cp311-cp311-manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (alias of the artifact below)
+    mypy-1.15.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl
+    sha256 = 5a95fb17c13e29d2d5195869262f8125dfdb5c134dc8d9a9d0aecf7525b10c2c
+coverage==7.8.0
+    coverage-7.8.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+    sha256 = d39fc4817fd67b3915256af5dda75fd4ee10621a3d484524487e33416c6f3543
+debugpy==1.8.14
+    debugpy-1.8.14-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+    sha256 = cf431c343a99384ac7eab2f763980724834f933a271e90496944195318c619e2
+rope==1.13.0
+    rope-1.13.0-py3-none-any.whl
+    sha256 = b435a0c0971244fdcd8741676a9fae697ae614c20cc36003678a7782f25c0d6c
+# mypy extras resolved by pip at build time (typing_extensions, mypy_extensions)
+# are transitive pins; record them with `pip freeze` in the image build log.
+
+[node-vendor]  # /opt/harmonika/node (npm install --ignore-scripts --no-save)
+typescript==5.8.3
+prettier==3.5.3
+react==19.1.0
+@types/react==19.1.2
+@types/node==22.14.1
+esbuild==0.25.3
+# npm lifecycle scripts are disabled (--ignore-scripts); esbuild 0.25.x ships
+# its binary via the @esbuild/linux-x64 optional dependency and does not need
+# postinstall. Verify: /opt/harmonika/node/node_modules/.bin/esbuild --version.
+
+[offline-pkg-cache]  # /opt/harmonika/pkg-cache — the ONLY runtime install sources
+python: humanize==4.12.2
+    humanize-4.12.2-py3-none-any.whl
+    sha256 = e4e44dced598b7e03487f3b1c6fd5b1146c30ea55a110e71d5d4bca3e094259e
+node: decimal.js==10.5.0
+    decimal.js-10.5.0.tgz
+    sha256 = 3b8f8ce61185b7d5598f33a4e302c243c7f6bdd6e17eb720e55ca78cdd26f0c7
+
+# Reproduce this inventory:
+#   pip download --no-cache-dir --no-deps --only-binary=:all: \
+#     --platform manylinux2014_x86_64 --python-version 311 --implementation cp \
+#     -d . black==25.1.0 ruff==0.11.8 mypy==1.15.0 coverage==7.8.0 debugpy==1.8.14 rope==1.13.0
+#   pip download --no-cache-dir --no-deps -d . humanize==4.12.2
+#   npm pack decimal.js@10.5.0
+#   shasum -a 256 *
+# Runtime allowlist duplicated in phase2_tools.py PKG_ALLOWLIST:
+#   python humanize==4.12.2 ; node decimal.js==10.5.0

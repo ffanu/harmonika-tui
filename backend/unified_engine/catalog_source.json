@@ -1,0 +1,291 @@
+{
+  "source_sha256": "8f46a321577221ddae5bbbf226456ec833dd43e962d7b53e05c760b96cfac8c8",
+  "source_lines": 1302,
+  "skills": [
+    {
+      "id": "core.perceive",
+      "description": "Bounded perceive stage"
+    },
+    {
+      "id": "core.understand",
+      "description": "Bounded understand stage"
+    },
+    {
+      "id": "core.reason",
+      "description": "Bounded reason stage"
+    },
+    {
+      "id": "core.retrieve",
+      "description": "Bounded retrieve stage"
+    },
+    {
+      "id": "core.decide",
+      "description": "Bounded decide stage"
+    },
+    {
+      "id": "core.act",
+      "description": "Bounded act stage"
+    },
+    {
+      "id": "core.learn",
+      "description": "Bounded learn stage"
+    },
+    {
+      "id": "orch.receive.request",
+      "description": "Terima request dari WebUI/Terminal/API"
+    },
+    {
+      "id": "orch.parse.input",
+      "description": "Parse input multi-modal"
+    },
+    {
+      "id": "orch.detect.channel",
+      "description": "Detect channel (chat, voice, terminal)"
+    },
+    {
+      "id": "orch.detect.user",
+      "description": "Identify user (auth, profile)"
+    },
+    {
+      "id": "orch.detect.session",
+      "description": "Detect session (new vs existing)"
+    },
+    {
+      "id": "orch.detect.urgency",
+      "description": "Urgency detection (low/med/high/crisis)"
+    },
+    {
+      "id": "orch.detect.privacy",
+      "description": "Privacy level (public/private/confidential)"
+    },
+    {
+      "id": "orch.queue.request",
+      "description": "Queue request kalau overload"
+    },
+    {
+      "id": "orch.intent.classify",
+      "description": "Klasifikasi intent (chat/build/legal/dll)"
+    },
+    {
+      "id": "orch.context.load",
+      "description": "Load context (session, history, profile)"
+    },
+    {
+      "id": "orch.domain.detect",
+      "description": "Detect domain (legal/tech/business/personal)"
+    },
+    {
+      "id": "orch.complexity.assess",
+      "description": "Assess complexity (simple/medium/complex)"
+    },
+    {
+      "id": "orch.multi_intent.detect",
+      "description": "Detect multi-intent (user mau beberapa hal)"
+    },
+    {
+      "id": "orch.ambiguity.detect",
+      "description": "Detect ambiguity (perlu klarifikasi)"
+    },
+    {
+      "id": "orch.clarify.request",
+      "description": "Minta klarifikasi ke user"
+    },
+    {
+      "id": "orch.scope.define",
+      "description": "Define scope request"
+    },
+    {
+      "id": "orch.route.chat",
+      "description": "Route ke Chat 1:1 Engine"
+    },
+    {
+      "id": "orch.route.legal",
+      "description": "Route ke Legal Assistant Engine"
+    },
+    {
+      "id": "orch.route.web_builder",
+      "description": "Route ke Web Full-Stack Builder"
+    },
+    {
+      "id": "orch.route.mobile_builder",
+      "description": "Route ke Mobile App Builder"
+    },
+    {
+      "id": "orch.route.browser_auto",
+      "description": "Route ke Browser Automation Engine"
+    },
+    {
+      "id": "orch.route.text_typo",
+      "description": "Route ke Text Typo Engine"
+    },
+    {
+      "id": "orch.route.multi",
+      "description": "Route ke multiple engines (parallel)"
+    },
+    {
+      "id": "orch.route.fallback",
+      "description": "Fallback ke Core kalau specialist gagal"
+    },
+    {
+      "id": "orch.route.human",
+      "description": "Escalate ke human agent"
+    },
+    {
+      "id": "orch.route.crisis",
+      "description": "Crisis routing (immediate human)"
+    },
+    {
+      "id": "orch.exec.start",
+      "description": "Start execution di engine target"
+    },
+    {
+      "id": "orch.exec.monitor",
+      "description": "Monitor execution progress"
+    },
+    {
+      "id": "orch.exec.timeout",
+      "description": "Handle timeout"
+    },
+    {
+      "id": "orch.exec.retry",
+      "description": "Retry kalau gagal"
+    },
+    {
+      "id": "orch.exec.cancel",
+      "description": "Cancel execution kalau user minta"
+    },
+    {
+      "id": "orch.aggregate.single",
+      "description": "Aggregate result dari 1 engine"
+    },
+    {
+      "id": "orch.aggregate.multi",
+      "description": "Aggregate result dari multiple engines"
+    },
+    {
+      "id": "orch.aggregate.conflict",
+      "description": "Resolve conflict antar engine results"
+    },
+    {
+      "id": "orch.aggregate.format",
+      "description": "Format final response per channel"
+    },
+    {
+      "id": "bus.publish.event",
+      "description": "Publish event ke message bus"
+    },
+    {
+      "id": "bus.subscribe.event",
+      "description": "Subscribe ke event"
+    },
+    {
+      "id": "bus.request.response",
+      "description": "Request-response pattern"
+    },
+    {
+      "id": "bus.async.task",
+      "description": "Async task execution"
+    },
+    {
+      "id": "bus.priority.queue",
+      "description": "Priority queue management"
+    },
+    {
+      "id": "bus.dead_letter",
+      "description": "Dead letter queue (failed messages)"
+    },
+    {
+      "id": "bus.retry.policy",
+      "description": "Retry policy (exponential backoff)"
+    },
+    {
+      "id": "bus.circuit.breaker",
+      "description": "Circuit breaker (anti cascade failure)"
+    },
+    {
+      "id": "data.shared.memory",
+      "description": "Shared memory antar engines"
+    },
+    {
+      "id": "data.context.pass",
+      "description": "Pass context antar engines"
+    },
+    {
+      "id": "data.serialize",
+      "description": "Serialize data untuk transfer"
+    },
+    {
+      "id": "data.deserialize",
+      "description": "Deserialize data dari transfer"
+    },
+    {
+      "id": "data.validate",
+      "description": "Validate data antar engines"
+    },
+    {
+      "id": "data.transform",
+      "description": "Transform data format antar engines"
+    },
+    {
+      "id": "data.encrypt",
+      "description": "Encrypt sensitive data transfer"
+    },
+    {
+      "id": "data.audit.log",
+      "description": "Audit log semua data flow"
+    },
+    {
+      "id": "shared.auth",
+      "description": "Shared authentication"
+    },
+    {
+      "id": "shared.memory",
+      "description": "Shared memory store (Redis)"
+    },
+    {
+      "id": "shared.knowledge",
+      "description": "Shared knowledge base (Vector DB)"
+    },
+    {
+      "id": "shared.user_profile",
+      "description": "Shared user profile"
+    },
+    {
+      "id": "shared.audit_log",
+      "description": "Shared audit log"
+    },
+    {
+      "id": "shared.monitoring",
+      "description": "Shared monitoring (Prometheus)"
+    },
+    {
+      "id": "shared.secrets",
+      "description": "Shared secrets management (Vault)"
+    },
+    {
+      "id": "gateway.rest",
+      "description": "REST API gateway"
+    },
+    {
+      "id": "gateway.graphql",
+      "description": "GraphQL gateway"
+    },
+    {
+      "id": "gateway.websocket",
+      "description": "WebSocket gateway"
+    },
+    {
+      "id": "gateway.rate_limit",
+      "description": "Rate limiting per engine"
+    },
+    {
+      "id": "gateway.auth",
+      "description": "Auth & authorization gateway"
+    }
+  ],
+  "declared_specialist_count": 1153,
+  "specialist_sum": 1153,
+  "declared_total": 1223,
+  "header_claim": "1300+",
+  "specialist_ids_enumerated": false
+}

@@ -1,0 +1,954 @@
+{
+  "readiness": {
+    "available": 4,
+    "unavailable": 88,
+    "restricted": 7,
+    "not_registered": 8
+  },
+  "rows": [
+    {
+      "id": "ip.lookup",
+      "in_master": true,
+      "execution_target": "bounded_input_analysis",
+      "status": "available",
+      "reason": null,
+      "engine": "analysis",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ip": {
+            "type": "string",
+            "maxLength": 45
+          }
+        },
+        "required": [
+          "ip"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Classify a supplied IP with the ipaddress module (scope, loopback, private, multicast). No geo or reputation.",
+      "directly_invocable": true
+    },
+    {
+      "id": "ip.geo.locate",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.asn.info",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.reputation.check",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.proxy.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.vpn.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.tor.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.datacenter.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.residential.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.botnet.check",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.blacklist.check",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.threat.score",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.history.lookup",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.shared.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "ip.lease.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.browser",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.tls",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.http",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.device",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.cookie",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.local_storage",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.canvas",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.audio",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.fonts",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.plugins",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.screen",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "fingerprint.combine",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.useragent.analyze",
+      "in_master": true,
+      "execution_target": "bounded_input_analysis",
+      "status": "available",
+      "reason": null,
+      "engine": "analysis",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "user_agent": {
+            "type": "string",
+            "maxLength": 512
+          }
+        },
+        "required": [
+          "user_agent"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Score a supplied user-agent string with spoofable automation heuristics. Suspicion signals, not identity.",
+      "directly_invocable": true
+    },
+    {
+      "id": "bot.headless.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.selenium.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.webdriver.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.mouse.analyze",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.keyboard.analyze",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.scroll.analyze",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.crawler.identify",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.scraper.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.behavior.score",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.challenge",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.trap.deploy",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "bot.captcha.verify",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.fake.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.takeover.detect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.credential_stuff",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.brute_force",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.velocity.check",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.multi_account",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.suspicious_login",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.password.spray",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.mfa.bypass",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.session.hijack",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.session.fixation",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.recovery.abuse",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "restricted",
+      "reason": "autonomous_attack_or_bypass_not_enabled",
+      "directly_invocable": false
+    },
+    {
+      "id": "account.device.binding",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.quarantine",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "account.stepup_auth",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.card.test",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.velocity.check",
+      "in_master": true,
+      "execution_target": "bounded_input_analysis",
+      "status": "available",
+      "reason": null,
+      "engine": "analysis",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                "amount": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1000000000000
+                }
+              },
+              "required": [
+                "timestamp"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "window_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2592000
+          },
+          "threshold": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          }
+        },
+        "required": [
+          "events",
+          "window_seconds",
+          "threshold"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Sliding-window timestamp arithmetic over caller-supplied payment events with threshold findings and uncertainty notes.",
+      "directly_invocable": true
+    },
+    {
+      "id": "payment.geo.mismatch",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.bin.lookup",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.giftcard.abuse",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.refund.abuse",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.chargeback.pattern",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.synthetic_identity",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.score",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "payment.block",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.baseline",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.anomaly",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.session.replay",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.heatmap",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.journey",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.dwell_time",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.velocity",
+      "in_master": true,
+      "execution_target": "bounded_input_analysis",
+      "status": "available",
+      "reason": null,
+      "engine": "analysis",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                "action": {
+                  "type": "string",
+                  "maxLength": 80
+                }
+              },
+              "required": [
+                "timestamp",
+                "action"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "window_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2592000
+          },
+          "threshold": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          }
+        },
+        "required": [
+          "events",
+          "window_seconds",
+          "threshold"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Per-action sliding-window counts over caller-supplied event fixtures; heuristic rate signals with uncertainty.",
+      "directly_invocable": true
+    },
+    {
+      "id": "behavior.deviation",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.clustering",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "behavior.risk_score",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.set",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.check",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.throttle",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.slowdown",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.ban",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.shadow_ban",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.whitelist",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rate_limit.adaptive",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.captcha",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.js_pow",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.device_check",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.email_verify",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.sms_otp",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.voice_otp",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.authenticator",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "challenge.trust_token",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.event.append",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.alert.send",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.export.siem",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.query",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.report.fraud",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.evidence.collect",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.timeline.build",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "log.compliance.export",
+      "in_master": true,
+      "execution_target": "not_implemented",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "intel.maxmind.sync",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.spamhaus.sync",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.abuseipdb.sync",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.project_honeypot",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.greynoise.feed",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.sans.dshield",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.custom.feed",
+      "status": "not_registered",
+      "http": 404
+    },
+    {
+      "id": "intel.exchange.stix",
+      "status": "not_registered",
+      "http": 404
+    }
+  ],
+  "smoke": [
+    {
+      "id": "ip.lookup",
+      "http": 200,
+      "metrics": {
+        "version": 4,
+        "scope": "private"
+      },
+      "limitations": [
+        "Client-supplied bounded data analyzed in-process only; no network, host files, shell, or execution of analyzed input.",
+        "No reputation, geolocation, identity, or safety verdict is claimed.",
+        "Classification uses Python ipaddress semantics only; no geo, ASN, proxy, VPN, or reputation data is available or guessed."
+      ]
+    },
+    {
+      "id": "bot.useragent.analyze",
+      "http": 200,
+      "metrics": {
+        "suspicion_score": 60,
+        "verdict": "high_suspicion",
+        "signals": 2
+      },
+      "limitations": [
+        "Client-supplied bounded data analyzed in-process only; no network, host files, shell, or execution of analyzed input.",
+        "No reputation, geolocation, identity, or safety verdict is claimed.",
+        "Suspicion heuristics only; user agents are trivially spoofed, so no bot/human identity or verdict is claimed."
+      ]
+    },
+    {
+      "id": "payment.velocity.check",
+      "http": 200,
+      "metrics": {
+        "events_valid": 2,
+        "events_invalid": 0,
+        "window_seconds": 60,
+        "threshold": 2,
+        "max_events_in_window": 2,
+        "max_amount_in_window": 3000.0,
+        "first": "2026-10-25T00:00:00Z",
+        "last": "2026-10-25T00:00:01Z"
+      },
+      "limitations": [
+        "Client-supplied bounded data analyzed in-process only; no network, host files, shell, or execution of analyzed input.",
+        "No reputation, geolocation, identity, or safety verdict is claimed.",
+        "Uncertainty: timestamp arithmetic on caller fixtures only; ordering, precision, clock skew, and timezone assumptions are not verified against any authority."
+      ]
+    },
+    {
+      "id": "behavior.velocity",
+      "http": 200,
+      "metrics": {
+        "events_valid": 2,
+        "events_invalid": 0,
+        "window_seconds": 60,
+        "threshold": 2,
+        "actions": {
+          "login": {
+            "total": 2,
+            "max_in_window": 2
+          }
+        }
+      },
+      "limitations": [
+        "Client-supplied bounded data analyzed in-process only; no network, host files, shell, or execution of analyzed input.",
+        "No reputation, geolocation, identity, or safety verdict is claimed.",
+        "Uncertainty: timestamp arithmetic on caller fixtures only; per-action windows are computed independently and clocks are not verified."
+      ]
+    }
+  ],
+  "source": {
+    "file": "/Users/id/Documents/1.txt",
+    "sha256": "5ad7c4c14f9bb70bef720c9e311b3c04061fd336d576e05e05655811e5ecffc1",
+    "declared_header": 95,
+    "unique": 107,
+    "occurrences": 109,
+    "duplicates": {
+      "ip.blacklist.check": 2,
+      "account.multi_account": 2
+    }
+  }
+}

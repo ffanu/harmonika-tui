@@ -1,0 +1,15 @@
+[Unit]
+Description=Refresh allowlisted public law sources (no client case data)
+After=harmonika-legal-engine.service
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/legal-venv/bin/python -m legal_engine.sync_sources
+TimeoutStartSec=240
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+IPAddressDeny=any
+IPAddressAllow=localhost

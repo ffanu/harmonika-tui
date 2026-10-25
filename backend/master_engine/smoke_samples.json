@@ -1,0 +1,218 @@
+{
+  "static.ast.parse": {
+    "code": "def check(value):\n    if value:\n        return 1\n    return 0\n"
+  },
+  "static.complexity": {
+    "code": "def check(value):\n    if value:\n        return 1\n    return 0\n"
+  },
+  "static.duplication": {
+    "code": "def check(value):\n    if value:\n        return 1\n    return 0\n"
+  },
+  "code.secret.scan": {
+    "code": "password = \"SYNTHETIC_NOT_A_REAL_PASSWORD\""
+  },
+  "malware.hash.check": {
+    "data_base64": "U1lOVEhFVElDLUhBUk1PTklLQS1PTkxZ"
+  },
+  "malware.ioc.extract": {
+    "text": "https://untrusted.example.test admin@example.test 192.0.2.1 host.example.test"
+  },
+  "binary.inspect.pe": {
+    "data_base64": "TVoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQRQAAZIYBAADxU2UAAAAAAAAAAPAAIgALAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAudGV4dAAAAAQAAAAAEAAABAAAAAACAAAAAAAAAAAAAAAAAAAgAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGQUtF"
+  },
+  "binary.inspect.elf": {
+    "data_base64": "f0VMRgIBAQAAAAAAAAAAAAIAPgABAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=="
+  },
+  "binary.inspect.macho": {
+    "data_base64": "z/rt/gcAAAEDAAAABgAAAAAAAAAAAAAAAAAAAAAAAAA="
+  },
+  "binary.strings.extract": {
+    "data_base64": "U1lOVEhFVElDLUhBUk1PTklLQS1PTkxZ"
+  },
+  "web.headers.check": {
+    "headers": {
+      "Content-Type": "text/html",
+      "X-Content-Type-Options": "nosniff"
+    }
+  },
+  "web.csp.test": {
+    "csp": "default-src 'self'; object-src 'none'"
+  },
+  "web.cookies.analyze": {
+    "cookies": [
+      "session=SYNTHETIC; Secure; HttpOnly; SameSite=Lax"
+    ]
+  },
+  "ip.lookup": {
+    "ip": "192.0.2.1"
+  },
+  "bot.useragent.analyze": {
+    "user_agent": "Mozilla/5.0 synthetic audit browser"
+  },
+  "payment.velocity.check": {
+    "events": [
+      {
+        "timestamp": "2026-10-24T12:00:00Z",
+        "amount": 10
+      },
+      {
+        "timestamp": "2026-10-24T12:00:20Z",
+        "amount": 20
+      }
+    ],
+    "window_seconds": 60,
+    "threshold": 2
+  },
+  "behavior.velocity": {
+    "events": [
+      {
+        "timestamp": "2026-10-24T12:00:00Z",
+        "action": "view"
+      },
+      {
+        "timestamp": "2026-10-24T12:00:20Z",
+        "action": "view"
+      }
+    ],
+    "window_seconds": 60,
+    "threshold": 2
+  },
+  "nlu.spam.detect": {
+    "text": "Harmonika offers internet information. Contact demo@example.test. More information is needed."
+  },
+  "security.pii.mask": {
+    "text": "Harmonika offers internet information. Contact demo@example.test. More information is needed."
+  },
+  "antipattern.detect": {
+    "text": "Harmonika offers internet information. Contact demo@example.test. More information is needed."
+  },
+  "score.burstiness": {
+    "text": "Harmonika offers internet information. Contact demo@example.test. More information is needed."
+  },
+  "brief.outline.create": {
+    "topic": "Synthetic service help"
+  },
+  "normalize.cve_schema": {
+    "records": [
+      {
+        "id": "CVE-2026-1234",
+        "published": "2026-10-23T00:00:00Z",
+        "severity": "HIGH",
+        "cvss": 8.1
+      },
+      {
+        "id": "CVE-2026-1235",
+        "published": "2026-10-24T00:00:00Z",
+        "severity": "LOW",
+        "cvss": 2.1
+      }
+    ]
+  },
+  "sort.by_date.desc": {
+    "records": [
+      {
+        "id": "CVE-2026-1234",
+        "published": "2026-10-23T00:00:00Z",
+        "severity": "HIGH",
+        "cvss": 8.1
+      },
+      {
+        "id": "CVE-2026-1235",
+        "published": "2026-10-24T00:00:00Z",
+        "severity": "LOW",
+        "cvss": 2.1
+      }
+    ]
+  },
+  "sort.by_date.asc": {
+    "records": [
+      {
+        "id": "CVE-2026-1234",
+        "published": "2026-10-23T00:00:00Z",
+        "severity": "HIGH",
+        "cvss": 8.1
+      },
+      {
+        "id": "CVE-2026-1235",
+        "published": "2026-10-24T00:00:00Z",
+        "severity": "LOW",
+        "cvss": 2.1
+      }
+    ]
+  },
+  "sort.by_severity.desc": {
+    "records": [
+      {
+        "id": "CVE-2026-1234",
+        "published": "2026-10-23T00:00:00Z",
+        "severity": "HIGH",
+        "cvss": 8.1
+      },
+      {
+        "id": "CVE-2026-1235",
+        "published": "2026-10-24T00:00:00Z",
+        "severity": "LOW",
+        "cvss": 2.1
+      }
+    ]
+  },
+  "filter.by_date_range": {
+    "records": [
+      {
+        "id": "CVE-2026-1234",
+        "published": "2026-10-23T00:00:00Z",
+        "severity": "HIGH",
+        "cvss": 8.1
+      },
+      {
+        "id": "CVE-2026-1235",
+        "published": "2026-10-24T00:00:00Z",
+        "severity": "LOW",
+        "cvss": 2.1
+      }
+    ],
+    "start": "2026-10-22T00:00:00Z",
+    "end": "2026-10-25T00:00:00Z"
+  },
+  "filter.by_severity": {
+    "records": [
+      {
+        "id": "CVE-2026-1234",
+        "published": "2026-10-23T00:00:00Z",
+        "severity": "HIGH",
+        "cvss": 8.1
+      },
+      {
+        "id": "CVE-2026-1235",
+        "published": "2026-10-24T00:00:00Z",
+        "severity": "LOW",
+        "cvss": 2.1
+      }
+    ],
+    "severities": [
+      "HIGH"
+    ]
+  },
+  "workflow.browser": {
+    "html": "<input id=\"name\"><button onclick=\"document.querySelector('#result').textContent='Halo '+document.querySelector('#name').value\">Kirim</button><p id=\"result\"></p>",
+    "actions": [
+      {
+        "type": "dom.fill",
+        "selector": "#name",
+        "value": "Harmonika"
+      },
+      {
+        "type": "dom.click",
+        "selector": "button"
+      },
+      {
+        "type": "dom.text",
+        "selector": "#result"
+      }
+    ],
+    "viewport": {
+      "width": 390,
+      "height": 844
+    }
+  }
+}

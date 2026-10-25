@@ -1,158 +1,154 @@
 #!/usr/bin/env python3
-"""Minimal local OOXML read/create. No implicit dependency installation."""
+"""Project-scoped local document dispatcher. No network or implicit installs."""
 import argparse
+import importlib
 import importlib.util
 import json
-import math
 import os
+from io import BytesIO
+import subprocess
+import tempfile
 from pathlib import Path
 import sys
-import zipfile
 
-MODULES = {'.docx': 'docx', '.xlsx': 'openpyxl', '.pptx': 'pptx'}
-MAX_SIZE = 20 * 1024 * 1024
+# Support both direct CLI execution and importlib-based callers/tests.
+SCRIPTS = Path(__file__).resolve().parent
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
+from document_common import scoped, validate_zip, strings
+
+MANIFEST = SCRIPTS.parent / 'manifest.yaml'
+# JSON is a YAML 1.2 subset; load without introducing a YAML dependency.
+REGISTRY_ERROR = False
+try:
+    REGISTRY = json.loads(MANIFEST.read_text(encoding='utf-8'))
+    if REGISTRY.get('schema_version') != 1 or not isinstance(REGISTRY.get('formats'), dict) or not REGISTRY['formats']:
+        raise ValueError()
+    FORMATS = REGISTRY['formats']
+    MODULES = {ext: info['dependencies'][0] for ext, info in FORMATS.items()}
+except (OSError, ValueError, TypeError, KeyError, IndexError, AttributeError):
+    REGISTRY_ERROR = True
+    REGISTRY, FORMATS, MODULES = {}, {}, {}
+
+def available(module):
+    return importlib.util.find_spec(module) is not None
 
 def capabilities():
-    return {ext: bool(importlib.util.find_spec(module)) for ext, module in MODULES.items()}
+    if REGISTRY_ERROR:raise ValueError('invalid_document_manifest: Document registry is missing or invalid')
+    """Keep legacy extension -> bool shape, add PDF truthfully."""
+    return {ext: all(available(name) for name in item['dependencies'])
+            for ext, item in FORMATS.items()}
 
-def scoped(root_value, value):
-    root, candidate = Path(root_value), Path(value)
-    if not root.is_absolute() or not candidate.is_absolute():
-        raise ValueError('Root and file paths must be absolute')
-    for p in (root, candidate):
-        if '..' in p.parts or any(part.startswith('.') for part in p.parts[1:]):
-            raise ValueError('Parent traversal and protected dot-paths are blocked')
-        for parent in [p, *p.parents]:
-            if parent.is_symlink():
-                raise ValueError('Symlink paths are blocked')
-    root = root.resolve()
-    candidate = candidate.resolve()
-    if root in (Path('/'), Path.home()) or not root.is_dir():
-        raise ValueError('Root must be an existing project directory')
-    if not candidate.is_relative_to(root) or candidate == root:
-        raise ValueError('File must be inside the selected project root')
-    return candidate
+def detailed_capabilities():
+    formats = {}
+    for ext, info in FORMATS.items():
+        handler(ext)  # Validate signed handler imports even when optional engines are absent.
+        operations = {action: all(available(name) for name in deps)
+                      for action, deps in info['operations'].items()}
+        formats[ext] = {'operations': operations,
+                        'missing_dependencies': [name for name in info['dependencies'] if not available(name)],
+                        'local': True}
+    return {'schema_version': 1, 'formats': formats, 'reserved_formats': REGISTRY['reserved_formats'],
+            'network': False, 'ocr': False, 'automatic_install': False}
 
-def validate_zip(file):
-    if file.stat().st_size > MAX_SIZE:
-        raise ValueError('Input exceeds 20 MiB')
-    with zipfile.ZipFile(file) as z:
-        if len(z.infolist()) > 10000 or sum(i.file_size for i in z.infolist()) > 100 * 1024 * 1024:
-            raise ValueError('Expanded document exceeds safe limits')
+def dependency(ext, action='create', data=None):
+    if ext not in FORMATS:
+        raise ValueError('unsupported_format: Supported formats: ' + ', '.join(FORMATS))
+    deps = FORMATS[ext]['operations'].get(action)
+    if deps is None:
+        raise ValueError('unsupported_operation: ' + action + ' for ' + ext)
+    # Preserve the old dependency-hook contract used by existing integrations.
+    if action == 'create' and ext != '.pdf' and not capabilities()[ext]:
+        raise ValueError('Unsupported: missing optional Python module ' + ', '.join(name for name in FORMATS[ext]['dependencies'] if not available(name)))
+    missing = [name for name in deps if not available(name)]
+    if ext == '.pdf' and action == 'edit' and data and 'watermark' in data and not available('reportlab'):
+        missing.append('reportlab')
+    if missing:
+        raise ValueError('Unsupported: missing optional Python module ' + ', '.join(missing))
 
-def dependency(ext):
-    if ext not in MODULES:
-        raise ValueError('Supported formats: .docx, .xlsx, .pptx')
-    if not capabilities()[ext]:
-        raise ValueError('Unsupported: missing optional Python module ' + MODULES[ext])
+def handler(ext):
+    return importlib.import_module(FORMATS[ext]['handler'])
 
 def inspect(file):
+    file = Path(file)
     ext = file.suffix.lower()
-    dependency(ext)
-    validate_zip(file)
-    if ext == '.docx':
-        from docx import Document
-        doc = Document(file)
-        return {'paragraphs': [p.text for p in doc.paragraphs[:1000]],
-                'tables': [[[c.text for c in row.cells[:50]] for row in table.rows[:100]] for table in doc.tables[:20]],
-                'limits': '1000 paragraphs, 20 tables, 100 rows/table, 50 columns'}
-    if ext == '.xlsx':
-        from openpyxl import load_workbook
-        book = load_workbook(file, read_only=True, data_only=False, keep_links=False)
-        try:
-            return {'sheets': [{'name': sheet.title, 'rows': [list(row) for row in sheet.iter_rows(min_row=1, max_row=min(sheet.max_row or 0, 200), max_col=min(sheet.max_column or 0, 50), values_only=True)]} for sheet in list(book)[:20]], 'limits': '20 sheets, 200 rows/sheet, 50 columns; formulas returned as text, never evaluated'}
-        finally:
-            book.close()
-    from pptx import Presentation
-    deck = Presentation(file)
-    return {'slides': [{'text': [shape.text for shape in slide.shapes if shape.has_text_frame]} for slide in list(deck.slides)[:100]], 'limits': '100 slides; text frames only'}
+    dependency(ext, 'inspect')
+    return handler(ext).inspect(file)
 
-def strings(value, label):
-    if not isinstance(value, list) or len(value) > 1000 or any(not isinstance(x, str) or len(x) > 100000 for x in value):
-        raise ValueError(label + ' must be a bounded list of strings')
-    return value
+class BoundedBuffer(BytesIO):
+    def __init__(self, maximum):
+        super().__init__()
+        self.maximum = maximum
+    def write(self, value):
+        if self.tell() + len(value) > self.maximum:
+            raise ValueError('output_too_large: exceeds format byte limit')
+        return super().write(value)
+
+def _save(file, save, ext):
+    if not file.parent.is_dir():
+        raise ValueError('Output parent directory does not exist')
+    if file.exists():
+        raise ValueError('Output exists; choose a new filename')
+    # Render before publishing: parser/render failure cannot leave a partial file.
+    buffer = BoundedBuffer((10 if ext == '.pdf' else 20) * 1024 * 1024)
+    save(buffer)
+    pending = None
+    try:
+        with tempfile.NamedTemporaryFile(prefix='harmonika-document-', suffix='.pending', dir=str(file.parent), delete=False) as handle:
+            pending = Path(handle.name)
+            handle.write(buffer.getvalue())
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.link(pending, file)  # Atomic publication; refuses even a racing existing destination.
+    except FileExistsError:
+        raise ValueError('Output exists; choose a new filename') from None
+    finally:
+        buffer.close()
+        if pending is not None:
+            pending.unlink(missing_ok=True)
+    return {'created': str(file), 'bytes': file.stat().st_size, 'format': ext}
 
 def create(file, data):
+    file = Path(file)
     ext = file.suffix.lower()
     dependency(ext)
     if not isinstance(data, dict):
         raise ValueError('Creation JSON must be an object')
-    if ext == '.docx':
-        from docx import Document
-        result = Document()
-        for text in strings(data.get('paragraphs'), 'paragraphs'):
-            result.add_paragraph(text)
-    elif ext == '.xlsx':
-        from openpyxl import Workbook
-        result = Workbook()
-        result.remove(result.active)
-        sheets = data.get('sheets')
-        if not isinstance(sheets, list) or not 1 <= len(sheets) <= 20:
-            raise ValueError('sheets must contain 1..20 sheets')
-        names = set()
-        for sheet in sheets:
-            name = sheet['name']
-            if not isinstance(name, str) or not name or len(name) > 31 or any(c in name for c in '[]:*?/\\') or name.lower() in names:
-                raise ValueError('Invalid or duplicate sheet name')
-            names.add(name.lower())
-            target = result.create_sheet(name)
-            rows = sheet['rows']
-            if not isinstance(rows, list) or len(rows) > 1000:
-                raise ValueError('rows must be a list of at most 1000 rows')
-            for ri, row in enumerate(rows, 1):
-                if not isinstance(row, list) or len(row) > 100:
-                    raise ValueError('Each row must have at most 100 cells')
-                for ci, value in enumerate(row, 1):
-                    if value is not None and not isinstance(value, (str, int, float, bool)):
-                        raise ValueError('Cell values must be scalar')
-                    if isinstance(value, float) and not math.isfinite(value):
-                        raise ValueError('Cell numbers must be finite')
-                    if isinstance(value, str) and len(value) > 32767:
-                        raise ValueError('Cell text too long')
-                    cell = target.cell(ri, ci, value)
-                    if isinstance(value, str):
-                        cell.data_type = 's'  # never turn input strings into spreadsheet formulas
-    else:
-        from pptx import Presentation
-        result = Presentation()
-        slides = data.get('slides')
-        if not isinstance(slides, list) or not 1 <= len(slides) <= 100:
-            raise ValueError('slides must contain 1..100 slides')
-        for spec in slides:
-            title = spec.get('title', '')
-            if not isinstance(title, str) or len(title) > 100000:
-                raise ValueError('title must be a bounded string')
-            slide = result.slides.add_slide(result.slide_layouts[1])
-            slide.shapes.title.text = title
-            body = strings(spec.get('body', []), 'body')
-            slide.placeholders[1].text = '\n'.join(body)
-    # Exclusive creation prevents overwriting an existing document.
-    if not file.parent.is_dir():
-        raise ValueError('Output parent directory does not exist')
-    try:
-        with file.open('xb') as handle:
-            result.save(handle)
-    except FileExistsError:
-        raise ValueError('Output exists; choose a new filename') from None
-    except Exception:
-        if file.exists():
-            file.unlink()
-        raise
-    return {'created': str(file), 'bytes': file.stat().st_size, 'format': ext}
+    result = handler(ext).build(data)
+    output = _save(file, result.save, ext)
+    if ext == '.pdf':output.update({'font': result.font, 'warnings': result.warnings})
+    return output
 
-def main(argv=None):
+def edit(file, output, data, root):
+    file, output = Path(file), Path(output)
+    ext = file.suffix.lower()
+    dependency(ext, 'edit', data)
+    if output.suffix.lower() != ext:
+        raise ValueError('unsupported_conversion: edit output must have the same format')
+    # PDF reference paths pass through the same project scope guard as CLI inputs.
+    result = handler(ext).edit(file, data, root)
+    output = _save(output, result.write, ext)
+    output['removed_content'] = ['annotations', 'page_actions', 'forms', 'catalog_actions', 'attachment_catalog']
+    return output
+
+def arguments(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
-    sub.add_parser('capabilities')
-    for command in ('inspect', 'create'):
+    sub.add_parser('capabilities').add_argument('--detailed', action='store_true')
+    for command in ('inspect', 'create', 'edit'):
         p = sub.add_parser(command)
         p.add_argument('--root', required=True)
-        p.add_argument('--input' if command == 'inspect' else '--output', required=True)
-        if command == 'create':
+        if command in ('inspect', 'edit'):
+            p.add_argument('--input', required=True)
+        if command in ('create', 'edit'):
+            p.add_argument('--output', required=True)
             p.add_argument('--data', required=True)
-    args = parser.parse_args(argv)
+    return parser.parse_args(argv)
+
+def main(argv=None):
+    args = arguments(argv)
     if args.command == 'capabilities':
-        return capabilities()
+        return detailed_capabilities() if args.detailed else capabilities()
     if args.command == 'inspect':
         return inspect(scoped(args.root, args.input))
     output = scoped(args.root, args.output)
@@ -160,16 +156,52 @@ def main(argv=None):
     if source.stat().st_size > 1024 * 1024:
         raise ValueError('Creation JSON exceeds 1 MiB')
     data = json.loads(source.read_text(encoding='utf-8'))
+    if args.command == 'edit':
+        return edit(scoped(args.root, args.input), output, data, args.root)
     return create(output, data)
 
-if __name__ == '__main__':
-    # Optional runtime installed explicitly by the Harmonika owner; never install it here.
-    runtime_root = Path.home() / '.config/harmonika-terminal/document-runtime'
+def emit_error(error):
+    if isinstance(error, json.JSONDecodeError):
+        code, message = 'invalid_spec_json', 'Document specification must be valid JSON'
+    elif isinstance(error, ValueError):
+        message = str(error)
+        prefix = message.split(':', 1)[0]
+        code = prefix if prefix.isidentifier() and prefix.islower() else 'invalid_input'
+        if message.startswith('Unsupported: missing optional'):code = 'missing_dependency'
+    else:
+        code, message = 'document_processing_failed', 'Document processing failed'
+    print(json.dumps({'error': message, 'code': code, 'status': 'error'}, ensure_ascii=False), file=sys.stderr)
+
+def cli():
+    runtime_root = Path(os.environ.get('HARMONIKA_TERMINAL_HOME', str(Path.home()/'.config/harmonika-terminal'))) / 'document-runtime'
     runtime_python = runtime_root / 'bin/python'
     if runtime_python.is_file() and Path(sys.prefix).resolve() != runtime_root.resolve() and not all(capabilities().values()):
-        os.execv(str(runtime_python), [str(runtime_python), str(Path(__file__).resolve()), *sys.argv[1:]])
+        os.execv(str(runtime_python), [str(runtime_python), '-I', str(Path(__file__).resolve()), *sys.argv[1:]])
+    args = arguments()
+    # Validate scope using the actual user HOME before the child receives a clean HOME.
+    if args.command != 'capabilities':
+        for name in ('input', 'output', 'data'):
+            if getattr(args, name, None):scoped(args.root, getattr(args, name))
+    if any(value.lower().endswith('.pdf') for value in sys.argv[1:]):
+        try:
+            with tempfile.TemporaryDirectory(prefix='harmonika-document-worker-') as home:
+                env = {key:value for key,value in os.environ.items() if not key.startswith(('PYTHON', 'RL_'))}
+                env['HOME'] = home  # Do not execute ~/.reportlab_settings or ~/.reportlab_mods.
+                child = subprocess.run([sys.executable, '-I', str(SCRIPTS/'pdf_worker.py'), *sys.argv[1:]],
+                                       capture_output=True, timeout=30, cwd=home, env=env)
+            if child.returncode < 0:
+                raise ValueError('document_resource_limit: PDF processing exceeded its resource budget')
+            sys.stdout.buffer.write(child.stdout)
+            sys.stderr.buffer.write(child.stderr)
+            return child.returncode
+        except subprocess.TimeoutExpired:
+            raise ValueError('document_resource_limit: PDF processing exceeded its resource budget') from None
+    print(json.dumps(main(), ensure_ascii=False, default=str, allow_nan=False))
+    return 0
+
+if __name__ == '__main__':
     try:
-        print(json.dumps(main(), ensure_ascii=False, default=str, allow_nan=False))
+        sys.exit(cli())
     except Exception as error:
-        print(json.dumps({'error': str(error)}, ensure_ascii=False), file=sys.stderr)
+        emit_error(error)
         sys.exit(2)

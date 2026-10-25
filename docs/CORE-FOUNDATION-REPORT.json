@@ -1,0 +1,625 @@
+{
+  "status": "active_verified",
+  "release": "2026.10.25.28",
+  "source": "2.txt",
+  "source_read_in_full": true,
+  "catalog": {
+    "schema_version": 1,
+    "engine": "harmonika-shared-core",
+    "source_sha256": "2969c64c4ae833c38968de475331f96b8319ca46ab3c1dcf149bf82ff540c619",
+    "catalog_size": 99,
+    "readiness": {
+      "available": 12,
+      "context_required": 19,
+      "local_only": 6,
+      "native_endpoint": 2,
+      "unavailable": 60
+    },
+    "features": {
+      "bounded_data": true,
+      "core_sse": false,
+      "core_websocket": false,
+      "native_mcp_tools": false,
+      "private_memory": true,
+      "bounded_workflows": true,
+      "workspace_adapters": true,
+      "chat_gateway_adapter": true,
+      "workflow_scheduler": false,
+      "host_filesystem_access": false,
+      "host_shell_access": false,
+      "host_secret_access": false,
+      "outbound_messages": false
+    },
+    "limits": {
+      "input_bytes": 131072,
+      "data_input_bytes": 65536,
+      "output_bytes": 262144,
+      "global_active": 2,
+      "per_actor_active": 1,
+      "per_actor_per_minute": 60,
+      "timeout_seconds": 20,
+      "memory_records_per_actor": 100,
+      "memory_value_bytes": 16384,
+      "memory_actor_bytes": 1048576,
+      "state_global_bytes": 104857600,
+      "memory_ttl_max_seconds": 604800,
+      "workflow_steps": 12,
+      "workflow_budget_seconds": 15
+    },
+    "registration_is_not_runtime_readiness": true
+  },
+  "contributors": {
+    "codex": "integration, boundary, encrypted state review, numeric/chart fixes, tests, deployment",
+    "opencode": "bounded data module and tests"
+  },
+  "tests": {
+    "core_unittest": 101,
+    "release_unittest": 10,
+    "master_regression": 86,
+    "mobile_regression": 104,
+    "gateway_go": "passed",
+    "private_staging": {
+      "local_tools": 12,
+      "unavailable_local_rejections": 66
+    },
+    "fixture_cleanup": "passed_four_temporary_tokens_two_workspaces_and_eight_encrypted_rows",
+    "unauthenticated_https": "401_missing_api_key"
+  },
+  "gaps": [
+    {
+      "id": "file.delete",
+      "status": "unavailable",
+      "reason": "scoped_adapter_required"
+    },
+    {
+      "id": "file.move",
+      "status": "unavailable",
+      "reason": "scoped_adapter_required"
+    },
+    {
+      "id": "process.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "process.kill",
+      "status": "unavailable",
+      "reason": "scoped_adapter_required"
+    },
+    {
+      "id": "code.run.sql",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.fetch",
+      "status": "unavailable",
+      "reason": "network_adapter_not_bound"
+    },
+    {
+      "id": "web.search",
+      "status": "unavailable",
+      "reason": "network_adapter_not_bound"
+    },
+    {
+      "id": "web.scrape",
+      "status": "unavailable",
+      "reason": "network_adapter_not_bound"
+    },
+    {
+      "id": "web.preview",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "web.screenshot",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "http.request",
+      "status": "unavailable",
+      "reason": "network_adapter_not_bound"
+    },
+    {
+      "id": "api.call",
+      "status": "unavailable",
+      "reason": "network_adapter_not_bound"
+    },
+    {
+      "id": "webhook.send",
+      "status": "unavailable",
+      "reason": "network_adapter_not_bound"
+    },
+    {
+      "id": "data.read_excel",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "db.connect",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "db.query",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "db.migrate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "doc.read_pdf",
+      "status": "local_only",
+      "reason": "local_document_runtime_required"
+    },
+    {
+      "id": "doc.read_docx",
+      "status": "local_only",
+      "reason": "local_document_runtime_required"
+    },
+    {
+      "id": "doc.create_pdf",
+      "status": "local_only",
+      "reason": "local_document_runtime_required"
+    },
+    {
+      "id": "doc.create_docx",
+      "status": "local_only",
+      "reason": "local_document_runtime_required"
+    },
+    {
+      "id": "doc.create_xlsx",
+      "status": "local_only",
+      "reason": "local_document_runtime_required"
+    },
+    {
+      "id": "doc.create_pptx",
+      "status": "local_only",
+      "reason": "local_document_runtime_required"
+    },
+    {
+      "id": "doc.convert",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "doc.ocr",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "llm.embed",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "vision.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "image.generate",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "image.edit",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.transcribe",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "audio.synthesize",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "video.analyze",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rag.query",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "rag.index",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "git.push",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "docker.build",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "docker.run",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "docker.ps",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "env.get",
+      "status": "unavailable",
+      "reason": "scoped_adapter_required"
+    },
+    {
+      "id": "env.set",
+      "status": "unavailable",
+      "reason": "scoped_adapter_required"
+    },
+    {
+      "id": "secret.get",
+      "status": "unavailable",
+      "reason": "scoped_adapter_required"
+    },
+    {
+      "id": "cron.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "cron.list",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "knowledge.add",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "knowledge.search",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "knowledge.graph",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "email.send",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "email.read",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "chat.send",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "notification.push",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "sms.send",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "calendar.create",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "calendar.list",
+      "status": "unavailable",
+      "reason": "authorized_connector_required"
+    },
+    {
+      "id": "system.monitor",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.network",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.battery",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.screenshot",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.clipboard",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.notify",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.audio",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.open",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "system.url",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "workflow.schedule",
+      "status": "unavailable",
+      "reason": "scheduler_not_configured"
+    },
+    {
+      "id": "trigger.on_event",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "macro.record",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    },
+    {
+      "id": "macro.play",
+      "status": "unavailable",
+      "reason": "implementation_missing"
+    }
+  ],
+  "notes": [
+    "33 REST integrations include19 workspace-dependent adapters and2 existing chat routes; not33 new independent engines.",
+    "Charts return Vega-Lite specifications, not rendered images.",
+    "Workflow steps use explicit input; no dynamic output interpolation or scheduler.",
+    "Git commit was not executed in acceptance testing.",
+    "Fraud engine remains deferred."
+  ],
+  "customer_data_modified": false,
+  "activation": {
+    "catalog_size": 99,
+    "readiness": {
+      "available": 12,
+      "context_required": 19,
+      "local_only": 6,
+      "native_endpoint": 2,
+      "unavailable": 60
+    },
+    "activation_backup": "/var/backups/harmonika-core/20261024T214457Z",
+    "status": "active_https_verified",
+    "other_service_pids_unchanged": true,
+    "services_restarted": [
+      "harmonika-master-skills",
+      "harmonika-web-chat-live"
+    ],
+    "service_added": "harmonika-shared-core",
+    "production_state_from_fixtures": false,
+    "fixture_cleanup_verified": true,
+    "encrypted_fixture_rows_remaining": {
+      "actors": 0,
+      "memory": 0,
+      "workflows": 0,
+      "idempotency": 0
+    },
+    "master_catalog": {
+      "schema_version": 1,
+      "declared_skills": 1507,
+      "declared_engine_total": 1408,
+      "source_occurrences": 1203,
+      "source_unique": 1200,
+      "duplicates": {
+        "rebuild.apply_diff": 4
+      },
+      "source_sha256": "f7bf3f4fc34d6b0063ac7d8f1ce6b9a5fd08ce594bbb95317067b97302dee31a",
+      "master_exact_registered": 7,
+      "master_domain_ambiguous": 7,
+      "existing_registered": 601,
+      "catalog_size": 1881,
+      "readiness": {
+        "available": 29,
+        "context_required": 596,
+        "local_only": 27,
+        "unavailable": 1168,
+        "restricted": 54,
+        "domain_ambiguous": 7
+      },
+      "features": {
+        "consolidated_catalog": true,
+        "defensive_input_analysis": true,
+        "isolated_html_browser": true,
+        "registered_browser_profiles_access": false,
+        "autonomous_exploitation": false,
+        "stealth_bypass": false,
+        "live_customer_access": false
+      },
+      "limits": {
+        "request_bytes": 1048576,
+        "analyzer_json_bytes": 262144,
+        "output_bytes": 262144,
+        "json_depth": 20,
+        "global_active": 2,
+        "per_actor_active": 1,
+        "analyses_per_minute": 60,
+        "analysis_timeout_seconds": 15,
+        "browser_timeout_seconds": 40
+      },
+      "registration_is_not_runtime_readiness": true,
+      "related_domains": {
+        "mobile_builder": {
+          "capabilities_endpoint": "/v1/mobile-builder/capabilities",
+          "skills_endpoint": "/v1/mobile-builder/skills",
+          "catalog_size": 214
+        },
+        "shared_core": {
+          "capabilities_endpoint": "/v1/core/capabilities",
+          "skills_endpoint": "/v1/core/skills",
+          "catalog_size": 99
+        }
+      }
+    }
+  },
+  "https_smoke": {
+    "local_operations_tested": 12,
+    "local_ids": [
+      "data.read_csv",
+      "data.read_json",
+      "data.transform",
+      "data.analyze",
+      "data.visualize",
+      "data.export",
+      "memory.set",
+      "memory.get",
+      "memory.search",
+      "workflow.define",
+      "workflow.run",
+      "memory.clear"
+    ],
+    "workspace_adapters_tested": 19,
+    "workspace_adapter_ids": [
+      "file.write",
+      "file.read",
+      "file.edit",
+      "file.list",
+      "file.search",
+      "file.grep",
+      "code.scaffold",
+      "shell.exec",
+      "shell.background",
+      "code.run.python",
+      "code.run.node",
+      "code.run.shell",
+      "code.lint",
+      "code.format",
+      "code.test",
+      "git.commit",
+      "system.info",
+      "git.status",
+      "git.diff"
+    ],
+    "actual_python_execution": true,
+    "workspace_file_read_write_edit": true,
+    "workspace_ownership_and_write_execution_permissions": true,
+    "chat_adapters": [
+      {
+        "id": "llm.complete",
+        "http": 200,
+        "choices": 1
+      },
+      {
+        "id": "llm.chat",
+        "http": 200,
+        "choices": 1
+      }
+    ],
+    "memory_isolation_precision_replay": true,
+    "workflow_real_steps_and_replay": true,
+    "unavailable_and_local_only_rejected": 66,
+    "customer_data_modified": false,
+    "synthetic_workspaces": [
+      "9bc6bce4-2a28-4ab8-ad3d-84570c0eb034",
+      "7536fa86-f5d3-4f1d-9083-0e5558762f01"
+    ],
+    "fixture_actor_ids": [
+      83,
+      84,
+      85,
+      86
+    ]
+  },
+  "tui": {
+    "doctor": {
+      "ok": true,
+      "release": "2026.10.25.28",
+      "upstream": "0.98.1",
+      "binary_verified": true,
+      "runtime_verified": true,
+      "mcp_protocol": "ok",
+      "skills": 19,
+      "lsp": [
+        "css",
+        "html",
+        "json",
+        "python",
+        "typescript"
+      ],
+      "documents": {
+        ".docx": true,
+        ".xlsx": true,
+        ".pptx": true,
+        ".pdf": true
+      },
+      "browser": {
+        "chromium": true
+      },
+      "automatic_update": false,
+      "active_sessions_untouched": true
+    },
+    "core_capabilities_verified": {
+      "available": 12,
+      "context_required": 19,
+      "local_only": 6,
+      "native_endpoint": 2,
+      "unavailable": 60
+    },
+    "real_cli_read_csv_completed": true,
+    "public_signature_sha256_verified": true,
+    "package": {
+      "automatic_update": false,
+      "binary_included": false,
+      "package_sha256": "0bba69ef22366af4101ded20abc0887dd6d1f5265bda27d2fa56216bb9dfe082",
+      "package_size": 310737,
+      "package_url": "https://chat.harmonika.id/assets/harmonika-terminal/harmonika-terminal-2026.10.25.28.zip",
+      "product": "Harmonika Terminal",
+      "release": "2026.10.25.28",
+      "upstream_version": "0.98.1"
+    },
+    "update_check": {
+      "ok": true,
+      "current": "2026.10.25.28",
+      "latest": "2026.10.25.28",
+      "update_available": false,
+      "automatic_update": false,
+      "catalog": "https://chat.harmonika.id/assets/harmonika-terminal/stable.json",
+      "package_url": "https://chat.harmonika.id/assets/harmonika-terminal/harmonika-terminal-2026.10.25.28.zip"
+    }
+  },
+  "source_files_sha256": {
+    "backend/core_engine/service.py": "98f0b1fc347b39588429d01ad6ade788645c96e73c28cd0b055bb85910c3b315",
+    "backend/core_engine/registry.py": "fb3adefac255157ed364dab3f30d6d7644a506b1b0a21ac92f2898d146831a54",
+    "backend/core_engine/data_tools.py": "9664e2dcb22a7add5c09e258eeed484ea7b784c6f40b3b1e22bfbc9f21621626",
+    "backend/core_engine/__init__.py": "0e857ff4d521065ec5099a4c3b034ec2285fdaf453c4d8d689fe3722e4ec6ec9",
+    "backend/core_engine/state.py": "15f45ac642a97527bf4f1ba6b3382f68a45065b72e26575532d96bc0e3f27d08",
+    "runtime/tools/core_cli.py": "a0e8538c630052b7c38f491f74ea9e33219eace96306fcd41b6f0712efd1d652",
+    "backend/master_engine/public_ai_master.go": "80c3e757e6ab113643c06162715b97ce0f1d44b751ee7ddf644ca0a8c81fba5e",
+    "backend/master_engine/core_index.json": "1b04cf36c66a24c7ccf47f5526a71e771048d088015e23603dfd6c44863f69b8"
+  }
+}

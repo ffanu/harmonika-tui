@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "release": "2026.10.24.18",
+  "scope": "owner local Shared Skill Core and TUI",
+  "status": "verified_with_explicit_provider_limits",
+  "seo_operations_registered": 14,
+  "shared_operations_total": 23,
+  "guidance_skills": 12,
+  "readiness": {
+    "seo.backlinks": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.content": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.drift": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.ga4": {
+      "status": "unavailable",
+      "reason": "google_credentials_not_configured"
+    },
+    "seo.geo": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.keyword_cluster": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.local": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.page_audit": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.performance": {
+      "status": "degraded",
+      "reason": "live_pagespeed_provider_quota_and_network_required"
+    },
+    "seo.schema": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.search_console": {
+      "status": "unavailable",
+      "reason": "google_credentials_not_configured"
+    },
+    "seo.sitemap": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.technical": {
+      "status": "available",
+      "reason": null
+    },
+    "seo.visual": {
+      "status": "available",
+      "reason": "javascript_disabled_render_only"
+    }
+  },
+  "tests": {
+    "python": 340,
+    "legacy_documents": 7,
+    "node": 55,
+    "total": 402,
+    "failures": 0
+  },
+  "installed_smoke": {
+    "page_audit": "completed",
+    "keyword_cluster": "degraded",
+    "visual_screenshots": 2,
+    "visual_status": "degraded",
+    "visual_atomic_artifacts": true,
+    "visual_idempotency_metadata_replay": true,
+    "ga4_without_credentials": "unavailable",
+    "doctor_ok": true
+  },
+  "live_public_smoke": [
+    {
+      "operation": "seo.page_audit",
+      "status": "completed",
+      "seconds": 0.48,
+      "findings": 3,
+      "error": null
+    },
+    {
+      "operation": "seo.technical",
+      "status": "completed",
+      "seconds": 0.89,
+      "findings": 0,
+      "error": null
+    },
+    {
+      "operation": "seo.content",
+      "status": "completed",
+      "seconds": 0.46,
+      "findings": 4,
+      "error": null
+    },
+    {
+      "operation": "seo.schema",
+      "status": "completed",
+      "seconds": 0.41,
+      "findings": 0,
+      "error": null
+    },
+    {
+      "operation": "seo.sitemap",
+      "status": "completed",
+      "seconds": 0.42,
+      "findings": 3,
+      "error": null
+    },
+    {
+      "operation": "seo.local",
+      "status": "completed",
+      "seconds": 0.45,
+      "findings": 1,
+      "error": null
+    },
+    {
+      "operation": "seo.geo",
+      "status": "completed",
+      "seconds": 0.52,
+      "findings": 2,
+      "error": null
+    },
+    {
+      "operation": "seo.keyword_cluster",
+      "status": "degraded",
+      "seconds": 0.2,
+      "findings": 2,
+      "error": null
+    },
+    {
+      "operation": "seo.drift.capture",
+      "status": "completed",
+      "error": null
+    },
+    {
+      "operation": "seo.drift.compare",
+      "status": "completed",
+      "error": null
+    },
+    {
+      "operation": "seo.performance",
+      "status": "degraded",
+      "reason": "performance_rate_limited",
+      "http_status": 429
+    }
+  ],
+  "additional_live_smoke": [
+    {
+      "operation": "seo.visual",
+      "status": "degraded",
+      "screenshots": 2,
+      "atomic_output": true,
+      "seconds": 5.8,
+      "metadata_only_replay": true
+    },
+    {
+      "operation": "seo.search_console",
+      "status": "unavailable",
+      "reason": "google_credentials_not_configured"
+    },
+    {
+      "operation": "seo.ga4",
+      "status": "unavailable",
+      "reason": "google_credentials_not_configured"
+    },
+    {
+      "operation": "seo.backlinks",
+      "status": "completed",
+      "method": "provided_link_verification",
+      "source_scope": "same_site"
+    }
+  ],
+  "stop_smoke": {
+    "status": "stopped",
+    "owned_processes_observed": 6,
+    "owned_processes_still_running": 0,
+    "final_directory_exists": false,
+    "staging_left": 0
+  },
+  "team": {
+    "claude": "8 deterministic analyzers and methodology; 88 tests; independent integration review",
+    "opencode": "pinned SSRF-safe network transport and 44 tests",
+    "codex": "registry, worker routing, measurement/visual/drift/backlink/Google adapters, hardening, integration and final QA"
+  },
+  "closed_review_findings": [
+    "valueless HTML attributes",
+    "separate viewport fetch budgets",
+    "exclusive atomic visual publication",
+    "SEO journal artifact metadata only",
+    "Google-Extended training/grounding separated from Search",
+    "POST and credential redirect rejection",
+    "Google credential source checks"
+  ],
+  "limitations": [
+    "GSC/GA4 require private OAuth and principal/property allowlists; not connected",
+    "Anonymous PSI live smoke received HTTP429; no fabricated score",
+    "Visual snapshots disable JavaScript and may omit blocked resources",
+    "Keyword clustering without provided SERPs is lexical heuristic",
+    "Backlinks verify supplied sources only; no inventory provider connected",
+    "JSON-LD checks are selected rules, not complete Google rich results validation",
+    "No public HTTP/MCP SEO endpoint or website auto-publish enabled"
+  ],
+  "inference_routing_changed": false,
+  "server_services_restarted": false,
+  "user_sessions_terminated": false,
+  "native_binary_bytes_changed": false,
+  "credential_values_in_repository": false
+}

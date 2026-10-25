@@ -1,0 +1,80 @@
+[
+  {
+    "name": "black",
+    "version": "25.1.0",
+    "wheel": "black-25.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "bce2e264d59c91e52d8000d507eb20a9aca4a778731a08cfff7e5ac4a4bb7096"
+  },
+  {
+    "name": "click",
+    "version": "8.5.0",
+    "wheel": "click-8.5.0-py3-none-any.whl",
+    "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360"
+  },
+  {
+    "name": "coverage",
+    "version": "7.8.0",
+    "wheel": "coverage-7.8.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "d39fc4817fd67b3915256af5dda75fd4ee10621a3d484524487e33416c6f3543"
+  },
+  {
+    "name": "debugpy",
+    "version": "1.8.14",
+    "wheel": "debugpy-1.8.14-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "cf431c343a99384ac7eab2f763980724834f933a271e90496944195318c619e2"
+  },
+  {
+    "name": "mypy",
+    "version": "1.15.0",
+    "wheel": "mypy-1.15.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "5a95fb17c13e29d2d5195869262f8125dfdb5c134dc8d9a9d0aecf7525b10c2c"
+  },
+  {
+    "name": "mypy_extensions",
+    "version": "1.1.0",
+    "wheel": "mypy_extensions-1.1.0-py3-none-any.whl",
+    "sha256": "1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505"
+  },
+  {
+    "name": "packaging",
+    "version": "26.3",
+    "wheel": "packaging-26.3-py3-none-any.whl",
+    "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+  },
+  {
+    "name": "pathspec",
+    "version": "1.1.1",
+    "wheel": "pathspec-1.1.1-py3-none-any.whl",
+    "sha256": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189"
+  },
+  {
+    "name": "platformdirs",
+    "version": "4.13.5",
+    "wheel": "platformdirs-4.13.5-py3-none-any.whl",
+    "sha256": "53d3ec4280b815c1e0b02edad7f9ee8fda1ba9c0865dd9c2e6e63849ce82fc1e"
+  },
+  {
+    "name": "pytoolconfig",
+    "version": "1.3.1",
+    "wheel": "pytoolconfig-1.3.1-py3-none-any.whl",
+    "sha256": "5d8cea8ae1996938ec3eaf44567bbc5ef1bc900742190c439a44a704d6e1b62b"
+  },
+  {
+    "name": "rope",
+    "version": "1.13.0",
+    "wheel": "rope-1.13.0-py3-none-any.whl",
+    "sha256": "b435a0c0971244fdcd8741676a9fae697ae614c20cc36003678a7782f25c0d6c"
+  },
+  {
+    "name": "ruff",
+    "version": "0.11.8",
+    "wheel": "ruff-0.11.8-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "7f024d32e62faad0f76b2d6afd141b8c171515e4fb91ce9fd6464335c81244e5"
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "wheel": "typing_extensions-4.16.0-py3-none-any.whl",
+    "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+  }
+]

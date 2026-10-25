@@ -1,0 +1,28 @@
+[Unit]
+Description=Harmonika isolated full-stack website builder
+After=network.target docker.service harmonika-legal-media.service
+Requires=docker.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/builder-venv/bin/python -m web_builder.service
+Environment=HARMONIKA_BUILDER_ROOT=/var/lib/harmonika-builder
+Environment=HARMONIKA_BUILDER_PORT=18191
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/nonexistent
+UMask=0077
+MemoryMax=1G
+CPUQuota=100%
+TasksMax=128
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-builder
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=160
+[Install]
+WantedBy=multi-user.target

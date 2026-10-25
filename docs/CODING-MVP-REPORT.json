@@ -1,0 +1,164 @@
+{
+  "phase": "Engineering skills MVP",
+  "release": "2026.10.24.20",
+  "verified_at": "2026-10-24T00:53:23.529958+00:00",
+  "status": "active_verified",
+  "capabilities": {
+    "coding_workspaces": true,
+    "coding_agent": true,
+    "coding_sandbox": true,
+    "mvp_skills": 18,
+    "shared_registry_operations": 45,
+    "terminal_skill_guides": 14
+  },
+  "implementation": {
+    "Claude": "Secure file operations and race/negative tests; independent audit",
+    "OpenCode": "Async Docker sandbox, export helper, deadlock/watchdog tests",
+    "Codex": "Gateway, auth, jobs, COW persistence, approvals, agent loop, CLI, fixes, live deployment and final review"
+  },
+  "verification": {
+    "backend_python": {
+      "passed": 201,
+      "failed": 0,
+      "skipped": 0,
+      "environment": "Linux Python3.12, real Docker image"
+    },
+    "shared_registry": {
+      "passed": 33,
+      "failed": 0
+    },
+    "engineering_regression": {
+      "passed": 102,
+      "failed": 0
+    },
+    "seo_regression": {
+      "passed": 152,
+      "failed": 0
+    },
+    "release_tests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "go_gateway": "all tests pass; build pass",
+    "private_smoke": {
+      "ok": true,
+      "checks": [
+        "tenant_isolation",
+        "fs.write",
+        "fs.read",
+        "code.write",
+        "code.read",
+        "code.edit",
+        "fs.list",
+        "fs.tree",
+        "fs.glob",
+        "code.search",
+        "code.grep",
+        "exec.python",
+        "exec.node",
+        "exec.python",
+        "real_isolation",
+        "exec.shell",
+        "fs.read",
+        "tmpfs_roundtrip",
+        "exec.background",
+        "code.write",
+        "test.run",
+        "git.commit",
+        "git.status",
+        "git.diff",
+        "timeout",
+        "stop",
+        "event_replay"
+      ]
+    },
+    "production_https": {
+      "ok": true,
+      "checks": [
+        "18_schemas",
+        "Bearer_auth",
+        "principal_spoof_blocked",
+        "cross_token_404",
+        "automatic_code_write",
+        "automatic_exec_approval",
+        "real_python_42",
+        "idempotent_replay",
+        "conflicting_turn_409",
+        "event_replay",
+        "SSE_Last_Event_ID",
+        "SSE_automatic_chat"
+      ],
+      "total_seconds": 19.26
+    },
+    "terminal": {
+      "doctor_ok": true,
+      "release": "2026.10.24.20",
+      "mcp": "ok",
+      "native_sessions_untouched": true,
+      "automatic_update": false
+    },
+    "secret_scan_findings": 0
+  },
+  "contracts": {
+    "base_url": "https://chat.harmonika.id/v1/coding",
+    "automatic_chat": "POST /v1/chat/completions + workspace_id + Idempotency-Key",
+    "auth": "existing Bearer API key with chat/coding scope",
+    "approval": "exec.*, test.run, git.commit wait for explicit client approval; git inspection approval-free",
+    "recovery": "job status + SSE/JSON replay; interrupted turns never auto-repeat mutations"
+  },
+  "limits": {
+    "workspace_bytes": 16777216,
+    "file_bytes": 524288,
+    "files": 256,
+    "workspaces_per_token": 3,
+    "active_global": 2,
+    "active_per_token": 1,
+    "execution_requests_per_hour": 30,
+    "command_seconds_max": 120,
+    "agent_steps_max": 8,
+    "container_network": false
+  },
+  "fixed_review_findings": [
+    "FIFO block on read",
+    "sequential stdout/stderr deadlock",
+    "tmpfs last-mount source loss",
+    "Docker copy-up reset ownership",
+    "cancellation after publication",
+    "stuck cancelled file jobs",
+    "unsafe interrupted replay",
+    "stale approval preview on replay",
+    "cross-workspace idempotency conflict",
+    "stop race overwrote completed result",
+    "SSE terminal event/pagination loss",
+    "models-only token coding scope",
+    "periodic metadata pruning",
+    "export failure must not claim persisted changes",
+    "large SSE output chunks split without silent loss"
+  ],
+  "cleanup": {
+    "isolated_api_tokens_deleted": true,
+    "isolated_workspace_data_deleted": true,
+    "owned_job_containers_and_volumes_clean": true
+  },
+  "boundaries": [
+    "188-skill roadmap not fully implemented; this release completes the 18 MVP operations",
+    "container isolation shares host kernel",
+    "no external network/package install/deploy/debugger; only image-installed Python/Node/Git runtimes",
+    "remote workspace does not automatically contain local terminal project",
+    "syntax-aware symbol search is Python AST; other languages best effort",
+    "no load benchmark; local macOS tests skip unavailable backend dependencies, server suite has no skips"
+  ],
+  "source_sha256": {
+    "backend/coding_runtime/catalog.py": "0ababeb3e5e639556341d674529848c4be545af9959b45cb73584ba58fa8b166",
+    "backend/coding_runtime/service.py": "0ab7cbd370dfb377f4a243508db7b642f2db5d313ef7366c2f7d59897c7d8d05",
+    "backend/coding_runtime/files.py": "a3817c09dbc4b053ebeb41a5a59136bebbf0b0f0ce5882384e046bca58c48e50",
+    "backend/coding_runtime/__init__.py": "ce3ea3783286702371785b25638c6fb3e18e008ca033779b5ce5d5efb8adbce1",
+    "backend/coding_runtime/core.py": "0e737a433052c827eb71495778f0631933988a47b23ad0c738a35b83f6e267a8",
+    "backend/coding_runtime/sandbox.py": "21131acca8f756e77e13db335a706427899097eba5416b292569218e6f21f5e5",
+    "backend/coding_runtime/volume_io.py": "a7671e365b9d284893bb9c8c93d67474f25d6a24475779091aa2b4ccd7d0375c",
+    "backend/coding_runtime/agent.py": "3853f08a1767eeffc9b4a95d5344d22abf4696568b222093441e11beec481288",
+    "backend/coding_runtime/public_ai_coding.go": "c6368a2b23dd195b620887491ffbee03f9d3a1c5ae4b82511f1a5e0ea8082de2",
+    "runtime/tools/coding_cli.py": "f23ec0aeff8866cd887fb870176abbbd8b883f9f5675abd7e73fc5bce6cd0f06",
+    "runtime/tools/coding_catalog.py": "0ababeb3e5e639556341d674529848c4be545af9959b45cb73584ba58fa8b166"
+  }
+}

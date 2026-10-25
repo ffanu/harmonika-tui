@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-24",
+  "status": "deployed_verified",
+  "endpoint": "https://chat.harmonika.id/v1/chat/completions",
+  "authentication": "Existing Telegram-issued Bearer key; no rotation or tier elevation",
+  "selection": "Automatic model selection from user request and supplied conversation; bounded SEO relevance prefilter; no manual skill_id",
+  "scope": {
+    "public_operations": 12,
+    "ready_or_degraded": 10,
+    "unavailable_account_adapters": [
+      "seo.search_console",
+      "seo.ga4"
+    ],
+    "local_only": [
+      "seo.visual",
+      "seo.drift"
+    ],
+    "arbitrary_shell_or_files": false,
+    "cross_customer_history": false
+  },
+  "limits": {
+    "max_tools_per_request": 3,
+    "max_active_per_token": 1,
+    "max_active_global": 2,
+    "deadline_seconds": 150,
+    "worker_deadline_seconds": 70
+  },
+  "security": [
+    "Fixed allowlist and Python isolated worker as non-login unprivileged user",
+    "Private network URLs blocked by pinned SafeFetcher",
+    "Targets must appear in user messages, not retrieved results",
+    "One-shot plan; summarizer has no tools",
+    "No raw prompts, URLs, keys or tool results in audit logs",
+    "No inherited Google credentials; account adapters fail unavailable",
+    "Unapproved generated links/images stripped",
+    "Explicit client function calling preserved",
+    "Existing quota admission once per chat request"
+  ],
+  "verification": {
+    "go_race_suite": "passed",
+    "go_auto_unit_tests": 9,
+    "python_boundary_tests": 8,
+    "https_public_smoke": {
+      "automatic_audit_http": 200,
+      "real_tool_executions": 1,
+      "audit_seconds": 10.687,
+      "sse_audit_http": 200,
+      "sse_audit_seconds": 9.597,
+      "sse_done": true,
+      "ordinary_chat_http": 200,
+      "ordinary_chat_seconds": 9.796,
+      "unauthenticated_http": 401,
+      "capability_automatic_skills": true
+    },
+    "worker_private_url_denied": true,
+    "worker_forged_actor_denied": true,
+    "worker_shell_denied": true,
+    "temporary_test_token_and_own_request_rows_cleaned": true,
+    "changed_source_secret_scan_findings": 0
+  },
+  "deployment": {
+    "restarted_service": "harmonika-web-chat-live.service",
+    "health_http": 200,
+    "engine_service_restarted": false,
+    "tui_binary_modified": false,
+    "other_domain_or_cs_code_modified": false,
+    "backup": "Server-local pre-deployment backup prepared; source hashes checked before applying"
+  },
+  "team": {
+    "Codex": "implementation, integration, deployment and live verification",
+    "Claude": "read-only architecture/security review; one-shot planning adopted",
+    "OpenCode": "read-only worker contract, dependency and allowlist review"
+  },
+  "limitations": [
+    "Automatic server routing currently covers read-only SEO, not every local skill",
+    "Search Console and GA4 need an authorized token-to-property connector",
+    "Visual screenshots and drift artifact delivery not public",
+    "SSE keepalives during work; synthesized answer currently emitted after completion, not token streaming",
+    "Semantic correctness and prompt-injection immunity cannot be guaranteed; validated operation and target boundaries constrain actions"
+  ],
+  "superseded_by": "ENGINEERING-REPORT.json"
+}

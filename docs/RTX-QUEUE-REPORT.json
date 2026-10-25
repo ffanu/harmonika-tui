@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "service": "harmonika-rtx-queue.service",
+  "base_url": "http://127.0.0.1:18186",
+  "worker_transport": "private_ssh_tunnel",
+  "generate_real": "completed",
+  "job_id": "job_1f6fb10eccdf440daff6dec9eee77840",
+  "artifact": {
+    "file_id": "file_88ccc9409d71467da50ed757d5aba7cb",
+    "mime_type": "image/png",
+    "size_bytes": 427921,
+    "width": 512,
+    "height": 512,
+    "sha256": "35bf55f225525944d7181be6789018d703097d89d1a5cada597b72cf75ae0768",
+    "status": "ready"
+  },
+  "seconds": 0.82,
+  "idempotency": "same_job_no_second_render",
+  "auth_without_token": 401,
+  "vision_real_ready": false,
+  "existing_chat_services_restarted": false
+}

@@ -1,0 +1,145 @@
+{
+  "product": "Harmonika Terminal",
+  "synthetic_fixture": true,
+  "checks": {
+    "clipboard_backup": {
+      "available": true,
+      "representations": 2,
+      "backup_kept_in_memory": true,
+      "original_change_count": 1411,
+      "error": null
+    },
+    "pty_launch": {
+      "ok": true,
+      "pid": 68335
+    },
+    "startup_mouse_enable_sequences": [
+      "1002",
+      "1006"
+    ],
+    "startup_ready": {
+      "ok": true,
+      "seconds": 0.25,
+      "onboarding_ready_prompt": true
+    },
+    "fixture_response_visible": {
+      "ok": true,
+      "model_requests": 2
+    },
+    "synthetic_config_isolated": {
+      "ok": true,
+      "note": "model traffic only reached the loopback fixture gateway"
+    },
+    "no_eager_import_or_tool_use": {
+      "ok": true
+    },
+    "sgr_wheel_scroll": {
+      "ok": true,
+      "visible_marker_span_at_bottom": {
+        "top": 153,
+        "bottom": 169,
+        "count": 17
+      },
+      "visible_marker_span_after_wheel_up": {
+        "top": 143,
+        "bottom": 163,
+        "count": 21
+      },
+      "visible_marker_span_after_wheel_down": {
+        "top": 153,
+        "bottom": 169,
+        "count": 17
+      },
+      "screen_hash_changed": true,
+      "wheel_up_single_tick_deltas": [
+        -1
+      ],
+      "wheel_down_single_tick_tops": [
+        144,
+        145
+      ],
+      "wheel_down_single_tick_verdict": "works:+1_per_tick",
+      "emulator_validation": "MiniTerm agrees with independent pyte on every checkpoint (see validate-wheel-pyte.py)",
+      "note": "top visible marker index decreases on wheel-up and returns on wheel-down; singleton ticks verified in both directions"
+    },
+    "native_clipboard_copy": {
+      "ok": true,
+      "path": "drag_select_code_autocopy",
+      "copied_marker_count": 3,
+      "copied_sample": [
+        "HKSMOKE-L160",
+        "HKSMOKE-L161"
+      ],
+      "copied_sha256": "a064161d8235e349",
+      "exact_code_slice_of_response": true,
+      "physical_clipboard": true,
+      "note": "copied text verified as a literal contiguous substring of the fixture code block, including partial boundary lines; content kept out of logs",
+      "copy_attempts": [
+        {
+          "row": 10,
+          "change_before": 1413,
+          "change_after": 1414,
+          "raw_repaint_bytes": 903,
+          "clip_marker_count": 3
+        }
+      ]
+    },
+    "resize_and_still_alive": {
+      "ok": true,
+      "grid_after_80x24": [
+        24,
+        80
+      ],
+      "markers_after_resize_scroll": [
+        159,
+        160,
+        161,
+        "...",
+        167,
+        168,
+        169
+      ],
+      "markers_after_restore_scroll": [
+        167,
+        168,
+        169
+      ]
+    },
+    "mouse_disable_after_exit": {
+      "ok": true,
+      "altscreen_exit": true,
+      "child_exit_code": 0,
+      "graceful_ctrl_c": true,
+      "note": "pty EOF can lag behind app exit while the runtime's MCP helper holds the slave; clean exit code 0 plus disable sequences is the graceful signal"
+    },
+    "binary_unmodified": {
+      "ok": true,
+      "sha256_prefix": "1e9455f58a9a4e06"
+    },
+    "fixture_model_only": {
+      "ok": true,
+      "requests": 2
+    },
+    "clipboard_restore": {
+      "ok": true,
+      "stdout": "{\"ok\":true,\"failed\":0,\"redeclared\":0,\"changeCount\":\"1416\"}",
+      "byte_identical_readback": true,
+      "representations_restored": 2
+    }
+  },
+  "events": [],
+  "fixture_gateway_port": 64123,
+  "product_findings": [
+    {
+      "id": "chat-wheel-down-singleton-dropped-RETRACTED",
+      "status": "retracted_after_audit",
+      "component": "Harmonika TUI chat viewport (SGR mouse wheel handling)",
+      "initial_claim": "single wheel-down SGR tick appeared not to scroll the chat viewport",
+      "audit_result": "claim was a harness artifact: the smoke's MiniTerm emulator lacked DECSTBM scroll regions (CSI r), region-aware LF/RI/IND and ECH (CSI X); the app scrolls via ESC[4;24r + ESC M (up) / LF-at-region-bottom (down) plus single-row repaints, which MiniTerm dropped for the down direction",
+      "evidence": "raw escape stream shows one new bottom-row repaint per singleton down tick (marker 167 then 168 with only ~136 bytes emitted); after fixing MiniTerm, MiniTerm and the independent pyte emulator agree on every checkpoint and singleton down moves +1 line per tick until the list bottom clamps it",
+      "product_verdict": "wheel handling correct in both directions in the shipped frozen binary; no product defect"
+    }
+  ],
+  "elapsed_seconds": 18.86,
+  "ok": true
+}

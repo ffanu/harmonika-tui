@@ -1,0 +1,89 @@
+{
+  "status": "active_with_explicit_limitations",
+  "verified_at": "2026-10-25T01:25:15.107542+00:00",
+  "activation": {
+    "status": "active_verified",
+    "backup": "/var/backups/harmonika-media/20261025T012145Z",
+    "worker_capabilities": {
+      "ready": true,
+      "generate": true,
+      "analyze": false,
+      "references": false
+    },
+    "only_restarted": [
+      "harmonika-rtx-queue",
+      "harmonika-web-chat-live"
+    ],
+    "unrelated_ten_pids_unchanged": true,
+    "gpu_or_renderer_changed": false,
+    "private_secret_exposed": false
+  },
+  "public_gpu_smoke": {
+    "status": "passed",
+    "scenarios": [
+      "unauthenticated_rejected",
+      "truthful_capabilities",
+      "idempotency_required",
+      "accepted_async_job",
+      "idempotency_single_job",
+      "foreign_job_rejected",
+      "private_file_ownership",
+      "png_integrity"
+    ],
+    "elapsed_seconds": 20.11,
+    "render": {
+      "mime_type": "image/png",
+      "size_bytes": 512824,
+      "width": 512,
+      "height": 512,
+      "sha256": "286f1f1d312676c006c1359e862a587b8a415395f008622ab1e272cfc385b402"
+    },
+    "actual_windows_gpu_render": true,
+    "image_analysis_ready": false,
+    "fixture_cleanup": "completed"
+  },
+  "installed_tui_mcp_smoke": {
+    "status": "passed",
+    "installed_release": "2026.10.25.31",
+    "transport": "stdio MCP \u2192 HTTPS \u2192 private queue \u2192 Windows GPU",
+    "elapsed_seconds": 6.926,
+    "image_bytes": 507414,
+    "provider": "Harmonika Ai",
+    "output_mode": "0600",
+    "image_base64_in_tool_context": false,
+    "sha256": "e2c56db496fb5eee86761e9c821f6976a4a80ba2187e2c236309daa9f399adf9"
+  },
+  "tests": {
+    "async_client": 13,
+    "mcp_branding": 33,
+    "linux_queue": 24,
+    "go_gateway": "passed",
+    "public_ownership_gpu": "passed"
+  },
+  "gpu_vision_ready": false,
+  "gpu_references_ready": false,
+  "existing_user_sessions_restarted": false,
+  "native_interaction_report": "NATIVE-INTERACTION-REPORT.json",
+  "automatic_updates": false,
+  "native_wheel_crosscheck": "NATIVE-WHEEL-CROSSCHECK.json",
+  "native_mouse_clipboard": {
+    "status": "verified_active",
+    "sgr_tracking": [
+      "1002",
+      "1006"
+    ],
+    "slow_and_fast_scroll": "passed_both_directions",
+    "resize": "passed",
+    "code_clipboard": "real_macOS_exact_selected_code",
+    "clipboard_final_qa_snapshot_restored": true,
+    "binary_modified": false,
+    "hardware_mouse_manual_test": false,
+    "linux_desktop_test": false
+  },
+  "mentors": {
+    "Codex": "backend bridge, SDK, deployment, final review and independent smoke",
+    "OpenCode": "native PTY, mouse, clipboard and cross-emulator audit",
+    "Claude": "not involved"
+  },
+  "public_fixture_token_cleanup": "verified"
+}

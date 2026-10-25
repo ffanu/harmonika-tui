@@ -63,6 +63,10 @@ class Releases(unittest.TestCase):
         self.files['tools/helper.cjs']=b'const = ;'
         with self.assertRaisesRegex(ValueError,'javascript_preflight'):m.install_package(self.package(),self.root)
         self.unchanged()
+    def test_python_syntax_failure_does_not_activate_release(self):
+        self.files['skills/harmonika-documents/scripts/broken.py']=b'def invalid(:'
+        with self.assertRaisesRegex(ValueError,'python_preflight_failed'):m.install_package(self.package(),self.root)
+        self.unchanged()
     def test_fails_closed_on_modified_binary(self):
         current,_=m.active(self.root);(current/'harmonika').write_bytes(b'broken')
         with self.assertRaisesRegex(ValueError,'binary_checksum'):m.active(self.root)

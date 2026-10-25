@@ -1,0 +1,28 @@
+[Unit]
+Description=Harmonika Phase2 isolated staging runtime
+After=docker.service network.target
+Requires=docker.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai/coding-phase2-stage
+ExecStart=/opt/harmonika-ai/coding-venv/bin/python -m coding_runtime.service
+Environment=HARMONIKA_CODING_ROOT=/var/lib/harmonika-coding-phase2-staging
+Environment=HARMONIKA_CODING_PORT=18188
+Environment=HARMONIKA_CODING_PHASE2_ENABLED=true
+Environment=HARMONIKA_CODING_IMAGE=harmonika-coding:20261024-phase2
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/nonexistent
+UMask=0077
+MemoryMax=1G
+TasksMax=128
+CPUQuota=200%
+LimitNOFILE=512
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=40
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-coding-phase2-staging
+ReadOnlyPaths=/etc/harmonika-ai/coding-runtime.token /etc/harmonika-ai/internal-agent.token

@@ -1,0 +1,1316 @@
+{
+  "build.run": {
+    "id": "build.run",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript"
+          ]
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "javascript",
+      "typescript",
+      "jsx",
+      "tsx"
+    ],
+    "limitations": [
+      "Single Python entry-point zipapp or esbuild JS/TS/JSX/TSX bundle; not an arbitrary project build command"
+    ]
+  },
+  "code.diff": {
+    "id": "code.diff",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "new_content": {
+          "type": "string",
+          "maxLength": 524288
+        }
+      },
+      "required": [
+        "path",
+        "new_content"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": []
+  },
+  "code.edit": {
+    "id": "code.edit",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "old": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "new": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "old",
+        "new"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "code.format": {
+    "id": "code.format",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript",
+            "json"
+          ]
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "javascript",
+      "typescript",
+      "json"
+    ]
+  },
+  "code.grep": {
+    "id": "code.grep",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "literal": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "pattern"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "code.patch": {
+    "id": "code.patch",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "patch": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "patch",
+        "expected_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [],
+    "limitations": [
+      "One existing UTF-8 file with exact unified diff context and SHA256; no binary or multi-file patch"
+    ]
+  },
+  "code.read": {
+    "id": "code.read",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "start_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "code.rename": {
+    "id": "code.rename",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000,
+          "description": "0-based character column in the source line"
+        },
+        "new_name": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "line",
+        "column",
+        "new_name"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ],
+    "limitations": [
+      "Python semantic refactoring through rope; unsupported or ambiguous targets fail explicitly"
+    ]
+  },
+  "code.search": {
+    "id": "code.search",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "code.write": {
+    "id": "code.write",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "content": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "overwrite": {
+          "type": "boolean"
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "debug.attach": {
+    "id": "debug.attach",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "status",
+            "continue",
+            "next",
+            "inspect",
+            "stop"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "session_id": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 300
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ],
+    "limitations": [
+      "Owned sandbox Python launch only; no host PID, no expression evaluate, hard TTL 300s and idle TTL 60s"
+    ]
+  },
+  "debug.breakpoint": {
+    "id": "debug.breakpoint",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          }
+        }
+      },
+      "required": [
+        "session_id",
+        "path",
+        "lines"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ],
+    "limitations": [
+      "Owned sandbox Python launch only; no host PID, no expression evaluate, hard TTL 300s and idle TTL 60s"
+    ]
+  },
+  "exec.background": {
+    "id": "exec.background",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "maxLength": 16384
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "exec.node": {
+    "id": "exec.node",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "args": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "exec.python": {
+    "id": "exec.python",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "args": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "exec.shell": {
+    "id": "exec.shell",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "maxLength": 16384
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "format.run": {
+    "id": "format.run",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript",
+            "json"
+          ]
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "javascript",
+      "typescript",
+      "json"
+    ]
+  },
+  "fs.glob": {
+    "id": "fs.glob",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "pattern"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "fs.list": {
+    "id": "fs.list",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "fs.read": {
+    "id": "fs.read",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "start_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "fs.tree": {
+    "id": "fs.tree",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "fs.write": {
+    "id": "fs.write",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "content": {
+          "type": "string",
+          "maxLength": 524288
+        },
+        "overwrite": {
+          "type": "boolean"
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "git.commit": {
+    "id": "git.commit",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "paths": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "author_name": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "author_email": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "git.diff": {
+    "id": "git.diff",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "staged": {
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "git.status": {
+    "id": "git.status",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "lint.run": {
+    "id": "lint.run",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript"
+          ]
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "javascript",
+      "typescript"
+    ],
+    "limitations": [
+      "Python ruff; JavaScript syntax check; TypeScript compiler diagnostics, not eslint"
+    ]
+  },
+  "pkg.install": {
+    "id": "pkg.install",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "manager": {
+          "type": "string",
+          "enum": [
+            "python",
+            "node"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "version": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "manager",
+        "name",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "node"
+    ],
+    "limitations": [
+      "Offline allowlist only; no package registry network or lifecycle scripts"
+    ]
+  },
+  "pkg.list": {
+    "id": "pkg.list",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "manager": {
+          "type": "string",
+          "enum": [
+            "python",
+            "node"
+          ]
+        }
+      },
+      "required": [
+        "manager"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "node"
+    ]
+  },
+  "refactor.dead_code": {
+    "id": "refactor.dead_code",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "apply": {
+          "type": "boolean"
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ],
+    "limitations": [
+      "Unused import diagnostics; apply removes only safe unused imports, not arbitrary dead functions"
+    ]
+  },
+  "refactor.extract": {
+    "id": "refactor.extract",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "start_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "start_line",
+        "end_line",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ],
+    "limitations": [
+      "Python semantic refactoring through rope; unsupported or ambiguous targets fail explicitly"
+    ]
+  },
+  "refactor.rename": {
+    "id": "refactor.rename",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "1-based source line"
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000,
+          "description": "0-based character column in the source line"
+        },
+        "new_name": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "expected_sha256": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "SHA256 returned by code.read for this exact source version"
+        }
+      },
+      "required": [
+        "path",
+        "line",
+        "column",
+        "new_name"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ],
+    "limitations": [
+      "Python semantic refactoring through rope; unsupported or ambiguous targets fail explicitly"
+    ]
+  },
+  "scaffold.api": {
+    "id": "scaffold.api",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "route": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "route",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python"
+    ]
+  },
+  "scaffold.component": {
+    "id": "scaffold.component",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "path",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "jsx"
+    ]
+  },
+  "scaffold.project": {
+    "id": "scaffold.project",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "template": {
+          "type": "string",
+          "enum": [
+            "python_http",
+            "node_http"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "path",
+        "template",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": true,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "javascript"
+    ],
+    "templates": [
+      "python_http",
+      "node_http"
+    ]
+  },
+  "test.coverage": {
+    "id": "test.coverage",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "runner": {
+          "type": "string",
+          "enum": [
+            "python_unittest",
+            "node_test"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        }
+      },
+      "required": [
+        "runner"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "node"
+    ]
+  },
+  "test.run": {
+    "id": "test.run",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "runner": {
+          "type": "string",
+          "enum": [
+            "python_unittest",
+            "node_test",
+            "npm_test"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "filter": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      },
+      "required": [
+        "runner"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 1,
+    "supported_languages": []
+  },
+  "test.single": {
+    "id": "test.single",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "runner": {
+          "type": "string",
+          "enum": [
+            "python_unittest",
+            "node_test"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "runner",
+        "path",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": true,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "node"
+    ]
+  },
+  "type.check": {
+    "id": "type.check",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "typescript"
+          ]
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "execution_target": "coding_workspace",
+    "requires_approval": false,
+    "write_permission": false,
+    "network": false,
+    "phase": 2,
+    "supported_languages": [
+      "python",
+      "javascript",
+      "typescript"
+    ]
+  }
+}

@@ -2,7 +2,7 @@
 'use strict';
 
 /*
- * Harmonika Harmonika Tools - MCP stdio server (low-level Server + StdioServerTransport).
+ * Harmonika Terminal Tools - MCP stdio server (low-level Server + StdioServerTransport).
  * stdout carries MCP protocol frames only; tool output is returned as
  * CallToolResult text. No logging of prompts/secrets anywhere.
  */
@@ -21,7 +21,8 @@ const {
 const coreModule = require(path.join(__dirname, 'mcp-core.cjs'));
 
 async function main() {
-  const core = coreModule.createCore({});
+  const mediaBridge=process.env.HARMONIKA_MEDIA_BRIDGE!=='0'?require('./media_bridge.cjs').createMediaBridge():undefined;
+  const core = coreModule.createCore({mediaBridge});
 
   const server = new Server(coreModule.SERVER_INFO, {
     capabilities: { tools: { listChanged: false } },

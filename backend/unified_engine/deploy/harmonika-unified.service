@@ -1,0 +1,27 @@
+[Unit]
+Description=Harmonika unified core and specialist orchestration
+After=network.target harmonika-shared-core.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/builder-venv/bin/python -m unified_engine.service
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONPATH=/opt/harmonika-ai/unified-deps/graphql-3.2.13
+UMask=0077
+MemoryMax=384M
+CPUQuota=100%
+TasksMax=32
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-unified
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+[Install]
+WantedBy=multi-user.target

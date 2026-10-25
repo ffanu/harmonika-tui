@@ -1,0 +1,87 @@
+{
+  "checked_at": "2026-10-24T03:58:57.458788+07:00",
+  "release": "2026.10.24.14",
+  "scope": "owner installation; synthetic fixtures; no customer inputs",
+  "skills_installed": 11,
+  "mcp_tools": 8,
+  "office_smoke": [
+    {
+      "format": "docx",
+      "create_exit": 0,
+      "inspect_exit": 0,
+      "bytes": 36609
+    },
+    {
+      "format": "xlsx",
+      "create_exit": 0,
+      "inspect_exit": 0,
+      "bytes": 4856
+    },
+    {
+      "format": "pptx",
+      "create_exit": 0,
+      "inspect_exit": 0,
+      "bytes": 28260
+    }
+  ],
+  "live_tool_smoke": [
+    {
+      "tool": "analyze_image",
+      "ok": true,
+      "status": "ok",
+      "seconds": 5.106,
+      "synthetic_code_matched": true
+    },
+    {
+      "tool": "transcribe_audio",
+      "ok": true,
+      "status": "ok",
+      "seconds": 1.645,
+      "synthetic_code_matched": true,
+      "max_audio_seconds": 120
+    },
+    {
+      "tool": "analyze_video",
+      "ok": true,
+      "status": "ok",
+      "seconds": 6.751,
+      "synthetic_code_matched": true,
+      "frames": 6,
+      "audio_analyzed": false
+    },
+    {
+      "tool": "web_search",
+      "ok": true,
+      "status": "ok",
+      "seconds": 8.604,
+      "sources_count": 5
+    },
+    {
+      "tool": "read_pdf",
+      "ok": true,
+      "status": "ok",
+      "seconds": 0.559,
+      "synthetic_code_matched": true,
+      "max_pages": 20
+    },
+    {
+      "tool": "generate_image",
+      "ok": true,
+      "status": "ok",
+      "seconds": 1.653,
+      "mime_type": "image/png",
+      "width": 512,
+      "height": 512,
+      "bytes": 476853
+    }
+  ],
+  "browser_smoke": {
+    "desktop": "1440x900",
+    "mobile": "390x844",
+    "passed": true
+  },
+  "os_tts_fixture_created": true,
+  "backend_tts_api_verified": false,
+  "rtx_generate_ready": true,
+  "rtx_vision_ready": false
+}

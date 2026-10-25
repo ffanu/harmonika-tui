@@ -1,0 +1,17 @@
+{
+  "retrieved_at": "2026-10-25",
+  "source": "https://registry.npmjs.org/expo/58.0.19",
+  "tarball_sha256": "4fd179f7ca98a0f452cc3e367bb21c91828962cde7170ea6eca6ed9191b86d21",
+  "framework": "expo",
+  "dependencies": {
+    "expo": "58.0.19",
+    "expo-status-bar": "58.0.4",
+    "react": "19.3.0",
+    "react-native": "0.88.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "5.9.3"
+  },
+  "warning": "Version baseline verified from official published Expo bundledNativeModules, not proof of an Android/iOS application build."
+}

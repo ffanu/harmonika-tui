@@ -1,0 +1,26 @@
+[Unit]
+Description=Harmonika isolated coding workspace runtime
+After=docker.service network.target
+Requires=docker.service
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/coding-venv/bin/python -m coding_runtime.service
+Environment=HARMONIKA_CODING_ROOT=/var/lib/harmonika-coding
+UMask=0077
+MemoryMax=1G
+TasksMax=128
+CPUQuota=200%
+LimitNOFILE=512
+Environment=HOME=/nonexistent
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-coding
+ReadOnlyPaths=/etc/harmonika-ai/coding-runtime.token /etc/harmonika-ai/internal-agent.token
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,360 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_backlinks",
+      "description": "Evidence-based backlinks; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          },
+          "links": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 2048
+            }
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_content",
+      "description": "Evidence-based content; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_ga4",
+      "description": "Evidence-based ga4; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "start_date": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "end_date": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        },
+        "required": [
+          "property_id",
+          "start_date",
+          "end_date"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_geo",
+      "description": "Evidence-based geo; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_keyword_cluster",
+      "description": "Evidence-based keyword cluster; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "keywords": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "serp_results": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "keywords"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_local",
+      "description": "Evidence-based local; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_page_audit",
+      "description": "Evidence-based page audit; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_performance",
+      "description": "Evidence-based performance; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          },
+          "strategy": {
+            "type": "string",
+            "enum": [
+              "mobile",
+              "desktop"
+            ]
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_schema",
+      "description": "Evidence-based schema; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_search_console",
+      "description": "Evidence-based search console; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "start_date": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "end_date": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        },
+        "required": [
+          "property_id",
+          "start_date",
+          "end_date"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_sitemap",
+      "description": "Evidence-based sitemap; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "seo_technical",
+      "description": "Evidence-based technical; availability depends on the local adapter and authorized data",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "engineering_code_review",
+      "description": "Review supplied code or diff with evidence-backed heuristic findings and explicit limitations; no repository access or execution; the server binds original user evidence automatically; pass an empty object.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "engineering_debug",
+      "description": "Diagnose supplied errors/logs and source; distinguish observations from hypotheses, ask for missing reproduction evidence; the server binds original user evidence automatically; pass an empty object.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "engineering_documentation",
+      "description": "Prepare source-grounded documentation facts and outline from supplied code or requirements; never invent endpoints or test results; the server binds original user evidence automatically; pass an empty object.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "engineering_testing_strategy",
+      "description": "Build a risk-based test plan from supplied code or requirements; never claim tests ran or coverage measured; the server binds original user evidence automatically; pass an empty object.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  }
+]

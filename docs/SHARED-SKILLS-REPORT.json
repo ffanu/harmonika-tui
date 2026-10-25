@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "release": "2026.10.24.17",
+  "status": "verified_owner_local",
+  "registry_operations": 9,
+  "actual_worker_available": 9,
+  "installed_cli": [
+    {
+      "format": "pdf",
+      "create": "completed",
+      "read": "completed",
+      "idempotency_across_cli_processes": true
+    },
+    {
+      "format": "docx",
+      "create": "completed",
+      "read": "completed",
+      "idempotency_across_cli_processes": true
+    },
+    {
+      "format": "xlsx",
+      "create": "completed",
+      "read": "completed",
+      "idempotency_across_cli_processes": true
+    },
+    {
+      "format": "pptx",
+      "create": "completed",
+      "read": "completed",
+      "idempotency_across_cli_processes": true
+    }
+  ],
+  "pdf_edit_completed": true,
+  "job_status_event_sequence": [
+    1,
+    2,
+    3
+  ],
+  "stop_completed_job_no_effect": true,
+  "principal_in_stdin_refused": true,
+  "python_tests": 186,
+  "legacy_document_tests": 7,
+  "node_tests": 55,
+  "total_tests": 248,
+  "failed_tests": 0,
+  "claude_used": false,
+  "team": {
+    "registry": "AI team member",
+    "executor_and_release": "Codex",
+    "security_review": "OpenCode and independent AI team reviewer"
+  },
+  "audit_fixes": [
+    "trusted principal/context",
+    "central reference paths",
+    "ambiguous publication fails closed",
+    "payload snapshot before awaits",
+    "cancel reservation cleanup",
+    "terminal callback cannot rewrite success",
+    "case-insensitive private directory guard",
+    "physical project identity",
+    "bounded worker stdin/stdout and deadlines"
+  ],
+  "public_http_enabled": false,
+  "new_mcp_transport_enabled": false,
+  "web_ui_wired": false,
+  "inference_routing_changed": false,
+  "existing_document_cli_preserved": true,
+  "service_restart": false,
+  "user_sessions_terminated": false,
+  "binary_bytes_changed": false,
+  "customer_data_used": false
+}

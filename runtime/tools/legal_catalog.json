@@ -1,0 +1,5149 @@
+{
+  "schema_version": 1,
+  "skills": [
+    {
+      "id": "intent.detect.legal",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "intent.detect.legal — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Conservative local educational triage, not a legal determination.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "intent.detect.emergency",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "intent.detect.emergency — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Conservative local educational triage, not a legal determination.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "intent.detect.layanan",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "intent.detect.layanan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Conservative local educational triage, not a legal determination.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.detect.expert",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.detect.expert — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Conservative local educational triage, not a legal determination.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.ite",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.ite — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.pidana",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.pidana — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.perdata",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.perdata — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.keluarga",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.keluarga — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.tenagakerja",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.tenagakerja — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.konsumen",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.konsumen — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.activate.pdp",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.activate.pdp — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Educational analytical lens only; no licensed professional identity or formal opinion is claimed.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "persona.deactivate",
+      "layer": {
+        "number": 1,
+        "name": "INTENT & PERSONA DETECTOR"
+      },
+      "description": "persona.deactivate — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Conservative local educational triage, not a legal determination.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.image.upload",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.image.upload — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "bytes max 10485760; bytes diambil penuh dari vault server, bukan dari pemanggil; mime ditentukan dari magic bytes aktual; format tidak dikenal ditolak; dimensi hanya dari header PNG/JPEG/GIF/WebP/BMP; bukan verifikasi isi gambar",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.video.upload",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.video.upload — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "bytes max 10485760; bytes diambil penuh dari vault server; durasi hanya dari kotak mvhd MP4/MOV/M4A bila ada; tanpa dekode frame; webm: audio/video ditentukan dari codec string pada 262144 byte pertama; wadah tidak meyakinkan ditolak",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.voice.upload",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.voice.upload — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "bytes max 10485760; bytes diambil penuh dari vault server; durasi hanya dihitung untuk WAV (fmt/data) dan MP4-family (mvhd); MP3 tidak dihitung, bukan estimasi",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.document.upload",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.document.upload — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "bytes max 10485760; didukung: PDF, DOCX, DOC legacy (CFB), teks UTF-8; subtype CFB tidak diverifikasi per stream internal; diberi label msword container",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.ocr.extract",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.ocr.extract — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Best-effort local media observation/transcription, owned files only; <=120 seconds for audio/video, sampled video frames only. Human confirmation of all findings/names/dates/numbers is required. No forensic, identity, speaker or legal-fact certification.",
+      "supported_mime_types": [
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+      ],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.vlm.analyze",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.vlm.analyze — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Best-effort local media observation/transcription, owned files only; <=120 seconds for audio/video, sampled video frames only. Human confirmation of all findings/names/dates/numbers is required. No forensic, identity, speaker or legal-fact certification.",
+      "supported_mime_types": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "video/mp4"
+      ],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.asr.transcribe",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.asr.transcribe — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "id",
+              "en"
+            ],
+            "default": "id"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Best-effort local media observation/transcription, owned files only; <=120 seconds for audio/video, sampled video frames only. Human confirmation of all findings/names/dates/numbers is required. No forensic, identity, speaker or legal-fact certification.",
+      "supported_mime_types": [
+        "audio/wav",
+        "audio/mpeg",
+        "audio/ogg",
+        "video/mp4"
+      ],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.document.parse",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.document.parse — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "max_pages": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "timeout_seconds": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10.0
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "PDF via pypdf bila terpasang; jika tidak, ekstraksi stdlib literal-string terbatas (tanpa ToUnicode CMap) sehingga teks subset-font bisa tidak terbaca, tidak pernah dikarang; batas: 100 halaman, 400 stream, 4194304 byte/stream, 200000 karakter teks, timeout <= 10 detik; DOCX via stdlib zip+XML dengan pelindung zip-bomb (1000 entri, 5242880 byte/entri, rasio 200x); DOC legacy binary tidak didukung",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.metadata.extract",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.metadata.extract — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "hanya magic bytes, SHA-256, dimensi header, durasi wadah, dan penanda level-byte; EXIF/GPS/perangkat/waktu jepret sengaja tidak diekstrak",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.authenticity.check",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.authenticity.check — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "hanya konsistensi hash dan wadah dasar; bukan analisis forensik, bukan penilaian keaslian hukum atau kelayakan alat bukti",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.chain.custody",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.chain.custody — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id",
+          "action"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "view",
+              "append"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "log append-only ber-hash-chain per tenant+case+file (maks 1000 entri); integritas diverifikasi dengan rekalkulasi hash; bukan rantai custody tersertifikasi/legal-grade",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.categorize",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.categorize — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "kategori hanya dari wadah terdeteksi dan tautan kasus; tidak mengklaim kategori pembuktian (dokumen/saksi/digital menurut hukum acara)",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.relevance.assess",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.relevance.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "hanya tumpang tindih kata leksikal (maks 4000 karakter sumber, 100000 token bukti); bukan relevansi pembuktian menurut hukum; penilaian hanya untuk wadah teks (PDF/DOCX/txt); OCR/VLM/ASR tidak tersedia sehingga media lain tidak bisa dinilai",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.store.secure",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.store.secure — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "wajib atribut enkripsi AES-256-GCM dari metadata vault server; flag caller diabaikan/ditolak; tanpa atestasi, tidak ada perubahan",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "evidence.privacy.redact",
+      "layer": {
+        "number": 2,
+        "name": "EVIDENCE COLLECTOR (MULTI-MODAL)"
+      },
+      "description": "evidence.privacy.redact — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          },
+          "file_id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9_-]{1,100}"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "hanya pratinjau masking teks dari teks terekstrak; tidak ada black-box gambar, tidak ada redaksi PDF ireversibel, tidak ada berkas turunan disimpan modul ini; deteksi konservatif: email, telepon +62/08, IPv4, angka Luhn, NIK 16 digit; pola lain tidak diklaim",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.uu.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.uu.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "jurisdiction": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Searches only the explicitly ingested official corpus; not every Indonesian law or a vector/semantic search.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.uu.get",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.uu.get — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Returns a server-fetched snapshot; this does not certify all amendments, constitutional rulings or temporal applicability.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.uu.pasal.get",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.uu.pasal.get — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "article": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id",
+          "article"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Exact article-heading extraction from full official snapshot only; old labels in requested spec are not used as legal meanings.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.uu.history.track",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.uu.history.track — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Tracks fetched document snapshots, explicitly not a complete amendment/repeal graph.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.uu.replace.check",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.uu.replace.check — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Evidence excerpts only; replacement/applicability unknown without complete authoritative relationship graph.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.putusan.ma.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.putusan.ma.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Pencarian terbatas direktori putusan MA pada portal resmi; portal saat ini menolak akses sisi-server (diverifikasi 2026-10-24) sehingga hasil berstatus error, bukan kosong-palsu. Kutipan riset bukan kutipan pasal dan bukan sertifikasi hukum yang berlaku.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.putusan.mk.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.putusan.mk.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "number": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Hanya putusan MK yang diterbitkan pada portal peraturan.go.id; bukan seluruh arsip MK dan bukan status berlaku suatu norma. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.putusan.pengadilan.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.putusan.pengadilan.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Pencarian terbatas direktori putusan pengadilan pada portal resmi MA; portal saat ini menolak akses sisi-server (diverifikasi 2026-10-24). Hasil kosong resmi berbeda dari error akses. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.pp.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.pp.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "number": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Nomor/tahun: pencarian terbatas PP sisi-server di peraturan.go.id. Kata kunci: indeks global resmi difilter ke slug PP, sehingga no_match di halaman awal bukan bukti ketiadaan PP. Bukan status berlaku. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.perpres.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.perpres.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "number": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Nomor/tahun: pencarian terbatas Perpres sisi-server. Kata kunci: indeks global resmi difilter ke slug Perpres. Bukan status berlaku. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.permendagri.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.permendagri.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "number": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Nomor/tahun: pencarian peraturan menteri sisi-server lalu difilter ke slug Permendagri; portal JDIH Kemendagiri langsung tidak tersedia dari jaringan ini (NXDOMAIN). Kata kunci: indeks global difilter ke slug Permendagri. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.perda.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.perda.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "number": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Nomor/tahun: pencarian Perda sisi-server; daerah berbeda dengan nomor sama semuanya tampil. Kata kunci: indeks global difilter ke slug Perda dan jauh dari lengkap seluruh daerah. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.sirclo.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.sirclo.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Sirkulasi internal JDIH Komdigi (kategori Surat Edaran) saja; bukan perusahaan SIRCLO dan bukan seluruh JDIH pemerintah. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.intl.law.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.intl.law.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "treaty",
+              "legislation"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Hanya treaty/legislasi terindeks ECOLEX (FAO/IUCN/UNEP); bukan seluruh hukum internasional dan bukan penentuan hukum mana yang berlaku untuk kasus. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.intl.case.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.intl.case.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "court_decision"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Hanya putusan pengadilan terindeks ECOLEX; portal ICJ/ICC/ECtHR menolak akses sisi-server. Bukan seluruh yurisdiksi internasional. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.article.legal.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.article.legal.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1950,
+            "maximum": 2106
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Metadata artikel ber-DOI dari Crossref; bukan jurnal seluruh dunia, bukan endorsasi isi artikel, dan bukan sumber hukum. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.konsil.yudisial",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.konsil.yudisial — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Hanya konten terbit KY (berita, pengumuman, rilis pers, profil anggota); bukan putusan atas laporan tertentu untuk identitas penuh dan bukan penentuan pelanggaran. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.advokat.verify",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.advokat.verify — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "identifier"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "degraded",
+        "reason": "issuer_public_registry_unavailable"
+      },
+      "limitations": "Pencocokan identifier eksak pada direktori terbit saja; TIDAK mensertifikasi identitas, status anggota, kecocokan orang, atau perilaku; tidak pernah membuat registry sendiri. Komponen pencarian PERADI saat ini tidak tersedia (diverifikasi 2026-10-24) sehingga hasil berstatus error sampai portal pulih.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.lbh.search",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.lbh.search — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Hanya direktori kantor LBH yang diterbitkan YLBHI; tanpa estimasi jarak, tanpa klaim layanan aktif, dan bukan seluruh LBH di Indonesia. Kutipan riset bukan kutipan pasal.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kb.update.sync",
+      "layer": {
+        "number": 3,
+        "name": "LAW KNOWLEDGE BASE (RAG)"
+      },
+      "description": "kb.update.sync — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "enum": [
+              "uu_1_2023",
+              "uu_1_2024",
+              "uu_1_2026",
+              "uu_20_2025",
+              "uu_27_2022"
+            ]
+          }
+        },
+        "required": [
+          "source_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Refreshes one allowlisted official document through the runtime outside case transactions; no all-law/currentness certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.status.check",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.status.check — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Degraded review aid from exact source excerpts; no currentness, replacement, effective-date or implementing-rule certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.amandemen.track",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.amandemen.track — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "track",
+              "deactivate"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "law_number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9999
+          },
+          "law_year": {
+            "type": "integer",
+            "minimum": 1945,
+            "maximum": 2100
+          },
+          "relations": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asserting_source_id",
+                "relation_type",
+                "quote",
+                "target_number",
+                "target_year"
+              ],
+              "properties": {
+                "asserting_source_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                "relation_type": {
+                  "type": "string",
+                  "enum": [
+                    "amends",
+                    "replaces",
+                    "repeals",
+                    "consolidates"
+                  ]
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 500
+                },
+                "target_number": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9999
+                },
+                "target_year": {
+                  "type": "integer",
+                  "minimum": 1945,
+                  "maximum": 2100
+                }
+              }
+            }
+          },
+          "persist": {
+            "type": "boolean"
+          },
+          "relation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "case_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Relasi perubahan hanya dari asersi eksplisit tervalidasi: dokumen asertor harus snapshot resmi server ber-teks-penuh dan kutipan harus substring persis yang memuat identitas nomor/tahun UU sasaran.; Kemunculan kata kunci (mengubah/dicabut/diganti) tidak pernah membuat atau memvalidasi relasi; dokumen yang mengutip hanya dilaporkan sebagai kandidat yang masih menunggu asersi eksplisit.; Graf relasi tidak lengkap: UU di luar corpus allowlist tidak memiliki snapshot sehingga tercantum sebagai missing dependency, bukan di reconstructed.; currentness tidak tersertifikasi; urutan kronologis relasi bukan pernyataan kelengkapan hukum.; Read-only terhadap sumber resmi; modul tidak pernah melakukan fetch jaringan.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.replace.find",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.replace.find — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Degraded review aid from exact source excerpts; no currentness, replacement, effective-date or implementing-rule certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.consolidated.get",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.consolidated.get — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "law_number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9999
+          },
+          "law_year": {
+            "type": "integer",
+            "minimum": 1945,
+            "maximum": 2100
+          },
+          "compare_source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "case_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Tidak pernah menyusun atau mengarang teks gabungan; dokumen konsolidasi resmi hanya dilaporkan bila dipetakan server dalam manifest untuk UU sasaran dan memiliki kutipan referensi tepat; asersi pemanggil saja tidak cukup.; Tanpa dokumen konsolidasi resmi, hasil hanya workbench versi/diff eksak dengan draft_only=True, missing dependencies eksplisit, dan tanpa klaim legally complete.; Diff adalah perbandingan teks tingkat judul pasal antar snapshot eksak; bukan penilaian efek hukum dan tidak pernah menghasilkan statute gabungan.; currentness tidak tersertifikasi.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.effective.date",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.effective.date — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Degraded review aid from exact source excerpts; no currentness, replacement, effective-date or implementing-rule certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.transition.rule",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.transition.rule — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Degraded review aid from exact source excerpts; no currentness, replacement, effective-date or implementing-rule certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.implementing.regulation",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.implementing.regulation — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Degraded review aid from exact source excerpts; no currentness, replacement, effective-date or implementing-rule certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.cross_reference",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.cross_reference — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "law_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "law_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Degraded review aid from exact source excerpts; no currentness, replacement, effective-date or implementing-rule certification.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.multiple_source.verify",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.multiple_source.verify — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "source_ids": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          }
+        },
+        "required": [
+          "source_ids"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Compares snapshot provenance/hash and distinct hosts only; agreement does not establish current legal applicability.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "uu.alert.new",
+      "layer": {
+        "number": 4,
+        "name": "UU UPDATE CHECKER"
+      },
+      "description": "uu.alert.new — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "subscribe",
+              "check",
+              "list",
+              "unsubscribe"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "watch_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "case_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "include_events": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read",
+          "write"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Langganan watch dan hasil polling hanya rekaman in-app pada data tenant terenkripsi; tidak ada email, webhook, atau pesan eksternal.; Tidak ada deteksi UU baru dari hash arbitrer: hanya perubahan snapshot resmi base law allowlist (sha256 tersimpan server vs baseline aktual saat subscribe) yang mencatat peristiwa; UU di luar corpus tidak terdeteksi.; Perubahan snapshot bukan sertifikasi perubahan hukum; currentness tidak tersertifikasi.; Store tidak mendukung delete: berhenti memantau berarti deaktivasi (active=false), rekaman tetap tersimpan.; Resubscribe pada watch aktif tidak pernah mengubah baseline; baseline hanya di-reset saat reaktivasi watch yang nonaktif.; Modul tidak pernah melakukan fetch jaringan; pembaruan snapshot resmi dilakukan root di luar transaksi penulis.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.ite.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.ite.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: informasi dan transaksi elektronik.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.ite.unsur_breakdown",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.ite.unsur_breakdown — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: informasi dan transaksi elektronik.; Pemecahan fragmen bersifat mekanis atas kutipan; pemetaan unsur doktrinal perlu advokat.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.ite.bukti_digital",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.ite.bukti_digital — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "evidence_file_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "evidence_file_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: bukti elektronik, alat bukti.; OCR/ASR/VLM/analisis forensik tidak dikonfigurasi pada modul ini; isi media tidak dibaca (not_seen); analysis_performed=false.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.pidana.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.pidana.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kitab undang-undang hukum pidana.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.pidana.unsur_breakdown",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.pidana.unsur_breakdown — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kitab undang-undang hukum pidana.; Pemecahan fragmen bersifat mekanis atas kutipan; pemetaan unsur doktrinal perlu advokat.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.pidana.sifat_perbuatan",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.pidana.sifat_perbuatan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kesengajaan.; Distingsi kesengajaan/kelalaian tidak diputuskan; hanya pertanyaan pembacaan teks.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.perdata.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.perdata.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perikatan.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.perdata.wanprestasi",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.perdata.wanprestasi — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: wanprestasi.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.perdata.perbuatan_lawan",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.perdata.perbuatan_lawan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perbuatan melawan hukum.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.keluarga.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.keluarga.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perceraian.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.keluarga.nafkah",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.keluarga.nafkah — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: nafkah.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.tenagakerja.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.tenagakerja.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perjanjian kerja, upah.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.konsumen.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.konsumen.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perlindungan konsumen.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.pdp.assess",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.pdp.assess — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pelindungan data pribadi, data pribadi.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "expert.opinion.generate",
+      "layer": {
+        "number": 5,
+        "name": "PASAL EXPERT SIMULATOR"
+      },
+      "description": "expert.opinion.generate — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: undang-undang.; Draf opini adalah struktur edukatif dari kutipan sumber dan fakta perkara; bukan opini advokat dan tidak dibuat-kan seolah advokat.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.27",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.27 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: muatan elektronik, penipuan, informasi dan transaksi elektronik.; ID ite.pasal.27 adalah identifier routing kompatibilitas; label 'Pasal 27: muatan mengganggu, penipuan' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.27.ayat1",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.27.ayat1 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pencemaran nama baik, informasi dan transaksi elektronik.; ID ite.pasal.27.ayat1 adalah identifier routing kompatibilitas; label 'Ayat 1: pencemaran nama baik' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.27.ayat3",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.27.ayat3 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: penghinaan, informasi dan transaksi elektronik.; ID ite.pasal.27.ayat3 adalah identifier routing kompatibilitas; label 'Ayat 3: penghinaan atau penyebaran' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.27.ayat4",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.27.ayat4 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: ancaman kekerasan, menakut-nakuti, informasi dan transaksi elektronik.; ID ite.pasal.27.ayat4 adalah identifier routing kompatibilitas; label 'Ayat 4: pengancaman kekerasan' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.28",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.28 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: berita bohong, informasi dan transaksi elektronik.; ID ite.pasal.28 adalah identifier routing kompatibilitas; label 'Pasal 28: berita kebencian & palsu' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.28.ayat1",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.28.ayat1 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kebencian, sara, informasi dan transaksi elektronik.; ID ite.pasal.28.ayat1 adalah identifier routing kompatibilitas; label 'Ayat 1: berita kebencian SARA' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.28.ayat2",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.28.ayat2 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kekhawatiran, menakut-nakuti, informasi dan transaksi elektronik.; ID ite.pasal.28.ayat2 adalah identifier routing kompatibilitas; label 'Ayat 2: ancaman kekerasan' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.30",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.30 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: sistem elektronik, akses elektronik, informasi dan transaksi elektronik.; ID ite.pasal.30 adalah identifier routing kompatibilitas; label 'Pasal 30: akses ilegal & gangguan' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.30.ayat1",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.30.ayat1 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: mengakses elektronik, akses elektronik, informasi dan transaksi elektronik.; ID ite.pasal.30.ayat1 adalah identifier routing kompatibilitas; label 'Ayat 1: akses tidak sah' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.32",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.32 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: intersepsi, penyadapan, informasi dan transaksi elektronik.; ID ite.pasal.32 adalah identifier routing kompatibilitas; label 'Pasal 32: intersepsi & wiretapping' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.35",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.35 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perbuatan tidak menyenangkan, informasi dan transaksi elektronik.; ID ite.pasal.35 adalah identifier routing kompatibilitas; label 'Pasal 35: perbuatan tidak menyenangkan' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "ite.pasal.45",
+      "layer": {
+        "number": 6,
+        "name": "UU ITE SPECIALIST"
+      },
+      "description": "ite.pasal.45 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: ancaman pidana, sanksi pidana, informasi dan transaksi elektronik.; ID ite.pasal.45 adalah identifier routing kompatibilitas; label 'Pasal 45: ancaman pidana' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.pencurian",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.pencurian — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pencurian.; ID kuhp.pasal.pencurian adalah identifier routing kompatibilitas; label 'Analisa pencurian (Pasal 362)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.penggelapan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.penggelapan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: penggelapan.; ID kuhp.pasal.penggelapan adalah identifier routing kompatibilitas; label 'Analisa penggelapan (Pasal 372)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.penipuan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.penipuan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: penipuan.; ID kuhp.pasal.penipuan adalah identifier routing kompatibilitas; label 'Analisa penipuan (Pasal 378)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.pemerasan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.pemerasan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pemerasan.; ID kuhp.pasal.pemerasan adalah identifier routing kompatibilitas; label 'Analisa pemerasan (Pasal 368)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.pengancaman",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.pengancaman — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pengancaman.; ID kuhp.pasal.pengancaman adalah identifier routing kompatibilitas; label 'Analisa pengancaman (Pasal 369)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.pencemaran",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.pencemaran — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pencemaran nama baik.; ID kuhp.pasal.pencemaran adalah identifier routing kompatibilitas; label 'Analisa pencemaran nama baik (Pasal 310-311)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.penghinaan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.penghinaan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: penghinaan.; ID kuhp.pasal.penghinaan adalah identifier routing kompatibilitas; label 'Analisa penghinaan (Pasal 312-321)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.perlindungan_anak",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.perlindungan_anak — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perlindungan anak.; ID kuhp.pasal.perlindungan_anak adalah identifier routing kompatibilitas; label 'Analisa pasal anak (Pasal 76-81)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.kdrt",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.kdrt — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kekerasan dalam rumah tangga.; ID kuhp.pasal.kdrt adalah identifier routing kompatibilitas; label 'Analisa KDRT (Pasal 44 UU PKDRT)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.pembunuhan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.pembunuhan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: pembunuhan.; ID kuhp.pasal.pembunuhan adalah identifier routing kompatibilitas; label 'Analisa pembunuhan (Pasal 338-350)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.penganiayaan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.penganiayaan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: penganiayaan.; ID kuhp.pasal.penganiayaan adalah identifier routing kompatibilitas; label 'Analisa penganiayaan (Pasal 351-358)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.perkosaan",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.perkosaan — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: perkosaan.; ID kuhp.pasal.perkosaan adalah identifier routing kompatibilitas; label 'Analisa perkosaan (Pasal 285 UU HP)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.korupsi",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.korupsi — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: tindak pidana korupsi, korupsi.; ID kuhp.pasal.korupsi adalah identifier routing kompatibilitas; label 'Analisa korupsi (Pasal 2-3 UU Tipikor)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.pasal.narkotika",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.pasal.narkotika — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: narkotika.; ID kuhp.pasal.narkotika adalah identifier routing kompatibilitas; label 'Analisa narkotika (Pasal 111-148 UU Narkotika)' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    },
+    {
+      "id": "kuhp.baru.2026",
+      "layer": {
+        "number": 7,
+        "name": "KUHP SPECIALIST"
+      },
+      "description": "kuhp.baru.2026 — edukasi berbasis sumber resmi; bukan layanan advokat",
+      "requested_label_is_not_legal_authority": true,
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "permissions": {
+        "tenant_records": [
+          "read"
+        ],
+        "host_shell": false
+      },
+      "readiness": {
+        "status": "available",
+        "reason": null
+      },
+      "limitations": "Lensa edukatif; bukan advokat berlisensi dan bukan pendapat hukum formal.; Tidak memberi vonis bersalah/tidak bersalah dan tidak memberi kesimpulan penerapan pasal yang mengikat.; Currentness sumber tidak tersertifikasi (not_certified); fetch resmi bukan sertifikasi status hukum.; Transisi/renumbering antar rezim hukum tidak diselesaikan otomatis.; Tanpa sumber terpercaya yang relevan, tidak ada panduan substantif.; Read-only; tidak menulis data, tidak filing, dan tidak mengirim notifikasi resmi.; Kueri sumber terbatas pada: kitab undang-undang hukum pidana baru, nomor 1 tahun 2023.; ID kuhp.baru.2026 adalah identifier routing kompatibilitas; label 'KUHP Baru (UU 1/2023) - efektif 2026' tidak diassert sebagai makna pasal; nomor pasal hanya dilaporkan sebagaimana muncul dalam kutipan sumber.; Label nomor KUHP lama tidak dijadikan default hukum yang berlaku saat ini.",
+      "supported_mime_types": [],
+      "execution_target": "legal_tenant",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "current_law_certified": false,
+      "licensed_expert_present": false
+    }
+  ]
+}

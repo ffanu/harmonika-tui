@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const projectAccess = require('./project-access.cjs');
+const {terminal} = require('./paths.cjs');
 const FILE_TOOLS = new Set(['view','ls','glob','grep','write','edit','multiedit']);
 const LSP_TOOLS = new Set(['lsp_diagnostics','lsp_references','lsp_symbols','lsp_definition','lsp_implementation','lsp_call_hierarchy']);
 const MARKERS = ['.git','package.json','go.mod','composer.json','Cargo.toml','pyproject.toml','settings.gradle','settings.gradle.kts','build.gradle','build.gradle.kts','AGENTS.md'];
@@ -29,9 +30,12 @@ function privatePath(value) {
 function managedSkillRead(value) {
   if(typeof value!=='string'||!path.isAbsolute(value))return false;
   try {
-    const base=fs.realpathSync(path.join(os.homedir(),'.config/harmonika-terminal/current/skills'));
+    const base=fs.realpathSync(path.join(terminal,'current/skills'));
     const file=canonical(value),relative=path.relative(base,file);
-    return inside(base,file)&&/^harmonika-(?:ui|debug|browser-qa|documents|git|release)\/(?:SKILL\.md|scripts\/(?:smoke\.cjs|documents\.py))$/.test(relative)&&fs.statSync(file).isFile();
+    const engineeringResource=/^harmonika-engineering\/scripts\/engineering_analyzers\.py$/.test(relative);
+    const seoResource=/^harmonika-seo\/scripts\/seo_analyzers\.py$/.test(relative);
+    const documentResource=/^harmonika-documents\/(?:manifest\.yaml|requirements\.txt|scripts\/(?:document_common|pdf_worker|pdf_handler|docx_handler|xlsx_handler|pptx_handler)\.py)$/.test(relative);
+    return inside(base,file)&&(documentResource||seoResource||engineeringResource||/^harmonika-(?:ui|debug|browser-qa|documents|seo|engineering|git|release|tui-dev|async-concurrency|ai-integration|terminal-qa|state-persistence)\/(?:SKILL\.md|references\/[A-Za-z0-9][A-Za-z0-9_-]*\.md|scripts\/(?:smoke\.cjs|documents\.py|terminal_qa\.py|fixture\.py|async_runtime\.py|stream_protocol\.py))$/.test(relative))&&fs.statSync(file).isFile();
   }catch{return false;}
 }
 function evaluate(payload) {

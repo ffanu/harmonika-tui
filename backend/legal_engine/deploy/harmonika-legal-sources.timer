@@ -1,0 +1,10 @@
+[Unit]
+Description=Keep the bounded official law corpus fresh twice daily
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=12h
+RandomizedDelaySec=5min
+Persistent=true
+Unit=harmonika-legal-sources.service
+[Install]
+WantedBy=timers.target

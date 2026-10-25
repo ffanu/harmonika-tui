@@ -1,8 +1,8 @@
 'use strict';
 
 /*
- * Harmonika Harmonika Tools - MCP core (framework-agnostic).
- * Dependency-injected: rpc (backend SSH), asr (local transcribe.py),
+ * Harmonika Terminal Tools - MCP core (framework-agnostic).
+ * Dependency-injected: rpc (backend HTTPS/SSH), asr (local transcribe.py),
  * ffprobe, extractFrames. Callers/tests replace any of them.
  */
 
@@ -255,9 +255,86 @@ function validatePdfHeader(canonical) {
 
 /* ---------------- default backend RPC (fixed SSH spawn) ---------------- */
 
+function readLicensedKey() {
+  let fd;
+  try {
+    const keyFile = path.join(os.homedir(), '.config/harmonika/harmonika-api-key');
+    fd = fs.openSync(keyFile, fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW || 0) | (fs.constants.O_NONBLOCK || 0));
+    const st = fs.fstatSync(fd);
+    if (!st.isFile() || (process.platform !== 'win32' && ((st.mode & 0o077) || (typeof process.getuid === 'function' && st.uid !== process.getuid())))) {
+      return null;
+    }
+    const key = fs.readFileSync(fd, 'utf8').trim();
+    return /^hai_[A-Za-z0-9_]{16,240}$/.test(key) ? key : null;
+  } catch {
+    return null;
+  } finally {
+    if (fd !== undefined) {
+      try { fs.closeSync(fd); } catch {}
+    }
+  }
+}
+
+async function httpsRpc(payload, apiKey) {
+  const input = Buffer.from(JSON.stringify(payload), 'utf8');
+  if (input.length > LIMITS.RPC_STDIN_MAX_BYTES) {
+    throw new ToolError('payload_too_large');
+  }
+  const control = new AbortController();
+  const timer = setTimeout(() => control.abort(), LIMITS.RPC_TIMEOUT_MS);
+  if (timer.unref) timer.unref();
+  try {
+    const res = await fetch('https://chat.harmonika.id/v1/terminal/rpc', {
+      method: 'POST',
+      redirect: 'error',
+      signal: control.signal,
+      headers: {
+        Authorization: 'Bearer ' + apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: input,
+    });
+    const parts = [];
+    let outLen = 0;
+    for await (const chunk of res.body) {
+      outLen += chunk.byteLength;
+      if (outLen > LIMITS.RPC_OUTPUT_MAX_BYTES) {
+        control.abort();
+        throw new ToolError('backend_output_too_large');
+      }
+      parts.push(Buffer.from(chunk));
+    }
+    const text = Buffer.concat(parts).toString('utf8');
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      throw new ToolError(res.ok ? 'backend_invalid_response' : 'backend_unavailable');
+    }
+    if (!res.ok && parsed && parsed.error && parsed.error.code) {
+      throw new ToolError(String(parsed.error.code));
+    }
+    return parsed;
+  } catch (err) {
+    if (err instanceof ToolError) throw err;
+    throw new ToolError(err && err.name === 'AbortError' ? 'backend_timeout' : 'backend_unavailable');
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 function defaultRpc(payload, deps) {
-  // Private owner bridge is opt-in. Public installs never inherit root SSH.
-  if(process.env.HARMONIKA_TRANSPORT!=='owner-ssh'||!/^\d{1,5}$/.test(process.env.HARMONIKA_OWNER_SSH_PORT||'22')||
+  if (process.env.HARMONIKA_TRANSPORT !== 'owner-ssh') {
+    if (process.env.HARMONIKA_MEDIA_BRIDGE === '0') {
+      return Promise.reject(new ToolError('licensed_media_transport_unavailable'));
+    }
+    const apiKey = readLicensedKey();
+    if (!apiKey) {
+      return Promise.reject(new ToolError('licensed_media_transport_unavailable'));
+    }
+    return httpsRpc(payload, apiKey);
+  }
+  if(!/^\d{1,5}$/.test(process.env.HARMONIKA_OWNER_SSH_PORT||'22')||
     !/^[A-Za-z0-9_.-]+@[A-Za-z0-9.-]+$/.test(process.env.HARMONIKA_OWNER_SSH_TARGET||'')||
     !path.isAbsolute(process.env.HARMONIKA_OWNER_SSH_KEY||''))return Promise.reject(new ToolError('licensed_media_transport_unavailable'));
   const input = Buffer.from(JSON.stringify(payload), 'utf8');
@@ -693,7 +770,10 @@ function createCore(overrides) {
     async capabilities() {
       let remote;
       try {
-        const res = await deps.rpc({ operation: 'capabilities' });
+        // Status must probe the same authenticated transport used by image tools.
+        const res = deps.mediaBridge
+          ? await deps.mediaBridge.capabilities()
+          : await deps.rpc({ operation: 'capabilities' });
         if (res && typeof res === 'object' && res.ok === true) {
           remote = {
             available: true,
@@ -725,8 +805,13 @@ function createCore(overrides) {
       const f = resolveInputFile(args.file_path, 'image', deps.callerCwd, deps);
       const mime = validateImageHeader(f.canonical, f.ext);
       const image_base64 = fs.readFileSync(f.canonical).toString('base64');
-      const res = await deps.rpc({ operation: 'analyze_image', image_base64, prompt: args.prompt });
-      return backendResult(res, ['text_detected', 'ui_elements', 'page_state', 'warnings', 'recommended_action', 'description', 'analysis', 'model', 'provider', 'mime_type']);
+      let res;
+      if(deps.mediaBridge){
+        res=await deps.mediaBridge.analyze(image_base64,args.prompt);
+        if(res?.handled!==true){if(res?.not_dispatched!==true)throw new ToolError('media_dispatch_uncertain');res=undefined;}
+      }
+      if(!res)res = await deps.rpc({ operation: 'analyze_image', image_base64, prompt: args.prompt });
+      return backendResult(res, ['text_detected', 'ui_elements', 'page_state', 'warnings', 'recommended_action', 'description', 'analysis', 'model', 'provider', 'mime_type', 'processing_mode', 'analysis_performed', 'content_is_untrusted']);
     },
 
     async read_pdf(args) {
@@ -778,7 +863,12 @@ function createCore(overrides) {
 
     async generate_image(args) {
       const outPath = resolveOutputFile(args.output_file);
-      const res = await deps.rpc({ operation: 'generate_image', prompt: args.prompt });
+      let res;
+      if(deps.mediaBridge){
+        res=await deps.mediaBridge.generate(args.prompt,outPath);
+        if(res?.handled!==true){if(res?.not_dispatched!==true)throw new ToolError('media_dispatch_uncertain');res=undefined;}
+      }
+      if(!res)res = await deps.rpc({ operation: 'generate_image', prompt: args.prompt });
       if (!res || typeof res !== 'object' || res.ok !== true || res.status !== 'ok') {
         return backendResult(res);
       }
@@ -833,7 +923,8 @@ function createCore(overrides) {
       data = await ops[name](parsed);
     } catch (e) {
       const code = e && e.code ? e.code : 'internal_error';
-      data = { ok: false, status: 'error', error: code };
+      data = { ok: false, status: 'error', error: code, ...(e?.uncertain?{retry_safe:false,operation_state:'uncertain',message:'Status pekerjaan belum pasti. Jangan membuat ulang pekerjaan dengan identitas berbeda.'}:{}) };
+      if(code==='local_vision_unavailable')data={ok:false,status:'degraded',error:code,analysis_performed:false,processing_mode:'local_only',message:'Analisis gambar lokal sedang tidak tersedia. Gambar belum dianalisis.'};
     }
     return textResult(data);
   }
@@ -856,6 +947,7 @@ function createCore(overrides) {
   }
 
   function shutdown() {
+    if(deps.mediaBridge)deps.mediaBridge.close();
     for (const child of internalDeps._activeChildren) {
       try { child.kill('SIGTERM'); } catch { /* already gone */ }
     }

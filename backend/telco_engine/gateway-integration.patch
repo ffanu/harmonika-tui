@@ -1,0 +1,69 @@
+--- a/main.go
++++ b/main.go
+@@ -256,6 +256,7 @@
+ 	mux.HandleFunc("/v1/member-ai/chat/messages", a.mobileChatMessages)
+ 	mux.HandleFunc("/v1/member-ai/chat/stop", a.mobileChatStop)
+ 	mux.HandleFunc("/v1/coding/", a.publicCodingAPI)
++	mux.HandleFunc("/v1/telco/", a.publicTelcoAPI)
+ 	mux.HandleFunc("/v1/models", a.publicAIModels)
+ 	mux.HandleFunc("/v1/chat/completions", a.publicAIChatCompletions)
+ 	mux.HandleFunc("/v1/public-ai/capabilities", a.publicAICapabilities)
+@@ -10542,6 +10543,7 @@
+ }
+ 
+ type publicAIChatCompletionRequest struct {
++	Telco bool `json:"telco,omitempty"`
+ 	WorkspaceID       string                `json:"workspace_id,omitempty"`
+ 	AttachmentIDs     []string              `json:"attachment_ids,omitempty"`
+ 	Model             string                `json:"model"`
+@@ -10929,6 +10931,7 @@
+ 		jsonOut(w, 400, map[string]any{"error": map[string]any{"code": "messages_required", "message": "messages is required"}})
+ 		return
+ 	}
++	if input.Telco { a.publicTelcoChat(w,r,tok,input); return }
+ 	if input.WorkspaceID != "" && len(input.Tools) == 0 && !publicAIHasToolHistory(input) && input.ToolChoice == nil {
+ 		a.publicCodingChat(w, r, tok, input)
+ 		return
+--- a/public_api_docs.go
++++ b/public_api_docs.go
+@@ -6,7 +6,7 @@
+ 	"strings"
+ )
+ 
+-const publicAPIDocumentationVersion = "2026-10-24-coding-phase2"
++const publicAPIDocumentationVersion = "2026-10-24-telco-domain"
+ 
+ type publicAPIEndpoint struct {
+ 	Method      string `json:"method"`
+@@ -17,6 +17,13 @@
+ 
+ func publicAPIEndpoints() []publicAPIEndpoint {
+ 	return []publicAPIEndpoint{
++ {"GET","/v1/telco/capabilities","Katalog276 ID dan readiness lokal per tenant; bukan akses jaringan/billing perusahaan","application/json"},
++ {"POST","/v1/telco/invoke","Operasi domain lokal; mutasi menunggu approval","application/json"},
++ {"POST","/v1/telco/agent","Pemilihan skill telco otomatis dalam tenant terisolasi","application/json | text/event-stream"},
++ {"GET","/v1/telco/requests/{id}","Recovery request milik token","application/json"},
++ {"GET","/v1/telco/requests/{id}/events","SSE/JSON replay request telco","application/json | text/event-stream"},
++ {"POST","/v1/telco/requests/{id}/approve","Approval eksplisit terikat hash dan revisi tenant","application/json"},
++ {"POST","/v1/telco/requests/{id}/stop","Batalkan perubahan yang belum disetujui","application/json"},
+ 		{"GET", "/v1/coding/debug/sessions/{id}", "Status sesi debug milik token/workspace", "application/json"},
+ 		{"GET", "/v1/coding/debug/sessions/{id}/events", "Replay event debugger terisolasi", "application/json | text/event-stream"},
+ 		{"POST", "/v1/coding/debug/sessions/{id}/actions", "Continue/next/inspect dengan Idempotency-Key", "application/json"},
+@@ -44,7 +51,8 @@
+ 	return map[string]any{
+ 		"chat": true, "streaming": true, "openai_compatible": true,
+ 		"coding_phase2": publicCodingPhase2Ready(), "coding_debugger": publicCodingPhase2Ready(), "coding_refactor": publicCodingPhase2Ready(),
+-		"coding_workspaces": publicCodingReady(), "coding_agent": publicCodingReady(), "coding_sandbox": publicCodingReady(),
++		"coding_workspaces": publicCodingReady(), "telco_domain_engine":publicTelcoReady(), "telco_network_live":false,"telco_payment_gateway":false,
++		"coding_agent": publicCodingReady(), "coding_sandbox": publicCodingReady(),
+ 		"orchestration": true, "model_fallback": true, "web_grounding": true,
+ 		"endpoint_catalog": true, "guide_download": true, "tool_calls": false, "tool_execution": false,
+ 		"files": false, "file_upload": false, "image_input": false, "pdf_input": false,
+@@ -219,6 +227,7 @@
+ - Tinjau preview lalu POST /v1/coding/jobs/{id}/approve body {"decision":"approve","input_hash":"HASH_DARI_JOB"}. Hanya aksi persetujuan client, bukan model AI, yang memanggil endpoint ini.
+ - Approval kedaluwarsa 5 menit; perubahan workspace membatalkannya. Retry input sama memakai key sama; input berbeda memakai key baru.
+ - GET /v1/coding/jobs/{id}, /events; POST /stop untuk recovery/Stop. Event mendukung after_sequence/Last-Event-ID. Recovery dan Stop tidak memakai kuota mutasi.
++- Telco: gunakan /v1/telco/capabilities dan invoke/agent, atau telco=true pada /chat/completions dengan Idempotency-Key. Tenant terisolasi per key; company_data_connected=false. Tidak memberi akses OLT/billing/payment perusahaan. Periksa readiness setiap ID; unavailable bukan hasil kosong/sukses. Semua mutasi memerlukan approval client.
+ - Phase2 hanya aktif jika features.coding_phase2=true; schema/dukungan bahasa/paket dibaca dari /v1/coding/capabilities.
+ - pkg.install hanya paket offline ber-versi yang diizinkan, bukan arbitrary internet install. Debugger Python hanya debug_session_id milik workspace; tidak menerima PID host.
+ - Continue/next/inspect memakai /v1/coding/debug/sessions/{id}/actions dengan Idempotency-Key, Stop melalui /stop; sesi punya TTL.

@@ -1,0 +1,27 @@
+[Unit]
+Description=Harmonika shared skill data, private memory and bounded workflows
+After=network.target
+[Service]
+Type=simple
+WorkingDirectory=/opt/harmonika-ai
+ExecStart=/opt/harmonika-ai/builder-venv/bin/python -m core_engine.service
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HARMONIKA_CORE_PORT=18195
+UMask=0077
+MemoryMax=256M
+CPUQuota=100%
+TasksMax=32
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-core
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+[Install]
+WantedBy=multi-user.target

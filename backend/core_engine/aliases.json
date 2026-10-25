@@ -1,0 +1,21 @@
+{
+  "code.format": "code.format",
+  "code.lint": "lint.run",
+  "code.run.node": "exec.node",
+  "code.run.python": "exec.python",
+  "code.run.shell": "exec.shell",
+  "code.scaffold": "scaffold.project",
+  "code.test": "test.run",
+  "file.edit": "code.edit",
+  "file.grep": "code.grep",
+  "file.list": "fs.list",
+  "file.read": "fs.read",
+  "file.search": "fs.glob",
+  "file.write": "fs.write",
+  "git.commit": "git.commit",
+  "git.diff": "git.diff",
+  "git.status": "git.status",
+  "shell.background": "exec.background",
+  "shell.exec": "exec.shell",
+  "system.info": "exec.python"
+}

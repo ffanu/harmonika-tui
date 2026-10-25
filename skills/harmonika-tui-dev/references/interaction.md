@@ -1,0 +1,11 @@
+# Input, fokus dan diagnostik
+
+Semua alur utama dapat dilakukan tanpa mouse. Tentukan urutan Tab/Shift-Tab, fokus awal, tombol aktivasi, Escape/back dan shortcut keluar yang mengikuti stack proyek. Shortcut harus terlihat dalam bantuan dan tidak menelan input teks biasa. Saat modal muncul, simpan fokus sebelumnya dan pulihkan setelah tutup; fokus hanya boleh menunjuk kontrol yang masih ada setelah resize/panel runtuh.
+
+Composer mempertahankan draft ketika fokus berpindah. Tentukan Enter versus newline sesuai perilaku aplikasi yang ada; uji paste multiline, Unicode, Backspace, navigasi cursor, riwayat dan cancel. Paste bracketed tidak boleh mengeksekusi teks sebagai command atau men-submit tiap baris. Hindari shortcut yang berbenturan dengan kontrol terminal kecuali raw mode memang mengelolanya. Pulihkan mode TTY pada exit normal maupun exception dengan lifecycle/finally stack yang ada.
+
+Saat request berjalan, composer dan cancel tetap responsif. Pisahkan state idle/loading/streaming/done/cancelled/error; notifikasi error tidak menghapus draft. Event respons membawa request ID/generation dan hanya mengubah request yang masih aktif. Jangan mencampur delta lama dengan output retry baru. Uji resize dan pergantian fokus selama streaming.
+
+Untuk diagnostik, temukan capability runtime dahulu. Katalog saat ini memuat delapan tool MCP: `create_directory`, `capabilities`, `web_search`, `analyze_image`, `read_pdf`, `analyze_video`, `transcribe_audio`, `generate_image`. Tool ini tidak otomatis menyediakan screenshot atau driver keyboard terminal. Lima konfigurasi LSP harus ditemukan dari konfigurasi/source yang relevan dan diuji ketersediaannya; jangan mengasumsikan semua server terpasang atau berjalan. Gunakan native file/bash dan LSP yang tersedia untuk error source; redaksi path sensitif dan credential. Key layanan tetap privat, sedangkan label publik hanya Harmonika Ai.
+
+QA produk harus memakai executable dan data-dir/session milik pengujian yang secara eksplisit tersedia. Jangan attach writer/sesi pengguna, mengubah binary, mengakses akun privat atau mengganti host produksi demi demonstrasi. Bila runtime terisolasi tidak tersedia, laporkan batas tersebut dan serahkan patch/source checks beserta langkah reproduksi.

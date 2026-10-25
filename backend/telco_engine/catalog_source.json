@@ -1,0 +1,2495 @@
+{
+  "document_sha256": "57cf870d1d763774633495099ca351fae043dad059a2ed1de2fa807bfc44381e",
+  "source_lines": 1142,
+  "declared_header_skills": 320,
+  "actual_unique_skills": 276,
+  "duplicates_removed": [
+    "fraud.usage.anomaly"
+  ],
+  "skills": [
+    {
+      "id": "netinv.device.register",
+      "description": "Register device (OLT, ONU, router, BTS)",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.device.update",
+      "description": "Update device info",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.device.decommission",
+      "description": "Decommission device",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.hierarchy.build",
+      "description": "Build network hierarchy",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.port.management",
+      "description": "Port & interface management",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.link.management",
+      "description": "Link (fiber, wireless) management",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.cable.trace",
+      "description": "Trace kabel (fiber, copper)",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.spatial.view",
+      "description": "GIS / map view network",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.capacity.track",
+      "description": "Track kapasitas per device",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.utilization.track",
+      "description": "Track utilisasi bandwidth",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.fiber.route",
+      "description": "Fiber route management",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.splitter.management",
+      "description": "Splitter GPON management",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.olt.port.alloc",
+      "description": "Alokasi port OLT ke pelanggan",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.spare.parts",
+      "description": "Spare parts inventory (ONU, kabel)",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "netinv.audit.physical",
+      "description": "Audit fisik vs data",
+      "engine": {
+        "number": 1,
+        "name": "NETWORK INVENTORY MANAGEMENT",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.order.create",
+      "description": "Create provisioning order",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.order.validate",
+      "description": "Validate order feasibility",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.allocate.resource",
+      "description": "Alokasi resource (IP, port, bandwidth)",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.configure.olt",
+      "description": "Configure OLT (VLAN, profile, ONT)",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.configure.ont",
+      "description": "Configure ONT di rumah pelanggan",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.activate.service",
+      "description": "Activate service di network",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.test.connectivity",
+      "description": "Test connectivity end-to-end",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.suspend.service",
+      "description": "Suspend (block) service",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.unsuspend.service",
+      "description": "Unsuspend service",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.terminate.service",
+      "description": "Terminate service permanent",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.change.plan",
+      "description": "Change paket (upgrade/downgrade)",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.migrate.customer",
+      "description": "Migrate pelanggan (OLT baru, area baru)",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.relocate.service",
+      "description": "Relocate (pindah rumah)",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.workorder.create",
+      "description": "Create work order untuk teknisi",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prov.workorder.complete",
+      "description": "Complete work order",
+      "engine": {
+        "number": 2,
+        "name": "SERVICE PROVISIONING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.monitor.uptime",
+      "description": "Monitor uptime device (ICMP, SNMP)",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.monitor.bandwidth",
+      "description": "Monitor bandwidth per interface",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.monitor.cpu",
+      "description": "Monitor CPU/RAM device",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.monitor.optical",
+      "description": "Monitor optical power (RX/TX)",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.monitor.temperature",
+      "description": "Monitor temperature device",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.alert.threshold",
+      "description": "Alert kalau threshold exceeded",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.alert.fiber.cut",
+      "description": "Alert fiber cut (LOS detection)",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.alert.outage",
+      "description": "Alert outage massal",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.dashboard.realtime",
+      "description": "Realtime NOC dashboard",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.map.network",
+      "description": "Network topology map (live)",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.ticket.create",
+      "description": "Create NOC ticket",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.ticket.assign",
+      "description": "Assign ticket ke engineer",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.escalation.matrix",
+      "description": "Escalation matrix (P1, P2, P3)",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.shift.handover",
+      "description": "Shift handover documentation",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "noc.incident.postmortem",
+      "description": "Post-mortem incident analysis",
+      "engine": {
+        "number": 3,
+        "name": "NETWORK MONITORING & NOC",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "olt.discover",
+      "description": "Discover OLT di network",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.profile.management",
+      "description": "Profile (DBA, line, srv)",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.ont.register",
+      "description": "Register ONT ke OLT",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.ont.deregister",
+      "description": "Deregister ONT",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.vlan.config",
+      "description": "VLAN configuration",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.bandwidth.profile",
+      "description": "Bandwidth profile (CBR, assured)",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.optical.power",
+      "description": "Read optical power per ONT",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.distance.measure",
+      "description": "Measure distance OLT-ONT",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.rogue.ont.detect",
+      "description": "Detect rogue ONT",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.firmware.upgrade",
+      "description": "Firmware upgrade OLT",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.config.backup",
+      "description": "Backup configuration",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "olt.config.restore",
+      "description": "Restore configuration",
+      "engine": {
+        "number": 4,
+        "name": "OLT & GPON MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "bill.cycle.run",
+      "description": "Run billing cycle (monthly)",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.invoice.generate",
+      "description": "Generate invoice otomatis",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.invoice.send",
+      "description": "Send invoice (WA, email, SMS)",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.payment.record",
+      "description": "Record payment masuk",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.payment.match",
+      "description": "Match payment ke invoice",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.arrears.calculate",
+      "description": "Calculate tunggakan",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.dunning.run",
+      "description": "Dunning (reminder, warning, suspend)",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.late.fee",
+      "description": "Calculate late fee",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.discount.apply",
+      "description": "Apply discount / promo",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.prorate.calculate",
+      "description": "Prorate (naik paket mid-cycle)",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.deposit.manage",
+      "description": "Deposit management",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.refund.process",
+      "description": "Process refund",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.adjustment.create",
+      "description": "Manual adjustment (kompensasi)",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.statement.generate",
+      "description": "Generate statement bulanan",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "bill.tax.calculate",
+      "description": "Tax (PPN 11%)",
+      "engine": {
+        "number": 5,
+        "name": "BILLING & CHARGING",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "prepaid.balance.check",
+      "description": "Check saldo prepaid",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "prepaid.topup",
+      "description": "Topup via voucher / bank",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "prepaid.deduct",
+      "description": "Deduct saldo per usage",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "prepaid.expire.notify",
+      "description": "Notify saldo akan expire",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voucher.generate",
+      "description": "Generate voucher batch",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voucher.distribute",
+      "description": "Distribute ke dealer",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voucher.redeem",
+      "description": "Redeem voucher",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voucher.validate",
+      "description": "Validate voucher (belum dipakai)",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voucher.expire.handle",
+      "description": "Handle expired voucher",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voucher.audit.report",
+      "description": "Audit voucher (suspicious activity)",
+      "engine": {
+        "number": 6,
+        "name": "PREPAID & VOUCHER",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.create",
+      "description": "Create product (paket internet, voice)",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.update",
+      "description": "Update product",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.pricing.set",
+      "description": "Set harga & recurring fee",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.bundling",
+      "description": "Bundle (internet + TV + phone)",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.promo.create",
+      "description": "Create promo (diskon, cashback)",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.promo.validate",
+      "description": "Validate customer eligible",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.lifecycle.manage",
+      "description": "Product lifecycle (launch, retire)",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.eligibility.check",
+      "description": "Check customer eligible for product",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.feature.attaching",
+      "description": "Attach feature (add-on)",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "product.compatibility.check",
+      "description": "Check compatibility antar product",
+      "engine": {
+        "number": 7,
+        "name": "PRODUCT CATALOG & PRICING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sub.create",
+      "description": "Create subscriber baru",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.profile.update",
+      "description": "Update data subscriber",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.kyc.verify",
+      "description": "KYC verification (KTP, selfie)",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.status.manage",
+      "description": "Status (active, suspended, terminated)",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.contact.manage",
+      "description": "Multiple contact per subscriber",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.address.verify",
+      "description": "Verify alamat (coverage cek)",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.contract.manage",
+      "description": "Contract (12 bulan, 24 bulan)",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.document.store",
+      "description": "Store dokumen (KTP, form)",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.segmentation",
+      "description": "Segmentasi (residential, business)",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.lifetime.value",
+      "description": "Calculate CLV",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.churn.predict",
+      "description": "Predict churn risk",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sub.merge.duplicate",
+      "description": "Merge duplicate subscriber",
+      "engine": {
+        "number": 8,
+        "name": "CRM & SUBSCRIBER MANAGEMENT",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sales.lead.capture",
+      "description": "Capture lead (online, walk-in)",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.lead.qualify",
+      "description": "Qualify (coverage, willingness)",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.quote.generate",
+      "description": "Generate quote",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.order.create",
+      "description": "Create sales order",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.order.approve",
+      "description": "Approval (credit check, contract)",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.commission.calc",
+      "description": "Commission untuk sales",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.target.track",
+      "description": "Sales target tracking",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.funnel.analyze",
+      "description": "Sales funnel analytics",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.campaign.track",
+      "description": "Campaign effectiveness",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sales.referral.manage",
+      "description": "Referral program",
+      "engine": {
+        "number": 9,
+        "name": "SALES & ORDER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.register",
+      "description": "Register dealer / outlet",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.commission",
+      "description": "Commission calculation",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.settlement",
+      "description": "Settlement periodik",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.stock.allocation",
+      "description": "Stock allocation (voucher, SIM)",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.sales.report",
+      "description": "Sales report per dealer",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.performance.track",
+      "description": "Performance ranking",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "dealer.termination",
+      "description": "Terminate dealer (pelanggaran)",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "partner.contract.manage",
+      "description": "Partner contract (reseller)",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "partner.revenue.share",
+      "description": "Revenue sharing",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "partner.portal.access",
+      "description": "Partner portal (self-service)",
+      "engine": {
+        "number": 10,
+        "name": "DEALER & PARTNER MANAGEMENT",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "field.dispatch.create",
+      "description": "Dispatch teknisi",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.dispatch.assign",
+      "description": "Assign teknisi terdekat",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.route.optimize",
+      "description": "Optimize rute teknisi",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.arrival.track",
+      "description": "Track kedatangan teknisi (GPS)",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.work.complete",
+      "description": "Complete work order",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.photo.upload",
+      "description": "Upload foto instalasi",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.signature.capture",
+      "description": "Capture tanda tangan customer",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.equipment.use",
+      "description": "Equipment used (ONU, kabel)",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.time.track",
+      "description": "Time tracking per job",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.quality.score",
+      "description": "Quality score per teknisi",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.reassignment",
+      "description": "Reassign kalau teknisi bermasalah",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.emergency.dispatch",
+      "description": "Emergency dispatch (outage)",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.schedule.optimize",
+      "description": "Optimize jadwal teknisi",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.skill.match",
+      "description": "Match skill teknisi ke job",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "field.feedback.collect",
+      "description": "Feedback customer post-install",
+      "engine": {
+        "number": 11,
+        "name": "FIELD OPERATIONS",
+        "declared_count": 15
+      }
+    },
+    {
+      "id": "sla.define",
+      "description": "Define SLA (uptime, response, resolution)",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sla.monitor",
+      "description": "Monitor SLA compliance",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sla.breach.alert",
+      "description": "Alert SLA breach",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sla.report.customer",
+      "description": "SLA report ke customer",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "sla.penalty.calc",
+      "description": "Penalty kalau breach",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "qos.measure",
+      "description": "QoS (latency, jitter, packet loss)",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "qos.threshold",
+      "description": "Threshold QoS per paket",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "qos.speedtest.auto",
+      "description": "Auto speedtest per customer",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "qos.benchmark",
+      "description": "Benchmark vs competitor",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "trouble.ticket.create",
+      "description": "Trouble ticket (gangguan)",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "trouble.ticket.escalate",
+      "description": "Escalate kalau lama",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "trouble.ticket.resolve",
+      "description": "Resolve & verify",
+      "engine": {
+        "number": 12,
+        "name": "SERVICE ASSURANCE & SLA",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.sim.swap.detect",
+      "description": "Detect SIM swap fraud",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.premium.rate",
+      "description": "Premium rate service fraud",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.call.bombing",
+      "description": "Call bombing detection",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.sms.spam",
+      "description": "SMS spam detection",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.usage.anomaly",
+      "description": "Anomali usage (tiba-tiba naik)",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.location.anomaly",
+      "description": "Location anomaly (roaming palsu)",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.identity.theft",
+      "description": "Identity theft (KTP orang lain)",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.subscription",
+      "description": "Subscription fraud (bayar pertama gagal)",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.cbe.detect",
+      "description": "International call fraud (CBE)",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.wangiri",
+      "description": "Wangiri (call back fraud)",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.ifw.rules",
+      "description": "IFW (Fraud Management System) rules",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.case.investigate",
+      "description": "Investigate fraud case",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "fraud.blacklist.subscriber",
+      "description": "Blacklist subscriber fraud",
+      "engine": {
+        "number": 13,
+        "name": "FRAUD MANAGEMENT (TELCO-SPECIFIC)",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "revass.leak.detect",
+      "description": "Detect revenue leakage",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.usage.not.billed",
+      "description": "Usage not billed detection",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.double.billing",
+      "description": "Double billing detection",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.rate.mismatch",
+      "description": "Rate mismatch (paket vs charge)",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.discount.abuse",
+      "description": "Discount abuse detection",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.reconciliation",
+      "description": "Reconciliation (network vs billing)",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.report.monthly",
+      "description": "Monthly RA report",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "revass.recovery.action",
+      "description": "Recovery action plan",
+      "engine": {
+        "number": 14,
+        "name": "REVENUE ASSURANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "interconnect.partner.setup",
+      "description": "Setup interconnect partner",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "interconnect.rate.config",
+      "description": "Rate per partner",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "interconnect.cdr.process",
+      "description": "Process CDR (Call Detail Record)",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "interconnect.settlement",
+      "description": "Settlement (TAP file)",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "interconnect.dispute.resolve",
+      "description": "Dispute resolution",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "roaming.partner.setup",
+      "description": "Roaming partner setup",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "roaming.profile.config",
+      "description": "Roaming profile subscriber",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "roaming.usage.alert",
+      "description": "Roaming usage alert (over limit)",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "roaming.tap.generate",
+      "description": "TAP file generation",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "roaming.settlement.monthly",
+      "description": "Monthly roaming settlement",
+      "engine": {
+        "number": 15,
+        "name": "INTERCONNECT & ROAMING",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "numbering.plan.manage",
+      "description": "Numbering plan (prefix, range)",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.allocate",
+      "description": "Allocate number ke subscriber",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.deallocate",
+      "description": "Deallocate (release)",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.port.in",
+      "description": "Port-in (MNP dari operator lain)",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.port.out",
+      "description": "Port-out (MNP ke operator lain)",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.port.status",
+      "description": "Porting status tracking",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.reservation",
+      "description": "Reserve number (VIP, gold)",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "numbering.audit.regulator",
+      "description": "Audit report untuk regulator",
+      "engine": {
+        "number": 16,
+        "name": "NUMBERING & PORTABILITY",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "sms.send.bulk",
+      "description": "Bulk SMS (broadcast, promo)",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sms.send.otp",
+      "description": "OTP via SMS",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sms.send.transactional",
+      "description": "Transactional (invoice, billing)",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sms.receive.inbound",
+      "description": "Inbound SMS (keyword, opt-in)",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "sms.shortcode.manage",
+      "description": "Shortcode management",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voice.call.outbound",
+      "description": "Outbound call (reminder, survey)",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voice.call.inbound",
+      "description": "Inbound call (call center)",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voice.ivr.manage",
+      "description": "IVR menu management",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voice.recording.store",
+      "description": "Call recording storage",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "voice.cdr.generate",
+      "description": "CDR generation",
+      "engine": {
+        "number": 17,
+        "name": "SMS & VOICE GATEWAY",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.templating",
+      "description": "Template workflow (instalasi, gangguan)",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.trigger",
+      "description": "Trigger event (new order, payment)",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.condition",
+      "description": "Conditional routing",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.parallel",
+      "description": "Parallel execution",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.approval",
+      "description": "Approval chain",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.timeout.escalation",
+      "description": "Timeout escalation",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.sla.attach",
+      "description": "Attach SLA ke workflow",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.notification",
+      "description": "Notification per step",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.dashboard",
+      "description": "Workflow monitoring dashboard",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "workflow.optimization",
+      "description": "Optimize bottleneck",
+      "engine": {
+        "number": 18,
+        "name": "WORKFLOW & BUSINESS RULES",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.customer.login",
+      "description": "Customer login (OTP, password)",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.profile.view",
+      "description": "View profile & contract",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.usage.view",
+      "description": "View usage (bandwidth, durasi)",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.invoice.view",
+      "description": "View invoice & pay",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.payment.online",
+      "description": "Online payment (CC, VA, e-wallet)",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.ticket.create",
+      "description": "Create ticket (gangguan)",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.package.change",
+      "description": "Change package (self-service)",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.speedtest",
+      "description": "Speedtest tool",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.feedback.submit",
+      "description": "Submit feedback",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "portal.notification.center",
+      "description": "Notification center",
+      "engine": {
+        "number": 19,
+        "name": "SELF-SERVICE PORTAL",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "report.subscriber.growth",
+      "description": "Subscriber growth",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.churn.rate",
+      "description": "Churn rate",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.arpu",
+      "description": "ARPU (Average Revenue Per User)",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.revenue.monthly",
+      "description": "Monthly revenue",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.network.uptime",
+      "description": "Network uptime report",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.outage.summary",
+      "description": "Outage summary",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.fraud.summary",
+      "description": "Fraud summary",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.sla.compliance",
+      "description": "SLA compliance",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.field.productivity",
+      "description": "Field productivity",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.coverage.area",
+      "description": "Coverage area report",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.regulatory.submit",
+      "description": "Submit ke regulator (Komdigi)",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "report.executive.dashboard",
+      "description": "Executive dashboard",
+      "engine": {
+        "number": 20,
+        "name": "REPORTING & ANALYTICS",
+        "declared_count": 12
+      }
+    },
+    {
+      "id": "reg.license.manage",
+      "description": "License (ISP, ISPU, NAP)",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.frequency.license",
+      "description": "Frequency license (BHP)",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.numbering.report",
+      "description": "Numbering report ke regulator",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.interconnect.report",
+      "description": "Interconnect report",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.data.localize",
+      "description": "Data localization (PDP Law)",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.content.block",
+      "description": "Block content (Komdigi order)",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.lawful.intercept",
+      "description": "Lawful intercept (TNI/Polri)",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.customer.privacy",
+      "description": "Customer privacy compliance",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.universal.service",
+      "description": "Universal Service Obligation (USO)",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "reg.audit.prepare",
+      "description": "Audit preparation",
+      "engine": {
+        "number": 21,
+        "name": "REGULATORY COMPLIANCE",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "capacity.forecast",
+      "description": "Forecast demand (3/6/12 bulan)",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.bottleneck.identify",
+      "description": "Identify bottleneck",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.upgrade.recommend",
+      "description": "Recommend upgrade",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.cost.benefit",
+      "description": "Cost-benefit analysis upgrade",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.expansion.plan",
+      "description": "Expansion plan",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.link.utilization",
+      "description": "Link utilization monitoring",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.spectrum.analyze",
+      "description": "Spectrum analyze (mobile)",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "capacity.report.quarterly",
+      "description": "Quarterly capacity report",
+      "engine": {
+        "number": 22,
+        "name": "CAPACITY PLANNING",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.fiber.degrade",
+      "description": "Predict fiber degrade",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.olt.failure",
+      "description": "Predict OLT failure",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.ont.battery",
+      "description": "Predict ONT battery weak",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.ups.failure",
+      "description": "Predict UPS failure",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.network.congestion",
+      "description": "Predict network congestion",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.churn.risk",
+      "description": "Predict churn risk",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.payment.default",
+      "description": "Predict payment default",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "predict.maintenance.schedule",
+      "description": "Schedule preventive maintenance",
+      "engine": {
+        "number": 23,
+        "name": "PREDICTIVE MAINTENANCE",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "netsec.ddos.mitigate",
+      "description": "DDoS mitigation (scrubbing center)",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.bgp.hijack.detect",
+      "description": "BGP hijack detection",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.botnet.detect",
+      "description": "Botnet C2 detection",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.malware.c2.block",
+      "description": "Block malware C2 traffic",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.phishing.block",
+      "description": "Block phishing domains",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.ips.ids.manage",
+      "description": "IPS/IDS management",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.firewall.policy",
+      "description": "Firewall policy management",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.vpn.manage",
+      "description": "VPN management (karyawan, partner)",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.audit.compliance",
+      "description": "Security audit compliance",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "netsec.incident.response",
+      "description": "Incident response (telco-specific)",
+      "engine": {
+        "number": 24,
+        "name": "NETWORK SECURITY (TELCO)",
+        "declared_count": 10
+      }
+    },
+    {
+      "id": "nps.survey.send",
+      "description": "NPS survey post-interaction",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.score.calculate",
+      "description": "Calculate NPS score",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.feedback.analyze",
+      "description": "Analyze feedback (sentiment)",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.detractor.followup",
+      "description": "Detractor followup",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.report.monthly",
+      "description": "Monthly NPS report",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.benchmark.industry",
+      "description": "Benchmark vs industry",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.action.plan",
+      "description": "Action plan per area",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    },
+    {
+      "id": "nps.trend.analyze",
+      "description": "Trend analysis",
+      "engine": {
+        "number": 25,
+        "name": "CUSTOMER FEEDBACK & NPS",
+        "declared_count": 8
+      }
+    }
+  ]
+}

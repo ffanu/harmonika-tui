@@ -1,0 +1,32 @@
+[Unit]
+Description=Harmonika private asynchronous RTX job queue
+After=network-online.target harmonika-rtx-tunnel.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=harmonika-rtx-queue
+Group=harmonika-rtx-queue
+WorkingDirectory=/opt/harmonika-ai/rtx-queue
+LoadCredential=config.json:/etc/harmonika-ai/rtx-queue/config.json
+LoadCredential=client-keys.json:/etc/harmonika-ai/rtx-queue/client-keys.json
+ExecStart=/opt/harmonika-ai/rtx-queue-venv/bin/python -m backend.rtx_queue.service
+StateDirectory=harmonika-rtx-queue
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/harmonika-rtx-queue
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+MemoryMax=512M
+TasksMax=64
+CPUQuota=100%
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

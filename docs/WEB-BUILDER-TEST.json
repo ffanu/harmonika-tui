@@ -1,0 +1,3066 @@
+{
+  "product": "Harmonika Web Builder",
+  "checked_at": "2026-10-24T15:49:12.156495+00:00",
+  "terminal_release": "2026.10.24.25",
+  "active_backend": "https://chat.harmonika.id/v1/builder",
+  "catalog_ids": 161,
+  "implemented_handlers": 161,
+  "available_modes": 155,
+  "external_connectors_unconfigured": [
+    "spec.read.notation",
+    "ssh.connect",
+    "ssh.exec",
+    "ssh.upload",
+    "ssh.download",
+    "ssh.tunnel"
+  ],
+  "cloud_deployment_configured": false,
+  "tests": {
+    "mandatory_mac": {
+      "run": 160,
+      "passed": 160,
+      "skipped": 0
+    },
+    "mandatory_linux": {
+      "run": 160,
+      "passed": 160,
+      "skipped": 0
+    },
+    "python_regression": {
+      "run": 1521,
+      "passed": 1431,
+      "skipped": 90,
+      "failed": 0
+    },
+    "node": {
+      "passed": 55,
+      "failed": 0
+    },
+    "go_gateway": "passed",
+    "fastapi_sqlite_reference": {
+      "integration_passed": 4,
+      "browser_desktop_mobile_passed": true,
+      "gpu": false
+    },
+    "generated_auth_oauth_payment_http": {
+      "passed": 3,
+      "uses_real_pyjwt": true,
+      "external_provider_calls": false
+    },
+    "nextjs_reference": {
+      "tsc": "passed",
+      "eslint": "passed",
+      "vitest_passed": 5,
+      "production_build": "passed_with_webpack_in_networkless_sandbox",
+      "webpack_reason": "Preinstalled dependency symlink lies outside the Turbopack project root."
+    }
+  },
+  "private_api": {
+    "summary": {
+      "tested": 161,
+      "passed": 161,
+      "completed": 155,
+      "expected_unavailable": 6,
+      "failed": [],
+      "cross_tenant_404": true,
+      "artifact_bearer_ownership": true,
+      "sse_terminal_and_resume": true,
+      "idempotency_replay_conflict": true,
+      "stale_approval_and_stop": true,
+      "workflow_syntax_real": true,
+      "unregistered_deployment_rejected": true,
+      "active_job_limit_enforced": true
+    },
+    "skills": [
+      {
+        "skill_id": "spec.read.markdown",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.txt",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.json",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.notation",
+        "state": "failed",
+        "error_code": "notion_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.01,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.obsidian",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.voice",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "media_transcription",
+        "seconds": 5.34,
+        "expected_unavailable": false,
+        "passed": true,
+        "transcript_checked": true
+      },
+      {
+        "skill_id": "spec.parse.requirements",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.04,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.user_stories",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.03,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.features",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.constraints",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.03,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.design_pref",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.clarify",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.analyze.requirements",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.frontend",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.backend",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.database",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.hosting",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.auth",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.payment",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.storage",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.cache",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.search",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.monitoring",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.recommend.combination",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.match",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.postgresql",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.mysql",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.mongodb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.redis",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.elasticsearch",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.sqlite",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.duckdb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.influxdb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.surrealdb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.system",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.database_schema",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.api",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.component_tree",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.folder_structure",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.data_flow",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.auth_flow",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.deployment",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.scaling",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.security",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.diagram.generate",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.document.generate",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.nextjs",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.nuxt",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.sveltekit",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.remix",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.express",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.nestjs",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.fastapi",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.django",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.laravel",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.monorepo",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.layout",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.page",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.component",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.form",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.table",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.chart",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.modal",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.auth_page",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.dashboard",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.landing_page",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.ecommerce",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.blog",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.style.tailwind",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.style.shadcn",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.responsive.optimize",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.api.crud",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.api.custom",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.auth.jwt",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.auth.oauth",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.middleware",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.validation",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.orm.model",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.service",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.controller",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.dto",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.websocket",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.cron",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.queue",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.upload",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.payment",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.schema",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.migration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.seed",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.run.migration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 0.92,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.run.seed",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.07,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.indexes",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.02,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.relations",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.triggers",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.stored_proc",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.backup.automate",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.connect",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.01,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.exec",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.01,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.upload",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.01,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.download",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.01,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.tunnel",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.01,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.node",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.python",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.docker",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.nginx",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.certbot",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.firewall",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.fail2ban",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vercel",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.netlify",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.cloudflare",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vps.docker",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vps.pm2",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vps.systemd",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.kubernetes",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.ssh.direct",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.docker.compose",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.nginx.config",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.ssl.setup",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.domain.dns",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.cdn.setup",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.rollback",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.blue_green",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.gen.unit",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.gen.integration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.gen.e2e",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.run.unit",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.07,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.run.integration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.08,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.run.e2e",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 2.29,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.coverage.report",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.07,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.lint.run",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.08,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.type.check",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 3.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.performance",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.07,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.color.palette",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.typography",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.layout.grid",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.icon.set",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.illustration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.logo",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.favicon",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.og_image",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.theme",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.prototype",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "content.gen.placeholder",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "content.gen.copy",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.meta",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.sitemap",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.robots",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.schema",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.og",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.optimize.performance",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.uptime",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.error.track",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.performance",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.logs",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.alerts",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.backup",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.update",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.security.patch",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.cdn_cache",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.scale",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.01,
+        "expected_unavailable": false,
+        "passed": true
+      }
+    ]
+  },
+  "public_https_api": {
+    "summary": {
+      "tested": 161,
+      "passed": 161,
+      "completed": 155,
+      "expected_unavailable": 6,
+      "failed": [],
+      "cross_tenant_404": true,
+      "artifact_bearer_ownership": true,
+      "sse_terminal_and_resume": true,
+      "idempotency_replay_conflict": true,
+      "stale_approval_and_stop": true,
+      "workflow_syntax_real": true,
+      "unregistered_deployment_rejected": true,
+      "active_job_limit_enforced": true
+    },
+    "skills": [
+      {
+        "skill_id": "spec.read.markdown",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.txt",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.json",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.notation",
+        "state": "failed",
+        "error_code": "notion_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.21,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.obsidian",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "workspace_read",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.read.voice",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "media_transcription",
+        "seconds": 5.41,
+        "expected_unavailable": false,
+        "passed": true,
+        "transcript_checked": true
+      },
+      {
+        "skill_id": "spec.parse.requirements",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.user_stories",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.features",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.constraints",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.parse.design_pref",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "spec.clarify",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.analyze.requirements",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.frontend",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.backend",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.database",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.hosting",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.auth",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.payment",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.storage",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.cache",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.search",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.select.monitoring",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "stack.recommend.combination",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.match",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.postgresql",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.mysql",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.mongodb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.redis",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.elasticsearch",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.sqlite",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.duckdb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.influxdb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.engine.surrealdb",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.system",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.database_schema",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.api",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.component_tree",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.folder_structure",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.data_flow",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.auth_flow",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.deployment",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.scaling",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.design.security",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.diagram.generate",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "arch.document.generate",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.nextjs",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.nuxt",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.sveltekit",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.remix",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.express",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.nestjs",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.fastapi",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.django",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.laravel",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "scaffold.monorepo",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.layout",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.page",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.component",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.form",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.table",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.chart",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.modal",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.auth_page",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.dashboard",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.landing_page",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.ecommerce",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.gen.blog",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.style.tailwind",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.style.shadcn",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "fe.responsive.optimize",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.api.crud",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.api.custom",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.auth.jwt",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.auth.oauth",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.middleware",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.validation",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.orm.model",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.service",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.controller",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.dto",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.websocket",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.cron",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.queue",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.upload",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "be.gen.payment",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.schema",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.migration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.seed",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.run.migration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.37,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.run.seed",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.15,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.indexes",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.relations",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.triggers",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.gen.stored_proc",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "db.backup.automate",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.connect",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.29,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.exec",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.29,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.upload",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.29,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.download",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.28,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.tunnel",
+        "state": "failed",
+        "error_code": "ssh_connector_not_configured",
+        "execution_kind": null,
+        "seconds": 0.29,
+        "expected_unavailable": true,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.node",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.python",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.docker",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.nginx",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.certbot",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.firewall",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "ssh.setup.fail2ban",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "operator_recipe",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vercel",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.netlify",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.cloudflare",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vps.docker",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vps.pm2",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.vps.systemd",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.kubernetes",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.ssh.direct",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.docker.compose",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.nginx.config",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.ssl.setup",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.domain.dns",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.cdn.setup",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.rollback",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "deploy.blue_green",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.gen.unit",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.gen.integration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.2,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.gen.e2e",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.run.unit",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.14,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.run.integration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.14,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.run.e2e",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 2.66,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.coverage.report",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.36,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.lint.run",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.14,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.type.check",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 3.1,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "test.performance",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "sandbox_execution",
+        "seconds": 1.36,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.color.palette",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.typography",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.layout.grid",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.icon.set",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.illustration",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.logo",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.favicon",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.og_image",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.theme",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "design.prototype",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "content.gen.placeholder",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "content.gen.copy",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.meta",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.sitemap",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.robots",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.schema",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.gen.og",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "seo.optimize.performance",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "analysis",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.uptime",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.error.track",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.performance",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.logs",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.23,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "monitor.alerts",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.backup",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.update",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.security.patch",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.cdn_cache",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.22,
+        "expected_unavailable": false,
+        "passed": true
+      },
+      {
+        "skill_id": "maintain.scale",
+        "state": "completed",
+        "error_code": null,
+        "execution_kind": "artifact_generation",
+        "seconds": 0.21,
+        "expected_unavailable": false,
+        "passed": true
+      }
+    ]
+  },
+  "activation": {
+    "status": "activated",
+    "catalog": 161,
+    "available": 155,
+    "backup": "/var/backups/harmonika-builder/20261024-154626",
+    "other_engine_pids_unchanged": true,
+    "only_restarted_existing_service": "harmonika-web-chat-live.service",
+    "new_service": "harmonika-web-builder.service",
+    "source_files": 45,
+    "post_audit_hardening": "Only new builder service restarted; existing root dir chmod0700 and integer SSH port validated."
+  },
+  "scopes": {
+    "other_engines_changed": false,
+    "native_binary_changed": false,
+    "auto_update_enabled": false,
+    "git_push": false
+  },
+  "limitations": [
+    "Generated artifacts are not automatically complete arbitrary business applications.",
+    "External Notion/SSH/cloud accounts are not configured or live-tested.",
+    "Production load, real-device Safari/Android tests and other framework deployments were not performed.",
+    "OAuth userinfo/local session integration and payment provider reconciliation require actual authorized account configuration and further integration."
+  ],
+  "terminal": {
+    "release": "2026.10.24.25",
+    "doctor_ok": true,
+    "guides": 16,
+    "registry_descriptors": 601,
+    "builder_descriptors": 161,
+    "signed_package_public_sha_verified": true,
+    "native_binary_unchanged": true,
+    "automatic_update": false
+  },
+  "audit_findings": [
+    {
+      "finding": "Midtrans pending notification incorrectly marked paid when trust flag enabled",
+      "resolution": "No webhook marks paid without a real server-side provider reconciliation. Event identity includes provider/order/status."
+    },
+    {
+      "finding": "OAuth self-compared HMAC, cookies combined and timestamp unchecked",
+      "resolution": "Independent __Host- cookies, signed provider/state/time, future time denied, PKCE required."
+    },
+    {
+      "finding": "Token exchange falsely claimed authenticated",
+      "resolution": "Returns token_exchanged, authenticated=false until identity/session integration is completed."
+    }
+  ],
+  "additional_hardening": [
+    "Existing state directory chmod0700 and direct symlink refused",
+    "SSH port is a bounded integer",
+    "Inline JS literals escape HTML delimiters",
+    "Refresh rotation serialized with BEGIN IMMEDIATE",
+    "NestJS generated module/controller/DTO template tokens fully substituted."
+  ],
+  "cleanup": {
+    "fixture_tokens_deleted": 4,
+    "production_fixture_projects_removed": 32,
+    "production_fixture_jobs_removed": 364,
+    "staging_service_stopped": true,
+    "only_test_actor_rows_deleted": true,
+    "staging_fixture_projects_removed": 62,
+    "owned_builder_containers_remaining": 0
+  },
+  "team": {
+    "codex": "Core/API/auth boundaries, job queue, sandbox, integration, QA, activation and signed terminal release.",
+    "opencode": "Planning/design, 10 scaffold + 15 frontend templates, backend/database generators, independent security audit.",
+    "claude_used": false
+  },
+  "source_files_verified": 45,
+  "final_https_smoke_seconds": 66.79
+}

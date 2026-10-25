@@ -1,0 +1,58 @@
+# Harmonika Phase2 sandbox image v2 (TOOLS worker scope).
+# Base stays the official Node.js image; adds Python 3.11, git, the pinned
+# tool toolchain, and the offline package caches. No GPU, no network at
+# runtime; the runtime user is 10000 and /opt/harmonika stays root-owned.
+# Build context: backend/coding_runtime/
+FROM node:22-bookworm-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 python3-venv git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Pinned Python toolchain in its own venv; python3 resolves to the venv so
+# debugpy/rope/coverage/mypy import from every child process.
+COPY phase2-build-assets/phase2-python.lock /opt/harmonika/phase2-python.lock
+RUN python3 -m venv /opt/harmonika/tools-venv \
+    && /opt/harmonika/tools-venv/bin/pip install --no-cache-dir --only-binary=:all: --require-hashes -r /opt/harmonika/phase2-python.lock \
+    && ln -sfn /opt/harmonika/tools-venv/bin/python3 /usr/local/bin/python3 \
+    && ln -sfn /opt/harmonika/tools-venv/bin/pip /usr/local/bin/pip
+
+# Pinned Node toolchain as vendored node_modules; lifecycle scripts disabled.
+COPY phase2-build-assets/package.json phase2-build-assets/package-lock.json /opt/harmonika/node/
+RUN cd /opt/harmonika/node \
+    && npm ci --ignore-scripts --no-audit --no-fund --loglevel=error \
+    && /opt/harmonika/node/node_modules/.bin/esbuild --version \
+    && /opt/harmonika/node/node_modules/.bin/tsc --version
+
+# Offline package caches: the ONLY sources for runtime pkg.install.
+# Public registries are touched here, at build time, never at runtime.
+RUN mkdir -p /opt/harmonika/pkg-cache/python /opt/harmonika/pkg-cache/node \
+    && /opt/harmonika/tools-venv/bin/pip download --no-cache-dir --only-binary=:all: --no-deps \
+        -d /opt/harmonika/pkg-cache/python humanize==4.12.2 \
+    && cd /tmp \
+    && npm pack decimal.js@10.5.0 --ignore-scripts --pack-destination /opt/harmonika/pkg-cache/node --silent \
+    && chmod -R a-w /opt/harmonika/pkg-cache \
+    && rm -rf /tmp/.npm
+
+ENV PATH=/opt/harmonika/tools-venv/bin:/opt/harmonika/node/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    NODE_PATH=/opt/harmonika/node/node_modules \
+    HARMONIKA_VENDOR_NODE=/opt/harmonika/node \
+    HARMONIKA_PKG_CACHE=/opt/harmonika/pkg-cache \
+    PYTHONDONTWRITEBYTECODE=1
+
+# Trusted helpers and the Phase2 tool CLI (never writable by the sandbox user).
+COPY volume_io.py phase2_tools.py phase2_exec.py /opt/harmonika/
+RUN chmod 0444 /opt/harmonika/volume_io.py /opt/harmonika/phase2_tools.py /opt/harmonika/phase2_exec.py \
+    && chown root:root /opt/harmonika/volume_io.py /opt/harmonika/phase2_tools.py /opt/harmonika/phase2_exec.py
+
+COPY phase2-build-assets/offline-packages.sha256 /opt/harmonika/offline-packages.sha256
+COPY phase2-toolchain.txt /opt/harmonika/phase2-toolchain.txt
+LABEL harmonika.phase2="1" harmonika.toolchain="2026.10.24.21"
+RUN cd /opt/harmonika/pkg-cache && sha256sum -c /opt/harmonika/offline-packages.sha256 \
+    && /opt/harmonika/tools-venv/bin/pip freeze > /opt/harmonika/python.freeze \
+    && cd /opt/harmonika/node && npm ls --all --json > /opt/harmonika/node.inventory.json
+
+USER 10000:10000
+ENV HOME=/tmp
+WORKDIR /workspace
+ENTRYPOINT []

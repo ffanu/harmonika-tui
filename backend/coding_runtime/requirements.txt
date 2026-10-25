@@ -1,0 +1,2 @@
+# Backend requires Python >=3.11; enforced by deploy/prepare.sh
+aiohttp==3.14.5

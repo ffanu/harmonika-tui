@@ -1,0 +1,503 @@
+{
+  "sha256": "2969c64c4ae833c38968de475331f96b8319ca46ab3c1dcf149bf82ff540c619",
+  "skills": [
+    {
+      "number": 1,
+      "id": "file.read",
+      "description": "Baca isi file (text, binary)"
+    },
+    {
+      "number": 2,
+      "id": "file.write",
+      "description": "Tulis/buat file baru"
+    },
+    {
+      "number": 3,
+      "id": "file.edit",
+      "description": "Edit sebagian file (find-replace)"
+    },
+    {
+      "number": 4,
+      "id": "file.delete",
+      "description": "Hapus file atau folder"
+    },
+    {
+      "number": 5,
+      "id": "file.search",
+      "description": "Cari file berdasarkan nama/pattern"
+    },
+    {
+      "number": 6,
+      "id": "file.grep",
+      "description": "Cari konten dalam file"
+    },
+    {
+      "number": 7,
+      "id": "file.move",
+      "description": "Pindah/rename file"
+    },
+    {
+      "number": 8,
+      "id": "file.list",
+      "description": "List isi direktori"
+    },
+    {
+      "number": 9,
+      "id": "shell.exec",
+      "description": "Jalankan command shell"
+    },
+    {
+      "number": 10,
+      "id": "shell.background",
+      "description": "Run command di background"
+    },
+    {
+      "number": 11,
+      "id": "process.list",
+      "description": "List running process"
+    },
+    {
+      "number": 12,
+      "id": "process.kill",
+      "description": "Kill process by PID"
+    },
+    {
+      "number": 13,
+      "id": "code.run.python",
+      "description": "Eksekusi Python script"
+    },
+    {
+      "number": 14,
+      "id": "code.run.node",
+      "description": "Eksekusi Node.js script"
+    },
+    {
+      "number": 15,
+      "id": "code.run.shell",
+      "description": "Eksekusi shell script"
+    },
+    {
+      "number": 16,
+      "id": "code.run.sql",
+      "description": "Eksekusi SQL query"
+    },
+    {
+      "number": 17,
+      "id": "code.lint",
+      "description": "Linting kode (eslint, ruff)"
+    },
+    {
+      "number": 18,
+      "id": "code.format",
+      "description": "Format kode (prettier, black)"
+    },
+    {
+      "number": 19,
+      "id": "code.test",
+      "description": "Run unit test"
+    },
+    {
+      "number": 20,
+      "id": "code.scaffold",
+      "description": "Init project baru"
+    },
+    {
+      "number": 21,
+      "id": "web.fetch",
+      "description": "Ambil konten URL"
+    },
+    {
+      "number": 22,
+      "id": "web.search",
+      "description": "Cari di internet"
+    },
+    {
+      "number": 23,
+      "id": "web.scrape",
+      "description": "Scrape halaman web"
+    },
+    {
+      "number": 24,
+      "id": "web.preview",
+      "description": "Serve & preview web app"
+    },
+    {
+      "number": 25,
+      "id": "web.screenshot",
+      "description": "Screenshot URL"
+    },
+    {
+      "number": 26,
+      "id": "http.request",
+      "description": "Custom HTTP request"
+    },
+    {
+      "number": 27,
+      "id": "api.call",
+      "description": "Call REST/GraphQL API"
+    },
+    {
+      "number": 28,
+      "id": "webhook.send",
+      "description": "Kirim webhook"
+    },
+    {
+      "number": 29,
+      "id": "data.read_csv",
+      "description": "Baca file CSV"
+    },
+    {
+      "number": 30,
+      "id": "data.read_json",
+      "description": "Baca JSON"
+    },
+    {
+      "number": 31,
+      "id": "data.read_excel",
+      "description": "Baca XLSX"
+    },
+    {
+      "number": 32,
+      "id": "data.transform",
+      "description": "Transform data (pandas)"
+    },
+    {
+      "number": 33,
+      "id": "data.analyze",
+      "description": "Analisis statistik"
+    },
+    {
+      "number": 34,
+      "id": "data.visualize",
+      "description": "Buat chart/plot"
+    },
+    {
+      "number": 35,
+      "id": "data.export",
+      "description": "Export ke CSV/JSON/XLSX"
+    },
+    {
+      "number": 36,
+      "id": "db.connect",
+      "description": "Connect ke database"
+    },
+    {
+      "number": 37,
+      "id": "db.query",
+      "description": "Run SQL query"
+    },
+    {
+      "number": 38,
+      "id": "db.migrate",
+      "description": "Run DB migration"
+    },
+    {
+      "number": 39,
+      "id": "doc.read_pdf",
+      "description": "Extract teks PDF"
+    },
+    {
+      "number": 40,
+      "id": "doc.read_docx",
+      "description": "Baca Word doc"
+    },
+    {
+      "number": 41,
+      "id": "doc.create_pdf",
+      "description": "Buat PDF"
+    },
+    {
+      "number": 42,
+      "id": "doc.create_docx",
+      "description": "Buat Word"
+    },
+    {
+      "number": 43,
+      "id": "doc.create_xlsx",
+      "description": "Buat Excel"
+    },
+    {
+      "number": 44,
+      "id": "doc.create_pptx",
+      "description": "Buat PowerPoint"
+    },
+    {
+      "number": 45,
+      "id": "doc.convert",
+      "description": "Konversi format dokumen"
+    },
+    {
+      "number": 46,
+      "id": "doc.ocr",
+      "description": "OCR gambar ke teks"
+    },
+    {
+      "number": 47,
+      "id": "llm.chat",
+      "description": "Chat dengan LLM"
+    },
+    {
+      "number": 48,
+      "id": "llm.complete",
+      "description": "Text completion"
+    },
+    {
+      "number": 49,
+      "id": "llm.embed",
+      "description": "Generate embedding"
+    },
+    {
+      "number": 50,
+      "id": "vision.analyze",
+      "description": "Analisis gambar"
+    },
+    {
+      "number": 51,
+      "id": "image.generate",
+      "description": "Generate gambar (SD local)"
+    },
+    {
+      "number": 52,
+      "id": "image.edit",
+      "description": "Edit gambar"
+    },
+    {
+      "number": 53,
+      "id": "audio.transcribe",
+      "description": "Speech-to-text"
+    },
+    {
+      "number": 54,
+      "id": "audio.synthesize",
+      "description": "Text-to-speech"
+    },
+    {
+      "number": 55,
+      "id": "video.analyze",
+      "description": "Analisis video"
+    },
+    {
+      "number": 46,
+      "id": "rag.query",
+      "description": "Query knowledge base"
+    },
+    {
+      "number": 57,
+      "id": "rag.index",
+      "description": "Index dokumen ke vector DB"
+    },
+    {
+      "number": 58,
+      "id": "git.status",
+      "description": "Cek git status"
+    },
+    {
+      "number": 59,
+      "id": "git.commit",
+      "description": "Commit changes"
+    },
+    {
+      "number": 60,
+      "id": "git.push",
+      "description": "Push ke remote"
+    },
+    {
+      "number": 61,
+      "id": "git.diff",
+      "description": "Lihat diff"
+    },
+    {
+      "number": 62,
+      "id": "docker.build",
+      "description": "Build Docker image"
+    },
+    {
+      "number": 63,
+      "id": "docker.run",
+      "description": "Run container"
+    },
+    {
+      "number": 64,
+      "id": "docker.ps",
+      "description": "List container"
+    },
+    {
+      "number": 65,
+      "id": "env.get",
+      "description": "Get env variable"
+    },
+    {
+      "number": 66,
+      "id": "env.set",
+      "description": "Set env variable"
+    },
+    {
+      "number": 67,
+      "id": "secret.get",
+      "description": "Get secret (vault)"
+    },
+    {
+      "number": 68,
+      "id": "cron.add",
+      "description": "Tambah cron job"
+    },
+    {
+      "number": 69,
+      "id": "cron.list",
+      "description": "List cron jobs"
+    },
+    {
+      "number": 70,
+      "id": "memory.set",
+      "description": "Simpan ke memory"
+    },
+    {
+      "number": 71,
+      "id": "memory.get",
+      "description": "Ambil dari memory"
+    },
+    {
+      "number": 72,
+      "id": "memory.search",
+      "description": "Cari di memory"
+    },
+    {
+      "number": 73,
+      "id": "memory.clear",
+      "description": "Hapus memory"
+    },
+    {
+      "number": 74,
+      "id": "knowledge.add",
+      "description": "Tambah ke knowledge base"
+    },
+    {
+      "number": 75,
+      "id": "knowledge.search",
+      "description": "Semantic search KB"
+    },
+    {
+      "number": 76,
+      "id": "knowledge.graph",
+      "description": "Query knowledge graph"
+    },
+    {
+      "number": 77,
+      "id": "email.send",
+      "description": "Kirim email"
+    },
+    {
+      "number": 78,
+      "id": "email.read",
+      "description": "Baca inbox"
+    },
+    {
+      "number": 79,
+      "id": "chat.send",
+      "description": "Kirim ke Slack/Discord/Telegram"
+    },
+    {
+      "number": 80,
+      "id": "notification.push",
+      "description": "Push notification"
+    },
+    {
+      "number": 81,
+      "id": "sms.send",
+      "description": "Kirim SMS"
+    },
+    {
+      "number": 82,
+      "id": "calendar.create",
+      "description": "Buat event kalender"
+    },
+    {
+      "number": 83,
+      "id": "calendar.list",
+      "description": "List event"
+    },
+    {
+      "number": 84,
+      "id": "system.info",
+      "description": "Info CPU/RAM/Disk"
+    },
+    {
+      "number": 85,
+      "id": "system.monitor",
+      "description": "Monitor resource"
+    },
+    {
+      "number": 86,
+      "id": "system.network",
+      "description": "Info jaringan"
+    },
+    {
+      "number": 87,
+      "id": "system.battery",
+      "description": "Status baterai"
+    },
+    {
+      "number": 88,
+      "id": "system.screenshot",
+      "description": "Screenshot layar"
+    },
+    {
+      "number": 89,
+      "id": "system.clipboard",
+      "description": "Read/write clipboard"
+    },
+    {
+      "number": 90,
+      "id": "system.notify",
+      "description": "Desktop notification"
+    },
+    {
+      "number": 91,
+      "id": "system.audio",
+      "description": "Play/record audio"
+    },
+    {
+      "number": 92,
+      "id": "system.open",
+      "description": "Buka file dengan app default"
+    },
+    {
+      "number": 93,
+      "id": "system.url",
+      "description": "Buka URL di browser"
+    },
+    {
+      "number": 94,
+      "id": "workflow.define",
+      "description": "Define workflow DAG"
+    },
+    {
+      "number": 95,
+      "id": "workflow.run",
+      "description": "Eksekusi workflow"
+    },
+    {
+      "number": 96,
+      "id": "workflow.schedule",
+      "description": "Jadwalkan workflow"
+    },
+    {
+      "number": 97,
+      "id": "trigger.on_event",
+      "description": "Trigger saat event"
+    },
+    {
+      "number": 98,
+      "id": "macro.record",
+      "description": "Record macro (UI actions)"
+    },
+    {
+      "number": 99,
+      "id": "macro.play",
+      "description": "Playback macro"
+    }
+  ],
+  "numbering_error": "rag.query is numbered46; expected56",
+  "phase1_actual_count": 14,
+  "phase1_declared_count": 13
+}

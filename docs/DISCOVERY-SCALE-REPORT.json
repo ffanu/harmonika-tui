@@ -1,0 +1,129 @@
+{
+  "status": "active_verified",
+  "verified_at": "2026-10-25T01:17:17.166785+00:00",
+  "scope": [
+    "hot_reload_sync",
+    "3072_chunked_lazy_scan",
+    "SSE_backlog_alignment"
+  ],
+  "activation": {
+    "status": "active_verified",
+    "backup": "/var/backups/harmonika-master/scale-20261025T010045Z",
+    "module_limit": 3072,
+    "dynamic_installed": 1,
+    "catalog": 1951,
+    "hot_reload_wait_active": true,
+    "lazy_sources": true,
+    "other_nine_pids_unchanged": true,
+    "gateway_binary_changed": false,
+    "session_databases_modified": false,
+    "public_https": "passed"
+  },
+  "hot_reload": {
+    "bounded_server_wait_seconds": 10,
+    "max_waiters": 16,
+    "client_preflight_poll_seconds": 30,
+    "client_retries": "GET status only; no automatic tool POST retry",
+    "snapshot_publication": "atomic after audit persist",
+    "regression_fixture": "waits for expected source hash; E_SCAN_BUSY no longer treated as completion"
+  },
+  "capacity": {
+    "module_limit": 3072,
+    "chunk_size": 64,
+    "source_budget_bytes": 64000000,
+    "metadata_budget_bytes": 8388608,
+    "disk_source_spool_bytes": 134217728,
+    "source_on_demand": true,
+    "static_metadata": "literal AST only with inert top-level; others isolated subprocess",
+    "registered_product_modules": 1,
+    "catalog_descriptors": 1951,
+    "note": "Capacity and synthetic module benchmark do not make unavailable catalog skills implemented."
+  },
+  "tests": {
+    "mac_discovery": {
+      "run": 107,
+      "passed": 104,
+      "linux_only_skips": 3
+    },
+    "linux_discovery": {
+      "run": 107,
+      "passed": 107
+    },
+    "mac_regression": {
+      "run": 537,
+      "passed": 534,
+      "linux_only_skips": 3
+    },
+    "public_https": {
+      "status": "passed",
+      "private": false,
+      "scenarios": [
+        "real_skill",
+        "strict_payload",
+        "hot_register_and_invoke",
+        "tamper_withdrawal",
+        "broken_duplicate_and_reserved_isolation",
+        "no_gateway_or_master_restart_during_hot_changes"
+      ],
+      "final_registered": 1,
+      "fixture_directories_removed": true,
+      "gateway_binary_changed": false
+    },
+    "benchmark": {
+      "status": "passed",
+      "modules": 3072,
+      "cold_seconds": 1.713,
+      "warm_seconds": 1.253,
+      "invoke_during_scan_seconds": 1.469,
+      "max_event_loop_gap_seconds": 0.132,
+      "peak_rss_mib": 72.17,
+      "incremental_peak_rss_mib": 27.96,
+      "source_bytes": 2227200,
+      "snapshot_metadata_bytes": 1253376,
+      "cold_metadata_subprocesses": 0,
+      "source_storage": "lazy_private_disk",
+      "page_and_real_module_execution": "passed",
+      "temporary_state_removed": true
+    },
+    "signed_helper": {
+      "status": "active",
+      "release": "2026.10.25.30",
+      "previous": "2026.10.25.29",
+      "signed_preflight": "passed",
+      "binary_unchanged": true,
+      "session_files_modified": false,
+      "automatic_update": false,
+      "changed_helpers": [
+        "state_store.py",
+        "master_cli.py"
+      ]
+    },
+    "actual_cli_invoke": {
+      "status": "completed",
+      "skill_id": "text.metrics",
+      "result": {
+        "characters": 23,
+        "words": 3,
+        "lines": 1,
+        "utf8_bytes": 23
+      }
+    }
+  },
+  "documentation": {
+    "TUI-BACKLOG.md": "SSE /v1/chat/completions, /api/tags and /api/show readiness",
+    "offline_model_activated": false
+  },
+  "contributors": {
+    "Codex": "Sync/server/client integration, schema/CAS guard hardening, tests, staging, deployment and public verification.",
+    "OpenCode": "Chunked lazy scanner and18 scaling tests; native interaction QA continues separately.",
+    "Claude": "Not involved."
+  },
+  "remaining_from_original_audit": [
+    "Native local read-only inspection edge case not in this three-item scope.",
+    "Local offline model still not ready."
+  ],
+  "next_user_work": [
+    "RTX bridge TUI network client",
+    "Native mouse/code-copy verification"
+  ]
+}

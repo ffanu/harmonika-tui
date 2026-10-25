@@ -1,0 +1,8 @@
+{
+  "endpoint": "http://127.0.0.1:18182",
+  "mode": "legacy",
+  "port": 18186,
+  "connect_timeout": 3,
+  "job_timeout": 120,
+  "data_root": "/var/lib/harmonika-rtx-queue"
+}

@@ -1,0 +1,2877 @@
+{
+  "status": "activated_source_and_planning_only",
+  "source_audit": {
+    "source_sha256": "9d3f2c7fa29390fa840fa454ab30f02298b2cd772c431aa4200104686996449f",
+    "source_lines": 1239,
+    "header_declared": 165,
+    "actual_unique": 214
+  },
+  "capabilities": {
+    "schema_version": 1,
+    "engine": "harmonika-mobile-builder",
+    "source_sha256": "9d3f2c7fa29390fa840fa454ab30f02298b2cd772c431aa4200104686996449f",
+    "declared_header_count": 165,
+    "catalog_size": 214,
+    "readiness": {
+      "available": 91,
+      "unavailable": 123,
+      "planning": 34,
+      "source_generation": 57
+    },
+    "features": {
+      "spec_analysis": true,
+      "source_generation": true,
+      "android_build": false,
+      "ios_build": false,
+      "code_signing": false,
+      "store_publish": false,
+      "ota_release": false,
+      "device_farm": false,
+      "live_iap": false,
+      "host_filesystem_access": false
+    },
+    "limits": {
+      "spec_characters": 32000,
+      "input_bytes": 65536,
+      "output_bytes": 262144,
+      "files": 60,
+      "file_bytes": 65536,
+      "timeout_seconds": 15,
+      "global_active_shared": 2,
+      "per_actor_active_shared": 1
+    },
+    "registration_is_not_runtime_readiness": true
+  },
+  "remaining_unavailable": [
+    {
+      "number": 36,
+      "id": "scaffold.react_native_cli",
+      "description": "Init React Native CLI project",
+      "layer": "PROJECT SCAFFOLDER - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 41,
+      "id": "scaffold.monorepo.mobile",
+      "description": "Setup monorepo (Nx, Turborepo)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 62,
+      "id": "nav.setup.drawer",
+      "description": "Setup drawer navigation",
+      "layer": "NAVIGATION BUILDER",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 65,
+      "id": "nav.push_notif_link",
+      "description": "Navigate dari push notification",
+      "layer": "NAVIGATION BUILDER",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 68,
+      "id": "nav.transition.custom",
+      "description": "Custom transition animation",
+      "layer": "NAVIGATION BUILDER",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 69,
+      "id": "nav.analytics",
+      "description": "Track screen view analytics",
+      "layer": "NAVIGATION BUILDER",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 70,
+      "id": "state.setup.redux",
+      "description": "Setup Redux Toolkit (React Native)",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 74,
+      "id": "state.setup.mobx",
+      "description": "Setup MobX",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 75,
+      "id": "state.persist",
+      "description": "Persist state ke local storage",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 76,
+      "id": "state.hydrate",
+      "description": "Hydrate state dari storage on startup",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 77,
+      "id": "state.sync.remote",
+      "description": "Sync state dengan remote API",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 78,
+      "id": "state.middleware",
+      "description": "Setup middleware (logging, analytics)",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 79,
+      "id": "state.devtools",
+      "description": "Setup devtools (Redux DevTools, Flipper)",
+      "layer": "STATE MANAGEMENT",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 82,
+      "id": "net.setup.graphql",
+      "description": "Setup Apollo / urql GraphQL client",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 83,
+      "id": "net.setup.websocket",
+      "description": "Setup WebSocket client",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 84,
+      "id": "net.setup.trpc",
+      "description": "Setup tRPC client",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 85,
+      "id": "net.auth.token",
+      "description": "Token management (refresh, rotate)",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 86,
+      "id": "net.retry",
+      "description": "Retry strategy (exponential backoff)",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 87,
+      "id": "net.cache",
+      "description": "Network cache (React Query, SWR)",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 88,
+      "id": "net.upload.file",
+      "description": "File upload (multipart, presigned URL)",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 89,
+      "id": "net.ssl.pinning",
+      "description": "SSL pinning untuk security",
+      "layer": "NETWORK & API INTEGRATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 92,
+      "id": "local.watermelon",
+      "description": "Setup WatermelonDB (offline-first)",
+      "layer": "LOCAL STORAGE & OFFLINE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 94,
+      "id": "local.realm",
+      "description": "Setup Realm Database",
+      "layer": "LOCAL STORAGE & OFFLINE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 99,
+      "id": "local.backup",
+      "description": "Backup local data",
+      "layer": "LOCAL STORAGE & OFFLINE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 101,
+      "id": "auth.mobile.oauth",
+      "description": "OAuth (Google, Apple, Facebook)",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 102,
+      "id": "auth.mobile.biometric",
+      "description": "Biometric (Face ID, Touch ID, Fingerprint)",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 103,
+      "id": "auth.mobile.pin",
+      "description": "PIN code auth",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 104,
+      "id": "auth.mobile.jwt",
+      "description": "JWT token management",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 105,
+      "id": "auth.mobile.refresh",
+      "description": "Refresh token rotation",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 107,
+      "id": "auth.mobile.device_binding",
+      "description": "Device binding (anti-sharing)",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 108,
+      "id": "auth.mobile.jailbreak_detect",
+      "description": "Detect jailbreak / root",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 109,
+      "id": "auth.mobile.tamper_detect",
+      "description": "Tamper detection",
+      "layer": "AUTHENTICATION & SECURITY",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 110,
+      "id": "push.setup.fcm",
+      "description": "Setup Firebase Cloud Messaging (Android)",
+      "layer": "PUSH NOTIFICATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 111,
+      "id": "push.setup.apns",
+      "description": "Setup Apple Push Notification Service (iOS)",
+      "layer": "PUSH NOTIFICATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 112,
+      "id": "push.setup.onesignal",
+      "description": "Setup OneSignal (cross-platform)",
+      "layer": "PUSH NOTIFICATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 114,
+      "id": "push.handle.foreground",
+      "description": "Handle foreground notification",
+      "layer": "PUSH NOTIFICATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 115,
+      "id": "push.handle.background",
+      "description": "Handle background notification",
+      "layer": "PUSH NOTIFICATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 117,
+      "id": "push.schedule.local",
+      "description": "Schedule local notification",
+      "layer": "PUSH NOTIFICATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 121,
+      "id": "device.maps",
+      "description": "Maps integration (Google Maps, Mapbox)",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 122,
+      "id": "device.accelerometer",
+      "description": "Accelerometer sensor",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 123,
+      "id": "device.gyroscope",
+      "description": "Gyroscope sensor",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 124,
+      "id": "device.bluetooth",
+      "description": "Bluetooth (BLE)",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 125,
+      "id": "device.nfc",
+      "description": "NFC",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 126,
+      "id": "device.biometric",
+      "description": "Biometric scanner",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 127,
+      "id": "device.contacts",
+      "description": "Contacts access",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 128,
+      "id": "device.sms",
+      "description": "SMS sending",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 129,
+      "id": "device.phone",
+      "description": "Phone call",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 131,
+      "id": "device.file_system",
+      "description": "File system access",
+      "layer": "NATIVE DEVICE FEATURES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 133,
+      "id": "media.audio.record",
+      "description": "Audio recording",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 134,
+      "id": "media.audio.play",
+      "description": "Audio playback",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 135,
+      "id": "media.video.record",
+      "description": "Video recording",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 136,
+      "id": "media.video.play",
+      "description": "Video playback",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 137,
+      "id": "media.image.process",
+      "description": "Image processing (filter, crop, compress)",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 138,
+      "id": "media.lottie",
+      "description": "Lottie animation",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 139,
+      "id": "media.reanimated",
+      "description": "Reanimated (React Native) animation",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 140,
+      "id": "media.gesture",
+      "description": "Gesture handler (swipe, pinch, pan)",
+      "layer": "MEDIA & ANIMATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 141,
+      "id": "iap.setup.play_billing",
+      "description": "Setup Google Play Billing",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 142,
+      "id": "iap.setup.storekit",
+      "description": "Setup Apple StoreKit",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 143,
+      "id": "iap.setup.revenue_cat",
+      "description": "Setup RevenueCat (cross-platform)",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 144,
+      "id": "iap.product.fetch",
+      "description": "Fetch products dari store",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 145,
+      "id": "iap.purchase",
+      "description": "Process purchase",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 146,
+      "id": "iap.restore",
+      "description": "Restore purchases",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 147,
+      "id": "iap.subscription",
+      "description": "Subscription management",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 148,
+      "id": "iap.validate",
+      "description": "Validate receipt server-side",
+      "layer": "IN-APP PURCHASE & MONETIZATION",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 156,
+      "id": "bridge.publish.npm",
+      "description": "Publish native module ke npm/pub",
+      "layer": "NATIVE BRIDGE & MODULES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 157,
+      "id": "test.unit.jest",
+      "description": "Unit test dengan Jest (React Native)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 158,
+      "id": "test.unit.flutter",
+      "description": "Unit test dengan Flutter Test",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 159,
+      "id": "test.unit.kotlin",
+      "description": "Unit test dengan JUnit (Android)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 160,
+      "id": "test.unit.swift",
+      "description": "Unit test dengan XCTest (iOS)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 161,
+      "id": "test.widget.flutter",
+      "description": "Widget test (Flutter)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 162,
+      "id": "test.component.rntl",
+      "description": "Component test (React Native Testing Library)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 163,
+      "id": "test.e2e.detox",
+      "description": "E2E test dengan Detox (React Native)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 164,
+      "id": "test.e2e.maestro",
+      "description": "E2E test dengan Maestro (cross-platform)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 165,
+      "id": "test.e2e.appium",
+      "description": "E2E test dengan Appium",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 166,
+      "id": "test.screenshot",
+      "description": "Screenshot test (Fastlane Snapshot)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 167,
+      "id": "test.device_farm",
+      "description": "Test di device farm (AWS, Firebase)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 168,
+      "id": "test.performance.mobile",
+      "description": "Performance test (startup, memory)",
+      "layer": "TESTING - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 169,
+      "id": "build.android.apk",
+      "description": "Build APK (debug / release)",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 170,
+      "id": "build.android.aab",
+      "description": "Build AAB (App Bundle untuk Play Store)",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 171,
+      "id": "build.ios.ipa",
+      "description": "Build IPA (untuk App Store / TestFlight)",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 172,
+      "id": "build.android.sign",
+      "description": "Sign Android dengan keystore",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 173,
+      "id": "build.ios.sign",
+      "description": "Sign iOS dengan provisioning profile",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 174,
+      "id": "build.version.manage",
+      "description": "Version code & version name management",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 175,
+      "id": "build.proguard",
+      "description": "ProGuard / R8 obfuscation (Android)",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 176,
+      "id": "build.ios.export",
+      "description": "iOS export method (App Store, Ad Hoc, Dev)",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 177,
+      "id": "build.eas.submit",
+      "description": "EAS Build & Submit (Expo)",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 178,
+      "id": "build.fastlane",
+      "description": "Fastlane build automation",
+      "layer": "BUILD & SIGN",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_mobile_toolchain_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 179,
+      "id": "deploy.play_store",
+      "description": "Upload ke Google Play Console",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 180,
+      "id": "deploy.app_store",
+      "description": "Upload ke Apple App Store Connect",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 181,
+      "id": "deploy.testflight",
+      "description": "Upload ke TestFlight (beta testing)",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 182,
+      "id": "deploy.internal_testing",
+      "description": "Play Store Internal Testing",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 183,
+      "id": "deploy.closed_testing",
+      "description": "Play Store Closed Testing (alpha/beta)",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 184,
+      "id": "deploy.staged_rollout",
+      "description": "Staged rollout (1% → 100%)",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 185,
+      "id": "deploy.store_listing",
+      "description": "Setup store listing (description, screenshots)",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 186,
+      "id": "deploy.store_screenshot",
+      "description": "Generate store screenshots",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 187,
+      "id": "deploy.store_icon",
+      "description": "Generate store icon",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 188,
+      "id": "deploy.promo_content",
+      "description": "Generate promo content (feature graphic)",
+      "layer": "DEPLOY TO STORE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 189,
+      "id": "ota.setup.codepush",
+      "description": "Setup CodePush (React Native)",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 190,
+      "id": "ota.setup.eas_update",
+      "description": "Setup EAS Update (Expo)",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 191,
+      "id": "ota.setup.shorebird",
+      "description": "Setup Shorebird (Flutter)",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 192,
+      "id": "ota.release.update",
+      "description": "Release OTA update",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 193,
+      "id": "ota.rollback",
+      "description": "Rollback OTA update",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 194,
+      "id": "ota.targeting",
+      "description": "Targeting update (by version, channel)",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 195,
+      "id": "ota.mandatory",
+      "description": "Mandatory update enforcement",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 196,
+      "id": "ota.monitoring",
+      "description": "Monitor OTA adoption rate",
+      "layer": "OTA & UPDATES",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 197,
+      "id": "monitor.crashlytics",
+      "description": "Setup Firebase Crashlytics",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 198,
+      "id": "monitor.sentry.mobile",
+      "description": "Setup Sentry mobile",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 199,
+      "id": "monitor.bugsnag",
+      "description": "Setup Bugsnag",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 200,
+      "id": "analytics.firebase",
+      "description": "Setup Firebase Analytics",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 201,
+      "id": "analytics.mixpanel",
+      "description": "Setup Mixpanel",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 202,
+      "id": "analytics.amplitude",
+      "description": "Setup Amplitude",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 203,
+      "id": "analytics.event_track",
+      "description": "Track custom event",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 204,
+      "id": "analytics.funnel",
+      "description": "Funnel analysis",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 205,
+      "id": "analytics.retention",
+      "description": "Retention tracking",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 206,
+      "id": "analytics.heatmap",
+      "description": "Heatmap (FullStory, LogRocket)",
+      "layer": "MONITORING & ANALYTICS",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 207,
+      "id": "cicd.github_actions.mobile",
+      "description": "GitHub Actions untuk mobile",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 208,
+      "id": "cicd.gitlab_ci.mobile",
+      "description": "GitLab CI untuk mobile",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 209,
+      "id": "cicd.fastlane.lane",
+      "description": "Fastlane lane automation",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 210,
+      "id": "cicd.bitrise",
+      "description": "Bitrise CI/CD",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 211,
+      "id": "cicd.codemagic",
+      "description": "Codemagic CI/CD (Flutter)",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 212,
+      "id": "cicd.eas.pipeline",
+      "description": "EAS Pipeline (Expo)",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 213,
+      "id": "cicd.auto_version",
+      "description": "Auto version bump",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    },
+    {
+      "number": 214,
+      "id": "cicd.auto_tag",
+      "description": "Auto git tag release",
+      "layer": "CI/CD - MOBILE",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "authorized_connector_and_runtime_required",
+      "execution_target": "not_configured"
+    }
+  ],
+  "team": {
+    "codex": "API, planner, validation, integration, review and release",
+    "opencode": "source generators and generator unit tests",
+    "claude_invoked": false
+  },
+  "build_and_store_execution": false,
+  "checked_at": "2026-10-24T20:51:16.701602+00:00",
+  "available": [
+    {
+      "id": "spec.read.mobile",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.platform",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.screens",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.features.mobile",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.offline",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.auth.mobile",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.push_notif",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.iap",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.parse.design_pref.mobile",
+      "mode": "planning"
+    },
+    {
+      "id": "spec.clarify.mobile",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.mobile.analyze",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.react_native",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.flutter",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.kotlin",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.swift",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.ionic",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.state_mgmt",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.navigation",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.network",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.local_db",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.select.di",
+      "mode": "planning"
+    },
+    {
+      "id": "stack.recommend.combination.mobile",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.system",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.screen_flow",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.state",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.offline",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.sync",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.cache",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.security",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.local_storage",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.push_notif",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.deep_link",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.iap",
+      "mode": "planning"
+    },
+    {
+      "id": "arch.mobile.diagram",
+      "mode": "planning"
+    },
+    {
+      "id": "scaffold.expo",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.flutter",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.kotlin_android",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.swift_ios",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.ionic",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.ci_cd.mobile",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.env_config",
+      "mode": "source_generation"
+    },
+    {
+      "id": "scaffold.linting.mobile",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.screen",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.component",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.form",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.list",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.card",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.modal",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.tab_bar",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.drawer",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.skeleton",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.gen.empty_state",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.style.material",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.style.cupertino",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.style.adaptive",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.responsive.tablet",
+      "mode": "source_generation"
+    },
+    {
+      "id": "mobile.theme.dark_mode",
+      "mode": "source_generation"
+    },
+    {
+      "id": "nav.setup.stack",
+      "mode": "source_generation"
+    },
+    {
+      "id": "nav.setup.tab",
+      "mode": "source_generation"
+    },
+    {
+      "id": "nav.setup.modal",
+      "mode": "source_generation"
+    },
+    {
+      "id": "nav.deep_link",
+      "mode": "source_generation"
+    },
+    {
+      "id": "nav.auth_flow",
+      "mode": "source_generation"
+    },
+    {
+      "id": "nav.guard",
+      "mode": "source_generation"
+    },
+    {
+      "id": "state.setup.zustand",
+      "mode": "source_generation"
+    },
+    {
+      "id": "state.setup.riverpod",
+      "mode": "source_generation"
+    },
+    {
+      "id": "state.setup.bloc",
+      "mode": "source_generation"
+    },
+    {
+      "id": "net.setup.axios",
+      "mode": "source_generation"
+    },
+    {
+      "id": "net.setup.fetch",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.async_storage",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.sqlite",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.hive",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.secure_store",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.sync.engine",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.conflict.resolve",
+      "mode": "source_generation"
+    },
+    {
+      "id": "local.migration",
+      "mode": "source_generation"
+    },
+    {
+      "id": "auth.mobile.login",
+      "mode": "source_generation"
+    },
+    {
+      "id": "auth.mobile.logout",
+      "mode": "source_generation"
+    },
+    {
+      "id": "push.permission.request",
+      "mode": "source_generation"
+    },
+    {
+      "id": "push.handle.tap",
+      "mode": "source_generation"
+    },
+    {
+      "id": "device.camera",
+      "mode": "source_generation"
+    },
+    {
+      "id": "device.gallery",
+      "mode": "source_generation"
+    },
+    {
+      "id": "device.gps",
+      "mode": "source_generation"
+    },
+    {
+      "id": "device.sharing",
+      "mode": "source_generation"
+    },
+    {
+      "id": "device.permissions",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.kotlin.module",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.swift.module",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.react_native",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.flutter_platform_channel",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.method_channel",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.event_channel",
+      "mode": "source_generation"
+    },
+    {
+      "id": "bridge.type_safe",
+      "mode": "source_generation"
+    }
+  ],
+  "tests": {
+    "mobile_mac": {
+      "run": 104,
+      "passed": 104,
+      "skipped": 0
+    },
+    "mobile_linux": {
+      "run": 104,
+      "passed": 104,
+      "skipped": 0
+    },
+    "master_regression": {
+      "run": 86,
+      "passed": 86,
+      "skipped": 0
+    },
+    "gateway_go": true,
+    "release_tests": 10,
+    "typescript_syntax_files": 93,
+    "expo_scaffold_tsc": true,
+    "expo_module_cases_tsc": 35,
+    "expo_module_source_files_tsc": 77,
+    "swift_scaffold_typecheck_ios_sdk": true,
+    "dart_source_parse": 23,
+    "dart_core_merge_scenarios_passed": 5,
+    "native_application_build": false,
+    "emulator_or_physical_device": false,
+    "typescript_core_compiler": "5.9.3",
+    "dart_sdk": "3.13.7 (official archive SHA-256 verified, analytics suppressed)"
+  },
+  "activation": {
+    "status": "activated",
+    "capabilities": {
+      "schema_version": 1,
+      "engine": "harmonika-mobile-builder",
+      "source_sha256": "9d3f2c7fa29390fa840fa454ab30f02298b2cd772c431aa4200104686996449f",
+      "declared_header_count": 165,
+      "catalog_size": 214,
+      "readiness": {
+        "available": 91,
+        "unavailable": 123,
+        "planning": 34,
+        "source_generation": 57
+      },
+      "features": {
+        "spec_analysis": true,
+        "source_generation": true,
+        "android_build": false,
+        "ios_build": false,
+        "code_signing": false,
+        "store_publish": false,
+        "ota_release": false,
+        "device_farm": false,
+        "live_iap": false,
+        "host_filesystem_access": false
+      },
+      "limits": {
+        "spec_characters": 32000,
+        "input_bytes": 65536,
+        "output_bytes": 262144,
+        "files": 60,
+        "file_bytes": 65536,
+        "timeout_seconds": 15,
+        "global_active_shared": 2,
+        "per_actor_active_shared": 1
+      },
+      "registration_is_not_runtime_readiness": true
+    },
+    "other_six_engine_pids_unchanged": true,
+    "backup": "/var/backups/harmonika-mobile/20261024-204937",
+    "service": "harmonika-master-skills.service",
+    "gateway": "harmonika-web-chat-live.service"
+  },
+  "private_smoke": {
+    "passed": 91,
+    "catalog_size": 214,
+    "readiness": {
+      "available": 91,
+      "unavailable": 123,
+      "planning": 34,
+      "source_generation": 57
+    },
+    "negative_runtime_and_security": true,
+    "curl_capabilities_passed": true,
+    "mean_seconds": 0.0023,
+    "max_seconds": 0.0114,
+    "results": [
+      {
+        "id": "spec.read.mobile",
+        "mode": "planning",
+        "seconds": 0.0054,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.platform",
+        "mode": "planning",
+        "seconds": 0.003,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.screens",
+        "mode": "planning",
+        "seconds": 0.0026,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.features.mobile",
+        "mode": "planning",
+        "seconds": 0.0023,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.offline",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.auth.mobile",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.push_notif",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.iap",
+        "mode": "planning",
+        "seconds": 0.0025,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.design_pref.mobile",
+        "mode": "planning",
+        "seconds": 0.0027,
+        "files": 0
+      },
+      {
+        "id": "spec.clarify.mobile",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "stack.mobile.analyze",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "stack.select.react_native",
+        "mode": "planning",
+        "seconds": 0.0024,
+        "files": 0
+      },
+      {
+        "id": "stack.select.flutter",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "stack.select.kotlin",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "stack.select.swift",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "stack.select.ionic",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "stack.select.state_mgmt",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "stack.select.navigation",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "stack.select.network",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "stack.select.local_db",
+        "mode": "planning",
+        "seconds": 0.0025,
+        "files": 0
+      },
+      {
+        "id": "stack.select.di",
+        "mode": "planning",
+        "seconds": 0.0022,
+        "files": 0
+      },
+      {
+        "id": "stack.recommend.combination.mobile",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.system",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.screen_flow",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.state",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.offline",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.sync",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.cache",
+        "mode": "planning",
+        "seconds": 0.0024,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.security",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.local_storage",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.push_notif",
+        "mode": "planning",
+        "seconds": 0.0021,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.deep_link",
+        "mode": "planning",
+        "seconds": 0.002,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.iap",
+        "mode": "planning",
+        "seconds": 0.0114,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.diagram",
+        "mode": "planning",
+        "seconds": 0.0022,
+        "files": 0
+      },
+      {
+        "id": "scaffold.expo",
+        "mode": "source_generation",
+        "seconds": 0.0025,
+        "files": 8
+      },
+      {
+        "id": "scaffold.flutter",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 7
+      },
+      {
+        "id": "scaffold.kotlin_android",
+        "mode": "source_generation",
+        "seconds": 0.0024,
+        "files": 13
+      },
+      {
+        "id": "scaffold.swift_ios",
+        "mode": "source_generation",
+        "seconds": 0.0025,
+        "files": 8
+      },
+      {
+        "id": "scaffold.ionic",
+        "mode": "source_generation",
+        "seconds": 0.0023,
+        "files": 9
+      },
+      {
+        "id": "scaffold.ci_cd.mobile",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "scaffold.env_config",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 3
+      },
+      {
+        "id": "scaffold.linting.mobile",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 3
+      },
+      {
+        "id": "mobile.gen.screen",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.component",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.form",
+        "mode": "source_generation",
+        "seconds": 0.0023,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.list",
+        "mode": "source_generation",
+        "seconds": 0.0025,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.card",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.modal",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.tab_bar",
+        "mode": "source_generation",
+        "seconds": 0.0023,
+        "files": 6
+      },
+      {
+        "id": "mobile.gen.drawer",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 6
+      },
+      {
+        "id": "mobile.gen.skeleton",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.empty_state",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "mobile.style.material",
+        "mode": "source_generation",
+        "seconds": 0.0024,
+        "files": 2
+      },
+      {
+        "id": "mobile.style.cupertino",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "mobile.style.adaptive",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 4
+      },
+      {
+        "id": "mobile.responsive.tablet",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 3
+      },
+      {
+        "id": "mobile.theme.dark_mode",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "nav.setup.stack",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 3
+      },
+      {
+        "id": "nav.setup.tab",
+        "mode": "source_generation",
+        "seconds": 0.0023,
+        "files": 6
+      },
+      {
+        "id": "nav.setup.modal",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 3
+      },
+      {
+        "id": "nav.deep_link",
+        "mode": "source_generation",
+        "seconds": 0.0024,
+        "files": 2
+      },
+      {
+        "id": "nav.auth_flow",
+        "mode": "source_generation",
+        "seconds": 0.0023,
+        "files": 3
+      },
+      {
+        "id": "nav.guard",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "state.setup.zustand",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 1
+      },
+      {
+        "id": "state.setup.riverpod",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 2
+      },
+      {
+        "id": "state.setup.bloc",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "net.setup.axios",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 1
+      },
+      {
+        "id": "net.setup.fetch",
+        "mode": "source_generation",
+        "seconds": 0.0024,
+        "files": 1
+      },
+      {
+        "id": "local.async_storage",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 1
+      },
+      {
+        "id": "local.sqlite",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "local.hive",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 2
+      },
+      {
+        "id": "local.secure_store",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 1
+      },
+      {
+        "id": "local.sync.engine",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 2
+      },
+      {
+        "id": "local.conflict.resolve",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 2
+      },
+      {
+        "id": "local.migration",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 2
+      },
+      {
+        "id": "auth.mobile.login",
+        "mode": "source_generation",
+        "seconds": 0.0026,
+        "files": 4
+      },
+      {
+        "id": "auth.mobile.logout",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 1
+      },
+      {
+        "id": "push.permission.request",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 1
+      },
+      {
+        "id": "push.handle.tap",
+        "mode": "source_generation",
+        "seconds": 0.0022,
+        "files": 1
+      },
+      {
+        "id": "device.camera",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 1
+      },
+      {
+        "id": "device.gallery",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 1
+      },
+      {
+        "id": "device.gps",
+        "mode": "source_generation",
+        "seconds": 0.0021,
+        "files": 1
+      },
+      {
+        "id": "device.sharing",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 1
+      },
+      {
+        "id": "device.permissions",
+        "mode": "source_generation",
+        "seconds": 0.0024,
+        "files": 1
+      },
+      {
+        "id": "bridge.kotlin.module",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 2
+      },
+      {
+        "id": "bridge.swift.module",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 2
+      },
+      {
+        "id": "bridge.react_native",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 6
+      },
+      {
+        "id": "bridge.flutter_platform_channel",
+        "mode": "source_generation",
+        "seconds": 0.0019,
+        "files": 4
+      },
+      {
+        "id": "bridge.method_channel",
+        "mode": "source_generation",
+        "seconds": 0.0019,
+        "files": 4
+      },
+      {
+        "id": "bridge.event_channel",
+        "mode": "source_generation",
+        "seconds": 0.0019,
+        "files": 4
+      },
+      {
+        "id": "bridge.type_safe",
+        "mode": "source_generation",
+        "seconds": 0.002,
+        "files": 2
+      }
+    ],
+    "fixtures_only": true,
+    "customer_data_modified": false
+  },
+  "https_smoke": {
+    "passed": 91,
+    "catalog_size": 214,
+    "readiness": {
+      "available": 91,
+      "unavailable": 123,
+      "planning": 34,
+      "source_generation": 57
+    },
+    "negative_runtime_and_security": true,
+    "curl_capabilities_passed": null,
+    "mean_seconds": 0.0703,
+    "max_seconds": 0.0934,
+    "results": [
+      {
+        "id": "spec.read.mobile",
+        "mode": "planning",
+        "seconds": 0.0748,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.platform",
+        "mode": "planning",
+        "seconds": 0.0696,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.screens",
+        "mode": "planning",
+        "seconds": 0.0696,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.features.mobile",
+        "mode": "planning",
+        "seconds": 0.0684,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.offline",
+        "mode": "planning",
+        "seconds": 0.0706,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.auth.mobile",
+        "mode": "planning",
+        "seconds": 0.0701,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.push_notif",
+        "mode": "planning",
+        "seconds": 0.0701,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.iap",
+        "mode": "planning",
+        "seconds": 0.069,
+        "files": 0
+      },
+      {
+        "id": "spec.parse.design_pref.mobile",
+        "mode": "planning",
+        "seconds": 0.0684,
+        "files": 0
+      },
+      {
+        "id": "spec.clarify.mobile",
+        "mode": "planning",
+        "seconds": 0.0699,
+        "files": 0
+      },
+      {
+        "id": "stack.mobile.analyze",
+        "mode": "planning",
+        "seconds": 0.0691,
+        "files": 0
+      },
+      {
+        "id": "stack.select.react_native",
+        "mode": "planning",
+        "seconds": 0.0829,
+        "files": 0
+      },
+      {
+        "id": "stack.select.flutter",
+        "mode": "planning",
+        "seconds": 0.0684,
+        "files": 0
+      },
+      {
+        "id": "stack.select.kotlin",
+        "mode": "planning",
+        "seconds": 0.0771,
+        "files": 0
+      },
+      {
+        "id": "stack.select.swift",
+        "mode": "planning",
+        "seconds": 0.0682,
+        "files": 0
+      },
+      {
+        "id": "stack.select.ionic",
+        "mode": "planning",
+        "seconds": 0.0684,
+        "files": 0
+      },
+      {
+        "id": "stack.select.state_mgmt",
+        "mode": "planning",
+        "seconds": 0.0682,
+        "files": 0
+      },
+      {
+        "id": "stack.select.navigation",
+        "mode": "planning",
+        "seconds": 0.068,
+        "files": 0
+      },
+      {
+        "id": "stack.select.network",
+        "mode": "planning",
+        "seconds": 0.0674,
+        "files": 0
+      },
+      {
+        "id": "stack.select.local_db",
+        "mode": "planning",
+        "seconds": 0.0685,
+        "files": 0
+      },
+      {
+        "id": "stack.select.di",
+        "mode": "planning",
+        "seconds": 0.0698,
+        "files": 0
+      },
+      {
+        "id": "stack.recommend.combination.mobile",
+        "mode": "planning",
+        "seconds": 0.0685,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.system",
+        "mode": "planning",
+        "seconds": 0.0691,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.screen_flow",
+        "mode": "planning",
+        "seconds": 0.0668,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.state",
+        "mode": "planning",
+        "seconds": 0.0686,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.offline",
+        "mode": "planning",
+        "seconds": 0.0678,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.sync",
+        "mode": "planning",
+        "seconds": 0.0683,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.cache",
+        "mode": "planning",
+        "seconds": 0.0682,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.security",
+        "mode": "planning",
+        "seconds": 0.068,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.local_storage",
+        "mode": "planning",
+        "seconds": 0.0692,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.push_notif",
+        "mode": "planning",
+        "seconds": 0.0689,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.deep_link",
+        "mode": "planning",
+        "seconds": 0.0779,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.iap",
+        "mode": "planning",
+        "seconds": 0.0682,
+        "files": 0
+      },
+      {
+        "id": "arch.mobile.diagram",
+        "mode": "planning",
+        "seconds": 0.0691,
+        "files": 0
+      },
+      {
+        "id": "scaffold.expo",
+        "mode": "source_generation",
+        "seconds": 0.0681,
+        "files": 8
+      },
+      {
+        "id": "scaffold.flutter",
+        "mode": "source_generation",
+        "seconds": 0.0682,
+        "files": 7
+      },
+      {
+        "id": "scaffold.kotlin_android",
+        "mode": "source_generation",
+        "seconds": 0.0839,
+        "files": 13
+      },
+      {
+        "id": "scaffold.swift_ios",
+        "mode": "source_generation",
+        "seconds": 0.068,
+        "files": 8
+      },
+      {
+        "id": "scaffold.ionic",
+        "mode": "source_generation",
+        "seconds": 0.0679,
+        "files": 9
+      },
+      {
+        "id": "scaffold.ci_cd.mobile",
+        "mode": "source_generation",
+        "seconds": 0.0685,
+        "files": 2
+      },
+      {
+        "id": "scaffold.env_config",
+        "mode": "source_generation",
+        "seconds": 0.0665,
+        "files": 3
+      },
+      {
+        "id": "scaffold.linting.mobile",
+        "mode": "source_generation",
+        "seconds": 0.067,
+        "files": 3
+      },
+      {
+        "id": "mobile.gen.screen",
+        "mode": "source_generation",
+        "seconds": 0.0683,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.component",
+        "mode": "source_generation",
+        "seconds": 0.0817,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.form",
+        "mode": "source_generation",
+        "seconds": 0.0685,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.list",
+        "mode": "source_generation",
+        "seconds": 0.0674,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.card",
+        "mode": "source_generation",
+        "seconds": 0.0694,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.modal",
+        "mode": "source_generation",
+        "seconds": 0.0694,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.tab_bar",
+        "mode": "source_generation",
+        "seconds": 0.0707,
+        "files": 6
+      },
+      {
+        "id": "mobile.gen.drawer",
+        "mode": "source_generation",
+        "seconds": 0.0674,
+        "files": 6
+      },
+      {
+        "id": "mobile.gen.skeleton",
+        "mode": "source_generation",
+        "seconds": 0.0682,
+        "files": 2
+      },
+      {
+        "id": "mobile.gen.empty_state",
+        "mode": "source_generation",
+        "seconds": 0.0676,
+        "files": 2
+      },
+      {
+        "id": "mobile.style.material",
+        "mode": "source_generation",
+        "seconds": 0.0679,
+        "files": 2
+      },
+      {
+        "id": "mobile.style.cupertino",
+        "mode": "source_generation",
+        "seconds": 0.067,
+        "files": 2
+      },
+      {
+        "id": "mobile.style.adaptive",
+        "mode": "source_generation",
+        "seconds": 0.0677,
+        "files": 4
+      },
+      {
+        "id": "mobile.responsive.tablet",
+        "mode": "source_generation",
+        "seconds": 0.0859,
+        "files": 3
+      },
+      {
+        "id": "mobile.theme.dark_mode",
+        "mode": "source_generation",
+        "seconds": 0.0731,
+        "files": 2
+      },
+      {
+        "id": "nav.setup.stack",
+        "mode": "source_generation",
+        "seconds": 0.0688,
+        "files": 3
+      },
+      {
+        "id": "nav.setup.tab",
+        "mode": "source_generation",
+        "seconds": 0.0689,
+        "files": 6
+      },
+      {
+        "id": "nav.setup.modal",
+        "mode": "source_generation",
+        "seconds": 0.0732,
+        "files": 3
+      },
+      {
+        "id": "nav.deep_link",
+        "mode": "source_generation",
+        "seconds": 0.0699,
+        "files": 2
+      },
+      {
+        "id": "nav.auth_flow",
+        "mode": "source_generation",
+        "seconds": 0.0694,
+        "files": 3
+      },
+      {
+        "id": "nav.guard",
+        "mode": "source_generation",
+        "seconds": 0.069,
+        "files": 2
+      },
+      {
+        "id": "state.setup.zustand",
+        "mode": "source_generation",
+        "seconds": 0.067,
+        "files": 1
+      },
+      {
+        "id": "state.setup.riverpod",
+        "mode": "source_generation",
+        "seconds": 0.068,
+        "files": 2
+      },
+      {
+        "id": "state.setup.bloc",
+        "mode": "source_generation",
+        "seconds": 0.0679,
+        "files": 2
+      },
+      {
+        "id": "net.setup.axios",
+        "mode": "source_generation",
+        "seconds": 0.0682,
+        "files": 1
+      },
+      {
+        "id": "net.setup.fetch",
+        "mode": "source_generation",
+        "seconds": 0.0703,
+        "files": 1
+      },
+      {
+        "id": "local.async_storage",
+        "mode": "source_generation",
+        "seconds": 0.0685,
+        "files": 1
+      },
+      {
+        "id": "local.sqlite",
+        "mode": "source_generation",
+        "seconds": 0.0695,
+        "files": 2
+      },
+      {
+        "id": "local.hive",
+        "mode": "source_generation",
+        "seconds": 0.0694,
+        "files": 2
+      },
+      {
+        "id": "local.secure_store",
+        "mode": "source_generation",
+        "seconds": 0.0693,
+        "files": 1
+      },
+      {
+        "id": "local.sync.engine",
+        "mode": "source_generation",
+        "seconds": 0.0683,
+        "files": 2
+      },
+      {
+        "id": "local.conflict.resolve",
+        "mode": "source_generation",
+        "seconds": 0.0679,
+        "files": 2
+      },
+      {
+        "id": "local.migration",
+        "mode": "source_generation",
+        "seconds": 0.0682,
+        "files": 2
+      },
+      {
+        "id": "auth.mobile.login",
+        "mode": "source_generation",
+        "seconds": 0.082,
+        "files": 4
+      },
+      {
+        "id": "auth.mobile.logout",
+        "mode": "source_generation",
+        "seconds": 0.0704,
+        "files": 1
+      },
+      {
+        "id": "push.permission.request",
+        "mode": "source_generation",
+        "seconds": 0.0714,
+        "files": 1
+      },
+      {
+        "id": "push.handle.tap",
+        "mode": "source_generation",
+        "seconds": 0.0687,
+        "files": 1
+      },
+      {
+        "id": "device.camera",
+        "mode": "source_generation",
+        "seconds": 0.0934,
+        "files": 1
+      },
+      {
+        "id": "device.gallery",
+        "mode": "source_generation",
+        "seconds": 0.0707,
+        "files": 1
+      },
+      {
+        "id": "device.gps",
+        "mode": "source_generation",
+        "seconds": 0.0686,
+        "files": 1
+      },
+      {
+        "id": "device.sharing",
+        "mode": "source_generation",
+        "seconds": 0.0692,
+        "files": 1
+      },
+      {
+        "id": "device.permissions",
+        "mode": "source_generation",
+        "seconds": 0.0725,
+        "files": 1
+      },
+      {
+        "id": "bridge.kotlin.module",
+        "mode": "source_generation",
+        "seconds": 0.0689,
+        "files": 2
+      },
+      {
+        "id": "bridge.swift.module",
+        "mode": "source_generation",
+        "seconds": 0.0705,
+        "files": 2
+      },
+      {
+        "id": "bridge.react_native",
+        "mode": "source_generation",
+        "seconds": 0.072,
+        "files": 6
+      },
+      {
+        "id": "bridge.flutter_platform_channel",
+        "mode": "source_generation",
+        "seconds": 0.0691,
+        "files": 4
+      },
+      {
+        "id": "bridge.method_channel",
+        "mode": "source_generation",
+        "seconds": 0.0696,
+        "files": 4
+      },
+      {
+        "id": "bridge.event_channel",
+        "mode": "source_generation",
+        "seconds": 0.0709,
+        "files": 4
+      },
+      {
+        "id": "bridge.type_safe",
+        "mode": "source_generation",
+        "seconds": 0.0708,
+        "files": 2
+      }
+    ],
+    "fixtures_only": true,
+    "customer_data_modified": false
+  },
+  "terminal": {
+    "release": "2026.10.25.27",
+    "guides": 18,
+    "automatic_update": false,
+    "native_binary_change": false,
+    "installation_verified": true,
+    "public_signature_and_package_sha_verified": true,
+    "doctor_release": "2026.10.25.27",
+    "real_cli_spec": true,
+    "real_cli_source_files": 8
+  },
+  "limitations": [
+    "Source generation and planning, not a finished app implementing arbitrary free-form requirements.",
+    "Android/iOS build/sign/store/OTA/IAP live unavailable.",
+    "56 canonical IDs still implementation_missing; see exact gap list.",
+    "Native source kits require official project materialization and integration.",
+    "Flutter parser/core Dart tests do not establish a full Flutter build or device test.",
+    "Mobile CLI exposes discovery/inspect/invoke; mobile build from/store commands in the source master are not implemented."
+  ],
+  "cleanup": {
+    "temporary_fixture_tokens": 4,
+    "staging_service_pending_stop": false,
+    "customer_data_modified": false,
+    "temporary_tokens_verified_absent": true
+  },
+  "runtime_source_files_verified": 11
+}

@@ -1,0 +1,265 @@
+{
+  "phase": 2,
+  "approved_on": "2026-10-24",
+  "production_coding_skills": 38,
+  "target_coding_skills": 38,
+  "production_phase2_enabled": true,
+  "skills": [
+    {
+      "id": "scaffold.project",
+      "batch": "2A",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "scaffold.component",
+      "batch": "2A",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "scaffold.api",
+      "batch": "2A",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "code.diff",
+      "batch": "2A",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "code.patch",
+      "batch": "2A",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "code.format",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "format.run",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "lint.run",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "type.check",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "build.run",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "pkg.list",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "pkg.install",
+      "batch": "2B",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "test.single",
+      "batch": "2C",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "test.coverage",
+      "batch": "2C",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "code.rename",
+      "batch": "2D",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "refactor.rename",
+      "batch": "2D",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "refactor.extract",
+      "batch": "2D",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "refactor.dead_code",
+      "batch": "2D",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "debug.attach",
+      "batch": "2E",
+      "status": "production_verified",
+      "production_available": true
+    },
+    {
+      "id": "debug.breakpoint",
+      "batch": "2E",
+      "status": "production_verified",
+      "production_available": true
+    }
+  ],
+  "tests": {
+    "backend_linux": {
+      "regression": 201,
+      "controller": 47,
+      "toolchain": 76,
+      "debugger": 52,
+      "total": 376,
+      "failures": 0,
+      "skipped": 0
+    },
+    "local_python": {
+      "discovered": 826,
+      "passed": 723,
+      "skipped": 103,
+      "failures": 0,
+      "skip_reason": "Optional local dependencies, Python>=3.11 runtime and Linux Docker checks run separately on VPS"
+    },
+    "node": {
+      "passed": 55,
+      "failures": 0
+    },
+    "production_https": {
+      "skills_verified": 20,
+      "checks": 63,
+      "failures": 0,
+      "bearer_ownership": true,
+      "explicit_debug_start": true
+    },
+    "opencode_independent_http": {
+      "checks": 78,
+      "failures": 0
+    },
+    "automatic_planner_live": {
+      "passed": true,
+      "phase2_starter_selected": true
+    }
+  },
+  "notes": [
+    "No changes to native binary; manual signed TUI release only",
+    "No inference engine restart; unrelated services untouched",
+    "No Git commit/push requested",
+    "Aliases share implementations; ID count is not distinct engine count"
+  ],
+  "milestones": [
+    {
+      "phase": "2A",
+      "status": "production_verified",
+      "completed_on": "2026-10-24"
+    },
+    {
+      "phase": "2B",
+      "status": "production_verified",
+      "completed_on": "2026-10-24"
+    },
+    {
+      "phase": "2C",
+      "status": "production_verified",
+      "completed_on": "2026-10-24"
+    },
+    {
+      "phase": "2D",
+      "status": "production_verified",
+      "completed_on": "2026-10-24"
+    },
+    {
+      "phase": "2E",
+      "status": "production_verified",
+      "completed_on": "2026-10-24"
+    },
+    {
+      "phase": "2F",
+      "status": "production_verified",
+      "completed_on": "2026-10-24"
+    }
+  ],
+  "implementation_complete": true,
+  "activation_status": "production_verified",
+  "team": [
+    "Codex",
+    "OpenCode"
+  ],
+  "claude_involved_this_run": false,
+  "release": "2026.10.24.21",
+  "completed_at": "2026-10-24T04:19:35.809235+00:00",
+  "initial_target_date": "2026-11-13",
+  "actual_completion_date": "2026-10-24",
+  "scope": "Phase2A-2F, 20 additional IDs; not all 188 proposed engineering skills",
+  "features": {
+    "coding_phase2": true,
+    "coding_debugger": true,
+    "coding_refactor": true
+  },
+  "limits": {
+    "debug_language": "python",
+    "refactor_language": "python",
+    "offline_packages": {
+      "python": [
+        "humanize==4.12.2"
+      ],
+      "node": [
+        "decimal.js==10.5.0"
+      ]
+    },
+    "debug_session_seconds": 300,
+    "debug_idle_seconds": 60,
+    "global_debug_sessions": 1,
+    "global_execution_slots": 2,
+    "command_seconds": 120
+  },
+  "fixed_bugs": [
+    "Nested failed checks/tests were incorrectly treated as successful transport",
+    "Linux coverage file paths",
+    "Offline Node build resolution",
+    "Debug callback task bounds and transport cleanup",
+    "Reaper missed already-failed transport state",
+    "Explicit debug action=start leaked into adapter payload",
+    "Node coverage directory discovery",
+    "Partial failed mutation publication prevented"
+  ],
+  "tui": {
+    "release": "2026.10.24.21",
+    "doctor_ok": true,
+    "registry_operations": 65,
+    "skill_guides": 14,
+    "native_binary_unchanged": true,
+    "active_sessions_untouched": true,
+    "automatic_update": false,
+    "signed_release_published": true
+  },
+  "cleanup": {
+    "isolated_production_test_actors": 4,
+    "isolated_production_workspaces": 4,
+    "test_tokens_revoked": true,
+    "temporary_bearer_files": 0,
+    "staging_service_stopped": true
+  }
+}

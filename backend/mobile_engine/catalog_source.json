@@ -1,0 +1,1292 @@
+{
+  "source_sha256": "9d3f2c7fa29390fa840fa454ab30f02298b2cd772c431aa4200104686996449f",
+  "source_lines": 1239,
+  "header_declared": 165,
+  "actual_unique": 214,
+  "skills": [
+    {
+      "number": 1,
+      "id": "spec.read.mobile",
+      "description": "Baca spec khusus mobile app",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 2,
+      "id": "spec.parse.platform",
+      "description": "Parse target platform (Android/iOS/both)",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 3,
+      "id": "spec.parse.screens",
+      "description": "Parse daftar screen yang dibutuhkan",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 4,
+      "id": "spec.parse.features.mobile",
+      "description": "Parse fitur mobile (camera, GPS, dll)",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 5,
+      "id": "spec.parse.offline",
+      "description": "Parse kebutuhan offline support",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 6,
+      "id": "spec.parse.auth.mobile",
+      "description": "Parse auth strategy (biometric, OTP)",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 7,
+      "id": "spec.parse.push_notif",
+      "description": "Parse kebutuhan push notification",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 8,
+      "id": "spec.parse.iap",
+      "description": "Parse in-app purchase requirements",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 9,
+      "id": "spec.parse.design_pref.mobile",
+      "description": "Parse preferensi desain mobile",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 10,
+      "id": "spec.clarify.mobile",
+      "description": "Clarify ambiguities mobile-specific",
+      "layer": "SPEC & REQUIREMENTS READER"
+    },
+    {
+      "number": 11,
+      "id": "stack.mobile.analyze",
+      "description": "Analisa requirements untuk pilih stack",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 12,
+      "id": "stack.select.react_native",
+      "description": "Pilih React Native (Expo / CLI)",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 13,
+      "id": "stack.select.flutter",
+      "description": "Pilih Flutter",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 14,
+      "id": "stack.select.kotlin",
+      "description": "Pilih Native Android (Kotlin)",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 15,
+      "id": "stack.select.swift",
+      "description": "Pilih Native iOS (Swift)",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 16,
+      "id": "stack.select.ionic",
+      "description": "Pilih Ionic (Capacitor)",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 17,
+      "id": "stack.select.state_mgmt",
+      "description": "Pilih state management library",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 18,
+      "id": "stack.select.navigation",
+      "description": "Pilih navigation library",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 19,
+      "id": "stack.select.network",
+      "description": "Pilih network library (Axios, tRPC, GraphQL)",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 20,
+      "id": "stack.select.local_db",
+      "description": "Pilih local database (SQLite, Watermelon, Hive)",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 21,
+      "id": "stack.select.di",
+      "description": "Pilih dependency injection",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 22,
+      "id": "stack.recommend.combination.mobile",
+      "description": "Rekomendasi kombinasi optimal",
+      "layer": "TECH STACK SELECTOR - MOBILE"
+    },
+    {
+      "number": 23,
+      "id": "arch.mobile.system",
+      "description": "Desain arsitektur mobile high-level",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 24,
+      "id": "arch.mobile.screen_flow",
+      "description": "Desain screen flow & navigation",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 25,
+      "id": "arch.mobile.state",
+      "description": "Desain state management architecture",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 26,
+      "id": "arch.mobile.offline",
+      "description": "Desain offline-first strategy",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 27,
+      "id": "arch.mobile.sync",
+      "description": "Desain sync strategy (local ↔ remote)",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 28,
+      "id": "arch.mobile.cache",
+      "description": "Desain cache strategy",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 29,
+      "id": "arch.mobile.security",
+      "description": "Desain security (keystore, keychain, SSL pinning)",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 30,
+      "id": "arch.mobile.local_storage",
+      "description": "Desain local storage schema",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 31,
+      "id": "arch.mobile.push_notif",
+      "description": "Desain push notification architecture",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 32,
+      "id": "arch.mobile.deep_link",
+      "description": "Desain deep link strategy",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 33,
+      "id": "arch.mobile.iap",
+      "description": "Desain in-app purchase flow",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 34,
+      "id": "arch.mobile.diagram",
+      "description": "Generate diagram (Mermaid)",
+      "layer": "MOBILE ARCHITECTURE DESIGNER"
+    },
+    {
+      "number": 35,
+      "id": "scaffold.expo",
+      "description": "Init Expo project (managed / bare)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 36,
+      "id": "scaffold.react_native_cli",
+      "description": "Init React Native CLI project",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 37,
+      "id": "scaffold.flutter",
+      "description": "Init Flutter project",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 38,
+      "id": "scaffold.kotlin_android",
+      "description": "Init Native Android (Kotlin + Jetpack Compose)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 39,
+      "id": "scaffold.swift_ios",
+      "description": "Init Native iOS (Swift + SwiftUI)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 40,
+      "id": "scaffold.ionic",
+      "description": "Init Ionic + Capacitor project",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 41,
+      "id": "scaffold.monorepo.mobile",
+      "description": "Setup monorepo (Nx, Turborepo)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 42,
+      "id": "scaffold.ci_cd.mobile",
+      "description": "Setup CI/CD untuk mobile (Fastlane, EAS)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 43,
+      "id": "scaffold.env_config",
+      "description": "Setup environment config (dev, staging, prod)",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 44,
+      "id": "scaffold.linting.mobile",
+      "description": "Setup ESLint / Dart analyze / SwiftLint",
+      "layer": "PROJECT SCAFFOLDER - MOBILE"
+    },
+    {
+      "number": 45,
+      "id": "mobile.gen.screen",
+      "description": "Generate screen (login, home, detail, profile)",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 46,
+      "id": "mobile.gen.component",
+      "description": "Generate reusable component",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 47,
+      "id": "mobile.gen.form",
+      "description": "Generate form with validation",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 48,
+      "id": "mobile.gen.list",
+      "description": "Generate list (FlatList, ListView)",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 49,
+      "id": "mobile.gen.card",
+      "description": "Generate card component",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 50,
+      "id": "mobile.gen.modal",
+      "description": "Generate modal / bottom sheet",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 51,
+      "id": "mobile.gen.tab_bar",
+      "description": "Generate tab bar navigation",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 52,
+      "id": "mobile.gen.drawer",
+      "description": "Generate drawer navigation",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 53,
+      "id": "mobile.gen.skeleton",
+      "description": "Generate skeleton loader",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 54,
+      "id": "mobile.gen.empty_state",
+      "description": "Generate empty state",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 55,
+      "id": "mobile.style.material",
+      "description": "Apply Material Design 3 (Android)",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 56,
+      "id": "mobile.style.cupertino",
+      "description": "Apply Cupertino style (iOS)",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 57,
+      "id": "mobile.style.adaptive",
+      "description": "Adaptive platform-specific styling",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 58,
+      "id": "mobile.responsive.tablet",
+      "description": "Responsive untuk tablet & foldable",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 59,
+      "id": "mobile.theme.dark_mode",
+      "description": "Setup dark mode support",
+      "layer": "UI/UX BUILDER - MOBILE"
+    },
+    {
+      "number": 60,
+      "id": "nav.setup.stack",
+      "description": "Setup stack navigation",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 61,
+      "id": "nav.setup.tab",
+      "description": "Setup tab navigation",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 62,
+      "id": "nav.setup.drawer",
+      "description": "Setup drawer navigation",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 63,
+      "id": "nav.setup.modal",
+      "description": "Setup modal navigation",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 64,
+      "id": "nav.deep_link",
+      "description": "Setup deep link (URL scheme, universal link)",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 65,
+      "id": "nav.push_notif_link",
+      "description": "Navigate dari push notification",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 66,
+      "id": "nav.auth_flow",
+      "description": "Auth flow (login → main app)",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 67,
+      "id": "nav.guard",
+      "description": "Navigation guard (protected routes)",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 68,
+      "id": "nav.transition.custom",
+      "description": "Custom transition animation",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 69,
+      "id": "nav.analytics",
+      "description": "Track screen view analytics",
+      "layer": "NAVIGATION BUILDER"
+    },
+    {
+      "number": 70,
+      "id": "state.setup.redux",
+      "description": "Setup Redux Toolkit (React Native)",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 71,
+      "id": "state.setup.zustand",
+      "description": "Setup Zustand (React Native)",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 72,
+      "id": "state.setup.riverpod",
+      "description": "Setup Riverpod (Flutter)",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 73,
+      "id": "state.setup.bloc",
+      "description": "Setup Bloc (Flutter)",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 74,
+      "id": "state.setup.mobx",
+      "description": "Setup MobX",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 75,
+      "id": "state.persist",
+      "description": "Persist state ke local storage",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 76,
+      "id": "state.hydrate",
+      "description": "Hydrate state dari storage on startup",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 77,
+      "id": "state.sync.remote",
+      "description": "Sync state dengan remote API",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 78,
+      "id": "state.middleware",
+      "description": "Setup middleware (logging, analytics)",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 79,
+      "id": "state.devtools",
+      "description": "Setup devtools (Redux DevTools, Flipper)",
+      "layer": "STATE MANAGEMENT"
+    },
+    {
+      "number": 80,
+      "id": "net.setup.axios",
+      "description": "Setup Axios dengan interceptors",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 81,
+      "id": "net.setup.fetch",
+      "description": "Setup fetch dengan wrapper",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 82,
+      "id": "net.setup.graphql",
+      "description": "Setup Apollo / urql GraphQL client",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 83,
+      "id": "net.setup.websocket",
+      "description": "Setup WebSocket client",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 84,
+      "id": "net.setup.trpc",
+      "description": "Setup tRPC client",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 85,
+      "id": "net.auth.token",
+      "description": "Token management (refresh, rotate)",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 86,
+      "id": "net.retry",
+      "description": "Retry strategy (exponential backoff)",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 87,
+      "id": "net.cache",
+      "description": "Network cache (React Query, SWR)",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 88,
+      "id": "net.upload.file",
+      "description": "File upload (multipart, presigned URL)",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 89,
+      "id": "net.ssl.pinning",
+      "description": "SSL pinning untuk security",
+      "layer": "NETWORK & API INTEGRATION"
+    },
+    {
+      "number": 90,
+      "id": "local.async_storage",
+      "description": "Setup AsyncStorage (key-value)",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 91,
+      "id": "local.sqlite",
+      "description": "Setup SQLite (relational)",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 92,
+      "id": "local.watermelon",
+      "description": "Setup WatermelonDB (offline-first)",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 93,
+      "id": "local.hive",
+      "description": "Setup Hive (Flutter, fast NoSQL)",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 94,
+      "id": "local.realm",
+      "description": "Setup Realm Database",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 95,
+      "id": "local.secure_store",
+      "description": "Secure storage (Keychain, Keystore)",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 96,
+      "id": "local.sync.engine",
+      "description": "Sync engine (local ↔ remote)",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 97,
+      "id": "local.conflict.resolve",
+      "description": "Conflict resolution strategy",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 98,
+      "id": "local.migration",
+      "description": "Local DB migration",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 99,
+      "id": "local.backup",
+      "description": "Backup local data",
+      "layer": "LOCAL STORAGE & OFFLINE"
+    },
+    {
+      "number": 100,
+      "id": "auth.mobile.login",
+      "description": "Login (email/password, OTP)",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 101,
+      "id": "auth.mobile.oauth",
+      "description": "OAuth (Google, Apple, Facebook)",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 102,
+      "id": "auth.mobile.biometric",
+      "description": "Biometric (Face ID, Touch ID, Fingerprint)",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 103,
+      "id": "auth.mobile.pin",
+      "description": "PIN code auth",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 104,
+      "id": "auth.mobile.jwt",
+      "description": "JWT token management",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 105,
+      "id": "auth.mobile.refresh",
+      "description": "Refresh token rotation",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 106,
+      "id": "auth.mobile.logout",
+      "description": "Logout & cleanup",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 107,
+      "id": "auth.mobile.device_binding",
+      "description": "Device binding (anti-sharing)",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 108,
+      "id": "auth.mobile.jailbreak_detect",
+      "description": "Detect jailbreak / root",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 109,
+      "id": "auth.mobile.tamper_detect",
+      "description": "Tamper detection",
+      "layer": "AUTHENTICATION & SECURITY"
+    },
+    {
+      "number": 110,
+      "id": "push.setup.fcm",
+      "description": "Setup Firebase Cloud Messaging (Android)",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 111,
+      "id": "push.setup.apns",
+      "description": "Setup Apple Push Notification Service (iOS)",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 112,
+      "id": "push.setup.onesignal",
+      "description": "Setup OneSignal (cross-platform)",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 113,
+      "id": "push.permission.request",
+      "description": "Request permission (iOS ATT, Android 13+)",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 114,
+      "id": "push.handle.foreground",
+      "description": "Handle foreground notification",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 115,
+      "id": "push.handle.background",
+      "description": "Handle background notification",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 116,
+      "id": "push.handle.tap",
+      "description": "Handle notification tap (deep link)",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 117,
+      "id": "push.schedule.local",
+      "description": "Schedule local notification",
+      "layer": "PUSH NOTIFICATION"
+    },
+    {
+      "number": 118,
+      "id": "device.camera",
+      "description": "Camera access (take photo, video)",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 119,
+      "id": "device.gallery",
+      "description": "Gallery / photo picker",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 120,
+      "id": "device.gps",
+      "description": "GPS & location services",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 121,
+      "id": "device.maps",
+      "description": "Maps integration (Google Maps, Mapbox)",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 122,
+      "id": "device.accelerometer",
+      "description": "Accelerometer sensor",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 123,
+      "id": "device.gyroscope",
+      "description": "Gyroscope sensor",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 124,
+      "id": "device.bluetooth",
+      "description": "Bluetooth (BLE)",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 125,
+      "id": "device.nfc",
+      "description": "NFC",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 126,
+      "id": "device.biometric",
+      "description": "Biometric scanner",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 127,
+      "id": "device.contacts",
+      "description": "Contacts access",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 128,
+      "id": "device.sms",
+      "description": "SMS sending",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 129,
+      "id": "device.phone",
+      "description": "Phone call",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 130,
+      "id": "device.sharing",
+      "description": "Social sharing (Share sheet)",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 131,
+      "id": "device.file_system",
+      "description": "File system access",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 132,
+      "id": "device.permissions",
+      "description": "Permissions management (Android 13+, iOS)",
+      "layer": "NATIVE DEVICE FEATURES"
+    },
+    {
+      "number": 133,
+      "id": "media.audio.record",
+      "description": "Audio recording",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 134,
+      "id": "media.audio.play",
+      "description": "Audio playback",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 135,
+      "id": "media.video.record",
+      "description": "Video recording",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 136,
+      "id": "media.video.play",
+      "description": "Video playback",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 137,
+      "id": "media.image.process",
+      "description": "Image processing (filter, crop, compress)",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 138,
+      "id": "media.lottie",
+      "description": "Lottie animation",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 139,
+      "id": "media.reanimated",
+      "description": "Reanimated (React Native) animation",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 140,
+      "id": "media.gesture",
+      "description": "Gesture handler (swipe, pinch, pan)",
+      "layer": "MEDIA & ANIMATION"
+    },
+    {
+      "number": 141,
+      "id": "iap.setup.play_billing",
+      "description": "Setup Google Play Billing",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 142,
+      "id": "iap.setup.storekit",
+      "description": "Setup Apple StoreKit",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 143,
+      "id": "iap.setup.revenue_cat",
+      "description": "Setup RevenueCat (cross-platform)",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 144,
+      "id": "iap.product.fetch",
+      "description": "Fetch products dari store",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 145,
+      "id": "iap.purchase",
+      "description": "Process purchase",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 146,
+      "id": "iap.restore",
+      "description": "Restore purchases",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 147,
+      "id": "iap.subscription",
+      "description": "Subscription management",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 148,
+      "id": "iap.validate",
+      "description": "Validate receipt server-side",
+      "layer": "IN-APP PURCHASE & MONETIZATION"
+    },
+    {
+      "number": 149,
+      "id": "bridge.kotlin.module",
+      "description": "Write native Kotlin module (Android)",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 150,
+      "id": "bridge.swift.module",
+      "description": "Write native Swift module (iOS)",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 151,
+      "id": "bridge.react_native",
+      "description": "Bridge ke React Native JS",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 152,
+      "id": "bridge.flutter_platform_channel",
+      "description": "Bridge ke Flutter Dart",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 153,
+      "id": "bridge.method_channel",
+      "description": "Method channel (Flutter)",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 154,
+      "id": "bridge.event_channel",
+      "description": "Event channel (Flutter)",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 155,
+      "id": "bridge.type_safe",
+      "description": "Type-safe bridge (TypeScript / Dart)",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 156,
+      "id": "bridge.publish.npm",
+      "description": "Publish native module ke npm/pub",
+      "layer": "NATIVE BRIDGE & MODULES"
+    },
+    {
+      "number": 157,
+      "id": "test.unit.jest",
+      "description": "Unit test dengan Jest (React Native)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 158,
+      "id": "test.unit.flutter",
+      "description": "Unit test dengan Flutter Test",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 159,
+      "id": "test.unit.kotlin",
+      "description": "Unit test dengan JUnit (Android)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 160,
+      "id": "test.unit.swift",
+      "description": "Unit test dengan XCTest (iOS)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 161,
+      "id": "test.widget.flutter",
+      "description": "Widget test (Flutter)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 162,
+      "id": "test.component.rntl",
+      "description": "Component test (React Native Testing Library)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 163,
+      "id": "test.e2e.detox",
+      "description": "E2E test dengan Detox (React Native)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 164,
+      "id": "test.e2e.maestro",
+      "description": "E2E test dengan Maestro (cross-platform)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 165,
+      "id": "test.e2e.appium",
+      "description": "E2E test dengan Appium",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 166,
+      "id": "test.screenshot",
+      "description": "Screenshot test (Fastlane Snapshot)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 167,
+      "id": "test.device_farm",
+      "description": "Test di device farm (AWS, Firebase)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 168,
+      "id": "test.performance.mobile",
+      "description": "Performance test (startup, memory)",
+      "layer": "TESTING - MOBILE"
+    },
+    {
+      "number": 169,
+      "id": "build.android.apk",
+      "description": "Build APK (debug / release)",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 170,
+      "id": "build.android.aab",
+      "description": "Build AAB (App Bundle untuk Play Store)",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 171,
+      "id": "build.ios.ipa",
+      "description": "Build IPA (untuk App Store / TestFlight)",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 172,
+      "id": "build.android.sign",
+      "description": "Sign Android dengan keystore",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 173,
+      "id": "build.ios.sign",
+      "description": "Sign iOS dengan provisioning profile",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 174,
+      "id": "build.version.manage",
+      "description": "Version code & version name management",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 175,
+      "id": "build.proguard",
+      "description": "ProGuard / R8 obfuscation (Android)",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 176,
+      "id": "build.ios.export",
+      "description": "iOS export method (App Store, Ad Hoc, Dev)",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 177,
+      "id": "build.eas.submit",
+      "description": "EAS Build & Submit (Expo)",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 178,
+      "id": "build.fastlane",
+      "description": "Fastlane build automation",
+      "layer": "BUILD & SIGN"
+    },
+    {
+      "number": 179,
+      "id": "deploy.play_store",
+      "description": "Upload ke Google Play Console",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 180,
+      "id": "deploy.app_store",
+      "description": "Upload ke Apple App Store Connect",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 181,
+      "id": "deploy.testflight",
+      "description": "Upload ke TestFlight (beta testing)",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 182,
+      "id": "deploy.internal_testing",
+      "description": "Play Store Internal Testing",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 183,
+      "id": "deploy.closed_testing",
+      "description": "Play Store Closed Testing (alpha/beta)",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 184,
+      "id": "deploy.staged_rollout",
+      "description": "Staged rollout (1% → 100%)",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 185,
+      "id": "deploy.store_listing",
+      "description": "Setup store listing (description, screenshots)",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 186,
+      "id": "deploy.store_screenshot",
+      "description": "Generate store screenshots",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 187,
+      "id": "deploy.store_icon",
+      "description": "Generate store icon",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 188,
+      "id": "deploy.promo_content",
+      "description": "Generate promo content (feature graphic)",
+      "layer": "DEPLOY TO STORE"
+    },
+    {
+      "number": 189,
+      "id": "ota.setup.codepush",
+      "description": "Setup CodePush (React Native)",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 190,
+      "id": "ota.setup.eas_update",
+      "description": "Setup EAS Update (Expo)",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 191,
+      "id": "ota.setup.shorebird",
+      "description": "Setup Shorebird (Flutter)",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 192,
+      "id": "ota.release.update",
+      "description": "Release OTA update",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 193,
+      "id": "ota.rollback",
+      "description": "Rollback OTA update",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 194,
+      "id": "ota.targeting",
+      "description": "Targeting update (by version, channel)",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 195,
+      "id": "ota.mandatory",
+      "description": "Mandatory update enforcement",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 196,
+      "id": "ota.monitoring",
+      "description": "Monitor OTA adoption rate",
+      "layer": "OTA & UPDATES"
+    },
+    {
+      "number": 197,
+      "id": "monitor.crashlytics",
+      "description": "Setup Firebase Crashlytics",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 198,
+      "id": "monitor.sentry.mobile",
+      "description": "Setup Sentry mobile",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 199,
+      "id": "monitor.bugsnag",
+      "description": "Setup Bugsnag",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 200,
+      "id": "analytics.firebase",
+      "description": "Setup Firebase Analytics",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 201,
+      "id": "analytics.mixpanel",
+      "description": "Setup Mixpanel",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 202,
+      "id": "analytics.amplitude",
+      "description": "Setup Amplitude",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 203,
+      "id": "analytics.event_track",
+      "description": "Track custom event",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 204,
+      "id": "analytics.funnel",
+      "description": "Funnel analysis",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 205,
+      "id": "analytics.retention",
+      "description": "Retention tracking",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 206,
+      "id": "analytics.heatmap",
+      "description": "Heatmap (FullStory, LogRocket)",
+      "layer": "MONITORING & ANALYTICS"
+    },
+    {
+      "number": 207,
+      "id": "cicd.github_actions.mobile",
+      "description": "GitHub Actions untuk mobile",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 208,
+      "id": "cicd.gitlab_ci.mobile",
+      "description": "GitLab CI untuk mobile",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 209,
+      "id": "cicd.fastlane.lane",
+      "description": "Fastlane lane automation",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 210,
+      "id": "cicd.bitrise",
+      "description": "Bitrise CI/CD",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 211,
+      "id": "cicd.codemagic",
+      "description": "Codemagic CI/CD (Flutter)",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 212,
+      "id": "cicd.eas.pipeline",
+      "description": "EAS Pipeline (Expo)",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 213,
+      "id": "cicd.auto_version",
+      "description": "Auto version bump",
+      "layer": "CI/CD - MOBILE"
+    },
+    {
+      "number": 214,
+      "id": "cicd.auto_tag",
+      "description": "Auto git tag release",
+      "layer": "CI/CD - MOBILE"
+    }
+  ]
+}

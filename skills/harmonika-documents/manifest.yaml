@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "entrypoint": "scripts/documents.py",
+  "formats": {
+    ".docx": {
+      "handler": "docx_handler",
+      "dependencies": [
+        "docx"
+      ],
+      "operations": {
+        "inspect": [
+          "docx"
+        ],
+        "create": [
+          "docx"
+        ]
+      }
+    },
+    ".xlsx": {
+      "handler": "xlsx_handler",
+      "dependencies": [
+        "openpyxl"
+      ],
+      "operations": {
+        "inspect": [
+          "openpyxl"
+        ],
+        "create": [
+          "openpyxl"
+        ]
+      }
+    },
+    ".pptx": {
+      "handler": "pptx_handler",
+      "dependencies": [
+        "pptx"
+      ],
+      "operations": {
+        "inspect": [
+          "pptx"
+        ],
+        "create": [
+          "pptx"
+        ]
+      }
+    },
+    ".pdf": {
+      "handler": "pdf_handler",
+      "dependencies": [
+        "pypdf",
+        "reportlab"
+      ],
+      "operations": {
+        "inspect": [
+          "pypdf"
+        ],
+        "create": [
+          "reportlab"
+        ],
+        "edit": [
+          "pypdf"
+        ]
+      }
+    }
+  },
+  "reserved_formats": {
+    ".md": {
+      "enabled": false
+    },
+    ".html": {
+      "enabled": false
+    },
+    ".epub": {
+      "enabled": false
+    },
+    ".rtf": {
+      "enabled": false
+    }
+  }
+}

@@ -7,6 +7,16 @@ import unittest
 
 spec=importlib.util.spec_from_file_location('public_source',Path(__file__).resolve().parent.parent/'runtime/check-public-source.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 class Source(unittest.TestCase):
+    def test_google_secrets_are_detected_without_returning_values(self):
+        fixtures=[('ya29.'+'a'*40,'google_oauth_access_token'),('GOCSPX-'+'b'*24,'google_client_secret'),('AIza'+'c'*35,'google_api_key')]
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            for value,code in fixtures:
+                (root/'google-config.json').write_text(json.dumps({'credential':value}))
+                result=m.review([Path('google-config.json')],root)
+                self.assertEqual(result[0]['code'],code)
+                self.assertNotIn(value,json.dumps(result))
+
     def test_reviewed_media_requires_matching_checksum_and_signature(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);assets=root/'docs/assets';assets.mkdir(parents=True)

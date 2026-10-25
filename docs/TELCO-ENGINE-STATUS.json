@@ -1,0 +1,2116 @@
+{
+  "date": "2026-10-24",
+  "status": "local_core_active_live_integrations_pending",
+  "release": "2026.10.24.22",
+  "team": {
+    "Codex": "architecture, persistence, auth/approval, HTTP/SSE, gateway/TUI integration, acceptance, fixes and activation",
+    "OpenCode": "commercial79 / operations50 / extensions17 implementations and independent security/correctness audits",
+    "Claude": "not_invoked_per_instruction"
+  },
+  "source_document": {
+    "read_completely": true,
+    "lines": 1141,
+    "sha256": "57cf870d1d763774633495099ca351fae043dad059a2ed1de2fa807bfc44381e",
+    "header_claimed": 320,
+    "rows": 277,
+    "unique_ids": 276,
+    "duplicates_removed": [
+      "fraud.usage.anomaly"
+    ]
+  },
+  "catalog": {
+    "engines": 25,
+    "registered": 276,
+    "available_local": 203,
+    "mutations_requiring_approval": 103,
+    "unavailable": 73,
+    "shared_tui_registry_operations": 341,
+    "tui_guides": 14
+  },
+  "scope": {
+    "tenant_identity": "server-derived api-token ID; one tenant per key",
+    "company_data_connected": false,
+    "network_live": false,
+    "external_payments_verified": false,
+    "customer_portal_login_live": false,
+    "kyc_verified": false,
+    "automatic_external_actions": false
+  },
+  "tests": {
+    "linux_telco": {
+      "discovered": 266,
+      "passed": 266,
+      "skipped": 0
+    },
+    "all_local_python": {
+      "discovered": 1092,
+      "passed": 999,
+      "skipped": 93,
+      "skip_reason": "platform and optional dependencies; mandatory telco HTTP tested on Linux"
+    },
+    "node": {
+      "passed": 55,
+      "skipped": 0
+    },
+    "go_suite": "passed",
+    "https_production": [
+      "two temporary API keys",
+      "untrusted principal header ignored",
+      "cross-token recovery/approve 404",
+      "approval hash and preview",
+      "idempotent replay/conflict",
+      "disabled live adapter 503",
+      "SSE replay after Last-Event-ID",
+      "GET recovery/events do not consume quota",
+      "actual mentor read-only ARPU tool",
+      "actual mentor sub.create preview",
+      "Stop pending mutation"
+    ],
+    "production_smoke_seconds_total": 17.83,
+    "load_smoke": {
+      "requests": 60,
+      "completed": 44,
+      "backpressure_429": 16,
+      "mean_seconds": 0.0091,
+      "p95_seconds": 0.0223,
+      "max_seconds": 0.0387,
+      "synthetic_only": true
+    },
+    "limits": "Synthetic/local smoke, not a hardware/operator integration test or sustained enterprise stress test"
+  },
+  "security_fixes": [
+    "plaintext voucher absent from persisted recovery/audit/agent cache",
+    "caller-supplied verified_by_adapter rejected",
+    "payment subscriber FK",
+    "paid invoices only for commissions",
+    "unrelated tenant cleanup prevented",
+    "abandoned approvals expire",
+    "parsed telemetry ordering and equivalent-time dedupe",
+    "fractional future evidence rejected",
+    "reservation assign/release with subscriber/order ownership",
+    "port capacities enforced",
+    "retirement checks reserved/assigned ports and links",
+    "cross-metric alert dedupe",
+    "customer-specific outage attribution and period-end SLA",
+    "iterative topology walk",
+    "unknown link distance never invented as zero",
+    "DB outage returns auth unavailable rather than invalid key"
+  ],
+  "production": {
+    "base_url": "https://chat.harmonika.id/v1",
+    "service": "harmonika-telco-engine.service",
+    "loopback": "127.0.0.1:18189",
+    "private_state": "/var/lib/harmonika-telco/state.sqlite",
+    "gateway_backup": "/var/backups/harmonika-telco/20261024-091435",
+    "existing_inference_and_coding_pids_unchanged": true,
+    "new_api_key_required": false,
+    "key_scope": "chat or telco",
+    "gpu_changes": false,
+    "github_pushed": false,
+    "temporary_api_keys_removed": true,
+    "synthetic_fixtures_removed": true,
+    "backend_error_log_count_since_activation": 0,
+    "documentation_version": "2026-10-24-telco-domain",
+    "documented_telco_endpoints": 7,
+    "capability_telco_domain_engine": true,
+    "temporary_smoke_tokens_remaining": 0,
+    "source_and_package_secret_scan": "passed",
+    "native_binary_unchanged": true
+  },
+  "readiness": [
+    {
+      "id": "netinv.device.register",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.device.update",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.device.decommission",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.hierarchy.build",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.port.management",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.link.management",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local topology records and status changes only; no real interface configuration.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.cable.trace",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.spatial.view",
+      "status": "available",
+      "reason": null,
+      "limitations": "bounded analytics over inventory coordinates; proximity listing only, does not promise service coverage",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.capacity.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "bounded analytics over resource records (max 1000); port-based capacity only, no live throughput",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.utilization.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "evidence-based only; utilization comes from operator-supplied interface samples with freshness window",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.fiber.route",
+      "status": "available",
+      "reason": null,
+      "limitations": "Shortest path over EXISTING local network_link records by recorded length; unreachability reflects local inventory only and coverage is NEVER promised. Read-only.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.splitter.management",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local bounded splitter inventory: fixed ratios 1:4..1:64, port accounting within tenant records (max 1000 listed); no physical splitter is configured or touched.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.olt.port.alloc",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local inventory assignment/release, including owned reservations; never activates/configures/disconnects real equipment.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.spare.parts",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netinv.audit.physical",
+      "status": "available",
+      "reason": null,
+      "limitations": "Compares SUBMITTED physical audit evidence vs local device records; unknown devices are reported as findings, local records are never auto-corrected and no live device is queried.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.order.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.order.validate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.allocate.resource",
+      "status": "available",
+      "reason": null,
+      "limitations": "atomic within root transaction; deterministic pick by (value,id); no live device binding",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.configure.olt",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: requires verified OLT device adapter (NETCONF/SSH); local module never fabricates device configuration",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.configure.ont",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: requires verified ONT device adapter; local module never fabricates device configuration",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.activate.service",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: live network activation requires verified external adapter; local provisioning stops at resources_reserved/awaiting_connector",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.test.connectivity",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: end-to-end connectivity test requires live device adapter; no fabricated ping/speedtest results",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.suspend.service",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: suspending live service requires verified external adapter; local records only",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.unsuspend.service",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: requires verified external adapter",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.terminate.service",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: terminating live service requires verified external adapter; local records only",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.change.plan",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "not implemented: plan change pricing/proration is commercial-worker scope; connector activation unavailable",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.migrate.customer",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "not implemented: migration execution needs OLT adapter; local planning records only",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.relocate.service",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "not implemented: relocation execution needs field + adapter coordination",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.workorder.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prov.workorder.complete",
+      "status": "available",
+      "reason": null,
+      "limitations": "records operator-supplied evidence only; never marks network service active",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.monitor.uptime",
+      "status": "available",
+      "reason": null,
+      "limitations": "evidence-based only: computes from operator-supplied samples vs ctx.now; no ICMP/SNMP polling",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.monitor.bandwidth",
+      "status": "available",
+      "reason": null,
+      "limitations": "evidence-based only; no live interface counters",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.monitor.cpu",
+      "status": "available",
+      "reason": null,
+      "limitations": "Evaluates operator-supplied CPU/RAM percent samples (source+timestamp, freshness window, duplicate/future/stale rejection); NO SNMP/SSH poll is performed and status is evidence-based only. Default warn 80% is heuristic.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.monitor.optical",
+      "status": "available",
+      "reason": null,
+      "limitations": "evidence-based only; optical power in integer hundredths of dBm; warn default -27.00 dBm is heuristic",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.monitor.temperature",
+      "status": "available",
+      "reason": null,
+      "limitations": "evidence-based only; warn default 60C is heuristic",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.alert.threshold",
+      "status": "available",
+      "reason": null,
+      "limitations": "creates local alert records from supplied evidence; no paging/notification delivery",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.alert.fiber.cut",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.alert.outage",
+      "status": "available",
+      "reason": null,
+      "limitations": "correlation rule: distinct subscribers reporting same asset within window; single-report or repeated-report cases are not declared mass outage",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.dashboard.realtime",
+      "status": "available",
+      "reason": null,
+      "limitations": "snapshot of stored tenant records as-of ctx.now; not live; bounded analytics (max 1000 per kind)",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.map.network",
+      "status": "available",
+      "reason": null,
+      "limitations": "Static topology assembled from local device + network_link records (bounded 1000 per kind); not live device state and not a coverage promise.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.ticket.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.ticket.assign",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.escalation.matrix",
+      "status": "available",
+      "reason": null,
+      "limitations": "default reference matrix (P1 15/240m, P2 60/1440m, P3 240/4320m); override via sla.define",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.shift.handover",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records one structured handover per unique shift_label with FK-checked local ticket/outage/work_order references; no notification is sent and no shift system is changed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "noc.incident.postmortem",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records operator-supplied post-mortem analysis against a locally RESOLVED ticket (one per ticket); root cause is not independently verified and no external report is filed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.discover",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.profile.management",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.ont.register",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.ont.deregister",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.vlan.config",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.bandwidth.profile",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.optical.power",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.distance.measure",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.rogue.ont.detect",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.firmware.upgrade",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.config.backup",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "olt.config.restore",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.cycle.run",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics: scans up to the ctx.list cap (1000) of products/subscribers/invoices per run; use max_invoices for explicit caps.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.invoice.generate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.invoice.send",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "NOT IMPLEMENTED: outbound invoice delivery needs a consented messaging connector (email/WA/SMS). Nothing is sent.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.payment.record",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.payment.match",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.arrears.calculate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000); adjustments are summed per invoice from records.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.dunning.run",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records dunning steps; suspend_request never changes subscriber status or network state.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.late.fee",
+      "status": "available",
+      "reason": null,
+      "limitations": "Calculation-only: flat per-day bps on remaining balance, capped at the remaining amount; nothing is written.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.discount.apply",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.prorate.calculate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Calculation-only: calendar-day proration with integer ROUND_HALF_UP; no invoice is written.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.deposit.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.refund.process",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records refund requests only; execution requires a verified finance/payment connector.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "bill.adjustment.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.statement.generate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000); payment attribution uses record timestamps.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "bill.tax.calculate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Calculation-only with caller-supplied policy_id/rate_bps/effective date; no statutory rate is hardcoded and nothing is filed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prepaid.balance.check",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prepaid.topup",
+      "status": "unavailable",
+      "reason": "verified_payment_connector_required",
+      "limitations": "Disabled at registry: caller-supplied funding flags cannot prove a payment. Requires an authenticated verified payment connector.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prepaid.deduct",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "prepaid.expire.notify",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "NOT IMPLEMENTED: expiry notification needs a consented messaging connector; ledger v1 has no balance expiry either.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voucher.generate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Codes are random secrets shown once and stored only as SHA-256 hashes; max 200 per batch per call.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voucher.distribute",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voucher.redeem",
+      "status": "available",
+      "reason": null,
+      "limitations": "Exactly-once via CAS expected_version (version_conflict on race); credits local prepaid ledger only.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voucher.validate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voucher.expire.handle",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voucher.audit.report",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000) per batch; suspicious = same redeemer at or above threshold.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.update",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.pricing.set",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.bundling",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.promo.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.promo.validate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.lifecycle.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.eligibility.check",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.feature.attaching",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "product.compatibility.check",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.profile.update",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.kyc.verify",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records KYC evidence and returns pending_manual_verification only; never marks verified. Needs an authorized identity connector.",
+      "effect": "manual_verification_case"
+    },
+    {
+      "id": "sub.status.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local record transitions only; live activation/suspension/termination needs the verified network connector owned by root.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.contact.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.address.verify",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records the request only; coverage determination belongs to the operations/GIS worker with real evidence.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "sub.contract.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.document.store",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.segmentation",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.lifetime.value",
+      "status": "available",
+      "reason": null,
+      "limitations": "Heuristic projection of observed paid ARPU over requested months; not a financial forecast.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.churn.predict",
+      "status": "available",
+      "reason": null,
+      "limitations": "Heuristic rule score (arrears, payment recency, open tickets, suspension) 0-100; not a validated ML model.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sub.merge.duplicate",
+      "status": "unavailable",
+      "reason": "verified_same_account_identity_and_complete_reference_migration_required",
+      "limitations": "Disabled at registry: distinct valid subscription accounts must never be merged; full identity/reference validation is required before any future enablement.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.lead.capture",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.lead.qualify",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records a human qualification decision; coverage truthfulness depends on operations evidence.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.quote.generate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.order.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.order.approve",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.commission.calc",
+      "status": "available",
+      "reason": null,
+      "limitations": "Calculation-only over paid invoices with unique approved-order attribution and invoice period; unpaid orders earn zero. No payout is executed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.target.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000).",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.funnel.analyze",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000).",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.campaign.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000); attribution follows lead-quote-order references.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sales.referral.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reward approval is a local record; payout requires a finance connector.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.register",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.commission",
+      "status": "available",
+      "reason": null,
+      "limitations": "Calculation-only over the ctx.list cap (1000); no payout is executed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.settlement",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records settlements as recorded_unpaid; payout requires a finance connector.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.stock.allocation",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.sales.report",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000).",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.performance.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded analytics over the ctx.list cap (1000); deterministic tie-break by dealer id.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "dealer.termination",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "partner.contract.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "partner.revenue.share",
+      "status": "available",
+      "reason": null,
+      "limitations": "Calculation-only integer split; no transfer is executed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "partner.portal.access",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local access record only; real portal authentication is owned by the root token boundary and no credentials are issued.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "field.dispatch.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.dispatch.assign",
+      "status": "available",
+      "reason": null,
+      "limitations": "nearest-technician heuristic uses straight-line haversine distance; no traffic/schedule optimization",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.route.optimize",
+      "status": "available",
+      "reason": null,
+      "limitations": "greedy nearest-neighbor approximation; not guaranteed optimal TSP",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.arrival.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.work.complete",
+      "status": "available",
+      "reason": null,
+      "limitations": "records operator-supplied evidence only; never marks network service active",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.photo.upload",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.signature.capture",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.equipment.use",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.time.track",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.quality.score",
+      "status": "available",
+      "reason": null,
+      "limitations": "Scores SUPPLIED checklist evidence in integer basis points (weights 1..100); writes a local quality_score record only when record=true. No field observation is performed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.reassignment",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.emergency.dispatch",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.schedule.optimize",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic greedy earliest-fit proposal from supplied availability windows; guarantees non-overlap per technician, is not an optimal scheduler, and performs NO booking or dispatch write.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.skill.match",
+      "status": "available",
+      "reason": null,
+      "limitations": "exact normalized skill-set matching; no proficiency levels",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "field.feedback.collect",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sla.define",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sla.monitor",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sla.breach.alert",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sla.report.customer",
+      "status": "available",
+      "reason": null,
+      "limitations": "bounded analytics; availability from union of overlapping outage windows; SLA targets need explicit sla_id",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sla.penalty.calc",
+      "status": "available",
+      "reason": null,
+      "limitations": "calculation-only with exact integer math; creates no charges; formula documented in result",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "qos.measure",
+      "status": "available",
+      "reason": null,
+      "limitations": "evidence-based; integer averages (floor); default thresholds heuristic, override per call",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "qos.threshold",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local threshold policy profile per existing product (one active per product unless replace=true supersedes); flags only, no device/network configuration is pushed. Omit product_id to list existing profiles.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "qos.speedtest.auto",
+      "status": "unavailable",
+      "reason": "verified_network_connector_required",
+      "limitations": "unavailable: automatic scheduled speedtests require a measurement agent/adapter; no fabricated speedtest evidence",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "qos.benchmark",
+      "status": "available",
+      "reason": null,
+      "limitations": "Compares operator-supplied measurements against operator-supplied benchmark targets with freshness/duplicate handling; NO competitor, external or live data is fetched.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "trouble.ticket.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "trouble.ticket.escalate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "trouble.ticket.resolve",
+      "status": "available",
+      "reason": null,
+      "limitations": "records operator-supplied resolution evidence; external verification explicitly not performed",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.sim.swap.detect",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.premium.rate",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.call.bombing",
+      "status": "available",
+      "reason": null,
+      "limitations": "Statistical indicator only, never a fraud verdict, blacklist or message interception.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.sms.spam",
+      "status": "available",
+      "reason": null,
+      "limitations": "Statistical indicator only, never a fraud verdict, blacklist or message interception.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.usage.anomaly",
+      "status": "available",
+      "reason": null,
+      "limitations": "Statistical indicator only, never a fraud verdict, blacklist or message interception.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.location.anomaly",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.identity.theft",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.subscription",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.cbe.detect",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.wangiri",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.ifw.rules",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.case.investigate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records a fraud REVIEW case with supplied evidence references; outcome stays pending_human_decision, NEVER a guilty verdict, no subscriber status change and no blacklist.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "fraud.blacklist.subscriber",
+      "status": "available",
+      "reason": null,
+      "limitations": "LOCAL REVIEW REQUEST only: creates a pending_human_approval request record. The subscriber is NEVER blacklisted, no service is suspended and no external system is touched.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "revass.leak.detect",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reconciliation of supplied evidence only; no automatic billing adjustment or recovery.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.usage.not.billed",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reconciliation of supplied evidence only; no automatic billing adjustment or recovery.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.double.billing",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reconciliation of supplied evidence only; no automatic billing adjustment or recovery.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.rate.mismatch",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reconciliation of supplied evidence only; no automatic billing adjustment or recovery.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.discount.abuse",
+      "status": "available",
+      "reason": null,
+      "limitations": "Flags supplied discount records against the supplied policy (policy max, evidenced approval); no discount is revoked and no money is moved.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.reconciliation",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reconciliation of supplied evidence only; no automatic billing adjustment or recovery.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.report.monthly",
+      "status": "available",
+      "reason": null,
+      "limitations": "Integer-exact reconciliation summary of SUPPLIED evidence for one period; draft only, never filed or submitted anywhere. No tax rate is assumed.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "revass.recovery.action",
+      "status": "available",
+      "reason": null,
+      "limitations": "LOCAL approval request record only: no invoice change, no refund/offset/write-off execution, no money movement; requires human approval by design.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "interconnect.partner.setup",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "interconnect.rate.config",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "interconnect.cdr.process",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "interconnect.settlement",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "interconnect.dispute.resolve",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "roaming.partner.setup",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "roaming.profile.config",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "roaming.usage.alert",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "roaming.tap.generate",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "roaming.settlement.monthly",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.plan.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local planning only; no external operation or company data access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.allocate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local planning only; no external operation or company data access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.deallocate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local planning only; no external operation or company data access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.port.in",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.port.out",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.port.status",
+      "status": "unavailable",
+      "reason": "operator_protocol_and_source_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.reservation",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local reservation expires after30 minutes; not an operator/MNP reservation.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "numbering.audit.regulator",
+      "status": "available",
+      "reason": null,
+      "limitations": "Inventory export only; not a regulator filing or verified numbering authorization.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sms.send.bulk",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sms.send.otp",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sms.send.transactional",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sms.receive.inbound",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "sms.shortcode.manage",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voice.call.outbound",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voice.call.inbound",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voice.ivr.manage",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voice.recording.store",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "voice.cdr.generate",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.templating",
+      "status": "available",
+      "reason": null,
+      "limitations": "Creates a validated DAG template. Steps require separate approved invokes; no autonomous action is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.trigger",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records a trigger and queued manual-dispatch instance only; no customer/network/message action runs.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "workflow.condition",
+      "status": "available",
+      "reason": null,
+      "limitations": "Fixed comparison operators only; no eval, code or external data retrieval.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.parallel",
+      "status": "available",
+      "reason": null,
+      "limitations": "Concurrent allowlisted pure analyses only; no DB mutations, arbitrary code, network or nested workflow actions.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.approval",
+      "status": "available",
+      "reason": null,
+      "limitations": "Business template review only; does not grant API permissions or approve live carrier actions.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.timeout.escalation",
+      "status": "available",
+      "reason": null,
+      "limitations": "Overdue detection only; no automatic escalation notification is sent.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.sla.attach",
+      "status": "available",
+      "reason": null,
+      "limitations": "FK-checked binding of an EXISTING local SLA record to an EXISTING local workflow template or instance (exactly one target); local evaluation marker only, nothing executes automatically.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.notification",
+      "status": "available",
+      "reason": null,
+      "limitations": "Draft only; no message sent and no communication consent is inferred.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "workflow.dashboard",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local planning only; no external operation or company data access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "workflow.optimization",
+      "status": "available",
+      "reason": null,
+      "limitations": "Critical-path calculation of supplied measured durations; not autonomous workflow execution.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.customer.login",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "NOT IMPLEMENTED: authentication belongs to the root service token boundary; no credentials are checked or issued.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.profile.view",
+      "status": "available",
+      "reason": null,
+      "limitations": "Assumes root has bound the authenticated actor to the subscriber; no customer login here.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.usage.view",
+      "status": "available",
+      "reason": null,
+      "limitations": "Reads usage_record evidence produced by operations/adapters; if none exists it returns empty without fabricating data.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.invoice.view",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.payment.online",
+      "status": "unavailable",
+      "reason": "verified_payment_or_billing_connector_required",
+      "limitations": "NOT IMPLEMENTED: online payment needs a verified payment connector adapter; no payment is initiated.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.ticket.create",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.package.change",
+      "status": "available",
+      "reason": null,
+      "limitations": "Records the change and updates the local package reference; live reprovisioning is owned by operations.",
+      "effect": "draft_only"
+    },
+    {
+      "id": "portal.speedtest",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "NOT IMPLEMENTED: real speed measurement needs live network access; no synthetic results are produced.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.feedback.submit",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "portal.notification.center",
+      "status": "available",
+      "reason": null,
+      "limitations": "Notifications are recorded_not_sent; delivery requires a consented messaging connector.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.subscriber.growth",
+      "status": "available",
+      "reason": null,
+      "limitations": "Counts locally recorded subscriber creation timestamps; no imported historical churn implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.churn.rate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.arpu",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded current tenant records; no assertion of company-wide completeness or historical subscriber status.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.revenue.monthly",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded current tenant records; no assertion of company-wide completeness or historical subscriber status.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.network.uptime",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.outage.summary",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.fraud.summary",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.sla.compliance",
+      "status": "available",
+      "reason": null,
+      "limitations": "Compares supplied complete measurement window against supplied target, not a legal/contractual SLA certification.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.field.productivity",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.coverage.area",
+      "status": "available",
+      "reason": null,
+      "limitations": "Inventory counts only; city/proximity is not proof of coverage or free ports.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.regulatory.submit",
+      "status": "unavailable",
+      "reason": "authorized_policy_and_regulator_workflow_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "report.executive.dashboard",
+      "status": "available",
+      "reason": null,
+      "limitations": "Bounded current tenant records; no assertion of company-wide completeness or historical subscriber status.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.license.manage",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local license evidence metadata only; no government/Komdigi validation or permission to operate.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.frequency.license",
+      "status": "available",
+      "reason": null,
+      "limitations": "Local license evidence metadata only; no spectrum allocation or BHP payment confirmation.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.numbering.report",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.interconnect.report",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.data.localize",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.content.block",
+      "status": "unavailable",
+      "reason": "authorized_policy_and_regulator_workflow_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.lawful.intercept",
+      "status": "unavailable",
+      "reason": "authorized_policy_and_regulator_workflow_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.customer.privacy",
+      "status": "available",
+      "reason": null,
+      "limitations": "Privacy review case only. An asserted evidence reference does not establish valid consent or legal compliance.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.universal.service",
+      "status": "available",
+      "reason": null,
+      "limitations": "Arithmetic against an explicitly supplied policy/rate only; no statutory default, USO applicability, payment or filing determination.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "reg.audit.prepare",
+      "status": "available",
+      "reason": null,
+      "limitations": "Evidence checklist only; no legal certification, fixed tax/retention rule, interception or regulator filing.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.forecast",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.bottleneck.identify",
+      "status": "available",
+      "reason": null,
+      "limitations": "Measures supplied utilization samples only, no SNMP/polling.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.upgrade.recommend",
+      "status": "available",
+      "reason": null,
+      "limitations": "Sizing arithmetic only; no inferred demand, physical port availability or hardware order.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.cost.benefit",
+      "status": "available",
+      "reason": null,
+      "limitations": "Arithmetic only; no invented demand or investment recommendation.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.expansion.plan",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.link.utilization",
+      "status": "available",
+      "reason": null,
+      "limitations": "Measures supplied utilization samples only, no SNMP/polling.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.spectrum.analyze",
+      "status": "available",
+      "reason": null,
+      "limitations": "Sorts supplied spectrum samples and reports peak; no RF probe or interference attribution.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "capacity.report.quarterly",
+      "status": "available",
+      "reason": null,
+      "limitations": "Submitted/local evidence only, no live company source or external action.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.fiber.degrade",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.olt.failure",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.ont.battery",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.ups.failure",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.network.congestion",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.churn.risk",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.payment.default",
+      "status": "available",
+      "reason": null,
+      "limitations": "Deterministic trend estimate from supplied time series; not a trained predictive model or confirmed hardware fault.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "predict.maintenance.schedule",
+      "status": "available",
+      "reason": null,
+      "limitations": "Proposed maintenance record only; no trained failure prediction or technician dispatch.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.ddos.mitigate",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.bgp.hijack.detect",
+      "status": "available",
+      "reason": null,
+      "limitations": "Compare submitted origins; not a BGP collector or RPKI validation service.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.botnet.detect",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.malware.c2.block",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.phishing.block",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.ips.ids.manage",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.firewall.policy",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.vpn.manage",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.audit.compliance",
+      "status": "available",
+      "reason": null,
+      "limitations": "Evidence checklist only; no legal certification, fixed tax/retention rule, interception or regulator filing.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "netsec.incident.response",
+      "status": "unavailable",
+      "reason": "domain_implementation_or_verified_adapter_required",
+      "limitations": "Requires an authorized verified adapter; no live effect is implied.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.survey.send",
+      "status": "unavailable",
+      "reason": "consented_communication_connector_required",
+      "limitations": "NOT IMPLEMENTED: survey distribution needs a consented messaging connector; responses enter via adapter or fixture records.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.score.calculate",
+      "status": "available",
+      "reason": null,
+      "limitations": "Pure calculation over supplied responses (0..10); NPS range -100..100; responses are not stored.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.feedback.analyze",
+      "status": "available",
+      "reason": null,
+      "limitations": "Fixed bilingual keyword heuristic; not an ML sentiment model.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.detractor.followup",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.report.monthly",
+      "status": "available",
+      "reason": null,
+      "limitations": "Aggregates explicit responses or nps_response records (adapters/fixtures); survey distribution is not implemented.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.benchmark.industry",
+      "status": "available",
+      "reason": null,
+      "limitations": "Compares against a caller-supplied benchmark; no industry figure is hardcoded.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.action.plan",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    },
+    {
+      "id": "nps.trend.analyze",
+      "status": "available",
+      "reason": null,
+      "limitations": "Tenant-local records/calculation only; no company/network/payment access.",
+      "effect": "tenant_local"
+    }
+  ],
+  "tui_doctor": {
+    "ok": true,
+    "release": "2026.10.24.22",
+    "upstream": "0.98.1",
+    "binary_verified": true,
+    "runtime_verified": true,
+    "mcp_protocol": "ok",
+    "skills": 14,
+    "lsp": [
+      "css",
+      "html",
+      "json",
+      "python",
+      "typescript"
+    ],
+    "documents": {
+      ".docx": true,
+      ".xlsx": true,
+      ".pptx": true,
+      ".pdf": true
+    },
+    "browser": {
+      "chromium": true
+    },
+    "automatic_update": false,
+    "active_sessions_untouched": true
+  },
+  "installed_cli": {
+    "document_skill_ids": 276,
+    "engines": 25,
+    "available_local_operations": 203,
+    "scope": {
+      "kind": "isolated_tenant",
+      "company_data_connected": false,
+      "live_network_actions": false,
+      "external_payments_verified": false
+    }
+  },
+  "source_checksums": {
+    "__init__.py": "bc1cf0d3a5438a3935fbff52238a6113b9057e67e7de5a57ed12b6e8ea8a0dac",
+    "agent.py": "ad735927a3ffb054aedda37eac0fb069b6e64327140669417d59b6c85482db70",
+    "analysis.py": "6ceb12dfd3f9766a96936e71859eb48ebb8daaf8151cbc914b33bda338a192d9",
+    "assurance.py": "a64eb986fe2ce89786dbd068104b457c6026c39aa1781814c3c92b86332d5967",
+    "catalog_source.json": "ee09a6731cbb7c26ed86aaaef276a9152cc191932fb6bcdc8dd2f080d7b82e3d",
+    "commercial.py": "654e5b16ca4c07931c6e7baaa9bafc8cdfecdb033ee32a55f95fd1a362f30964",
+    "common.py": "3f3bab11151dc3ecf4036adc95b7be1b39b4e1c138ace005d8900f80d844a6ce",
+    "connector_contract.py": "1d62db7088636f07266fdb40685dcb34b56b3df97bca2c3686db1242d653e7db",
+    "deploy/harmonika-telco-engine.service": "6738124283670ac7339c8b60f1c356a92bc1cc5e77fe9a0f79c08d2202c37086",
+    "deploy/install.sh": "024c8a122e5983eabff9dd4ec5f678c48c7dcf7dd9e6516a270c1bec3d453437",
+    "extensions.py": "b32b7ca61f23b081ccc236363ece5eebbf5216968b2f487442c8de2b11e4e627",
+    "gateway-integration.patch": "7aa0abcb010a65939eadcf193e16b58127f461c0f9fb61b95361f1fcb7de907a",
+    "operations.py": "1242f5e08624ceb9ca55ec9e89f364494ce443d966e1b0d56b71913cf2ecb95a",
+    "planning.py": "c205215429e22c2349193c17c7a538fa9d3aee2a4965a49bf41de84cc51ac461",
+    "public_ai_telco.go": "62e68f96f1c151a2db144798a5630d7c167d438e84be392c28b0258d17228a0a",
+    "public_ai_telco_live_test.go": "1f807be2912c0883d413064b09c19dc5d17829bce297ecf9aee41a607f5b19f9",
+    "public_ai_telco_test.go": "57acedca69791ee6b7b0c936901394d2b76dbb7ed4615eccb6878160398009eb",
+    "registry.py": "28a66418b150fd0bb4e398444becc2ca0ee74e271ead0a9607231a7a0d2aeac8",
+    "requirements.txt": "9a5805d7998c48cd775e6dc3c8351cd384ba8e80fa47366ddb8625dd4ec1ee72",
+    "runtime.py": "2083f4e19c085381cafd4541e12b31f6d741d14cbdb25303445ccc34201d3a02",
+    "service.py": "f0592b04579a9c32c07bf6f376a7150a30a396dac03ee74c4098c5f4074ae9d4",
+    "store.py": "ccc0fa51754a030ac1d395fbe85f5b2195d30cffd71a216a7ee59acbc03d3b8b"
+  }
+}

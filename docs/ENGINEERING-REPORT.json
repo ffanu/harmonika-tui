@@ -1,0 +1,111 @@
+{
+  "phase": 1,
+  "date": "2026-10-24T06:50:26.691640+07:00",
+  "status": "deployed_verified",
+  "release": "2026.10.24.19",
+  "operations": [
+    "engineering.code_review",
+    "engineering.debug",
+    "engineering.testing_strategy",
+    "engineering.documentation"
+  ],
+  "interface": {
+    "endpoint": "https://chat.harmonika.id/v1/chat/completions",
+    "authentication": "Existing Telegram-issued Bearer token",
+    "manual_skill_selection_required": false,
+    "source_scope": "Supplied request/code fences/diffs/logs; user-only evidence extraction",
+    "structured_results": "harmonika.reports[]; terminal completion chunk for SSE",
+    "code_execution": false,
+    "private_repository_connector": false,
+    "monitoring_connector": false
+  },
+  "team": {
+    "Claude": "34 analyzer tests, deterministic analyzers, report contracts and reference guidance",
+    "OpenCode": "38 evidence tests; redaction accounting, fair evidence sampling, line-number and boundary corrections",
+    "Codex": "Registry/executor, pre-planning redaction and provenance binding, gateway, local package, integration tests, production deployment and live verification"
+  },
+  "verification": {
+    "python_tests": 450,
+    "node_tests": 55,
+    "go_race_suite": "passed",
+    "skill_validator": "passed",
+    "private_worker_uid": "hms-public-skills, non-root",
+    "native_binary_unchanged": true,
+    "owner_doctor_ok": true,
+    "owner_guidance_skills": 13,
+    "shared_operations": 27,
+    "public_catalog_operations": 16,
+    "installed_cli_workflows": 4,
+    "public_https_smoke": {
+      "code_review": {
+        "http": 200,
+        "tools_executed": 1,
+        "seconds": 11.79
+      },
+      "debug": {
+        "http": 200,
+        "tools_executed": 1,
+        "seconds": 11.43
+      },
+      "testing_strategy": {
+        "http": 200,
+        "tools_executed": 1,
+        "seconds": 19.59
+      },
+      "documentation": {
+        "http": 200,
+        "tools_executed": 1,
+        "seconds": 10.51,
+        "sse_terminal_reports": true,
+        "sse_done": true
+      },
+      "seo_regression": {
+        "http": 200,
+        "tools_executed": 1,
+        "seconds": 13.507
+      },
+      "ordinary_chat": {
+        "http": 200,
+        "seconds": 9.616
+      },
+      "unauthenticated": 401
+    },
+    "isolated_remote_tokens_and_request_rows_cleaned": true,
+    "private_or_customer_conversations_read": false,
+    "public_capabilities": {
+      "automatic_engineering": true,
+      "engineering_source_input": true,
+      "engineering_repository_connector": false,
+      "engineering_code_execution": false,
+      "automatic_context_max_bytes": 245760
+    }
+  },
+  "fixes_during_integration": [
+    "Natural Indonesian wording Review keamanan kode initially missed the cost-control gate; broader intervening wording and fenced evidence now covered",
+    "Prevent model-generated function arguments from fabricating source; bind original redacted user evidence",
+    "Preserve source line numbering while redacting private blocks and stripping ANSI",
+    "Round-robin evidence so source files do not starve logs or diff",
+    "Record true redaction operations and disclose clipped evidence",
+    "Handle unavailable-dependency test independently of other tests modifying sys.path",
+    "Remove outbound image/unapproved source URLs from synthesized automatic answers"
+  ],
+  "deployment": {
+    "restarted_service": "harmonika-web-chat-live.service",
+    "health_http": 200,
+    "core_engine_restarted": false,
+    "owner_sessions_interrupted": false,
+    "database_schema_changed": false,
+    "previous_runtime_retained": true,
+    "source_backup_and_baseline_hashes_checked": true
+  },
+  "limitations": [
+    "Heuristic static findings have false positives and false negatives; no clean-bill-of-health guarantee",
+    "No automatic private GitHub/Jira/CI/monitoring data access; a PR URL is not fetched source",
+    "No arbitrary server shell, file mutation, test execution, deployment or confirmed root cause implied",
+    "Local CLI returns structured static analysis; public chat adds model synthesis",
+    "SSE keepalives run during work; synthesis currently emitted after completion",
+    "Bounded lexical prefilter is cost control, not a universal semantic router for all skills",
+    "Search Console/GA4 and visual/drift public artifacts remain unavailable/local as previously documented",
+    "Existing native sessions may need a new launch to discover newly installed guidance; sessions were not terminated"
+  ]
+}

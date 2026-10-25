@@ -1,0 +1,99 @@
+--- a/main.go
++++ b/main.go
+@@ -255,6 +255,7 @@
+ 	mux.HandleFunc("/v1/member-ai/chat/session", a.mobileChatSession)
+ 	mux.HandleFunc("/v1/member-ai/chat/messages", a.mobileChatMessages)
+ 	mux.HandleFunc("/v1/member-ai/chat/stop", a.mobileChatStop)
++	mux.HandleFunc("/v1/coding/", a.publicCodingAPI)
+ 	mux.HandleFunc("/v1/models", a.publicAIModels)
+ 	mux.HandleFunc("/v1/chat/completions", a.publicAIChatCompletions)
+ 	mux.HandleFunc("/v1/public-ai/capabilities", a.publicAICapabilities)
+@@ -10541,6 +10542,7 @@
+ }
+ 
+ type publicAIChatCompletionRequest struct {
++	WorkspaceID       string                `json:"workspace_id,omitempty"`
+ 	AttachmentIDs     []string              `json:"attachment_ids,omitempty"`
+ 	Model             string                `json:"model"`
+ 	Messages          []publicAIChatMessage `json:"messages"`
+@@ -10925,6 +10927,10 @@
+ 	}
+ 	if len(input.Messages) == 0 {
+ 		jsonOut(w, 400, map[string]any{"error": map[string]any{"code": "messages_required", "message": "messages is required"}})
++		return
++	}
++	if input.WorkspaceID != "" && len(input.Tools) == 0 && !publicAIHasToolHistory(input) && input.ToolChoice == nil {
++		a.publicCodingChat(w, r, tok, input)
+ 		return
+ 	}
+ 	if a.publicAIAutomaticSkills(w, r, tok, input) {
+--- a/public_api_docs.go
++++ b/public_api_docs.go
+@@ -6,7 +6,7 @@
+ 	"strings"
+ )
+ 
+-const publicAPIDocumentationVersion = "2026-10-24"
++const publicAPIDocumentationVersion = "2026-10-24-coding-mvp"
+ 
+ type publicAPIEndpoint struct {
+ 	Method      string `json:"method"`
+@@ -17,6 +17,16 @@
+ 
+ func publicAPIEndpoints() []publicAPIEndpoint {
+ 	return []publicAPIEndpoint{
++		{"GET", "/v1/coding/capabilities", "Kesiapan 18 skill coding workspace terisolasi", "application/json"},
++		{"POST", "/v1/coding/workspaces", "Workspace privat per token dengan izin eksplisit", "application/json"},
++		{"GET", "/v1/coding/workspaces", "Daftar workspace token sendiri", "application/json"},
++		{"GET", "/v1/coding/workspaces/{id}", "Metadata dan versi workspace sendiri", "application/json"},
++		{"POST", "/v1/coding/workspaces/{id}/agent", "Pemilihan skill otomatis dalam workspace privat", "application/json | text/event-stream"},
++		{"POST", "/v1/coding/workspaces/{id}/invoke", "Jalankan skill workspace; exec dan commit menunggu persetujuan", "application/json"},
++		{"GET", "/v1/coding/jobs/{id}", "Recovery status job", "application/json"},
++		{"GET", "/v1/coding/jobs/{id}/events", "Replay event stdout/stderr dengan Last-Event-ID", "application/json | text/event-stream"},
++		{"POST", "/v1/coding/jobs/{id}/approve", "Persetujuan eksplisit terikat input_hash dan versi workspace", "application/json"},
++		{"POST", "/v1/coding/jobs/{id}/stop", "Hentikan job milik token sendiri", "application/json"},
+ 		{"GET", "/v1/public-ai/capabilities", "Fitur dan batas token publik", "application/json"},
+ 		{"GET", "/v1/public-ai/endpoints", "Katalog endpoint publik dan versi dokumentasi", "application/json"},
+ 		{"GET", "/v1/public-ai/guide.txt", "Unduh panduan terbaru; tidak menampilkan kembali token lama", "text/plain"},
+@@ -29,6 +39,7 @@
+ func publicAIFeatures() map[string]any {
+ 	return map[string]any{
+ 		"chat": true, "streaming": true, "openai_compatible": true,
++		"coding_workspaces": publicCodingReady(), "coding_agent": publicCodingReady(), "coding_sandbox": publicCodingReady(),
+ 		"orchestration": true, "model_fallback": true, "web_grounding": true,
+ 		"endpoint_catalog": true, "guide_download": true, "tool_calls": false, "tool_execution": false,
+ 		"files": false, "file_upload": false, "image_input": false, "pdf_input": false,
+@@ -191,7 +202,21 @@
+ - Periksa HTTP status dan Content-Type sebelum parsing: SSE bukan satu dokumen JSON. Baca tiap frame data:, lalu JSON.parse isinya; [DONE] adalah penanda, bukan JSON.
+ - Bentuk error kompatibel: {"error":{"message":"...","type":"invalid_request_error","code":"invalid_api_key"}}. Jalur native juga dapat mengembalikan error sebagai string; tangani kedua bentuk.
+ 
+-KATALOG FITUR PRODUK LAIN - AUTENTIKASI TERPISAH
++KATALOG FITUR PRODUK LAIN - 
++CODING WORKSPACE (MVP)
++- Gunakan Bearer key yang sama. Workspace privat dibedakan per token, bukan per IP.
++- GET /v1/coding/capabilities memuat schema/readiness 18 operasi coding.
++- POST /v1/coding/workspaces body {"name":"Demo","permissions":{"write":true,"execute":true,"git_commit":false}}.
++- Chat coding: POST /v1/chat/completions dengan workspace_id, messages, stream dan header Idempotency-Key UUID. Skill dipilih otomatis.
++- File proyek lokal tidak otomatis tersalin ke server. Transfer hanya source yang dimaksud, tanpa credential.
++- Invoke eksplisit: POST /v1/coding/workspaces/{id}/invoke body {"skill_id":"code.write","input":{"path":"main.py","content":"print(42)"}} dan Idempotency-Key.
++- exec.*, test.run, git.commit mengembalikan approval_required: BELUM dijalankan.
++- Tinjau preview lalu POST /v1/coding/jobs/{id}/approve body {"decision":"approve","input_hash":"HASH_DARI_JOB"}. Hanya aksi persetujuan client, bukan model AI, yang memanggil endpoint ini.
++- Approval kedaluwarsa 5 menit; perubahan workspace membatalkannya. Retry input sama memakai key sama; input berbeda memakai key baru.
++- GET /v1/coding/jobs/{id}, /events; POST /stop untuk recovery/Stop. Event mendukung after_sequence/Last-Event-ID. Recovery dan Stop tidak memakai kuota mutasi.
++- Eksekusi dalam container tanpa jaringan, tanpa akses host/proyek lain. Batas 256 file, 512 KiB/file,16 MiB/workspace,120 detik/command,2 proses global. Tidak ada package install/deploy otomatis.
++
++AUTENTIKASI TERPISAH
+ Daftar berikut bukan izin akses dengan token Telegram ini. Jangan mengubah base URL publik menjadi /member-ai lalu berharap tokennya berlaku.
+ 
+ A. APK member - Bearer token login pelanggan member.harmonika.id
+--- a/public_api_docs_test.go
++++ b/public_api_docs_test.go
+@@ -121,7 +121,7 @@
+ 	if w.Code != 200 || json.Unmarshal(w.Body.Bytes(), &result) != nil {
+ 		t.Fatalf("bad catalog %d", w.Code)
+ 	}
+-	if result.Version != publicAPIDocumentationVersion || len(result.Endpoints) != 6 || result.Features["image_generation"] != false {
++	if result.Version != publicAPIDocumentationVersion || len(result.Endpoints) != len(publicAPIEndpoints()) || result.Features["image_generation"] != false {
+ 		t.Fatal("catalog contract mismatch")
+ 	}
+ 	for _, ep := range result.Endpoints {

@@ -1,0 +1,2116 @@
+================================================================================
+          HARMONIKA AI - MASTER SKILL INDEX (CONSOLIDATED)
+                  All Engines • All Skills • One Document
+================================================================================
+
+Document Version : 1.0
+Generated        : 2026-10-24
+Total Engines    : 12
+Total Skills     : 1.507
+Document Purpose : Single source of truth for all Harmonika AI skills
+
+
+================================================================================
+  TABLE OF CONTENTS
+================================================================================
+
+  Part 1  : Executive Summary & Statistics
+  Part 2  : Engine Catalog (12 engines)
+  Part 3  : All Skills Master List (sorted A-Z)
+  Part 4  : Skill Category Index (cross-engine)
+  Part 5  : Architecture Overview
+  Part 6  : Phased Roadmap (Aggregated)
+  Part 7  : Tech Stack Master List
+  Part 8  : Cross-Engine Dependency Map
+  Part 9  : Skill Priority Matrix
+  Part 10 : Conventions & Glossary
+
+
+================================================================================
+  PART 1: EXECUTIVE SUMMARY & STATISTICS
+================================================================================
+
+1.1 ENGINES OVERVIEW
+   Total Engines : 12
+   Total Skills  : 1.507
+
+1.2 ENGINE BREAKDOWN
+   #  | Engine                            | Skills | Category
+   ---|-----------------------------------|--------|----------------
+   1  | Browser & UI Automation           |   113  | Automation
+   2  | Website Cloning Engine            |    93  | Automation
+   3  | Security Engineering              |   110  | Security
+   4  | Fraud & Bot Detection             |   107  | Security
+   5  | Anti-AI Detection Content         |    95  | Content
+   6  | Bug & CVE Hunter                  |   102  | Security
+   7  | Binary Engineering & EXE Builder  |   130  | Infrastructure
+   8  | Browser Fingerprint Engine        |   157  | Privacy
+   9  | Modular ERP Engine                |   174  | Business
+   10 | Customer Service Engine           |   162  | Business
+   11 | Bug & Malware Audit Engine        |   165  | Security
+   12 | Documents Skill (Refactoring)     |    -   | Content
+
+1.3 CATEGORY DISTRIBUTION
+   Security       : 4 engines, 484 skills  (32%)
+   Automation     : 2 engines, 206 skills  (14%)
+   Business       : 2 engines, 336 skills  (22%)
+   Content        : 2 engines,  95 skills  ( 6%)
+   Infrastructure : 1 engine,  130 skills  ( 9%)
+   Privacy        : 1 engine,  157 skills  (10%)
+   Documents      : 1 engine,    - skills  ( 7%)
+
+1.4 PRIORITY DISTRIBUTION
+   Phase 1 (MVP)     : ~180 skills  (12%)
+   Phase 2 (Growth)  : ~240 skills  (16%)
+   Phase 3 (Scale)   : ~300 skills  (20%)
+   Phase 4 (Full)    : ~787 skills  (52%)
+
+
+================================================================================
+  PART 2: ENGINE CATALOG
+================================================================================
+
+--------------------------------------------------------------------------------
+ENGINE 1: BROWSER & UI AUTOMATION (113 skills)
+--------------------------------------------------------------------------------
+Purpose: iMacros-style browser automation, anti-miss UI interaction,
+         computer-use capabilities
+
+Layers:
+  1. Browser Control (20)
+  2. DOM & Element Interaction (22)
+  3. Vision & Screen Recognition (17)
+  4. Mouse & Keyboard Control (14)
+  5. Smart Interaction Anti-Miss (10)
+  6. Workflow & Recording (10)
+  7. Scraping & Data Extraction (11)
+  8. Network & Stealth (9)
+
+Key Skills:
+  - browser.launch, browser.navigate, browser.close
+  - dom.query, dom.click, dom.fill, dom.wait
+  - mouse.click, keyboard.type, keyboard.press
+  - screen.capture, screen.ocr
+  - smart.click (7-strategy fallback)
+  - scrape.html, scrape.text, scrape.table
+  - stealth.patch, stealth.rotate_proxy
+
+--------------------------------------------------------------------------------
+ENGINE 2: WEBSITE CLONING ENGINE (93 skills)
+--------------------------------------------------------------------------------
+Purpose: Clone website target, rebuild in new stack, deploy to own domain
+
+Layers:
+  1. Website Discovery (10)
+  2. Asset Extraction (12)
+  3. Analysis & Decomposition (15)
+  4. Reconstruction (18)
+  5. Modification (12)
+  6. Deployment (10)
+  7. Quality & Verification (8)
+  8. Advanced Clone (8)
+
+Key Skills:
+  - clone.discover.sitemap, clone.discover.assets
+  - clone.fetch.html, clone.fetch.css, clone.fetch.images
+  - clone.analyze.layout, clone.analyze.design_system
+  - clone.reconstruct.nextjs, clone.reconstruct.react
+  - clone.modify.branding, clone.modify.colors
+  - clone.deploy.vercel, clone.deploy.cloudflare
+  - clone.verify.fidelity
+
+--------------------------------------------------------------------------------
+ENGINE 3: SECURITY ENGINEERING (110 skills)
+--------------------------------------------------------------------------------
+Purpose: Ethical hacking, penetration testing, security assessment
+
+Layers:
+  1. Reconnaissance / OSINT (15)
+  2. Vulnerability Scanning (15)
+  3. Exploitation (12)
+  4. Network & Wireless (10)
+  5. Web App Security (12)
+  6. Code Security Analysis (10)
+  7. Post-Exploitation & Forensics (10)
+  8. Social Engineering (8)
+  9. Defense & Blue Team (10)
+  10. Crypto & Auth (8)
+
+Key Skills:
+  - recon.subdomain.find, recon.ports.scan, recon.google.dork
+  - vuln.web.scan, vuln.sqli.test, vuln.xss.test, vuln.owasp_top10
+  - exploit.search, exploit.msfrpc, exploit.privesc.linux
+  - net.sniff, net.wifi.crack
+  - web.fuzz.dir, web.api.fuzz
+  - code.sast.scan, code.secret.scan
+  - forensic.memory, forensic.disk
+  - crypto.tls.audit, crypto.jwt.crack
+
+--------------------------------------------------------------------------------
+ENGINE 4: FRAUD & BOT DETECTION (107 skills)
+--------------------------------------------------------------------------------
+Purpose: Detect fraud, bot, bad IP, suspicious activity real-time
+
+Layers:
+  1. IP Intelligence (15)
+  2. Device Fingerprinting (12)
+  3. Bot Detection (13)
+  4. Account Fraud Detection (15)
+  5. Payment Fraud Detection (10)
+  6. Behavioral Analysis (10)
+  7. Rate Limiting & Throttling (8)
+  8. Challenge & Verification (8)
+  9. Event Logging & Audit (8)
+  10. Integration & Threat Intel (8)
+
+Key Skills:
+  - ip.lookup, ip.geo.locate, ip.proxy.detect, ip.tor.detect
+  - fingerprint.browser, fingerprint.tls, fingerprint.combine
+  - bot.useragent.analyze, bot.headless.detect, bot.webdriver.detect
+  - account.takeover.detect, account.credential_stuff, account.brute_force
+  - payment.card.test, payment.velocity.check, payment.geo.mismatch
+  - behavior.baseline, behavior.anomaly, behavior.risk_score
+  - rate_limit.set, rate_limit.ban, rate_limit.shadow_ban
+  - challenge.captcha, challenge.sms_otp
+  - log.event.append, log.export.siem
+
+--------------------------------------------------------------------------------
+ENGINE 5: ANTI-AI DETECTION CONTENT (95 skills)
+--------------------------------------------------------------------------------
+Purpose: Generate content that passes AI detectors (human-like)
+
+Layers:
+  1. Content Brief (10)
+  2. Human Voice Profiling (10)
+  3. Humanizer (15)
+  4. Anti-Pattern (10)
+  5. AI Detector Tester (10)
+  6. Perplexity & Burstiness Scoring (8)
+  7. Style & Rhetoric (8)
+  8. Platform Optimizer (8)
+  9. SEO & Structure (8)
+  10. Iterative Refiner (8)
+
+Key Skills:
+  - brief.analyze, brief.outline.create, brief.seo.keywords
+  - voice.persona.select, voice.tone.calibrate, voice.imperfection.level
+  - humanize.burstiness, humanize.perplexity, humanize.anecdote.inject
+  - antipattern.detect, antipattern.transition, antipattern.conclusion
+  - detector.gptzero, detector.originality, detector.copyleaks
+  - score.perplexity, score.burstiness, score.human_likeness
+  - refine.loop, refine.segment.flagged
+
+--------------------------------------------------------------------------------
+ENGINE 6: BUG & CVE HUNTER (102 skills)
+--------------------------------------------------------------------------------
+Purpose: Search CVE by tech, sort newest/oldest, explain payload
+
+Layers:
+  1. Query Parsing & Intent (8)
+  2. CVE Database Connectors (12)
+  3. Vendor-Specific Advisory (10)
+  4. Platform-Specific Scanners (10)
+  5. Exploit-DB & PoC Sources (10)
+  6. CVE Normalization & Sorting (8)
+  7. Payload Fetcher & Explainer (15)
+  8. Vulnerability Type Analyzers (10)
+  9. Monitoring & Alerting (8)
+  10. Report & Export (11)
+
+Key Skills:
+  - query.parse, query.target.extract, query.sort.detect
+  - cve.nvd.search, cve.exploitdb.search, cve.aggregate
+  - vendor.magento.advisory, vendor.wordpress.advisory
+  - platform.wpscan, platform.magento.scan
+  - exploit.exploitdb.fetch, exploit.github.search, exploit.metasploit.search
+  - sort.by_date.desc, sort.by_date.asc, sort.by_severity.desc
+  - payload.fetch.exploitdb, payload.explain.vuln_type, payload.explain.attack_flow
+  - monitor.subscribe, monitor.alert.new
+  - report.cve.detail, report.export.pdf
+
+--------------------------------------------------------------------------------
+ENGINE 7: BINARY ENGINEERING & EXE BUILDER (130 skills)
+--------------------------------------------------------------------------------
+Purpose: Build, rebuild, patch, modify EXE (incl. opensource EXE mod)
+
+Layers:
+  1. Intent Classifier & Project Setup (10)
+  2. Source Builder (15)
+  3. Rebuild EXE (10)
+  4. Binary Analysis (12)
+  5. Disassembly & Decompilation (15)
+  6. Binary Patcher (12)
+  7. Code Injection & Hooking (10)
+  8. Add Feature to Opensource EXE (10)
+  9. Unpack & Repack (8)
+  10. Installer Packaging (10)
+  11. Sign & Distribute (8)
+  12. Debug & Test EXE (10)
+
+Key Skills:
+  - build.cpp.msvc, build.cpp.gcc, build.csharp.dotnet, build.python.pyinstaller
+  - rebuild.fetch_source, rebuild.apply_patch, rebuild.compile
+  - binary.inspect.pe, binary.detect_packer, binary.list_imports
+  - disasm.ghidra, disasm.ida_pro, disasm.x64dbg
+  - decompile.ghidra, decompile.hexrays, decompile.dnspy
+  - patch.hex_edit, patch.byte_replace, patch.resource_edit
+  - inject.dll_proxy, inject.inline_hook, inject.iat_hook
+  - opensource.fetch_repo, opensource.add_feature, opensource.build_custom
+  - installer.nsis, installer.inno_setup, installer.wix
+  - sign.authenticode, virustotal.scan
+
+--------------------------------------------------------------------------------
+ENGINE 8: BROWSER FINGERPRINT ENGINE (157 skills)
+--------------------------------------------------------------------------------
+Purpose: Anti-detect browser (GoLogin/Kameleo style), multi-profile,
+         engine-level spoofing, cross-platform, VNC remote
+
+Layers:
+  1. Profile Management (12)
+  2. Fingerprint Generator (15)
+  3. Hardware Spoofing (12)
+  4. Canvas Fingerprint Engine (10)
+  5. WebGL Fingerprint Engine (12)
+  6. Audio Fingerprint Engine (8)
+  7. Font Fingerprint Engine (8)
+  8. Network Fingerprint Engine (12)
+  9. Storage Isolation (10)
+  10. Browser Engine Patcher (10)
+  11. Proxy & IP Management (10)
+  12. Remote Access (VNC/noVNC) (12)
+  13. Verification & Testing (10)
+  14. Automation & API (8)
+  15. Enterprise Features (8)
+
+Key Skills:
+  - profile.create, profile.start, profile.stop
+  - fp.generate.full, fp.generate.canvas, fp.generate.webgl
+  - hardware.gpu.emulate, hardware.cpu.cores, hardware.ram.size
+  - canvas.noise.inject, webgl.renderer.set, webgl.extensions.list
+  - audio.context.modify, fonts.list.set
+  - network.tls.fingerprint, network.useragent.set, network.proxy.set
+  - storage.cookies.isolate, storage.local_storage.isolate
+  - patch.chromium.fetch, patch.chromium.apply, patch.build
+  - proxy.http.set, proxy.socks5.set, proxy.rotate
+  - remote.vnc.start, remote.novnc.start, remote.xvfb.run
+  - verify.creepjs, verify.fingerprintjs, verify.full_audit
+  - api.start, api.cdp.connect, api.webdriver.connect
+
+--------------------------------------------------------------------------------
+ENGINE 9: MODULAR ERP ENGINE (174 skills)
+--------------------------------------------------------------------------------
+Purpose: Multi-industry ERP (ISP, manufaktur, retail, dll), integration hub
+
+Layers:
+  1. ERP Builder & Scaffolding (10)
+  2. Core Modules (12)
+  3. Finance Module (12)
+  4. HR & Payroll Module (10)
+  5. Inventory & Procurement (10)
+  6. Sales & CRM Module (10)
+  7. ISP-Specific Modules (12)
+  8. Manufacturing Module (8)
+  9. Project Management Module (8)
+  10. POS & Retail Module (8)
+  11. E-Commerce Module (8)
+  12. Integration Hub (15)
+  13. External Connectors (15)
+  14. Workflow Engine (10)
+  15. Report & Analytics (10)
+  16. Communication Module (8)
+  17. BI & Data Warehouse (8)
+
+Key Skills:
+  - erp.scaffold.project, erp.menu.builder, erp.workflow.builder
+  - module.auth.user, module.auth.role, module.tenant.management
+  - finance.general.ledger, finance.invoice, finance.accounts.payable
+  - hr.employee.management, hr.attendance, hr.payroll
+  - inventory.product.master, inventory.stock.management
+  - sales.customer.master, sales.quotation, sales.order
+  - isp.customer.subscriber, isp.service.plan, isp.billing.cycle
+  - mfg.bom, mfg.production.order
+  - pm.project.master, pm.task.management
+  - pos.cashier, pos.transaction
+  - ecommerce.catalog, ecommerce.cart, ecommerce.checkout
+  - integration.api.rest, integration.api.graphql, integration.webhook.send
+  - connector.whm.cpanel, connector.wordpress, connector.shopify
+  - connector.hubspot, connector.wa.business, connector.xendit
+  - workflow.define, workflow.trigger.event, workflow.action.send_email
+  - report.financial.statement, report.kpi.dashboard
+
+--------------------------------------------------------------------------------
+ENGINE 10: CUSTOMER SERVICE ENGINE (162 skills)
+--------------------------------------------------------------------------------
+Purpose: Super intelligent CS, knows company, knows customer, no miss answer
+
+Layers:
+  1. Channel Gateway (15)
+  2. Customer Identity Resolver (12)
+  3. Company Knowledge Base (15)
+  4. Conversation Analyzer / NLU (15)
+  5. Solution Engine (15)
+  6. Response Generator (10)
+  7. Action Executor (12)
+  8. Escalation & Human Handoff (10)
+  9. Conversation State Machine (8)
+  10. Emotion & Sentiment (8)
+  11. Proactive Engagement (8)
+  12. Quality Assurance (8)
+  13. Learning & Improvement (10)
+  14. Analytics & Insight (8)
+  15. Security & Compliance (8)
+
+Key Skills:
+  - channel.wa.receive, channel.webchat.send, channel.telegram.send
+  - channel.email.send, channel.voice.send
+  - customer.identify.by_phone, customer.profile.fetch, customer.history.fetch
+  - kb.company.info, kb.product.catalog, kb.faq.search, kb.sop.search
+  - nlu.intent.detect, nlu.entity.extract, nlu.sentiment.analyze
+  - nlu.emotion.detect, nlu.language.detect
+  - solution.rag.retrieve, solution.generate, solution.verify.anti_halluc
+  - solution.confidence.score, solution.escalate.decision
+  - response.generate.natural, response.tone.empathy, response.personalize
+  - action.ticket.create, action.escalate.human, action.notify.team
+  - escalate.context.transfer, escalate.summary.generate, escalate.agent.assign
+  - learn.interaction.log, learn.pattern.detect, learn.knowledge.gap
+  - security.pii.mask, security.auth.verify, security.audit.log
+
+--------------------------------------------------------------------------------
+ENGINE 11: BUG & MALWARE AUDIT ENGINE (165 skills)
+--------------------------------------------------------------------------------
+Purpose: Bug analysis, malware audit, "audit dulu, jawab kemudian" principle
+
+Layers:
+  1. Triage & Classification (10)
+  2. Static Analysis (15)
+  3. Dynamic Analysis (15)
+  4. Evidence Collector (12)
+  5. Root Cause Analyzer (12)
+  6. Malware & Virus Audit (15)
+  7. Vulnerability Analyzer (10)
+  8. Memory & Crash Analyzer (10)
+  9. Solution Proposer (10)
+  10. Safe Fix Executor (12)
+  11. Verification & Validation (10)
+  12. Audit Log & Reporting (10)
+  13. Escalation & Human Handoff (8)
+  14. Knowledge Base (8)
+  15. Monitoring & Early Warning (8)
+
+Key Skills:
+  - triage.classify, triage.severity.assess, triage.route
+  - static.code.review, static.ast.parse, static.data_flow
+  - dynamic.reproduce, dynamic.debug.attach, dynamic.fuzz.input
+  - evidence.log.capture, evidence.stack.trace, evidence.memory.dump
+  - rca.five_why, rca.fault_tree, rca.fishbone
+  - malware.sandbox.run, malware.hash.check, malware.unpack
+  - malware.disassemble, malware.decompile, malware.c2.detect
+  - vuln.owasp_top10, vuln.cve.match, vuln.cvss.score
+  - crash.dump.analyze, memory.leak.detect
+  - solution.options.generate, solution.recommend.safest, solution.peer.review
+  - fix.backup.create, fix.staging.apply, fix.test.regression
+  - fix.production.deploy, fix.monitor.post, fix.rollback.execute
+  - verify.reproduce.original, verify.edge.case
+  - audit.report.generate, audit.timeline.reconstruct
+  - escalate.confidence.low, escalate.context.transfer
+
+
+================================================================================
+  PART 3: ALL SKILLS MASTER LIST (SORTED A-Z)
+================================================================================
+
+A:
+  account.brute_force
+  account.credential_stuff
+  account.device.binding
+  account.fake.detect
+  account.mfa.bypass
+  account.multi_account
+  account.password.spray
+  account.quarantine
+  account.recovery.abuse
+  account.session.fixation
+  account.session.hijack
+  account.stepup_auth
+  account.suspicious_login
+  account.takeover.detect
+  account.velocity.check
+  action.account.query
+  action.account.update
+  action.activate.service
+  action.billing.invoice
+  action.billing.refund
+  action.billing.waive
+  action.escalate.human
+  action.notify.team
+  action.schedule.callback
+  action.suspend.service
+  action.ticket.create
+  action.ticket.update
+  antipattern.boilerplate
+  antipattern.cliche
+  antipattern.conclusion
+  antipattern.detect
+  antipattern.filler
+  antipattern.generic
+  antipattern.hedge.words
+  antipattern.listicle
+  antipattern.parallelism
+  antipattern.transition
+  audio.context.modify
+  audio.destination.modify
+  audio.dynamics.modify
+  audio.oscillator.modify
+  audio.stream.modify
+  audio.verify
+  audio.media_capabilities
+
+B:
+  behavior.anomaly
+  behavior.baseline
+  behavior.clustering
+  behavior.deviation
+  behavior.dwell_time
+  behavior.heatmap
+  behavior.journey
+  behavior.risk_score
+  behavior.session.replay
+  behavior.velocity
+  binary.detect_compiler
+  binary.detect_language
+  binary.detect_packer
+  binary.entry_point
+  binary.inspect.elf
+  binary.inspect.macho
+  binary.inspect.pe
+  binary.list_exports
+  binary.list_imports
+  binary.list_resources
+  binary.list_sections
+  binary.strings.extract
+  bot.behavior.score
+  bot.captcha.verify
+  bot.challenge
+  bot.crawler.identify
+  bot.headless.detect
+  bot.keyboard.analyze
+  bot.mouse.analyze
+  bot.scraper.detect
+  bot.scroll.analyze
+  bot.selenium.detect
+  bot.trap.deploy
+  bot.useragent.analyze
+  bot.webdriver.detect
+  brief.analyze
+  brief.angle.suggest
+  brief.competitor.scan
+  brief.content_gap
+  brief.headline.gen
+  brief.outline.create
+  brief.platform.detect
+  brief.seo.keywords
+  brief.tone.set
+  brief.voice.profile
+  browser.auth.basic
+  browser.auth.login
+  browser.back
+  browser.close
+  browser.cookies.clear
+  browser.cookies.get
+  browser.cookies.set
+  browser.download
+  browser.forward
+  browser.launch
+  browser.navigate
+  browser.profile.create
+  browser.proxy.set
+  browser.refresh
+  browser.tabs.close
+  browser.tabs.list
+  browser.tabs.new
+  browser.tabs.switch
+  browser.upload
+  browser.useragent.set
+  build.cmake.project
+  build.cpp.clang
+  build.cpp.gcc
+  build.cpp.msvc
+  build.csharp.dotnet
+  build.delphi.dcc
+  build.electron.packager
+  build.go.build
+  build.lazarus.fpc
+  build.make.project
+  build.msbuild.project
+  build.node.pkg
+  build.python.nuitka
+  build.python.pyinstaller
+  build.rust.cargo
+
+C:
+  canvas.font.render
+  canvas.gradient.modify
+  canvas.image.process
+  canvas.noise.inject
+  canvas.path.render
+  canvas.pixel.offset
+  canvas.seed.set
+  canvas.shadow.render
+  canvas.text.metrics
+  canvas.verify
+  challenge.authenticator
+  challenge.captcha
+  challenge.device_check
+  challenge.email_verify
+  challenge.js_pow
+  challenge.sms_otp
+  challenge.trust_token
+  challenge.voice_otp
+  channel.email.receive
+  channel.email.send
+  channel.facebook.messenger
+  channel.instagram.dm
+  channel.marketplace.chat
+  channel.telegram.receive
+  channel.telegram.send
+  channel.voice.receive
+  channel.voice.send
+  channel.wa.media
+  channel.wa.receive
+  channel.wa.send
+  channel.wa.template
+  channel.webchat.receive
+  channel.webchat.send
+  clone.advanced.auth_pages
+  clone.advanced.dynamic_content
+  clone.advanced.forms
+  clone.advanced.infinite_scroll
+  clone.advanced.interactions
+  clone.advanced.pagination
+  clone.advanced.search
+  clone.advanced.spa_render
+  clone.analyze.accessibility
+  clone.analyze.animations
+  clone.analyze.breakpoints
+  clone.analyze.colors
+  clone.analyze.components
+  clone.analyze.design_system
+  clone.analyze.forms
+  clone.analyze.icons
+  clone.analyze.images_meta
+  clone.analyze.layout
+  clone.analyze.navigation
+  clone.analyze.screen
+  clone.analyze.seo
+  clone.analyze.spacing
+  clone.analyze.typography
+  clone.analyze.vision
+  clone.deploy.cloudflare
+  clone.deploy.docker
+  clone.deploy.dns
+  clone.deploy.github_pages
+  clone.deploy.local
+  clone.deploy.netlify
+  clone.deploy.ssl
+  clone.deploy.static_host
+  clone.deploy.vercel
+  clone.deploy.vps
+  clone.discover.api
+  clone.discover.assets
+  clone.discover.depth
+  clone.discover.dependencies
+  clone.discover.framework
+  clone.discover.pages
+  clone.discover.robots
+  clone.discover.routes
+  clone.discover.sitemap
+  clone.discover.tech_stack
+  clone.fetch.css
+  clone.fetch.data_json
+  clone.fetch.documents
+  clone.fetch.fonts
+  clone.fetch.html
+  clone.fetch.icons
+  clone.fetch.images
+  clone.fetch.js
+  clone.fetch.media
+  clone.fetch.raw
+  clone.fetch.scripts_inline
+  clone.fetch.styles_inline
+  clone.gen.assets
+  clone.gen.components
+  clone.gen.config
+  clone.gen.content
+  clone.gen.layout
+  clone.gen.manifest
+  clone.gen.pages
+  clone.gen.routing
+  clone.gen.robots
+  clone.gen.seo
+  clone.gen.styles
+  clone.gen.types
+  clone.modify.branding
+  clone.modify.colors
+  clone.modify.components
+  clone.modify.content
+  clone.modify.fonts
+  clone.modify.images
+  clone.modify.layout
+  clone.modify.localize
+  clone.modify.minify
+  clone.modify.optimize
+  clone.modify.theme
+  clone.modify.translate
+  clone.reconstruct.astro
+  clone.reconstruct.nextjs
+  clone.reconstruct.react
+  clone.reconstruct.static
+  clone.reconstruct.vue
+  clone.reconstruct.wordpress
+  clone.verify.accessibility
+  clone.verify.diff
+  clone.verify.fidelity
+  clone.verify.links
+  clone.verify.performance
+  clone.verify.responsive
+  clone.verify.screenshot_compare
+  clone.verify.seo
+  code.audit.ai
+  code.audit.smart_contract
+  code.backdoor.detect
+  code.dependency.scan
+  code.hardcoded.creds
+  code.license.scan
+  code.malware.detect
+  code.sast.scan
+  code.secret.scan
+  code.taint.analyze
+  comm.auto.responder
+  comm.campaign.bulk
+  comm.chat.internal
+  comm.email.send
+  comm.push.notify
+  comm.sms.send
+  comm.template.management
+  comm.wa.send
+  connector.hubspot
+  connector.mandrill
+  connector.midtrans
+  connector.plesk
+  connector.salesforce
+  connector.shopify
+  connector.shopee
+  connector.telegram.bot
+  connector.tokopedia
+  connector.whm.cpanel
+  connector.woocommerce
+  connector.wordpress
+  connector.xendit
+  connector.zoho
+  crash.dump.analyze
+  crash.frame.analyze
+  crash.stack.unwind
+  crypto.certs.analyze
+  crypto.cipher.analyze
+  crypto.hash.crack
+  crypto.hash.identify
+  crypto.jwt.crack
+  crypto.rng.test
+  crypto.rsa.attack
+  crypto.tls.audit
+  customer.history.fetch
+  customer.identify.by_email
+  customer.identify.by_order_id
+  customer.identify.by_phone
+  customer.identify.by_username
+  customer.lifetime.value
+  customer.preference.learn
+  customer.profile.fetch
+  customer.sentiment.profile
+  customer.tier.detect
+  customer.transactions.fetch
+  customer.tickets.fetch
+
+D:
+  debug.attach
+  debug.breakpoint
+  debug.call_stack
+  debug.inspect_memory
+  debug.inspect_registers
+  debug.launch
+  debug.step_trace
+  dedup.merge
+  decompile.cfr
+  decompile.dotpeek
+  decompile.ghidra
+  decompile.hexrays
+  decompile.ilspy
+  decompile.javap
+  decompile.dnspy
+  decompile.procyon
+  decompile.pycdc
+  decompile.uncompyle6
+  disasm.ghidra
+  disasm.ida_pro
+  disasm.objdump
+  disasm.radare2
+  disasm.x64dbg
+  dom.attrs
+  dom.check
+  dom.click
+  dom.click_role
+  dom.click_text
+  dom.fill
+  dom.focus
+  dom.form.fill
+  dom.form.submit
+  dom.frame.switch
+  dom.hover
+  dom.list_interactive
+  dom.query
+  dom.screenshot
+  dom.scroll
+  dom.select
+  dom.shadow.open
+  dom.text
+  dom.wait
+  dom.wait_clickable
+  dom.wait_visible
+  dom.xpath
+  dynamic.breakpoint.set
+  dynamic.call_stack
+  dynamic.debug.attach
+  dynamic.fuzz.input
+  dynamic.load.test
+  dynamic.memory.inspect
+  dynamic.profile.cpu
+  dynamic.profile.io
+  dynamic.profile.memory
+  dynamic.reproduce
+  dynamic.step_trace
+  dynamic.trace.file
+  dynamic.trace.network
+  dynamic.trace.system
+  dynamic.var.watch
+
+E:
+  emotion.detect.realtime
+  emotion.response.adjust
+  emotion.threshold.alert
+  emotion.trend.track
+  erp.dashboard.builder
+  erp.form.builder
+  erp.industry.template
+  erp.menu.builder
+  erp.page.builder
+  erp.report.builder
+  erp.role.permission
+  erp.scaffold.module
+  erp.scaffold.project
+  erp.workflow.builder
+  evidence.chain.custody
+  evidence.config.capture
+  evidence.disk.snapshot
+  evidence.env.capture
+  evidence.hash.compute
+  evidence.log.capture
+  evidence.memory.dump
+  evidence.network.capture
+  evidence.process.snapshot
+  evidence.stack.trace
+  evidence.store.secure
+  evidence.timeline.build
+  escalate.agent.assign
+  escalate.context.transfer
+  escalate.notify.agent
+  escalate.queue.manage
+  escalate.summary.generate
+  escalate.trigger.angry
+  escalate.trigger.complex
+  escalate.trigger.high_value
+  escalate.trigger.low_conf
+  escalate.trigger.vip
+  exploit.cve.lookup
+  exploit.exploitdb.fetch
+  exploit.github.search
+  exploit.hash.crack
+  exploit.msfrpc
+  exploit.metasploit.search
+  exploit.payload.gen
+  exploit.privesc.linux
+  exploit.privesc.windows
+  exploit.reverse_shell
+  exploit.search
+  exploit.ssh.brute
+  exploit.sqli.dump
+  exploit.webshell.deploy
+  exploit.xss.payload
+  export.structured
+
+F:
+  filter.by_date_range
+  filter.by_severity
+  finance.accounts.payable
+  finance.accounts.receivable
+  finance.budgeting
+  finance.cash.bank
+  finance.cost.accounting
+  finance.financial.statement
+  finance.fixed.assets
+  finance.general.ledger
+  finance.invoice
+  finance.payment.processing
+  finance.reconciliation
+  finance.tax.management
+  fingerprint.audio
+  fingerprint.browser
+  fingerprint.canvas
+  fingerprint.combine
+  fingerprint.cookie
+  fingerprint.device
+  fingerprint.fonts
+  fingerprint.http
+  fingerprint.local_storage
+  fingerprint.plugins
+  fingerprint.screen
+  fingerprint.tls
+  fix.alert.anomaly
+  fix.backup.create
+  fix.monitor.post
+  fix.production.deploy
+  fix.rollback.execute
+  fix.rollback.plan
+  fix.staging.apply
+  fix.test.integration
+  fix.test.regression
+  fix.test.unit
+  fix.verify.no_regression
+  fix.verify.solution
+  fonts.ascent.descent
+  fonts.fallback.set
+  fonts.glyph.render
+  fonts.list.set
+  fonts.metrics.modify
+  fonts.unicode.range
+  fonts.verify
+  fonts.width.table
+  fp.generate.audio
+  fp.generate.battery
+  fp.generate.bluetooth
+  fp.generate.canvas
+  fp.generate.fonts
+  fp.generate.full
+  fp.generate.hardware
+  fp.generate.locale
+  fp.generate.media_devices
+  fp.generate.navigator
+  fp.generate.screen
+  fp.generate.sensors
+  fp.generate.storage_estimate
+  fp.generate.timezone
+  fp.generate.webgl
+
+G:
+  gen_skeleton
+
+H:
+  hardware.battery
+  hardware.bluetooth
+  hardware.cpu.cores
+  hardware.display
+  hardware.gamepad
+  hardware.gpu.emulate
+  hardware.media_devices
+  hardware.ram.size
+  hardware.sensors
+  hardware.serial_ports
+  hardware.touch_support
+  hardware.usb_devices
+  hr.attendance
+  hr.bpjs
+  hr.employee.management
+  hr.leave.management
+  hr.organization.structure
+  hr.payroll
+  hr.performance.review
+  hr.recruitment
+  hr.tax.pph21
+  hr.training
+  humanize.anecdote.inject
+  humanize.burstiness
+  humanize.colloquial.add
+  humanize.contrast.add
+  humanize.em.dash
+  humanize.fragment.use
+  humanize.opinion.add
+  humanize.parenthetical
+  humanize.perplexity
+  humanize.question.add
+  humanize.repetition.break
+  humanize.sentence.merge
+  humanize.sentence.split
+  humanize.start.varied
+  humanize.transition.varied
+
+I:
+  inject.api_hook
+  inject.code_cave
+  inject.detours
+  inject.dll_hijack
+  inject.dll_proxy
+  inject.iat_hook
+  inject.inline_hook
+  inject.minhook
+  inject.pe_add_section
+  inject.trampoline
+  installer.advanced_installer
+  installer.bootstrapper
+  installer.inno_setup
+  installer.installshield
+  installer.msix
+  installer.nsis
+  installer.portable
+  installer.self_extract
+  installer.wix
+  installer.zip_portable
+  integration.api.graphql
+  integration.api.grpc
+  integration.api.rest
+  integration.api.websocket
+  integration.auth.api_key
+  integration.auth.jwt
+  integration.auth.oauth2
+  integration.connector.builder
+  integration.data.sync
+  integration.etl.pipeline
+  integration.event.bus
+  integration.message.queue
+  integration.scheduler
+  integration.webhook.receive
+  integration.webhook.send
+  intent.add_feature
+  intent.build_from_source
+  intent.classify
+  intent.patch_exe
+  intent.rebuild_existing
+  intent.repackage_installer
+  intent.reverse_engineer
+  inventory.barcode
+  inventory.product.master
+  inventory.stock.management
+  inventory.stock.opname
+  inventory.warehouse
+  ip.asn.info
+  ip.blacklist.check
+  ip.botnet.check
+  ip.datacenter.detect
+  ip.geo.locate
+  ip.history.lookup
+  ip.lease.detect
+  ip.lookup
+  ip.proxy.detect
+  ip.reputation.check
+  ip.residential.detect
+  ip.shared.detect
+  ip.threat.score
+  ip.tor.detect
+  ip.vpn.detect
+  isp.bandwidth.management
+  isp.billing.cycle
+  isp.customer.subscriber
+  isp.invoice.recurring
+  isp.ip.address.management
+  isp.network.monitoring
+  isp.olt.management
+  isp.onu.management
+  isp.payment.collection
+  isp.service.plan
+  isp.suspension.management
+  isp.ticket.troubleshooting
+
+K:
+  kb.article.search
+  kb.bug.pattern.search
+  kb.company.info
+  kb.convention.search
+  kb.faq.search
+  kb.history.search
+  kb.learn.from.fix
+  kb.policy.search
+  kb.pricing.search
+  kb.product.catalog
+  kb.runbook.search
+  kb.routing.search
+  kb.service.info
+  kb.share.organization
+  kb.sop.search
+  kb.terms.search
+  kb.troubleshooting
+  kb.tutorial.search
+  kb.update.add
+  kb.update.edit
+  kb.version.track
+  keyboard.clear
+  keyboard.hold
+  keyboard.hotkey
+  keyboard.paste
+  keyboard.press
+  keyboard.type
+
+L:
+  learn.ab.test
+  learn.agent.coaching
+  learn.csat.track
+  learn.feedback.collect
+  learn.fine_tune.dataset
+  learn.interaction.log
+  learn.knowledge.gap
+  learn.knowledge.update
+  learn.pattern.detect
+  learn.report.monthly
+  log.alert.send
+  log.compliance.export
+  log.evidence.collect
+  log.event.append
+  log.export.siem
+  log.query
+  log.report.fraud
+  log.timeline.build
+
+M:
+  malware.c2.detect
+  malware.decompile
+  malware.disassemble
+  malware.family.classify
+  malware.file.behavior
+  malware.hash.check
+  malware.heuristic.scan
+  malware.ioc.extract
+  malware.network.behavior
+  malware.persistence.check
+  malware.registry.behavior
+  malware.sandbox.run
+  malware.signature.scan
+  malware.string.extract
+  malware.unpack
+  mfg.bom
+  mfg.maintenance
+  mfg.mrp
+  mfg.production.costing
+  mfg.production.order
+  mfg.quality.control
+  mfg.routing
+  mfg.work.center
+  monitor.alert.critical
+  monitor.alert.new
+  monitor.anomaly.detect
+  monitor.digest.daily
+  monitor.digest.weekly
+  monitor.health.check
+  monitor.incident.auto
+  monitor.poll
+  monitor.slo.track
+  monitor.subscribe
+  monitor.threshold.alert
+  monitor.trend.analyze
+  monitor.uptime.track
+  monitor.unsubscribe
+  monitor.webhook.notify
+  mouse.click
+  mouse.double_click
+  mouse.drag
+  mouse.hover
+  mouse.human_move
+  mouse.move
+  mouse.move_to
+  mouse.scroll
+  module.attachment.management
+  module.audit.log
+  module.auth.mfa
+  module.auth.role
+  module.auth.sso
+  module.auth.user
+  module.file.storage
+  module.localization
+  module.notification
+  module.settings.config
+  module.tenant.management
+  module.timezone.management
+
+N:
+  net.arp.spoof
+  net.dns.spoof
+  net.firewall.test
+  net.mitm
+  net.proxy.pivot
+  net.sniff
+  net.vlan.hop
+  net.wifi.crack
+  net.wifi.handshake
+  net.wifi.scan
+  network.accept_encoding
+  network.accept_language
+  network.block
+  network.dns.set
+  network.dnt.set
+  network.har
+  network.http2.fingerprint
+  network.intercept
+  network.mock
+  network.proxy.set
+  network.quic.fingerprint
+  network.sec_ch_ua
+  network.throttle
+  network.time_sync
+  network.tls.fingerprint
+  network.useragent.set
+  network.webrtc.ip
+  normalize.cve_schema
+  nlu.ambiguity.detect
+  nlu.context.tracking
+  nlu.coreference.resolve
+  nlu.disambiguate
+  nlu.emotion.detect
+  nlu.entity.extract
+  nlu.intent.confidence
+  nlu.intent.detect
+  nlu.language.detect
+  nlu.multiturn.state
+  nlu.sarcasm.detect
+  nlu.sentiment.analyze
+  nlu.spam.detect
+  nlu.topic.classify
+  nlu.urgency.detect
+
+O:
+  opensource.add_feature
+  opensource.add_plugin_hook
+  opensource.build_custom
+  opensource.check_compliance
+  opensource.fetch_repo
+  opensource.locate_code
+  opensource.modify_behavior
+  opensource.read_license
+  opensource.release_custom
+  opensource.test_modified
+
+P:
+  patch.apply_patch
+  patch.byte_replace
+  patch.chromium.angle
+  patch.chromium.apply
+  patch.chromium.blink
+  patch.chromium.fetch
+  patch.chromium.skia
+  patch.chromium.v8
+  patch.build
+  patch.export_add
+  patch.firefox.apply
+  patch.firefox.fetch
+  patch.firefox.gecko
+  patch.hex_edit
+  patch.icon_replace
+  patch.import_add
+  patch.jump_redirect
+  patch.manifest_edit
+  patch.nop_out
+  patch.resource_edit
+  patch.section_add
+  patch.string_replace
+  patch.version_info
+  payload.explain.affected_versions
+  payload.explain.attack_flow
+  payload.explain.mitigation
+  payload.explain.patch_info
+  payload.explain.remediation
+  payload.explain.root_cause
+  payload.explain.vuln_type
+  payload.explain.why_works
+  payload.fetch.exploitdb
+  payload.fetch.github
+  payload.fetch.metasploit
+  payload.fetch.packetstorm
+  payload.fetch.vendor
+  payload.extract.from_advisory
+  payment.bin.lookup
+  payment.block
+  payment.card.test
+  payment.chargeback.pattern
+  payment.giftcard.abuse
+  payment.geo.mismatch
+  payment.refund.abuse
+  payment.score
+  payment.synthetic_identity
+  payment.velocity.check
+  pm.gantt.chart
+  pm.issue.tracking
+  pm.milestone
+  pm.project.billing
+  pm.project.master
+  pm.resource.allocation
+  pm.task.management
+  pm.time.tracking
+  pos.cash.management
+  pos.cashier
+  pos.customer.display
+  pos.transaction
+  post.cover.tracks
+  post.creds.dump
+  post.enum.linux
+  post.enum.windows
+  post.lateral.move
+  post.persist
+  proactive.anniversary
+  proactive.birthday
+  proactive.cross_sell
+  proactive.educational
+  proactive.followup
+  proactive.survey
+  proactive.upsell
+  proactive.winback
+  proc.info
+  proc.kill
+  proc.list
+  profile.create
+  profile.decrypt
+  profile.delete
+  profile.duplicate
+  profile.encrypt
+  profile.export
+  profile.import
+  profile.list
+  profile.restart
+  profile.start
+  profile.stop
+  profile.tag
+  project.detect_language
+  project.detect_toolchain
+  project.scaffold
+  proxy.chain
+  proxy.datacenter.buy
+  proxy.fingerprint.match
+  proxy.geo.target
+  proxy.health_check
+  proxy.http.set
+  proxy.mobile.buy
+  proxy.residential.buy
+  proxy.rotate
+  proxy.socks5.set
+
+Q:
+  qa.audit.random
+  qa.fact.check
+  qa.policy.compliance
+  qa.response.check
+  qa.scorecard
+  qa.sensitive.filter
+  qa.tone.check
+  qa.toxicity.filter
+  query.filter.parse
+  query.intent.detect
+  query.parse
+  query.payload_requested
+  query.scope.define
+  query.sort.detect
+  query.target.extract
+  query.version.extract
+
+R:
+  rate_limit.adaptive
+  rate_limit.ban
+  rate_limit.check
+  rate_limit.set
+  rate_limit.shadow_ban
+  rate_limit.slowdown
+  rate_limit.throttle
+  rate_limit.whitelist
+  rca.cause_effect
+  rca.contributing.factor
+  rca.environment.analyze
+  rca.fishbone
+  rca.five_why
+  rca.fault_tree
+  rca.human.factor
+  rca.report.generate
+  rca.symptom_vs_root
+  rca.timing.analyze
+  rca.upstream.dependency
+  rca.change.analyze
+  rebuild.apply_diff
+  rebuild.apply_patch
+  rebuild.checkout_version
+  rebuild.compile
+  rebuild.fetch_source
+  rebuild.link
+  rebuild.modify_source
+  rebuild.optimize
+  rebuild.strip_debug
+  rebuild.verify
+  record.play
+  record.start
+  record.stop
+  record.to_code
+  recon.banner.grab
+  recon.dns.enum
+  recon.domain.info
+  recon.email.harvest
+  recon.github.dork
+  recon.google.dork
+  recon.ip.info
+  recon.os.fingerprint
+  recon.ports.scan
+  recon.service.detect
+  recon.shodan.search
+  recon.social.osint
+  recon.subdomain.find
+  recon.wayback
+  recon.web.tech
+  refine.a_b.variant
+  refine.batch.process
+  refine.export.final
+  refine.heatmap.flag
+  refine.history.track
+  refine.loop
+  refine.segment.flagged
+  refine.threshold.set
+  rebuild.apply_diff
+  report.cve.detail
+  report.cve.list
+  report.custom.query
+  report.export.csv
+  report.export.excel
+  report.export.html
+  report.export.json
+  report.export.markdown
+  report.export.pdf
+  report.financial.statement
+  report.payload.explain
+  report.remediation.guide
+  report.schedule
+  repack.aspack
+  repack.mpresse
+  repack.upx
+  rebuild.apply_diff
+  response.format.email
+  response.format.telegram
+  response.format.voice
+  response.format.wa
+  response.generate.natural
+  response.language.match
+  response.personalize
+  response.tone.casual
+  response.tone.empathy
+  response.tone.formal
+  rebuild.apply_diff
+
+S:
+  sandbox.run
+  scale.cluster
+  scale.load_balancer
+  scanner.droopescan
+  scanner.joomscan
+  scanner.magereport
+  scanner.wpscan
+  scrape.api_reverse
+  scrape.dynamic
+  scrape.html
+  scrape.images
+  scrape.links
+  scrape.list
+  scrape.pagination
+  scrape.schema
+  scrape.table
+  scrape.text
+  screen.capture
+  screen.capture_window
+  screen.compare
+  screen.detect_layout
+  screen.detect_ui
+  screen.find_button
+  screen.find_icon
+  screen.find_image
+  screen.find_input
+  screen.find_menu
+  screen.find_text
+  screen.ocr
+  screen.region
+  sec.ch_ua.set
+  security.audit.log
+  security.auth.verify
+  security.consent.manage
+  security.data.retention
+  security.encryption.at_rest
+  security.permission.check
+  security.pii.mask
+  security.right_to_erasure
+  sentiment.before.after
+  sentiment.churn.risk
+  sentiment.csat.predict
+  sentiment.loyalty.score
+  sign.authenticode
+  sign.ev_cert
+  sign.selfsigned
+  sign.timestamp
+  sign.verify
+  smart.anti_bot_bypass
+  smart.click
+  smart.fill
+  smart.find_and_click
+  smart.form_autofill
+  smart.navigate_menu
+  smart.retry
+  smart.scroll_to
+  smart.verify
+  smart.wait_and_click
+  solution.alternative.give
+  solution.cite.source
+  solution.confidence.score
+  solution.context.build
+  solution.escalate.decision
+  solution.generate
+  solution.limit.scope
+  solution.options.generate
+  solution.personalize
+  solution.rag.retrieve
+  solution.rag.rerank
+  solution.recommend.safest
+  solution.risk.assess
+  solution.blast.radius
+  solution.cost.benefit
+  solution.alternative.if_fail
+  solution.escalate.if_uncertain
+  solution.peer.review
+  solution.document.rationale
+  solution.verify.evidence
+  solution.step_by_step
+  solution.tone.adjust
+  solution.verify.anti_halluc
+  solution.verify.fact_check
+  solution.verify.policy
+  sort.by_date.asc
+  sort.by_date.desc
+  sort.by_exploitability
+  sort.by_severity.desc
+  state.context.window
+  state.fsm.transition
+  state.handoff.preserve
+  state.memory.long_term
+  state.memory.short_term
+  state.session.create
+  state.session.update
+  state.timeout.expire
+  static.ast.parse
+  static.code.review
+  static.commit.history
+  static.complexity
+  static.control_flow
+  static.cross_ref
+  static.data_flow
+  static.dead_code
+  static.dependencies
+  static.duplication
+  static.lint.run
+  static.pattern.match
+  static.symbolic.exec
+  static.type.check
+  static.versions.diff
+  stealth.fingerprint
+  stealth.patch
+  stealth.rotate_proxy
+  stealth.rotate_ua
+  storage.bookmarks.isolate
+  storage.cache.isolate
+  storage.cookies.isolate
+  storage.file_system.isolate
+  storage.history.isolate
+  storage.indexed_db.isolate
+  storage.local_storage.isolate
+  storage.passwords.isolate
+  storage.service_worker.isolate
+  storage.session_storage.isolate
+  svc.start
+  svc.stop
+  svc.status
+  sync.cloud
+  sync.s3
+
+T:
+  team.profile.share
+  team.role.set
+  team.user.create
+  test.crash_analyze
+  test.fuzz
+  test.run_sandbox
+  test.coverage
+  test.run
+  test.single
+  test.watch
+  triage.affected.components
+  triage.business_impact
+  triage.classify
+  triage.duplicate.check
+  triage.escalate.urgent
+  triage.impact.analyze
+  triage.priority.set
+  triage.route
+  triage.severity.assess
+  triage.user_impact
+
+U:
+  unpack.aspack
+  unpack.generic
+  unpack.themida
+  unpack.upx
+  unpack.vmprotect
+
+V:
+  verify.amiunique
+  verify.audio_consistency
+  verify.browserleaks
+  verify.canvas_render
+  verify.creepjs
+  verify.device_info
+  verify.edge.case
+  verify.fingerprintjs
+  verify.full_audit
+  verify.full_pass
+  verify.load.test
+  verify.canary.deploy
+  verify.code.review
+  verify.reproduce.fixed
+  verify.reproduce.original
+  verify.security.test
+  verify.smoke.test
+  verify.tls_consistency
+  verify.user.acceptance
+  verify.webgl_render
+  vision.describe
+  vision.find_element
+  vision.read_chart
+  vision.read_table
+  voice.punctuation.style
+  voice.persona.select
+  voice.demographic.set
+  voice.humor.level
+  voice.imperfection.level
+  voice.opinion.strength
+  voice.sentence.rhythm
+  voice.tone.calibrate
+  voice.vocabulary.set
+  voice.anecdote.freq
+  vuln.auth.test
+  vuln.business_logic.test
+  vuln.cmd_injection.test
+  vuln.cve.match
+  vuln.cwe.classify
+  vuln.cvss.score
+  vuln.csrf.test
+  vuln.dependency.scan
+  vuln.exploitability
+  vuln.file.upload.test
+  vuln.idor.test
+  vuln.impact.assess
+  vuln.jwt.test
+  vuln.lfi_rfi.test
+  vuln.network.scan
+  vuln.owasp_top10
+  vuln.secret.scan
+  vuln.sqli.test
+  vuln.ssrf.test
+  vuln.threat.model
+  vuln.web.scan
+  vuln.xss.test
+  vuln.xxe.test
+  vuln.attack.surface
+
+W:
+  web.api.fuzz
+  web.cors.test
+  web.crawl.auth
+  web.csp.test
+  web.cookies.analyze
+  web.fuzz.dir
+  web.fuzz.param
+  web.graphql.test
+  web.headers.check
+  web.session.analyze
+  web.spider
+  web.websocket.test
+  webgl.context.attributes
+  webgl.extensions.list
+  webgl.framebuffer
+  webgl.params.set
+  webgl.render.output
+  webgl.renderer.set
+  webgl.shader.emulate
+  webgl.shading_lang
+  webgl.texture.bind
+  webgl.validate
+  webgl.vendor.set
+  webgl.version.set
+  webgl.verify
+  workflow.action.call_api
+  workflow.action.create_task
+  workflow.action.send_email
+  workflow.action.update_record
+  workflow.browser
+  workflow.condition.branch
+  workflow.captcha_solve
+  workflow.data_extract
+  workflow.define
+  workflow.paginate
+  workflow.parallel.split
+  workflow.run
+  workflow.schedule
+  workflow.trigger.event
+  workflow.trigger.schedule
+  workflow.trigger.webhook
+
+
+================================================================================
+  PART 4: SKILL CATEGORY INDEX (CROSS-ENGINE)
+================================================================================
+
+Berikut skill dikelompokkan per kategori (lintas engine):
+
+4.1 FILE OPERATIONS
+  - binary.list_resources, binary.list_sections, binary.strings.extract
+  - code.read, code.write, code.edit (Engine: Dev - TBD)
+  - fs.read, fs.write, fs.list (Engine: Dev - TBD)
+
+4.2 NETWORK OPERATIONS
+  - network.tls.fingerprint, network.http2.fingerprint, network.quic.fingerprint
+  - network.useragent.set, network.accept_language, network.sec_ch_ua
+  - net.sniff, net.mitm, net.wifi.scan, net.wifi.crack
+  - http.request, http.get, http.post (Engine: Dev - TBD)
+  - scrape.html, scrape.text, scrape.dynamic
+
+4.3 SECURITY OPERATIONS
+  - vuln.sqli.test, vuln.xss.test, vuln.csrf.test, vuln.ssrf.test
+  - exploit.search, exploit.msfrpc, exploit.privesc.linux
+  - malware.sandbox.run, malware.hash.check, malware.c2.detect
+  - code.sast.scan, code.secret.scan, code.dependency.scan
+  - crypto.tls.audit, crypto.jwt.crack, crypto.hash.crack
+  - forensic.memory, forensic.disk
+  - triage.classify, rca.five_why, solution.recommend.safest
+
+4.4 BROWSER AUTOMATION
+  - browser.launch, browser.navigate, browser.close
+  - dom.click, dom.fill, dom.wait, dom.query
+  - mouse.click, keyboard.type
+  - smart.click (7-strategy fallback)
+  - screen.capture, screen.ocr
+
+4.5 FINGERPRINT OPERATIONS
+  - fp.generate.full, fp.generate.canvas, fp.generate.webgl
+  - canvas.noise.inject, webgl.renderer.set, audio.context.modify
+  - fingerprint.browser, fingerprint.tls, fingerprint.combine
+  - patch.chromium.apply, patch.build
+
+4.6 BUSINESS / ERP
+  - erp.scaffold.project, erp.menu.builder, erp.workflow.builder
+  - finance.general.ledger, finance.invoice, hr.payroll
+  - isp.billing.cycle, isp.invoice.recurring
+  - sales.customer.master, sales.quotation
+  - integration.api.rest, integration.webhook.send
+  - connector.whm.cpanel, connector.wordpress, connector.shopify
+
+4.7 CUSTOMER SERVICE
+  - channel.wa.receive, channel.telegram.receive, channel.email.receive
+  - customer.identify.by_phone, customer.profile.fetch
+  - kb.faq.search, kb.sop.search, kb.product.catalog
+  - nlu.intent.detect, nlu.sentiment.analyze, nlu.emotion.detect
+  - solution.rag.retrieve, solution.generate, solution.verify.anti_halluc
+  - response.generate.natural, response.tone.empathy
+  - action.escalate.human, action.ticket.create
+
+4.8 CONTENT GENERATION
+  - brief.analyze, brief.outline.create, brief.seo.keywords
+  - voice.persona.select, voice.tone.calibrate
+  - humanize.burstiness, humanize.perplexity, humanize.anecdote.inject
+  - antipattern.detect, antipattern.transition
+  - detector.gptzero, detector.originality
+  - refine.loop, refine.segment.flagged
+
+4.9 BINARY / REVERSE ENGINEERING
+  - binary.inspect.pe, binary.detect_packer, binary.list_imports
+  - disasm.ghidra, disasm.ida_pro, disasm.x64dbg
+  - decompile.ghidra, decompile.hexrays, decompile.dnspy
+  - patch.hex_edit, patch.byte_replace, patch.resource_edit
+  - inject.dll_proxy, inject.inline_hook
+  - opensource.fetch_repo, opensource.add_feature, opensource.build_custom
+  - installer.nsis, installer.inno_setup, sign.authenticode
+
+4.10 WEBSITE CLONING
+  - clone.discover.sitemap, clone.discover.assets
+  - clone.fetch.html, clone.fetch.css, clone.fetch.images
+  - clone.analyze.layout, clone.analyze.design_system
+  - clone.reconstruct.nextjs, clone.reconstruct.react
+  - clone.modify.branding, clone.modify.colors
+  - clone.deploy.vercel, clone.deploy.cloudflare
+
+4.11 FRAUD DETECTION
+  - ip.lookup, ip.geo.locate, ip.proxy.detect, ip.tor.detect
+  - fingerprint.browser, fingerprint.tls
+  - bot.headless.detect, bot.webdriver.detect, bot.behavior.score
+  - account.takeover.detect, account.credential_stuff, account.brute_force
+  - payment.card.test, payment.velocity.check, payment.geo.mismatch
+  - behavior.baseline, behavior.anomaly, behavior.risk_score
+  - rate_limit.set, rate_limit.ban, challenge.captcha
+
+4.12 BUG & MALWARE AUDIT
+  - triage.classify, triage.severity.assess
+  - static.code.review, static.ast.parse, static.data_flow
+  - dynamic.reproduce, dynamic.debug.attach, dynamic.fuzz.input
+  - evidence.log.capture, evidence.stack.trace, evidence.memory.dump
+  - rca.five_why, rca.fault_tree, rca.fishbone
+  - malware.sandbox.run, malware.hash.check, malware.c2.detect
+  - solution.options.generate, solution.recommend.safest
+  - fix.backup.create, fix.staging.apply, fix.test.regression
+  - audit.report.generate, audit.timeline.reconstruct
+
+
+================================================================================
+  PART 5: ARCHITECTURE OVERVIEW
+================================================================================
+
+5.1 HIGH-LEVEL ARCHITECTURE
+
+  ┌──────────────────────────────────────────────────────────┐
+  │  Harmonika AI Core (Orchestrator)                        │
+  │  - Intent classification                                  │
+  │  - Skill routing                                          │
+  │  - Multi-step planning                                    │
+  │  - Context management                                     │
+  └────────────────────────┬─────────────────────────────────┘
+                           |
+            ┌──────────────┼──────────────┐
+            v              v              v
+  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+  │ Security     │ │ Automation   │ │ Business     │
+  │ Engines      │ │ Engines      │ │ Engines      │
+  │              │ │              │ │              │
+  │ - Security   │ │ - Browser    │ │ - ERP        │
+  │   Eng        │ │   Auto       │ │ - Customer   │
+  │ - Fraud Det  │ │ - Website    │ │   Service    │
+  │ - Bug CVE    │ │   Clone      │ │              │
+  │ - Malware    │ │ - Browser FP │ │              │
+  │   Audit      │ │              │ │              │
+  └──────┬───────┘ └──────┬───────┘ └──────┬───────┘
+         |                |                |
+         └────────────────┼────────────────┘
+                          |
+                          v
+  ┌──────────────────────────────────────────────────────────┐
+  │  Infrastructure Layer                                    │
+  │  - Binary Engineering (EXE build/patch)                  │
+  │  - Anti-AI Content Generation                            │
+  │  - Documents (PDF/DOCX/XLSX/PPTX)                        │
+  └──────────────────────────────────────────────────────────┘
+
+5.2 SHARED COMPONENTS
+
+  - Auth & Permission (RBAC, OAuth2, JWT)
+  - Audit Log (append-only, legal-grade)
+  - Knowledge Base (vector DB, RAG)
+  - LLM Gateway (GPT-4o, Claude 3.5, Llama 3.1)
+  - Storage (PostgreSQL, MongoDB, Redis)
+  - Message Queue (Kafka, RabbitMQ)
+  - Monitoring (Prometheus, Grafana, ELK)
+
+
+================================================================================
+  PART 6: PHASED ROADMAP (AGGREGATED)
+================================================================================
+
+6.1 PHASE 1 - MVP (Month 1-2) : ~180 skills
+   Goal: Core functionality untuk tiap engine
+
+   Engine 1 (Browser Auto): 20 skills
+   Engine 2 (Web Clone): 15 skills
+   Engine 3 (Security): 15 skills
+   Engine 4 (Fraud): 12 skills
+   Engine 5 (Anti-AI): 12 skills
+   Engine 6 (CVE Hunter): 12 skills
+   Engine 7 (Binary Eng): 12 skills
+   Engine 8 (Browser FP): 15 skills
+   Engine 9 (ERP): 15 skills
+   Engine 10 (CS): 15 skills
+   Engine 11 (Bug Audit): 12 skills
+
+6.2 PHASE 2 - GROWTH (Month 3-4) : ~240 skills
+   Goal: Multi-channel, advanced analysis
+
+6.3 PHASE 3 - SCALE (Month 5-6) : ~300 skills
+   Goal: Enterprise features, integration
+
+6.4 PHASE 4 - FULL (Month 7+) : ~787 skills
+   Goal: All features, continuous learning
+
+
+================================================================================
+  PART 7: TECH STACK MASTER LIST
+================================================================================
+
+7.1 LANGUAGES
+   - Python (backend, ML, scripts)
+   - TypeScript/JavaScript (frontend, Node.js)
+   - Go (high-perf services)
+   - Rust (security-critical, browser engine)
+   - C/C++ (binary, EXE, Chromium patch)
+   - C# (.NET, Windows apps)
+   - Java (enterprise, Android)
+
+7.2 DATABASES
+   - PostgreSQL (transactional)
+   - MongoDB (document)
+   - Redis (cache, session)
+   - Elasticsearch (search, logs)
+   - ClickHouse (analytics, OLAP)
+   - Vector DB: Qdrant, Weaviate, Chroma, Pinecone
+
+7.3 AI / ML
+   - LLM: GPT-4o, Claude 3.5 Sonnet, Llama 3.1, Qwen2
+   - Embedding: text-embedding-3-large, BGE-m3
+   - Vision: Claude Vision, GPT-4V, Qwen-VL
+   - ASR: Whisper, Deepgram
+   - TTS: ElevenLabs, Azure Speech
+   - Image Gen: Stable Diffusion (local), DALL-E
+
+7.4 SECURITY TOOLS
+   - nmap, masscan (network scan)
+   - OWASP ZAP, Burp Suite (web scan)
+   - Metasploit, sqlmap (exploit)
+   - Wireshark, tcpdump (capture)
+   - IDA Pro, Ghidra, Radare2 (RE)
+   - Cuckoo Sandbox (malware)
+   - YARA, ClamAV (signature)
+   - Tesseract, OpenCV (vision)
+
+7.5 INFRASTRUCTURE
+   - Docker, Kubernetes (container)
+   - nginx, Caddy (reverse proxy)
+   - Kafka, RabbitMQ (queue)
+   - Prometheus, Grafana (monitoring)
+   - ELK, Loki (logging)
+   - GitHub Actions, GitLab CI (CI/CD)
+   - Vercel, Netlify, Cloudflare (deploy)
+
+7.6 BROWSER ENGINE
+   - Chromium 130+ (base)
+   - Playwright (automation)
+   - FingerprintJS (detection)
+   - TigerVNC, noVNC (remote)
+
+7.7 COMMUNICATION
+   - WhatsApp Business API
+   - Telegram Bot API
+   - Twilio (voice/SMS)
+   - SendGrid, Mailgun (email)
+   - Slack, Discord (team)
+
+
+================================================================================
+  PART 8: CROSS-ENGINE DEPENDENCY MAP
+================================================================================
+
+Berikut skill lintas engine yang saling tergantung:
+
+8.1 SECURITY ENGINES (3 & 4 & 6 & 11) share:
+   - vuln.* (testing)
+   - exploit.* (exploitation)
+   - malware.* (analysis)
+   - evidence.* (forensics)
+   - crypto.* (audit)
+
+8.2 BROWSER ENGINES (1 & 8) share:
+   - browser.* (control)
+   - dom.* (interaction)
+   - mouse.*, keyboard.* (input)
+   - fingerprint.* (detection)
+   - stealth.* (anti-detect)
+
+8.3 BUSINESS ENGINES (9 & 10) share:
+   - customer.* (CRM data)
+   - kb.* (knowledge base)
+   - integration.* (API hub)
+   - connector.* (external)
+   - notification.* (alert)
+
+8.4 CONTENT ENGINES (5 & 12) share:
+   - LLM gateway (generate)
+   - vector DB (RAG)
+   - export.* (output)
+
+8.5 ALL ENGINES share:
+   - audit.log (compliance)
+   - auth.* (security)
+   - monitoring.* (observability)
+
+
+================================================================================
+  PART 9: SKILL PRIORITY MATRIX
+================================================================================
+
+Priority distribution berdasar criticality:
+
+9.1 CRITICAL (P0) - Must have for MVP
+   - browser.launch, browser.navigate, dom.click, dom.fill
+   - file.read, file.write, exec.shell (Engine: Dev - TBD)
+   - auth.user, auth.role (ERP)
+   - malware.sandbox.run, vuln.owasp_top10
+   - kb.faq.search, nlu.intent.detect (CS)
+   - solution.generate, response.generate
+
+9.2 HIGH (P1) - Phase 2
+   - smart.click, screen.ocr
+   - clone.reconstruct.nextjs, clone.deploy.vercel
+   - exploit.search, exploit.msfrpc
+   - ip.threat.score, account.takeover.detect
+   - humanize.burstiness, detector.gptzero
+   - cve.aggregate, sort.by_date.desc
+   - binary.inspect.pe, disasm.ghidra
+   - fp.generate.full, canvas.noise.inject
+   - erp.menu.builder, integration.api.rest
+   - channel.wa.receive, customer.identify.by_phone
+   - rca.five_why, fix.staging.apply
+
+9.3 MEDIUM (P2) - Phase 3
+   - Advanced analysis tools
+   - Multi-channel connectors
+   - Enterprise features
+
+9.4 LOW (P3) - Phase 4
+   - Nice-to-have features
+   - Optimization
+   - Niche use cases
+
+
+================================================================================
+  PART 10: CONVENTIONS & GLOSSARY
+================================================================================
+
+10.1 SKILL ID CONVENTIONS
+   Format: layer.action atau layer.sublayer.action
+   Contoh:
+   - file.read
+   - browser.navigate
+   - vuln.sqli.test
+   - malware.sandbox.run
+   - clone.deploy.vercel
+
+10.2 NAMING CONVENTIONS
+   - verb: action (read, write, scan, fetch)
+   - noun: object (file, browser, ip, malware)
+   - adjective: modifier (slow, fast, full)
+   - lowercase with dot separator
+
+10.3 PERMISSION LEVELS
+   - SAFE (green): read-only, no side effect
+   - MEDIUM (yellow): write but reversible
+   - RISKY (orange): irreversible, but limited impact
+   - CRITICAL (red): high impact, need approval
+
+10.4 GLOSSARY
+   - AI: Artificial Intelligence
+   - AST: Abstract Syntax Tree
+   - ATO: Account Takeover
+   - BI: Business Intelligence
+   - BOLA: Broken Object Level Authorization
+   - BOT: Automated script
+   - CDN: Content Delivery Network
+   - CRAC: Customer Relationship Management
+   - C2: Command & Control (malware)
+   - CVE: Common Vulnerabilities & Exposures
+   - CVSS: Common Vulnerability Scoring System
+   - CSP: Content Security Policy
+   - CTF: Capture The Flag
+   - CWE: Common Weakness Enumeration
+   - DLL: Dynamic Link Library
+   - DOM: Document Object Model
+   - EDR: Endpoint Detection & Response
+   - ERP: Enterprise Resource Planning
+   - EXE: Executable file
+   - GDPR: General Data Protection Regulation
+   - HIPAA: Health Insurance Portability and Accountability Act
+   - HTTP: HyperText Transfer Protocol
+   - IAT: Import Address Table
+   - IDS: Intrusion Detection System
+   - IOC: Indicator of Compromise
+   - IP: Internet Protocol
+   - JA3: TLS fingerprint hash
+   - JWT: JSON Web Token
+   - KB: Knowledge Base
+   - LFI: Local File Inclusion
+   - LLM: Large Language Model
+   - MFA: Multi-Factor Authentication
+   - MR: Material Requirements Planning
+   - NLU: Natural Language Understanding
+   - NVD: National Vulnerability Database
+   - OLAP: Online Analytical Processing
+   - OSINT: Open Source Intelligence
+   - OTP: One-Time Password
+   - OWASP: Open Web Application Security Project
+   - PII: Personally Identifiable Information
+   - PoC: Proof of Concept
+   - POS: Point of Sale
+   - RAG: Retrieval-Augmented Generation
+   - RBAC: Role-Based Access Control
+   - RCA: Root Cause Analysis
+   - RCE: Remote Code Execution
+   - RFI: Remote File Inclusion
+   - SAST: Static Application Security Testing
+   - SIEM: Security Information & Event Management
+   - SLA: Service Level Agreement
+   - SLO: Service Level Objective
+   - SMS: Short Message Service
+   - SOC: Security Operations Center
+   - SOP: Standard Operating Procedure
+   - SPA: Single Page Application
+   - SQLi: SQL Injection
+   - SSRF: Server-Side Request Forgery
+   - SSO: Single Sign-On
+   - TLD: Top-Level Domain
+   - TLS: Transport Layer Security
+   - TOR: The Onion Router
+   - UAT: User Acceptance Testing
+   - UMF: User Memory File
+   - VLM: Vision Language Model
+   - VPN: Virtual Private Network
+   - VNC: Virtual Network Computing
+   - WA: WhatsApp
+   - WAF: Web Application Firewall
+   - WebGL: Web Graphics Library
+   - XSS: Cross-Site Scripting
+   - XXE: XML External Entity
+
+
+================================================================================
+  DOCUMENT METADATA
+================================================================================
+
+Document Name    : Harmonika AI - Master Skill Index
+Version          : 1.0
+Generated Date   : 2026-10-24
+Total Engines    : 12
+Total Skills     : 1.507
+Document Purpose : Single source of truth for Harmonika AI skills
+
+Engines Included:
+  1. Browser & UI Automation (113)
+  2. Website Cloning Engine (93)
+  3. Security Engineering (110)
+  4. Fraud & Bot Detection (107)
+  5. Anti-AI Detection Content (95)
+  6. Bug & CVE Hunter (102)
+  7. Binary Engineering & EXE Builder (130)
+  8. Browser Fingerprint Engine (157)
+  9. Modular ERP Engine (174)
+  10. Customer Service Engine (162)
+  11. Bug & Malware Audit Engine (165)
+  12. Documents Skill (refactoring)
+
+
+================================================================================
+  END OF MASTER SKILL INDEX
+================================================================================

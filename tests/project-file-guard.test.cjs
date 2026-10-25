@@ -43,3 +43,15 @@ test('Home session can use an explicitly selected project without opening Home o
   fs.symlinkSync(home,path.join(root,'escape'));
   assert.equal(call(home,'write',{file_path:path.join(root,'escape','outside.php')}).decision,'deny');
 });
+test('new managed skills support references/helpers read-only and refuse symlink escape',t=>{
+  const {spawnSync}=require('node:child_process');
+  const root=fixture(t),runtime=path.join(root,'.runtime'),base=path.join(runtime,'current/skills');
+  const files=['harmonika-engineering/SKILL.md','harmonika-engineering/scripts/engineering_analyzers.py','harmonika-engineering/references/workflows.md','harmonika-seo/SKILL.md','harmonika-seo/scripts/seo_analyzers.py','harmonika-seo/references/methodology.md','harmonika-documents/manifest.yaml','harmonika-documents/requirements.txt','harmonika-documents/scripts/pdf_worker.py','harmonika-documents/scripts/pdf_handler.py','harmonika-documents/scripts/document_common.py','harmonika-documents/scripts/docx_handler.py','harmonika-documents/scripts/xlsx_handler.py','harmonika-documents/scripts/pptx_handler.py','harmonika-tui-dev/SKILL.md','harmonika-tui-dev/references/rendering.md','harmonika-terminal-qa/scripts/fixture.py','harmonika-async-concurrency/scripts/async_runtime.py','harmonika-ai-integration/scripts/stream_protocol.py'];
+  for(const file of files){fs.mkdirSync(path.dirname(path.join(base,file)),{recursive:true});fs.writeFileSync(path.join(base,file),'fixture');}
+  const hook=(name,file)=>JSON.parse(spawnSync(process.execPath,[path.resolve(__dirname,'../runtime/tools/project-file-guard.cjs')],{input:JSON.stringify({cwd:os.homedir(),tool_name:name,tool_input:{file_path:path.join(base,file)}}),env:{...process.env,HARMONIKA_TERMINAL_HOME:runtime},encoding:'utf8'}).stdout);
+  for(const file of files){assert.deepEqual(hook('view',file),{});assert.equal(hook('edit',file).decision,'deny');}
+  fs.symlinkSync('/etc/hosts',path.join(base,'harmonika-tui-dev/references/escape.md'));
+  assert.equal(hook('view','harmonika-tui-dev/references/escape.md').decision,'deny');
+  assert.equal(hook('view','harmonika-unknown/SKILL.md').decision,'deny');
+  for(const file of ['harmonika-engineering/scripts/arbitrary.py','harmonika-seo/scripts/arbitrary.py','harmonika-documents/scripts/arbitrary.py','harmonika-debug/scripts/pdf_handler.py','harmonika-documents/credentials.json']){fs.mkdirSync(path.dirname(path.join(base,file)),{recursive:true});fs.writeFileSync(path.join(base,file),'fixture');assert.equal(hook('view',file).decision,'deny');}
+});

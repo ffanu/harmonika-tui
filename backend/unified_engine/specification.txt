@@ -1,0 +1,1302 @@
+================================================================================
+     HARMONIKA AI - UNIFIED MASTER ENGINE SKILLS (SINGLE DOCUMENT)
+                 1 Core Engine + Master Orchestrator + 
+                 Specialist Engines + Hybrid Architecture
+                 
+                 The Complete Blueprint for AI Engine yang Bisa
+                 Paham Apapun, Jawab Apapun, Kerjakan Apapun
+                 
+                 
+================================================================================
+
+Document Version : 1.0
+Generated        : 2026-10-24
+Total Skills     : 1.300+ skills (Core + Orchestrator + Specialist)
+Document Purpose : Single source of truth - 1 engine untuk semua
+
+
+================================================================================
+  EKSEKUTIF SUMMARY
+================================================================================
+
+Dokumen ini berisi ARSITEKTUR LENGKAP Harmonika AI yang terdiri dari:
+
+1. CORE ENGINE (7 fundamental skills)
+   - Foundation untuk semua pemahaman AI
+   - Perceive, Understand, Reason, Retrieve, Decide, Act, Learn
+
+2. MASTER ORCHESTRATOR (35 skills)
+   - "Otak eksekutif" yang route request ke engine yang tepat
+   - Decision matrix, context routing, escalation
+
+3. INTEGRATION LAYER (28 skills)
+   - Connect Core dengan Specialist engines
+   - Message bus, event system, data flow
+
+4. SPECIALIST ENGINES (6 engines, 1.153 skills)
+   - Browser & UI Automation (113)
+   - Web Full-Stack Builder (161)
+   - Mobile App Builder (214)
+   - Legal Assistant Indonesia (221)
+   - Chat 1:1 Engine (215)
+   - Text Typo Tolerance (229)
+
+5. HYBRID ARCHITECTURE BLUEPRINT
+   - Diagram lengkap integrasi
+   - Data flow, message flow, control flow
+
+6. IMPLEMENTATION ROADMAP
+   - 4 phase, 12 bulan
+   - Timeline, resource, milestone
+
+7. TRADE-OFF ANALYSIS
+   - Core vs Specialist vs Hybrid
+   - Performance, complexity, maintenance
+
+8. SARAN LENGKAP DARI SAYA
+   - Best practice, anti-pattern, recommendation
+   - Strategic decision untuk long-term
+
+
+================================================================================
+  PART 1: CORE ENGINE (7 FUNDAMENTAL SKILLS)
+================================================================================
+
+Core Engine adalah "OTAK" Harmonika AI. 7 skill fundamental yang MENJADI
+FONDASI SEMUA PEMAHAMAN AI. Setiap interaksi user PASTI lewat 7 skill ini.
+
+--------------------------------------------------------------------------------
+1.1 SKILL 1: core.perceive (PERCEPTUAL LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: Paham SEMUA jenis input user (multi-modal)
+
+Sub-capabilities:
+  - Vision (gambar, video, screenshot)
+  - Hearing (voice note, audio, music)
+  - Reading (teks, dokumen, OCR)
+  - Sensor (sensor data IoT, location, time)
+  - Context (timestamp, sender, channel)
+
+Interfaces:
+  - core.perceive.vision_analyze(image) -> description
+  - core.perceive.audio_transcribe(voice) -> text
+  - core.perceive.document_parse(pdf) -> text
+  - core.perceive.ocr_extract(image) -> text
+  - core.perceive.video_analyze(video) -> scenes
+  - core.perceive.sensor_read(data) -> structured
+  - core.perceive.context_extract(input) -> metadata
+
+Delegates to specialist:
+  - VLM (Claude Vision, GPT-4V, Qwen-VL)
+  - ASR (Whisper, Deepgram)
+  - OCR (Tesseract, PaddleOCR)
+  - Document parser (PyPDF, Apache Tika)
+
+Why this is core:
+  APAPUN input user (teks/gambar/video/voice), harus dipersepsi dulu
+  sebelum bisa dipahami. Ini gerbang pertama.
+
+
+--------------------------------------------------------------------------------
+1.2 SKILL 2: core.understand (COGNITIVE LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: Paham MAKNA dari input yang sudah dipersepsi
+
+Sub-capabilities:
+  - Intent detection (apa maunya user)
+  - Entity extraction (siapa, apa, kapan, di mana)
+  - Sentiment analysis (positif/negatif/netral)
+  - Emotion detection (senang/marah/sedih/bingung)
+  - Language detection (ID, EN, daerah, code-switch)
+  - Typo tolerance (paham kalimat typo)
+  - Context tracking (multi-turn conversation)
+  - Reference resolution ("dia", "itu", "yang tadi")
+  - Sarcasm detection
+  - Ambiguity detection
+
+Interfaces:
+  - core.understand.intent(text) -> intent
+  - core.understand.entities(text) -> entities[]
+  - core.understand.sentiment(text) -> sentiment
+  - core.understand.emotion(text) -> emotion
+  - core.understand.language(text) -> language
+  - core.understand.context_resolve(input) -> resolved_context
+  - core.understand.typo_correct(text) -> corrected
+
+Delegates to specialist:
+  - Text Typo Engine (untuk koreksi typo dalam/slang)
+  - NLU models (spaCy, Rasa, BERT)
+  - Emotion models (RoBERTa, DeepFace)
+
+Why this is core:
+  Tanpa understanding, AI cuma bisa pattern matching, bukan benar-benar
+  paham apa yang user mau.
+
+
+--------------------------------------------------------------------------------
+1.3 SKILL 3: core.reason (REASONING LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: AI mikir logis, analisa, bukan asal jawab
+
+Sub-capabilities:
+  - Logical reasoning (deduction, induction)
+  - Cause-effect analysis
+  - Pattern recognition
+  - Multi-step planning
+  - What-if analysis
+  - Trade-off analysis
+  - Anti-hallucination (fact-check, verify)
+  - Confidence scoring
+  - Root cause analysis
+  - Decision tree traversal
+
+Interfaces:
+  - core.reason.analyze(problem) -> analysis
+  - core.reason.plan(goal) -> steps[]
+  - core.reason.fact_check(claim) -> verified
+  - core.reason.confidence(response) -> score
+  - core.reason.alternatives(situation) -> options[]
+  - core.reason.root_cause(symptom) -> cause
+
+Anti-hallucination protocols:
+  - NEVER invent facts
+  - ALWAYS cite source
+  - ADMIT when uncertain
+  - ESCALATE when confidence < 60%
+  - VERIFY before send
+
+Why this is core:
+  Ini yang membedakan AI pintar dengan AI bodoh. Tanpa reasoning,
+  AI cuma autocomplete canggih.
+
+
+--------------------------------------------------------------------------------
+1.4 SKILL 4: core.retrieve (KNOWLEDGE LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: Cari tahu informasi yang tidak AI punya
+
+Sub-capabilities:
+  - Internal knowledge base search (RAG)
+  - Web search (real-time)
+  - User-specific data retrieval
+  - Conversation history search
+  - Cross-reference multiple sources
+  - Citation formatting
+  - Freshness check (apakah info masih update)
+  - Source credibility assessment
+
+Interfaces:
+  - core.retrieve.kb_search(query) -> results
+  - core.retrieve.web_search(query) -> results
+  - core.retrieve.user_data(query, user) -> data
+  - core.retrieve.history_search(query, session) -> matches
+  - core.retrieve.cross_reference(claim) -> verified
+  - core.retrieve.cite(source) -> citation
+
+Delegates to:
+  - Vector DB (Qdrant, Weaviate, Chroma)
+  - Web search API (Tavily, Serper, Google)
+  - PostgreSQL (user data)
+  - Redis (conversation cache)
+
+Why this is core:
+  AI tidak mungkin tahu segalanya. Harus bisa cari tahu dengan cepat
+  dan akurat.
+
+
+--------------------------------------------------------------------------------
+1.5 SKILL 5: core.decide (DECISION LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: Ambil keputusan: jawab langsung, atau rujuk ke specialist?
+
+Sub-capabilities:
+  - Decision matrix (kapan pakai core, kapan specialist)
+  - Risk assessment
+  - Confidence threshold check
+  - Escalation trigger
+  - Multi-option ranking
+  - Human handoff decision
+  - Crisis detection (harus human intervention)
+
+Interfaces:
+  - core.decide.route(intent, context) -> engine_choice
+  - core.decide.escalate(reason) -> human_agent
+  - core.decide.confidence_check(score) -> action
+  - core.decide.risk_assess(action) -> risk_level
+  - core.decide.crisis_detect(input) -> crisis_level
+
+Decision matrix:
+  - Confidence > 90% & simple: handle by Core
+  - Confidence 70-90%: handle by Core with caveat
+  - Confidence < 70%: route to Specialist
+  - Crisis detected: escalate to Human immediately
+  - Complex domain (legal/medical): route to Specialist
+
+Why this is core:
+  Tanpa decision layer, AI akan over-confident atau under-confident.
+  Ini yang manage kapan harus minta bantuan.
+
+
+--------------------------------------------------------------------------------
+1.6 SKILL 6: core.act (ACTION LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: Eksekusi keputusan - generate response atau panggil tool
+
+Sub-capabilities:
+  - Text generation (response)
+  - Multi-modal generation (text + image + voice)
+  - Tool calling (API, function)
+  - Code execution
+  - File operations
+  - External service integration
+  - Streaming response
+  - Tone adjustment
+  - Personalization
+  - Format adaptation (per channel)
+
+Interfaces:
+  - core.act.generate_text(prompt, context) -> response
+  - core.act.generate_voice(text) -> audio
+  - core.act.generate_image(prompt) -> image
+  - core.act.call_tool(tool_name, args) -> result
+  - core.act.execute_code(code) -> output
+  - core.act.stream(response) -> stream
+
+Delegates to:
+  - LLM (GPT-4o, Claude 3.5, Llama 3.1)
+  - TTS (ElevenLabs, Azure)
+  - Image gen (DALL-E, Stable Diffusion)
+  - Tool execution sandbox
+
+Why this is core:
+  Tanpa action layer, AI cuma bisa mikir, tidak bisa ngapa-ngapain.
+  Ini yang ubah pikiran jadi kenyataan.
+
+
+--------------------------------------------------------------------------------
+1.7 SKILL 7: core.learn (LEARNING LAYER)
+--------------------------------------------------------------------------------
+
+Tujuan: AI makin pintar dari setiap interaksi
+
+Sub-capabilities:
+  - Interaction logging
+  - Pattern detection
+  - User preference learning
+  - Feedback collection
+  - Knowledge base update
+  - Fine-tune dataset building
+  - A/B testing
+  - Continuous improvement
+  - Drift detection
+  - Model retraining trigger
+
+Interfaces:
+  - core.learn.log(interaction)
+  - core.learn.detect_pattern(history) -> patterns
+  - core.learn.update_preference(user, data)
+  - core.learn.collect_feedback(user, response)
+  - core.learn.update_kb(new_knowledge)
+  - core.learn.fine_tune(dataset) -> model
+
+Why this is core:
+  AI yang tidak belajar akan ketinggalan zaman. Ini yang bikin AI
+  makin pintar seiring waktu.
+
+
+================================================================================
+  PART 2: MASTER ORCHESTRATOR (35 SKILLS)
+================================================================================
+
+Master Orchestrator adalah "OTAK EKSEKUTIF" yang:
+  - Terima request dari user
+  - Analisa intent & context
+  - Putuskan engine mana yang handle
+  - Route request ke engine yang tepat
+  - Monitor execution
+  - Handle fallback & escalation
+  - Aggregate results kalau multi-engine
+  - Return final response ke user
+
+--------------------------------------------------------------------------------
+2.1 REQUEST INTAKE (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+1   | orch.receive.request            | Terima request dari WebUI/Terminal/API
+2   | orch.parse.input                | Parse input multi-modal
+3   | orch.detect.channel             | Detect channel (chat, voice, terminal)
+4   | orch.detect.user                | Identify user (auth, profile)
+5   | orch.detect.session             | Detect session (new vs existing)
+6   | orch.detect.urgency             | Urgency detection (low/med/high/crisis)
+7   | orch.detect.privacy             | Privacy level (public/private/confidential)
+8   | orch.queue.request              | Queue request kalau overload
+
+
+--------------------------------------------------------------------------------
+2.2 INTENT & CONTEXT ANALYZER (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+9   | orch.intent.classify            | Klasifikasi intent (chat/build/legal/dll)
+10  | orch.context.load               | Load context (session, history, profile)
+11  | orch.domain.detect              | Detect domain (legal/tech/business/personal)
+12  | orch.complexity.assess          | Assess complexity (simple/medium/complex)
+13  | orch.multi_intent.detect        | Detect multi-intent (user mau beberapa hal)
+14  | orch.ambiguity.detect           | Detect ambiguity (perlu klarifikasi)
+15  | orch.clarify.request            | Minta klarifikasi ke user
+16  | orch.scope.define               | Define scope request
+
+
+--------------------------------------------------------------------------------
+2.3 ENGINE ROUTER (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk route request ke engine yang tepat
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+17  | orch.route.chat                 | Route ke Chat 1:1 Engine
+18  | orch.route.legal                | Route ke Legal Assistant Engine
+19  | orch.route.web_builder          | Route ke Web Full-Stack Builder
+20  | orch.route.mobile_builder       | Route ke Mobile App Builder
+21  | orch.route.browser_auto         | Route ke Browser Automation Engine
+22  | orch.route.text_typo            | Route ke Text Typo Engine
+23  | orch.route.multi                | Route ke multiple engines (parallel)
+24  | orch.route.fallback             | Fallback ke Core kalau specialist gagal
+25  | orch.route.human                | Escalate ke human agent
+26  | orch.route.crisis               | Crisis routing (immediate human)
+
+
+--------------------------------------------------------------------------------
+2.4 EXECUTION MONITOR (5 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+27  | orch.exec.start                 | Start execution di engine target
+28  | orch.exec.monitor               | Monitor execution progress
+29  | orch.exec.timeout               | Handle timeout
+30  | orch.exec.retry                 | Retry kalau gagal
+31  | orch.exec.cancel                | Cancel execution kalau user minta
+
+
+--------------------------------------------------------------------------------
+2.5 RESULT AGGREGATOR (4 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+32  | orch.aggregate.single           | Aggregate result dari 1 engine
+33  | orch.aggregate.multi            | Aggregate result dari multiple engines
+34  | orch.aggregate.conflict         | Resolve conflict antar engine results
+35  | orch.aggregate.format           | Format final response per channel
+
+
+================================================================================
+  PART 3: INTEGRATION LAYER (28 SKILLS)
+================================================================================
+
+Integration Layer connect Core dengan Specialist Engines.
+
+--------------------------------------------------------------------------------
+3.1 MESSAGE BUS (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+1   | bus.publish.event               | Publish event ke message bus
+2   | bus.subscribe.event             | Subscribe ke event
+3   | bus.request.response            | Request-response pattern
+4   | bus.async.task                  | Async task execution
+5   | bus.priority.queue              | Priority queue management
+6   | bus.dead_letter                 | Dead letter queue (failed messages)
+7   | bus.retry.policy                | Retry policy (exponential backoff)
+8   | bus.circuit.breaker             | Circuit breaker (anti cascade failure)
+
+
+--------------------------------------------------------------------------------
+3.2 DATA FLOW (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+9   | data.shared.memory              | Shared memory antar engines
+10  | data.context.pass               | Pass context antar engines
+11  | data.serialize                  | Serialize data untuk transfer
+12  | data.deserialize                | Deserialize data dari transfer
+13  | data.validate                   | Validate data antar engines
+14  | data.transform                  | Transform data format antar engines
+15  | data.encrypt                    | Encrypt sensitive data transfer
+16  | data.audit.log                  | Audit log semua data flow
+
+
+--------------------------------------------------------------------------------
+3.3 SHARED SERVICES (7 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+17  | shared.auth                     | Shared authentication
+18  | shared.memory                   | Shared memory store (Redis)
+19  | shared.knowledge                | Shared knowledge base (Vector DB)
+20  | shared.user_profile             | Shared user profile
+21  | shared.audit_log                | Shared audit log
+22  | shared.monitoring               | Shared monitoring (Prometheus)
+23  | shared.secrets                  | Shared secrets management (Vault)
+
+
+--------------------------------------------------------------------------------
+3.4 API GATEWAY (5 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+24  | gateway.rest                    | REST API gateway
+25  | gateway.graphql                 | GraphQL gateway
+26  | gateway.websocket               | WebSocket gateway
+27  | gateway.rate_limit              | Rate limiting per engine
+28  | gateway.auth                    | Auth & authorization gateway
+
+
+================================================================================
+  PART 4: SPECIALIST ENGINES (6 ENGINES, 1.153 SKILLS)
+================================================================================
+
+Specialist Engines handle domain spesifik. Core handle 80% umum,
+Specialist handle 20% kompleks.
+
+--------------------------------------------------------------------------------
+4.1 CHAT 1:1 ENGINE (215 skills)
+--------------------------------------------------------------------------------
+Tujuan: Chat real-time yang paham konteks, multi-modal, anti-hallucination
+
+Layer utama:
+  - Multi-Modal Input (20): image, video, voice, dokumen
+  - Context Manager (15): multi-turn, reference resolution
+  - NLU (15): intent, sentiment, emotion, language
+  - Emotion & Psychology (12): empathy, crisis intervention
+  - Safety Filter (15): toxic, NSFW, PII, self-harm
+  - Language Guard (12): tone, politeness, cultural
+  - Anti-Hallucination (12): fact-check, confidence, admit uncertain
+  - Response Generator (15): natural, tone, format
+  - Personalization (12): remember name, preference, history
+  - Memory System (10): short-term + long-term
+  - Knowledge Retrieval (10): RAG + web search
+  - Task & Action (10): execute task dari chat
+  - Conversation Management (8): opening, closing, small talk
+  - Learning (8): pattern, feedback, A/B test
+  - Analytics (8): CSAT, engagement, retention
+  - Compliance (10): GDPR/PDP, consent, audit
+
+Kapan dipanggil:
+  - User chat casual
+  - Emotional support
+  - Multi-turn conversation
+  - Multi-modal analysis (gambar + teks)
+  - Crisis intervention
+
+--------------------------------------------------------------------------------
+4.2 LEGAL ASSISTANT ENGINE (221 skills)
+--------------------------------------------------------------------------------
+Tujuan: Edukasi hukum Indonesia, anti-takut, ahli pasal simulator
+
+Layer utama:
+  - Intent & Persona (12): ahli ITE, ahli pidana, dll
+  - Evidence Multi-Modal (15): gambar, video, voice, dokumen
+  - Law Knowledge Base (20): UU, putusan MA, MK, PP
+  - UU Update Checker (10): cek UU masih berlaku
+  - Pasal Expert Simulator (15): simulasi konsultasi ahli
+  - UU ITE Specialist (12): pasal 27, 28, 30, 35, 45
+  - KUHP Specialist (15): pencurian, penipuan, KDRT, dll
+  - UU Perlindungan Konsumen (8)
+  - UU PDP (10)
+  - Hukum Ketenagakerjaan (10)
+  - Hukum Keluarga (8)
+  - Hukum Jual Beli & Kontrak (8)
+  - Hak Pelapor (10)
+  - Hak Terlapor (10)
+  - Proses Hukum Pidana (10)
+  - Sanksi & Pidana (8)
+  - Hukum Internasional (8)
+  - Anti-Hallucination (10)
+  - Dispute Resolution ADR (8)
+  - Learning (8)
+  - Compliance & Ethics (8)
+
+Kapan dipanggil:
+  - User tanya soal hukum Indonesia
+  - User minta analisa pasal
+  - User butuh edukasi hukum
+  - User dalam proses hukum (pelapor/terlapor)
+
+--------------------------------------------------------------------------------
+4.3 WEB FULL-STACK BUILDER ENGINE (161 skills)
+--------------------------------------------------------------------------------
+Tujuan: Build website full-stack dari spec, deploy via SSH
+
+Layer utama:
+  - Spec Reader (12): baca markdown, JSON, Notion
+  - Tech Stack Selector (12): auto-pilih frontend/backend/DB
+  - Database Engine Selector (10)
+  - Architecture Designer (12)
+  - Project Scaffolder (10): Next.js, NestJS, FastAPI
+  - Frontend Builder (15): layout, page, form, dashboard
+  - Backend Builder (15): CRUD API, auth, payment
+  - Database Builder (10)
+  - SSH Server Connector (12): setup Docker, nginx, SSL
+  - Deployment Engine (15): Vercel, VPS, K8s
+  - Testing Engine (10)
+  - UI/UX Designer (10)
+  - Content & SEO (8)
+  - Monitoring (10)
+
+Kapan dipanggil:
+  - User minta build website
+  - User minta deploy ke server
+  - User minta add feature ke web existing
+  - User minta setup database/API
+
+--------------------------------------------------------------------------------
+4.4 MOBILE APP BUILDER ENGINE (214 skills)
+--------------------------------------------------------------------------------
+Tujuan: Build aplikasi Android & iOS, deploy ke Play Store & App Store
+
+Layer utama:
+  - Spec & Requirements (10)
+  - Tech Stack Selector (12): RN, Flutter, Kotlin, Swift
+  - Architecture Designer (12)
+  - Project Scaffolder (10)
+  - UI/UX Builder (15): Material, Cupertino
+  - Navigation Builder (10)
+  - State Management (10)
+  - Network & API (10)
+  - Local Storage & Offline (10)
+  - Auth & Security (10)
+  - Push Notification (8)
+  - Native Device Features (15): camera, GPS, BLE, NFC
+  - Media & Animation (8)
+  - In-App Purchase (8)
+  - Native Bridge (8)
+  - Testing (12)
+  - Build & Sign (10)
+  - Deploy to Store (10)
+  - OTA Updates (8)
+  - Monitoring (10)
+  - CI/CD (8)
+
+Kapan dipanggil:
+  - User minta build app mobile
+  - User minta deploy ke Play Store/App Store
+  - User minta add feature native (camera, GPS)
+  - User minta OTA update
+
+--------------------------------------------------------------------------------
+4.5 BROWSER & UI AUTOMATION ENGINE (113 skills)
+--------------------------------------------------------------------------------
+Tujuan: iMacros-style browser automation, anti-miss UI interaction
+
+Layer utama:
+  - Browser Control (20)
+  - DOM Interaction (22)
+  - Vision & Screen (17)
+  - Mouse & Keyboard (14)
+  - Smart Anti-Miss (10): smart.click 7-strategy
+  - Workflow & Record (10)
+  - Scraping & Extract (11)
+  - Network & Stealth (9)
+
+Kapan dipanggil:
+  - User minta automasi browser
+  - User minta scraping data
+  - User minta UI testing
+  - User minta iMacros-style automation
+
+--------------------------------------------------------------------------------
+4.6 TEXT TYPO TOLERANCE ENGINE (229 skills)
+--------------------------------------------------------------------------------
+Tujuan: Paham teks dengan typo, slang, singkatan, alay
+
+Layer utama:
+  - Pre-Processor (10)
+  - Tokenizer (10)
+  - Typo Detector Char Level (12)
+  - Typo Detector Word Level (12)
+  - Typo Detector Sentence Level (8)
+  - Indonesian-Specific (15): afiks, reduplikasi
+  - Bahasa Gaul (12): banget, wkwk, anjir
+  - Alay Language (10): 4n4k, s4y4
+  - Singkatan (10): yg, dgn, tdk, gpp
+  - Elongation (8): baguuuus
+  - OCR Error Correction (10)
+  - ASR Error Correction (10)
+  - Code-Switching (8)
+  - Context-Aware (10)
+  - Normalization (10)
+  - Confidence Scorer (8)
+  - Dictionary (10)
+  - Learning (8)
+  - Performance (8)
+  - Multi-Modal Integration (6)
+
+Kapan dipanggil:
+  - User chat dengan typo/slang
+  - OCR output perlu correction
+  - ASR output perlu correction
+  - User pakai bahasa alay/gaul
+
+
+================================================================================
+  PART 5: HYBRID ARCHITECTURE BLUEPRINT
+================================================================================
+
+5.1 HIGH-LEVEL ARCHITECTURE
+
+  ┌──────────────────────────────────────────────────────────────┐
+  │  USER TOUCHPOINTS                                           │
+  │  - WebUI (Next.js)                                          │
+  │  - Terminal TUI (Rust/Go)                                   │
+  │  - Mobile App (RN/Flutter)                                  │
+  │  - API Client (REST/GraphQL)                                │
+  │  - WhatsApp / Telegram Bot                                  │
+  └────────────────────────┬─────────────────────────────────────┘
+                           |
+                           v
+  ┌──────────────────────────────────────────────────────────────┐
+  │  API GATEWAY                                                 │
+  │  - Auth (JWT, OAuth2, API Key)                               │
+  │  - Rate limit                                                │
+  │  - Request validation                                        │
+  │  - WebSocket for streaming                                   │
+  └────────────────────────┬─────────────────────────────────────┘
+                           |
+                           v
+  ┌──────────────────────────────────────────────────────────────┐
+  │  MASTER ORCHESTRATOR (35 skills)                             │
+  │  - Request intake                                            │
+  │  - Intent & context analyzer                                 │
+  │  - Engine router                                             │
+  │  - Execution monitor                                         │
+  │  - Result aggregator                                         │
+  └────────────────────────┬─────────────────────────────────────┘
+                           |
+                           v
+  ┌──────────────────────────────────────────────────────────────┐
+  │  CORE ENGINE (7 fundamental skills)                         │
+  │  - perceive    (paham input multi-modal)                    │
+  │  - understand  (paham makna, intent, emotion)               │
+  │  - reason      (mikir logis, anti-hallucination)            │
+  │  - retrieve    (cari knowledge, web search)                 │
+  │  - decide      (route ke specialist atau handle sendiri)    │
+  │  - act         (generate response, call tool)               │
+  │  - learn       (continuous learning)                        │
+  └────────────────────────┬─────────────────────────────────────┘
+                           |
+       ┌───────────────────┼───────────────────────┐
+       v                   v                       v
+  ┌────────────┐  ┌──────────────────┐  ┌──────────────────┐
+  │ SPECIALIST │  │ SPECIALIST       │  │ SPECIALIST       │
+  │ ENGINES    │  │ ENGINES          │  │ ENGINES          │
+  │            │  │                  │  │                  │
+  │ - Chat 1:1 │  │ - Legal Assistant│  │ - Web Builder    │
+  │   (215)    │  │   (221)          │  │   (161)          │
+  │ - Mobile   │  │ - Browser Auto   │  │ - Text Typo      │
+  │   (214)    │  │   (113)          │  │   (229)          │
+  └────────────┘  └──────────────────┘  └──────────────────┘
+       |                   |                       |
+       └───────────────────┼───────────────────────┘
+                           |
+                           v
+  ┌──────────────────────────────────────────────────────────────┐
+  │  INTEGRATION LAYER (28 skills)                              │
+  │  - Message bus (Kafka/RabbitMQ)                              │
+  │  - Shared services (Redis, Vector DB)                        │
+  │  - Data flow & serialization                                 │
+  │  - Audit log                                                 │
+  └────────────────────────┬─────────────────────────────────────┘
+                           |
+                           v
+  ┌──────────────────────────────────────────────────────────────┐
+  │  INFRASTRUCTURE                                             │
+  │  - PostgreSQL (transactional data)                          │
+  │  - Redis (cache, session)                                   │
+  │  - Qdrant/Weaviate (vector DB for RAG)                      │
+  │  - Kafka (event stream)                                     │
+  │  - MinIO/S3 (file storage)                                  │
+  │  - Prometheus + Grafana (monitoring)                        │
+  │  - ELK/Loki (log aggregation)                               │
+  │  - Docker + Kubernetes (container)                          │
+  └──────────────────────────────────────────────────────────────┘
+
+
+5.2 DATA FLOW EXAMPLE
+
+  User: "Buatkan website toko online, lalu ceritakan juga
+        apa hukumnya kalau ada customer complain"
+
+  Step 1: API Gateway
+    - Auth check
+    - Rate limit check
+    - Forward to Orchestrator
+
+  Step 2: Master Orchestrator
+    - Parse input
+    - Detect multi-intent: [build_website, legal_education]
+    - Route ke 2 engines: Web Builder + Legal Assistant
+    - Execute parallel
+
+  Step 3a: Web Full-Stack Builder Engine
+    - spec.read (parse "toko online")
+    - stack.select (pilih Next.js + PostgreSQL)
+    - scaffold.nextjs
+    - be.gen.api.crud
+    - fe.gen.ecommerce
+    - ... (full build flow)
+    - Return: website_url, admin_creds
+
+  Step 3b: Legal Assistant Engine (parallel)
+    - intent.detect.legal (complain = hukum konsumen)
+    - kb.uu.search (UU 8/1999 Perlindungan Konsumen)
+    - expert.konsumen.assess
+    - Return: legal_summary, pasal_reference
+
+  Step 4: Result Aggregator
+    - Aggregate Web Builder result + Legal result
+    - Format combined response
+
+  Step 5: Core Engine (final polish)
+    - core.act.generate_text (combine jadi 1 response)
+    - core.learn.log (save interaction)
+    - Stream to user
+
+  Step 6: User receive
+    - URL website + admin creds
+    - Summary hukum konsumen + pasal relevan
+    - Saran tindakan
+
+
+5.3 SHARED MEMORY MODEL
+
+  ┌──────────────────────────────────────────────────────────────┐
+  │  SHARED MEMORY (Redis + PostgreSQL)                         │
+  │                                                              │
+  │  - User Profile (preferences, history)                      │
+  │  - Session State (current conversation)                     │
+  │  - Long-term Memory (cross-session)                         │
+  │  - Knowledge Base (shared across engines)                   │
+  │  - Audit Log (append-only, all engines)                     │
+  └──────────────────────────────────────────────────────────────┘
+
+  Semua engine PAKAI memory yang sama. Jadi:
+  - Chat Engine tahu user pernah pakai Legal Engine
+  - Web Builder tahu preferensi user dari Chat Engine
+  - Tidak ada data silo antar engine
+
+
+================================================================================
+  PART 6: IMPLEMENTATION ROADMAP
+================================================================================
+
+6.1 PHASE 1 (Bulan 1-3): CORE ENGINE + ORCHESTRATOR
+  Goal: Build fondasi - Core + Orchestrator + Integration
+
+  Deliverables:
+  - Core Engine (7 skills):
+    * core.perceive (multi-modal input)
+    * core.understand (NLU + emotion + language)
+    * core.reason (anti-hallucination + confidence)
+    * core.retrieve (RAG + web search)
+    * core.decide (routing + escalation)
+    * core.act (response generation + tool calling)
+    * core.learn (logging + pattern)
+
+  - Master Orchestrator (35 skills):
+    * Request intake
+    * Intent analyzer
+    * Engine router (basic)
+    * Execution monitor
+    * Result aggregator
+
+  - Integration Layer (28 skills):
+    * Message bus (Kafka)
+    * Shared memory (Redis)
+    * API Gateway
+
+  - Infrastructure setup:
+    * PostgreSQL + Redis + Qdrant
+    * Docker + Kubernetes
+    * Monitoring (Prometheus + Grafana)
+
+  Team: 3-4 developers
+  Estimasi: 3 bulan
+
+6.2 PHASE 2 (Bulan 4-6): CHAT 1:1 + TEXT TYPO ENGINE
+  Goal: Build chat capability + text understanding
+
+  Deliverables:
+  - Chat 1:1 Engine MVP (15 skills Phase 1)
+    * Basic chat, context, anti-hallucination
+  - Text Typo Engine MVP (15 skills Phase 1)
+    * Basic typo correction, Indonesian dictionary
+  - Integrate dengan Core
+  - Test end-to-end
+
+  Team: +2 developers (total 5-6)
+  Estimasi: 3 bulan
+
+6.3 PHASE 3 (Bulan 7-9): LEGAL + BROWSER AUTOMATION
+  Goal: Build domain-specific engines
+
+  Deliverables:
+  - Legal Assistant Engine MVP (15 skills Phase 1)
+    * UU search, ahli ITE, anti-takut
+  - Browser Automation MVP (20 skills Phase 1)
+    * Browser control, dom interaction, smart click
+  - Integrate dengan Core + Orchestrator
+
+  Team: +2 developers (total 7-8)
+  Estimasi: 3 bulan
+
+6.4 PHASE 4 (Bulan 10-12): WEB + MOBILE BUILDER
+  Goal: Build app/web builder engines
+
+  Deliverables:
+  - Web Full-Stack Builder MVP (15 skills Phase 1)
+    * Spec reader, scaffold Next.js, deploy Vercel
+  - Mobile App Builder MVP (15 skills Phase 1)
+    * Spec reader, scaffold Expo, deploy Play Store
+  - Full integration test
+  - Production deployment
+
+  Team: +2 developers (total 9-10)
+  Estimasi: 3 bulan
+
+6.5 POST-MVP (Bulan 13+)
+  - Add Phase 2-4 skills per engine
+  - Add more specialist engines (IoT, Fintech, Game, dll)
+  - Continuous learning & improvement
+  - Scale infrastructure
+
+
+================================================================================
+  PART 7: TRADE-OFF ANALYSIS
+================================================================================
+
+7.1 CORE ONLY (Tanpa Specialist)
+
+  ✅ PROS:
+  - Simpel, 1 engine untuk semua
+  - Maintenance mudah
+  - Cross-domain seamless
+
+  ❌ CONS:
+  - Tidak optimal untuk task kompleks
+  - Generalist < specialist
+  - Sulit tune per domain
+  - Risk: 1 bug = semua affected
+
+  Verdict: OK untuk MVP, tidak untuk production kompleks
+
+7.2 SPECIALIST ONLY (Tanpa Core)
+
+  ✅ PROS:
+  - Optimized per domain
+  - Deep capability
+  - Easy tune per domain
+
+  ❌ CONS:
+  - Tidak terintegrasi
+  - Data silo antar engine
+  - User experience fragment
+  - Maintenance banyak engine
+
+  Verdict: Tidak recommended, user experience buruk
+
+7.3 HYBRID (Core + Specialist) ⭐ RECOMMENDED
+
+  ✅ PROS:
+  - Best of both worlds
+  - Core handle 80% umum
+  - Specialist handle 20% kompleks
+  - Shared memory & context
+  - Scalable architecture
+  - Easy add new specialist
+
+  ❌ CONS:
+  - Architecture kompleks
+  - Butuh initial investment besar
+  - Butuh orchestrator yang baik
+
+  Verdict: RECOMMENDED untuk long-term
+
+
+================================================================================
+  PART 8: SARAN LENGKAP DARI SAYA
+================================================================================
+
+Setelah membangun dokumen ini, berikut saran lengkap saya:
+
+8.1 STRATEGIC DECISIONS
+
+  a) BUILD CORE FIRST
+     - Jangan langsung bangun specialist tanpa Core
+     - Core = fondasi, tanpa Core = rumah di atas pasir
+     - Invest 3 bulan pertama untuk Core saja
+
+  b) ORCHESTRATOR IS CRITICAL
+     - Orchestrator yang buruk = sistem yang buruk
+     - Invest waktu untuk design decision matrix
+     - Test dengan banyak scenario
+
+  c) SHARED MEMORY IS KEY
+     - Jangan ada data silo antar engine
+     - User profile, history, preference = shared
+     - Ini yang bikin experience seamless
+
+  d) START WITH MVP PER ENGINE
+     - Jangan bangun semua 215 skill Chat Engine sekaligus
+     - Bangun 15 skill MVP dulu
+     - Test dengan real user
+     - Iterate berdasarkan feedback
+
+8.2 ANTI-PATTERNS (YANG HARUS DIHINDARI)
+
+  a) OVER-ENGINEERING AWAL
+     - Jangan bangun semua fitur complex di Phase 1
+     - Mulai dari yang simple, iterate
+     - "Ship simple, iterate fast"
+
+  b) MONOLITH TRAP
+     - Jangan bangun 1 engine raksasa untuk semua
+     - Akan susah maintain, susah scale
+     - Tetap pakai specialist pattern
+
+  c) DATA SILO
+     - Jangan setiap engine punya memory sendiri
+     - User harus feeling 1 AI, bukan 6 AI berbeda
+     - Shared memory WAJIB
+
+  d) IGNORE ANTI-HALLUCINATION
+     - Anti-hallucination BUKAN optional
+     - Tanpa ini, AI akan mengarang
+     - User trust akan hancur
+
+  e) SKIP TESTING
+     - Setiap engine WAJIB ada unit test, integration test
+     - E2E test untuk critical path
+     - Jangan ship tanpa test
+
+8.3 BEST PRACTICE
+
+  a) API-FIRST DESIGN
+     - Semua engine expose API
+     - Internal communication via API
+     - Easy swap engine kalau perlu
+
+  b) OBSERVABILITY
+     - Log semua (audit trail)
+     - Monitor semua (Prometheus + Grafana)
+     - Trace semua (Jaeger)
+     - Tanpa observability = blind
+
+  c) GRACEFUL DEGRADATION
+     - Kalau 1 engine down, sistem tetap jalan
+     - Fallback ke Core
+     - Circuit breaker anti cascade failure
+
+  d) COST OPTIMIZATION
+     - Cache frequent request
+     - Use smaller model untuk simple task
+     - Async untuk task berat
+     - Monitor cost per request
+
+  e) SECURITY FIRST
+     - PII mask di log
+     - Encryption at rest + in transit
+     - Audit log untuk compliance
+     - Pen-test berkala
+
+8.4 LONG-TERM VISION
+
+  Bulan 1-12: Build Core + 6 Specialist (MVP each)
+  Bulan 13-24: Add Phase 2-4 skills per engine
+  Bulan 25-36: Add more specialist engines (IoT, Fintech, Game, dll)
+  Bulan 37+: AI Agent Swarm (multi-agent collaboration)
+
+8.5 SUCCESS METRICS
+
+  - User Satisfaction (CSAT > 4.5/5)
+  - Response Accuracy (> 95%)
+  - Latency P95 (< 3 detik first token)
+  - Hallucination Rate (< 2%)
+  - Uptime (> 99.5%)
+  - Cost per Conversation (< Rp 1.000)
+
+8.6 TEAM RECOMMENDATION
+
+  - 1 Tech Lead (architecture)
+  - 2 Backend Engineer (Core + Orchestrator)
+  - 2 ML Engineer (model integration)
+  - 1 DevOps (infrastructure)
+  - 1 QA (testing)
+  - 1 Product Manager (requirement)
+
+  Total: 8 orang untuk Phase 1
+  Estimasi cost: Rp 200-300 juta/bulan (Indonesia)
+
+
+================================================================================
+  PART 9: TOTAL SKILLS SUMMARY
+================================================================================
+
+| Component                    | Skills | Status
+|------------------------------|--------|--------
+| Core Engine                  |      7 | NEW (this doc)
+| Master Orchestrator          |     35 | NEW (this doc)
+| Integration Layer            |     28 | NEW (this doc)
+| Chat 1:1 Engine              |    215 | Existing
+| Legal Assistant Engine       |    221 | Existing
+| Web Full-Stack Builder       |    161 | Existing
+| Mobile App Builder           |    214 | Existing
+| Browser Automation Engine    |    113 | Existing
+| Text Typo Tolerance Engine   |    229 | Existing
+|------------------------------|--------|--------
+| TOTAL                        |  1.223 |        |
+
+Breakdown:
+  - Core & Infrastructure: 70 skills (5.7%)
+  - Specialist Engines: 1.153 skills (94.3%)
+
+
+================================================================================
+  PART 10: DECISION MATRIX - KAPAN PAKAI CORE VS SPECIALIST
+================================================================================
+
+  Skenario                              | Handle by
+  --------------------------------------|----------------------
+  "Halo, apa kabar?"                    | Core (chat simple)
+  "Jelaskan apa itu AI"                 | Core (general knowledge)
+  "Buatkan website toko online"         | Web Builder (specialist)
+  "Apakah saya kena pasal ITE?"         | Legal Assistant (specialist)
+  "Baca gambar ini, apa isinya?"        | Core (multi-modal basic)
+  "Tolong scraping data dari web X"     | Browser Automation (specialist)
+  "Buatkan aplikasi mobile Android"     | Mobile Builder (specialist)
+  "Pahami chat saya yang typo"          | Text Typo Engine (specialist)
+  "Saya sedih, temani saya"             | Chat 1:1 (specialist, emotion)
+  "Buatkan website + deploy ke VPS"     | Web Builder (specialist)
+  "Apakah UU ITE masih berlaku?"        | Legal Assistant (specialist)
+  "Translate teks ini"                  | Core (general task)
+  "Saya tertuduh kasus, apa hak saya?"  | Legal Assistant (specialist)
+  "Build app + deploy ke Play Store"    | Mobile Builder (specialist)
+  "Cari tahu harga produk X"            | Browser Automation (specialist)
+
+  Rule of thumb:
+  - General question → Core
+  - Domain-specific → Specialist
+  - Multi-domain → Orchestrator route to multiple
+
+
+================================================================================
+  PART 11: ANTI-HALLUCINATION MASTER PROTOCOL
+================================================================================
+
+  Semua engine (Core + Specialist) WAJIB ikut protocol ini:
+
+  1. CONFIDENCE THRESHOLD
+     - < 50%: "Saya cek dulu" + search more
+     - 50-70%: route ke specialist
+     - 70-90%: jawab dengan caveat
+     - > 90%: jawab confident
+
+  2. FACT CHECK BEFORE SEND
+     - Verify claim vs knowledge base
+     - Web search kalau tidak ada di KB
+     - Cross-reference multiple sources
+
+  3. NEVER INVENT
+     - Tidak ada fakta yang dikarang
+     - Tidak ada angka yang dihapal
+     - Tidak ada link yang dibuat-buat
+
+  4. SOURCE CITATION
+     - Cite sumber untuk setiap claim
+     - Kalau tidak ada sumber: "setau saya"
+     - Tidak ada klaim tanpa basis
+
+  5. ADMIT UNCERTAINTY
+     - "Saya tidak yakin, tapi..."
+     - "Berdasarkan informasi yang ada..."
+     - "Untuk kepastian, konsultasi..."
+
+  6. ESCALATE WHEN UNSURE
+     - Kalau confidence rendah → escalate
+     - Kalau domain kompleks → route ke specialist
+     - Kalau crisis → human intervention
+
+  7. SCOPE LIMIT
+     - Jawab hanya yang ditanya
+     - Jangan out-of-scope
+     - Jangan assume
+
+
+================================================================================
+  PART 12: FINAL BLUEPRINT - HARMONIKA AI UNIFIED ENGINE
+================================================================================
+
+  ┌──────────────────────────────────────────────────────────────┐
+  │                    HARMONIKA AI UNIFIED ENGINE               │
+  │                                                              │
+  │  ┌──────────────────────────────────────────────────────┐   │
+  │  │  USER TOUCHPOINTS (WebUI, TUI, Mobile, API, Bot)     │   │
+  │  └────────────────────┬─────────────────────────────────┘   │
+  │                       │                                      │
+  │  ┌────────────────────▼─────────────────────────────────┐   │
+  │  │  API GATEWAY (Auth, Rate Limit, WebSocket)           │   │
+  │  └────────────────────┬─────────────────────────────────┘   │
+  │                       │                                      │
+  │  ┌────────────────────▼─────────────────────────────────┐   │
+  │  │  MASTER ORCHESTRATOR (35 skills)                     │   │
+  │  │  - Intake, Intent, Router, Monitor, Aggregator       │   │
+  │  └────────────────────┬─────────────────────────────────┘   │
+  │                       │                                      │
+  │  ┌────────────────────▼─────────────────────────────────┐   │
+  │  │  CORE ENGINE (7 fundamental skills)                  │   │
+  │  │  - Perceive, Understand, Reason                      │   │
+  │  │  - Retrieve, Decide, Act, Learn                      │   │
+  │  └────────────────────┬─────────────────────────────────┘   │
+  │                       │                                      │
+  │       ┌───────────────┼───────────────┐                      │
+  │       │               │               │                      │
+  │  ┌────▼────┐    ┌─────▼─────┐    ┌───▼──────┐                │
+  │  │ CHAT    │    │ LEGAL     │    │ WEB      │                │
+  │  │ 1:1     │    │ ASSISTANT │    │ BUILDER  │                │
+  │  │ (215)   │    │ (221)     │    │ (161)    │                │
+  │  └─────────┘    └───────────┘    └──────────┘                │
+  │                                                              │
+  │  ┌─────────┐    ┌───────────┐    ┌──────────┐                │
+  │  │ MOBILE  │    │ BROWSER   │    │ TEXT     │                │
+  │  │ BUILDER │    │ AUTO      │    │ TYPO     │                │
+  │  │ (214)   │    │ (113)     │    │ (229)    │                │
+  │  └─────────┘    └───────────┘    └──────────┘                │
+  │                                                              │
+  │  ┌──────────────────────────────────────────────────────┐   │
+  │  │  INTEGRATION LAYER (28 skills)                       │   │
+  │  │  - Message Bus, Shared Memory, Data Flow             │   │
+  │  └────────────────────┬─────────────────────────────────┘   │
+  │                       │                                      │
+  │  ┌────────────────────▼─────────────────────────────────┐   │
+  │  │  INFRASTRUCTURE                                      │   │
+  │  │  PostgreSQL, Redis, Qdrant, Kafka, MinIO             │   │
+  │  │  Prometheus, Grafana, ELK, Docker, K8s               │   │
+  │  └──────────────────────────────────────────────────────┘   │
+  └──────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+  PART 13: KEY TAKEAWAYS
+================================================================================
+
+  1. ADA 1 CORE ENGINE untuk semua pemahaman AI
+     - 7 fundamental skills: perceive, understand, reason,
+       retrieve, decide, act, learn
+
+  2. CORE TIDAK CUKUP untuk domain kompleks
+     - Butuh specialist engines
+     - Specialist = deep capability per domain
+
+  3. MASTER ORCHESTRATOR connect Core + Specialist
+     - Route request ke engine yang tepat
+     - Aggregate results
+     - Handle fallback & escalation
+
+  4. SHARED MEMORY = seamless experience
+     - User feeling 1 AI, bukan banyak AI
+     - Profile, history, preference shared
+
+  5. ANTI-HALLUCINATION WAJIB di semua layer
+     - Core dan Specialist sama-sama harus anti-hallucination
+     - Confidence threshold, fact-check, admit uncertain
+
+  6. HYBRID ARCHITECTURE is the answer
+     - Core untuk 80% umum
+     - Specialist untuk 20% kompleks
+     - Integration layer connect semua
+
+  7. PHASED IMPLEMENTATION
+     - Phase 1: Core + Orchestrator (3 bulan)
+     - Phase 2: Chat + Text Typo (3 bulan)
+     - Phase 3: Legal + Browser Auto (3 bulan)
+     - Phase 4: Web + Mobile Builder (3 bulan)
+     - Total MVP: 12 bulan
+
+  8. TOTAL: 1.223 SKILLS
+     - 70 Core & Infra (5.7%)
+     - 1.153 Specialist (94.3%)
+
+
+================================================================================
+  PART 14: CLOSING - SARAN FINAL SAYA
+================================================================================
+
+  Setelah membangun dokumen lengkap ini, saran final saya:
+
+  a) JANGAN BANGUN SEMUA SEKALIGUS
+     - Mulai dari Core (7 skills) + Orchestrator (35 skills)
+     - Test dengan 1 specialist engine (rekomendasi: Chat 1:1)
+     - Iterasi berdasarkan feedback
+
+  b) INVEST DI ARCHITECTURE
+     - Architecture yang baik = separuh perjuangan
+     - Jangan terburu-buru coding sebelum design matang
+     - Hire tech lead yang berpengalaman
+
+  c) USER EXPERIENCE IS KING
+     - User harus feeling 1 AI yang pintar
+     - Bukan 6 AI yang berbeda
+     - Shared memory + orchestrator = key
+
+  d) ANTI-HALLUCINATION IS NON-NEGOTIABLE
+     - Lebih baik bilang "tidak tahu" daripada mengarang
+     - Trust user sulit dibangun, mudah hancur
+     - Invest di fact-check & confidence scoring
+
+  e) CONTINUOUS LEARNING
+     - AI harus makin pintar seiring waktu
+     - Log semua interaksi
+     - Fine-tune dengan data baru
+     - Update knowledge base berkala
+
+  f) COMMUNITY & FEEDBACK
+     - Dengarkan user feedback
+     - Build community around product
+     - Open untuk improvement
+
+  g) THINK LONG-TERM
+     - Jangan optimized untuk short-term
+     - Architecture yang scalable
+     - Code yang maintainable
+     - Documentation yang lengkap
+
+  h) ENJOY THE JOURNEY
+     - Build AI adalah perjalanan panjang
+     - Bukan sprint, marathon
+     - Celebrate milestone
+     - Learn dari failure
+
+  Semoga dokumen ini jadi blueprint yang berguna untuk membangun
+  Harmonika AI yang unified, powerful, dan bermanfaat untuk
+  banyak orang.
+
+  Good luck dengan pembangunan Harmonika AI! 🚀
+
+
+================================================================================
+  END OF UNIFIED MASTER DOCUMENT
+================================================================================
