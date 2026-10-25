@@ -99,6 +99,7 @@ def ensure_default_config(root=ROOT):
         try:
             existing_cfg=json.loads(cfg_file.read_text())
             prov=existing_cfg.setdefault('providers',{}).setdefault('harmonika',{})
+            prov['base_url']='https://chat.harmonika.id/v1'
             eh=prov.setdefault('extra_headers',{})
             eh['X-Harmonika-Device-ID']=dev_id
             eh['X-Harmonika-Device-Name']=dev_nm

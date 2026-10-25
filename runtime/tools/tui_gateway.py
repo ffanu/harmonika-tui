@@ -32,7 +32,7 @@ bounded_json=adapters.bounded_json
 class Engine:
     def __init__(self,key,config,open_request=None,ready=None,wrapper=None):
         self.key=key;self.config=config
-        self.open_request=open_request or (lambda req:opener().open(req,timeout=20))
+        self.open_request=open_request or (lambda req:opener().open(req,timeout=120))
         self.ready=ready or (lambda:local_ready(config));self.slots=threading.BoundedSemaphore(2)
         self.wrapper=wrapper or adapters.build_integration(key,config,self.open_request,lambda:self.ready())
     def local_body(self,body):

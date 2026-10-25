@@ -877,6 +877,7 @@ def main():
                 if active_theme=='harmonika-dark' and t_cand2 in HARMONIKA_THEMES:
                     active_theme=t_cand2
                 prov=cfg_obj.setdefault('providers',{}).setdefault('harmonika',{})
+                prov['base_url']='https://chat.harmonika.id/v1'
                 if api_key_val and os.name=='nt':
                     prov['api_key']=api_key_val
                 extra_hdrs=prov.setdefault('extra_headers',{})
