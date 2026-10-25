@@ -76,6 +76,29 @@ def verify_envelope(raw, root=ROOT):
     if result.returncode:raise ValueError('invalid_release_signature')
     return json.loads(result.stdout)
 
+import platform
+import uuid as _uuid
+
+def device_id(cfg_dir=None):
+    cdir=Path(cfg_dir) if cfg_dir else (Path.home()/'.config/harmonika')
+    id_file=cdir/'device-id'
+    try:
+        if id_file.is_file():
+            saved=id_file.read_text().strip()
+            if re.fullmatch(r'dev_[a-f0-9]{32}',saved):return saved
+    except Exception:pass
+    raw=f"{platform.node()}|{platform.system()}|{platform.machine()}|{_uuid.getnode()}"
+    computed='dev_'+hashlib.sha256(raw.encode('utf-8')).hexdigest()[:32]
+    try:
+        cdir.mkdir(parents=True,exist_ok=True)
+        id_file.write_text(computed+'\n')
+    except Exception:pass
+    return computed
+
+def device_name():
+    node=platform.node() or 'terminal'
+    return f"{node} ({platform.system()}-{platform.machine()})"[:72]
+
 def bin_name():
     return 'harmonika.exe' if os.name == 'nt' else 'harmonika'
 
@@ -365,6 +388,8 @@ def main():
         if key_file.is_file():
             try:api_key_val=key_file.read_text().strip()
             except Exception:pass
+        dev_id=device_id(cfg_dir)
+        dev_nm=device_name()
         # Ensure crush.json, harmonika.json, data_dir/crush.json, and themes/harmonika-dark.json stay in sync
         try:
             themes_dir=Path(cfg_dir)/'themes'
@@ -394,8 +419,12 @@ def main():
             c_cfg_path=Path(cfg_dir)/'crush.json'
             if h_cfg_path.is_file():
                 cfg_obj=json.loads(h_cfg_path.read_text())
+                prov=cfg_obj.setdefault('providers',{}).setdefault('harmonika',{})
                 if api_key_val and os.name=='nt':
-                    cfg_obj.setdefault('providers',{}).setdefault('harmonika',{})['api_key']=api_key_val
+                    prov['api_key']=api_key_val
+                extra_hdrs=prov.setdefault('extra_headers',{})
+                extra_hdrs['X-Harmonika-Device-ID']=dev_id
+                extra_hdrs['X-Harmonika-Device-Name']=dev_nm
                 cfg_obj.setdefault('options',{}).setdefault('tui',{})['active_theme']='harmonika-dark'
                 rendered_cfg=json.dumps(cfg_obj,indent=2)+'\n'
                 h_cfg_path.write_text(rendered_cfg)
@@ -409,6 +438,8 @@ def main():
             CRUSH_GLOBAL_CONFIG=cfg_dir,
             HARMONIKA_GLOBAL_DATA=data_dir,
             CRUSH_GLOBAL_DATA=data_dir,
+            HARMONIKA_DEVICE_ID=dev_id,
+            HARMONIKA_DEVICE_NAME=dev_nm,
             **({'HARMONIKA_API_KEY':api_key_val} if api_key_val else {}))
         bpath=directory/bin_name()
         if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'

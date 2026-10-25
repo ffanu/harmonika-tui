@@ -76,9 +76,11 @@ def ensure_default_config(root=ROOT):
     cfg_file=cfg_dir/'harmonika.json'
     key_file=cfg_dir/'harmonika-api-key'
     key_cmd=f'$(cat {key_file})' if os.name!='nt' else '$HARMONIKA_API_KEY'
+    dev_id=m.device_id(cfg_dir)
+    dev_nm=m.device_name()
     if not cfg_file.exists():
         default_cfg={
-            'providers':{'harmonika':{'id':'harmonika','name':'Harmonika Ai','type':'openai-compat','base_url':'https://chat.harmonika.id/v1','api_key':key_cmd,'discover_models':False,'models':[{'id':'harmonika-ai','name':'Harmonika Ai','context_window':16000,'default_max_tokens':4096,'can_reason':False,'supports_attachments':False,'cost_per_1m_in':0,'cost_per_1m_out':0,'cost_per_1m_in_cached':0,'cost_per_1m_out_cached':0}]}},
+            'providers':{'harmonika':{'id':'harmonika','name':'Harmonika Ai','type':'openai-compat','base_url':'https://chat.harmonika.id/v1','api_key':key_cmd,'extra_headers':{'X-Harmonika-Device-ID':dev_id,'X-Harmonika-Device-Name':dev_nm},'discover_models':False,'models':[{'id':'harmonika-ai','name':'Harmonika Ai','context_window':16000,'default_max_tokens':4096,'can_reason':False,'supports_attachments':False,'cost_per_1m_in':0,'cost_per_1m_out':0,'cost_per_1m_in_cached':0,'cost_per_1m_out_cached':0}]}},
             'models':{'large':{'provider':'harmonika','model':'harmonika-ai','max_tokens':4096},'small':{'provider':'harmonika','model':'harmonika-ai','max_tokens':4096}},
             'options':{
                 'disabled_tools':['agent','crush_info','crush_logs','job_output','job_kill','download','lsp_restart','lsp_rename','lsp_replace_symbol','fetch','agentic_fetch','sourcegraph','list_mcp_resources','read_mcp_resource'],
@@ -93,6 +95,19 @@ def ensure_default_config(root=ROOT):
             'mcp':{'harmonika':{'type':'stdio','command':m.NODE,'args':[str(root/'current/tools/mcp-server.cjs')],'timeout':240}}
         }
         cfg_file.write_text(json.dumps(default_cfg,indent=2)+'\n')
+    else:
+        try:
+            existing_cfg=json.loads(cfg_file.read_text())
+            prov=existing_cfg.setdefault('providers',{}).setdefault('harmonika',{})
+            eh=prov.setdefault('extra_headers',{})
+            eh['X-Harmonika-Device-ID']=dev_id
+            eh['X-Harmonika-Device-Name']=dev_nm
+            if os.name=='nt' and key_file.is_file():
+                kval=key_file.read_text().strip()
+                if kval:prov['api_key']=kval
+            existing_cfg.setdefault('options',{}).setdefault('tui',{})['active_theme']='harmonika-dark'
+            cfg_file.write_text(json.dumps(existing_cfg,indent=2)+'\n')
+        except Exception:pass
     crush_alias=cfg_dir/'crush.json'
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
 
@@ -257,6 +272,10 @@ def activate(stage,manifest):
     guard_cmd=f'"{guard_path}"' if ' ' in guard_path else guard_path
     config['mcp']['harmonika']['command']=str(m.NODE)
     config['mcp']['harmonika']['args']=[str(ROOT/'current/tools/mcp-server.cjs')]
+    if 'harmonika' in config.get('providers',{}):
+        eh=config['providers']['harmonika'].setdefault('extra_headers',{})
+        eh['X-Harmonika-Device-ID']=m.device_id(configfile.parent)
+        eh['X-Harmonika-Device-Name']=m.device_name()
     for hook in config.get('hooks',{}).get('PreToolUse',[]):
         if 'project-file-guard.cjs' in hook.get('command',''):
             hook['command']=node_cmd+' '+guard_cmd

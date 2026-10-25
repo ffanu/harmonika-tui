@@ -275,6 +275,18 @@ function readLicensedKey() {
   }
 }
 
+function readDeviceId() {
+  if (process.env.HARMONIKA_DEVICE_ID && /^dev_[a-f0-9]{32}$/.test(process.env.HARMONIKA_DEVICE_ID)) {
+    return process.env.HARMONIKA_DEVICE_ID;
+  }
+  try {
+    const devFile = path.join(os.homedir(), '.config/harmonika/device-id');
+    const val = fs.readFileSync(devFile, 'utf8').trim();
+    if (/^dev_[a-f0-9]{32}$/.test(val)) return val;
+  } catch {}
+  return '';
+}
+
 async function httpsRpc(payload, apiKey) {
   const input = Buffer.from(JSON.stringify(payload), 'utf8');
   if (input.length > LIMITS.RPC_STDIN_MAX_BYTES) {
@@ -283,15 +295,21 @@ async function httpsRpc(payload, apiKey) {
   const control = new AbortController();
   const timer = setTimeout(() => control.abort(), LIMITS.RPC_TIMEOUT_MS);
   if (timer.unref) timer.unref();
+  const devId = readDeviceId();
+  const reqHeaders = {
+    Authorization: 'Bearer ' + apiKey,
+    'Content-Type': 'application/json',
+  };
+  if (devId) {
+    reqHeaders['X-Harmonika-Device-ID'] = devId;
+    reqHeaders['X-Harmonika-Device-Name'] = (process.env.HARMONIKA_DEVICE_NAME || os.hostname() || 'terminal').slice(0, 72);
+  }
   try {
     const res = await fetch('https://chat.harmonika.id/v1/terminal/rpc', {
       method: 'POST',
       redirect: 'error',
       signal: control.signal,
-      headers: {
-        Authorization: 'Bearer ' + apiKey,
-        'Content-Type': 'application/json',
-      },
+      headers: reqHeaders,
       body: input,
     });
     const parts = [];
@@ -866,7 +884,11 @@ function createCore(overrides) {
       let res;
       if(deps.mediaBridge){
         res=await deps.mediaBridge.generate(args.prompt,outPath);
-        if(res?.handled!==true){if(res?.not_dispatched!==true)throw new ToolError('media_dispatch_uncertain');res=undefined;}
+        if(res?.handled!==true){
+          if(res?.not_dispatched!==true)throw new ToolError('media_dispatch_uncertain');
+          if(deps.allowMediaFallback!==true)throw new ToolError('image_engine_offline');
+          res=undefined;
+        }
       }
       if(!res)res = await deps.rpc({ operation: 'generate_image', prompt: args.prompt });
       if (!res || typeof res !== 'object' || res.ok !== true || res.status !== 'ok') {
@@ -924,6 +946,19 @@ function createCore(overrides) {
     } catch (e) {
       const code = e && e.code ? e.code : 'internal_error';
       data = { ok: false, status: 'error', error: code, ...(e?.uncertain?{retry_safe:false,operation_state:'uncertain',message:'Status pekerjaan belum pasti. Jangan membuat ulang pekerjaan dengan identitas berbeda.'}:{}) };
+      const mediaFailures={
+        image_engine_offline:['Engine gambar lokal sedang offline. Silakan coba lagi setelah PC gambar terhubung.',true],
+        image_worker_offline:['Engine gambar lokal sedang offline. Silakan coba lagi setelah PC gambar terhubung.',true],
+        rtx_offline:['Engine gambar lokal sedang offline. Silakan coba lagi setelah PC gambar terhubung.',true],
+        worker_busy:['Engine gambar sedang mengerjakan permintaan lain. Silakan coba lagi sebentar.',true],
+        worker_vram_full:['Memori GPU sedang penuh. Permintaan gambar belum berhasil; silakan coba lagi setelah memori tersedia.',true],
+        worker_warming:['Engine gambar sedang disiapkan. Silakan coba lagi sebentar.',true],
+        gpu_job_recovery_required:['Status pekerjaan GPU perlu diperiksa sebelum membuat permintaan baru.',false],
+        invalid_worker_response:['Hasil dari engine gambar tidak valid dan sudah ditolak.',false],
+        invalid_image_result:['Hasil gambar tidak valid dan sudah ditolak.',false],
+        worker_auth_failed:['Koneksi engine gambar memerlukan pemulihan akses.',false],
+      };
+      if(mediaFailures[code])data={...data,status:'degraded',message:e?.uncertain?data.message:mediaFailures[code][0],retryable:!e?.uncertain&&mediaFailures[code][1],retry_safe:!e?.uncertain,operation_state:e?.uncertain?'uncertain':code==='image_engine_offline'?'not_dispatched':'failed'};
       if(code==='local_vision_unavailable')data={ok:false,status:'degraded',error:code,analysis_performed:false,processing_mode:'local_only',message:'Analisis gambar lokal sedang tidak tersedia. Gambar belum dianalisis.'};
     }
     return textResult(data);

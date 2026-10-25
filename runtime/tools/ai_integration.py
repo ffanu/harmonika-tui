@@ -209,7 +209,16 @@ class OpenAICompatibleAdapter(AIAdapter):
         self.endpoint=endpoint;self.prepare=prepare;self.open_request=open_request
     def response(self,request,stream):
         body,auth=self.prepare(request,stream)
-        wire=urllib.request.Request(self.endpoint,data=json.dumps(body,ensure_ascii=False,allow_nan=False).encode(),headers={'Content-Type':'application/json','Authorization':'Bearer '+auth,'Accept':'text/event-stream' if stream else 'application/json'})
+        hdrs={'Content-Type':'application/json','Authorization':'Bearer '+auth,'Accept':'text/event-stream' if stream else 'application/json'}
+        if self.endpoint.startswith('https://chat.harmonika.id/'):
+            dev_id=os.environ.get('HARMONIKA_DEVICE_ID','')
+            if not dev_id:
+                try:
+                    df=Path.home()/'.config/harmonika/device-id'
+                    if df.is_file():dev_id=df.read_text().strip()
+                except Exception:pass
+            if dev_id:hdrs['X-Harmonika-Device-ID']=dev_id
+        wire=urllib.request.Request(self.endpoint,data=json.dumps(body,ensure_ascii=False,allow_nan=False).encode(),headers=hdrs)
         return self.open_request(wire)
     @staticmethod
     def failure(error,terminal=False):

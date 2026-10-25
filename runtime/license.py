@@ -28,8 +28,19 @@ class NoRedirect(request.HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs):raise LicenseError('license_redirect_refused')
 
 def device_id():
+    id_file=CONFIG/'device-id'
+    try:
+        if id_file.is_file():
+            saved=id_file.read_text().strip()
+            if re.fullmatch(r'dev_[a-f0-9]{32}',saved):return saved
+    except Exception:pass
     raw=f"{platform.node()}|{platform.system()}|{platform.machine()}|{uuid.getnode()}"
-    return 'dev_'+hashlib.sha256(raw.encode('utf-8')).hexdigest()[:32]
+    computed='dev_'+hashlib.sha256(raw.encode('utf-8')).hexdigest()[:32]
+    try:
+        CONFIG.mkdir(parents=True,exist_ok=True)
+        id_file.write_text(computed+'\n')
+    except Exception:pass
+    return computed
 
 def device_name():
     node=platform.node() or 'terminal'
