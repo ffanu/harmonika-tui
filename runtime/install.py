@@ -155,16 +155,52 @@ def _prepare(package,stage):
         if os.environ.get('HARMONIKA_SKIP_BINARY_SHA_CHECK')!='1' and m.digest(BINARY)!=manifest['binary_sha256']:raise ValueError('custom_binary_changed')
         bname=m.bin_name() if BINARY.name.endswith('.exe') else 'harmonika'
         shutil.copy2(BINARY,stage/bname);os.chmod(stage/bname,0o755)
+        if os.name=='nt':
+            (stage/'binary.sha256').write_text(m.digest(stage/bname))
         m.preflight(stage,manifest)
+
+def write_windows_wrappers(root=ROOT):
+    node_path=m._find_node()
+    (root/'node.path').write_text(node_path)
+    bin_dir=Path.home()/'.local/bin'
+    bin_dir.mkdir(parents=True,exist_ok=True)
+    cmd_wrapper=(
+        '@echo off\r\n'
+        f'set "HARMONIKA_NODE={node_path}"\r\n'
+        f'"{sys.executable}" -I "{root}\\launcher.py" %*\r\n'
+    )
+    atomic_text(bin_dir/'harmonika.cmd',cmd_wrapper,0o755)
+    # If running as Administrator on Windows, also place harmonika.cmd in C:\Windows\System32 so it works immediately without PATH changes
+    sys32=Path(os.environ.get('SystemRoot',r'C:\Windows'))/'System32'
+    if sys32.is_dir():
+        try:
+            atomic_text(sys32/'harmonika.cmd',cmd_wrapper,0o755)
+        except Exception:
+            pass
 
 def main(package=None):
     global BINARY
-    if (ROOT/'current').exists():
+    has_active=False
+    try:
+        m.active(ROOT)
+        has_active=True
+    except Exception:
+        has_active=False
+    if has_active or (package is not None and (ROOT/'current').exists()):
         if package is not None:
             raise ValueError('already_installed_use_manual_update')
         ensure_default_config(ROOT)
-        print(json.dumps({'ok':True,'status':'already_installed'},indent=2))
+        atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
+        if os.name=='nt':write_windows_wrappers(ROOT)
+        print(json.dumps(m.doctor(),indent=2))
         return
+    # Clean up any broken partial 'current' pointer before fresh bootstrap
+    if os.name=='nt':
+        for broken in [ROOT/'current',ROOT/'current.version']:
+            try:
+                if broken.is_symlink() or broken.is_file():broken.unlink()
+                elif broken.is_dir():subprocess.run(['cmd','/c','rmdir',str(broken)],capture_output=True)
+            except Exception:pass
     downloaded_bin=downloaded_pkg=None
     try:
         if not package:
@@ -197,10 +233,14 @@ def activate(stage,manifest):
     paths=config['options'].setdefault('skills_paths',[])
     skillpath=str(ROOT/'current/skills')
     if skillpath not in paths:paths.append(skillpath)
+    node_cmd=f'"{m.NODE}"' if (' ' in str(m.NODE) and not str(m.NODE).startswith('"')) else str(m.NODE)
+    guard_path=str(ROOT/'current/tools/project-file-guard.cjs')
+    guard_cmd=f'"{guard_path}"' if ' ' in guard_path else guard_path
+    config['mcp']['harmonika']['command']=str(m.NODE)
     config['mcp']['harmonika']['args']=[str(ROOT/'current/tools/mcp-server.cjs')]
     for hook in config.get('hooks',{}).get('PreToolUse',[]):
         if 'project-file-guard.cjs' in hook.get('command',''):
-            hook['command']=m.NODE+' '+str(ROOT/'current/tools/project-file-guard.cjs')
+            hook['command']=node_cmd+' '+guard_cmd
     # Validate proposed configuration on stdin before touching live files/pointers.
     schema=SOURCE/'runtime/harmonika-schema.json'
     js="const fs=require('fs'),{Ajv2020}=require(process.argv[2]);const v=new Ajv2020({strict:false,validateFormats:false}).compile(JSON.parse(fs.readFileSync(process.argv[1])));if(!v(JSON.parse(fs.readFileSync(0,'utf8'))))process.exit(1);"
@@ -212,6 +252,11 @@ def activate(stage,manifest):
     target=ROOT/'versions'/release
     if target.exists():
         if m.verify_envelope((target/'release.json').read_bytes(),ROOT)!=manifest:raise ValueError('release_name_conflict')
+        bname=m.bin_name()
+        if (stage/bname).is_file() and not (target/bname).is_file():
+            shutil.copy2(stage/bname,target/bname)
+        if os.name=='nt' and (target/bname).is_file():
+            (target/'binary.sha256').write_text(m.digest(target/bname))
         m.preflight(target,manifest)
     else:stage.rename(target)
     if not (ROOT/'config-before.json').exists():
@@ -220,10 +265,7 @@ def activate(stage,manifest):
     m.switch(release,ROOT)
     atomic_text(configfile,encoded)
     if os.name == 'nt':
-        bin_dir = Path.home()/'.local/bin'
-        bin_dir.mkdir(parents=True,exist_ok=True)
-        cmd_wrapper = f'@echo off\r\n"{sys.executable}" -I "%USERPROFILE%\\.config\\harmonika-terminal\\launcher.py" %*\r\n'
-        atomic_text(bin_dir/'harmonika.cmd',cmd_wrapper,0o755)
+        write_windows_wrappers(ROOT)
     else:
         wrapper=f'#!/bin/sh\nexec "{sys.executable}" -I "$HOME/.config/harmonika-terminal/launcher.py" "$@"\n'
         for file in [Path.home()/'.local/bin/harmonika',Path.home()/'.local/node/bin/harmonika']:

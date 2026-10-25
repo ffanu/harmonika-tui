@@ -21,7 +21,34 @@ import zipfile
 from uuid import uuid4
 
 ROOT = Path(os.environ.get('HARMONIKA_TERMINAL_HOME', str(Path.home()/'.config/harmonika-terminal')))
-NODE = os.environ.get('HARMONIKA_NODE') or shutil.which('node') or str(Path.home()/'.local/node/bin/node')
+
+def _find_node():
+    env_node = os.environ.get('HARMONIKA_NODE')
+    if env_node and Path(env_node).is_file():
+        return env_node
+    saved = ROOT / 'node.path'
+    if saved.is_file():
+        try:
+            p = saved.read_text().strip()
+            if p and Path(p).is_file():
+                return p
+        except Exception:
+            pass
+    which_node = shutil.which('node.exe' if os.name == 'nt' else 'node') or shutil.which('node')
+    if which_node:
+        return which_node
+    if os.name == 'nt':
+        for candidate in [
+            Path(os.environ.get('ProgramFiles', r'C:\Program Files')) / 'nodejs/node.exe',
+            Path(os.environ.get('ProgramFiles(x86)', r'C:\Program Files (x86)')) / 'nodejs/node.exe',
+            Path(os.environ.get('LOCALAPPDATA', '')) / 'Programs/nodejs/node.exe',
+            Path.home() / 'AppData/Local/Programs/nodejs/node.exe',
+        ]:
+            if candidate.is_file():
+                return str(candidate)
+    return str(Path.home()/'.local/node/bin/node')
+
+NODE = _find_node()
 CATALOG = 'https://chat.harmonika.id/assets/harmonika-terminal/stable.json'
 RELEASE_RE = re.compile(r'^[0-9]{4}\.[0-9]{2}\.[0-9]{2}\.[0-9]+$')
 VERIFY_JS = """const fs=require('fs'),crypto=require('crypto');const e=JSON.parse(fs.readFileSync(0,'utf8'));const p=Buffer.from(e.payload,'base64');if(!crypto.verify(null,p,fs.readFileSync(process.argv[1]),Buffer.from(e.signature,'base64')))process.exit(3);process.stdout.write(p);"""
@@ -53,13 +80,30 @@ def bin_name():
     return 'harmonika.exe' if os.name == 'nt' else 'harmonika'
 
 def active(root=ROOT):
-    selected=(root/'current').resolve(strict=True)
+    selected=None
+    ver_file=root/'current.version'
+    if os.name=='nt' and ver_file.is_file():
+        rel_name=ver_file.read_text().strip()
+        if RELEASE_RE.fullmatch(rel_name) and (root/'versions'/rel_name).is_dir():
+            selected=(root/'versions'/rel_name).resolve(strict=True)
+    if selected is None:
+        cur=root/'current'
+        if os.name=='nt' and cur.is_file() and not cur.is_symlink():
+            rel_name=cur.read_text().strip()
+            if RELEASE_RE.fullmatch(rel_name) and (root/'versions'/rel_name).is_dir():
+                selected=(root/'versions'/rel_name).resolve(strict=True)
+        if selected is None:
+            selected=cur.resolve(strict=True)
     if selected.parent!=(root/'versions').resolve() or not RELEASE_RE.fullmatch(selected.name):raise ValueError('invalid_release_pointer')
     manifest=verify_envelope((selected/'release.json').read_bytes(),root)
     if manifest.get('release')!=selected.name:raise ValueError('release_identity_mismatch')
     binary=selected/bin_name()
     if not binary.exists() and (selected/'harmonika').exists():binary=selected/'harmonika'
-    if binary.is_symlink() or digest(binary)!=manifest['binary_sha256']:raise ValueError('binary_checksum_mismatch')
+    expected_sha=manifest['binary_sha256']
+    plat_sha_file=selected/'binary.sha256'
+    if os.name=='nt' and plat_sha_file.is_file():
+        expected_sha=plat_sha_file.read_text().strip()
+    if binary.is_symlink() or digest(binary)!=expected_sha:raise ValueError('binary_checksum_mismatch')
     return selected,manifest
 
 def verify_files(directory,manifest):
@@ -69,6 +113,17 @@ def verify_files(directory,manifest):
 
 def switch(release,root=ROOT):
     if not RELEASE_RE.fullmatch(release):raise ValueError('invalid_release')
+    if os.name=='nt':
+        atomic_state(root/'current.version',release)
+        cur=root/'current'
+        try:
+            if cur.is_symlink() or cur.is_file():cur.unlink()
+            elif cur.is_dir():
+                subprocess.run(['cmd','/c','rmdir',str(cur)],capture_output=True)
+            subprocess.run(['cmd','/c','mklink','/J',str(cur),str(root/'versions'/release)],capture_output=True)
+        except Exception:
+            pass
+        return
     temporary=root/('current.next-'+uuid4().hex)
     try:
         temporary.symlink_to('versions/'+release)
