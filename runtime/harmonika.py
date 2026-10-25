@@ -7,6 +7,7 @@ try:
 except ImportError:
     fcntl = None
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -312,7 +313,7 @@ def ensure_harmonika_downloads(cfg_dir=None):
             f"   - **Folder Utama Harmonika AI:** `{dl_abs}`\n"
             f"   - **File Gambar** (`.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`, `.gif` — hasil generate gambar, desain, poster, screenshot): simpan di `{gambar_abs}`\n"
             f"   - **File Dokumen** (`.pdf`, `.docx`, `.xlsx`, `.pptx`, `.csv`, `.txt`, `.md`, `.html` — hasil dokumen, laporan, tabel, presentasi): simpan di `{doc_abs}`\n"
-            f"   - **File Arsip / Bundle** (`.zip`, `.tar.gz`, `.tgz`, `.7z` — hasil kompresi atau paket kode/file): simpan di `{zip_abs}`\n"
+            f"   - **File Arsip / Bundle** (`.zip`, `.tar.gz`, `.tgz`, `.7z` — hasil kompresi atau paket kode/file): simpan di `{zip_abs}` (bisa juga menjalankan `harmonika zip <path_folder> [nama.zip]`)\n"
         )
         guide_file.write_text(guide_text,encoding='utf-8')
     except Exception:
@@ -335,12 +336,19 @@ def prompt_startup_update(root=ROOT,force_output=False):
             if force_output:
                 print(f"\033[38;2;63;185;80m✓ Harmonika AI sudah menggunakan versi terbaru ({cur_ver}).\033[0m")
             return {'ok':True,'updated':False,'current':cur_ver,'latest':release}
+        notes=newest.get('release_notes') if isinstance(newest.get('release_notes'),list) else []
         O='\033[38;2;255;123;0m';B='\033[1m';G='\033[38;2;63;185;80m';C='\033[38;2;88;166;255m';R='\033[0m'
         print(f"\n{O}╭──────────────────────────────────────────────────────────────────────────╮{R}")
         print(f"{O}│{R}  {B}{O}HARMONIKA AI — PEMBARUAN TERBARU TERSEDIA{R}                               {O}│{R}")
         print(f"{O}│{R}                                                                          {O}│{R}")
         print(f"{O}│{R}  Versi Saat Ini : {C}{cur_ver:<54}{R} {O}│{R}")
         print(f"{O}│{R}  Versi Terbaru  : {G}{B}{release:<54}{R} {O}│{R}")
+        if notes:
+            print(f"{O}│{R}                                                                          {O}│{R}")
+            print(f"{O}│{R}  {B}Apa yang baru di versi ini:{R}                                             {O}│{R}")
+            for note in notes[:4]:
+                clean_note=str(note).strip()[:66]
+                print(f"{O}│{R}    • {clean_note:<67} {O}│{R}")
         print(f"{O}│{R}                                                                          {O}│{R}")
         print(f"{O}│{R}  Pilih tindakan pembaruan:                                               {O}│{R}")
         print(f"{O}│{R}    {B}[Y] Yes{R}   — Update otomatis sekarang ke versi terbaru                 {O}│{R}")
@@ -379,6 +387,100 @@ def prompt_startup_update(root=ROOT,force_output=False):
             print(f"Gagal memeriksa/memasang pembaruan: {exc}",file=sys.stderr)
         return None
 
+def create_zip_bundle(args,cfg_dir=None):
+    dl_root=ensure_harmonika_downloads(cfg_dir)
+    zip_dir=dl_root/'zip'
+    zip_dir.mkdir(parents=True,exist_ok=True)
+    src_path=Path(args[0]).expanduser().resolve() if args else Path.cwd().resolve()
+    if not src_path.exists():
+        raise ValueError('zip_source_not_found')
+    from datetime import datetime
+    stamp=datetime.now().strftime('%Y%m%d-%H%M%S')
+    base_name=args[1] if len(args)>1 else f"{src_path.stem or 'project'}-{stamp}.zip"
+    if not base_name.lower().endswith('.zip'):
+        base_name+='.zip'
+    out_zip=Path(base_name).expanduser().resolve() if Path(base_name).is_absolute() else (zip_dir/Path(base_name).name)
+    out_zip.parent.mkdir(parents=True,exist_ok=True)
+    skip_dirs={'node_modules','.git','__pycache__','.venv','venv','.harmonika','.pytest_cache','.mypy_cache','.next','dist_cache'}
+    skip_files={'.DS_Store','Thumbs.db','.env','harmonika-api-key'}
+    count=0
+    with zipfile.ZipFile(out_zip,'w',zipfile.ZIP_DEFLATED) as zf:
+        if src_path.is_file():
+            zf.write(src_path,src_path.name)
+            count=1
+        else:
+            for item in sorted(src_path.rglob('*')):
+                if item.is_symlink():
+                    continue
+                rel_parts=item.relative_to(src_path).parts
+                if any(p in skip_dirs or (p.startswith('.') and p not in {'.github','.env.example'}) for p in rel_parts[:-1]):
+                    continue
+                if item.is_file():
+                    if item.name in skip_files or item.name.endswith(('.pem','.key','.pfx','.p12')):
+                        continue
+                    if item.resolve()==out_zip.resolve():
+                        continue
+                    zf.write(item,str(item.relative_to(src_path)))
+                    count+=1
+    size_bytes=out_zip.stat().st_size
+    O='\033[38;2;255;123;0m';G='\033[38;2;63;185;80m';B='\033[1m';R='\033[0m'
+    print(f"{G}✓ Paket ZIP berhasil dibuat:{R} {B}{out_zip}{R} ({count} file, {size_bytes/1024:.1f} KB)")
+    return {'ok':True,'zip_file':str(out_zip),'source':str(src_path),'files_count':count,'size_bytes':size_bytes}
+
+def show_status(root=ROOT,as_json=False):
+    directory,manifest=active(root)
+    cfg_dir=Path(os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
+    dl_root=ensure_harmonika_downloads(cfg_dir)
+    dev_id=device_id(cfg_dir)
+    dev_nm=device_name()
+    key_file=cfg_dir/'harmonika-api-key'
+    has_key=key_file.is_file()
+    lic_info={'valid':False,'status':'not_activated'}
+    if has_key:
+        try:
+            lic_mod_path=directory/'tools/license.py'
+            if not lic_mod_path.exists():lic_mod_path=Path(__file__).resolve().parent/'license.py'
+            spec=importlib.util.spec_from_file_location('harmonika_lic',lic_mod_path)
+            lic_mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(lic_mod)
+            lic_info=lic_mod.check(key_file.read_text().strip())
+        except Exception as e:
+            lic_info={'valid':False,'status':str(e)}
+    folder_stats={}
+    for sub in ('gambar','document','zip'):
+        sp=dl_root/sub
+        files=[p for p in sp.iterdir() if p.is_file() and not p.name.startswith('.')] if sp.is_dir() else []
+        folder_stats[sub]={'path':str(sp),'count':len(files)}
+    skills_count=len(list((directory/'skills').glob('*/SKILL.md')))
+    status_data={
+        'ok':True,
+        'product':'Harmonika AI Terminal',
+        'release':manifest['release'],
+        'upstream_version':manifest.get('upstream_version','0.98.1'),
+        'device':{'name':dev_nm,'id':dev_id,'policy':'1 Key = 1 Device'},
+        'license':lic_info,
+        'skills_installed':skills_count,
+        'downloads_workspace':{'root':str(dl_root),'folders':folder_stats},
+    }
+    if as_json:
+        return status_data
+    O='\033[38;2;255;123;0m';B='\033[1m';G='\033[38;2;63;185;80m';C='\033[38;2;88;166;255m';Y='\033[38;2;255;158;0m';R='\033[0m'
+    lic_badge=f"{G}{B}AKTIF (Verified){R}" if lic_info.get('valid') else f"{Y}{B}BELUM AKTIF / PERLU CEK ({lic_info.get('status')}){R}"
+    quota_str='Unlimited' if lic_info.get('unlimited') else (f"{lic_info.get('requests_per_day')} req/hari" if lic_info.get('requests_per_day') else '-')
+    print(f"\n{O}╭──────────────────────────────────────────────────────────────────────────╮{R}")
+    print(f"{O}│{R}  {B}{O}HARMONIKA AI — STATUS TERMINAL & LISENSI{R}                                {O}│{R}")
+    print(f"{O}├──────────────────────────────────────────────────────────────────────────┤{R}")
+    print(f"{O}│{R}  Versi Rilis    : {C}{manifest['release']}{R} (Engine v0.98.1 • {skills_count} Skills Aktif)")
+    print(f"{O}│{R}  Perangkat      : {B}{dev_nm}{R}")
+    print(f"{O}│{R}  Device ID      : {C}{dev_id}{R} (1 Key = 1 Device)")
+    print(f"{O}│{R}  Status Lisensi : {lic_badge} • Kuota: {B}{quota_str}{R}")
+    print(f"{O}├──────────────────────────────────────────────────────────────────────────┤{R}")
+    print(f"{O}│{R}  {B}Folder Auto-Save Harmonika AI ({dl_root}):{R}")
+    print(f"{O}│{R}    • {B}gambar/  {R} : {G}{folder_stats['gambar']['count']} file{R}  ({folder_stats['gambar']['path']})")
+    print(f"{O}│{R}    • {B}document/{R} : {G}{folder_stats['document']['count']} file{R}  ({folder_stats['document']['path']})")
+    print(f"{O}│{R}    • {B}zip/     {R} : {G}{folder_stats['zip']['count']} file{R}  ({folder_stats['zip']['path']})")
+    print(f"{O}╰──────────────────────────────────────────────────────────────────────────╯{R}\n")
+    return status_data
+
 def run_exec(command, env=None):
     if os.name == 'nt':
         res = subprocess.run(command, env=env)
@@ -392,6 +494,12 @@ def main():
     args=sys.argv[1:]
     ensure_harmonika_downloads(os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     if args==['doctor']:result=doctor()
+    elif args in (['status'],['status','--json']):
+        res=show_status(ROOT,as_json=('--json' in args))
+        if '--json' not in args:return
+        result=res
+    elif args and args[0] in ('zip','export'):
+        result=create_zip_bundle(args[1:],os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     elif args==['update']:
         res=prompt_startup_update(ROOT,force_output=True)
         result=res or check_update()
