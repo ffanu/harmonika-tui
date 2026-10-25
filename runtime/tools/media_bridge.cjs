@@ -4,6 +4,21 @@ const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cryp
 const BASE='https://chat.harmonika.id/v1/media';
 class MediaError extends Error{constructor(code,uncertain=false){super(code);this.code=code;this.uncertain=uncertain;}}
 function privateKey(){let fd;try{fd=fs.openSync(path.join(os.homedir(),'.config/harmonika/harmonika-api-key'),fs.constants.O_RDONLY|(fs.constants.O_NOFOLLOW||0)|(fs.constants.O_NONBLOCK||0));const s=fs.fstatSync(fd);if(!s.isFile()||(process.platform!=='win32'&&((s.mode&0o077)||(typeof process.getuid==='function'&&s.uid!==process.getuid()))))throw new Error();const k=fs.readFileSync(fd,'utf8').trim();if(!/^hai_[A-Za-z0-9_]{16,240}$/.test(k))throw new Error();return k;}catch{throw new MediaError('media_key_unavailable');}finally{if(fd!==undefined)fs.closeSync(fd);}}
+function readDeviceHeaders(){
+ const out={};
+ let devId=process.env.HARMONIKA_DEVICE_ID||'';
+ if(!/^dev_[a-f0-9]{32}$/.test(devId)){
+  try{
+   const v=fs.readFileSync(path.join(os.homedir(),'.config/harmonika/device-id'),'utf8').trim();
+   if(/^dev_[a-f0-9]{32}$/.test(v))devId=v;
+  }catch{}
+ }
+ if(devId){
+  out['X-Harmonika-Device-ID']=devId;
+  out['X-Harmonika-Device-Name']=(process.env.HARMONIKA_DEVICE_NAME||os.hostname()||'terminal').slice(0,72);
+ }
+ return out;
+}
 function createMediaBridge(options={}){
  const fetcher=options.fetch||globalThis.fetch,key=options.key||privateKey,sleep=options.sleep||(ms=>new Promise(r=>setTimeout(r,ms))),clock=options.clock||Date.now;
  const localVisionOnly=options.localVisionOnly!==false;
@@ -12,7 +27,8 @@ function createMediaBridge(options={}){
  async function request(method,route,body,headers={},binary=false){
   if(closed)throw new MediaError('media_client_closed');const control=new AbortController();active.add(control);const timer=setTimeout(()=>control.abort(),20000);timer.unref?.();
   try{
-   const res=await fetcher(BASE+route,{method,redirect:'error',signal:control.signal,headers:{Authorization:'Bearer '+key(),...(body!==undefined&&typeof body==='string'?{'Content-Type':'application/json'}:{}),...headers},body});
+   const devHeaders=options.fetch?{}:readDeviceHeaders();
+   const res=await fetcher(BASE+route,{method,redirect:'error',signal:control.signal,headers:{Authorization:'Bearer '+key(),...devHeaders,...(body!==undefined&&typeof body==='string'?{'Content-Type':'application/json'}:{}),...headers},body});
    const limit=binary?16*1024*1024:1024*1024,parts=[];let size=0;
    for await(const part of res.body){size+=part.byteLength;if(size>limit){control.abort();throw new MediaError('media_response_limit',method==='POST');}parts.push(Buffer.from(part));}
    const raw=Buffer.concat(parts);if(!res.ok){let code='media_request_failed';try{const p=JSON.parse(raw);if(/^[a-z_]{1,80}$/.test(p?.error?.code))code=p.error.code;}catch{}throw new MediaError(code,method==='POST'&&res.status>=500);}

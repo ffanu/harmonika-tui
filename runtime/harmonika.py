@@ -412,7 +412,7 @@ def ensure_harmonika_downloads(cfg_dir=None):
         doc_abs=str((dl_root/'document').resolve())
         zip_abs=str((dl_root/'zip').resolve())
         guide_text=(
-            "# Aturan Penyimpanan File Otomatis Harmonika AI\n\n"
+            "# Aturan Penyimpanan File Otomatis & Pengalaman Visual Harmonika AI\n\n"
             "1. **Sesuai Permintaan User (Custom Folder):**\n"
             "   Jika pengguna meminta secara spesifik untuk membuat folder baru (di `Downloads` atau `Projects`) atau menyimpan di folder proyek tertentu, ikuti permintaan pengguna dan gunakan tool `create_directory` bila membuat folder proyek baru.\n\n"
             "2. **Inisiatif Penyimpanan Otomatis Berdasarkan Jenis File (`Downloads/harmonika-ai`):**\n"
@@ -420,7 +420,10 @@ def ensure_harmonika_downloads(cfg_dir=None):
             f"   - **Folder Utama Harmonika AI:** `{dl_abs}`\n"
             f"   - **File Gambar** (`.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`, `.gif` — hasil generate gambar, desain, poster, screenshot): simpan di `{gambar_abs}`\n"
             f"   - **File Dokumen** (`.pdf`, `.docx`, `.xlsx`, `.pptx`, `.csv`, `.txt`, `.md`, `.html` — hasil dokumen, laporan, tabel, presentasi): simpan di `{doc_abs}`\n"
-            f"   - **File Arsip / Bundle** (`.zip`, `.tar.gz`, `.tgz`, `.7z` — hasil kompresi atau paket kode/file): simpan di `{zip_abs}` (bisa juga menjalankan `harmonika zip <path_folder> [nama.zip]`)\n"
+            f"   - **File Arsip / Bundle** (`.zip`, `.tar.gz`, `.tgz`, `.7z` — hasil kompresi atau paket kode/file): simpan di `{zip_abs}` (bisa juga menjalankan `harmonika zip <path_folder> [nama.zip]`)\n\n"
+            "3. **Gaya Respons & Pembuatan Gambar Modern di Terminal:**\n"
+            f"   - Saat pengguna meminta membuat gambar (`generate_image`), gunakan path output di dalam `{gambar_abs}/<nama-unik>.png` (kecuali diminta di folder lain).\n"
+            "   - Sajikan informasi hasil pembuatan gambar dengan rapi (Nama File, Dimensi, Ukuran File, Lokasi Penyimpanan, dan informasikan bahwa pengguna dapat mengetik `harmonika preview` di terminal untuk melihat pratinjau warna gambar langsung di terminal).\n"
         )
         guide_file.write_text(guide_text,encoding='utf-8')
     except Exception:
@@ -493,6 +496,91 @@ def prompt_startup_update(root=ROOT,force_output=False):
         if force_output:
             print(f"Gagal memeriksa/memasang pembaruan: {exc}",file=sys.stderr)
         return None
+
+def _decode_png_rgb(raw_bytes):
+    import struct as _st, zlib as _zl
+    if raw_bytes[:8]!=b'\x89PNG\r\n\x1a\n':raise ValueError('not_a_png')
+    pos=8;w=h=bit_depth=color_type=0;idat=bytearray()
+    while pos<len(raw_bytes):
+        length=_st.unpack('>I',raw_bytes[pos:pos+4])[0]
+        ctype=raw_bytes[pos+4:pos+8]
+        chunk=raw_bytes[pos+8:pos+8+length]
+        pos+=12+length
+        if ctype==b'IHDR':
+            w,h,bit_depth,color_type,_,_,_=_st.unpack('>IIBBBBB',chunk)
+        elif ctype==b'IDAT':
+            idat.extend(chunk)
+        elif ctype==b'IEND':
+            break
+    if bit_depth!=8 or color_type not in (2,6):raise ValueError('unsupported_png_format')
+    bpp=3 if color_type==2 else 4
+    stride=w*bpp
+    data=_zl.decompress(bytes(idat))
+    rows=[];prev=bytearray(stride);idx=0
+    for _ in range(h):
+        ftype=data[idx];idx+=1
+        row=bytearray(data[idx:idx+stride]);idx+=stride
+        if ftype==1:
+            for i in range(bpp,stride):row[i]=(row[i]+row[i-bpp])&0xff
+        elif ftype==2:
+            for i in range(stride):row[i]=(row[i]+prev[i])&0xff
+        elif ftype==3:
+            for i in range(stride):
+                a=row[i-bpp] if i>=bpp else 0
+                row[i]=(row[i]+((a+prev[i])>>1))&0xff
+        elif ftype==4:
+            for i in range(stride):
+                a=row[i-bpp] if i>=bpp else 0
+                b=prev[i]
+                c=prev[i-bpp] if i>=bpp else 0
+                p=a+b-c;pa=abs(p-a);pb=abs(p-b);pc=abs(p-c)
+                pr=a if (pa<=pb and pa<=pc) else (b if pb<=pc else c)
+                row[i]=(row[i]+pr)&0xff
+        rows.append(row);prev=row
+    return w,h,bpp,rows
+
+def preview_image(args,cfg_dir=None):
+    dl_root=ensure_harmonika_downloads(cfg_dir)
+    gambar_dir=dl_root/'gambar'
+    target=None
+    if args:
+        cand=Path(args[0]).expanduser()
+        if not cand.is_absolute() and not cand.exists() and (gambar_dir/cand.name).is_file():
+            cand=gambar_dir/cand.name
+        target=cand.resolve()
+    else:
+        imgs=sorted([p for p in gambar_dir.glob('*.png') if p.is_file()],key=lambda x:x.stat().st_mtime,reverse=True)
+        if not imgs:raise ValueError('no_images_in_harmonika_gambar_folder')
+        target=imgs[0]
+    if not target.is_file():raise ValueError('image_file_not_found')
+    raw=target.read_bytes()
+    w,h,bpp,rows=_decode_png_rgb(raw)
+    cols=min(56,max(24,w))
+    rows_out=max(12,int((h/max(1,w))*cols*0.95))
+    if rows_out%2==1:rows_out+=1
+    O='\033[38;2;255;123;0m';B='\033[1m';G='\033[38;2;63;185;80m';C='\033[38;2;88;166;255m';R='\033[0m'
+    print(f"\n{O}╭──────────────────────────────────────────────────────────────────────────╮{R}")
+    print(f"{O}│{R}  {B}{O}HARMONIKA AI — TERMINAL TRUECOLOR IMAGE PREVIEW{R}                         {O}│{R}")
+    print(f"{O}├──────────────────────────────────────────────────────────────────────────┤{R}")
+    print(f"{O}│{R}  File     : {B}{target.name}{R}")
+    print(f"{O}│{R}  Resolusi : {G}{w}x{h} px{R} • Ukuran: {C}{len(raw)/1024:.1f} KB{R}")
+    print(f"{O}│{R}  Lokasi   : {target}")
+    print(f"{O}╰──────────────────────────────────────────────────────────────────────────╯{R}")
+    for y in range(0,rows_out,2):
+        sy1=min(h-1,int(y*h/rows_out))
+        sy2=min(h-1,int((y+1)*h/rows_out))
+        r1=rows[sy1];r2=rows[sy2]
+        line=['  ']
+        for x in range(cols):
+            sx=min(w-1,int(x*w/cols))
+            o1=sx*bpp;o2=sx*bpp
+            tr,tg,tb=r1[o1],r1[o1+1],r1[o1+2]
+            br,bg,bb=r2[o2],r2[o2+1],r2[o2+2]
+            line.append(f"\033[38;2;{tr};{tg};{tb}m\033[48;2;{br};{bg};{bb}m▀")
+        line.append(f"{R}")
+        print(''.join(line))
+    print()
+    return {'ok':True,'file':str(target),'width':w,'height':h,'size_bytes':len(raw)}
 
 def create_zip_bundle(args,cfg_dir=None):
     dl_root=ensure_harmonika_downloads(cfg_dir)
@@ -609,6 +697,9 @@ def main():
         res=switch_theme(args[1:],os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')),os.environ.get('HARMONIKA_GLOBAL_DATA',str(Path.home()/'.local/share/harmonika')))
         if not args[1:]:return
         result=res
+    elif args and args[0]=='preview':
+        res=preview_image(args[1:],os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
+        return
     elif args and args[0] in ('zip','export'):
         result=create_zip_bundle(args[1:],os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     elif args==['update']:
