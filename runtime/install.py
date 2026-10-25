@@ -87,7 +87,7 @@ def ensure_default_config(root=ROOT):
                 'progress':True,'auto_lsp':False,'data_directory':'.harmonika','disable_provider_auto_update':True,
                 'disabled_skills':['built-in-browser','chrome-browser','computer-use','crush-config','crush-hooks','harmonika-config','harmonika-hooks','deep-research','docs','docx','google-workspace','import-memory','jq','learn','morning','pdf','pptx','setup-writing-style','skill-creator','theme-factory','xlsx'],
                 'request_timeout':120,
-                'tui':{'compact_mode':True,'diff_mode':'unified','active_theme':'harmonika-dark','scrollbar':'always','mouse':True,'exit_banner':'compact'},
+                'tui':{'compact_mode':False,'diff_mode':'unified','active_theme':'harmonika-dark','scrollbar':'always','mouse':True,'exit_banner':'compact'},
                 'skills_paths':[str(root/'current/skills')]
             },
             'permissions':{'allowed_tools':[]},
@@ -110,6 +110,7 @@ def ensure_default_config(root=ROOT):
         except Exception:pass
     crush_alias=cfg_dir/'crush.json'
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
+    m.ensure_themes(cfg_dir,share_dir)
     m.ensure_harmonika_downloads(cfg_dir)
 
 def fetch_remote_bootstrap(root=ROOT):

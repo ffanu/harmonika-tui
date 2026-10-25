@@ -285,6 +285,113 @@ def doctor(root=ROOT):
         'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,
         'automatic_update':False,'active_sessions_untouched':True}
 
+HARMONIKA_THEMES = {
+    'harmonika-dark': {
+        'base':'charmtone-panther','primary':'#ff7b00','secondary':'#ff9e00','accent':'#ffa657','on_primary':'#0b0e14',
+        'bg_base':'#0b0e14','bg_less_visible':'#131822','bg_least_visible':'#1c2331','bg_most_visible':'#283246',
+        'fg_base':'#f0f6fc','fg_subtle':'#d1d7e0','fg_more_subtle':'#9198a1','fg_most_subtle':'#6e7681','button_subtle':'#1c2331',
+        'info':'#58a6ff','info_more_subtle':'#1f6feb','info_most_subtle':'#0d419d',
+        'success':'#3fb950','success_more_subtle':'#238636','success_most_subtle':'#12261e',
+        'warning':'#ff9e00','warning_subtle':'#9e6a03','error':'#f85149','plan':'#ff7b00','plan_more_subtle':'#3d2200',
+        'diff_insert_fg':'#7ee787','diff_insert_code_bg':'#12261e','diff_insert_gutter_bg':'#19362a',
+        'diff_delete_fg':'#ff7b72','diff_delete_code_bg':'#2d1619','diff_delete_gutter_bg':'#3d1d21',
+        'ansi_black':'#484f58','ansi_red':'#ff7b72','ansi_green':'#3fb950','ansi_yellow':'#ffa657',
+        'ansi_blue':'#58a6ff','ansi_magenta':'#d2a8ff','ansi_cyan':'#39c5cf','ansi_white':'#b1bac4',
+        'ansi_bright_black':'#6e7681','ansi_bright_red':'#ffa198','ansi_bright_green':'#7ee787','ansi_bright_yellow':'#ffdf5d',
+        'ansi_bright_blue':'#79c0ff','ansi_bright_magenta':'#e2c5ff','ansi_bright_cyan':'#56d4dd','ansi_bright_white':'#ffffff'
+    },
+    'harmonika-cyber': {
+        'base':'charmtone-panther','primary':'#00e5ff','secondary':'#ff7b00','accent':'#7c4dff','on_primary':'#080b12',
+        'bg_base':'#080b12','bg_less_visible':'#0f1523','bg_least_visible':'#182236','bg_most_visible':'#24324f',
+        'fg_base':'#e6edf3','fg_subtle':'#c9d1d9','fg_more_subtle':'#8b949e','fg_most_subtle':'#6e7681','button_subtle':'#182236',
+        'info':'#00e5ff','info_more_subtle':'#00838f','info_most_subtle':'#004d40',
+        'success':'#00e676','success_more_subtle':'#1b5e20','success_most_subtle':'#0d2b14',
+        'warning':'#ffab00','warning_subtle':'#8f6000','error':'#ff5252','plan':'#00e5ff','plan_more_subtle':'#003344',
+        'diff_insert_fg':'#69f0ae','diff_insert_code_bg':'#0d2b1d','diff_insert_gutter_bg':'#143d29',
+        'diff_delete_fg':'#ff8a80','diff_delete_code_bg':'#2e1419','diff_delete_gutter_bg':'#401b22',
+        'ansi_black':'#484f58','ansi_red':'#ff5252','ansi_green':'#00e676','ansi_yellow':'#ffd740',
+        'ansi_blue':'#40c4ff','ansi_magenta':'#e040fb','ansi_cyan':'#00e5ff','ansi_white':'#c9d1d9',
+        'ansi_bright_black':'#6e7681','ansi_bright_red':'#ff8a80','ansi_bright_green':'#69f0ae','ansi_bright_yellow':'#ffe57f',
+        'ansi_bright_blue':'#80d8ff','ansi_bright_magenta':'#ea80fc','ansi_bright_cyan':'#84ffff','ansi_bright_white':'#ffffff'
+    },
+    'harmonika-mocha': {
+        'base':'charmtone-panther','primary':'#fab387','secondary':'#cba6f7','accent':'#f9e2af','on_primary':'#181825',
+        'bg_base':'#181825','bg_less_visible':'#1e1e2e','bg_least_visible':'#313244','bg_most_visible':'#45475a',
+        'fg_base':'#cdd6f4','fg_subtle':'#bac2de','fg_more_subtle':'#a6adc8','fg_most_subtle':'#6c7086','button_subtle':'#313244',
+        'info':'#89b4fa','info_more_subtle':'#4569a0','info_most_subtle':'#253759',
+        'success':'#a6e3a1','success_more_subtle':'#3a6e43','success_most_subtle':'#1f3a25',
+        'warning':'#f9e2af','warning_subtle':'#8c7848','error':'#f38ba8','plan':'#fab387','plan_more_subtle':'#4a3222',
+        'diff_insert_fg':'#a6e3a1','diff_insert_code_bg':'#1e3326','diff_insert_gutter_bg':'#274231',
+        'diff_delete_fg':'#f38ba8','diff_delete_code_bg':'#361f28','diff_delete_gutter_bg':'#472834',
+        'ansi_black':'#45475a','ansi_red':'#f38ba8','ansi_green':'#a6e3a1','ansi_yellow':'#f9e2af',
+        'ansi_blue':'#89b4fa','ansi_magenta':'#cba6f7','ansi_cyan':'#94e2d5','ansi_white':'#bac2de',
+        'ansi_bright_black':'#585b70','ansi_bright_red':'#f38ba8','ansi_bright_green':'#a6e3a1','ansi_bright_yellow':'#f9e2af',
+        'ansi_bright_blue':'#89b4fa','ansi_bright_magenta':'#f5c2e7','ansi_bright_cyan':'#94e2d5','ansi_bright_white':'#ffffff'
+    },
+}
+
+def ensure_themes(cfg_dir=None,data_dir=None):
+    cdir=Path(cfg_dir) if cfg_dir else (Path.home()/'.config/harmonika')
+    ddir=Path(data_dir) if data_dir else (Path.home()/'.local/share/harmonika')
+    themes_dir=cdir/'themes'
+    themes_dir.mkdir(parents=True,exist_ok=True)
+    for tname,tval in HARMONIKA_THEMES.items():
+        (themes_dir/(tname+'.json')).write_text(json.dumps(tval,indent=2)+'\n')
+    ddir.mkdir(parents=True,exist_ok=True)
+    return themes_dir
+
+def switch_theme(args,cfg_dir=None,data_dir=None):
+    cdir=Path(cfg_dir) if cfg_dir else (Path.home()/'.config/harmonika')
+    ddir=Path(data_dir) if data_dir else (Path.home()/'.local/share/harmonika')
+    ensure_themes(cdir,ddir)
+    aliases={'dark':'harmonika-dark','harmonika-dark':'harmonika-dark','orange':'harmonika-dark',
+             'cyber':'harmonika-cyber','harmonika-cyber':'harmonika-cyber','neon':'harmonika-cyber',
+             'mocha':'harmonika-mocha','harmonika-mocha':'harmonika-mocha','warm':'harmonika-mocha'}
+    h_cfg_path=cdir/'harmonika.json'
+    c_cfg_path=cdir/'crush.json'
+    d_cfg_path=ddir/'crush.json'
+    cur_theme='harmonika-dark'
+    if h_cfg_path.is_file():
+        try:cur_theme=json.loads(h_cfg_path.read_text()).get('options',{}).get('tui',{}).get('active_theme','harmonika-dark')
+        except Exception:pass
+    O='\033[38;2;255;123;0m';B='\033[1m';G='\033[38;2;63;185;80m';C='\033[38;2;0;229;255m';M='\033[38;2;250;179;135m';R='\033[0m'
+    if not args:
+        print(f"\n{O}╭──────────────────────────────────────────────────────────────────────────╮{R}")
+        print(f"{O}│{R}  {B}{O}HARMONIKA AI — PILIHAN TEMA TERMINAL MODERN{R}                             {O}│{R}")
+        print(f"{O}├──────────────────────────────────────────────────────────────────────────┤{R}")
+        print(f"{O}│{R}  Tema Aktif Saat Ini : {G}{B}{cur_theme:<49}{R} {O}│{R}")
+        print(f"{O}│{R}                                                                          {O}│{R}")
+        print(f"{O}│{R}  Pilihan Tema Resmi:                                                     {O}│{R}")
+        print(f"{O}│{R}    • {O}{B}harmonika-dark {R} — Signature Orange & Deep Obsidian (Default)        {O}│{R}")
+        print(f"{O}│{R}    • {C}{B}harmonika-cyber{R} — Modern Cyber Neon (Electric Cyan & Midnight)      {O}│{R}")
+        print(f"{O}│{R}    • {M}{B}harmonika-mocha{R} — Eye-Comfort Warm Mocha (Nyaman baca lama)         {O}│{R}")
+        print(f"{O}│{R}                                                                          {O}│{R}")
+        print(f"{O}│{R}  Cara ganti: {B}harmonika theme dark|cyber|mocha{R} atau tekan {B}Ctrl+P{R} di TUI  {O}│{R}")
+        print(f"{O}╰──────────────────────────────────────────────────────────────────────────╯{R}\n")
+        return {'ok':True,'active_theme':cur_theme,'available_themes':list(HARMONIKA_THEMES)}
+    chosen=aliases.get(args[0].strip().lower())
+    if not chosen:
+        raise ValueError('invalid_theme_use_dark_cyber_or_mocha')
+    for p in (h_cfg_path,c_cfg_path):
+        if p.is_file():
+            try:
+                obj=json.loads(p.read_text())
+                tui=obj.setdefault('options',{}).setdefault('tui',{})
+                tui['active_theme']=chosen
+                tui['compact_mode']=False
+                p.write_text(json.dumps(obj,indent=2)+'\n')
+            except Exception:pass
+    try:
+        d_obj=json.loads(d_cfg_path.read_text()) if d_cfg_path.is_file() else {}
+        d_tui=d_obj.setdefault('options',{}).setdefault('tui',{})
+        d_tui['active_theme']=chosen
+        d_tui['transparent']=False
+        d_tui['compact_mode']=False
+        d_cfg_path.write_text(json.dumps(d_obj,indent=2)+'\n')
+    except Exception:pass
+    print(f"{G}✓ Tema Harmonika TUI berhasil diubah ke:{R} {B}{chosen}{R}")
+    return {'ok':True,'active_theme':chosen}
+
 def ensure_harmonika_downloads(cfg_dir=None):
     cdir=Path(cfg_dir) if cfg_dir else (Path.home()/'.config/harmonika')
     dl_root=Path.home()/'Downloads'/'harmonika-ai'
@@ -498,6 +605,10 @@ def main():
         res=show_status(ROOT,as_json=('--json' in args))
         if '--json' not in args:return
         result=res
+    elif args and args[0]=='theme':
+        res=switch_theme(args[1:],os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')),os.environ.get('HARMONIKA_GLOBAL_DATA',str(Path.home()/'.local/share/harmonika')))
+        if not args[1:]:return
+        result=res
     elif args and args[0] in ('zip','export'):
         result=create_zip_bundle(args[1:],os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     elif args==['update']:
@@ -605,45 +716,39 @@ def main():
             except Exception:pass
         dev_id=device_id(cfg_dir)
         dev_nm=device_name()
-        # Ensure crush.json, harmonika.json, data_dir/crush.json, and themes/harmonika-dark.json stay in sync
+        # Ensure crush.json, harmonika.json, data_dir/crush.json, and all 3 modern themes stay in sync
         try:
-            themes_dir=Path(cfg_dir)/'themes'
-            themes_dir.mkdir(parents=True,exist_ok=True)
-            theme_file=themes_dir/'harmonika-dark.json'
-            if not theme_file.is_file():
-                orange_dark_theme={
-                    'base':'charmtone-panther','primary':'#ff7b00','secondary':'#ff9e00','accent':'#ffa657','on_primary':'#0d1117',
-                    'bg_base':'#0d1117','bg_less_visible':'#161b22','bg_least_visible':'#21262d','bg_most_visible':'#30363d',
-                    'fg_base':'#f0f6fc','fg_subtle':'#c9d1d9','fg_more_subtle':'#8b949e','fg_most_subtle':'#6e7681','button_subtle':'#21262d',
-                    'info':'#58a6ff','info_more_subtle':'#1f6feb','info_most_subtle':'#0d419d',
-                    'success':'#3fb950','success_more_subtle':'#238636','success_most_subtle':'#12261e',
-                    'warning':'#ff9e00','warning_subtle':'#9e6a03','error':'#f85149','plan':'#ff7b00','plan_more_subtle':'#3d2200',
-                    'diff_insert_fg':'#7ee787','diff_insert_code_bg':'#12261e','diff_insert_gutter_bg':'#19362a',
-                    'diff_delete_fg':'#ff7b72','diff_delete_code_bg':'#2d1619','diff_delete_gutter_bg':'#3d1d21',
-                    'ansi_black':'#484f58','ansi_red':'#ff7b72','ansi_green':'#3fb950','ansi_yellow':'#ffa657',
-                    'ansi_blue':'#58a6ff','ansi_magenta':'#d2a8ff','ansi_cyan':'#39c5cf','ansi_white':'#b1bac4',
-                    'ansi_bright_black':'#6e7681','ansi_bright_red':'#ffa198','ansi_bright_green':'#7ee787','ansi_bright_yellow':'#ffdf5d',
-                    'ansi_bright_blue':'#79c0ff','ansi_bright_magenta':'#e2c5ff','ansi_bright_cyan':'#56d4dd','ansi_bright_white':'#ffffff'
-                }
-                theme_file.write_text(json.dumps(orange_dark_theme,indent=2)+'\n')
-            Path(data_dir).mkdir(parents=True,exist_ok=True)
-            data_crush=Path(data_dir)/'crush.json'
-            if not data_crush.is_file():
-                data_crush.write_text('{"options":{"tui":{"transparent":false,"active_theme":"harmonika-dark"}}}\n')
+            ensure_themes(cfg_dir,data_dir)
             h_cfg_path=Path(cfg_dir)/'harmonika.json'
             c_cfg_path=Path(cfg_dir)/'crush.json'
+            data_crush=Path(data_dir)/'crush.json'
+            active_theme='harmonika-dark'
+            if data_crush.is_file():
+                try:
+                    d_obj=json.loads(data_crush.read_text())
+                    t_cand=d_obj.get('options',{}).get('tui',{}).get('active_theme','')
+                    if t_cand in HARMONIKA_THEMES:active_theme=t_cand
+                except Exception:pass
             if h_cfg_path.is_file():
                 cfg_obj=json.loads(h_cfg_path.read_text())
+                t_cand2=cfg_obj.get('options',{}).get('tui',{}).get('active_theme','')
+                if active_theme=='harmonika-dark' and t_cand2 in HARMONIKA_THEMES:
+                    active_theme=t_cand2
                 prov=cfg_obj.setdefault('providers',{}).setdefault('harmonika',{})
                 if api_key_val and os.name=='nt':
                     prov['api_key']=api_key_val
                 extra_hdrs=prov.setdefault('extra_headers',{})
                 extra_hdrs['X-Harmonika-Device-ID']=dev_id
                 extra_hdrs['X-Harmonika-Device-Name']=dev_nm
-                cfg_obj.setdefault('options',{}).setdefault('tui',{})['active_theme']='harmonika-dark'
+                tui_opts=cfg_obj.setdefault('options',{}).setdefault('tui',{})
+                tui_opts['active_theme']=active_theme
+                tui_opts['compact_mode']=False
+                tui_opts['scrollbar']='always'
                 rendered_cfg=json.dumps(cfg_obj,indent=2)+'\n'
                 h_cfg_path.write_text(rendered_cfg)
                 c_cfg_path.write_text(rendered_cfg)
+            if not data_crush.is_file():
+                data_crush.write_text(json.dumps({'options':{'tui':{'transparent':False,'compact_mode':False,'active_theme':active_theme}}})+'\n')
         except Exception:
             pass
         env=dict(os.environ,
