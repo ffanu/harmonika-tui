@@ -365,10 +365,50 @@ def main():
         if key_file.is_file():
             try:api_key_val=key_file.read_text().strip()
             except Exception:pass
+        # Ensure crush.json, harmonika.json, data_dir/crush.json, and themes/harmonika-dark.json stay in sync
+        try:
+            themes_dir=Path(cfg_dir)/'themes'
+            themes_dir.mkdir(parents=True,exist_ok=True)
+            theme_file=themes_dir/'harmonika-dark.json'
+            if not theme_file.is_file():
+                orange_dark_theme={
+                    'base':'charmtone-panther','primary':'#ff7b00','secondary':'#ff9e00','accent':'#ffa657','on_primary':'#0d1117',
+                    'bg_base':'#0d1117','bg_less_visible':'#161b22','bg_least_visible':'#21262d','bg_most_visible':'#30363d',
+                    'fg_base':'#f0f6fc','fg_subtle':'#c9d1d9','fg_more_subtle':'#8b949e','fg_most_subtle':'#6e7681','button_subtle':'#21262d',
+                    'info':'#58a6ff','info_more_subtle':'#1f6feb','info_most_subtle':'#0d419d',
+                    'success':'#3fb950','success_more_subtle':'#238636','success_most_subtle':'#12261e',
+                    'warning':'#ff9e00','warning_subtle':'#9e6a03','error':'#f85149','plan':'#ff7b00','plan_more_subtle':'#3d2200',
+                    'diff_insert_fg':'#7ee787','diff_insert_code_bg':'#12261e','diff_insert_gutter_bg':'#19362a',
+                    'diff_delete_fg':'#ff7b72','diff_delete_code_bg':'#2d1619','diff_delete_gutter_bg':'#3d1d21',
+                    'ansi_black':'#484f58','ansi_red':'#ff7b72','ansi_green':'#3fb950','ansi_yellow':'#ffa657',
+                    'ansi_blue':'#58a6ff','ansi_magenta':'#d2a8ff','ansi_cyan':'#39c5cf','ansi_white':'#b1bac4',
+                    'ansi_bright_black':'#6e7681','ansi_bright_red':'#ffa198','ansi_bright_green':'#7ee787','ansi_bright_yellow':'#ffdf5d',
+                    'ansi_bright_blue':'#79c0ff','ansi_bright_magenta':'#e2c5ff','ansi_bright_cyan':'#56d4dd','ansi_bright_white':'#ffffff'
+                }
+                theme_file.write_text(json.dumps(orange_dark_theme,indent=2)+'\n')
+            Path(data_dir).mkdir(parents=True,exist_ok=True)
+            data_crush=Path(data_dir)/'crush.json'
+            if not data_crush.is_file():
+                data_crush.write_text('{"options":{"tui":{"transparent":false,"active_theme":"harmonika-dark"}}}\n')
+            h_cfg_path=Path(cfg_dir)/'harmonika.json'
+            c_cfg_path=Path(cfg_dir)/'crush.json'
+            if h_cfg_path.is_file():
+                cfg_obj=json.loads(h_cfg_path.read_text())
+                if api_key_val and os.name=='nt':
+                    cfg_obj.setdefault('providers',{}).setdefault('harmonika',{})['api_key']=api_key_val
+                cfg_obj.setdefault('options',{}).setdefault('tui',{})['active_theme']='harmonika-dark'
+                rendered_cfg=json.dumps(cfg_obj,indent=2)+'\n'
+                h_cfg_path.write_text(rendered_cfg)
+                c_cfg_path.write_text(rendered_cfg)
+        except Exception:
+            pass
         env=dict(os.environ,
             HARMONIKA_DISABLE_PROVIDER_AUTO_UPDATE='1',
+            CRUSH_DISABLE_PROVIDER_AUTO_UPDATE='1',
             HARMONIKA_GLOBAL_CONFIG=cfg_dir,
+            CRUSH_GLOBAL_CONFIG=cfg_dir,
             HARMONIKA_GLOBAL_DATA=data_dir,
+            CRUSH_GLOBAL_DATA=data_dir,
             **({'HARMONIKA_API_KEY':api_key_val} if api_key_val else {}))
         bpath=directory/bin_name()
         if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'

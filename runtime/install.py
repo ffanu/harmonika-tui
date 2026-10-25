@@ -93,8 +93,8 @@ def ensure_default_config(root=ROOT):
             'mcp':{'harmonika':{'type':'stdio','command':m.NODE,'args':[str(root/'current/tools/mcp-server.cjs')],'timeout':240}}
         }
         cfg_file.write_text(json.dumps(default_cfg,indent=2)+'\n')
-        crush_alias=cfg_dir/'crush.json'
-        if not crush_alias.exists():shutil.copy2(cfg_file,crush_alias)
+    crush_alias=cfg_dir/'crush.json'
+    if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
 
 def fetch_remote_bootstrap(root=ROOT):
     ensure_public_key(root)
@@ -178,13 +178,26 @@ def write_windows_wrappers(root=ROOT):
         except Exception:
             pass
 
+def _needs_binary_rebrand(selected):
+    try:
+        bpath=selected/m.bin_name()
+        if not bpath.exists() and (selected/'harmonika').exists():bpath=selected/'harmonika'
+        if not bpath.is_file():return True
+        logo_sig=bytes.fromhex('e29688202020e2968820e29684e29680e29680e29680e29684')
+        return logo_sig not in bpath.read_bytes()
+    except Exception:
+        return True
+
 def main(package=None):
     global BINARY
     has_active=False
+    selected_dir=None
     try:
-        m.active(ROOT)
+        selected_dir,_=m.active(ROOT)
         has_active=True
     except Exception:
+        has_active=False
+    if has_active and package is None and _needs_binary_rebrand(selected_dir):
         has_active=False
     if has_active or (package is not None and (ROOT/'current').exists()):
         if package is not None:
@@ -192,6 +205,12 @@ def main(package=None):
         ensure_default_config(ROOT)
         atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
         if os.name=='nt':write_windows_wrappers(ROOT)
+        try:
+            res=m.update(['--apply'])
+            if res.get('updated'):
+                ensure_default_config(ROOT)
+        except Exception:
+            pass
         print(json.dumps(m.doctor(),indent=2))
         return
     # Clean up any broken partial 'current' pointer before fresh bootstrap
@@ -253,7 +272,7 @@ def activate(stage,manifest):
     if target.exists():
         if m.verify_envelope((target/'release.json').read_bytes(),ROOT)!=manifest:raise ValueError('release_name_conflict')
         bname=m.bin_name()
-        if (stage/bname).is_file() and not (target/bname).is_file():
+        if (stage/bname).is_file():
             shutil.copy2(stage/bname,target/bname)
         if os.name=='nt' and (target/bname).is_file():
             (target/'binary.sha256').write_text(m.digest(target/bname))
@@ -264,6 +283,7 @@ def activate(stage,manifest):
     atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
     m.switch(release,ROOT)
     atomic_text(configfile,encoded)
+    atomic_text(configfile.parent/'crush.json',encoded)
     if os.name == 'nt':
         write_windows_wrappers(ROOT)
     else:
