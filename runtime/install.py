@@ -221,9 +221,16 @@ def main(package=None):
         atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
         if os.name=='nt':write_windows_wrappers(ROOT)
         try:
-            res=m.update(['--apply'])
-            if res.get('updated'):
-                ensure_default_config(ROOT)
+            chk=m.check_update(ROOT)
+            if chk.get('update_available') and chk.get('package_url'):
+                tmp_pkg=ROOT/('update-'+chk['latest']+'.zip')
+                try:
+                    with urllib.request.build_opener(m.SameOrigin()).open(chk['package_url'],timeout=120) as r, open(tmp_pkg,'wb') as out:
+                        shutil.copyfileobj(r,out)
+                    m.install_package(tmp_pkg,ROOT)
+                    ensure_default_config(ROOT)
+                finally:
+                    tmp_pkg.unlink(missing_ok=True)
         except Exception:
             pass
         print(json.dumps(m.doctor(),indent=2))

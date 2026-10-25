@@ -226,6 +226,8 @@ def _install_package(package,root=ROOT):
             bname=bin_name() if (current/bin_name()).exists() else 'harmonika'
             shutil.copy2(current/bname,stage/bname)
             os.chmod(stage/bname,0o755)
+            if os.name=='nt':
+                (stage/'binary.sha256').write_text(digest(stage/bname))
             preflight(stage,manifest)
             stage.rename(target)
             atomic_state(root/'previous',current.name)
