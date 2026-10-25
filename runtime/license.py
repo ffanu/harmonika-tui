@@ -16,6 +16,13 @@ ENDPOINT='https://chat.harmonika.id/v1/public-ai/capabilities'
 CONFIG=Path.home()/'.config/harmonika'
 OWNER_WHATSAPP='085771378237'
 
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, 'reconfigure'):
+        try:
+            _stream.reconfigure(encoding='utf-8', errors='replace')
+        except Exception:
+            pass
+
 class LicenseError(ValueError):pass
 class NoRedirect(request.HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs):raise LicenseError('license_redirect_refused')
@@ -28,9 +35,17 @@ def device_name():
     node=platform.node() or 'terminal'
     return f"{node} ({platform.system()}-{platform.machine()})"[:72]
 
+def clean_key_input(raw):
+    if not isinstance(raw,str):return ''
+    text=raw.strip()
+    if '\r' in text or '\n' in text:return text
+    m=re.search(r'hai_[A-Za-z0-9_]{16,240}',text)
+    return m.group(0) if m else text
+
 def validate_key(key):
-    if not isinstance(key,str) or not re.fullmatch(r'hai_[A-Za-z0-9_]{16,240}',key):raise LicenseError('invalid_key_format')
-    return key
+    cleaned=clean_key_input(key)
+    if not isinstance(cleaned,str) or not re.fullmatch(r'hai_[A-Za-z0-9_]{16,240}',cleaned):raise LicenseError('invalid_key_format')
+    return cleaned
 
 def summary(data):
     if not isinstance(data,dict) or data.get('ok') is not True:raise LicenseError('invalid_license_response')
@@ -117,10 +132,20 @@ def interactive_tui_box(config=CONFIG):
     sys.stderr.write(box + "\n")
     while True:
         try:
-            entered = getpass.getpass(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}").strip()
+            if os.name == 'nt':
+                sys.stderr.write(f"  {orange}🔑 Paste API Key Lisensi Harmonika (hai_live_...) lalu tekan Enter:{reset}\n  > ")
+                sys.stderr.flush()
+                entered = sys.stdin.readline().strip()
+            else:
+                entered = getpass.getpass(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}").strip()
+                if not entered:
+                    sys.stderr.write(f"  {dim}(Jika paste tersembunyi tidak terbaca, tempel di sini lalu Enter): {reset}")
+                    sys.stderr.flush()
+                    entered = sys.stdin.readline().strip()
         except (KeyboardInterrupt, EOFError):
             sys.stderr.write(f"\n  {dim}Aktivasi dibatalkan.{reset}\n")
             sys.exit(1)
+        entered = clean_key_input(entered)
         if not entered:
             sys.stderr.write(f"  {red}✖ API Key tidak boleh kosong. Hubungi WhatsApp {OWNER_WHATSAPP} untuk meminta API Key.{reset}\n\n")
             continue
@@ -133,19 +158,21 @@ def interactive_tui_box(config=CONFIG):
             if code == 'device_already_bound':
                 sys.stderr.write(f"\n  {red}✖ Lisensi API Key ini sudah digunakan di perangkat lain (1 Key = 1 Device).{reset}\n  {amber}📞 Hubungi WhatsApp {OWNER_WHATSAPP} untuk meminta API Key baru atau reset device.{reset}\n\n")
             elif code == 'invalid_key_format':
-                sys.stderr.write(f"\n  {red}✖ Format API Key tidak valid (harus diawali hai_...).{reset}\n  {amber}📞 Hubungi WhatsApp {OWNER_WHATSAPP} jika Anda belum memiliki API Key.{reset}\n\n")
+                sys.stderr.write(f"\n  {red}✖ Format API Key tidak valid (harus diawali hai_live_...).{reset}\n  {amber}📞 Hubungi WhatsApp {OWNER_WHATSAPP} jika Anda belum memiliki API Key.{reset}\n\n")
             else:
-                sys.stderr.write(f"\n  {red}✖ API Key tidak valid atau sudah dicabut ({code}).{reset}\n  {amber}📞 Hubungi WhatsApp {OWNER_WHATSAPP} untuk meminta API Key aktif.{reset}\n\n")
+                sys.stderr.write(f"\n  {red}✖ API Key tidak valid atau gagal diverifikasi ({code}).{reset}\n  {amber}📞 Hubungi WhatsApp {OWNER_WHATSAPP} untuk meminta API Key aktif.{reset}\n\n")
 
 def main(args):
     if args==['check']:
         file=CONFIG/'harmonika-api-key'
         if not file.is_file() or file.is_symlink():raise LicenseError('license_key_not_configured')
         result=check(file.read_text().strip())
+    elif len(args)==2 and args[0]=='activate':
+        result=activate(clean_key_input(args[1]),CONFIG)
     elif args==['activate']:
         if not sys.stdin.isatty():raise LicenseError('activation_requires_private_terminal_prompt')
         result=interactive_tui_box(CONFIG)
-    else:raise LicenseError('usage: python3 runtime/license.py check|activate')
+    else:raise LicenseError('usage: python3 runtime/license.py check|activate [KEY]')
     print(json.dumps(result,ensure_ascii=False,indent=2))
 
 if __name__=='__main__':

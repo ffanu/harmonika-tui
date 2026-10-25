@@ -285,11 +285,12 @@ def main():
         command=[executable,*(['-I'] if args[1]=='documents' else []),str(directory/'skills'/script),*args[2:]]
         run_exec(command)
         return
-    elif args in (['license'],['login']):
+    elif args and args[0] in ('license','login'):
         directory,manifest=active();verify_files(directory,manifest)
         lic_script=directory/'tools/license.py'
         if not lic_script.exists():lic_script=Path(__file__).resolve().parent/'license.py'
-        run_exec([sys.executable,'-I',str(lic_script),'activate'])
+        extra=args[1:] if len(args)>1 else []
+        run_exec([sys.executable,'-I',str(lic_script),'activate',*extra])
         return
     elif args and args[0] in {'update','doctor'}:raise ValueError('usage: harmonika doctor | update --check | update --apply PACKAGE | rollback')
     else:
@@ -305,10 +306,15 @@ def main():
                 res=subprocess.run([sys.executable,'-I',str(lic_script),'activate'])
                 if res.returncode!=0 or not key_file.is_file():
                     sys.exit(res.returncode or 1)
+        api_key_val=''
+        if key_file.is_file():
+            try:api_key_val=key_file.read_text().strip()
+            except Exception:pass
         env=dict(os.environ,
             HARMONIKA_DISABLE_PROVIDER_AUTO_UPDATE='1',
             HARMONIKA_GLOBAL_CONFIG=cfg_dir,
-            HARMONIKA_GLOBAL_DATA=data_dir)
+            HARMONIKA_GLOBAL_DATA=data_dir,
+            **({'HARMONIKA_API_KEY':api_key_val} if api_key_val else {}))
         bpath=directory/bin_name()
         if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'
         if os.name == 'nt':

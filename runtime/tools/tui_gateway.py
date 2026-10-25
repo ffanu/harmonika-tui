@@ -93,7 +93,7 @@ class Server(ThreadingHTTPServer):
 
 def read_key(config=CONFIG):
     file=config/'harmonika-api-key'
-    if file.is_symlink() or file.stat().st_mode & 0o077:raise GatewayError('unsafe_key_permissions')
+    if file.is_symlink() or (os.name!='nt' and (file.stat().st_mode & 0o077)):raise GatewayError('unsafe_key_permissions')
     key=file.read_text().strip()
     if not key or '\n' in key or '\r' in key:raise GatewayError('invalid_key')
     return key

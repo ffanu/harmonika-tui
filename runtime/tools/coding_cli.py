@@ -19,7 +19,7 @@ def request(method,path,payload=None,key=None):
     fd=os.open(file,flags)
     with os.fdopen(fd) as src:
         info=os.fstat(src.fileno())
-        if not stat.S_ISREG(info.st_mode) or info.st_uid!=os.getuid() or info.st_mode&0o077:raise ValueError('unsafe_key_file')
+        if not stat.S_ISREG(info.st_mode) or (os.name!='nt' and (info.st_uid!=os.getuid() or info.st_mode&0o077)):raise ValueError('unsafe_key_file')
         token=src.read(256).strip()
     if not token.startswith('hai_') or len(token)>200:raise ValueError('invalid_key_file')
     raw=json.dumps(payload,ensure_ascii=False).encode() if payload is not None else None

@@ -23,7 +23,7 @@ def request(method,path,body=None,idempotency_key=None,*,base=BASE,timeout=65):
  fd=os.open(Path.home()/'.config/harmonika/harmonika-api-key',os.O_RDONLY|getattr(os,'O_NOFOLLOW',0)|getattr(os,'O_NONBLOCK',0))
  with os.fdopen(fd) as f:
   s=os.fstat(f.fileno())
-  if not stat.S_ISREG(s.st_mode) or s.st_uid!=os.getuid() or s.st_mode&0o077:raise ValueError('unsafe_key_file')
+  if not stat.S_ISREG(s.st_mode) or (os.name!='nt' and (s.st_uid!=os.getuid() or s.st_mode&0o077)):raise ValueError('unsafe_key_file')
   key=f.read(256).strip()
  if not key.startswith('hai_') or len(key)>200:raise ValueError('invalid_key_file')
  if method=='POST' and path=='/invoke' and base==BASE and body is not None and not body.get('context'):

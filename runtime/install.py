@@ -43,12 +43,12 @@ def ensure_public_key(root=ROOT):
 def ensure_dependencies(root=ROOT):
     tools_dir=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(Path.home()/'.config/harmonika/harmonika-tools')))
     if not (tools_dir/'node_modules/@modelcontextprotocol/sdk').exists() or not (tools_dir/'node_modules/ajv').exists():
-        npm=shutil.which('npm') or str(Path.home()/'.local/node/bin/npm')
+        npm=shutil.which('npm.cmd' if os.name=='nt' else 'npm') or shutil.which('npm') or str(Path.home()/'.local/node/bin/npm')
         if Path(npm).exists() or shutil.which('npm'):
             tools_dir.mkdir(parents=True,exist_ok=True)
             pkg={'name':'harmonika-tools','private':True,'dependencies':{'@modelcontextprotocol/sdk':'^1.0.0','ajv':'^8.17.1'}}
             (tools_dir/'package.json').write_text(json.dumps(pkg,indent=2))
-            subprocess.run([npm,'install','--no-audit','--no-fund'],cwd=str(tools_dir),check=True,timeout=180)
+            subprocess.run([npm,'install','--no-audit','--no-fund'],cwd=str(tools_dir),check=True,timeout=180,shell=(os.name=='nt'))
 
 def ensure_default_config(root=ROOT):
     cfg_dir=Path.home()/'.config/harmonika'
@@ -159,7 +159,12 @@ def _prepare(package,stage):
 
 def main(package=None):
     global BINARY
-    if (ROOT/'current').exists():raise ValueError('already_installed_use_manual_update')
+    if (ROOT/'current').exists():
+        if package is not None:
+            raise ValueError('already_installed_use_manual_update')
+        ensure_default_config(ROOT)
+        print(json.dumps({'ok':True,'status':'already_installed'},indent=2))
+        return
     downloaded_bin=downloaded_pkg=None
     try:
         if not package:
