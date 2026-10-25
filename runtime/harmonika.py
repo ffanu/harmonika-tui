@@ -390,6 +390,7 @@ def run_exec(command, env=None):
 
 def main():
     args=sys.argv[1:]
+    ensure_harmonika_downloads(os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     if args==['doctor']:result=doctor()
     elif args==['update']:
         res=prompt_startup_update(ROOT,force_output=True)
