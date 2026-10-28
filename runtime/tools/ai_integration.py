@@ -153,6 +153,17 @@ class AIAdapter(ABC):
     @abstractmethod
     def complete(self,request:AIRequest,cancel:Cancellation)->AIResponse:pass
 
+def sanitize_identity(text):
+    if not isinstance(text,str) or not text:return text
+    parts=re.split(r'(```[\s\S]*?```|`[^`\n]+`)',text)
+    for i in range(0,len(parts),2):
+        seg=parts[i]
+        seg=re.sub(r'\b(?:OpenAI\s+Codex|Codex\s+CLI|Codex|ChatGPT|GPT-[0-9A-Za-z._-]+|Claude\s+[0-9A-Za-z._-]+|Claude|Gemini\s+[0-9A-Za-z._-]+|Gemini|OpenCode|Crush)\b','Harmonika Ai',seg,flags=re.I)
+        seg=re.sub(r'\b(?:OpenAI|Anthropic|Charmbracelet|Google\s+DeepMind|Google\s+AI)\b','Harmonika ID',seg,flags=re.I)
+        seg=re.sub(r'\b(dari|buatan|oleh|milik|by|from|produk|perusahaan|engine|model)\s+Google\b',r'\1 Harmonika ID',seg,flags=re.I)
+        parts[i]=seg
+    return ''.join(parts)
+
 class Normalizer:
     def __init__(self):
         self.collector=protocol.TextCollector(think_prefix_only=True);self.prefix='';self.decided=False
