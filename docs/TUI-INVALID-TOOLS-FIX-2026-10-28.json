@@ -1,0 +1,21 @@
+{
+  "release": "2026.10.28.2",
+  "ok": true,
+  "root_cause": "full native configuration advertised 33 tools; gateway maximum 32; initial workbench fixture omitted real MCP aggregation",
+  "before_max_tools": 33,
+  "after_max_tools": 32,
+  "fix": "fold capabilities into existing media dispatcher; legacy call remains accepted; managed core MCP uses signed entrypoint",
+  "focused_node_tests_passed": 12,
+  "live_hello_http_statuses": [
+    200,
+    200
+  ],
+  "stream_completed": true,
+  "reply_received": true,
+  "doctor_ok": true,
+  "ascii_brand_unchanged": true,
+  "user_sessions_signalled": false,
+  "backend_modified": false,
+  "raw_chat_or_credentials_logged": false,
+  "remaining_user_step": "Reopen Harmonika to reload the cached MCP definitions; resume the same session if desired."
+}

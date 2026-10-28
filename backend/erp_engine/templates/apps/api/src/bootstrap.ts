@@ -1,0 +1,4 @@
+import {db} from './db';
+import {passwordHash} from './auth';
+async function main(){const {OWNER_EMAIL,OWNER_PASSWORD,OWNER_TENANT_SLUG,OWNER_COMPANY,ALLOW_BOOTSTRAP}=process.env;if(ALLOW_BOOTSTRAP!=='true'||!OWNER_EMAIL||!OWNER_PASSWORD||OWNER_PASSWORD.length<12||!OWNER_TENANT_SLUG||!OWNER_COMPANY)throw Error('bootstrap_configuration_required');const hash=await passwordHash(OWNER_PASSWORD);await db.$transaction(async tx=>{const tenant=await tx.tenant.create({data:{name:OWNER_COMPANY,slug:OWNER_TENANT_SLUG}});await tx.$executeRaw`SELECT set_config('app.tenant_id',${tenant.id},true)`;await tx.user.create({data:{tenantId:tenant.id,email:OWNER_EMAIL.toLowerCase(),passwordHash:hash,role:'admin'}});});console.log('Owner created; no sample customers or transactions inserted.');}
+main().catch(()=>{console.error('Bootstrap failed; existing data was not replaced.');process.exitCode=1;}).finally(()=>db.$disconnect());

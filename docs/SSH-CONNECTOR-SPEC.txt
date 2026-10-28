@@ -1,0 +1,76 @@
+HARMONIKA SSH CONNECTOR — SPEC 1.0, 2026-10-26
+Metadata: ssh.connect/ssh.exec/ssh.upload/ssh.download, prioritas HIGH, Codex owner/reviewer.
+1 Overview: Dedicated local connector for registered owner SSH targets, independent
+  of bash policy and inference provider. Existing backend builder SSH remains separate.
+2 Requirements: Alias only; exec argv allowlist; relative remote/local file paths;
+  private-key authentication, pinned known_hosts, no password or dynamic host fields.
+  Outputs: schema_version, ok, skill_id, status, data or structured error.
+  connect means verified nonpersistent connection, not a long-lived shell session.
+3 Design: TUI native permission -> MCP stdio -> bounded Python worker -> Paramiko
+  SSH/SFTP -> operator-registered endpoint. CLI shares exactly the same worker.
+  Dependencies: Paramiko 4.0.0 and MCP SDK already used by Harmonika.
+  Local config 0600, trusted owner; audit SQLite WAL, mechanic-only columns.
+4 Nonfunctional: connect/banner/auth <=8 seconds; exec <=120 seconds; output <=64KiB;
+  transfers <=10MiB/60 seconds. MCP process timeout cancels only its own worker.
+  No claims of load/SLA beyond measured tests. No firewall or sandbox network broadening.
+5 Errors: invalid_input, target_not_registered, ssh_host_key_rejected,
+  ssh_auth_failed, ssh_timeout, ssh_command_not_allowed, path_denied,
+  destination_exists, file_too_large, ssh_connection_failed, remote_state_unknown.
+  No automatic retry of remote mutations; uncertain status is explicit.
+6 Evidence: verify keys/exit/checksums; never infer successful execution from plans.
+  No private text, credentials, prompts, filenames or remote output in audit/logs.
+7 Tests: strict config/schema/path guards; unknown/mismatched host keys, auth failure,
+  output limit, timeout, exit code; real isolated SSH/SFTP staging; production read-only
+  connectivity first, then own temporary transfer fixture, never existing user files.
+8 Monitoring: SQLite timestamp, skill_id, status, error_type, latency_ms only.
+  Retain at most5000 mechanic records. stdout is protocol; stderr never carries exceptions.
+9 Deployment: signed helper-only release; binary/branding unchanged; atomic config update;
+  no automatic updates and no killing/restarting user TUI sessions. Roll back symlink/config.
+10 Docs: this spec, runtime skill instructions, README and example public config (no keys).
+11 Acceptance: local tests + MCP protocol + isolated staging + real registered target proof;
+  doctor verifies release. Existing sessions may require a native MCP reconnect/new resume.
+  Missing connector/config/dependency must be unavailable, never treated as success.
+12 Changelog: 1.0 adds dedicated local SSH bridge and actionable bash policy guidance.
+Reference: Harmonika_AI_Tech_Spec_Template.txt. The exact named FullStack Builder txt
+  was not found locally; existing builder catalog/connectors were inspected as evidence.
+
+OPERATOR RUNBOOK
+Current local support: macOS/Linux (POSIX ownership and file flags). Windows
+connector readiness is unavailable, not implied by a cross-platform installer.
+Register targets only in ~/.config/harmonika/ssh-targets.json (0600):
+{"schema_version":1,"local_roots":["/absolute/Projects"],"targets":{
+ "staging":{"host":"staging.example.invalid","port":22,"username":"deploy",
+ "identity_file":"/absolute/private/key","known_hosts":"/absolute/pinned/known_hosts",
+ "remote_root":"/srv/owned-transfer-root","allowed_executables":["/usr/bin/uname"],
+ "allow_upload":true,"allow_download":true}}}
+Use existing operator-verified host keys; never auto-accept/fetch unverified keys.
+Root access requires explicit allow_root:true. Remote transfer root must already
+exist and be controlled by the registered SSH account. Path checks do not claim
+isolation against a malicious remote owner racing changes inside that directory.
+No recursive transfer, password auth, shell interpreter or arbitrary executable
+is enabled by default. Expand executable policy manually only when appropriate.
+CLI request example (JSON stdin to harmonika ssh invoke):
+{"skill_id":"ssh.exec","input":{"target":"staging","argv":["/usr/bin/uname","-s"]}}
+Test: ssh-runtime/bin/python -m unittest discover -s tests/ssh -v
+Primary API reference: https://docs.paramiko.org/en/stable/api/client.html
+
+REVISION 1.1 (2026-10-26)
+Added remote.targets, telnet.connect/exec and vnc.connect/capture/control. SSH
+accepts exact registered user@host:port as well as alias. Discovery exposes
+endpoint metadata only and cannot register a new host or retrieve credentials.
+Core backend: backend/remote_access/connector.py (identical signed local worker);
+async backend boundary: service.execute -> isolated Python process with deadline.
+These privileged owner connectors are not exposed through public API tokens.
+Telnet and VNC only travel through a registered SSH direct-tcpip tunnel, with a
+one-client ephemeral loopback forward. No Internet-facing listeners are opened.
+Telnet requires literal configured login/password/command prompt, local credential
+files 0600 and exact command allowlist; it reports prompt completion, not exit code.
+VNC verifies authentication and framebuffer; capture PNG is private/no overwrite.
+Mouse/key/text input is conditional on allow_control and native permission.
+Screenshots remain private project artifacts, are never written to mechanic logs.
+One VNC worker per invocation shuts down its reactor. No persistent shared writer.
+Default registrations: chr SSH and chr-vnc (capture, control disabled). A real
+Telnet production endpoint remains conditional on user-supplied destination.
+Libraries: Paramiko, telnetlib3, vncdotool, Pillow (manual pinned dependency lock).
+VNC reference: https://vncdotool.readthedocs.io/en/latest/api/
+Telnet reference: https://telnetlib3.readthedocs.io/en/latest/api/client.html

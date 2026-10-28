@@ -1,0 +1,37 @@
+{
+  "synthetic_input_only": true,
+  "tests": [
+    {
+      "operation": "hr.attendance",
+      "passed": true
+    },
+    {
+      "operation": "hr.leave.management",
+      "passed": true
+    },
+    {
+      "operation": "hr.payroll",
+      "passed": true
+    },
+    {
+      "operation": "hr.time.overtime",
+      "passed": true
+    },
+    {
+      "operation": "hr.expense.claim",
+      "passed": true
+    },
+    {
+      "operation": "hr.loan.management",
+      "passed": true
+    },
+    {
+      "operation": "report.export.excel",
+      "passed": true,
+      "actual_file_saved": true,
+      "sha_verified": true,
+      "formula_stored_as_text": true
+    }
+  ],
+  "artifact_path": "/Users/id/Downloads/harmonika-ai/xlsx/harmonika-report-c8c4d366e58d.xlsx"
+}

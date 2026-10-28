@@ -1,0 +1,23 @@
+{
+  "synthetic_input_only": true,
+  "tests": [
+    {
+      "operation": "procurement.rfq",
+      "passed": true
+    },
+    {
+      "operation": "procurement.vendor.performance",
+      "passed": true
+    }
+  ],
+  "latest_download": {
+    "path": "/Users/id/Downloads/harmonika-ai/zip/harmonika-erp-service-31cbe6ddd404.zip",
+    "sha256": "9b71755de8ce96595c4ec1fcf27cca21bc5706a4ec55fa20e91f18fcee992a34",
+    "files": 54,
+    "built": false,
+    "deployed": false,
+    "tests_run_for_this_download": false,
+    "all_template_bytes_verified": true,
+    "manifest_verified": true
+  }
+}

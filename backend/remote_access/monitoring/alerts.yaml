@@ -1,0 +1,13 @@
+groups:
+  - name: harmonika-ssh
+    rules:
+      - alert: HarmonikaSSHHighErrorRate
+        expr: sum(rate(harmonika_ssh_commands_total{status="error"}[5m])) > 0.1
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "Harmonika SSH technical error rate increased"}
+      - alert: HarmonikaSSHBlockedSpike
+        expr: rate(harmonika_ssh_blocked_total[5m]) > 0.5
+        for: 2m
+        labels: {severity: warning}
+        annotations: {summary: "Harmonika SSH policy refusals increased"}

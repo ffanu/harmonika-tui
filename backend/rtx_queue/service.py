@@ -11,17 +11,36 @@ import re
 import time
 from aiohttp import web
 from .adapter import RTXAdapter
+from .diagnostics import error_type,STATE_CODES,observed
 from .core import Store,RTXError,FILE_LIMIT,RESULT_LIMIT,ACTIVE
 
 class Queue:
-    def __init__(self,store,adapter):self.store=store;self.adapter=adapter;self.task=None;self.lock=None;self.recovery_lock=asyncio.Lock();self.last_error=None
+    def __init__(self,store,adapter):self.store=store;self.adapter=adapter;self.task=None;self.lock=None;self.recovery_lock=asyncio.Lock();self.last_error=None;self.failures=None;self.failure_logging_degraded=False;self.last_graphics_state=None
+    async def record_failure(self,kind,code,latency):
+        if self.failures is None:self.failure_logging_degraded=True;return
+        try:
+            result=await asyncio.to_thread(self.failures.record,'image.generate' if kind=='generate' else 'vision.analyze',error_type(code),latency)
+            self.failure_logging_degraded=result not in (True,'ok')
+        except Exception:self.failure_logging_degraded=True
+    async def failure_summary(self):
+        if self.failures is None:return {'status':'logging_unavailable','count':0,'recent':[]}
+        try:
+            value=await asyncio.to_thread(self.failures.summary)
+            return {'status':value.get('status',value.get('logging','logging_unavailable')),'count':value.get('count',0),'recent':value.get('recent',[])}
+        except Exception:return {'status':'logging_unavailable','count':0,'recent':[]}
     async def start(self):
         path=self.store.root/'worker.lock'
         if path.is_symlink():raise RTXError('unsafe_lock_path')
         self.lock=open(path,'a');os.chmod(path,0o600)
         try:fcntl.flock(self.lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:self.lock.close();self.lock=None;raise RTXError('queue_already_running',409) from None
-        await self.store.call('startup');await self.adapter.start();self.task=asyncio.create_task(self.run())
+        await self.store.call('startup')
+        try:
+            try:from engine_registry.failure_log import FailureLog
+            except ModuleNotFoundError:from backend.engine_registry.failure_log import FailureLog
+            self.failures=FailureLog(self.store.db)
+        except Exception:self.failure_logging_degraded=True
+        await self.adapter.start();self.task=asyncio.create_task(self.run())
     async def close(self):
         if self.task:
             self.task.cancel();await asyncio.gather(self.task,return_exceptions=True)
@@ -41,15 +60,18 @@ class Queue:
             except Exception:
                 self.last_error='queue_storage_unavailable';await asyncio.sleep(.5);continue
             if job is None:await asyncio.sleep(.2);continue
+            started=time.monotonic()
             try:
                 result=await self.adapter.run(job,self.store);await self.save_result(job,result)
             except asyncio.CancelledError:
                 await self.store.call('set_state',job['id'],'unknown','service_interrupted');raise
             except RTXError as error:
+                await self.record_failure(job['kind'],error.code,(time.monotonic()-started)*1000)
                 if error.code=='remote_job_cancelled':state='cancelled'
                 else:state='unknown' if error.uncertain else 'failed'
                 await self.store.call('set_state',job['id'],state,error.code)
             except Exception:
+                await self.record_failure(job['kind'],'internal_worker_error',(time.monotonic()-started)*1000)
                 await self.store.call('set_state',job['id'],'unknown','internal_worker_error')
     async def recover(self,owner,jid):
         async with self.recovery_lock:
@@ -92,9 +114,16 @@ async def auth(request,handler):
     return await handler(request)
 
 async def health(request):
-    caps=await request.app[QUEUE].adapter.health()
+    queue=request.app[QUEUE];caps=await queue.adapter.health()
+    connection=getattr(queue.adapter,'connection',observed('unknown'))
+    state=connection.get('status','unknown')
+    if state!=queue.last_graphics_state and state in STATE_CODES:
+        await queue.record_failure('generate',STATE_CODES[state],connection.get('latency_ms',0))
+    queue.last_graphics_state=state
     uncertain=await request.app[STORE].call('uncertain')
-    return web.json_response({'ok':True,'provider':'Harmonika Ai','worker':caps,'queue':await request.app[STORE].call('counts',request[OWNER]),'concurrency':1,'queue_ready':not request.app[QUEUE].task.done() and request.app[QUEUE].last_error is None and not uncertain,'blocked_by_uncertain_job':uncertain})
+    if uncertain:connection={**connection,'status':'recovery_required'}
+    diagnostics={'graphics':connection,'errors':await queue.failure_summary(),'logging_degraded':queue.failure_logging_degraded}
+    return web.json_response({'ok':True,'provider':'Harmonika Ai','worker':caps,'queue':await request.app[STORE].call('counts',request[OWNER]),'concurrency':1,'queue_ready':not queue.task.done() and queue.last_error is None and not uncertain,'blocked_by_uncertain_job':uncertain,'diagnostics':diagnostics})
 async def submit(request):
     if request.content_type!='application/json':raise RTXError('json_required',415)
     body=bytearray()

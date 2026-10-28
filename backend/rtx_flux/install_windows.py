@@ -1,5 +1,5 @@
 """Pinned, resumable ComfyUI + model provisioning, isolated from legacy worker."""
-import concurrent.futures, hashlib, json, os, shutil, subprocess, sys, time, urllib.request, zipfile
+import concurrent.futures, hashlib, http.client, ipaddress, json, os, shutil, subprocess, sys, time, urllib.request, zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 COMMIT='4281eb0a1478ce445dc32c4b0895f14c9fc3c1be'
@@ -24,7 +24,8 @@ def download(url,path,size,digest):
    if have==z-a+1:return
    if have>z-a+1:p.unlink();have=0
    try:
-    req=urllib.request.Request(url,headers={'Range':f'bytes={a+have}-{z}','User-Agent':'Harmonika-Model-Installer/1'})
+    request_url=url+('\u0026' if '?' in url else '?')+'download=true&hms_offset='+str(a+have)
+    req=urllib.request.Request(request_url,headers={'Range':f'bytes={a+have}-{z}','User-Agent':'Harmonika-Model-Installer/1','Cache-Control':'no-cache'})
     with urllib.request.urlopen(req,timeout=90) as r:
      if r.status!=206 or not r.headers.get('Content-Range','').startswith(f'bytes {a+have}-'):raise ValueError('range_not_supported')
      remain=z-a+1-have
@@ -33,7 +34,8 @@ def download(url,path,size,digest):
        b=r.read(min(remain,1024*1024))
        if not b:raise IOError('incomplete_download')
        f.write(b);remain-=len(b)
-   except Exception:
+   except Exception as exc:
+    with (ROOT/'download-errors.jsonl').open('a') as log:log.write(json.dumps({'file':path.name,'part':i,'attempt':attempt,'error_type':type(exc).__name__,'code':getattr(exc,'code',None),'reason':str(exc) if isinstance(exc,ValueError) else None})+'\n')
     if attempt==14:raise
     time.sleep(min(30,2+attempt*2))
   raise RuntimeError('download_failed')
@@ -54,6 +56,16 @@ def download(url,path,size,digest):
  os.replace(temp,path);shutil.rmtree(parts)
 def main():
  status('preflight')
+ interface=ROOT/'download-interface.json'
+ if interface.exists():
+  source_ip=json.loads(interface.read_text()).get('source_ip')
+  address=ipaddress.ip_address(source_ip)
+  if address.version!=4 or not address.is_private:raise ValueError('invalid_download_interface')
+  class WiredConnection(http.client.HTTPSConnection):
+   def __init__(self,*args,**kwargs):super().__init__(*args,source_address=(source_ip,0),**kwargs)
+  class WiredHTTPS(urllib.request.HTTPSHandler):
+   def https_open(self,req):return self.do_open(WiredConnection,req,context=self._context)
+  urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({}),WiredHTTPS()))
  if shutil.disk_usage(ROOT).free<40*1024**3:raise RuntimeError('requires_40gb_free')
  comfy=ROOT/'ComfyUI'
  if not comfy.exists():

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-28",
+  "root_cause": "invalid_tools: aggregate native and MCP tools exceeded gateway limit 32",
+  "affected_session_prefix": "14455096",
+  "changes": {
+    "video_definitions": 1,
+    "core_definitions": 9,
+    "ssh_definitions": 7,
+    "native_budget": 14,
+    "total_budget": 31,
+    "gateway_limit": 32,
+    "backend_limit_changed": false
+  },
+  "tests": {
+    "focused_node_tests_passed": 10,
+    "native_harmonika_run": "passed",
+    "native_response": "10-second video unsupported; 1-second silent preview only"
+  },
+  "existing_services_restarted": false,
+  "user_tui_signaled": false,
+  "user_sessions_modified": false,
+  "remaining_user_step": "Reopen Harmonika to refresh cached MCP definitions; resume the same session."
+}

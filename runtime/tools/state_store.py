@@ -3,6 +3,7 @@ import argparse
 from contextlib import closing
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -112,6 +113,34 @@ def human_bytes(value):
         value/=1024
 
 
+DIAGNOSTIC_STATES={'online','offline','busy','vram_full','warming','timeout','bad_payload','auth_failed','recovery_required','unavailable','unknown','not_checked'}
+DIAGNOSTIC_ERRORS={'skill_exception','skill_timeout','invalid_input','invalid_output','cancelled','graphics_offline','graphics_busy','graphics_vram_full','graphics_timeout','graphics_bad_payload','graphics_auth_failed','graphics_warming','graphics_recovery_required','graphics_failed','logging_unavailable'}
+def sanitize_engine_diagnostics(value):
+    result={'graphics':{'status':'unavailable'},'registry_errors':{'status':'logging_unavailable','count':0,'recent':[]},'graphics_errors':{'status':'logging_unavailable','count':0,'recent':[]}}
+    if type(value) is not dict:return result
+    graphics=value.get('graphics',{})
+    if type(graphics) is dict:
+        result['graphics']['status']=graphics.get('status') if isinstance(graphics.get('status'),str) and graphics.get('status') in DIAGNOSTIC_STATES else 'unknown'
+        delay=graphics.get('latency_ms')
+        if type(delay) in (int,float) and math.isfinite(delay) and 0<=delay<=600000:result['graphics']['latency_ms']=round(delay,3)
+    for name in ('registry_errors','graphics_errors'):
+        item=value.get(name,{})
+        if type(item) is not dict:continue
+        target=result[name]
+        if item.get('status')=='ok':target['status']='ok'
+        if type(item.get('count')) is int and 0<=item['count']<=1000000:target['count']=item['count']
+        rows=item.get('recent',[])
+        if type(rows) is not list:continue
+        for row in rows[:5]:
+            if type(row) is not dict:continue
+            stamp=row.get('timestamp');sid=row.get('skill_id');code=row.get('error_type');latency=row.get('latency')
+            if not isinstance(stamp,str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z',stamp):continue
+            if not isinstance(sid,str) or len(sid)>100 or not re.fullmatch(r'[a-z][a-z0-9_]*(?:\.[a-z0-9_]+)*',sid) or not isinstance(code,str) or code not in DIAGNOSTIC_ERRORS:continue
+            if type(latency) not in (int,float) or not math.isfinite(latency) or not 0<=latency<=3600000:continue
+            target['recent'].append({'timestamp':stamp,'skill_id':sid,'error_type':code,'latency':round(latency,3)})
+    return result
+
+
 def engine_discovery_status():
     """Read-only gateway metadata. Never touches native sessions or prints keys."""
     key=Path.home()/'.config/harmonika/harmonika-api-key'
@@ -120,12 +149,13 @@ def engine_discovery_status():
         import importlib.util
         spec=importlib.util.spec_from_file_location('harmonika_state_master_client',Path(__file__).with_name('master_cli.py'))
         client=importlib.util.module_from_spec(spec);spec.loader.exec_module(client)
-        value=client.request('GET','/discovery',timeout=2)
+        value=client.request('GET','/discovery',timeout=7)
         if type(value) is not dict or value.get('error'):return {'status':'unavailable'}
         # Do not surface module paths, source, user payload or free-form errors.
         out={'status':value.get('status') if value.get('status') in ('ready','degraded','disabled','scanning','recovering') else 'unknown'}
         for k in ('registered','rejected','generation','last_scan_at'):
             if type(value.get(k)) in (int,float):out[k]=value[k]
+        out['diagnostics']=sanitize_engine_diagnostics(value.get('diagnostics'))
         return out
     except Exception:return {'status':'unavailable'}
 
@@ -149,6 +179,18 @@ def render_status(result):
     else:lines.append('Belum ada checkpoint yang berlaku.')
     if 'engine_discovery' in result:
         d=result['engine_discovery'];lines.append('Engine discovery: '+d.get('status','unknown')+' | Aktif: '+str(d.get('registered',0))+' | Ditolak: '+str(d.get('rejected',0)))
+    diagnostics=result.get('engine_diagnostics')
+    if type(diagnostics) is dict:
+        safe=sanitize_engine_diagnostics(diagnostics);graphics=safe['graphics']
+        labels={'online':'Online','offline':'Offline','busy':'Sibuk','vram_full':'VRAM penuh','warming':'Menyiapkan model','timeout':'Koneksi timeout','bad_payload':'Respons tidak valid','auth_failed':'Akses perlu diperiksa','recovery_required':'Perlu pemulihan pekerjaan','not_checked':'Tidak diperiksa (mode offline)','unavailable':'Status tidak tersedia','unknown':'Belum diketahui'}
+        label=labels[graphics['status']];delay=graphics.get('latency_ms')
+        lines.append('Graphics Engine PC 2: '+label+(f' | Probe: {delay:.0f} ms' if delay is not None else ''))
+        errors=[*safe['registry_errors']['recent'],*safe['graphics_errors']['recent']]
+        count=safe['registry_errors']['count']+safe['graphics_errors']['count']
+        logs_ok=all(safe[n]['status']=='ok' for n in ('registry_errors','graphics_errors'))
+        lines.append(f'Error skill terisolasi: {count}' + ('' if logs_ok else ' | Log belum tersedia lengkap'))
+        for row in sorted(errors,key=lambda r:r['timestamp'],reverse=True)[:5]:
+            lines.append(f"  {row['timestamp']} | {row['skill_id']} | {row['error_type']} | {row['latency']:.0f} ms")
     if not result.get('ok'):lines.append('Pemeriksaan degraded; data lama tidak dipakai sebagai hasil valid.')
     return '\n'.join(lines)
 
@@ -227,7 +269,10 @@ def main():
     directory=args.data_dir or str(Path(args.project)/'.harmonika')
     try:
         result=perform(args.action,directory,args.project,root,args.session_id,args.limit)
-        if args.action=='status':result['engine_discovery']={'status':'offline'} if args.offline else engine_discovery_status()
+        if args.action=='status':
+            result['engine_discovery']={'status':'offline'} if args.offline else engine_discovery_status()
+            result['engine_diagnostics']=result['engine_discovery'].pop('diagnostics',sanitize_engine_diagnostics(None))
+            if args.offline:result['engine_diagnostics']['graphics']['status']='not_checked'
         print(render_status(result) if args.format=='text' else json.dumps(result,ensure_ascii=False));return 0 if result.get('ok') else 2
     except (StateError,OSError):
         # No raw sqlite exceptions, paths, SQL, chat content or keys in error output.

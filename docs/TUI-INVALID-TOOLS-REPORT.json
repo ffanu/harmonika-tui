@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-26",
+  "error": "bad request: invalid_tools",
+  "affected_recent_session_prefix": "9819494d",
+  "gateway_source": "public_ai_internal.go:100",
+  "gateway_limit": 32,
+  "reproduction": {
+    "single_tool_http": 200,
+    "33_tools_http": 400,
+    "error_code": "invalid_tools",
+    "captured_native_run_tools_before": 32,
+    "captured_native_run_tools_after": 29,
+    "interactive_request_payload_capture": "inconclusive; isolated PTY test did not complete capture"
+  },
+  "fix": {
+    "release": "2026.10.26.5",
+    "advertised_remote_mcp_tools_before": 10,
+    "advertised_remote_mcp_tools_after": 7,
+    "operations_preserved": 10,
+    "telnet_dispatch": [
+      "connect",
+      "exec"
+    ],
+    "vnc_dispatch": [
+      "connect",
+      "capture",
+      "control"
+    ],
+    "legacy_dispatch_names_still_callable": true,
+    "ssh_skill_frontmatter_fixed": true
+  },
+  "verification": {
+    "budget_and_dispatch_regressions_passed": 3,
+    "mcp_protocol_passed": true,
+    "signed_release_verified": true,
+    "native_harmonika_run_public_api": "passed",
+    "actual_ssh_uname": "Linux, exit0",
+    "actual_vnc_auth": "passed,1366x768",
+    "private_local_capture_used_mock_400": "qa_capture_stop intentional; not a live gateway regression"
+  },
+  "safety": {
+    "user_history_modified": false,
+    "user_tui_restarted": false,
+    "main_gateway_restarted": false,
+    "gateway_limit_changed": false,
+    "raw_chat_recorded": false,
+    "credential_recorded": false
+  },
+  "remaining_user_step": "Reopen/resume the existing TUI session to refresh its cached MCP tool list."
+}

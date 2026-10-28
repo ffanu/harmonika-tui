@@ -1,0 +1,822 @@
+[
+  {
+    "id": "isp",
+    "name": "ISP / TELEKOMUNIKASI (RT-RW Net, Fiber Provider, Mobile Operator)",
+    "source_number": 1,
+    "keywords": [
+      "isp",
+      "rtrw net",
+      "rt rw net",
+      "internet provider",
+      "fiber provider",
+      "ftth",
+      "mbps"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "isp",
+      "crm",
+      "inventory",
+      "field_ops"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#0066CC",
+    "theme_direction": "Tech Blue (#0066CC), NOC-style dashboard, terminology \"Pelanggan/Paket/OLT/ONU\"",
+    "terminology": [
+      "Pelanggan",
+      "Paket",
+      "OLT",
+      "ONU"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "retail",
+    "name": "RETAIL (Toko, Minimarket, Butik, Apotek)",
+    "source_number": 2,
+    "keywords": [
+      "toko",
+      "retail",
+      "minimarket",
+      "kasir",
+      "butik"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "pos",
+      "inventory",
+      "sales",
+      "crm",
+      "procurement"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#D9480F",
+    "theme_direction": "Vibrant (Orange/Red), POS-heavy, terminology \"Barang/Stok/Kasir\"",
+    "terminology": [
+      "Barang",
+      "Stok",
+      "Kasir"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "manufacturing",
+    "name": "MANUFAKTUR (Pabrik Tekstil, Otomotif, Elektronik, Food)",
+    "source_number": 3,
+    "keywords": [
+      "manufaktur",
+      "pabrik",
+      "manufacturing",
+      "bom",
+      "mrp"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "manufacturing",
+      "inventory",
+      "procurement",
+      "sales",
+      "projects"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#334155",
+    "theme_direction": "Industrial (Gray/Blue), production dashboard, terminology \"BOM/MRP/Work Center\"",
+    "terminology": [
+      "BOM",
+      "MRP",
+      "Work Center"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "service",
+    "name": "JASA / SERVICE (Konsultan, Agen, Repair, Salon)",
+    "source_number": 4,
+    "keywords": [
+      "jasa",
+      "salon",
+      "repair",
+      "servis"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "projects",
+      "crm",
+      "sales"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#6D28D9",
+    "theme_direction": "Modern (Purple/Blue), calendar-based, terminology \"Klien/Appointment/Ticket\"",
+    "terminology": [
+      "Klien",
+      "Appointment",
+      "Ticket"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "distribution",
+    "name": "DISTRIBUTOR (Grosir, Distributor Barang)",
+    "source_number": 5,
+    "keywords": [
+      "distributor",
+      "grosir",
+      "wholesale"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "inventory",
+      "procurement",
+      "sales",
+      "logistics"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#047857",
+    "theme_direction": "Logistics (Green/Blue), warehouse dashboard, terminology \"Principal/Distributor/Outlet\"",
+    "terminology": [
+      "Principal",
+      "Distributor",
+      "Outlet"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "construction",
+    "name": "KONSTRUKSI (Kontraktor, Developer)",
+    "source_number": 6,
+    "keywords": [
+      "konstruksi",
+      "kontraktor",
+      "rab",
+      "mandor"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "construction",
+      "projects",
+      "inventory",
+      "procurement"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#854D0E",
+    "theme_direction": "Construction (Yellow/Black), project dashboard, terminology \"Proyek/RAB/Mandor\"",
+    "terminology": [
+      "Proyek",
+      "RAB",
+      "Mandor"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "property",
+    "name": "PROPERTY (Pengembang, Manajemen Gedung)",
+    "source_number": 7,
+    "keywords": [
+      "properti",
+      "property",
+      "real estate",
+      "apartemen",
+      "sewa gedung"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "property",
+      "sales",
+      "crm"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#854D0E",
+    "theme_direction": "Premium (Gold/Dark), property listing, terminology \"Unit/Sewa/Tenant\"",
+    "terminology": [
+      "Unit",
+      "Sewa",
+      "Tenant"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "mining",
+    "name": "PERTAMBANGAN (Batubara, Emas, Nikel)",
+    "source_number": 8,
+    "keywords": [
+      "tambang",
+      "pertambangan",
+      "batubara",
+      "nikel"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "mining",
+      "inventory",
+      "maintenance"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#92400E",
+    "theme_direction": "Earth (Brown/Orange), mining dashboard, terminology \"Tambang/OMZ/Hauling\"",
+    "terminology": [
+      "Tambang",
+      "OMZ",
+      "Hauling"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "agriculture",
+    "name": "PERTANIAN (Perkebunan, Agroindustri)",
+    "source_number": 9,
+    "keywords": [
+      "pertanian",
+      "perkebunan",
+      "panen",
+      "agro"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "agriculture",
+      "inventory",
+      "procurement"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#166534",
+    "theme_direction": "Natural (Green/Yellow), farm dashboard, terminology \"Lahan/Tanaman/Panen\"",
+    "terminology": [
+      "Lahan",
+      "Tanaman",
+      "Panen"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "education",
+    "name": "PENDIDIKAN (Sekolah, Universitas, Kursus)",
+    "source_number": 10,
+    "keywords": [
+      "sekolah",
+      "pendidikan",
+      "universitas",
+      "siswa",
+      "bimbel"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "education",
+      "scheduling"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#1D4ED8",
+    "theme_direction": "Education (Blue/Green), academic dashboard, terminology \"Siswa/Nilai/SPP\"",
+    "terminology": [
+      "Siswa",
+      "Nilai",
+      "SPP"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "healthcare",
+    "name": "KESEHATAN (Klinik, Rumah Sakit, Lab)",
+    "source_number": 11,
+    "keywords": [
+      "rumah sakit",
+      "klinik",
+      "kesehatan",
+      "pasien",
+      "medical"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "healthcare",
+      "pharmacy",
+      "inventory"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#0F766E",
+    "theme_direction": "Medical (White/Teal), patient dashboard, terminology \"Pasien/RM/Resep\"",
+    "terminology": [
+      "Pasien",
+      "RM",
+      "Resep"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "logistics",
+    "name": "LOGISTIK (Ekspedisi, Kurir, Freight Forwarder)",
+    "source_number": 12,
+    "keywords": [
+      "logistik",
+      "ekspedisi",
+      "kurir",
+      "freight",
+      "shipment"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "logistics",
+      "inventory"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#075985",
+    "theme_direction": "Logistics (Blue/Orange), shipment dashboard, terminology \"Shipment/Fleet/AWB\"",
+    "terminology": [
+      "Shipment",
+      "Fleet",
+      "AWB"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "banking",
+    "name": "PERBANKAN / FINTECH (Bank, Koperasi, P2P Lending)",
+    "source_number": 13,
+    "keywords": [
+      "bank",
+      "perbankan",
+      "fintech",
+      "p2p lending",
+      "koperasi"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "banking",
+      "crm"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#1E3A8A",
+    "theme_direction": "Banking (Navy Blue/Gold), transaction dashboard, terminology \"Nasabah/Transaksi/Loan\"",
+    "terminology": [
+      "Nasabah",
+      "Transaksi",
+      "Loan"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "insurance",
+    "name": "ASURANSI (Life, General, Syariah)",
+    "source_number": 14,
+    "keywords": [
+      "asuransi",
+      "underwriting",
+      "premi",
+      "polis"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "insurance",
+      "crm"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#1D4ED8",
+    "theme_direction": "Insurance (Blue/White), policy dashboard, terminology \"Polis/Klaim/Premi\"",
+    "terminology": [
+      "Polis",
+      "Klaim",
+      "Premi"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "automotive",
+    "name": "OTOMOTIF (Dealer, Bengkel, Spare Part)",
+    "source_number": 15,
+    "keywords": [
+      "otomotif",
+      "bengkel",
+      "dealer",
+      "spare part"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "automotive",
+      "inventory",
+      "sales"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#B91C1C",
+    "theme_direction": "Automotive (Red/Black), service dashboard, terminology \"Kendaraan/Servis/Part\"",
+    "terminology": [
+      "Kendaraan",
+      "Servis",
+      "Part"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "food",
+    "name": "F&B / RESTORAN (Resto, Cafe, Catering, Cloud Kitchen)",
+    "source_number": 16,
+    "keywords": [
+      "restoran",
+      "resto",
+      "cafe",
+      "kafe",
+      "catering",
+      "roti",
+      "f b",
+      "cloud kitchen"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "food",
+      "pos",
+      "inventory",
+      "procurement"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#C2410C",
+    "theme_direction": "Food (Orange/Red), POS dashboard, terminology \"Menu/Meja/Order\"",
+    "terminology": [
+      "Menu",
+      "Meja",
+      "Order"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "pharmacy",
+    "name": "PHARMACY (Apotek, Distributor Obat)",
+    "source_number": 17,
+    "keywords": [
+      "apotek",
+      "pharmacy",
+      "obat",
+      "resep"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "pharmacy",
+      "pos",
+      "inventory",
+      "procurement"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#15803D",
+    "theme_direction": "Pharmacy (Green/White), prescription dashboard, terminology \"Obat/Resep/Batch\"",
+    "terminology": [
+      "Obat",
+      "Resep",
+      "Batch"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "agency",
+    "name": "AGENSI / ADVERTISING (Digital Agency, Marketing)",
+    "source_number": 18,
+    "keywords": [
+      "agensi",
+      "agency",
+      "advertising",
+      "digital marketing"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "projects",
+      "crm",
+      "campaign"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#7E22CE",
+    "theme_direction": "Creative (Purple/Pink), project dashboard, terminology \"Client/Campaign/Deliverable\"",
+    "terminology": [
+      "Client",
+      "Campaign",
+      "Deliverable"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "transportation",
+    "name": "TRANSPORTASI (Bus, Travel, Truck, Taxi)",
+    "source_number": 19,
+    "keywords": [
+      "transportasi",
+      "bus",
+      "travel",
+      "trucking",
+      "taxi"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "transportation",
+      "logistics"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#1D4ED8",
+    "theme_direction": "Transport (Blue/White), fleet dashboard, terminology \"Armada/Rute/Tiket\"",
+    "terminology": [
+      "Armada",
+      "Rute",
+      "Tiket"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "energy",
+    "name": "ENERGI (PLTS, PLTU, Gas, Renewable)",
+    "source_number": 20,
+    "keywords": [
+      "energi",
+      "plts",
+      "pltu",
+      "renewable",
+      "kwh"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "energy",
+      "maintenance"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#4D7C0F",
+    "theme_direction": "Energy (Yellow/Green), production dashboard, terminology \"Generator/Grid/kWh\"",
+    "terminology": [
+      "Generator",
+      "Grid",
+      "kWh"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "mobile_telco",
+    "name": "TELEKOMUNIKASI MOBILE (Operator Seluler)",
+    "source_number": 21,
+    "keywords": [
+      "operator seluler",
+      "mobile operator",
+      "roaming",
+      "imsi"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "mobile_telco",
+      "crm"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#0369A1",
+    "theme_direction": "Telco (Blue/Red), NOC dashboard, terminology \"Subscriber/IMSI/HLR\"",
+    "terminology": [
+      "Subscriber",
+      "IMSI",
+      "HLR"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "hospitality",
+    "name": "HOTEL / HOSPITALITY (Hotel, Resort, Villa)",
+    "source_number": 22,
+    "keywords": [
+      "hotel",
+      "hospitality",
+      "villa",
+      "resort",
+      "penginapan"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "hospitality",
+      "scheduling",
+      "food"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#92400E",
+    "theme_direction": "Hospitality (Gold/Brown), reservation dashboard, terminology \"Guest/Room/Check-in\"",
+    "terminology": [
+      "Guest",
+      "Room",
+      "Check-in"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "events",
+    "name": "EVENT ORGANIZER (Wedding, Concert, Corporate Event)",
+    "source_number": 23,
+    "keywords": [
+      "event organizer",
+      "wedding organizer",
+      "eo",
+      "konser"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "events",
+      "projects",
+      "procurement"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#A21CAF",
+    "theme_direction": "Event (Vibrant), project dashboard, terminology \"Event/Vendor/Guest\"",
+    "terminology": [
+      "Event",
+      "Vendor",
+      "Guest"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "consulting",
+    "name": "KONSULTAN (Legal, Tax, Management, IT)",
+    "source_number": 24,
+    "keywords": [
+      "konsultan",
+      "consulting",
+      "kantor akuntan",
+      "konsultan pajak",
+      "konsultan hukum"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "projects",
+      "crm",
+      "documents"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#334155",
+    "theme_direction": "Professional (Navy/Silver), project dashboard, terminology \"Client/Case/Billable\"",
+    "terminology": [
+      "Client",
+      "Case",
+      "Billable"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  },
+  {
+    "id": "saas",
+    "name": "STARTUP / TECH (SaaS, Marketplace, App)",
+    "source_number": 25,
+    "keywords": [
+      "saas",
+      "startup",
+      "software as a service",
+      "subscription software"
+    ],
+    "required_modules": [
+      "core",
+      "finance",
+      "saas",
+      "crm",
+      "support"
+    ],
+    "optional_modules": [
+      "hr",
+      "analytics",
+      "integration"
+    ],
+    "primary_color": "#4338CA",
+    "theme_direction": "Tech (Modern Blue/Purple), analytics dashboard, terminology \"User/MRR/Churn\"",
+    "terminology": [
+      "User",
+      "MRR",
+      "Churn"
+    ],
+    "domain_runtime": "not_implemented",
+    "template_kind": "industry_plan"
+  }
+]

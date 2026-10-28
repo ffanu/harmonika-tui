@@ -50,6 +50,15 @@ def ensure_dependencies(root=ROOT):
             (tools_dir/'package.json').write_text(json.dumps(pkg,indent=2))
             subprocess.run([npm,'install','--no-audit','--no-fund'],cwd=str(tools_dir),check=True,timeout=180,shell=(os.name=='nt'))
 
+def ensure_ssh_dependencies(directory,root=ROOT):
+    lock=directory/'tools/ssh-requirements.lock'
+    if not lock.is_file():return False
+    runtime=root/'ssh-runtime'
+    python=runtime/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+    if not python.is_file():subprocess.run([sys.executable,'-m','venv',str(runtime)],check=True,timeout=120)
+    subprocess.run([str(python),'-m','pip','install','--disable-pip-version-check','-r',str(lock)],check=True,timeout=240)
+    return True
+
 def ensure_default_config(root=ROOT):
     cfg_dir=Path.home()/'.config/harmonika'
     cfg_dir.mkdir(parents=True,exist_ok=True)
@@ -294,6 +303,9 @@ def activate(stage,manifest):
     # Validate proposed configuration on stdin before touching live files/pointers.
     schema=SOURCE/'runtime/harmonika-schema.json'
     js="const fs=require('fs'),{Ajv2020}=require(process.argv[2]);const v=new Ajv2020({strict:false,validateFormats:false}).compile(JSON.parse(fs.readFileSync(process.argv[1])));if(!v(JSON.parse(fs.readFileSync(0,'utf8'))))process.exit(1);"
+    if os.name == 'posix' and (stage/'tools/ssh-mcp.cjs').is_file():
+        ensure_ssh_dependencies(stage)
+        config.setdefault('mcp',{})['harmonika-ssh']={'type':'stdio','command':str(m.NODE),'args':[str(ROOT/'current/tools/ssh-mcp.cjs')],'timeout':190}
     encoded=json.dumps(config,indent=2)+'\n'
     dependency=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(Path.home()/'.config/harmonika/harmonika-tools')))/'node_modules/ajv/dist/2020'
     checked=subprocess.run([m.NODE,'-e',js,str(schema),str(dependency)],input=encoded.encode(),capture_output=True,timeout=15)

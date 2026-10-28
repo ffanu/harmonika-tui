@@ -1,0 +1,102 @@
+[
+  {
+    "group": "asr",
+    "repo": "SYSTRAN/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "path": "config.json",
+    "url": "https://huggingface.co/SYSTRAN/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/config.json",
+    "bytes": 2370,
+    "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+    "license": "mit"
+  },
+  {
+    "group": "asr",
+    "repo": "SYSTRAN/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "path": "model.bin",
+    "url": "https://huggingface.co/SYSTRAN/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/model.bin",
+    "bytes": 483546902,
+    "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+    "license": "mit"
+  },
+  {
+    "group": "asr",
+    "repo": "SYSTRAN/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "path": "tokenizer.json",
+    "url": "https://huggingface.co/SYSTRAN/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/tokenizer.json",
+    "bytes": 2203239,
+    "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+    "license": "mit"
+  },
+  {
+    "group": "asr",
+    "repo": "SYSTRAN/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "path": "vocabulary.txt",
+    "url": "https://huggingface.co/SYSTRAN/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/vocabulary.txt",
+    "bytes": 459861,
+    "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+    "license": "mit"
+  },
+  {
+    "group": "upscale",
+    "repo": "fal/AuraSR-v2",
+    "revision": "ff452185a7c8b51206dd62c21c292e7baad5c3a3",
+    "path": "config.json",
+    "url": "https://huggingface.co/fal/AuraSR-v2/resolve/ff452185a7c8b51206dd62c21c292e7baad5c3a3/config.json",
+    "bytes": 222,
+    "sha256": "5009aca786759dc78369abc666878ec7dd99167beaada28bf473fbaf1a68ac9a",
+    "license": "apache-2.0"
+  },
+  {
+    "group": "upscale",
+    "repo": "fal/AuraSR-v2",
+    "revision": "ff452185a7c8b51206dd62c21c292e7baad5c3a3",
+    "path": "model.safetensors",
+    "url": "https://huggingface.co/fal/AuraSR-v2/resolve/ff452185a7c8b51206dd62c21c292e7baad5c3a3/model.safetensors",
+    "bytes": 2470247916,
+    "sha256": "8a80b4546f3f49b9095733cb9699030409339e2f4eb0ae9c1ada14c7d21d4dde",
+    "license": "apache-2.0"
+  },
+  {
+    "group": "tts_research",
+    "repo": "SWivid/F5-TTS",
+    "revision": "84e5a410d9cead4de2f847e7c9369a6440bdfaca",
+    "path": "F5TTS_v1_Base/model_1250000.safetensors",
+    "url": "https://huggingface.co/SWivid/F5-TTS/resolve/84e5a410d9cead4de2f847e7c9369a6440bdfaca/F5TTS_v1_Base/model_1250000.safetensors",
+    "bytes": 1348435761,
+    "sha256": "670900fd14e6c458b95da6e9ed317cdb20dbaf7a1c02ac06a05475a9d32b6a38",
+    "license": "cc-by-nc-4.0"
+  },
+  {
+    "group": "tts_research",
+    "repo": "SWivid/F5-TTS",
+    "revision": "84e5a410d9cead4de2f847e7c9369a6440bdfaca",
+    "path": "F5TTS_v1_Base/vocab.txt",
+    "url": "https://huggingface.co/SWivid/F5-TTS/resolve/84e5a410d9cead4de2f847e7c9369a6440bdfaca/F5TTS_v1_Base/vocab.txt",
+    "bytes": 13800,
+    "sha256": "2a05f992e00af9b0bd3800a8d23e78d520dbd705284ed2eedb5f4bd29398fa3c",
+    "license": "cc-by-nc-4.0"
+  },
+  {
+    "group": "vocoder",
+    "repo": "charactr/vocos-mel-24khz",
+    "revision": "0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21",
+    "path": "config.yaml",
+    "url": "https://huggingface.co/charactr/vocos-mel-24khz/resolve/0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21/config.yaml",
+    "bytes": 461,
+    "sha256": "da9033922f969a47f0c160010226919e59f27761fd5066f3828d46de6650b0fc",
+    "license": "mit"
+  },
+  {
+    "group": "vocoder",
+    "repo": "charactr/vocos-mel-24khz",
+    "revision": "0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21",
+    "path": "pytorch_model.bin",
+    "url": "https://huggingface.co/charactr/vocos-mel-24khz/resolve/0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21/pytorch_model.bin",
+    "bytes": 54365991,
+    "sha256": "97ec976ad1fd67a33ab2682d29c0ac7df85234fae875aefcc5fb215681a91b2a",
+    "license": "mit"
+  }
+]

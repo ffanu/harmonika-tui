@@ -1,0 +1,378 @@
+{
+  "synthetic_only": true,
+  "public_contracts_passed": 71,
+  "new_operation_invalid_payload_rejections": 16,
+  "public_direct_result_parity_checks": 16,
+  "tests": [
+    {
+      "skill_id": "debug_scan.asan.report.analyze",
+      "passed": true,
+      "latency_ms": 3286.8
+    },
+    {
+      "skill_id": "debug_scan.audit.report.executive",
+      "passed": true,
+      "latency_ms": 360.1
+    },
+    {
+      "skill_id": "debug_scan.audit.report.generate",
+      "passed": true,
+      "latency_ms": 346.0
+    },
+    {
+      "skill_id": "debug_scan.audit.report.technical",
+      "passed": true,
+      "latency_ms": 3583.2
+    },
+    {
+      "skill_id": "debug_scan.catalog",
+      "passed": true,
+      "latency_ms": 406.6
+    },
+    {
+      "skill_id": "debug_scan.cicd.block.if.critical",
+      "passed": true,
+      "latency_ms": 354.3
+    },
+    {
+      "skill_id": "debug_scan.dast.reproduce",
+      "passed": true,
+      "latency_ms": 3698.0
+    },
+    {
+      "skill_id": "debug_scan.ethics.authorized.scan",
+      "passed": true,
+      "latency_ms": 350.7
+    },
+    {
+      "skill_id": "debug_scan.ethics.scope.adherence",
+      "passed": true,
+      "latency_ms": 337.2
+    },
+    {
+      "skill_id": "debug_scan.evidence.hash.compute",
+      "passed": true,
+      "latency_ms": 3692.5
+    },
+    {
+      "skill_id": "debug_scan.evidence.log.capture",
+      "passed": true,
+      "latency_ms": 361.1
+    },
+    {
+      "skill_id": "debug_scan.evidence.stack.trace",
+      "passed": true,
+      "latency_ms": 350.1
+    },
+    {
+      "skill_id": "debug_scan.evidence.timeline.build",
+      "passed": true,
+      "latency_ms": 3681.3
+    },
+    {
+      "skill_id": "debug_scan.lang.javascript.scan",
+      "passed": true,
+      "latency_ms": 355.6
+    },
+    {
+      "skill_id": "debug_scan.lang.python.scan",
+      "passed": true,
+      "latency_ms": 367.1
+    },
+    {
+      "skill_id": "debug_scan.logic.calculation.error",
+      "passed": true,
+      "latency_ms": 3968.0
+    },
+    {
+      "skill_id": "debug_scan.logic.concurrency",
+      "passed": true,
+      "latency_ms": 614.2
+    },
+    {
+      "skill_id": "debug_scan.logic.data.consistency",
+      "passed": true,
+      "latency_ms": 583.2
+    },
+    {
+      "skill_id": "debug_scan.logic.edge.case",
+      "passed": true,
+      "latency_ms": 3630.1
+    },
+    {
+      "skill_id": "debug_scan.logic.integration.mismatch",
+      "passed": true,
+      "latency_ms": 637.3
+    },
+    {
+      "skill_id": "debug_scan.logic.race.condition",
+      "passed": true,
+      "latency_ms": 597.9
+    },
+    {
+      "skill_id": "debug_scan.logic.state.machine",
+      "passed": true,
+      "latency_ms": 3409.1
+    },
+    {
+      "skill_id": "debug_scan.logic.workflow.bug",
+      "passed": true,
+      "latency_ms": 588.2
+    },
+    {
+      "skill_id": "debug_scan.monitor.error.rate",
+      "passed": true,
+      "latency_ms": 353.2
+    },
+    {
+      "skill_id": "debug_scan.monitor.health.check",
+      "passed": true,
+      "latency_ms": 3344.3
+    },
+    {
+      "skill_id": "debug_scan.perf.benchmark.compare",
+      "passed": true,
+      "latency_ms": 348.0
+    },
+    {
+      "skill_id": "debug_scan.perf.slow.response",
+      "passed": true,
+      "latency_ms": 346.4
+    },
+    {
+      "skill_id": "debug_scan.rca.five.why",
+      "passed": true,
+      "latency_ms": 3798.5
+    },
+    {
+      "skill_id": "debug_scan.rca.report.generate",
+      "passed": true,
+      "latency_ms": 369.4
+    },
+    {
+      "skill_id": "debug_scan.rca.symptom.vs.root",
+      "passed": true,
+      "latency_ms": 347.4
+    },
+    {
+      "skill_id": "debug_scan.sast.ast.parse",
+      "passed": true,
+      "latency_ms": 3817.7
+    },
+    {
+      "skill_id": "debug_scan.sast.code.review",
+      "passed": true,
+      "latency_ms": 355.4
+    },
+    {
+      "skill_id": "debug_scan.sast.complexity",
+      "passed": true,
+      "latency_ms": 343.6
+    },
+    {
+      "skill_id": "debug_scan.sast.control.flow",
+      "passed": true,
+      "latency_ms": 4087.5
+    },
+    {
+      "skill_id": "debug_scan.sast.cross.ref",
+      "passed": true,
+      "latency_ms": 342.8
+    },
+    {
+      "skill_id": "debug_scan.sast.data.flow",
+      "passed": true,
+      "latency_ms": 585.5
+    },
+    {
+      "skill_id": "debug_scan.sast.dead.code",
+      "passed": true,
+      "latency_ms": 3632.1
+    },
+    {
+      "skill_id": "debug_scan.sast.dependencies",
+      "passed": true,
+      "latency_ms": 347.5
+    },
+    {
+      "skill_id": "debug_scan.sast.duplication",
+      "passed": true,
+      "latency_ms": 600.2
+    },
+    {
+      "skill_id": "debug_scan.sast.lint.run",
+      "passed": true,
+      "latency_ms": 3205.8
+    },
+    {
+      "skill_id": "debug_scan.sast.pattern.match",
+      "passed": true,
+      "latency_ms": 343.9
+    },
+    {
+      "skill_id": "debug_scan.scan",
+      "passed": true,
+      "latency_ms": 379.4
+    },
+    {
+      "skill_id": "debug_scan.sec.cmd.injection",
+      "passed": true,
+      "latency_ms": 4074.1
+    },
+    {
+      "skill_id": "debug_scan.sec.cookies.analyze",
+      "passed": true,
+      "latency_ms": 488.3
+    },
+    {
+      "skill_id": "debug_scan.sec.cors.misconfig",
+      "passed": true,
+      "latency_ms": 588.9
+    },
+    {
+      "skill_id": "debug_scan.sec.headers.check",
+      "passed": true,
+      "latency_ms": 3322.2
+    },
+    {
+      "skill_id": "debug_scan.sec.jwt.vulnerability",
+      "passed": true,
+      "latency_ms": 577.7
+    },
+    {
+      "skill_id": "debug_scan.sec.owasp.top10",
+      "passed": true,
+      "latency_ms": 348.4
+    },
+    {
+      "skill_id": "debug_scan.sec.secret.scan",
+      "passed": true,
+      "latency_ms": 3404.3
+    },
+    {
+      "skill_id": "debug_scan.sec.sqli.test",
+      "passed": true,
+      "latency_ms": 346.0
+    },
+    {
+      "skill_id": "debug_scan.sec.xss.test",
+      "passed": true,
+      "latency_ms": 354.5
+    },
+    {
+      "skill_id": "debug_scan.solution.verify.evidence",
+      "passed": true,
+      "latency_ms": 3886.8
+    },
+    {
+      "skill_id": "debug_scan.target.classify",
+      "passed": true,
+      "latency_ms": 345.2
+    },
+    {
+      "skill_id": "debug_scan.target.desktop.detect",
+      "passed": true,
+      "latency_ms": 348.3
+    },
+    {
+      "skill_id": "debug_scan.target.iot.detect",
+      "passed": true,
+      "latency_ms": 335.7
+    },
+    {
+      "skill_id": "debug_scan.target.mobile.detect",
+      "passed": true,
+      "latency_ms": 2562.5
+    },
+    {
+      "skill_id": "debug_scan.target.network.detect",
+      "passed": true,
+      "latency_ms": 350.5
+    },
+    {
+      "skill_id": "debug_scan.target.permission.check",
+      "passed": true,
+      "latency_ms": 346.4
+    },
+    {
+      "skill_id": "debug_scan.target.scope.define",
+      "passed": true,
+      "latency_ms": 3755.3
+    },
+    {
+      "skill_id": "debug_scan.target.web.detect",
+      "passed": true,
+      "latency_ms": 341.4
+    },
+    {
+      "skill_id": "debug_scan.tsan.report.analyze",
+      "passed": true,
+      "latency_ms": 348.1
+    },
+    {
+      "skill_id": "debug_scan.ubsan.report.analyze",
+      "passed": true,
+      "latency_ms": 3864.9
+    },
+    {
+      "skill_id": "debug_scan.uiux.accessibility",
+      "passed": true,
+      "latency_ms": 615.8
+    },
+    {
+      "skill_id": "debug_scan.uiux.color.contrast",
+      "passed": true,
+      "latency_ms": 594.6
+    },
+    {
+      "skill_id": "debug_scan.uiux.responsive.issue",
+      "passed": true,
+      "latency_ms": 3371.0
+    },
+    {
+      "skill_id": "debug_scan.web.api.endpoint.bug",
+      "passed": true,
+      "latency_ms": 347.1
+    },
+    {
+      "skill_id": "debug_scan.web.backend.exception",
+      "passed": true,
+      "latency_ms": 348.2
+    },
+    {
+      "skill_id": "debug_scan.web.frontend.console.error",
+      "passed": true,
+      "latency_ms": 3864.9
+    },
+    {
+      "skill_id": "debug_scan.web.frontend.cors.error",
+      "passed": true,
+      "latency_ms": 404.1
+    },
+    {
+      "skill_id": "debug_scan.web.frontend.csp.violation",
+      "passed": true,
+      "latency_ms": 352.7
+    },
+    {
+      "skill_id": "debug_scan.web.frontend.network.error",
+      "passed": true,
+      "latency_ms": 3760.9
+    }
+  ],
+  "registered_probe_fixture_removed": true,
+  "live_browser": {
+    "software_chromium": true,
+    "page_errors_observed": 1,
+    "overflow_detected": true,
+    "screenshot_sha256": "d8b703065ce02da7570de760b8bf4e60a39a56caf69248041bd06e44fcae5a36"
+  },
+  "unregistered_target_denied": true,
+  "erp_regression_passed": true,
+  "pdf_artifact": {
+    "name": "harmonika-debug-report.pdf",
+    "mime_type": "application/pdf",
+    "sha256": "e543f112d6be6ea173083db7c251b3b7f1b8477d1d17695e3d5b03b7e350fceb",
+    "artifact_path": "/Users/id/Downloads/harmonika-ai/pdf/harmonika-debug-report-f4038de61582.pdf"
+  }
+}

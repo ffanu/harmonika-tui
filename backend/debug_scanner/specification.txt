@@ -1,0 +1,1342 @@
+================================================================================
+     HARMONIKA AI - UNIVERSAL DEBUG & SECURITY SCANNER ENGINE SKILLS
+          Engine untuk Mencari & Memperbaiki SEMUA Jenis Bug
+          - Web Bug (Frontend, Backend, API, Database)
+          - Mobile Bug (Android, iOS)
+          - Desktop Bug (Windows, macOS, Linux)
+          - IoT Device Bug
+          - Network Bug
+          - Performance Bug
+          - Logic Bug
+          - UI/UX Bug
+          - Security Vulnerability Scanner
+          - Auto-Fix dengan Safety Protocol
+================================================================================
+
+Tujuan: Membangun debug engine dimana Harmonika AI bisa:
+  1. Scan web app untuk semua jenis bug (frontend, backend, API, DB)
+  2. Scan mobile app (Android APK, iOS IPA)
+  3. Scan desktop app (Windows EXE, macOS, Linux)
+  4. Scan IoT device (firmware, network)
+  5. Scan network infrastructure
+  6. Scan untuk security vulnerability (OWASP, CVE)
+  7. Performance profiling & bottleneck detection
+  8. Logic bug detection (business logic error)
+  9. UI/UX bug detection (visual, accessibility)
+  10. Auto-fix dengan safety (backup, staging, rollback)
+
+
+================================================================================
+  PRINSIP UTAMA DEBUG ENGINE
+================================================================================
+
+1. AUDIT BEFORE FIX
+   - Reproduce bug dulu
+   - Capture evidence (log, stack trace, screenshot)
+   - Identify root cause (bukan symptom)
+   - Verify dengan minimal 2 metode
+   - Hanya setelah itu: propose fix
+
+2. MULTI-LAYER SCANNING
+   - Static analysis (code review, AST)
+   - Dynamic analysis (runtime, debugger)
+   - Security scanning (SAST, DAST, IAST)
+   - Performance profiling
+   - Logic testing
+
+3. SAFE FIX PROTOCOL
+   - Backup sebelum ubah apapun
+   - Test di staging dulu (jangan langsung production)
+   - Rollback plan WAJIB disiapkan
+   - Monitor setelah apply (early warning)
+
+4. NEVER GUESS
+   - Setiap klaim WAJIB ada evidence
+   - Tidak ada "kayaknya sih...", "mungkin..."
+   - Kalau tidak yakin, audit lebih dalam
+
+5. EVIDENCE-BASED
+   - "Berdasarkan log baris 1234, error di fungsi X"
+   - "Berdasarkan stack trace frame #2, null pointer"
+   - "Berdasarkan test result, fix berhasil"
+
+6. MULTI-PLATFORM SUPPORT
+   - Web (frontend, backend, API)
+   - Mobile (Android, iOS)
+   - Desktop (Windows, macOS, Linux)
+   - IoT (firmware, embedded)
+   - Network (infrastructure)
+
+7. SECURITY-FIRST
+   - Security vulnerability = bug juga
+   - Scan OWASP Top 10, CVE, CWE
+   - Compliance check (PCI, HIPAA, SOC2)
+
+8. CONTINUOUS SCANNING
+   - Scan berkala (scheduled)
+   - Scan on-commit (CI/CD integration)
+   - Scan on-deploy (pre-production)
+
+
+================================================================================
+  ARSITEKTUR DEBUG ENGINE
+================================================================================
+
+       ┌──────────────────────────────────────────────────────────┐
+       │  User Input                                             │
+       │  - "Scan web https://example.com untuk bug"              │
+       │  - "Scan APK android untuk vulnerability"                │
+       │  - "Debug aplikasi desktop yang crash"                   │
+       │  - "Scan IoT device di network"                          │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Target Classifier                                      │
+       │  - Web (URL, repo, atau binary)                         │
+       │  - Mobile (APK, IPA, atau repo)                         │
+       │  - Desktop (EXE, binary, atau repo)                     │
+       │  - IoT (IP, firmware, atau device)                      │
+       │  - Network (IP range, hostname)                         │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Multi-Layer Scanner (Parallel)                         │
+       │  ┌────────────────┐  ┌────────────────┐                 │
+       │  │ Static Analysis│  │ Dynamic Analysis│                 │
+       │  │ (SAST)         │  │ (DAST)         │                 │
+       │  └────────────────┘  └────────────────┘                 │
+       │  ┌────────────────┐  ┌────────────────┐                 │
+       │  │ Security Scan  │  │ Performance    │                 │
+       │  │ (Vulnerability)│  │ Profiling      │                 │
+       │  └────────────────┘  └────────────────┘                 │
+       │  ┌────────────────┐  ┌────────────────┐                 │
+       │  │ Logic Testing  │  │ UI/UX Testing  │                 │
+       │  └────────────────┘  └────────────────┘                 │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Evidence Collector                                     │
+       │  - Stack trace, log, memory dump                        │
+       │  - Screenshot, video reproduction                       │
+       │  - Network capture, DB query log                        │
+       │  - Timeline reconstruction                              │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Root Cause Analyzer (RCA)                              │
+       │  - 5-Why analysis                                       │
+       │  - Fault tree analysis                                  │
+       │  - Cause-effect mapping                                 │
+       │  - Distinguish symptom vs root cause                    │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Solution Proposer                                      │
+       │  - Generate 2-3 fix options (ranked by risk)            │
+       │  - Each option: pros, cons, risk, blast radius          │
+       │  - Recommend safest option                              │
+       │  - Escalate kalau ragu                                  │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Safe Fix Executor                                      │
+       │  - Backup target (snapshot, git stash)                  │
+       │  - Apply fix di STAGING                                 │
+       │  - Run regression test                                  │
+       │  - Monitor for 24h                                      │
+       │  - Rollback plan ready                                  │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Audit Log & Report                                     │
+       │  - Full evidence chain                                  │
+       │  - Action taken + justification                         │
+       │  - Post-fix verification                                │
+       │  - Lessons learned                                      │
+       └──────────────────────────────────────────────────────────┘
+
+
+================================================================================
+  DAFTAR LENGKAP SKILL (245 SKILLS)
+================================================================================
+
+--------------------------------------------------------------------------------
+[Layer 1] TARGET CLASSIFIER (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk identify jenis target yang akan di-scan
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+1   | target.classify                | Klasifikasi target (web/mobile/desktop/IoT)
+2   | target.web.detect              | Detect web app (URL, tech stack)
+3   | target.mobile.detect           | Detect mobile app (APK, IPA)
+4   | target.desktop.detect          | Detect desktop app (EXE, binary)
+5   | target.iot.detect              | Detect IoT device (IP, firmware)
+6   | target.network.detect          | Detect network target (IP range)
+7   | target.source.access           | Akses source code (kalau ada)
+8   | target.binary.analyze          | Analyze binary (kalau tidak ada source)
+9   | target.scope.define            | Define scope scanning
+10  | target.permission.check        | Check permission (auth, scope)
+
+
+--------------------------------------------------------------------------------
+[Layer 2] STATIC ANALYSIS (SAST) (15 skills)
+--------------------------------------------------------------------------------
+Skill untuk analisa code tanpa run
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+11  | sast.code.review               | Code review otomatis
+12  | sast.ast.parse                 | Parse AST (abstract syntax tree)
+13  | sast.data.flow                 | Data flow analysis (taint tracking)
+14  | sast.control.flow              | Control flow analysis
+15  | sast.symbolic.exec             | Symbolic execution
+16  | sast.pattern.match             | Pattern matching (anti-pattern)
+17  | sast.cross.ref                 | Cross-reference analysis
+18  | sast.dead.code                 | Dead code detection
+19  | sast.complexity                | Cyclomatic complexity
+20  | sast.duplication               | Code duplication detection
+21  | sast.dependencies              | Dependency analysis
+22  | sast.versions.diff             | Diff antar versi (git blame)
+23  | sast.commit.history            | Commit history analysis
+24  | sast.lint.run                  | Linter (eslint, ruff, golangci)
+25  | sast.type.check                | Type check (mypy, tsc, pyright)
+
+
+--------------------------------------------------------------------------------
+[Layer 3] DYNAMIC ANALYSIS (DAST) (15 skills)
+--------------------------------------------------------------------------------
+Skill untuk analisa saat runtime
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+26  | dast.reproduce                 | Reproduce bug (coba trigger)
+27  | dast.debug.attach              | Attach debugger ke process
+28  | dast.breakpoint.set            | Set breakpoint strategis
+29  | dast.step.trace                | Step-by-step trace execution
+30  | dast.memory.inspect            | Inspect memory state
+31  | dast.var.watch                 | Watch variable changes
+32  | dast.call.stack                | Capture call stack
+33  | dast.profile.cpu               | CPU profiling
+34  | dast.profile.memory            | Memory profiling (leak detect)
+35  | dast.profile.io                | I/O profiling
+36  | dast.trace.system              | System call tracing (strace)
+37  | dast.trace.network             | Network packet capture
+38  | dast.trace.file                | File access trace
+39  | dast.fuzz.input                | Fuzz testing (input mutation)
+40  | dast.load.test                 | Load testing (reproduce perf bug)
+
+
+--------------------------------------------------------------------------------
+[Layer 4] WEB BUG SCANNER (20 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan web bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+41  | web.frontend.console.error     | Scan console error (JS)
+42  | web.frontend.network.error     | Scan network error (XHR, fetch)
+43  | web.frontend.render.bug        | Scan render bug (CSS, layout)
+44  | web.frontend.cors.error        | Scan CORS error
+45  | web.frontend.csp.violation     | Scan CSP violation
+46  | web.frontend.memory.leak       | Scan memory leak (browser)
+47  | web.frontend.performance       | Scan frontend performance (Lighthouse)
+48  | web.frontend.accessibility     | Scan accessibility (WCAG)
+49  | web.backend.exception          | Scan backend exception
+50  | web.backend.slow.query         | Scan slow query (DB)
+51  | web.backend.deadlock           | Scan deadlock
+52  | web.backend.connection.leak    | Scan connection leak (DB, HTTP)
+53  | web.backend.memory.leak        | Scan memory leak (server)
+54  | web.backend.cpu.spike          | Scan CPU spike
+55  | web.backend.crash              | Scan crash (segfault, OOM)
+56  | web.api.endpoint.bug           | Scan API endpoint bug
+57  | web.api.rate.limit             | Scan rate limit issue
+58  | web.api.authentication         | Scan authentication bug
+59  | web.api.authorization          | Scan authorization bug (IDOR)
+60  | web.api.validation             | Scan input validation bug
+
+
+--------------------------------------------------------------------------------
+[Layer 5] MOBILE BUG SCANNER (15 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan mobile app bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+61  | mobile.android.scan            | Scan Android APK (static + dynamic)
+62  | mobile.android.crash           | Scan crash (logcat, ANR)
+63  | mobile.android.memory          | Scan memory leak (LeakCanary)
+64  | mobile.android.battery         | Scan battery drain
+65  | mobile.android.network         | Scan network usage
+66  | mobile.android.permission      | Scan permission issue
+67  | mobile.ios.scan                | Scan iOS IPA
+68  | mobile.ios.crash               | Scan crash (crash log)
+69  | mobile.ios.memory              | Scan memory leak (Instruments)
+70  | mobile.ios.battery             | Scan battery drain
+71  | mobile.ui.render               | Scan UI render bug
+72  | mobile.ui.responsive           | Scan responsive issue
+73  | mobile.network.offline         | Scan offline handling
+74  | mobile.storage.corrupt        | Scan storage corruption
+75  | mobile.push.notif              | Scan push notification bug
+
+
+--------------------------------------------------------------------------------
+[Layer 6] DESKTOP BUG SCANNER (12 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan desktop app bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+76  | desktop.windows.scan           | Scan Windows app (EXE)
+77  | desktop.windows.crash          | Scan crash (BSOD, event log)
+78  | desktop.windows.registry       | Scan registry issue
+79  | desktop.macos.scan             | Scan macOS app
+80  | desktop.macos.crash            | Scan crash (crash report)
+81  | desktop.linux.scan             | Scan Linux app
+82  | desktop.linux.core.dump        | Analyze core dump
+83  | desktop.memory.leak            | Scan memory leak (Valgrind)
+84  | desktop.cpu.usage              | Scan CPU usage issue
+85  | desktop.disk.usage             | Scan disk usage issue
+86  | desktop.gpu.driver             | Scan GPU driver issue
+87  | desktop.compat.os              | Scan OS compatibility
+
+
+--------------------------------------------------------------------------------
+[Layer 7] IOT DEVICE BUG SCANNER (10 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan IoT device
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+88  | iot.firmware.scan              | Scan firmware (binary analysis)
+89  | iot.firmware.extract           | Extract filesystem dari firmware
+90  | iot.network.scan               | Scan IoT device di network
+91  | iot.protocol.analyze           | Analyze protocol (MQTT, CoAP, Zigbee)
+92  | iot.credential.check           | Check default credential
+93  | iot.update.mechanism           | Check OTA update security
+94  | iot.privacy.data               | Check privacy data handling
+95  | iot.physical.security          | Check physical security (UART, JTAG)
+96  | iot.cloud.connect              | Check cloud connectivity
+97  | iot.resource.constraint        | Check resource constraint issue
+
+
+--------------------------------------------------------------------------------
+[Layer 8] NETWORK BUG SCANNER (10 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan network bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+98  | net.latency.high               | Scan high latency
+99  | net.packet.loss                | Scan packet loss
+100 | net.bandwidth.bottleneck       | Scan bandwidth bottleneck
+101 | net.dns.issue                  | Scan DNS issue
+102 | net.routing.loop               | Scan routing loop
+103 | net.firewall.misconfig         | Scan firewall misconfiguration
+104 | net.vpn.issue                  | Scan VPN issue
+105 | net.load.balancer              | Scan load balancer bug
+106 | net.cdn.cache                  | Scan CDN cache issue
+107 | net.ddos.detect                | Detect DDoS attack
+
+
+--------------------------------------------------------------------------------
+[Layer 9] PERFORMANCE BUG SCANNER (12 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan performance bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+108 | perf.slow.response             | Scan slow response time
+109 | perf.high.cpu                  | Scan high CPU usage
+110 | perf.high.memory               | Scan high memory usage
+111 | perf.db.slow.query             | Scan slow database query
+112 | perf.n.plus.one                | Scan N+1 query problem
+113 | perf.cache.miss                | Scan cache miss issue
+114 | perf.gc.frequent               | Scan frequent garbage collection
+115 | perf.thread.contention         | Scan thread contention
+116 | perf.io.bottleneck             | Scan I/O bottleneck
+117 | perf.network.bottleneck        | Scan network bottleneck
+118 | perf.frontend.blocking         | Scan frontend render blocking
+119 | perf.benchmark.compare         | Benchmark vs baseline
+
+
+--------------------------------------------------------------------------------
+[Layer 10] LOGIC BUG SCANNER (10 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan logic bug (business logic error)
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+120 | logic.business.rule            | Scan business rule violation
+121 | logic.edge.case                | Scan edge case bug
+122 | logic.race.condition           | Scan race condition
+123 | logic.concurrency              | Scan concurrency bug
+124 | logic.state.machine            | Scan state machine bug
+125 | logic.calculation.error        | Scan calculation error
+126 | logic.validation.bypass        | Scan validation bypass
+127 | logic.workflow.bug             | Scan workflow bug
+128 | logic.integration.mismatch     | Scan integration mismatch
+129 | logic.data.consistency         | Scan data consistency issue
+
+
+--------------------------------------------------------------------------------
+[Layer 11] UI/UX BUG SCANNER (10 skills)
+--------------------------------------------------------------------------------
+Skill khusus scan UI/UX bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+130 | uiux.visual.glitch             | Scan visual glitch
+131 | uiux.layout.break              | Scan layout break
+132 | uiux.responsive.issue          | Scan responsive issue
+133 | uiux.cross.browser             | Scan cross-browser issue
+134 | uiux.accessibility             | Scan accessibility (WCAG)
+135 | uiux.color.contrast            | Scan color contrast issue
+136 | uiux.font.render               | Scan font rendering issue
+137 | uiux.animation.glitch          | Scan animation glitch
+138 | uiux.form.validation           | Scan form validation UX
+139 | uiux.user.flow.friction        | Scan user flow friction
+
+
+--------------------------------------------------------------------------------
+[Layer 12] SECURITY VULNERABILITY SCANNER (25 skills)
+--------------------------------------------------------------------------------
+Skill khusus security scanning (OWASP, CVE, CWE)
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+140 | sec.owasp.top10               | OWASP Top 10 audit
+141 | sec.sqli.test                  | SQL Injection testing
+142 | sec.xss.test                   | XSS testing (reflected, stored, DOM)
+143 | sec.csrf.test                  | CSRF testing
+144 | sec.ssrf.test                  | SSRF testing
+145 | sec.xxe.test                   | XXE testing
+146 | sec.idor.test                  | IDOR / BOLA testing
+147 | sec.auth.bypass                | Authentication bypass testing
+148 | sec.jwt.vulnerability          | JWT analysis & attacks
+149 | sec.file.upload                | File upload vulnerability testing
+150 | sec.lfi.rfi                    | LFI/RFI testing
+151 | sec.cmd.injection              | Command injection testing
+152 | sec.business.logic             | Business logic flaws
+153 | sec.api.fuzz                   | API fuzzing
+154 | sec.graphql.test               | GraphQL security testing
+155 | sec.websocket.test             | WebSocket security testing
+156 | sec.cors.misconfig             | CORS misconfiguration test
+157 | sec.csp.bypass                 | CSP bypass test
+158 | sec.headers.check              | Security headers audit
+159 | sec.cookies.analyze            | Cookie security analysis
+160 | sec.dependency.scan            | Dependency vulnerability (Snyk)
+161 | sec.secret.scan                | Secret detection (TruffleHog)
+162 | sec.container.scan             | Container security (Trivy)
+163 | sec.infrastructure.scan        | Infrastructure security (tfsec)
+164 | sec.compliance.check           | Compliance check (PCI, HIPAA, SOC2)
+
+
+--------------------------------------------------------------------------------
+[Layer 13] MEMORY & CRASH ANALYZER (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk analisa crash & memory corruption
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+165 | crash.dump.analyze             | Analyze crash dump (.dmp, core)
+166 | crash.stack.unwind             | Stack unwinding
+167 | crash.frame.analyze            | Frame analysis
+168 | memory.leak.detect            | Memory leak detection
+169 | memory.corruption.find        | Memory corruption (buffer overflow, UAF)
+170 | memory.heap.inspect           | Heap inspection
+171 | memory.stack.inspect          | Stack inspection
+172 | asan.report.analyze           | AddressSanitizer report
+173 | tsan.report.analyze           | ThreadSanitizer report
+174 | ubsan.report.analyze          | UBSan report
+
+
+--------------------------------------------------------------------------------
+[Layer 14] EVIDENCE COLLECTOR (12 skills)
+--------------------------------------------------------------------------------
+Skill untuk kumpulkan evidence
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+175 | evidence.log.capture           | Capture application log
+176 | evidence.stack.trace           | Capture stack trace
+177 | evidence.memory.dump           | Memory dump (core dump)
+178 | evidence.network.capture       | Network capture (pcap)
+179 | evidence.disk.snapshot         | Disk snapshot
+180 | evidence.process.snapshot      | Process state snapshot
+181 | evidence.config.capture        | Config state capture
+182 | evidence.env.capture           | Environment variables capture
+183 | evidence.timeline.build        | Build event timeline
+184 | evidence.hash.compute          | Hash files (integrity)
+185 | evidence.chain.custody         | Chain of custody (legal-grade)
+186 | evidence.store.secure          | Store evidence securely (immutable)
+
+
+--------------------------------------------------------------------------------
+[Layer 15] ROOT CAUSE ANALYZER (12 skills)
+--------------------------------------------------------------------------------
+Skill untuk cari root cause
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+187 | rca.five.why                   | 5-Why analysis
+188 | rca.fault.tree                 | Fault tree analysis
+189 | rca.fishbone                   | Fishbone (Ishikawa) diagram
+190 | rca.cause.effect               | Cause-effect mapping
+191 | rca.symptom.vs.root            | Distinguish symptom vs root cause
+192 | rca.contributing.factor        | Identify contributing factors
+193 | rca.timing.analyze             | Timing analysis (when did it start)
+194 | rca.change.analyze             | What changed recently (git diff)
+195 | rca.environment.analyze        | Environment factor analysis
+196 | rca.human.factor               | Human error analysis
+197 | rca.upstream.dependency        | Upstream dependency check
+198 | rca.report.generate            | Generate RCA report
+
+
+--------------------------------------------------------------------------------
+[Layer 16] SOLUTION PROPOSER (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk generate solusi
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+199 | solution.options.generate      | Generate 2-3 fix options
+200 | solution.risk.assess           | Risk assessment per option
+201 | solution.blast.radius          | Blast radius analysis
+202 | solution.cost.benefit          | Cost-benefit analysis
+203 | solution.recommend.safest      | Recommend safest option
+204 | solution.alternative.if.fail   | Backup plan if fix fails
+205 | solution.escalate.if.uncertain | Escalate if uncertain
+206 | solution.peer.review           | Request peer review (human)
+207 | solution.document.rationale    | Document decision rationale
+208 | solution.verify.evidence       | Verify solution has evidence
+
+
+--------------------------------------------------------------------------------
+[Layer 17] SAFE FIX EXECUTOR (12 skills)
+--------------------------------------------------------------------------------
+Skill untuk eksekusi fix dengan safety
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+209 | fix.backup.create              | Backup target (snapshot/git)
+210 | fix.staging.apply              | Apply di STAGING (never prod langsung)
+211 | fix.test.regression            | Run regression test
+212 | fix.test.unit                  | Run unit test
+213 | fix.test.integration           | Run integration test
+214 | fix.verify.solution            | Verify fix solves problem
+215 | fix.verify.no.regression       | Verify no new bug introduced
+216 | fix.rollback.plan              | Prepare rollback plan
+217 | fix.production.deploy          | Deploy ke production (after staging pass)
+218 | fix.monitor.post               | Monitor post-deploy (24h)
+219 | fix.alert.anomaly              | Alert if anomaly post-deploy
+220 | fix.rollback.execute           | Execute rollback if needed
+
+
+--------------------------------------------------------------------------------
+[Layer 18] VERIFICATION & VALIDATION (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk verify fix
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+221 | verify.reproduce.original      | Reproduce original bug (should fail now)
+222 | verify.reproduce.fixed         | Reproduce with fix (should pass now)
+223 | verify.edge.case               | Test edge cases
+224 | verify.load.test               | Load test (no perf regression)
+225 | verify.security.test           | Security test (no new vuln)
+226 | verify.code.review             | Code review by peer/human
+227 | verify.user.acceptance         | User acceptance test (UAT)
+228 | verify.smoke.test              | Smoke test production
+229 | verify.canary.deploy           | Canary deploy (5% traffic dulu)
+230 | verify.full.pass               | Full verification pass
+
+
+--------------------------------------------------------------------------------
+[Layer 19] AUDIT LOG & REPORTING (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk audit trail
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+231 | audit.log.action               | Log semua aksi (append-only)
+232 | audit.log.decision             | Log semua decision + rationale
+233 | audit.log.evidence             | Log evidence reference
+234 | audit.log.change               | Log semua perubahan
+235 | audit.log.access               | Log semua akses ke system
+236 | audit.report.generate          | Generate audit report (PDF)
+237 | audit.report.executive         | Executive summary
+238 | audit.report.technical         | Technical detail report
+239 | audit.report.lessons           | Lessons learned report
+240 | audit.timeline.reconstruct     | Reconstruct full timeline
+
+
+--------------------------------------------------------------------------------
+[Layer 20] ESCALATION & HUMAN HANDOFF (8 skills)
+--------------------------------------------------------------------------------
+Skill untuk escalate ke human
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+241 | escalate.confidence.low        | Escalate: confidence < 80%
+242 | escalate.critical.severity     | Escalate: critical severity
+243 | escalate.production.risk       | Escalate: risk ke production
+244 | escalate.complex.root.cause    | Escalate: root cause kompleks
+245 | escalate.no.evidence           | Escalate: tidak ada cukup evidence
+246 | escalate.context.transfer      | Transfer context ke human
+247 | escalate.summary.generate      | Generate summary untuk human
+248 | escalate.wait.human            | Wait for human confirmation
+
+
+--------------------------------------------------------------------------------
+[Layer 21] KNOWLEDGE BASE (8 skills)
+--------------------------------------------------------------------------------
+Skill untuk knowledge base bug pattern
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+249 | kb.bug.pattern.search          | Search bug pattern (similar issue)
+250 | kb.solution.search             | Search solution database
+251 | kb.postmortem.search           | Search postmortem reports
+252 | kb.runbook.search              | Search runbook (SOP)
+253 | kb.convention.search           | Search coding convention
+254 | kb.history.search              | Search historical fix
+255 | kb.learn.from.fix              | Learn from fix (update KB)
+256 | kb.share.organization          | Share knowledge ke org
+
+
+--------------------------------------------------------------------------------
+[Layer 22] MONITORING & EARLY WARNING (8 skills)
+--------------------------------------------------------------------------------
+Skill untuk monitoring prevent next bug
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+257 | monitor.error.rate             | Monitor error rate (Sentry)
+258 | monitor.anomaly.detect         | Anomaly detection
+259 | monitor.threshold.alert        | Threshold-based alert
+260 | monitor.trend.analyze          | Trend analysis
+261 | monitor.health.check           | Health check endpoint
+262 | monitor.uptime.track           | Uptime tracking
+263 | monitor.slo.track              | SLO tracking
+264 | monitor.incident.auto          | Auto-incident declaration
+
+
+--------------------------------------------------------------------------------
+[Layer 23] CI/CD INTEGRATION (8 skills)
+--------------------------------------------------------------------------------
+Skill untuk integrate ke CI/CD
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+265 | cicd.scan.on.commit            | Scan on every git commit
+266 | cicd.scan.on.pr                | Scan on pull request
+267 | cicd.scan.on.deploy            | Scan before deploy
+268 | cicd.scan.scheduled            | Scheduled scan (daily, weekly)
+269 | cicd.block.if.critical         | Block deploy kalau ada critical bug
+270 | cicd.report.to.pr              | Report hasil scan ke PR comment
+271 | cicd.badge.generate            | Generate quality badge
+272 | cicd.notify.slack              | Notify ke Slack kalau ada bug
+
+
+--------------------------------------------------------------------------------
+[Layer 24] MULTI-LANGUAGE SUPPORT (10 skills)
+--------------------------------------------------------------------------------
+Skill untuk support multiple programming language
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+273 | lang.javascript.scan           | Scan JavaScript/TypeScript
+274 | lang.python.scan               | Scan Python
+275 | lang.java.scan                 | Scan Java
+276 | lang.csharp.scan               | Scan C#
+277 | lang.go.scan                   | Scan Go
+278 | lang.rust.scan                 | Scan Rust
+279 | lang.php.scan                  | Scan PHP
+280 | lang.ruby.scan                 | Scan Ruby
+281 | lang.swift.scan                | Scan Swift
+282 | lang.kotlin.scan               | Scan Kotlin
+
+
+--------------------------------------------------------------------------------
+[Layer 25] COMPLIANCE & ETHICS (8 skills)
+--------------------------------------------------------------------------------
+Skill untuk compliance & ethics
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+283 | ethics.authorized.scan         | Ensure scan hanya ke authorized target
+284 | ethics.scope.adherence         | Adherence ke scope (no scope creep)
+285 | ethics.data.privacy            | Privacy data target
+286 | ethics.responsible.disclosure  | Responsible disclosure (kalau find vuln)
+287 | compliance.gdpr                | GDPR compliance
+288 | compliance.pci.dss             | PCI-DSS compliance
+289 | compliance.hipaa               | HIPAA compliance
+290 | compliance.soc2                | SOC 2 compliance
+
+
+================================================================================
+  CONTOH WORKFLOW: SCAN WEB APP UNTUK SEMUA BUG
+================================================================================
+
+User: "Scan web https://example.com untuk semua bug,
+       termasuk security vulnerability"
+
+AI eksekusi:
+
+# Phase 1: TARGET CLASSIFY
+target.classify("https://example.com")
+  -> Type: Web App
+  -> Tech: Next.js 14 + PostgreSQL + Redis
+  -> Scope: Full scan (frontend + backend + API + security)
+
+# Phase 2: MULTI-LAYER SCAN (parallel)
+
+# Layer A: Static Analysis (SAST)
+sast.code.review({repo: "https://github.com/user/example"})
+  -> 24 files analyzed
+  -> 15 issues found:
+     - 3 high: SQL query tidak parameterized
+     - 5 medium: missing input validation
+     - 7 low: code duplication
+
+sast.dependencies.scan()
+  -> 4 vulnerable dependencies:
+     - lodash@4.17.20 (CVE-2021-23337) HIGH
+     - axios@0.21.1 (CVE-2021-3749) MEDIUM
+     - ...
+
+sast.secret.scan()
+  -> 2 secrets found:
+     - API_KEY di commit history (line 45)
+     - DB password di .env (sudah di-gitignore, OK)
+
+# Layer B: Dynamic Analysis (DAST)
+dast.reproduce({target: "https://example.com"})
+  -> Site accessible, 200 OK
+
+dast.profile.cpu()
+  -> CPU spike di /api/users (95% saat 50 concurrent)
+
+dast.profile.memory()
+  -> Memory leak di /api/sse (naik 10MB per menit)
+
+dast.trace.network()
+  -> Slow request ke /api/products (3.2 detik)
+  -> N+1 query di /api/orders
+
+# Layer C: Security Scan
+sec.owasp.top10({target: "https://example.com"})
+  -> A01 Broken Access Control: IDOR di /api/users/{id}
+  -> A02 Cryptographic Failures: password hash MD5
+  -> A03 Injection: SQLi di /api/search?q=
+  -> A04 Insecure Design: no rate limit di /api/login
+  -> A07 Auth Failures: weak password policy
+
+sec.sqli.test({url: "https://example.com/api/search?q=test'"})
+  -> VULNERABLE: boolean-blind SQLi
+  -> DBMS: PostgreSQL
+
+sec.xss.test({url: "https://example.com/search?q=<script>"})
+  -> VULNERABLE: reflected XSS
+
+sec.idor.test({url: "https://example.com/api/users/1"})
+  -> VULNERABLE: bisa akses user lain tanpa auth
+
+sec.headers.check()
+  -> Missing: Strict-Transport-Security
+  -> Missing: Content-Security-Policy
+  -> Missing: X-Frame-Options
+
+# Layer D: Performance Scan
+perf.slow.response({target: "https://example.com"})
+  -> /api/products: 3.2s (target < 500ms)
+  -> /api/orders: 2.1s (target < 500ms)
+  -> /api/users: 1.8s (target < 500ms)
+
+perf.db.slow.query()
+  -> SELECT * FROM products WHERE... (2.8s, no index)
+  -> SELECT * FROM orders JOIN... (1.9s, missing index)
+
+perf.n.plus.one()
+  -> /api/orders: N+1 query (1 + 50 queries)
+
+perf.frontend.blocking()
+  -> main.js (2.5MB, blocking render 1.2s)
+  -> style.css (800KB, blocking render 0.8s)
+
+# Layer E: Logic Bug Scan
+logic.business.rule({target: "https://example.com"})
+  -> Cart bisa negative quantity
+  -> Discount applied multiple times
+  -> Stock tidak check saat checkout
+
+logic.race.condition()
+  -> /api/checkout: race condition (double purchase)
+
+# Layer F: UI/UX Bug Scan
+uiux.responsive.issue()
+  -> Layout break di iPad (768px)
+  -> Button overflow di mobile (375px)
+
+uiux.accessibility()
+  -> 12 issues:
+     - 5 color contrast < 4.5:1
+     - 3 missing alt text
+     - 4 missing ARIA label
+
+# Phase 3: EVIDENCE COLLECT
+evidence.log.capture({service: "all"})
+  -> 50MB log captured
+
+evidence.stack.trace()
+  -> 8 stack trace dari crash
+
+evidence.network.capture()
+  -> 200MB pcap (untuk security analysis)
+
+# Phase 4: ROOT CAUSE ANALYZE
+rca.five.why({problem: "API /api/products slow"})
+  -> Why 1: Query lambat (2.8s)
+  -> Why 2: Tidak ada index di WHERE clause
+  -> Why 3: Migration tidak di-run
+  -> Why 4: CI/CD tidak run migration otomatis
+  -> Why 5: Migration script tidak ter-commit
+  -> ROOT CAUSE: Migration script tidak ter-commit
+
+rca.five.why({problem: "SQLi di /api/search"})
+  -> Why 1: Query pakai string concatenation
+  -> Why 2: Developer tidak pakai parameterized query
+  -> Why 3: Tidak ada code review untuk security
+  -> Why 4: Tidak ada SAST di CI/CD
+  -> ROOT CAUSE: Tidak ada SAST di CI/CD
+
+# Phase 5: SOLUTION PROPOSE
+solution.options.generate({bug: "SQLi di /api/search"})
+  -> Option A (SAFEST): Pakai parameterized query
+     - Risk: LOW
+     - Blast radius: 1 function
+     - Effort: 30 menit
+  -> Option B: Pakai ORM (Prisma)
+     - Risk: MEDIUM (rewrite)
+     - Blast radius: multiple file
+     - Effort: 2 hari
+  -> Option C: Input validation + escape
+     - Risk: MEDIUM (might miss edge case)
+     - Blast radius: 1 function
+     - Effort: 1 jam
+
+solution.recommend.safest()
+  -> REKOMENDASI: Option A (parameterized query)
+
+# Phase 6: SAFE FIX EXECUTE
+fix.backup.create({target: "repo"})
+  -> Git stash created
+
+fix.staging.apply({
+    file: "api/search.js",
+    change: "Use parameterized query: db.query('SELECT * FROM products WHERE name LIKE $1', [q])"
+})
+  -> Applied to staging
+
+fix.test.regression()
+  -> 47 tests passed ✓
+
+fix.verify.solution({input: "test'", expected: "no SQL error"})
+  -> Without fix: SQLi ✗
+  -> With fix: No SQLi ✓
+
+# Phase 7: VERIFY
+verify.reproduce.original({input: "test'"})
+  -> Without fix: SQLi (confirmed)
+  -> With fix: No SQLi ✓
+
+verify.edge.case({inputs: ["'", '"', "1=1", "OR '1'='1"]})
+  -> All edge cases handled ✓
+
+verify.security.test()
+  -> No new vulnerability ✓
+
+# Phase 8: DEPLOY
+fix.production.deploy({strategy: "canary", percentage: 5})
+  -> Monitor 1 hour...
+  -> Error rate: 0% (normal)
+  -> Proceed to 100%
+
+# Phase 9: POST-DEPLOY MONITOR
+fix.monitor.post({duration: "24h"})
+  -> Hour 0-1: Normal
+  -> Hour 1-6: Normal
+  -> Hour 6-12: Normal
+  -> Hour 12-24: Normal
+  -> NO ANOMALY ✓
+
+# Phase 10: AUDIT REPORT
+audit.report.generate({
+    target: "https://example.com",
+    scan_date: "2026-10-26",
+    findings: {
+        critical: 3 (SQLi, IDOR, XSS),
+        high: 5,
+        medium: 12,
+        low: 15
+    },
+    fixed: 3 critical (today),
+    remaining: 32 (schedule fix)
+})
+  -> /reports/scan_report_example_com.pdf
+
+
+================================================================================
+  CONTOH: SCAN MOBILE APP (ANDROID APK)
+================================================================================
+
+User: "Scan APK ini untuk bug & vulnerability"
+
+AI eksekusi:
+
+# Phase 1: TARGET CLASSIFY
+target.mobile.detect({file: "app.apk"})
+  -> Type: Android APK
+  -> Package: com.example.app
+  -> Version: 1.2.3
+  -> Min SDK: 24, Target SDK: 34
+
+# Phase 2: STATIC ANALYSIS
+mobile.android.scan({apk: "app.apk"})
+  -> Decompile APK (jadx)
+  -> Analyze 150 classes
+  -> 8 issues:
+     - 2 hardcoded API keys
+     - 3 activities exported (security risk)
+     - 1 SQLi di local DB
+     - 2 missing permission check
+
+# Phase 3: DYNAMIC ANALYSIS
+mobile.android.crash({package: "com.example.app"})
+  -> 3 crash di logcat:
+     - NullPointerException di MainActivity
+     - OOM di ImageLoader
+     - ANR di NetworkCallback
+
+mobile.android.memory({package: "com.example.app"})
+  -> Memory leak di LoginActivity (LeakCanary)
+
+mobile.android.battery({package: "com.example.app"})
+  -> Background service drain battery (GPS terus-terusan)
+
+# Phase 4: SECURITY SCAN
+sec.dependency.scan()
+  -> 5 vulnerable dependencies:
+     - okhttp@3.12.0 (CVE-2021-0341)
+     - ...
+
+sec.secret.scan()
+  -> 2 secrets di code:
+     - API_KEY: sk_live_...
+     - DB password
+
+mobile.android.permission()
+  -> 3 over-permission:
+     - READ_SMS (tidak dipakai)
+     - ACCESS_FINE_LOCATION (cuma butuh coarse)
+
+# Phase 5: REPORT
+audit.report.generate({
+    target: "app.apk",
+    findings: {
+        critical: 2 (hardcoded keys, SQLi),
+        high: 4,
+        medium: 6,
+        low: 5
+    }
+})
+
+
+================================================================================
+  CONTOH: SCAN IoT DEVICE
+================================================================================
+
+User: "Scan IoT device di 192.168.1.100"
+
+AI eksekusi:
+
+# Phase 1: TARGET CLASSIFY
+iot.network.scan({ip: "192.168.1.100"})
+  -> Device: Smart Camera
+  -> Port: 80 (HTTP), 443 (HTTPS), 554 (RTSP), 23 (Telnet)
+
+# Phase 2: FIRMWARE ANALYSIS
+iot.firmware.scan({ip: "192.168.1.100"})
+  -> Firmware version: V2.3.1
+  -> Extract filesystem
+  -> 5 issues:
+     - Default credential (admin/admin)
+     - Hardcoded SSH key
+     - Outdated busybox (CVE-2022-28365)
+     - No firmware signature verification
+     - Debug mode enabled
+
+# Phase 3: NETWORK ANALYSIS
+iot.protocol.analyze({ip: "192.168.1.100"})
+  -> HTTP: plaintext (no HTTPS)
+  -> RTSP: no auth
+  -> Telnet: open (harusnya disabled)
+
+iot.credential.check()
+  -> admin/admin: SUCCESS (default credential!)
+
+# Phase 4: REPORT
+audit.report.generate({
+    target: "192.168.1.100 (Smart Camera)",
+    findings: {
+        critical: 3 (default cred, telnet open, no HTTPS),
+        high: 5,
+        medium: 3
+    },
+    recommendation: "Update firmware, change password, disable telnet"
+})
+
+
+================================================================================
+  TECH STACK RECOMMENDED
+================================================================================
+
+STATIC ANALYSIS (SAST):
+  - SonarQube
+  - Semgrep
+  - CodeQL (GitHub)
+  - Snyk Code
+  - ESLint, Prettier (JS)
+  - Ruff, Bandit (Python)
+  - Golangci-lint (Go)
+
+DYNAMIC ANALYSIS (DAST):
+  - OWASP ZAP
+  - Burp Suite
+  - Nuclei
+  - Nikto
+  - Arachni
+
+SECURITY SCANNING:
+  - OWASP ZAP (web)
+  - Nikto (web server)
+  - Nmap (network)
+  - Snyk (dependency)
+  - TruffleHog (secrets)
+  - Trivy (container)
+  - tfsec (infrastructure)
+
+MOBILE SCANNING:
+  - MobSF (Mobile Security Framework)
+  - jadx (APK decompile)
+  - Frida (runtime)
+  - LeakCanary (Android memory)
+  - Instruments (iOS)
+
+DESKTOP SCANNING:
+  - Valgrind (memory)
+  - AddressSanitizer (memory)
+  - WinDbg (Windows crash)
+  - lldb (macOS/Linux debugger)
+
+IoT SCANNING:
+  - binwalk (firmware extract)
+  - firmware-mod-kit
+  - Firmwalker (firmware scan)
+  - Nmap (network)
+  - Shodan (internet-facing)
+
+PERFORMANCE PROFILING:
+  - Lighthouse (web)
+  - WebPageTest
+  - Py-spy (Python)
+  - async-profiler (Java)
+  - perf (Linux)
+
+CRASH ANALYSIS:
+  - Sentry
+  - Bugsnag
+  - Crashlytics (mobile)
+  - Breakpad (desktop)
+  - WinDbg (Windows)
+
+CI/CD INTEGRATION:
+  - GitHub Actions
+  - GitLab CI
+  - Jenkins
+  - SonarQube CI
+
+REPORTING:
+  - Allure (test report)
+  - ReportLab (PDF)
+  - Grafana (dashboard)
+
+
+================================================================================
+  PRIORITAS BUILD (PHASED)
+================================================================================
+
+Phase 1 - MVP "Bug Scanner Basic" (Bulan 1-3)
+  Goal: Scan web app untuk bug + security
+  WAJIB (15 skills):
+  - target.classify
+  - target.web.detect
+  - sast.code.review
+  - sast.lint.run
+  - dast.reproduce
+  - web.frontend.console.error
+  - web.backend.exception
+  - web.api.endpoint.bug
+  - sec.owasp.top10
+  - sec.sqli.test
+  - sec.xss.test
+  - evidence.log.capture
+  - evidence.stack.trace
+  - rca.five.why
+  - audit.report.generate
+
+Phase 2 - "Multi-Platform Scanner" (Bulan 4-6)
+  Goal: Mobile + desktop + performance + logic bug
+  Tambahkan (15 skills):
+  - mobile.android.scan
+  - mobile.ios.scan
+  - desktop.windows.scan
+  - perf.slow.response
+  - perf.db.slow.query
+  - perf.n.plus.one
+  - logic.business.rule
+  - logic.race.condition
+  - uiux.responsive.issue
+  - uiux.accessibility
+  - sec.idor.test
+  - sec.dependency.scan
+  - sec.secret.scan
+  - fix.staging.apply
+  - fix.test.regression
+
+Phase 3 - "Advanced Scanner" (Bulan 7-9)
+  Goal: IoT, network, memory, crash analysis
+  Tambahkan (15 skills):
+  - iot.firmware.scan
+  - iot.network.scan
+  - net.latency.high
+  - net.firewall.misconfig
+  - crash.dump.analyze
+  - memory.leak.detect
+  - memory.corruption.find
+  - sec.csrf.test
+  - sec.ssrf.test
+  - sec.jwt.vulnerability
+  - sec.file.upload
+  - solution.options.generate
+  - fix.production.deploy
+  - verify.reproduce.original
+  - cicd.scan.on.commit
+
+Phase 4 - "Enterprise Suite" (Bulan 10+)
+  Goal: Full enterprise, CI/CD, compliance, multi-language
+  Tambahkan (15 skills):
+  - sec.container.scan
+  - sec.infrastructure.scan
+  - sec.compliance.check
+  - lang.javascript.scan (multi-language)
+  - lang.python.scan
+  - lang.java.scan
+  - monitor.anomaly.detect
+  - cicd.scan.on.pr
+  - cicd.block.if.critical
+  - cicd.report.to.pr
+  - ethics.authorized.scan
+  - compliance.gdpr
+  - compliance.pci.dss
+  - kb.learn.from.fix
+  - audit.report.executive
+
+
+================================================================================
+  SAFETY PROTOCOLS (WAJIB DIIKUTI)
+================================================================================
+
+Protocol A: AUDIT BEFORE ANSWER
+  1. Reproduce bug (kalau bisa)
+  2. Capture evidence (log, dump, trace)
+  3. Identify root cause (bukan symptom)
+  4. Verify dengan minimal 2 metode
+  5. Generate solution options
+  6. Pilih SAFEST option
+  7. Document rationale
+  8. Apply di staging
+  9. Test fix (regression + edge case)
+  10. Deploy ke production
+
+Protocol B: NEVER GUESS
+  ❌ DILARANG:
+  - "Mungkin penyebabnya X" (tanpa evidence)
+  - "Coba restart aja" (tanpa analisa)
+  - "Kayaknya bug di sini" (tanpa verifikasi)
+
+  ✅ WAJIB:
+  - "Berdasarkan log baris 1234, error di fungsi X"
+  - "Stack trace menunjukkan null pointer di file Y line Z"
+  - "Reproduksi berhasil dengan input A, B, C"
+
+Protocol C: SAFE FIX
+  1. BACKUP DULU (git stash / snapshot)
+  2. STAGING DULU (never prod langsung)
+  3. CANARY DEPLOY (5% dulu, monitor)
+  4. MONITOR POST-DEPLOY (24 jam)
+  5. ROLLBACK IF ANOMALY
+
+Protocol D: ESCALATE WHEN UNSURE
+  - Confidence < 80% → escalate ke human
+  - Critical severity → escalate
+  - Risk ke data loss → escalate
+  - Root cause tidak clear → escalate
+  - Fix melibatkan multiple components → escalate
+
+Protocol E: AUTHORIZED SCAN ONLY
+  - Hanya scan target yang sudah dapat izin
+  - Honor scope (no scope creep)
+  - Responsible disclosure untuk vulnerability
+  - Privacy data target
+
+
+================================================================================
+  DECISION MATRIX: KAPAN ESCALATE?
+================================================================================
+
+  Skenario                              | Action
+  --------------------------------------|------------------------------
+  Confidence > 95%, low risk            | Auto-fix (with staging test)
+  Confidence 80-95%, low risk           | Auto-fix + notify human
+  Confidence 80-95%, medium risk        | Human review, then fix
+  Confidence 80-95%, high risk          | Human approval WAJIB
+  Confidence 50-80%, any risk           | ESCALATE (jangan fix)
+  Confidence < 50%                      | ESCALATE + gather more evidence
+  Critical severity (prod down)         | ESCALATE + auto-mitigate
+  Security vulnerability found          | ESCALATE ke security team
+  Data corruption risk                  | ESCALATE + backup segera
+  Production data loss risk             | ESCALATE + emergency backup
+
+
+================================================================================
+  SUMMARY
+================================================================================
+
+| Layer                              | Skills | Fungsi                  |
+|------------------------------------|--------|-------------------------|
+| Target Classifier                  |   10   | Klasifikasi target      |
+| Static Analysis (SAST)             |   15   | Code review, AST        |
+| Dynamic Analysis (DAST)            |   15   | Runtime, debugger       |
+| Web Bug Scanner                    |   20   | Web-specific bug        |
+| Mobile Bug Scanner                 |   15   | Android, iOS            |
+| Desktop Bug Scanner                |   12   | Windows, macOS, Linux   |
+| IoT Device Bug Scanner             |   10   | Firmware, network       |
+| Network Bug Scanner                |   10   | Latency, packet loss    |
+| Performance Bug Scanner            |   12   | CPU, memory, slow query |
+| Logic Bug Scanner                  |   10   | Business logic, race    |
+| UI/UX Bug Scanner                  |   10   | Visual, accessibility   |
+| Security Vulnerability Scanner     |   25   | OWASP, CVE, SAST, DAST  |
+| Memory & Crash Analyzer            |   10   | Crash dump, ASan        |
+| Evidence Collector                 |   12   | Log, stack, dump        |
+| Root Cause Analyzer                |   12   | RCA (5-Why, fault tree) |
+| Solution Proposer                  |   10   | Multi-option, risk-rank |
+| Safe Fix Executor                  |   12   | Backup, staging, canary |
+| Verification & Validation          |   10   | Reproduce, edge case    |
+| Audit Log & Reporting              |   10   | Legal-grade audit       |
+| Escalation & Human Handoff         |    8   | Smart escalation        |
+| Knowledge Base                     |    8   | Bug pattern, solution   |
+| Monitoring & Early Warning         |    8   | Anomaly, SLO tracking   |
+| CI/CD Integration                  |    8   | Scan on commit/deploy   |
+| Multi-Language Support             |   10   | JS, Python, Java, dll   |
+| Compliance & Ethics                |    8   | Authorized scan, GDPR   |
+| TOTAL                              |  290   |                         |
+
+
+================================================================================
+  REKOMENDASI STARTER PACK (MVP)
+================================================================================
+
+Untuk MVP, bangun 15 skill Phase 1 ini:
+
+TARGET & STATIC (5):
+- target.classify
+- target.web.detect
+- sast.code.review
+- sast.lint.run
+- sast.dependencies
+
+DYNAMIC & WEB (5):
+- dast.reproduce
+- web.frontend.console.error
+- web.backend.exception
+- web.api.endpoint.bug
+- evidence.log.capture
+
+SECURITY (3):
+- sec.owasp.top10
+- sec.sqli.test
+- sec.xss.test
+
+ANALYSIS (2):
+- rca.five.why
+- audit.report.generate
+
+Tech stack minimal:
+- SonarQube / Semgrep (SAST)
+- OWASP ZAP (DAST)
+- Snyk (dependency scan)
+- Sentry (error tracking)
+- Nmap (network scan)
+- Python (orchestration)
+- LLM (untuk RCA & solution)
+
+Estimasi build MVP: 10-12 minggu
+
+Dengan MVP ini, AI bisa:
+- Classify target (web/mobile/desktop)
+- Static analysis (code review, lint, dependency)
+- Dynamic analysis (reproduce, profiling)
+- Scan web bug (frontend, backend, API)
+- Security scan (OWASP, SQLi, XSS)
+- RCA (5-Why)
+- Generate audit report
+
+
+================================================================================
+  ETHICAL USAGE
+================================================================================
+
+✅ DIIZINKAN:
+- Scan sistem milik sendiri
+- Pentest dengan izin tertulis
+- Bug bounty (dengan scope resmi)
+- Security research (dengan responsible disclosure)
+- QA testing internal
+- Compliance audit
+
+❌ TIDAK DIIZINKAN:
+- Scan tanpa izin
+- Akses data yang tidak perlu
+- Distribute vulnerability ke public
+- Exploit untuk akses tidak sah
+- Scan infrastructure critical (gov, healthcare)
+
+⚠️ WAJIB:
+- Hanya scan authorized target
+- Responsible disclosure (90 hari ke vendor)
+- Privacy data target
+- Audit log semua scan
+
+
+================================================================================
+  END OF UNIVERSAL DEBUG & SECURITY SCANNER ENGINE DOCUMENT
+================================================================================

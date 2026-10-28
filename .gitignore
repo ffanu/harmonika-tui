@@ -31,3 +31,6 @@ audit/
 .coverage
 CONTRACT.txt
 docs/mockups/
+docs/artifacts/
+backend/web_builder/assets/*.tar
+

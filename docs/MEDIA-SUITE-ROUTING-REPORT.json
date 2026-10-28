@@ -1,0 +1,77 @@
+{
+  "status": "active_via_licensed_terminal_rpc",
+  "public_rpc_endpoint": "https://chat.harmonika.id/v1/terminal/rpc",
+  "operations": [
+    "media_capabilities",
+    "transcribe_audio",
+    "upscale_image",
+    "browse_page"
+  ],
+  "tts_public_enabled": false,
+  "tts_private_research_ready": true,
+  "browser_scope": "registered_public_hosts_only_read_only",
+  "new_tui_tools": [
+    "media_capabilities",
+    "browse_page",
+    "upscale_image"
+  ],
+  "asr_tool": "transcribe_audio uses backend for WAV/MP3/FLAC/OGG <=8MiB; existing local ASR for other/larger inputs",
+  "public_live_tests": {
+    "capabilities": true,
+    "browser_dom": true,
+    "audio_transcription": true,
+    "upscale_saved_png_1024": true
+  },
+  "tests": {
+    "python_contracts": 29,
+    "node_mcp_and_media": 40
+  },
+  "gateway_restarted": false,
+  "apk_ios_existing_endpoints_changed": false,
+  "private_credentials_shipped_to_tui": false,
+  "active_tui_session_restarted": false,
+  "automatic_update_enabled": false,
+  "tui_release": "2026.10.27.8",
+  "binary_unchanged": true,
+  "doctor_ok": true,
+  "public_auth_missing_status": 401,
+  "public_tts_license_rejection_verified": true,
+  "canonical_legacy_audio_rest_handler_changed": false,
+  "new_web_chat_automatic_planner_added": false,
+  "review": {
+    "agent": "OpenCode",
+    "status": "read_only_review_completed",
+    "findings_fixed_by": "Codex",
+    "resolved": [
+      "SSH and HTTPS uncertainty marking",
+      "generic/IncompleteRead response uncertainty",
+      "image180s and facade195s budgets",
+      "local ASR pre-dispatch fallback",
+      "bounded browser page_text",
+      "scoped worker diff/hash attestation captured"
+    ]
+  },
+  "gateway_pids_unchanged": {
+    "harmonika-ai": "1487202",
+    "harmonika-web-chat-live": "1379498",
+    "harmonika-master-skills": "1327592"
+  },
+  "source_sha256": {
+    "service.py": "28e3e702d26e732e4fc668413f89702e6787ae4a3da6a8f3b3d1d954eb88c516",
+    "models.json": "7d5ae7c38564d44d24dbfa2bd5e4e42b3112d693763a5b86e1cf47ffbcd6fbde",
+    "engines.py": "c7d9b95b938a28a1d95686de5ffcce72d3ce935f66ed6166235c2264ffbe8b3e",
+    "client.py": "5c78793d0f17beb2447a5d26dd4523a208e55e226dd3baf61952510bd52a5f9c",
+    "README.md": "403cd225fba413495d1a6c93f8be1f5e7f051c7448ded6582bb42ccf600cbe36",
+    "torch-wheels.json": "928b1e6cbf00654db20a57fc9b47a3a06639438fc4eeb927db7caccd3aa459ef",
+    "probe.py": "578edd83e23880e00350cb64c924c8bb690527adacdde7f8feb2397c2ee05f9e",
+    "contracts.py": "4dbc84869698335c97a73941dc0bfaa5998320bf860e43f01d0015f39ea9e433",
+    "process.py": "0bd5c8a50d939ca57d26a676272ca91e5e8ad66e57000e3e2fd9d7caa92d9705",
+    "install.py": "5e4c51bb7d99811b0b42893f6af7ad0eb66c6050f3c4890498958bcd9abc18f1",
+    "AGENTS.md": "efd4bb34b7865c065a63b89a3e6c7ed229c1c07b6201e7812148637977de30ab",
+    "rpc_facade.py": "413f86f7303a53298b1ab149bee01d24250c36c0292d9c3de310d9e5c58deb43",
+    "qualify.py": "f10c01d148638db5d7ee07abc24251e1f1c7a2047fcf9c5a1b7a422bd03f71c7"
+  },
+  "worker_sha256": "8d0b32e4f7bdbf374eeeba2ed4c432f2fca20dd1307100682843b53c0fe83353",
+  "previous_worker_sha256": "5fad019e33f6b2b618d65d46cf75376ef497568233c309af9525b67c05dee7de",
+  "facade_sha256": "413f86f7303a53298b1ab149bee01d24250c36c0292d9c3de310d9e5c58deb43"
+}

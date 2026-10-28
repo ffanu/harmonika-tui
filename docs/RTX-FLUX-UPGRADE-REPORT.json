@@ -1,0 +1,195 @@
+{
+  "status": "active_verified",
+  "model": "FLUX.2-klein-4B",
+  "precision": {
+    "diffusion": "official FP8",
+    "text_encoder": "Comfy FP4"
+  },
+  "roles": {
+    "Codex": "Windows provisioning, integration, visual review, activation and end-to-end tests",
+    "OpenCode": "adapter, concurrency, timeout and activation audits; final GO"
+  },
+  "claude_used": false,
+  "model_sha256_verified": true,
+  "windows_ports": {
+    "comfy": 18190,
+    "worker": 18191
+  },
+  "vps_tunnel_loopback": 18211,
+  "resolution": {
+    "width": 1024,
+    "height": 1024
+  },
+  "qualification": {
+    "peak_total_gpu_used_mib": 9619,
+    "gpu_samples": 74,
+    "status": "technical_passed_visual_review_required",
+    "model": "black-forest-labs/FLUX.2-klein-4B",
+    "cases": [
+      {
+        "name": "indonesia-future",
+        "seconds": 17.88,
+        "first_byte_ms": 4016,
+        "bytes": 1794633,
+        "sha256": "0bb5191aa9fb7faade02f387cb45a5ca2b579d617a2b3093a85929b8c1eada4a",
+        "seed": 20261025
+      },
+      {
+        "name": "router-product",
+        "seconds": 14.52,
+        "first_byte_ms": 4000,
+        "bytes": 1351787,
+        "sha256": "0a8dece603f60002a0cefa06510aefe15c660ef4a239999cff9adbb186bc28fc",
+        "seed": 20261026
+      },
+      {
+        "name": "typography",
+        "seconds": 14.55,
+        "first_byte_ms": 4015,
+        "bytes": 251707,
+        "sha256": "4c9595a2f782dee8b7b7a2c0e2cbd3997ce9582397ee6a18db96374c2eaa06ca",
+        "seed": 20261027
+      },
+      {
+        "name": "technician",
+        "seconds": 14.55,
+        "first_byte_ms": 4016,
+        "bytes": 1359214,
+        "sha256": "69533e63984788a8268ed98911055af35e8057aee45698b81ba4bcb16308ba6e",
+        "seed": 20261028
+      },
+      {
+        "name": "interior",
+        "seconds": 14.55,
+        "first_byte_ms": 4016,
+        "bytes": 2027155,
+        "sha256": "3628625702be34723dc10101629958d3615cd6c221ed0765fe8591c9da7b1886",
+        "seed": 20261029
+      }
+    ],
+    "local_gpu_only": true,
+    "approved": false
+  },
+  "latency_seconds_mean": 15.21,
+  "idle_gpu_free_mib": 5852,
+  "profile": {
+    "vram_headroom_gib": 2,
+    "reserve_vram_gib": 2,
+    "disable_smart_memory": true,
+    "cpu_vae": true,
+    "custom_nodes": false,
+    "offline": true
+  },
+  "focused_tests": {
+    "worker_and_installer": 14,
+    "router": 14,
+    "failures": 0
+  },
+  "mcp": {
+    "status": "passed",
+    "installed_release": "2026.10.25.37",
+    "transport": "stdio MCP \u2192 HTTPS \u2192 private queue \u2192 Windows GPU",
+    "elapsed_seconds": 20.886,
+    "image_bytes": 151680,
+    "provider": "Harmonika Ai",
+    "output_mode": "0600",
+    "image_base64_in_tool_context": false,
+    "sha256": "4b182a24861a45b23fae9afab9515806841cb14e1b85c4aa3890b24353f539a3"
+  },
+  "terminal": {
+    "status": "passed",
+    "session": "58463905e9873cbd",
+    "file": "/Users/id/Downloads/indonesia-masa-depan/indonesia-2045-flux-20261025.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 2103624,
+    "sha256": "76b4f61f636ec68e61533ca7d8d90177a62bed2d4c34faad040c3cd729bb8e72",
+    "invocation": "harmonika run --session 5846390",
+    "actual_cli_tools": true
+  },
+  "web": {
+    "status": "passed",
+    "route": "web chat engine \u2192 Flux Windows \u2192 media preview HTTPS",
+    "seconds": 22.95,
+    "provider_manifest": "rtx-local",
+    "width": 1024,
+    "height": 1024,
+    "preview_http": 200,
+    "png_bytes": 2156640,
+    "id": "rtx-image-e514c857-9d0e-4662-9977-fa7a2ce531aa",
+    "markdown_image": true
+  },
+  "legacy_adapter": {
+    "status": "passed",
+    "route": "legacy owner adapter operator invocation",
+    "provider": "rtx",
+    "width": 1024,
+    "height": 1024,
+    "seconds": 19.42
+  },
+  "activation": {
+    "status": "active_pending_end_to_end",
+    "model": "black-forest-labs/FLUX.2-klein-4B",
+    "endpoint": "loopback18211",
+    "backup": "/var/backups/harmonika-media/flux-20261025T040553Z",
+    "only_restarted": [
+      "harmonika-ai",
+      "harmonika-rtx-queue"
+    ],
+    "other_service_pids_unchanged": true,
+    "legacy_windows_worker_untouched": true,
+    "old_hashes": {
+      "router": "dd22bee6c4f7382d489340af07f63f3ae7649f8942923549d2a403311574c3ea",
+      "bridge": "18862dbec87dfd8f3e6c7688654d7eab1693f8023d289c3e744d0c45b238113e",
+      "config": "ce6a80c2f30c64628709258764df5a594558736a0c282dac5bc2e6b77a07a905"
+    },
+    "new_hashes": {
+      "router": "e56e1d5e85de345419124b3a2f2f84fff7a2650a6157151a6f7a3a107fdf96f1",
+      "bridge": "5fad019e33f6b2b618d65d46cf75376ef497568233c309af9525b67c05dee7de",
+      "config": "6d39de819fb982a4fef93b4654a47ec5f210e0718c1ed9960ec95ac308411386"
+    },
+    "database_schema_unchanged": true
+  },
+  "visual_review": {
+    "approved": true,
+    "model": "black-forest-labs/FLUX.2-klein-4B",
+    "reviewer": "Codex visual inspection",
+    "scope": "general text-to-image quality upgrade; not exact product fidelity",
+    "cases": [
+      {
+        "case": "indonesia-future",
+        "status": "approved_with_limits",
+        "observations": "Flag, train, tropical greenery and Nusantara-inspired buildings visible; landmark is stylized, not geographic evidence."
+      },
+      {
+        "case": "router-product",
+        "status": "approved_with_limits",
+        "observations": "Coherent product photo and blue lighting; exactly four antennas requested but only three visible. Exact object count not guaranteed."
+      },
+      {
+        "case": "typography",
+        "status": "approved",
+        "observations": "HARMONIKA and INTERNET CEPAT readable and spelled correctly in this fixture; not a guarantee for arbitrary text."
+      },
+      {
+        "case": "technician",
+        "status": "approved",
+        "observations": "Coherent portrait and plausible visible hands holding fiber; no claim of perfect anatomy for all seeds."
+      },
+      {
+        "case": "interior",
+        "status": "approved",
+        "observations": "Coherent living room, tropical plants, rattan lamp, batik pillow and router visible; precise placement may vary."
+      }
+    ]
+  },
+  "limits": [
+    "Exact object counts and literal landmarks are not guaranteed.",
+    "Reference editing and upscaling were not enabled by this generator-only upgrade.",
+    "ComfyUI currently uses a read-only CUDA base dependency from the retained legacy Python venv.",
+    "Browser UI after login was not exercised; web engine and delivered HTTPS preview were tested."
+  ],
+  "driver_changes": false,
+  "gpu_on_cpu_vps": false,
+  "automatic_model_updates": false
+}

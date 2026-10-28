@@ -1,0 +1,8 @@
+'use strict';const {test}=require('node:test'),assert=require('node:assert/strict');
+process.env.JWT_SECRET=require('node:crypto').randomBytes(32).toString('hex');
+process.env.DATABASE_URL='postgresql://unused:unused@127.0.0.1:1/unused';
+const D=require('../apps/api/dist/db.js'),A=require('../apps/api/dist/auth.js');
+function context(token){const req={method:'GET',headers:{authorization:'Bearer '+token}};return {req,switchToHttp:()=>({getRequest:()=>req})};}
+test('invalid JWT is401 without touching DB',async()=>{const original=D.scope;let calls=0;D.scope=async()=>{calls++;throw Error('unexpected_db_call')};try{await assert.rejects(new A.AuthGuard().canActivate(context('invalid')),e=>e.getStatus()===401);assert.equal(calls,0)}finally{D.scope=original}});
+test('valid JWT plus DB outage propagates infrastructure error instead of401',async()=>{const original=D.scope,token=await A.jwt.signAsync({sub:'qa-user',tid:'qa-tenant',ver:0}),outage=Error('simulated_database_outage');D.scope=async()=>{throw outage};try{await assert.rejects(new A.AuthGuard().canActivate(context(token)),e=>e===outage)}finally{D.scope=original}});
+test('role comes from current DB user, and revoked versions are denied',async()=>{const original=D.scope,token=await A.jwt.signAsync({sub:'qa-user',tid:'qa-tenant',ver:0,role:'admin'});D.scope=async()=>({id:'qa-user',tenantId:'qa-tenant',role:'viewer',tokenVersion:0});try{const c=context(token);assert.equal(await new A.AuthGuard().canActivate(c),true);assert.equal(c.req.auth.role,'viewer');D.scope=async()=>({id:'qa-user',tenantId:'qa-tenant',role:'viewer',tokenVersion:1});await assert.rejects(new A.AuthGuard().canActivate(context(token)),e=>e.getStatus()===401)}finally{D.scope=original}});

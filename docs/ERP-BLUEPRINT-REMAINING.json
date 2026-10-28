@@ -1,0 +1,3448 @@
+{
+  "scope": "skill_gateway_callability; not a complete generated-source workflow matrix",
+  "source_sha256": "ce800ce7c98e42967a182023bd043ec7febf3dd725eea7b623242fef21aded3f",
+  "readiness": {
+    "available": 41,
+    "not_implemented": 226,
+    "input_analysis_available": 48,
+    "connector_required": 38,
+    "generator_available": 10
+  },
+  "not_implemented": [
+    {
+      "number": 7,
+      "id": "erp_all.industry.subcategory.detect",
+      "source_id": "industry.subcategory.detect",
+      "operation": "industry.subcategory.detect",
+      "description": "Detect sub-kategori (ISP vs Telco vs Mobile)",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 10,
+      "id": "erp_all.industry.regulation.check",
+      "source_id": "industry.regulation.check",
+      "operation": "industry.regulation.check",
+      "description": "Cek regulasi yang berlaku per industri",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 12,
+      "id": "erp_all.industry.benchmark.find",
+      "source_id": "industry.benchmark.find",
+      "operation": "industry.benchmark.find",
+      "description": "Find benchmark perusahaan sejenis",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 13,
+      "id": "erp_all.industry.competitor.analyze",
+      "source_id": "industry.competitor.analyze",
+      "operation": "industry.competitor.analyze",
+      "description": "Analyze competitor di industri sama",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 24,
+      "id": "erp_all.module.compliance.add",
+      "source_id": "module.compliance.add",
+      "operation": "module.compliance.add",
+      "description": "Add modul compliance (PDP, PCI, dll)",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 25,
+      "id": "erp_all.module.integration.suggest",
+      "source_id": "module.integration.suggest",
+      "operation": "module.integration.suggest",
+      "description": "Saran modul integrasi (payment, WA)",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 26,
+      "id": "erp_all.module.license.check",
+      "source_id": "module.license.check",
+      "operation": "module.license.check",
+      "description": "Cek license modul (open-source vs paid)",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 31,
+      "id": "erp_all.theme.icon.set.industry",
+      "source_id": "theme.icon.set.industry",
+      "operation": "theme.icon.set.industry",
+      "description": "Pilih icon set per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 33,
+      "id": "erp_all.theme.language.set",
+      "source_id": "theme.language.set",
+      "operation": "theme.language.set",
+      "description": "Set bahasa (ID, EN, bilingual)",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 34,
+      "id": "erp_all.theme.dark_mode.support",
+      "source_id": "theme.dark_mode.support",
+      "operation": "theme.dark_mode.support",
+      "description": "Support dark mode",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 37,
+      "id": "erp_all.theme.accessibility.ensure",
+      "source_id": "theme.accessibility.ensure",
+      "operation": "theme.accessibility.ensure",
+      "description": "Ensure WCAG AA compliance",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 41,
+      "id": "erp_all.theme.report.template",
+      "source_id": "theme.report.template",
+      "operation": "theme.report.template",
+      "description": "Template report per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 42,
+      "id": "erp_all.theme.preview.generate",
+      "source_id": "theme.preview.generate",
+      "operation": "theme.preview.generate",
+      "description": "Generate preview tema sebelum apply",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 49,
+      "id": "erp_all.schema.normalization.apply",
+      "source_id": "schema.normalization.apply",
+      "operation": "schema.normalization.apply",
+      "description": "Apply normalization (3NF)",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 50,
+      "id": "erp_all.schema.denormalization.selective",
+      "source_id": "schema.denormalization.selective",
+      "operation": "schema.denormalization.selective",
+      "description": "Selective denormalization untuk performance",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 55,
+      "id": "erp_all.schema.seed.generate",
+      "source_id": "schema.seed.generate",
+      "operation": "schema.seed.generate",
+      "description": "Generate seed data",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 58,
+      "id": "erp_all.core.auth.user",
+      "source_id": "core.auth.user",
+      "operation": "core.auth.user",
+      "description": "Manajemen user & auth",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 59,
+      "id": "erp_all.core.auth.role",
+      "source_id": "core.auth.role",
+      "operation": "core.auth.role",
+      "description": "Role-based access control (RBAC)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 60,
+      "id": "erp_all.core.auth.sso",
+      "source_id": "core.auth.sso",
+      "operation": "core.auth.sso",
+      "description": "Single Sign-On (SAML, OAuth, OIDC)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 61,
+      "id": "erp_all.core.auth.mfa",
+      "source_id": "core.auth.mfa",
+      "operation": "core.auth.mfa",
+      "description": "Multi-factor authentication",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 62,
+      "id": "erp_all.core.audit.log",
+      "source_id": "core.audit.log",
+      "operation": "core.audit.log",
+      "description": "Audit log semua aksi",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 63,
+      "id": "erp_all.core.notification",
+      "source_id": "core.notification",
+      "operation": "core.notification",
+      "description": "Notification (email, SMS, push, IM)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 64,
+      "id": "erp_all.core.settings.config",
+      "source_id": "core.settings.config",
+      "operation": "core.settings.config",
+      "description": "System configuration",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 65,
+      "id": "erp_all.core.tenant.management",
+      "source_id": "core.tenant.management",
+      "operation": "core.tenant.management",
+      "description": "Multi-tenant management",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 66,
+      "id": "erp_all.core.localization",
+      "source_id": "core.localization",
+      "operation": "core.localization",
+      "description": "Multi-language & currency",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 67,
+      "id": "erp_all.core.timezone.management",
+      "source_id": "core.timezone.management",
+      "operation": "core.timezone.management",
+      "description": "Timezone management",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 68,
+      "id": "erp_all.core.file.storage",
+      "source_id": "core.file.storage",
+      "operation": "core.file.storage",
+      "description": "File & document storage",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 69,
+      "id": "erp_all.core.attachment.management",
+      "source_id": "core.attachment.management",
+      "operation": "core.attachment.management",
+      "description": "Attachment management",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 70,
+      "id": "erp_all.core.workflow.engine",
+      "source_id": "core.workflow.engine",
+      "operation": "core.workflow.engine",
+      "description": "Workflow engine (BPMN)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 71,
+      "id": "erp_all.core.report.builder",
+      "source_id": "core.report.builder",
+      "operation": "core.report.builder",
+      "description": "Custom report builder",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 72,
+      "id": "erp_all.core.dashboard.builder",
+      "source_id": "core.dashboard.builder",
+      "operation": "core.dashboard.builder",
+      "description": "Custom dashboard builder",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 75,
+      "id": "erp_all.finance.accounts.payable",
+      "source_id": "finance.accounts.payable",
+      "operation": "finance.accounts.payable",
+      "description": "Hutang (AP)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 76,
+      "id": "erp_all.finance.accounts.receivable",
+      "source_id": "finance.accounts.receivable",
+      "operation": "finance.accounts.receivable",
+      "description": "Piutang (AR)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 77,
+      "id": "erp_all.finance.cash.bank",
+      "source_id": "finance.cash.bank",
+      "operation": "finance.cash.bank",
+      "description": "Kas & bank",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 78,
+      "id": "erp_all.finance.fixed.assets",
+      "source_id": "finance.fixed.assets",
+      "operation": "finance.fixed.assets",
+      "description": "Aset tetap",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 80,
+      "id": "erp_all.finance.tax.ppn",
+      "source_id": "finance.tax.ppn",
+      "operation": "finance.tax.ppn",
+      "description": "PPN (Pajak Pertambahan Nilai)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 81,
+      "id": "erp_all.finance.tax.pph",
+      "source_id": "finance.tax.pph",
+      "operation": "finance.tax.pph",
+      "description": "PPh (Pajak Penghasilan)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 83,
+      "id": "erp_all.finance.cost.accounting",
+      "source_id": "finance.cost.accounting",
+      "operation": "finance.cost.accounting",
+      "description": "Cost accounting",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 86,
+      "id": "erp_all.finance.equity.management",
+      "source_id": "finance.equity.management",
+      "operation": "finance.equity.management",
+      "description": "Modal & ekuitas",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 87,
+      "id": "erp_all.finance.retained.earning",
+      "source_id": "finance.retained.earning",
+      "operation": "finance.retained.earning",
+      "description": "Laba ditahan",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 89,
+      "id": "erp_all.finance.fiscal.year",
+      "source_id": "finance.fiscal.year",
+      "operation": "finance.fiscal.year",
+      "description": "Tahun buku",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 90,
+      "id": "erp_all.finance.closing.period",
+      "source_id": "finance.closing.period",
+      "operation": "finance.closing.period",
+      "description": "Tutup buku periode (monthly, yearly)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 92,
+      "id": "erp_all.finance.payment.processing",
+      "source_id": "finance.payment.processing",
+      "operation": "finance.payment.processing",
+      "description": "Payment gateway integration",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 94,
+      "id": "erp_all.finance.tax.efaktur",
+      "source_id": "finance.tax.e faktur",
+      "operation": "finance.tax.efaktur",
+      "description": "E-Faktur integration (DJP)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 95,
+      "id": "erp_all.finance.tax.ebupot",
+      "source_id": "finance.tax.e bupot",
+      "operation": "finance.tax.ebupot",
+      "description": "E-Bupot integration (PPh)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 96,
+      "id": "erp_all.finance.sak.psak.compliance",
+      "source_id": "finance.sak.psak.compliance",
+      "operation": "finance.sak.psak.compliance",
+      "description": "Compliance SAK/PSAK/ETAP",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 97,
+      "id": "erp_all.finance.audit.trail",
+      "source_id": "finance.audit.trail",
+      "operation": "finance.audit.trail",
+      "description": "Audit trail transaksi",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 98,
+      "id": "erp_all.hr.employee.management",
+      "source_id": "hr.employee.management",
+      "operation": "hr.employee.management",
+      "description": "Data karyawan",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 102,
+      "id": "erp_all.hr.tax.pph21",
+      "source_id": "hr.tax.pph21",
+      "operation": "hr.tax.pph21",
+      "description": "PPh 21 otomatis",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 103,
+      "id": "erp_all.hr.bpjs",
+      "source_id": "hr.bpjs",
+      "operation": "hr.bpjs",
+      "description": "BPJS Kesehatan & Ketenagakerjaan",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 104,
+      "id": "erp_all.hr.recruitment",
+      "source_id": "hr.recruitment",
+      "operation": "hr.recruitment",
+      "description": "Rekrutmen",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 105,
+      "id": "erp_all.hr.performance.review",
+      "source_id": "hr.performance.review",
+      "operation": "hr.performance.review",
+      "description": "Performance review",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 106,
+      "id": "erp_all.hr.training",
+      "source_id": "hr.training",
+      "operation": "hr.training",
+      "description": "Training & development",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 107,
+      "id": "erp_all.hr.organization.structure",
+      "source_id": "hr.organization.structure",
+      "operation": "hr.organization.structure",
+      "description": "Struktur organisasi",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 109,
+      "id": "erp_all.hr.shift.management",
+      "source_id": "hr.shift.management",
+      "operation": "hr.shift.management",
+      "description": "Shift kerja",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 112,
+      "id": "erp_all.hr.exit.management",
+      "source_id": "hr.exit.management",
+      "operation": "hr.exit.management",
+      "description": "Resign & exit interview",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 113,
+      "id": "erp_all.inventory.product.master",
+      "source_id": "inventory.product.master",
+      "operation": "inventory.product.master",
+      "description": "Master produk",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 115,
+      "id": "erp_all.inventory.warehouse",
+      "source_id": "inventory.warehouse",
+      "operation": "inventory.warehouse",
+      "description": "Multi-warehouse",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 117,
+      "id": "erp_all.inventory.barcode",
+      "source_id": "inventory.barcode",
+      "operation": "inventory.barcode",
+      "description": "Barcode & QR",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 119,
+      "id": "erp_all.inventory.serial.number",
+      "source_id": "inventory.serial.number",
+      "operation": "inventory.serial.number",
+      "description": "Serial number tracking",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 120,
+      "id": "erp_all.procurement.purchase.request",
+      "source_id": "procurement.purchase.request",
+      "operation": "procurement.purchase.request",
+      "description": "Purchase request",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 121,
+      "id": "erp_all.procurement.purchase.order",
+      "source_id": "procurement.purchase.order",
+      "operation": "procurement.purchase.order",
+      "description": "Purchase order",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 122,
+      "id": "erp_all.procurement.vendor.management",
+      "source_id": "procurement.vendor.management",
+      "operation": "procurement.vendor.management",
+      "description": "Vendor management",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 124,
+      "id": "erp_all.procurement.goods.receipt",
+      "source_id": "procurement.goods.receipt",
+      "operation": "procurement.goods.receipt",
+      "description": "Penerimaan barang",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 125,
+      "id": "erp_all.procurement.vendor.invoice",
+      "source_id": "procurement.vendor.invoice",
+      "operation": "procurement.vendor.invoice",
+      "description": "Invoice vendor",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 128,
+      "id": "erp_all.sales.customer.master",
+      "source_id": "sales.customer.master",
+      "operation": "sales.customer.master",
+      "description": "Master customer",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 129,
+      "id": "erp_all.sales.quotation",
+      "source_id": "sales.quotation",
+      "operation": "sales.quotation",
+      "description": "Quotation",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 130,
+      "id": "erp_all.sales.order",
+      "source_id": "sales.order",
+      "operation": "sales.order",
+      "description": "Sales order",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 131,
+      "id": "erp_all.sales.delivery",
+      "source_id": "sales.delivery",
+      "operation": "sales.delivery",
+      "description": "Pengiriman",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 132,
+      "id": "erp_all.sales.sales.invoice",
+      "source_id": "sales.sales.invoice",
+      "operation": "sales.sales.invoice",
+      "description": "Invoice penjualan",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 133,
+      "id": "erp_all.sales.sales.return",
+      "source_id": "sales.sales.return",
+      "operation": "sales.sales.return",
+      "description": "Retur penjualan",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 134,
+      "id": "erp_all.crm.lead.management",
+      "source_id": "crm.lead.management",
+      "operation": "crm.lead.management",
+      "description": "Lead management",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 135,
+      "id": "erp_all.crm.opportunity",
+      "source_id": "crm.opportunity",
+      "operation": "crm.opportunity",
+      "description": "Opportunity tracking",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 136,
+      "id": "erp_all.crm.activity",
+      "source_id": "crm.activity",
+      "operation": "crm.activity",
+      "description": "Activity tracking",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 138,
+      "id": "erp_all.crm.customer.360",
+      "source_id": "crm.customer.360",
+      "operation": "crm.customer.360",
+      "description": "Customer 360 view",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 139,
+      "id": "erp_all.crm.contact.management",
+      "source_id": "crm.contact.management",
+      "operation": "crm.contact.management",
+      "description": "Contact management",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 140,
+      "id": "erp_all.crm.campaign.management",
+      "source_id": "crm.campaign.management",
+      "operation": "crm.campaign.management",
+      "description": "Campaign management",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 142,
+      "id": "erp_all.crm.referral.program",
+      "source_id": "crm.referral.program",
+      "operation": "crm.referral.program",
+      "description": "Referral program",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 143,
+      "id": "erp_all.isp.customer.subscriber",
+      "source_id": "isp.customer.subscriber",
+      "operation": "isp.customer.subscriber",
+      "description": "Data pelanggan internet",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 144,
+      "id": "erp_all.isp.service.plan",
+      "source_id": "isp.service.plan",
+      "operation": "isp.service.plan",
+      "description": "Paket internet (speed, quota, price)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 146,
+      "id": "erp_all.isp.invoice.recurring",
+      "source_id": "isp.invoice.recurring",
+      "operation": "isp.invoice.recurring",
+      "description": "Invoice recurring otomatis",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 147,
+      "id": "erp_all.isp.payment.collection",
+      "source_id": "isp.payment.collection",
+      "operation": "isp.payment.collection",
+      "description": "Pembayaran (transfer, VA, e-wallet)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 148,
+      "id": "erp_all.isp.suspension.management",
+      "source_id": "isp.suspension.management",
+      "operation": "isp.suspension.management",
+      "description": "Suspensi pelanggan tunggak",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 149,
+      "id": "erp_all.isp.ticket.troubleshooting",
+      "source_id": "isp.ticket.troubleshooting",
+      "operation": "isp.ticket.troubleshooting",
+      "description": "Tiket gangguan internet",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 150,
+      "id": "erp_all.isp.network.monitoring",
+      "source_id": "isp.network.monitoring",
+      "operation": "isp.network.monitoring",
+      "description": "Monitoring jaringan (ping, latency)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 151,
+      "id": "erp_all.isp.olt.management",
+      "source_id": "isp.olt.management",
+      "operation": "isp.olt.management",
+      "description": "Manajemen OLT (fiber)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 152,
+      "id": "erp_all.isp.onu.management",
+      "source_id": "isp.onu.management",
+      "operation": "isp.onu.management",
+      "description": "Manajemen ONU/ONT",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 153,
+      "id": "erp_all.isp.ip.address.management",
+      "source_id": "isp.ip.address.management",
+      "operation": "isp.ip.address.management",
+      "description": "IP address pool (DHCP, static)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 154,
+      "id": "erp_all.isp.bandwidth.management",
+      "source_id": "isp.bandwidth.management",
+      "operation": "isp.bandwidth.management",
+      "description": "Bandwidth shaping (QoS)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 155,
+      "id": "erp_all.isp.coverage.area",
+      "source_id": "isp.coverage.area",
+      "operation": "isp.coverage.area",
+      "description": "Coverage area mapping",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 156,
+      "id": "erp_all.isp.installation.schedule",
+      "source_id": "isp.installation.schedule",
+      "operation": "isp.installation.schedule",
+      "description": "Jadwal instalasi teknisi",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 157,
+      "id": "erp_all.isp.field.operations",
+      "source_id": "isp.field.operations",
+      "operation": "isp.field.operations",
+      "description": "Operasional teknisi lapangan",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 158,
+      "id": "erp_all.isp.cpe.management",
+      "source_id": "isp.cpe.management",
+      "operation": "isp.cpe.management",
+      "description": "Customer Premises Equipment",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 159,
+      "id": "erp_all.isp.fiber.route",
+      "source_id": "isp.fiber.route",
+      "operation": "isp.fiber.route",
+      "description": "Fiber route management",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 160,
+      "id": "erp_all.isp.splitter.management",
+      "source_id": "isp.splitter.management",
+      "operation": "isp.splitter.management",
+      "description": "Splitter GPON management",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 161,
+      "id": "erp_all.isp.speedtest.integration",
+      "source_id": "isp.speedtest.integration",
+      "operation": "isp.speedtest.integration",
+      "description": "Speedtest integration",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 162,
+      "id": "erp_all.isp.auto.provisioning",
+      "source_id": "isp.auto.provisioning",
+      "operation": "isp.auto.provisioning",
+      "description": "Auto-provisioning ONU/ONT",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 164,
+      "id": "erp_all.mfg.production.order",
+      "source_id": "mfg.production.order",
+      "operation": "mfg.production.order",
+      "description": "Production order",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 165,
+      "id": "erp_all.mfg.work.center",
+      "source_id": "mfg.work.center",
+      "operation": "mfg.work.center",
+      "description": "Work center",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 169,
+      "id": "erp_all.mfg.maintenance",
+      "source_id": "mfg.maintenance",
+      "operation": "mfg.maintenance",
+      "description": "Maintenance mesin",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 171,
+      "id": "erp_all.mfg.shop.floor.control",
+      "source_id": "mfg.shop.floor.control",
+      "operation": "mfg.shop.floor.control",
+      "description": "Shop floor control",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 174,
+      "id": "erp_all.mfg.subcontracting",
+      "source_id": "mfg.subcontracting",
+      "operation": "mfg.subcontracting",
+      "description": "Subcontracting",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 175,
+      "id": "erp_all.pm.project.master",
+      "source_id": "pm.project.master",
+      "operation": "pm.project.master",
+      "description": "Master project",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 176,
+      "id": "erp_all.pm.task.management",
+      "source_id": "pm.task.management",
+      "operation": "pm.task.management",
+      "description": "Task management",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 185,
+      "id": "erp_all.pos.cashier",
+      "source_id": "pos.cashier",
+      "operation": "pos.cashier",
+      "description": "Kasir POS",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 189,
+      "id": "erp_all.retail.loyalty.program",
+      "source_id": "retail.loyalty.program",
+      "operation": "retail.loyalty.program",
+      "description": "Program loyalitas",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 190,
+      "id": "erp_all.retail.coupon",
+      "source_id": "retail.coupon",
+      "operation": "retail.coupon",
+      "description": "Kupon",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 191,
+      "id": "erp_all.retail.gift.card",
+      "source_id": "retail.gift.card",
+      "operation": "retail.gift.card",
+      "description": "Gift card",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 192,
+      "id": "erp_all.retail.customer.display",
+      "source_id": "retail.customer.display",
+      "operation": "retail.customer.display",
+      "description": "Customer display",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 193,
+      "id": "erp_all.retail.shelf.management",
+      "source_id": "retail.shelf.management",
+      "operation": "retail.shelf.management",
+      "description": "Manajemen rak & display",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 194,
+      "id": "erp_all.retail.price.tag",
+      "source_id": "retail.price.tag",
+      "operation": "retail.price.tag",
+      "description": "Price tag digital",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 195,
+      "id": "erp_all.retail.stock.opname.pos",
+      "source_id": "retail.stock.opname.pos",
+      "operation": "retail.stock.opname.pos",
+      "description": "Stock opname khusus retail",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 196,
+      "id": "erp_all.retail.shift.cashier",
+      "source_id": "retail.shift.cashier",
+      "operation": "retail.shift.cashier",
+      "description": "Shift kasir",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 197,
+      "id": "erp_all.ecommerce.catalog",
+      "source_id": "ecommerce.catalog",
+      "operation": "ecommerce.catalog",
+      "description": "Katalog produk",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 198,
+      "id": "erp_all.ecommerce.cart",
+      "source_id": "ecommerce.cart",
+      "operation": "ecommerce.cart",
+      "description": "Shopping cart",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 199,
+      "id": "erp_all.ecommerce.checkout",
+      "source_id": "ecommerce.checkout",
+      "operation": "ecommerce.checkout",
+      "description": "Checkout",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 200,
+      "id": "erp_all.ecommerce.payment",
+      "source_id": "ecommerce.payment",
+      "operation": "ecommerce.payment",
+      "description": "Payment gateway",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 201,
+      "id": "erp_all.ecommerce.shipping",
+      "source_id": "ecommerce.shipping",
+      "operation": "ecommerce.shipping",
+      "description": "Shipping integration",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 202,
+      "id": "erp_all.ecommerce.marketplace",
+      "source_id": "ecommerce.marketplace",
+      "operation": "ecommerce.marketplace",
+      "description": "Marketplace sync (Tokopedia, Shopee)",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 203,
+      "id": "erp_all.ecommerce.review",
+      "source_id": "ecommerce.review",
+      "operation": "ecommerce.review",
+      "description": "Customer review",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 204,
+      "id": "erp_all.ecommerce.return",
+      "source_id": "ecommerce.return",
+      "operation": "ecommerce.return",
+      "description": "Return management",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 205,
+      "id": "erp_all.ecommerce.wishlist",
+      "source_id": "ecommerce.wishlist",
+      "operation": "ecommerce.wishlist",
+      "description": "Wishlist",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 206,
+      "id": "erp_all.ecommerce.promo.code",
+      "source_id": "ecommerce.promo.code",
+      "operation": "ecommerce.promo.code",
+      "description": "Promo code",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 207,
+      "id": "erp_all.ecommerce.abandoned.cart",
+      "source_id": "ecommerce.abandoned.cart",
+      "operation": "ecommerce.abandoned.cart",
+      "description": "Abandoned cart recovery",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 208,
+      "id": "erp_all.ecommerce.analytics",
+      "source_id": "ecommerce.analytics",
+      "operation": "ecommerce.analytics",
+      "description": "E-commerce analytics",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 209,
+      "id": "erp_all.property.unit.management",
+      "source_id": "property.unit.management",
+      "operation": "property.unit.management",
+      "description": "Unit property (rumah, apartemen, ruko)",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 210,
+      "id": "erp_all.property.tenant.management",
+      "source_id": "property.tenant.management",
+      "operation": "property.tenant.management",
+      "description": "Tenant management",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 211,
+      "id": "erp_all.property.lease.agreement",
+      "source_id": "property.lease.agreement",
+      "operation": "property.lease.agreement",
+      "description": "Lease agreement",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 212,
+      "id": "erp_all.property.rent.collection",
+      "source_id": "property.rent.collection",
+      "operation": "property.rent.collection",
+      "description": "Rent collection",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 213,
+      "id": "erp_all.property.maintenance",
+      "source_id": "property.maintenance",
+      "operation": "property.maintenance",
+      "description": "Property maintenance",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 214,
+      "id": "erp_all.property.facility",
+      "source_id": "property.facility",
+      "operation": "property.facility",
+      "description": "Facility management",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 215,
+      "id": "erp_all.property.utility",
+      "source_id": "property.utility",
+      "operation": "property.utility",
+      "description": "Utility (listrik, air, gas)",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 216,
+      "id": "erp_all.property.security",
+      "source_id": "property.security",
+      "operation": "property.security",
+      "description": "Security & access control",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 217,
+      "id": "erp_all.property.parking",
+      "source_id": "property.parking",
+      "operation": "property.parking",
+      "description": "Parking management",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 218,
+      "id": "erp_all.property.billing",
+      "source_id": "property.billing",
+      "operation": "property.billing",
+      "description": "Property billing",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 219,
+      "id": "erp_all.construction.project",
+      "source_id": "construction.project",
+      "operation": "construction.project",
+      "description": "Construction project",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 220,
+      "id": "erp_all.construction.budget",
+      "source_id": "construction.budget",
+      "operation": "construction.budget",
+      "description": "RAB (Rencana Anggaran Biaya)",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 221,
+      "id": "erp_all.construction.progress",
+      "source_id": "construction.progress",
+      "operation": "construction.progress",
+      "description": "Progress billing",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 222,
+      "id": "erp_all.construction.equipment",
+      "source_id": "construction.equipment",
+      "operation": "construction.equipment",
+      "description": "Equipment management",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 223,
+      "id": "erp_all.construction.labor",
+      "source_id": "construction.labor",
+      "operation": "construction.labor",
+      "description": "Labor management",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 224,
+      "id": "erp_all.construction.subcontractor",
+      "source_id": "construction.subcontractor",
+      "operation": "construction.subcontractor",
+      "description": "Subcontractor management",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 225,
+      "id": "erp_all.construction.safety",
+      "source_id": "construction.safety",
+      "operation": "construction.safety",
+      "description": "Safety (HSE/K3)",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 226,
+      "id": "erp_all.construction.quality",
+      "source_id": "construction.quality",
+      "operation": "construction.quality",
+      "description": "Quality control",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 227,
+      "id": "erp_all.construction.drawings",
+      "source_id": "construction.drawings",
+      "operation": "construction.drawings",
+      "description": "Drawings & documents",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 228,
+      "id": "erp_all.construction.handover",
+      "source_id": "construction.handover",
+      "operation": "construction.handover",
+      "description": "Handover & defect liability",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 229,
+      "id": "erp_all.healthcare.patient",
+      "source_id": "healthcare.patient",
+      "operation": "healthcare.patient",
+      "description": "Patient management",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 230,
+      "id": "erp_all.healthcare.medical.record",
+      "source_id": "healthcare.medical.record",
+      "operation": "healthcare.medical.record",
+      "description": "Medical record (EMR)",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 231,
+      "id": "erp_all.healthcare.appointment",
+      "source_id": "healthcare.appointment",
+      "operation": "healthcare.appointment",
+      "description": "Appointment scheduling",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 232,
+      "id": "erp_all.healthcare.billing",
+      "source_id": "healthcare.billing",
+      "operation": "healthcare.billing",
+      "description": "Healthcare billing",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 233,
+      "id": "erp_all.healthcare.insurance",
+      "source_id": "healthcare.insurance",
+      "operation": "healthcare.insurance",
+      "description": "Asuransi (BPJS, private)",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 234,
+      "id": "erp_all.healthcare.pharmacy",
+      "source_id": "healthcare.pharmacy",
+      "operation": "healthcare.pharmacy",
+      "description": "Pharmacy management",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 235,
+      "id": "erp_all.healthcare.lab",
+      "source_id": "healthcare.lab",
+      "operation": "healthcare.lab",
+      "description": "Laboratorium",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 236,
+      "id": "erp_all.healthcare.radiology",
+      "source_id": "healthcare.radiology",
+      "operation": "healthcare.radiology",
+      "description": "Radiology",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 237,
+      "id": "erp_all.healthcare.inpatient",
+      "source_id": "healthcare.inpatient",
+      "operation": "healthcare.inpatient",
+      "description": "Rawat inap",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 238,
+      "id": "erp_all.healthcare.outpatient",
+      "source_id": "healthcare.outpatient",
+      "operation": "healthcare.outpatient",
+      "description": "Rawat jalan",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 239,
+      "id": "erp_all.healthcare.ambulance",
+      "source_id": "healthcare.ambulance",
+      "operation": "healthcare.ambulance",
+      "description": "Ambulance",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 240,
+      "id": "erp_all.healthcare.clinical.analytics",
+      "source_id": "healthcare.clinical.analytics",
+      "operation": "healthcare.clinical.analytics",
+      "description": "Clinical analytics",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 241,
+      "id": "erp_all.education.student",
+      "source_id": "education.student",
+      "operation": "education.student",
+      "description": "Student management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 242,
+      "id": "erp_all.education.admission",
+      "source_id": "education.admission",
+      "operation": "education.admission",
+      "description": "Admission (PPDB)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 243,
+      "id": "erp_all.education.academic",
+      "source_id": "education.academic",
+      "operation": "education.academic",
+      "description": "Academic (kurikulum, jadwal, nilai)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 244,
+      "id": "erp_all.education.attendance",
+      "source_id": "education.attendance",
+      "operation": "education.attendance",
+      "description": "Attendance siswa",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 245,
+      "id": "erp_all.education.finance",
+      "source_id": "education.finance",
+      "operation": "education.finance",
+      "description": "Finance (SPP, beasiswa)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 246,
+      "id": "erp_all.education.library",
+      "source_id": "education.library",
+      "operation": "education.library",
+      "description": "Library management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 247,
+      "id": "erp_all.education.parent.portal",
+      "source_id": "education.parent.portal",
+      "operation": "education.parent.portal",
+      "description": "Parent portal",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 248,
+      "id": "erp_all.education.teacher",
+      "source_id": "education.teacher",
+      "operation": "education.teacher",
+      "description": "Teacher management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 249,
+      "id": "erp_all.education.report.card",
+      "source_id": "education.report.card",
+      "operation": "education.report.card",
+      "description": "Report card (rapor)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 250,
+      "id": "erp_all.education.alumni",
+      "source_id": "education.alumni",
+      "operation": "education.alumni",
+      "description": "Alumni management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 251,
+      "id": "erp_all.logistics.shipment",
+      "source_id": "logistics.shipment",
+      "operation": "logistics.shipment",
+      "description": "Shipment management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 252,
+      "id": "erp_all.logistics.fleet",
+      "source_id": "logistics.fleet",
+      "operation": "logistics.fleet",
+      "description": "Fleet management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 253,
+      "id": "erp_all.logistics.driver",
+      "source_id": "logistics.driver",
+      "operation": "logistics.driver",
+      "description": "Driver management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 254,
+      "id": "erp_all.logistics.route",
+      "source_id": "logistics.route",
+      "operation": "logistics.route",
+      "description": "Route optimization",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 255,
+      "id": "erp_all.logistics.tracking",
+      "source_id": "logistics.tracking",
+      "operation": "logistics.tracking",
+      "description": "Real-time tracking",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 256,
+      "id": "erp_all.logistics.warehouse",
+      "source_id": "logistics.warehouse",
+      "operation": "logistics.warehouse",
+      "description": "Warehouse management (WMS)",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 257,
+      "id": "erp_all.logistics.cross.docking",
+      "source_id": "logistics.cross.docking",
+      "operation": "logistics.cross.docking",
+      "description": "Cross docking",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 258,
+      "id": "erp_all.logistics.customs",
+      "source_id": "logistics.customs",
+      "operation": "logistics.customs",
+      "description": "Customs (import/export)",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 259,
+      "id": "erp_all.logistics.freight",
+      "source_id": "logistics.freight",
+      "operation": "logistics.freight",
+      "description": "Freight forwarding",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 260,
+      "id": "erp_all.logistics.courier",
+      "source_id": "logistics.courier",
+      "operation": "logistics.courier",
+      "description": "Courier management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 261,
+      "id": "erp_all.logistics.last.mile",
+      "source_id": "logistics.last.mile",
+      "operation": "logistics.last.mile",
+      "description": "Last mile delivery",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 262,
+      "id": "erp_all.logistics.reverse.logistics",
+      "source_id": "logistics.reverse.logistics",
+      "operation": "logistics.reverse.logistics",
+      "description": "Reverse logistics (return)",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 263,
+      "id": "erp_all.agriculture.farm",
+      "source_id": "agriculture.farm",
+      "operation": "agriculture.farm",
+      "description": "Farm management",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 264,
+      "id": "erp_all.agriculture.crop",
+      "source_id": "agriculture.crop",
+      "operation": "agriculture.crop",
+      "description": "Crop tracking",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 265,
+      "id": "erp_all.agriculture.harvest",
+      "source_id": "agriculture.harvest",
+      "operation": "agriculture.harvest",
+      "description": "Harvest management",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 266,
+      "id": "erp_all.agriculture.inventory",
+      "source_id": "agriculture.inventory",
+      "operation": "agriculture.inventory",
+      "description": "Inventory (benih, pupuk, pestisida)",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 267,
+      "id": "erp_all.agriculture.equipment",
+      "source_id": "agriculture.equipment",
+      "operation": "agriculture.equipment",
+      "description": "Equipment management",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 268,
+      "id": "erp_all.agriculture.labor",
+      "source_id": "agriculture.labor",
+      "operation": "agriculture.labor",
+      "description": "Farm labor",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 269,
+      "id": "erp_all.agriculture.weather",
+      "source_id": "agriculture.weather",
+      "operation": "agriculture.weather",
+      "description": "Weather integration",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 270,
+      "id": "erp_all.agriculture.supply.chain",
+      "source_id": "agriculture.supply.chain",
+      "operation": "agriculture.supply.chain",
+      "description": "Supply chain",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 301,
+      "id": "erp_all.workflow.define",
+      "source_id": "workflow.define",
+      "operation": "workflow.define",
+      "description": "Define workflow (BPMN)",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 302,
+      "id": "erp_all.workflow.trigger.event",
+      "source_id": "workflow.trigger.event",
+      "operation": "workflow.trigger.event",
+      "description": "Trigger on event",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 303,
+      "id": "erp_all.workflow.trigger.schedule",
+      "source_id": "workflow.trigger.schedule",
+      "operation": "workflow.trigger.schedule",
+      "description": "Trigger on schedule",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 304,
+      "id": "erp_all.workflow.trigger.webhook",
+      "source_id": "workflow.trigger.webhook",
+      "operation": "workflow.trigger.webhook",
+      "description": "Trigger on webhook",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 305,
+      "id": "erp_all.workflow.action.send_email",
+      "source_id": "workflow.action.send_email",
+      "operation": "workflow.action.send_email",
+      "description": "Action: send email",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 306,
+      "id": "erp_all.workflow.action.call_api",
+      "source_id": "workflow.action.call_api",
+      "operation": "workflow.action.call_api",
+      "description": "Action: call external API",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 307,
+      "id": "erp_all.workflow.action.update_record",
+      "source_id": "workflow.action.update_record",
+      "operation": "workflow.action.update_record",
+      "description": "Action: update record",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 308,
+      "id": "erp_all.workflow.action.create_task",
+      "source_id": "workflow.action.create_task",
+      "operation": "workflow.action.create_task",
+      "description": "Action: create task",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 309,
+      "id": "erp_all.workflow.condition.branch",
+      "source_id": "workflow.condition.branch",
+      "operation": "workflow.condition.branch",
+      "description": "Conditional branching",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 310,
+      "id": "erp_all.workflow.parallel.split",
+      "source_id": "workflow.parallel.split",
+      "operation": "workflow.parallel.split",
+      "description": "Parallel execution",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 312,
+      "id": "erp_all.report.sales.analytics",
+      "source_id": "report.sales.analytics",
+      "operation": "report.sales.analytics",
+      "description": "Sales analytics",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 313,
+      "id": "erp_all.report.inventory.movement",
+      "source_id": "report.inventory.movement",
+      "operation": "report.inventory.movement",
+      "description": "Inventory movement report",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 318,
+      "id": "erp_all.report.kpi.dashboard",
+      "source_id": "report.kpi.dashboard",
+      "operation": "report.kpi.dashboard",
+      "description": "KPI dashboard",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 319,
+      "id": "erp_all.report.custom.query",
+      "source_id": "report.custom.query",
+      "operation": "report.custom.query",
+      "description": "Custom SQL query",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 321,
+      "id": "erp_all.report.scheduled",
+      "source_id": "report.scheduled",
+      "operation": "report.scheduled",
+      "description": "Scheduled report (email)",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 322,
+      "id": "erp_all.report.executive.summary",
+      "source_id": "report.executive.summary",
+      "operation": "report.executive.summary",
+      "description": "Executive summary",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 331,
+      "id": "erp_all.bi.etl.extract",
+      "source_id": "bi.etl.extract",
+      "operation": "bi.etl.extract",
+      "description": "ETL: extract",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 332,
+      "id": "erp_all.bi.etl.transform",
+      "source_id": "bi.etl.transform",
+      "operation": "bi.etl.transform",
+      "description": "ETL: transform",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 333,
+      "id": "erp_all.bi.etl.load",
+      "source_id": "bi.etl.load",
+      "operation": "bi.etl.load",
+      "description": "ETL: load ke data warehouse",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 334,
+      "id": "erp_all.bi.olap.cube",
+      "source_id": "bi.olap.cube",
+      "operation": "bi.olap.cube",
+      "description": "OLAP cube",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 335,
+      "id": "erp_all.bi.datawarehouse",
+      "source_id": "bi.datawarehouse",
+      "operation": "bi.datawarehouse",
+      "description": "Data warehouse (Snowflake schema)",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 336,
+      "id": "erp_all.bi.dashboard.realtime",
+      "source_id": "bi.dashboard.realtime",
+      "operation": "bi.dashboard.realtime",
+      "description": "Real-time dashboard",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 337,
+      "id": "erp_all.bi.predictive.analytics",
+      "source_id": "bi.predictive.analytics",
+      "operation": "bi.predictive.analytics",
+      "description": "Predictive analytics (ML)",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 338,
+      "id": "erp_all.bi.report.scheduling",
+      "source_id": "bi.report.scheduling",
+      "operation": "bi.report.scheduling",
+      "description": "Scheduled report",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 349,
+      "id": "erp_all.builder.test.run",
+      "source_id": "builder.test.run",
+      "operation": "builder.test.run",
+      "description": "Run automated tests",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 350,
+      "id": "erp_all.builder.deploy.ssh",
+      "source_id": "builder.deploy.ssh",
+      "operation": "builder.deploy.ssh",
+      "description": "Deploy via SSH ke VPS",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 351,
+      "id": "erp_all.builder.deploy.docker",
+      "source_id": "builder.deploy.docker",
+      "operation": "builder.deploy.docker",
+      "description": "Deploy via Docker Compose",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 352,
+      "id": "erp_all.builder.deploy.k8s",
+      "source_id": "builder.deploy.k8s",
+      "operation": "builder.deploy.k8s",
+      "description": "Deploy via Kubernetes",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 353,
+      "id": "erp_all.builder.ssl.setup",
+      "source_id": "builder.ssl.setup",
+      "operation": "builder.ssl.setup",
+      "description": "Setup SSL (Let's Encrypt)",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 354,
+      "id": "erp_all.compliance.pdp",
+      "source_id": "compliance.pdp",
+      "operation": "compliance.pdp",
+      "description": "UU PDP (Perlindungan Data Pribadi)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 355,
+      "id": "erp_all.compliance.pajak",
+      "source_id": "compliance.pajak",
+      "operation": "compliance.pajak",
+      "description": "Compliance pajak (PPN, PPh)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 356,
+      "id": "erp_all.compliance.bpjs",
+      "source_id": "compliance.bpjs",
+      "operation": "compliance.bpjs",
+      "description": "BPJS compliance",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 357,
+      "id": "erp_all.compliance.komdigi",
+      "source_id": "compliance.komdigi",
+      "operation": "compliance.komdigi",
+      "description": "Komdigi (untuk ISP)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 358,
+      "id": "erp_all.compliance.bssn",
+      "source_id": "compliance.bssn",
+      "operation": "compliance.bssn",
+      "description": "BSSN (cyber security)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 359,
+      "id": "erp_all.compliance.iso27001",
+      "source_id": "compliance.iso27001",
+      "operation": "compliance.iso27001",
+      "description": "ISO 27001",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 360,
+      "id": "erp_all.compliance.soc2",
+      "source_id": "compliance.soc2",
+      "operation": "compliance.soc2",
+      "description": "SOC 2",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 361,
+      "id": "erp_all.compliance.hipaa",
+      "source_id": "compliance.hipaa",
+      "operation": "compliance.hipaa",
+      "description": "HIPAA (untuk healthcare)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 362,
+      "id": "erp_all.compliance.pci.dss",
+      "source_id": "compliance.pci.dss",
+      "operation": "compliance.pci.dss",
+      "description": "PCI-DSS (untuk payment)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 363,
+      "id": "erp_all.compliance.audit.trail",
+      "source_id": "compliance.audit.trail",
+      "operation": "compliance.audit.trail",
+      "description": "Audit trail compliance",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      },
+      "status": "not_implemented",
+      "readiness_means": "not_callable"
+    }
+  ],
+  "connector_required": [
+    {
+      "number": 271,
+      "id": "erp_all.integration.api.rest",
+      "source_id": "integration.api.rest",
+      "operation": "integration.api.rest",
+      "description": "REST API endpoint",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 272,
+      "id": "erp_all.integration.api.graphql",
+      "source_id": "integration.api.graphql",
+      "operation": "integration.api.graphql",
+      "description": "GraphQL endpoint",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 273,
+      "id": "erp_all.integration.api.grpc",
+      "source_id": "integration.api.grpc",
+      "operation": "integration.api.grpc",
+      "description": "gRPC endpoint",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 274,
+      "id": "erp_all.integration.api.websocket",
+      "source_id": "integration.api.websocket",
+      "operation": "integration.api.websocket",
+      "description": "WebSocket real-time",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 275,
+      "id": "erp_all.integration.webhook.send",
+      "source_id": "integration.webhook.send",
+      "operation": "integration.webhook.send",
+      "description": "Send webhook",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 276,
+      "id": "erp_all.integration.webhook.receive",
+      "source_id": "integration.webhook.receive",
+      "operation": "integration.webhook.receive",
+      "description": "Receive webhook",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 277,
+      "id": "erp_all.integration.event.bus",
+      "source_id": "integration.event.bus",
+      "operation": "integration.event.bus",
+      "description": "Internal event bus (Kafka)",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 278,
+      "id": "erp_all.integration.message.queue",
+      "source_id": "integration.message.queue",
+      "operation": "integration.message.queue",
+      "description": "Message queue (RabbitMQ)",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 279,
+      "id": "erp_all.integration.etl.pipeline",
+      "source_id": "integration.etl.pipeline",
+      "operation": "integration.etl.pipeline",
+      "description": "ETL pipeline",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 280,
+      "id": "erp_all.integration.data.sync",
+      "source_id": "integration.data.sync",
+      "operation": "integration.data.sync",
+      "description": "Bidirectional data sync",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 281,
+      "id": "erp_all.integration.scheduler",
+      "source_id": "integration.scheduler",
+      "operation": "integration.scheduler",
+      "description": "Scheduled sync (cron)",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 282,
+      "id": "erp_all.integration.connector.builder",
+      "source_id": "integration.connector.builder",
+      "operation": "integration.connector.builder",
+      "description": "Custom connector builder",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 283,
+      "id": "erp_all.integration.auth.oauth2",
+      "source_id": "integration.auth.oauth2",
+      "operation": "integration.auth.oauth2",
+      "description": "OAuth2 client",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 284,
+      "id": "erp_all.integration.auth.api_key",
+      "source_id": "integration.auth.api_key",
+      "operation": "integration.auth.api_key",
+      "description": "API key auth",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 285,
+      "id": "erp_all.integration.auth.jwt",
+      "source_id": "integration.auth.jwt",
+      "operation": "integration.auth.jwt",
+      "description": "JWT auth",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 286,
+      "id": "erp_all.connector.whm.cpanel",
+      "source_id": "connector.whm.cpanel",
+      "operation": "connector.whm.cpanel",
+      "description": "WHM/cPanel integration (untuk ISP)",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 287,
+      "id": "erp_all.connector.wordpress",
+      "source_id": "connector.wordpress",
+      "operation": "connector.wordpress",
+      "description": "WordPress integration",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 288,
+      "id": "erp_all.connector.shopify",
+      "source_id": "connector.shopify",
+      "operation": "connector.shopify",
+      "description": "Shopify integration",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 289,
+      "id": "erp_all.connector.woocommerce",
+      "source_id": "connector.woocommerce",
+      "operation": "connector.woocommerce",
+      "description": "WooCommerce integration",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 290,
+      "id": "erp_all.connector.tokopedia",
+      "source_id": "connector.tokopedia",
+      "operation": "connector.tokopedia",
+      "description": "Tokopedia API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 291,
+      "id": "erp_all.connector.shopee",
+      "source_id": "connector.shopee",
+      "operation": "connector.shopee",
+      "description": "Shopee API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 292,
+      "id": "erp_all.connector.hubspot",
+      "source_id": "connector.hubspot",
+      "operation": "connector.hubspot",
+      "description": "HubSpot CRM",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 293,
+      "id": "erp_all.connector.salesforce",
+      "source_id": "connector.salesforce",
+      "operation": "connector.salesforce",
+      "description": "Salesforce CRM",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 294,
+      "id": "erp_all.connector.zoho",
+      "source_id": "connector.zoho",
+      "operation": "connector.zoho",
+      "description": "Zoho CRM",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 295,
+      "id": "erp_all.connector.wa.business",
+      "source_id": "connector.wa.business",
+      "operation": "connector.wa.business",
+      "description": "WhatsApp Business API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 296,
+      "id": "erp_all.connector.telegram.bot",
+      "source_id": "connector.telegram.bot",
+      "operation": "connector.telegram.bot",
+      "description": "Telegram Bot API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 297,
+      "id": "erp_all.connector.xendit",
+      "source_id": "connector.xendit",
+      "operation": "connector.xendit",
+      "description": "Xendit (payment gateway)",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 298,
+      "id": "erp_all.connector.midtrans",
+      "source_id": "connector.midtrans",
+      "operation": "connector.midtrans",
+      "description": "Midtrans (payment gateway)",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 299,
+      "id": "erp_all.connector.djp.efaktur",
+      "source_id": "connector.djp.efaktur",
+      "operation": "connector.djp.efaktur",
+      "description": "DJP e-Faktur",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 300,
+      "id": "erp_all.connector.djp.ebupot",
+      "source_id": "connector.djp.ebupot",
+      "operation": "connector.djp.ebupot",
+      "description": "DJP e-Bupot",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 323,
+      "id": "erp_all.comm.email.send",
+      "source_id": "comm.email.send",
+      "operation": "comm.email.send",
+      "description": "Send email",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 324,
+      "id": "erp_all.comm.sms.send",
+      "source_id": "comm.sms.send",
+      "operation": "comm.sms.send",
+      "description": "Send SMS",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 325,
+      "id": "erp_all.comm.wa.send",
+      "source_id": "comm.wa.send",
+      "operation": "comm.wa.send",
+      "description": "Send WhatsApp",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 326,
+      "id": "erp_all.comm.push.notify",
+      "source_id": "comm.push.notify",
+      "operation": "comm.push.notify",
+      "description": "Push notification",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 327,
+      "id": "erp_all.comm.template.management",
+      "source_id": "comm.template.management",
+      "operation": "comm.template.management",
+      "description": "Template management",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 328,
+      "id": "erp_all.comm.campaign.bulk",
+      "source_id": "comm.campaign.bulk",
+      "operation": "comm.campaign.bulk",
+      "description": "Bulk campaign",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 329,
+      "id": "erp_all.comm.auto.responder",
+      "source_id": "comm.auto.responder",
+      "operation": "comm.auto.responder",
+      "description": "Auto responder",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    },
+    {
+      "number": 330,
+      "id": "erp_all.comm.chat.internal",
+      "source_id": "comm.chat.internal",
+      "operation": "comm.chat.internal",
+      "description": "Internal chat (team)",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      },
+      "status": "connector_required",
+      "readiness_means": "not_callable"
+    }
+  ],
+  "business_instance_deployed": false
+}

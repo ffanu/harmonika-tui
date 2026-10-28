@@ -1,0 +1,552 @@
+[
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "README.md",
+    "bytes": 1155,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/README.md",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/README.md",
+    "sha256": "43f1675cc6805e3f901f51af31b91ac0fc04cf399560d739892ab4bbaf4cbdd5"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder/config.json",
+    "bytes": 766,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/config.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/config.json",
+    "sha256": "085cebf4169836dc4a521e5aa88fb2bfe742ddf7a5d56f93bab4e79e540da567"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder/model-00001-of-00004.safetensors",
+    "bytes": 4977222384,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00001-of-00004.safetensors",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00001-of-00004.safetensors",
+    "sha256": "f5ad57d3eda300a3195bc9c0bb36ab76ebe88831f128e9851e63440aff4a6741"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder/model-00002-of-00004.safetensors",
+    "bytes": 4999801992,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00002-of-00004.safetensors",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00002-of-00004.safetensors",
+    "sha256": "54accb98811931fca7598da4f7239b03b912eaa2bd5fe639f2da00923374f4a0"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder/model-00003-of-00004.safetensors",
+    "bytes": 4915915480,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00003-of-00004.safetensors",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00003-of-00004.safetensors",
+    "sha256": "d67c77f57cab4c9bf7f4420c256aed684c8ac7b49c6ab72cff9924e9513db9f1"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder/model-00004-of-00004.safetensors",
+    "bytes": 117465520,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00004-of-00004.safetensors",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model-00004-of-00004.safetensors",
+    "sha256": "c93f133c65ab1aeaa9ed1e998901a306636375b2f57fa53cd279241147a9a0e9"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder/model.safetensors.index.json",
+    "bytes": 22152,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model.safetensors.index.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder/model.safetensors.index.json",
+    "sha256": "ab9a659309b52018d958a2de7b2301fa31f60faa702838a0263e385f29b9b3a8"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder_2/config.json",
+    "bytes": 646,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder_2/config.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder_2/config.json",
+    "sha256": "2872d09ef8a7453db129a67a3e2d90e4dfa4de1febd0fcfa820ed006dceaff9a"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "text_encoder_2/model.safetensors",
+    "bytes": 246144152,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder_2/model.safetensors",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/text_encoder_2/model.safetensors",
+    "sha256": "660c6f5b1abae9dc498ac2d21e1347d2abdb0cf6c0c0c8576cd796491d9a6cdd"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer/special_tokens_map.json",
+    "bytes": 577,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer/special_tokens_map.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer/special_tokens_map.json",
+    "sha256": "e87284810dc7a4d9dbab5ea6b713b3e72a6a909006483760773fb129534b9fe0"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer/tokenizer.json",
+    "bytes": 17210098,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer/tokenizer.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer/tokenizer.json",
+    "sha256": "d2c593db4aa75b17a42c1f74d7cc38e257eaeed222e6a52674c65544165dcbaa"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer/tokenizer_config.json",
+    "bytes": 51729,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer/tokenizer_config.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer/tokenizer_config.json",
+    "sha256": "88d8723716a3368430f3a02fd4614c8368b9f87b28c0053fcbdd80b88888b0f7"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer_2/merges.txt",
+    "bytes": 524619,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/merges.txt",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/merges.txt",
+    "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer_2/special_tokens_map.json",
+    "bytes": 588,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/special_tokens_map.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/special_tokens_map.json",
+    "sha256": "2cdb3b8331a60c92fc1e55a13e9fd61fd2293c5a51275fdcccd62b780052530e"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer_2/tokenizer_config.json",
+    "bytes": 736,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/tokenizer_config.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/tokenizer_config.json",
+    "sha256": "39bae5313c2da6467866dee758e754d69f0e302a875027b142531cb9c51c7c28"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "tokenizer_2/vocab.json",
+    "bytes": 1059962,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/vocab.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/tokenizer_2/vocab.json",
+    "sha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "vae/config.json",
+    "bytes": 718,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/vae/config.json",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/vae/config.json",
+    "sha256": "8dd1ef5ce49d2a56cdb5ea4c6553244320cd7185918463578c4c08a31f55e50a"
+  },
+  {
+    "group": "framepack",
+    "repo": "hunyuanvideo-community/HunyuanVideo",
+    "revision": "e8c2aaa66fe3742a32c11a6766aecbf07c56e773",
+    "file": "vae/diffusion_pytorch_model.safetensors",
+    "bytes": 985943868,
+    "relative": "models/hub/models--hunyuanvideo-community--HunyuanVideo/snapshots/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/vae/diffusion_pytorch_model.safetensors",
+    "url": "https://huggingface.co/hunyuanvideo-community/HunyuanVideo/resolve/e8c2aaa66fe3742a32c11a6766aecbf07c56e773/vae/diffusion_pytorch_model.safetensors",
+    "sha256": "7c68a6295f9034a88225fbafb1f3258291a08d57a1fdb938233fa57b1b8f4883"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/flux_redux_bfl",
+    "revision": "45b801affc54ff2af4e5daf1b282e0921901db87",
+    "file": "README.md",
+    "bytes": 100,
+    "relative": "models/hub/models--lllyasviel--flux_redux_bfl/snapshots/45b801affc54ff2af4e5daf1b282e0921901db87/README.md",
+    "url": "https://huggingface.co/lllyasviel/flux_redux_bfl/resolve/45b801affc54ff2af4e5daf1b282e0921901db87/README.md",
+    "sha256": "132c44fb322fd56d8347b989e52299803a8a5da27b2c1aca15cdc5b0c4ae02b1"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/flux_redux_bfl",
+    "revision": "45b801affc54ff2af4e5daf1b282e0921901db87",
+    "file": "feature_extractor/preprocessor_config.json",
+    "bytes": 394,
+    "relative": "models/hub/models--lllyasviel--flux_redux_bfl/snapshots/45b801affc54ff2af4e5daf1b282e0921901db87/feature_extractor/preprocessor_config.json",
+    "url": "https://huggingface.co/lllyasviel/flux_redux_bfl/resolve/45b801affc54ff2af4e5daf1b282e0921901db87/feature_extractor/preprocessor_config.json",
+    "sha256": "ec1f371074fb4867ea1c654e00bc5ea99d706f409aaebf8dc614d67c0735aff8"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/flux_redux_bfl",
+    "revision": "45b801affc54ff2af4e5daf1b282e0921901db87",
+    "file": "image_encoder/config.json",
+    "bytes": 585,
+    "relative": "models/hub/models--lllyasviel--flux_redux_bfl/snapshots/45b801affc54ff2af4e5daf1b282e0921901db87/image_encoder/config.json",
+    "url": "https://huggingface.co/lllyasviel/flux_redux_bfl/resolve/45b801affc54ff2af4e5daf1b282e0921901db87/image_encoder/config.json",
+    "sha256": "9e087b26a3077b4257b5c69c4e6b70075c837f0913422f88f4c1a1589bf35b0d"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/flux_redux_bfl",
+    "revision": "45b801affc54ff2af4e5daf1b282e0921901db87",
+    "file": "image_encoder/model.safetensors",
+    "bytes": 856506120,
+    "relative": "models/hub/models--lllyasviel--flux_redux_bfl/snapshots/45b801affc54ff2af4e5daf1b282e0921901db87/image_encoder/model.safetensors",
+    "url": "https://huggingface.co/lllyasviel/flux_redux_bfl/resolve/45b801affc54ff2af4e5daf1b282e0921901db87/image_encoder/model.safetensors",
+    "sha256": "d769e3a32a6a9bac72d4d93b989e44491f71b50f02bfa14cd9187758d4a68ff1"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/FramePack_F1_I2V_HY_20250503",
+    "revision": "ab239828e0b384fed75580f186f078717d4020f7",
+    "file": "README.md",
+    "bytes": 145,
+    "relative": "models/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/snapshots/ab239828e0b384fed75580f186f078717d4020f7/README.md",
+    "url": "https://huggingface.co/lllyasviel/FramePack_F1_I2V_HY_20250503/resolve/ab239828e0b384fed75580f186f078717d4020f7/README.md",
+    "sha256": "ef8fa2bd693bf1fd36ab577be7648855f98fac7bba198805dc20c7c4f7867ba4"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/FramePack_F1_I2V_HY_20250503",
+    "revision": "ab239828e0b384fed75580f186f078717d4020f7",
+    "file": "config.json",
+    "bytes": 658,
+    "relative": "models/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/snapshots/ab239828e0b384fed75580f186f078717d4020f7/config.json",
+    "url": "https://huggingface.co/lllyasviel/FramePack_F1_I2V_HY_20250503/resolve/ab239828e0b384fed75580f186f078717d4020f7/config.json",
+    "sha256": "8af4d0731ab2449e0dbf00183ce5c507e9b5c9dac946b5cd454a74ceabe944ed"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/FramePack_F1_I2V_HY_20250503",
+    "revision": "ab239828e0b384fed75580f186f078717d4020f7",
+    "file": "diffusion_pytorch_model-00001-of-00003.safetensors",
+    "bytes": 9972080992,
+    "relative": "models/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/snapshots/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model-00001-of-00003.safetensors",
+    "url": "https://huggingface.co/lllyasviel/FramePack_F1_I2V_HY_20250503/resolve/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model-00001-of-00003.safetensors",
+    "sha256": "cdf7c3c5657f39d32fe2be77ecb0b9feff3da2ea44cede43742b0845298ff240"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/FramePack_F1_I2V_HY_20250503",
+    "revision": "ab239828e0b384fed75580f186f078717d4020f7",
+    "file": "diffusion_pytorch_model-00002-of-00003.safetensors",
+    "bytes": 9987115584,
+    "relative": "models/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/snapshots/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model-00002-of-00003.safetensors",
+    "url": "https://huggingface.co/lllyasviel/FramePack_F1_I2V_HY_20250503/resolve/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model-00002-of-00003.safetensors",
+    "sha256": "dceab3cb46e2aa764da3741c1dcb643623ea57eee6d160b729cd669fb451e1cd"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/FramePack_F1_I2V_HY_20250503",
+    "revision": "ab239828e0b384fed75580f186f078717d4020f7",
+    "file": "diffusion_pytorch_model-00003-of-00003.safetensors",
+    "bytes": 5789584816,
+    "relative": "models/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/snapshots/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model-00003-of-00003.safetensors",
+    "url": "https://huggingface.co/lllyasviel/FramePack_F1_I2V_HY_20250503/resolve/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model-00003-of-00003.safetensors",
+    "sha256": "cea9ec13d707f40293ce3f2a3cdeacf9ccbbe40469d2df35d95ada3780c1d766"
+  },
+  {
+    "group": "framepack",
+    "repo": "lllyasviel/FramePack_F1_I2V_HY_20250503",
+    "revision": "ab239828e0b384fed75580f186f078717d4020f7",
+    "file": "diffusion_pytorch_model.safetensors.index.json",
+    "bytes": 134006,
+    "relative": "models/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/snapshots/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model.safetensors.index.json",
+    "url": "https://huggingface.co/lllyasviel/FramePack_F1_I2V_HY_20250503/resolve/ab239828e0b384fed75580f186f078717d4020f7/diffusion_pytorch_model.safetensors.index.json",
+    "sha256": "426e1a6cfe987a5c1e9cc1b9d0c7187d21d903d50e4fe79c0f678431428eca72"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "hkchengrex/MMAudio",
+    "revision": "eb13a1a98fdbec91753775c57b074ccdfc60587c",
+    "file": "README.md",
+    "bytes": 383,
+    "relative": "models/hub/models--hkchengrex--MMAudio/snapshots/eb13a1a98fdbec91753775c57b074ccdfc60587c/README.md",
+    "url": "https://huggingface.co/hkchengrex/MMAudio/resolve/eb13a1a98fdbec91753775c57b074ccdfc60587c/README.md",
+    "sha256": "d788ad7a8c6067e7e710a2a0539bba7c6047259daf217a0b639ca317fcad7596"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "hkchengrex/MMAudio",
+    "revision": "eb13a1a98fdbec91753775c57b074ccdfc60587c",
+    "file": "ext_weights/synchformer_state_dict.pth",
+    "bytes": 950058171,
+    "relative": "models/hub/models--hkchengrex--MMAudio/snapshots/eb13a1a98fdbec91753775c57b074ccdfc60587c/ext_weights/synchformer_state_dict.pth",
+    "url": "https://huggingface.co/hkchengrex/MMAudio/resolve/eb13a1a98fdbec91753775c57b074ccdfc60587c/ext_weights/synchformer_state_dict.pth",
+    "sha256": "8aff082f2df5c3bc52759db0c865c7ee772ae6400b860d1b7e90413f2defb67c"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "hkchengrex/MMAudio",
+    "revision": "eb13a1a98fdbec91753775c57b074ccdfc60587c",
+    "file": "ext_weights/v1-44.pth",
+    "bytes": 1221942998,
+    "relative": "models/hub/models--hkchengrex--MMAudio/snapshots/eb13a1a98fdbec91753775c57b074ccdfc60587c/ext_weights/v1-44.pth",
+    "url": "https://huggingface.co/hkchengrex/MMAudio/resolve/eb13a1a98fdbec91753775c57b074ccdfc60587c/ext_weights/v1-44.pth",
+    "sha256": "ab6cc15dc31947675f75c950c41f4dcfd0d6d1817555ac871f809ec388e4651a"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "hkchengrex/MMAudio",
+    "revision": "eb13a1a98fdbec91753775c57b074ccdfc60587c",
+    "file": "weights/mmaudio_large_44k_v2.pth",
+    "bytes": 4122474715,
+    "relative": "models/hub/models--hkchengrex--MMAudio/snapshots/eb13a1a98fdbec91753775c57b074ccdfc60587c/weights/mmaudio_large_44k_v2.pth",
+    "url": "https://huggingface.co/hkchengrex/MMAudio/resolve/eb13a1a98fdbec91753775c57b074ccdfc60587c/weights/mmaudio_large_44k_v2.pth",
+    "sha256": "a6bf693424fbd4ce0244fff8c412347714d5ac586e28dbeffadfa0f2b647af74"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "apple/DFN5B-CLIP-ViT-H-14-384",
+    "revision": "01b771ed0d1395ca5ffdd279897d665ebe00dfd2",
+    "file": "LICENSE",
+    "bytes": 5820,
+    "relative": "models/hub/models--apple--DFN5B-CLIP-ViT-H-14-384/snapshots/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/LICENSE",
+    "url": "https://huggingface.co/apple/DFN5B-CLIP-ViT-H-14-384/resolve/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/LICENSE",
+    "sha256": "d8f5d9dfbdb60dc81b8f1720421699e7811070f0b46f6668f90253d5ac8c0b20"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "apple/DFN5B-CLIP-ViT-H-14-384",
+    "revision": "01b771ed0d1395ca5ffdd279897d665ebe00dfd2",
+    "file": "README.md",
+    "bytes": 4006,
+    "relative": "models/hub/models--apple--DFN5B-CLIP-ViT-H-14-384/snapshots/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/README.md",
+    "url": "https://huggingface.co/apple/DFN5B-CLIP-ViT-H-14-384/resolve/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/README.md",
+    "sha256": "49eeac2da391d791c4d918fb7bd3a09a695193d166d2af8903ad548c76cca4fe"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "apple/DFN5B-CLIP-ViT-H-14-384",
+    "revision": "01b771ed0d1395ca5ffdd279897d665ebe00dfd2",
+    "file": "open_clip_config.json",
+    "bytes": 735,
+    "relative": "models/hub/models--apple--DFN5B-CLIP-ViT-H-14-384/snapshots/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/open_clip_config.json",
+    "url": "https://huggingface.co/apple/DFN5B-CLIP-ViT-H-14-384/resolve/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/open_clip_config.json",
+    "sha256": "e043bd1129b97d3afc77eef2e8bfda940af588dabf2cbaacc21e956345402f67"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "apple/DFN5B-CLIP-ViT-H-14-384",
+    "revision": "01b771ed0d1395ca5ffdd279897d665ebe00dfd2",
+    "file": "open_clip_pytorch_model.bin",
+    "bytes": 3947081637,
+    "relative": "models/hub/models--apple--DFN5B-CLIP-ViT-H-14-384/snapshots/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/open_clip_pytorch_model.bin",
+    "url": "https://huggingface.co/apple/DFN5B-CLIP-ViT-H-14-384/resolve/01b771ed0d1395ca5ffdd279897d665ebe00dfd2/open_clip_pytorch_model.bin",
+    "sha256": "c07a17b547d461c60a3cce5062b26bf8545b13de602c4c59d8490361eb716033"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "nvidia/bigvgan_v2_44khz_128band_512x",
+    "revision": "95a9d1dcb12906c03edd938d77b9333d6ded7dfb",
+    "file": "LICENSE",
+    "bytes": 1076,
+    "relative": "models/hub/models--nvidia--bigvgan_v2_44khz_128band_512x/snapshots/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/LICENSE",
+    "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/LICENSE",
+    "sha256": "90459cd52fc41bd723df7c0c76fac1e4dd60e6bfd644a7e2a93f325bed4f6d95"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "nvidia/bigvgan_v2_44khz_128band_512x",
+    "revision": "95a9d1dcb12906c03edd938d77b9333d6ded7dfb",
+    "file": "README.md",
+    "bytes": 8041,
+    "relative": "models/hub/models--nvidia--bigvgan_v2_44khz_128band_512x/snapshots/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/README.md",
+    "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/README.md",
+    "sha256": "209c68252dd23468b4f95991a1fb535b35f8fb603ac3937ed5d5eb2b1d993439"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "nvidia/bigvgan_v2_44khz_128band_512x",
+    "revision": "95a9d1dcb12906c03edd938d77b9333d6ded7dfb",
+    "file": "bigvgan_generator.pt",
+    "bytes": 489041291,
+    "relative": "models/hub/models--nvidia--bigvgan_v2_44khz_128band_512x/snapshots/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/bigvgan_generator.pt",
+    "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/bigvgan_generator.pt",
+    "sha256": "d9fe7ec6bd0b44ed9d66973d5012d8181c1570b01e5c72df51973e241dccd357"
+  },
+  {
+    "group": "mmaudio",
+    "repo": "nvidia/bigvgan_v2_44khz_128band_512x",
+    "revision": "95a9d1dcb12906c03edd938d77b9333d6ded7dfb",
+    "file": "config.json",
+    "bytes": 1403,
+    "relative": "models/hub/models--nvidia--bigvgan_v2_44khz_128band_512x/snapshots/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/config.json",
+    "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/95a9d1dcb12906c03edd938d77b9333d6ded7dfb/config.json",
+    "sha256": "65b7f487bfaf15256056a75f6667ef5f640214c981922a111927873705ea4ddb"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "Wan2.1_VAE_bf16.safetensors",
+    "bytes": 253808213,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE_bf16.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE_bf16.safetensors",
+    "sha256": "1cfb45efe23ae6c9a8ae03667922f78e5d53ce81ecb29913f91f03f62230a2c2"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "umt5-xxl/models_t5_umt5-xxl-enc-quanto_int8.safetensors",
+    "bytes": 6733337738,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/models_t5_umt5-xxl-enc-quanto_int8.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/models_t5_umt5-xxl-enc-quanto_int8.safetensors",
+    "sha256": "5e4961851c78838931990549810ed51c9036081b2ad80bf464c4e2603c5f922c"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "umt5-xxl/README.txt",
+    "bytes": 11,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/README.txt",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/README.txt",
+    "sha256": "0f9a06bf351d48486c9c8543a7cdb5a2840931c64e15d5c8f3262cf815804f26"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "umt5-xxl/special_tokens_map.json",
+    "bytes": 6623,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/special_tokens_map.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/special_tokens_map.json",
+    "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "umt5-xxl/spiece.model",
+    "bytes": 4548313,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/spiece.model",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/spiece.model",
+    "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "umt5-xxl/tokenizer.json",
+    "bytes": 16837417,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/tokenizer.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/tokenizer.json",
+    "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "umt5-xxl/tokenizer_config.json",
+    "bytes": 61728,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/tokenizer_config.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/umt5-xxl/tokenizer_config.json",
+    "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "wan2.1_text2video_1.3B_mbf16.safetensors",
+    "bytes": 2872512608,
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/wan2.1_text2video_1.3B_mbf16.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/wan2.1_text2video_1.3B_mbf16.safetensors",
+    "sha256": "572aa1e665d968710edf68022a61501d3141e257c61540660cd473bedf45a023"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/models_clip_open-clip-xlm-roberta-large-vit-huge-14-bf16.safetensors",
+    "bytes": 2386119506,
+    "sha256": "742b68fe1cade9e54863aee12aed5390a994269957bd0638799b141cbc236ad8",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/models_clip_open-clip-xlm-roberta-large-vit-huge-14-bf16.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/models_clip_open-clip-xlm-roberta-large-vit-huge-14-bf16.safetensors"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/sentencepiece.bpe.model",
+    "bytes": 5069051,
+    "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/sentencepiece.bpe.model",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/sentencepiece.bpe.model"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/special_tokens_map.json",
+    "bytes": 280,
+    "sha256": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/special_tokens_map.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/special_tokens_map.json"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/tokenizer.json",
+    "bytes": 17082660,
+    "sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer.json"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/tokenizer_config.json",
+    "bytes": 418,
+    "sha256": "efb5c0d09722e5fe59a462cd2a9976ee216d55b037597d997cd3fe833216da15",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer_config.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer_config.json"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "Wan2.1_VAE.safetensors",
+    "bytes": 507593157,
+    "sha256": "3ce0c02b9470532e7f63f3e2f8e83b0681fdeaa432e969c412482d2b3b78267b",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE.safetensors"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "Wan2.1_VAE_upscale2x_imageonly_real_v1.safetensors",
+    "bytes": 507684560,
+    "sha256": "2413554bbec24215185662d009893cf4666b8e777efece2d895e03e1a6b63e06",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE_upscale2x_imageonly_real_v1.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE_upscale2x_imageonly_real_v1.safetensors"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "dependency_vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "services": {
+    "harmonika-ai.service": [
+      "MainPID=1487202",
+      "ActiveState=active"
+    ],
+    "harmonika-master-skills.service": [
+      "MainPID=1327592",
+      "ActiveState=active"
+    ],
+    "harmonika-web-chat-live.service": [
+      "MainPID=1379498",
+      "ActiveState=active"
+    ]
+  },
+  "blueprint_sha256": "ce800ce7c98e42967a182023bd043ec7febf3dd725eea7b623242fef21aded3f"
+}

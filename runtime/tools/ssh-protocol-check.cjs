@@ -1,0 +1,4 @@
+'use strict';
+const path=require('node:path');const sdk=require('./paths.cjs').sdk;
+const {Client}=require(path.join(sdk,'client/index.js')),{StdioClientTransport}=require(path.join(sdk,'client/stdio.js'));
+(async()=>{const c=new Client({name:'harmonika-ssh-preflight',version:'1.0.0'}),t=new StdioClientTransport({command:process.execPath,args:[process.argv[2]||path.join(__dirname,'ssh-mcp.cjs')],stderr:'pipe'});try{await c.connect(t);const {tools}=await c.listTools();for(const name of ['ssh_connect','ssh_exec','ssh_upload','ssh_download','remote_targets','telnet','vnc'])if(!tools.some(x=>x.name===name))throw Error('missing_remote_tool');process.stdout.write(JSON.stringify({ok:true,tools:tools.map(x=>x.name)}));}finally{await c.close()}})().catch(()=>{process.stderr.write('Remote MCP preflight failed');process.exitCode=1});

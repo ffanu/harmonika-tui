@@ -1,0 +1,2618 @@
+{
+  "source_sha256": "0d274c40408e9a6c2a864807104cb88c76c448e1b67e9918c7383996a45270d3",
+  "line_count": 1342,
+  "header_declared": 245,
+  "actual_count": 290,
+  "skills": [
+    {
+      "number": 1,
+      "operation": "target.classify",
+      "description": "Klasifikasi target (web/mobile/desktop/IoT)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 2,
+      "operation": "target.web.detect",
+      "description": "Detect web app (URL, tech stack)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 3,
+      "operation": "target.mobile.detect",
+      "description": "Detect mobile app (APK, IPA)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 4,
+      "operation": "target.desktop.detect",
+      "description": "Detect desktop app (EXE, binary)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 5,
+      "operation": "target.iot.detect",
+      "description": "Detect IoT device (IP, firmware)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 6,
+      "operation": "target.network.detect",
+      "description": "Detect network target (IP range)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 7,
+      "operation": "target.source.access",
+      "description": "Akses source code (kalau ada)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 8,
+      "operation": "target.binary.analyze",
+      "description": "Analyze binary (kalau tidak ada source)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 9,
+      "operation": "target.scope.define",
+      "description": "Define scope scanning",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 10,
+      "operation": "target.permission.check",
+      "description": "Check permission (auth, scope)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      }
+    },
+    {
+      "number": 11,
+      "operation": "sast.code.review",
+      "description": "Code review otomatis",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 12,
+      "operation": "sast.ast.parse",
+      "description": "Parse AST (abstract syntax tree)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 13,
+      "operation": "sast.data.flow",
+      "description": "Data flow analysis (taint tracking)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 14,
+      "operation": "sast.control.flow",
+      "description": "Control flow analysis",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 15,
+      "operation": "sast.symbolic.exec",
+      "description": "Symbolic execution",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 16,
+      "operation": "sast.pattern.match",
+      "description": "Pattern matching (anti-pattern)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 17,
+      "operation": "sast.cross.ref",
+      "description": "Cross-reference analysis",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 18,
+      "operation": "sast.dead.code",
+      "description": "Dead code detection",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 19,
+      "operation": "sast.complexity",
+      "description": "Cyclomatic complexity",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 20,
+      "operation": "sast.duplication",
+      "description": "Code duplication detection",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 21,
+      "operation": "sast.dependencies",
+      "description": "Dependency analysis",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 22,
+      "operation": "sast.versions.diff",
+      "description": "Diff antar versi (git blame)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 23,
+      "operation": "sast.commit.history",
+      "description": "Commit history analysis",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 24,
+      "operation": "sast.lint.run",
+      "description": "Linter (eslint, ruff, golangci)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 25,
+      "operation": "sast.type.check",
+      "description": "Type check (mypy, tsc, pyright)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      }
+    },
+    {
+      "number": 26,
+      "operation": "dast.reproduce",
+      "description": "Reproduce bug (coba trigger)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 27,
+      "operation": "dast.debug.attach",
+      "description": "Attach debugger ke process",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 28,
+      "operation": "dast.breakpoint.set",
+      "description": "Set breakpoint strategis",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 29,
+      "operation": "dast.step.trace",
+      "description": "Step-by-step trace execution",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 30,
+      "operation": "dast.memory.inspect",
+      "description": "Inspect memory state",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 31,
+      "operation": "dast.var.watch",
+      "description": "Watch variable changes",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 32,
+      "operation": "dast.call.stack",
+      "description": "Capture call stack",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 33,
+      "operation": "dast.profile.cpu",
+      "description": "CPU profiling",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 34,
+      "operation": "dast.profile.memory",
+      "description": "Memory profiling (leak detect)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 35,
+      "operation": "dast.profile.io",
+      "description": "I/O profiling",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 36,
+      "operation": "dast.trace.system",
+      "description": "System call tracing (strace)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 37,
+      "operation": "dast.trace.network",
+      "description": "Network packet capture",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 38,
+      "operation": "dast.trace.file",
+      "description": "File access trace",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 39,
+      "operation": "dast.fuzz.input",
+      "description": "Fuzz testing (input mutation)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 40,
+      "operation": "dast.load.test",
+      "description": "Load testing (reproduce perf bug)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      }
+    },
+    {
+      "number": 41,
+      "operation": "web.frontend.console.error",
+      "description": "Scan console error (JS)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 42,
+      "operation": "web.frontend.network.error",
+      "description": "Scan network error (XHR, fetch)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 43,
+      "operation": "web.frontend.render.bug",
+      "description": "Scan render bug (CSS, layout)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 44,
+      "operation": "web.frontend.cors.error",
+      "description": "Scan CORS error",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 45,
+      "operation": "web.frontend.csp.violation",
+      "description": "Scan CSP violation",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 46,
+      "operation": "web.frontend.memory.leak",
+      "description": "Scan memory leak (browser)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 47,
+      "operation": "web.frontend.performance",
+      "description": "Scan frontend performance (Lighthouse)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 48,
+      "operation": "web.frontend.accessibility",
+      "description": "Scan accessibility (WCAG)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 49,
+      "operation": "web.backend.exception",
+      "description": "Scan backend exception",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 50,
+      "operation": "web.backend.slow.query",
+      "description": "Scan slow query (DB)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 51,
+      "operation": "web.backend.deadlock",
+      "description": "Scan deadlock",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 52,
+      "operation": "web.backend.connection.leak",
+      "description": "Scan connection leak (DB, HTTP)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 53,
+      "operation": "web.backend.memory.leak",
+      "description": "Scan memory leak (server)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 54,
+      "operation": "web.backend.cpu.spike",
+      "description": "Scan CPU spike",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 55,
+      "operation": "web.backend.crash",
+      "description": "Scan crash (segfault, OOM)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 56,
+      "operation": "web.api.endpoint.bug",
+      "description": "Scan API endpoint bug",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 57,
+      "operation": "web.api.rate.limit",
+      "description": "Scan rate limit issue",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 58,
+      "operation": "web.api.authentication",
+      "description": "Scan authentication bug",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 59,
+      "operation": "web.api.authorization",
+      "description": "Scan authorization bug (IDOR)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 60,
+      "operation": "web.api.validation",
+      "description": "Scan input validation bug",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      }
+    },
+    {
+      "number": 61,
+      "operation": "mobile.android.scan",
+      "description": "Scan Android APK (static + dynamic)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 62,
+      "operation": "mobile.android.crash",
+      "description": "Scan crash (logcat, ANR)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 63,
+      "operation": "mobile.android.memory",
+      "description": "Scan memory leak (LeakCanary)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 64,
+      "operation": "mobile.android.battery",
+      "description": "Scan battery drain",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 65,
+      "operation": "mobile.android.network",
+      "description": "Scan network usage",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 66,
+      "operation": "mobile.android.permission",
+      "description": "Scan permission issue",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 67,
+      "operation": "mobile.ios.scan",
+      "description": "Scan iOS IPA",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 68,
+      "operation": "mobile.ios.crash",
+      "description": "Scan crash (crash log)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 69,
+      "operation": "mobile.ios.memory",
+      "description": "Scan memory leak (Instruments)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 70,
+      "operation": "mobile.ios.battery",
+      "description": "Scan battery drain",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 71,
+      "operation": "mobile.ui.render",
+      "description": "Scan UI render bug",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 72,
+      "operation": "mobile.ui.responsive",
+      "description": "Scan responsive issue",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 73,
+      "operation": "mobile.network.offline",
+      "description": "Scan offline handling",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 74,
+      "operation": "mobile.storage.corrupt",
+      "description": "Scan storage corruption",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 75,
+      "operation": "mobile.push.notif",
+      "description": "Scan push notification bug",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      }
+    },
+    {
+      "number": 76,
+      "operation": "desktop.windows.scan",
+      "description": "Scan Windows app (EXE)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 77,
+      "operation": "desktop.windows.crash",
+      "description": "Scan crash (BSOD, event log)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 78,
+      "operation": "desktop.windows.registry",
+      "description": "Scan registry issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 79,
+      "operation": "desktop.macos.scan",
+      "description": "Scan macOS app",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 80,
+      "operation": "desktop.macos.crash",
+      "description": "Scan crash (crash report)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 81,
+      "operation": "desktop.linux.scan",
+      "description": "Scan Linux app",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 82,
+      "operation": "desktop.linux.core.dump",
+      "description": "Analyze core dump",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 83,
+      "operation": "desktop.memory.leak",
+      "description": "Scan memory leak (Valgrind)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 84,
+      "operation": "desktop.cpu.usage",
+      "description": "Scan CPU usage issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 85,
+      "operation": "desktop.disk.usage",
+      "description": "Scan disk usage issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 86,
+      "operation": "desktop.gpu.driver",
+      "description": "Scan GPU driver issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 87,
+      "operation": "desktop.compat.os",
+      "description": "Scan OS compatibility",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      }
+    },
+    {
+      "number": 88,
+      "operation": "iot.firmware.scan",
+      "description": "Scan firmware (binary analysis)",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 89,
+      "operation": "iot.firmware.extract",
+      "description": "Extract filesystem dari firmware",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 90,
+      "operation": "iot.network.scan",
+      "description": "Scan IoT device di network",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 91,
+      "operation": "iot.protocol.analyze",
+      "description": "Analyze protocol (MQTT, CoAP, Zigbee)",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 92,
+      "operation": "iot.credential.check",
+      "description": "Check default credential",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 93,
+      "operation": "iot.update.mechanism",
+      "description": "Check OTA update security",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 94,
+      "operation": "iot.privacy.data",
+      "description": "Check privacy data handling",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 95,
+      "operation": "iot.physical.security",
+      "description": "Check physical security (UART, JTAG)",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 96,
+      "operation": "iot.cloud.connect",
+      "description": "Check cloud connectivity",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 97,
+      "operation": "iot.resource.constraint",
+      "description": "Check resource constraint issue",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      }
+    },
+    {
+      "number": 98,
+      "operation": "net.latency.high",
+      "description": "Scan high latency",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 99,
+      "operation": "net.packet.loss",
+      "description": "Scan packet loss",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 100,
+      "operation": "net.bandwidth.bottleneck",
+      "description": "Scan bandwidth bottleneck",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 101,
+      "operation": "net.dns.issue",
+      "description": "Scan DNS issue",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 102,
+      "operation": "net.routing.loop",
+      "description": "Scan routing loop",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 103,
+      "operation": "net.firewall.misconfig",
+      "description": "Scan firewall misconfiguration",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 104,
+      "operation": "net.vpn.issue",
+      "description": "Scan VPN issue",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 105,
+      "operation": "net.load.balancer",
+      "description": "Scan load balancer bug",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 106,
+      "operation": "net.cdn.cache",
+      "description": "Scan CDN cache issue",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 107,
+      "operation": "net.ddos.detect",
+      "description": "Detect DDoS attack",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      }
+    },
+    {
+      "number": 108,
+      "operation": "perf.slow.response",
+      "description": "Scan slow response time",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 109,
+      "operation": "perf.high.cpu",
+      "description": "Scan high CPU usage",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 110,
+      "operation": "perf.high.memory",
+      "description": "Scan high memory usage",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 111,
+      "operation": "perf.db.slow.query",
+      "description": "Scan slow database query",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 112,
+      "operation": "perf.n.plus.one",
+      "description": "Scan N+1 query problem",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 113,
+      "operation": "perf.cache.miss",
+      "description": "Scan cache miss issue",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 114,
+      "operation": "perf.gc.frequent",
+      "description": "Scan frequent garbage collection",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 115,
+      "operation": "perf.thread.contention",
+      "description": "Scan thread contention",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 116,
+      "operation": "perf.io.bottleneck",
+      "description": "Scan I/O bottleneck",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 117,
+      "operation": "perf.network.bottleneck",
+      "description": "Scan network bottleneck",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 118,
+      "operation": "perf.frontend.blocking",
+      "description": "Scan frontend render blocking",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 119,
+      "operation": "perf.benchmark.compare",
+      "description": "Benchmark vs baseline",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      }
+    },
+    {
+      "number": 120,
+      "operation": "logic.business.rule",
+      "description": "Scan business rule violation",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 121,
+      "operation": "logic.edge.case",
+      "description": "Scan edge case bug",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 122,
+      "operation": "logic.race.condition",
+      "description": "Scan race condition",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 123,
+      "operation": "logic.concurrency",
+      "description": "Scan concurrency bug",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 124,
+      "operation": "logic.state.machine",
+      "description": "Scan state machine bug",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 125,
+      "operation": "logic.calculation.error",
+      "description": "Scan calculation error",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 126,
+      "operation": "logic.validation.bypass",
+      "description": "Scan validation bypass",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 127,
+      "operation": "logic.workflow.bug",
+      "description": "Scan workflow bug",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 128,
+      "operation": "logic.integration.mismatch",
+      "description": "Scan integration mismatch",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 129,
+      "operation": "logic.data.consistency",
+      "description": "Scan data consistency issue",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      }
+    },
+    {
+      "number": 130,
+      "operation": "uiux.visual.glitch",
+      "description": "Scan visual glitch",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 131,
+      "operation": "uiux.layout.break",
+      "description": "Scan layout break",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 132,
+      "operation": "uiux.responsive.issue",
+      "description": "Scan responsive issue",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 133,
+      "operation": "uiux.cross.browser",
+      "description": "Scan cross-browser issue",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 134,
+      "operation": "uiux.accessibility",
+      "description": "Scan accessibility (WCAG)",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 135,
+      "operation": "uiux.color.contrast",
+      "description": "Scan color contrast issue",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 136,
+      "operation": "uiux.font.render",
+      "description": "Scan font rendering issue",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 137,
+      "operation": "uiux.animation.glitch",
+      "description": "Scan animation glitch",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 138,
+      "operation": "uiux.form.validation",
+      "description": "Scan form validation UX",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 139,
+      "operation": "uiux.user.flow.friction",
+      "description": "Scan user flow friction",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      }
+    },
+    {
+      "number": 140,
+      "operation": "sec.owasp.top10",
+      "description": "OWASP Top 10 audit",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 141,
+      "operation": "sec.sqli.test",
+      "description": "SQL Injection testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 142,
+      "operation": "sec.xss.test",
+      "description": "XSS testing (reflected, stored, DOM)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 143,
+      "operation": "sec.csrf.test",
+      "description": "CSRF testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 144,
+      "operation": "sec.ssrf.test",
+      "description": "SSRF testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 145,
+      "operation": "sec.xxe.test",
+      "description": "XXE testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 146,
+      "operation": "sec.idor.test",
+      "description": "IDOR / BOLA testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 147,
+      "operation": "sec.auth.bypass",
+      "description": "Authentication bypass testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 148,
+      "operation": "sec.jwt.vulnerability",
+      "description": "JWT analysis & attacks",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 149,
+      "operation": "sec.file.upload",
+      "description": "File upload vulnerability testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 150,
+      "operation": "sec.lfi.rfi",
+      "description": "LFI/RFI testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 151,
+      "operation": "sec.cmd.injection",
+      "description": "Command injection testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 152,
+      "operation": "sec.business.logic",
+      "description": "Business logic flaws",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 153,
+      "operation": "sec.api.fuzz",
+      "description": "API fuzzing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 154,
+      "operation": "sec.graphql.test",
+      "description": "GraphQL security testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 155,
+      "operation": "sec.websocket.test",
+      "description": "WebSocket security testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 156,
+      "operation": "sec.cors.misconfig",
+      "description": "CORS misconfiguration test",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 157,
+      "operation": "sec.csp.bypass",
+      "description": "CSP bypass test",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 158,
+      "operation": "sec.headers.check",
+      "description": "Security headers audit",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 159,
+      "operation": "sec.cookies.analyze",
+      "description": "Cookie security analysis",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 160,
+      "operation": "sec.dependency.scan",
+      "description": "Dependency vulnerability (Snyk)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 161,
+      "operation": "sec.secret.scan",
+      "description": "Secret detection (TruffleHog)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 162,
+      "operation": "sec.container.scan",
+      "description": "Container security (Trivy)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 163,
+      "operation": "sec.infrastructure.scan",
+      "description": "Infrastructure security (tfsec)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 164,
+      "operation": "sec.compliance.check",
+      "description": "Compliance check (PCI, HIPAA, SOC2)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      }
+    },
+    {
+      "number": 165,
+      "operation": "crash.dump.analyze",
+      "description": "Analyze crash dump (.dmp, core)",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 166,
+      "operation": "crash.stack.unwind",
+      "description": "Stack unwinding",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 167,
+      "operation": "crash.frame.analyze",
+      "description": "Frame analysis",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 168,
+      "operation": "memory.leak.detect",
+      "description": "Memory leak detection",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 169,
+      "operation": "memory.corruption.find",
+      "description": "Memory corruption (buffer overflow, UAF)",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 170,
+      "operation": "memory.heap.inspect",
+      "description": "Heap inspection",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 171,
+      "operation": "memory.stack.inspect",
+      "description": "Stack inspection",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 172,
+      "operation": "asan.report.analyze",
+      "description": "AddressSanitizer report",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 173,
+      "operation": "tsan.report.analyze",
+      "description": "ThreadSanitizer report",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 174,
+      "operation": "ubsan.report.analyze",
+      "description": "UBSan report",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      }
+    },
+    {
+      "number": 175,
+      "operation": "evidence.log.capture",
+      "description": "Capture application log",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 176,
+      "operation": "evidence.stack.trace",
+      "description": "Capture stack trace",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 177,
+      "operation": "evidence.memory.dump",
+      "description": "Memory dump (core dump)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 178,
+      "operation": "evidence.network.capture",
+      "description": "Network capture (pcap)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 179,
+      "operation": "evidence.disk.snapshot",
+      "description": "Disk snapshot",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 180,
+      "operation": "evidence.process.snapshot",
+      "description": "Process state snapshot",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 181,
+      "operation": "evidence.config.capture",
+      "description": "Config state capture",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 182,
+      "operation": "evidence.env.capture",
+      "description": "Environment variables capture",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 183,
+      "operation": "evidence.timeline.build",
+      "description": "Build event timeline",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 184,
+      "operation": "evidence.hash.compute",
+      "description": "Hash files (integrity)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 185,
+      "operation": "evidence.chain.custody",
+      "description": "Chain of custody (legal-grade)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 186,
+      "operation": "evidence.store.secure",
+      "description": "Store evidence securely (immutable)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      }
+    },
+    {
+      "number": 187,
+      "operation": "rca.five.why",
+      "description": "5-Why analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 188,
+      "operation": "rca.fault.tree",
+      "description": "Fault tree analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 189,
+      "operation": "rca.fishbone",
+      "description": "Fishbone (Ishikawa) diagram",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 190,
+      "operation": "rca.cause.effect",
+      "description": "Cause-effect mapping",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 191,
+      "operation": "rca.symptom.vs.root",
+      "description": "Distinguish symptom vs root cause",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 192,
+      "operation": "rca.contributing.factor",
+      "description": "Identify contributing factors",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 193,
+      "operation": "rca.timing.analyze",
+      "description": "Timing analysis (when did it start)",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 194,
+      "operation": "rca.change.analyze",
+      "description": "What changed recently (git diff)",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 195,
+      "operation": "rca.environment.analyze",
+      "description": "Environment factor analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 196,
+      "operation": "rca.human.factor",
+      "description": "Human error analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 197,
+      "operation": "rca.upstream.dependency",
+      "description": "Upstream dependency check",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 198,
+      "operation": "rca.report.generate",
+      "description": "Generate RCA report",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      }
+    },
+    {
+      "number": 199,
+      "operation": "solution.options.generate",
+      "description": "Generate 2-3 fix options",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 200,
+      "operation": "solution.risk.assess",
+      "description": "Risk assessment per option",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 201,
+      "operation": "solution.blast.radius",
+      "description": "Blast radius analysis",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 202,
+      "operation": "solution.cost.benefit",
+      "description": "Cost-benefit analysis",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 203,
+      "operation": "solution.recommend.safest",
+      "description": "Recommend safest option",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 204,
+      "operation": "solution.alternative.if.fail",
+      "description": "Backup plan if fix fails",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 205,
+      "operation": "solution.escalate.if.uncertain",
+      "description": "Escalate if uncertain",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 206,
+      "operation": "solution.peer.review",
+      "description": "Request peer review (human)",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 207,
+      "operation": "solution.document.rationale",
+      "description": "Document decision rationale",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 208,
+      "operation": "solution.verify.evidence",
+      "description": "Verify solution has evidence",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      }
+    },
+    {
+      "number": 209,
+      "operation": "fix.backup.create",
+      "description": "Backup target (snapshot/git)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 210,
+      "operation": "fix.staging.apply",
+      "description": "Apply di STAGING (never prod langsung)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 211,
+      "operation": "fix.test.regression",
+      "description": "Run regression test",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 212,
+      "operation": "fix.test.unit",
+      "description": "Run unit test",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 213,
+      "operation": "fix.test.integration",
+      "description": "Run integration test",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 214,
+      "operation": "fix.verify.solution",
+      "description": "Verify fix solves problem",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 215,
+      "operation": "fix.verify.no.regression",
+      "description": "Verify no new bug introduced",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 216,
+      "operation": "fix.rollback.plan",
+      "description": "Prepare rollback plan",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 217,
+      "operation": "fix.production.deploy",
+      "description": "Deploy ke production (after staging pass)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 218,
+      "operation": "fix.monitor.post",
+      "description": "Monitor post-deploy (24h)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 219,
+      "operation": "fix.alert.anomaly",
+      "description": "Alert if anomaly post-deploy",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 220,
+      "operation": "fix.rollback.execute",
+      "description": "Execute rollback if needed",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      }
+    },
+    {
+      "number": 221,
+      "operation": "verify.reproduce.original",
+      "description": "Reproduce original bug (should fail now)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 222,
+      "operation": "verify.reproduce.fixed",
+      "description": "Reproduce with fix (should pass now)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 223,
+      "operation": "verify.edge.case",
+      "description": "Test edge cases",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 224,
+      "operation": "verify.load.test",
+      "description": "Load test (no perf regression)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 225,
+      "operation": "verify.security.test",
+      "description": "Security test (no new vuln)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 226,
+      "operation": "verify.code.review",
+      "description": "Code review by peer/human",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 227,
+      "operation": "verify.user.acceptance",
+      "description": "User acceptance test (UAT)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 228,
+      "operation": "verify.smoke.test",
+      "description": "Smoke test production",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 229,
+      "operation": "verify.canary.deploy",
+      "description": "Canary deploy (5% traffic dulu)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 230,
+      "operation": "verify.full.pass",
+      "description": "Full verification pass",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      }
+    },
+    {
+      "number": 231,
+      "operation": "audit.log.action",
+      "description": "Log semua aksi (append-only)",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 232,
+      "operation": "audit.log.decision",
+      "description": "Log semua decision + rationale",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 233,
+      "operation": "audit.log.evidence",
+      "description": "Log evidence reference",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 234,
+      "operation": "audit.log.change",
+      "description": "Log semua perubahan",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 235,
+      "operation": "audit.log.access",
+      "description": "Log semua akses ke system",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 236,
+      "operation": "audit.report.generate",
+      "description": "Generate audit report (PDF)",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 237,
+      "operation": "audit.report.executive",
+      "description": "Executive summary",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 238,
+      "operation": "audit.report.technical",
+      "description": "Technical detail report",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 239,
+      "operation": "audit.report.lessons",
+      "description": "Lessons learned report",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 240,
+      "operation": "audit.timeline.reconstruct",
+      "description": "Reconstruct full timeline",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      }
+    },
+    {
+      "number": 241,
+      "operation": "escalate.confidence.low",
+      "description": "Escalate: confidence < 80%",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 242,
+      "operation": "escalate.critical.severity",
+      "description": "Escalate: critical severity",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 243,
+      "operation": "escalate.production.risk",
+      "description": "Escalate: risk ke production",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 244,
+      "operation": "escalate.complex.root.cause",
+      "description": "Escalate: root cause kompleks",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 245,
+      "operation": "escalate.no.evidence",
+      "description": "Escalate: tidak ada cukup evidence",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 246,
+      "operation": "escalate.context.transfer",
+      "description": "Transfer context ke human",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 247,
+      "operation": "escalate.summary.generate",
+      "description": "Generate summary untuk human",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 248,
+      "operation": "escalate.wait.human",
+      "description": "Wait for human confirmation",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      }
+    },
+    {
+      "number": 249,
+      "operation": "kb.bug.pattern.search",
+      "description": "Search bug pattern (similar issue)",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 250,
+      "operation": "kb.solution.search",
+      "description": "Search solution database",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 251,
+      "operation": "kb.postmortem.search",
+      "description": "Search postmortem reports",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 252,
+      "operation": "kb.runbook.search",
+      "description": "Search runbook (SOP)",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 253,
+      "operation": "kb.convention.search",
+      "description": "Search coding convention",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 254,
+      "operation": "kb.history.search",
+      "description": "Search historical fix",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 255,
+      "operation": "kb.learn.from.fix",
+      "description": "Learn from fix (update KB)",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 256,
+      "operation": "kb.share.organization",
+      "description": "Share knowledge ke org",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      }
+    },
+    {
+      "number": 257,
+      "operation": "monitor.error.rate",
+      "description": "Monitor error rate (Sentry)",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 258,
+      "operation": "monitor.anomaly.detect",
+      "description": "Anomaly detection",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 259,
+      "operation": "monitor.threshold.alert",
+      "description": "Threshold-based alert",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 260,
+      "operation": "monitor.trend.analyze",
+      "description": "Trend analysis",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 261,
+      "operation": "monitor.health.check",
+      "description": "Health check endpoint",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 262,
+      "operation": "monitor.uptime.track",
+      "description": "Uptime tracking",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 263,
+      "operation": "monitor.slo.track",
+      "description": "SLO tracking",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 264,
+      "operation": "monitor.incident.auto",
+      "description": "Auto-incident declaration",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      }
+    },
+    {
+      "number": 265,
+      "operation": "cicd.scan.on.commit",
+      "description": "Scan on every git commit",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 266,
+      "operation": "cicd.scan.on.pr",
+      "description": "Scan on pull request",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 267,
+      "operation": "cicd.scan.on.deploy",
+      "description": "Scan before deploy",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 268,
+      "operation": "cicd.scan.scheduled",
+      "description": "Scheduled scan (daily, weekly)",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 269,
+      "operation": "cicd.block.if.critical",
+      "description": "Block deploy kalau ada critical bug",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 270,
+      "operation": "cicd.report.to.pr",
+      "description": "Report hasil scan ke PR comment",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 271,
+      "operation": "cicd.badge.generate",
+      "description": "Generate quality badge",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 272,
+      "operation": "cicd.notify.slack",
+      "description": "Notify ke Slack kalau ada bug",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      }
+    },
+    {
+      "number": 273,
+      "operation": "lang.javascript.scan",
+      "description": "Scan JavaScript/TypeScript",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 274,
+      "operation": "lang.python.scan",
+      "description": "Scan Python",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 275,
+      "operation": "lang.java.scan",
+      "description": "Scan Java",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 276,
+      "operation": "lang.csharp.scan",
+      "description": "Scan C#",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 277,
+      "operation": "lang.go.scan",
+      "description": "Scan Go",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 278,
+      "operation": "lang.rust.scan",
+      "description": "Scan Rust",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 279,
+      "operation": "lang.php.scan",
+      "description": "Scan PHP",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 280,
+      "operation": "lang.ruby.scan",
+      "description": "Scan Ruby",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 281,
+      "operation": "lang.swift.scan",
+      "description": "Scan Swift",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 282,
+      "operation": "lang.kotlin.scan",
+      "description": "Scan Kotlin",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      }
+    },
+    {
+      "number": 283,
+      "operation": "ethics.authorized.scan",
+      "description": "Ensure scan hanya ke authorized target",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 284,
+      "operation": "ethics.scope.adherence",
+      "description": "Adherence ke scope (no scope creep)",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 285,
+      "operation": "ethics.data.privacy",
+      "description": "Privacy data target",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 286,
+      "operation": "ethics.responsible.disclosure",
+      "description": "Responsible disclosure (kalau find vuln)",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 287,
+      "operation": "compliance.gdpr",
+      "description": "GDPR compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 288,
+      "operation": "compliance.pci.dss",
+      "description": "PCI-DSS compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 289,
+      "operation": "compliance.hipaa",
+      "description": "HIPAA compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    },
+    {
+      "number": 290,
+      "operation": "compliance.soc2",
+      "description": "SOC 2 compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      }
+    }
+  ]
+}

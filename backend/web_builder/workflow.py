@@ -37,6 +37,7 @@ async def build(rt,args,files,j,actor):
  if stack=='auto':stack=select_stack(spec)
 
  values={'text':spec,'spec':spec,'name':name,'project':name,'project_name':name,'framework':stack,'stack':stack,'description':spec}
+ if stack=='nextjs':values['template']='harmonika-fullstack'
  requirements=await asyncio.to_thread(planning.dispatch,'spec.parse.requirements',match_args(planning.schema('spec.parse.requirements'),values))
  scaffold=await asyncio.to_thread(generation.dispatch,'scaffold.'+stack,match_args(generation.schema('scaffold.'+stack),values))
  require(scaffold.get('status')=='completed' and scaffold.get('writes'),'scaffold_failed',422)

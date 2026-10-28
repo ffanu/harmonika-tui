@@ -199,6 +199,9 @@ def preflight(directory,manifest):
     # Launch the real MCP protocol without invoking providers or user sessions.
     check=subprocess.run([NODE,str(directory/'tools/protocol-check.cjs'),str(directory/'tools/mcp-server.cjs')],capture_output=True,text=True,timeout=20)
     if check.returncode:raise ValueError('mcp_preflight_failed')
+    if (directory/'tools/ssh-mcp.cjs').is_file():
+        check=subprocess.run([NODE,str(directory/'tools/ssh-protocol-check.cjs'),str(directory/'tools/ssh-mcp.cjs')],capture_output=True,text=True,timeout=20)
+        if check.returncode:raise ValueError('ssh_mcp_preflight_failed')
 
 @contextmanager
 def installation_lock(root):
@@ -302,9 +305,11 @@ def doctor(root=ROOT):
     document_features=json.loads(documents.stdout)
     browser=subprocess.run([NODE,'-e',"const fs=require('fs'),p=require(process.argv[1]);process.stdout.write(JSON.stringify({chromium:fs.existsSync(p.chromium.executablePath())}));",str(root/'browser-runtime/node_modules/playwright')],capture_output=True,text=True,timeout=10)
     browser_features=json.loads(browser.stdout) if browser.returncode==0 else {}
+    ssh_runtime=root/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+    ssh_features={'configured':'harmonika-ssh' in config.get('mcp',{}),'runtime_available':ssh_runtime.is_file(),'platform_supported':os.name=='posix','tools':7 if (directory/'tools/remote_connector.py').is_file() else (4 if (directory/'tools/ssh-mcp.cjs').is_file() else 0)}
     return {'ok':True,'release':manifest['release'],'upstream':'0.98.1','binary_verified':True,
         'runtime_verified':True,'mcp_protocol':'ok','skills':len(list((directory/'skills').glob('*/SKILL.md'))),
-        'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,
+        'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,'ssh':ssh_features,
         'automatic_update':False,'active_sessions_untouched':True}
 
 HARMONIKA_THEMES = {
@@ -735,6 +740,9 @@ def run_exec(command, env=None):
 
 def main():
     args=sys.argv[1:]
+    workbench_enabled=os.environ.get('HARMONIKA_WORKBENCH','1')!='0'
+    if '--no-workbench' in args:
+        args=[arg for arg in args if arg!='--no-workbench'];workbench_enabled=False
     ensure_harmonika_downloads(os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     if args==['doctor']:result=doctor()
     elif args in (['status'],['status','--json']):
@@ -762,6 +770,12 @@ def main():
         command=[sys.executable,str(directory/'tools'/script),*args[1:]]
         run_exec(command)
         return
+    elif args and args[0]=='ssh':
+        directory,manifest=active();verify_files(directory,manifest)
+        python=ROOT/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+        if not python.is_file():raise ValueError('ssh_runtime_unavailable')
+        run_exec([str(python),'-I',str(directory/'tools/ssh_connector.py'),*args[1:]])
+        return
     elif args and args[0]=='state':
         directory,manifest=active();verify_files(directory,manifest)
         command=[sys.executable,str(directory/'tools/state_store.py'),*args[1:]]
@@ -776,6 +790,10 @@ def main():
         directory,manifest=active();verify_files(directory,manifest)
         command=[sys.executable,'-I',str(directory/'tools/mobile_cli.py'),*args[1:]]
         run_exec(command)
+        return
+    elif args and args[0]=='erp':
+        directory,manifest=active();verify_files(directory,manifest)
+        run_exec([sys.executable,'-I',str(directory/'tools/erp_cli.py'),*args[1:]])
         return
     elif args and args[0]=='catalog':
         directory,manifest=active();verify_files(directory,manifest)
@@ -870,6 +888,11 @@ def main():
                 except Exception:pass
             if h_cfg_path.is_file():
                 cfg_obj=json.loads(h_cfg_path.read_text())
+                workbench_module=directory/'tools/workbench.py'
+                if workbench_module.is_file():
+                    spec=importlib.util.spec_from_file_location('harmonika_workbench_preferences',workbench_module)
+                    wb=importlib.util.module_from_spec(spec);spec.loader.exec_module(wb)
+                    cfg_obj=wb.migrate_options(cfg_obj)
                 t_cand2=cfg_obj.get('options',{}).get('tui',{}).get('active_theme','')
                 if active_theme=='harmonika-dark' and t_cand2 in HARMONIKA_THEMES:
                     active_theme=t_cand2
@@ -910,6 +933,12 @@ def main():
         if os.name == 'nt':
             res = subprocess.run([str(bpath),*args], env=env)
             sys.exit(res.returncode)
+        workbench=directory/'tools/workbench.py'
+        cli_only=bool(args and args[0] in ('run','--help','-h','--version','version','dirs','logs','schema','completion'))
+        if workbench_enabled and not cli_only and sys.stdin.isatty() and sys.stdout.isatty() and workbench.is_file():
+            command=[sys.executable,'-I',str(workbench),'start','--binary',str(bpath),
+                     '--config',cfg_dir,'--data',data_dir,'--',*args]
+            os.execve(sys.executable,command,env)
         os.execve(str(bpath),['harmonika',*args],env)
         return
     print(json.dumps(result,ensure_ascii=False,indent=2))

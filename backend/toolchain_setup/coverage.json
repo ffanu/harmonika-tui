@@ -1,0 +1,486 @@
+{
+  "schema_version": 1,
+  "source_sha256": "c3ff8dfa55222ffce55b229b58008ca6f285b897df073a441d8458c55dc54219",
+  "parts": [
+    {
+      "part": 1,
+      "title": "ARSITEKTUR TUI \u2194 BACKEND",
+      "decision": "existing_decoupled_dual_pc_architecture"
+    },
+    {
+      "part": 2,
+      "title": "TUI FRAMEWORK (TERMINAL FRONTEND)",
+      "decision": "existing_branded_tui_preserved"
+    },
+    {
+      "part": 3,
+      "title": "BACKEND RUNTIME & FRAMEWORK",
+      "decision": "existing_gateway_plus_isolated_python_runtime"
+    },
+    {
+      "part": 4,
+      "title": "AI/ML LIBRARIES",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "part": 5,
+      "title": "DATABASE & CACHE",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "part": 6,
+      "title": "FILE PROCESSING LIBRARIES",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "part": 7,
+      "title": "NETWORK & SSH TOOLS",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "part": 8,
+      "title": "BROWSER AUTOMATION TOOLS",
+      "decision": "browser_capture_hardware_qualification_required"
+    },
+    {
+      "part": 9,
+      "title": "MULTIMEDIA PROCESSING",
+      "decision": "existing_windows_rtx_workers_no_gpu_on_linux"
+    },
+    {
+      "part": 10,
+      "title": "MONITORING & LOGGING",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "part": 11,
+      "title": "DEVOPS & DEPLOYMENT",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "part": 12,
+      "title": "SECURITY TOOLS",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "part": 13,
+      "title": "INTEGRATION LIBRARIES",
+      "decision": "isolated_connector_libraries_credentials_required"
+    },
+    {
+      "part": 14,
+      "title": "ONE-CLICK INSTALL SCRIPT",
+      "decision": "replaced_by_isolated_hash_locked_installer"
+    },
+    {
+      "part": 15,
+      "title": "VERIFICATION CHECKLIST",
+      "decision": "real_fixture_verification"
+    },
+    {
+      "part": 16,
+      "title": "DOCKER COMPOSE ALL-IN-ONE",
+      "decision": "explicit_loopback_infrastructure_profile"
+    },
+    {
+      "part": 17,
+      "title": "TUI ARCHITECTURE DETAIL",
+      "decision": "existing_internal_interface_no_tui_rewrite"
+    },
+    {
+      "part": 18,
+      "title": "HARDWARE REQUIREMENTS",
+      "decision": "dual_pc_resource_limits"
+    },
+    {
+      "part": 19,
+      "title": "SUMMARY - WAJIB INSTALL",
+      "decision": "capability_readiness_not_installation_only"
+    }
+  ],
+  "sections": [
+    {
+      "id": "2.1",
+      "title": "RUST (RECOMMENDED - Performance Terbaik)",
+      "decision": "existing_branded_tui_preserved"
+    },
+    {
+      "id": "2.2",
+      "title": "GO (ALTERNATIF - Cepat & Simple)",
+      "decision": "existing_branded_tui_preserved"
+    },
+    {
+      "id": "2.3",
+      "title": "TYPESCRIPT (Node.js-based)",
+      "decision": "existing_branded_tui_preserved"
+    },
+    {
+      "id": "2.4",
+      "title": "PYTHON (Quick Prototyping)",
+      "decision": "existing_branded_tui_preserved"
+    },
+    {
+      "id": "3.1",
+      "title": "PYTHON BACKEND (RECOMMENDED untuk AI/ML)",
+      "decision": "existing_gateway_plus_isolated_python_runtime"
+    },
+    {
+      "id": "3.2",
+      "title": "NODE.JS BACKEND (ALTERNATIF)",
+      "decision": "existing_gateway_plus_isolated_python_runtime"
+    },
+    {
+      "id": "3.3",
+      "title": "GO BACKEND (HIGH PERFORMANCE)",
+      "decision": "existing_gateway_plus_isolated_python_runtime"
+    },
+    {
+      "id": "3.4",
+      "title": "RUST BACKEND (MAX PERFORMANCE)",
+      "decision": "existing_gateway_plus_isolated_python_runtime"
+    },
+    {
+      "id": "4.1",
+      "title": "LLM (LARGE LANGUAGE MODEL)",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.2",
+      "title": "VLM (VISION LANGUAGE MODEL)",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.3",
+      "title": "ASR (AUTOMATIC SPEECH RECOGNITION)",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.4",
+      "title": "TTS (TEXT TO SPEECH)",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.5",
+      "title": "OCR (OPTICAL CHARACTER RECOGNITION)",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.6",
+      "title": "EMBEDDING MODEL",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.7",
+      "title": "IMAGE GENERATION",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "4.8",
+      "title": "ML UTILITIES",
+      "decision": "cpu_libraries_and_existing_mentor_rtx_adapters"
+    },
+    {
+      "id": "5.1",
+      "title": "POSTGRESQL (MAIN DATABASE)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "5.2",
+      "title": "REDIS (CACHE & SESSION)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "5.3",
+      "title": "VECTOR DATABASE (RAG)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "5.4",
+      "title": "ELASTICSEARCH (SEARCH & LOGS)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "5.5",
+      "title": "CLICKHOUSE (ANALYTICS)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "5.6",
+      "title": "SQLITE (LIGHTWEIGHT, EMBEDDED)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "5.7",
+      "title": "MONGODB (DOCUMENT DB - OPSIONAL)",
+      "decision": "existing_sqlite_and_explicit_infrastructure_profile"
+    },
+    {
+      "id": "6.1",
+      "title": "DOCUMENT PARSER",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "id": "6.2",
+      "title": "IMAGE PROCESSING",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "id": "6.3",
+      "title": "VIDEO PROCESSING",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "id": "6.4",
+      "title": "AUDIO PROCESSING",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "id": "6.5",
+      "title": "ARCHIVE HANDLING",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "id": "6.6",
+      "title": "EMAIL PARSING",
+      "decision": "isolated_document_and_media_libraries"
+    },
+    {
+      "id": "7.1",
+      "title": "SSH CLIENT & LIBRARY",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "id": "7.2",
+      "title": "NETWORK SCANNING",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "id": "7.3",
+      "title": "HTTP CLIENT",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "id": "7.4",
+      "title": "WEBSOCKET",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "id": "7.5",
+      "title": "VPN & TUNNEL",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "id": "7.6",
+      "title": "DNS TOOLS",
+      "decision": "existing_registered_network_connectors"
+    },
+    {
+      "id": "8.1",
+      "title": "PLAYWRIGHT (RECOMMENDED)",
+      "decision": "browser_capture_hardware_qualification_required"
+    },
+    {
+      "id": "8.2",
+      "title": "SELENIUM (ALTERNATIF)",
+      "decision": "browser_capture_hardware_qualification_required"
+    },
+    {
+      "id": "8.3",
+      "title": "PUPPETEER (NODE.JS)",
+      "decision": "browser_capture_hardware_qualification_required"
+    },
+    {
+      "id": "8.4",
+      "title": "BEAUTIFULSOUP (HTML PARSING)",
+      "decision": "browser_capture_hardware_qualification_required"
+    },
+    {
+      "id": "8.5",
+      "title": "STEALTH BROWSER",
+      "decision": "browser_capture_hardware_qualification_required"
+    },
+    {
+      "id": "9.1",
+      "title": "IMAGE GENERATION (Stable Diffusion)",
+      "decision": "existing_windows_rtx_workers_no_gpu_on_linux"
+    },
+    {
+      "id": "9.2",
+      "title": "VIDEO GENERATION",
+      "decision": "existing_windows_rtx_workers_no_gpu_on_linux"
+    },
+    {
+      "id": "9.3",
+      "title": "AUDIO GENERATION",
+      "decision": "existing_windows_rtx_workers_no_gpu_on_linux"
+    },
+    {
+      "id": "9.4",
+      "title": "VIDEO COMPOSITION",
+      "decision": "existing_windows_rtx_workers_no_gpu_on_linux"
+    },
+    {
+      "id": "10.1",
+      "title": "LOGGING",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "10.2",
+      "title": "METRICS (PROMETHEUS)",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "10.3",
+      "title": "GRAFANA (DASHBOARD)",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "10.4",
+      "title": "LOKI (LOG AGGREGATION)",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "10.5",
+      "title": "SENTRY (ERROR TRACKING)",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "10.6",
+      "title": "JAEGER (DISTRIBUTED TRACING)",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "10.7",
+      "title": "HEALTH CHECK",
+      "decision": "metadata_only_observability_no_customer_logs"
+    },
+    {
+      "id": "11.1",
+      "title": "DOCKER",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "id": "11.2",
+      "title": "KUBERNETES (OPSIONAL, UNTUK SCALE)",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "id": "11.3",
+      "title": "CI/CD",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "id": "11.4",
+      "title": "NGINX (REVERSE PROXY)",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "id": "11.5",
+      "title": "CERTBOT (SSL LET'S ENCRYPT)",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "id": "11.6",
+      "title": "PROCESS MANAGER",
+      "decision": "existing_docker_systemd_tls_no_host_replacement"
+    },
+    {
+      "id": "12.1",
+      "title": "FIREWALL",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "id": "12.2",
+      "title": "SECURITY SCANNER",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "id": "12.3",
+      "title": "PENTEST TOOLS (AUTHORIZED ONLY)",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "id": "12.4",
+      "title": "MALWARE ANALYSIS",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "id": "12.5",
+      "title": "VPN SERVER",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "id": "12.6",
+      "title": "ENCRYPTION",
+      "decision": "defensive_only_existing_policy_preserved"
+    },
+    {
+      "id": "13.1",
+      "title": "MESSAGE QUEUE",
+      "decision": "isolated_connector_libraries_credentials_required"
+    },
+    {
+      "id": "13.2",
+      "title": "WORKFLOW ENGINE",
+      "decision": "isolated_connector_libraries_credentials_required"
+    },
+    {
+      "id": "13.3",
+      "title": "EXTERNAL CONNECTORS",
+      "decision": "isolated_connector_libraries_credentials_required"
+    },
+    {
+      "id": "13.4",
+      "title": "STORAGE",
+      "decision": "isolated_connector_libraries_credentials_required"
+    },
+    {
+      "id": "17.1",
+      "title": "PROJECT STRUCTURE",
+      "decision": "existing_internal_interface_no_tui_rewrite"
+    },
+    {
+      "id": "17.2",
+      "title": "CARGO.TOML",
+      "decision": "existing_internal_interface_no_tui_rewrite"
+    },
+    {
+      "id": "17.3",
+      "title": "KONEKSI TUI \u2194 BACKEND",
+      "decision": "existing_internal_interface_no_tui_rewrite"
+    },
+    {
+      "id": "18.1",
+      "title": "MINIMUM (DEVELOPMENT)",
+      "decision": "dual_pc_resource_limits"
+    },
+    {
+      "id": "18.2",
+      "title": "RECOMMENDED (PRODUCTION SMALL)",
+      "decision": "dual_pc_resource_limits"
+    },
+    {
+      "id": "18.3",
+      "title": "PRODUCTION ENTERPRISE",
+      "decision": "dual_pc_resource_limits"
+    },
+    {
+      "id": "18.4",
+      "title": "CLOUD EQUIVALENT",
+      "decision": "dual_pc_resource_limits"
+    }
+  ],
+  "guide_commands_executed": false,
+  "corrections": {
+    "asyncio": "Python stdlib; no pip installation",
+    "zipfile36": "Python stdlib zipfile",
+    "PyPDF2": "pypdf maintained successor",
+    "google-generativeai": "google-genai current SDK",
+    "id_core_news_sm": "no official Indonesian pretrained spaCy pipeline",
+    "aioredis": "redis.asyncio",
+    "torch_vllm": "GPU models stay in registered external worker; not installed in CPU gateway",
+    "firewall_script": "not applied; would conflict with custom SSH/VPN ports",
+    "default_passwords": "not used",
+    "TUI_frameworks": "alternatives; custom binary preserved"
+  }
+}

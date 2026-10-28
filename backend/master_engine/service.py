@@ -4,6 +4,11 @@ from collections import deque,OrderedDict
 from pathlib import Path
 from aiohttp import web
 from .index import descriptors,summary,restricted
+# RequestKey is unavailable in the installed gateway aiohttp release. Request
+# state supports string keys on all supported versions (these are not AppKeys).
+MECHANICAL_SKILL='mechanical_skill'
+PLUGIN_AUDITED='plugin_failure_audited'
+
 class RequestError(ValueError):
  def __init__(self,code,status=400):self.code=code;self.status=status
 
@@ -26,8 +31,11 @@ def check_json(value):
   elif type(v) not in (str,int,float,bool,type(None)):raise RequestError('invalid_json')
   elif type(v) is float and not math.isfinite(v):raise RequestError('nonfinite_json')
 
-def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True,discovery=None,discovery_poll_seconds=5):
+def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True,discovery=None,discovery_poll_seconds=5,failure_log=None,graphics_probe=None,shared_bindings=None):
  if type(secret) is not str or len(secret)<32:raise ValueError('service_secret_required')
+ if shared_bindings is None:
+  from .shared_bindings import Bindings
+  shared_bindings=Bindings()
  if skills is None:
   from .analyzers import dispatch
   from .adapters import descriptors as analyzer_descriptors
@@ -49,15 +57,15 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
   capability.setdefault('related_domains',{})['unified']={'capabilities_endpoint':'/v1/unified/capabilities','skills_endpoint':'/v1/unified/skills','catalog_size':70}
  slots=asyncio.Semaphore(2);active=set();rates=OrderedDict();log=logging.getLogger('harmonika.master.audit')
  def live_rows():
-  return view + (discovery.descriptors() if discovery else [])
+  return shared_bindings.rows(view + (discovery.descriptors() if discovery else []))
  def live_capability():
-  if discovery is None:return capability
   current=json.loads(json.dumps(capability));rows=live_rows()
   current['catalog_size']=len(rows)
-  current['readiness']['available']=sum(x['status']=='available' for x in rows)
-  current['features']['runtime_discovery']=True
-  current['features']['hot_skill_registration']=True
-  current['discovery']=discovery.summary()
+  current['readiness']={status:sum(x['status']==status for x in rows) for status in ['available','context_required','local_only','unavailable','restricted','domain_ambiguous']}
+  current['features']['shared_seo_backend']=shared_bindings.config().get('seo_enabled') is True
+  current['features']['runtime_discovery']=discovery is not None
+  current['features']['hot_skill_registration']=discovery is not None
+  current['discovery']=discovery.summary() if discovery else {'status':'disabled'}
   return current
  if discovery is not None:
   async def lifecycle(app):
@@ -88,9 +96,13 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
   except web.HTTPException as e:res=web.json_response({'error':{'code':'request_too_large' if e.status==413 else 'not_found'}},status=e.status)
   except (ValueError,TypeError,KeyError,UnicodeError,RecursionError):res=web.json_response({'error':{'code':'invalid_input'}},status=400)
   except Exception:res=web.json_response({'error':{'code':'analysis_unavailable'}},status=503)
+  if req.method=='POST' and res.status>=400 and failure_log is not None and req.get(MECHANICAL_SKILL) and not req.get(PLUGIN_AUDITED):
+   error_code='skill_timeout' if res.status==504 else 'invalid_input' if res.status==400 else 'invalid_output' if res.status in (413,422) else 'skill_exception'
+   try:await asyncio.to_thread(failure_log.record,req[MECHANICAL_SKILL],error_code,(time.monotonic()-started)*1000)
+   except Exception:pass
   res.headers['Cache-Control']='no-store';res.headers['X-Content-Type-Options']='nosniff'
   # Deliberately excludes prompt, result, URLs, query strings, files, headers and secrets.
-  if req.method=='POST':log.info(json.dumps({'actor':hmac.new(secret.encode(),actor.encode(),hashlib.sha256).hexdigest()[:20],'status':res.status,'elapsed_ms':round((time.monotonic()-started)*1000)}))
+  if req.method=='POST':log.info(json.dumps({'status':res.status,'elapsed_ms':round((time.monotonic()-started)*1000)}))
   return res
  app=web.Application(middlewares=[auth],client_max_size=1048576)
  if discovery is not None:app.cleanup_ctx.append(lifecycle)
@@ -113,7 +125,14 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
   return web.json_response({'skill':row})
  async def discovery_status(req):
   if req.query:raise RequestError('unsupported_query')
-  return web.json_response(discovery.summary() if discovery else {'status':'disabled','registered':0})
+  from .diagnostics import errors_view
+  value=discovery.summary() if discovery else {'status':'disabled','registered':0}
+  try:errors=await asyncio.to_thread(failure_log.summary) if failure_log is not None else None
+  except Exception:errors=None
+  try:media=await graphics_probe() if graphics_probe is not None else {}
+  except Exception:media={}
+  value['diagnostics']={'graphics':media.get('graphics',{'status':'unavailable'}),'registry_errors':errors_view(errors),'graphics_errors':errors_view(media.get('errors'))}
+  return web.json_response(value)
  async def invoke(req):
   if req.query:raise RequestError('unsupported_query')
   raw=await req.read();body=json.loads(raw,object_pairs_hook=unique_pairs,parse_constant=lambda _: (_ for _ in ()).throw(ValueError('nonfinite')));check_json(body)
@@ -130,14 +149,16 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
      if getattr(error,'code','')=='E_SCAN_BUSY':raise RequestError('discovery_scan_busy',503) from None
      raise RequestError('discovery_unavailable',503) from None
   discovered=not mobile and discovery is not None and id in {r['id'] for r in discovery.descriptors()}
+  if discovered or id in skills or (mobile and id in mobile_by_id):req[MECHANICAL_SKILL]=id
   if mobile:
    row=mobile_by_id.get(id)
    if row is None:raise RequestError('unknown_skill',404)
    if row['status']!='available':raise RequestError(row['reason'],503)
    if len(raw)>65536:raise RequestError('input_too_large',413)
   if not mobile and restricted(id):raise RequestError('restricted_operation',403)
-  if not mobile and not discovered and id not in skills:
-   known=by_id.get(id)
+  shared=not mobile and shared_bindings.supports(id)
+  if not mobile and not discovered and id not in skills and not shared:
+   known={x['id']:x for x in live_rows()}.get(id)
    if known and known['status']=='domain_ambiguous':raise RequestError('explicit_engine_context_required',409)
    raise RequestError('engine_context_required' if known and known['status'] in ('context_required','local_only') else 'implementation_missing' if known else 'unknown_skill',409 if known and known['status'] in ('context_required','local_only') else 501 if known else 404)
   actor=req.headers['X-Harmonika-Principal'];now=time.monotonic()
@@ -168,6 +189,7 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
       if row is None:raise RequestError('skill_changed',409)
       try:validate_schema(body['input'],audit_schema(row['input_schema']))
       except SchemaError:raise RequestError('invalid_skill_input',400) from None
+      req[PLUGIN_AUDITED]=True
       try:return await discovery.execute(id,body['input'])
       except asyncio.CancelledError:raise
       except Exception as error:
@@ -175,6 +197,7 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
        mapped={'E_SCAN_BUSY':('discovery_scan_busy',503),'E_TIMEOUT':('skill_timeout',504),'E_PAYLOAD':('invalid_skill_input',400),'E_NOT_REGISTERED':('skill_changed',409),'E_DATABASE':('discovery_audit_unavailable',503)}
        message,status=mapped.get(code,('skill_execution_failed',422))
        raise RequestError(message,status) from None
+     if shared:return await asyncio.to_thread(shared_bindings.invoke,actor,id,body['input'])
      if mobile:
       try:from mobile_engine.registry import dispatch as mobile_dispatch
       except ModuleNotFoundError:
@@ -187,7 +210,7 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
    finally:active.discard(actor)
   task=asyncio.create_task(perform())
   task.add_done_callback(lambda t:t.exception() if not t.cancelled() else None)
-  try:result=await asyncio.wait_for(asyncio.shield(task),40 if id=='workflow.browser' else 15)
+  try:result=await asyncio.wait_for(asyncio.shield(task),20 if shared else 40 if id=='workflow.browser' else 15)
   except asyncio.TimeoutError:
    # The bounded worker keeps its slot until it really exits; timeout is not cancellation.
    task.add_done_callback(lambda t:t.exception() if not t.cancelled() else None)
@@ -195,7 +218,7 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
   except RequestError:raise
   except ValueError:raise RequestError('invalid_input') from None
   if type(result) is not dict:raise RequestError('invalid_worker_result',422)
-  if not discovered and (result.get('status')!='completed' or (not mobile and result.get('analysis_performed') is not True)):
+  if not shared and not discovered and (result.get('status')!='completed' or (not mobile and result.get('analysis_performed') is not True)):
    raise RequestError('invalid_analysis_input' if result.get('status')=='rejected' else 'analysis_failed',400 if result.get('status')=='rejected' else 422)
   if discovered:result={'status':'completed','skill_id':id,'result':result}
   encoded=json.dumps(result,ensure_ascii=False,allow_nan=False).encode()
@@ -215,7 +238,10 @@ async def main():
  from mobile_engine.registry import descriptors as mobile_descriptors
  reserved_ids={r['id'] for r in descriptors(analyzer_descriptors())}|{r['id'] for r in mobile_descriptors()}|{'discovery','capabilities','invoke'}
  discovery=Discovery(os.environ.get('HARMONIKA_SKILLS_DIRECTORY','/opt/harmonika-ai/skills-runtime'),os.environ.get('HARMONIKA_DISCOVERY_DATABASE','/var/lib/harmonika-master/discovery.sqlite3'),reserved_ids=reserved_ids,identity_policy=lambda identity:not restricted(identity))
- runner=web.AppRunner(make_app(secret,sandbox=sandbox if ready.get('ready') else None,discovery=discovery),access_log=None);await runner.setup();await web.TCPSite(runner,'127.0.0.1',int(os.environ.get('HARMONIKA_MASTER_PORT','18193'))).start();stop=asyncio.Event();loop=asyncio.get_running_loop()
+ from engine_registry.failure_log import FailureLog
+ from .diagnostics import GraphicsProbe
+ failures=FailureLog(os.environ.get('HARMONIKA_DISCOVERY_DATABASE','/var/lib/harmonika-master/discovery.sqlite3'))
+ runner=web.AppRunner(make_app(secret,failure_log=failures,graphics_probe=GraphicsProbe(),sandbox=sandbox if ready.get('ready') else None,discovery=discovery),access_log=None);await runner.setup();await web.TCPSite(runner,'127.0.0.1',int(os.environ.get('HARMONIKA_MASTER_PORT','18193'))).start();stop=asyncio.Event();loop=asyncio.get_running_loop()
  for sig in (signal.SIGTERM,signal.SIGINT):loop.add_signal_handler(sig,stop.set)
  try:await stop.wait()
  finally:await runner.cleanup()

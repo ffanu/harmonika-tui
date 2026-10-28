@@ -1,0 +1,197 @@
+{
+  "checked_at_unix": 1793145991.228555,
+  "scope": "read-only metadata/services; no customer data or skill execution",
+  "central_catalog": {
+    "total": 2124,
+    "statuses": {
+      "restricted": 54,
+      "unavailable": 1168,
+      "available": 203,
+      "context_required": 665,
+      "domain_ambiguous": 7,
+      "local_only": 27
+    },
+    "unavailable_reasons": {
+      "implementation_missing": 1134,
+      "network_adapter_not_bound": 6,
+      "authorized_connector_required": 7,
+      "connector_unconfigured": 14,
+      "scoped_adapter_required": 6,
+      "scheduler_not_configured": 1
+    }
+  },
+  "domains": {
+    "/v1/skills/capabilities": {
+      "catalog_size": 2124,
+      "readiness": {
+        "available": 203,
+        "context_required": 665,
+        "local_only": 27,
+        "unavailable": 1168,
+        "restricted": 54,
+        "domain_ambiguous": 7
+      },
+      "features": {
+        "consolidated_catalog": true,
+        "defensive_input_analysis": true,
+        "isolated_html_browser": true,
+        "registered_browser_profiles_access": false,
+        "autonomous_exploitation": false,
+        "stealth_bypass": false,
+        "live_customer_access": false,
+        "runtime_discovery": true,
+        "hot_skill_registration": true
+      }
+    },
+    "/v1/mobile-builder/capabilities": {
+      "catalog_size": 214,
+      "readiness": {
+        "available": 91,
+        "unavailable": 123,
+        "planning": 34,
+        "source_generation": 57
+      },
+      "features": {
+        "spec_analysis": true,
+        "source_generation": true,
+        "android_build": false,
+        "ios_build": false,
+        "code_signing": false,
+        "store_publish": false,
+        "ota_release": false,
+        "device_farm": false,
+        "live_iap": false,
+        "host_filesystem_access": false
+      }
+    },
+    "/v1/builder/capabilities": {
+      "catalog_size": 161,
+      "features": {
+        "web_builder": true,
+        "builder_projects": true,
+        "builder_sse": true,
+        "builder_sandbox": true,
+        "builder_production_autodeploy": false,
+        "builder_deployment_submission_configured": false,
+        "builder_ssh": false
+      }
+    },
+    "/v1/core/capabilities": {
+      "catalog_size": 99,
+      "readiness": {
+        "available": 12,
+        "context_required": 19,
+        "local_only": 6,
+        "native_endpoint": 2,
+        "unavailable": 60
+      },
+      "features": {
+        "bounded_data": true,
+        "core_sse": false,
+        "core_websocket": false,
+        "native_mcp_tools": false,
+        "private_memory": true,
+        "bounded_workflows": true,
+        "workspace_adapters": true,
+        "chat_gateway_adapter": true,
+        "workflow_scheduler": false,
+        "host_filesystem_access": false,
+        "host_shell_access": false,
+        "host_secret_access": false,
+        "outbound_messages": false
+      }
+    },
+    "/v1/unified/capabilities": {
+      "catalog_size": 70,
+      "readiness": {
+        "available": 57,
+        "internal_only": 12,
+        "native_endpoint": 1,
+        "unavailable": 0
+      },
+      "features": {
+        "durable_jobs": true,
+        "session_history": true,
+        "encrypted_state": true,
+        "tenant_isolation": true,
+        "idempotency": true,
+        "stop": true,
+        "sse_replay": true,
+        "chat_token_streaming": false,
+        "lexical_routing": true,
+        "calibrated_confidence": false,
+        "automatic_training": false,
+        "universal_media_analysis": false,
+        "general_message_bus": true,
+        "websocket": true,
+        "websocket_ticket_auth": true,
+        "graphql": true,
+        "tenant_connector_secrets": true,
+        "priority_queue": true,
+        "specialist_planning": true,
+        "automatic_deploy": false,
+        "verified_corpus_rag": true,
+        "knowledge_method": "bm25_operator_verified_documents",
+        "vector_database": false
+      }
+    },
+    "/v1/coding/capabilities": {
+      "features": {
+        "phase2": true,
+        "debug_sessions": true
+      }
+    },
+    "/v1/legal/capabilities": {
+      "features": {
+        "legal_assistant": true,
+        "legal_sources": true,
+        "legal_source_currentness_certified": false,
+        "legal_licensed_expert": false,
+        "legal_evidence_upload": true,
+        "legal_vision": true,
+        "legal_video_visual": true,
+        "legal_asr": true,
+        "legal_ocr": true,
+        "legal_evidence_authenticity_certified": false,
+        "legal_filing": false,
+        "legal_observer_internal_only": false
+      }
+    },
+    "/v1/telco/capabilities": {
+      "features": {
+        "telco_engine": true,
+        "telco_approval": true,
+        "telco_request_recovery": true,
+        "telco_events_replay": true,
+        "telco_network_live": false,
+        "telco_payment_gateway": false,
+        "telco_kyc": false,
+        "telco_customer_portal_login": false
+      }
+    }
+  },
+  "integration_gaps": [
+    {
+      "feature": "framepack image-to-video",
+      "state": "private_operator_ready",
+      "public_tui_web_route": false,
+      "qualified_seconds": 1
+    },
+    {
+      "feature": "seo",
+      "state": "14 operations local_only",
+      "shared_api_worker": "not_bound"
+    },
+    {
+      "feature": "neural_speech_and_video",
+      "state": "active_owner_TUI",
+      "central_catalog_audio_synthesize": "stale_unavailable_label",
+      "production_web_video": "not_activated"
+    },
+    {
+      "feature": "MMAudio/F5",
+      "state": "research_only_not_commercial_route"
+    }
+  ],
+  "no_changes_activated": true
+}

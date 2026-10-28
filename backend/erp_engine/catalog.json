@@ -1,0 +1,4006 @@
+{
+  "schema_version": 1,
+  "source_sha256": "ce800ce7c98e42967a182023bd043ec7febf3dd725eea7b623242fef21aded3f",
+  "source_lines": 1392,
+  "declared_counts": [
+    285,
+    347
+  ],
+  "actual_skills": 363,
+  "layers": 28,
+  "skills": [
+    {
+      "number": 1,
+      "id": "erp_all.industry.analyze.spec",
+      "source_id": "industry.analyze.spec",
+      "operation": "industry.analyze.spec",
+      "description": "Analyze spec user untuk detect industri",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 2,
+      "id": "erp_all.industry.detect.keywords",
+      "source_id": "industry.detect.keywords",
+      "operation": "industry.detect.keywords",
+      "description": "Detect keywords industri (ISP, retail, dll)",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 3,
+      "id": "erp_all.industry.detect.context",
+      "source_id": "industry.detect.context",
+      "operation": "industry.detect.context",
+      "description": "Detect dari konteks kalimat",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 4,
+      "id": "erp_all.industry.classify",
+      "source_id": "industry.classify",
+      "operation": "industry.classify",
+      "description": "Klasifikasi industri ke kategori",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 5,
+      "id": "erp_all.industry.confidence.score",
+      "source_id": "industry.confidence.score",
+      "operation": "industry.confidence.score",
+      "description": "Score confidence deteksi",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 6,
+      "id": "erp_all.industry.clarify",
+      "source_id": "industry.clarify",
+      "operation": "industry.clarify",
+      "description": "Minta klarifikasi kalau ambigu",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 7,
+      "id": "erp_all.industry.subcategory.detect",
+      "source_id": "industry.subcategory.detect",
+      "operation": "industry.subcategory.detect",
+      "description": "Detect sub-kategori (ISP vs Telco vs Mobile)",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 8,
+      "id": "erp_all.industry.scale.assess",
+      "source_id": "industry.scale.assess",
+      "operation": "industry.scale.assess",
+      "description": "Assess skala (UMKM, SME, Enterprise)",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 9,
+      "id": "erp_all.industry.region.detect",
+      "source_id": "industry.region.detect",
+      "operation": "industry.region.detect",
+      "description": "Detect region (Indonesia, ASEAN, Global)",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 10,
+      "id": "erp_all.industry.regulation.check",
+      "source_id": "industry.regulation.check",
+      "operation": "industry.regulation.check",
+      "description": "Cek regulasi yang berlaku per industri",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 11,
+      "id": "erp_all.industry.terminology.extract",
+      "source_id": "industry.terminology.extract",
+      "operation": "industry.terminology.extract",
+      "description": "Extract terminology khas industri",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 12,
+      "id": "erp_all.industry.benchmark.find",
+      "source_id": "industry.benchmark.find",
+      "operation": "industry.benchmark.find",
+      "description": "Find benchmark perusahaan sejenis",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 13,
+      "id": "erp_all.industry.competitor.analyze",
+      "source_id": "industry.competitor.analyze",
+      "operation": "industry.competitor.analyze",
+      "description": "Analyze competitor di industri sama",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 14,
+      "id": "erp_all.industry.tier.set",
+      "source_id": "industry.tier.set",
+      "operation": "industry.tier.set",
+      "description": "Set tier (micro, small, medium, large)",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 15,
+      "id": "erp_all.industry.profile.build",
+      "source_id": "industry.profile.build",
+      "operation": "industry.profile.build",
+      "description": "Build profile industri lengkap",
+      "layer": {
+        "number": 1,
+        "name": "INDUSTRY DETECTOR"
+      }
+    },
+    {
+      "number": 16,
+      "id": "erp_all.module.mapping.industry",
+      "source_id": "module.mapping.industry",
+      "operation": "module.mapping.industry",
+      "description": "Mapping industri ke modul required",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 17,
+      "id": "erp_all.module.required.select",
+      "source_id": "module.required.select",
+      "operation": "module.required.select",
+      "description": "Pilih modul WAJIB untuk industri",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 18,
+      "id": "erp_all.module.optional.suggest",
+      "source_id": "module.optional.suggest",
+      "operation": "module.optional.suggest",
+      "description": "Saran modul optional",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 19,
+      "id": "erp_all.module.exclude.irrelevant",
+      "source_id": "module.exclude.irrelevant",
+      "operation": "module.exclude.irrelevant",
+      "description": "Exclude modul yang tidak relevan",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 20,
+      "id": "erp_all.module.priority.rank",
+      "source_id": "module.priority.rank",
+      "operation": "module.priority.rank",
+      "description": "Rank modul berdasar prioritas",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 21,
+      "id": "erp_all.module.dependency.resolve",
+      "source_id": "module.dependency.resolve",
+      "operation": "module.dependency.resolve",
+      "description": "Resolve dependency antar modul",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 22,
+      "id": "erp_all.module.conflict.detect",
+      "source_id": "module.conflict.detect",
+      "operation": "module.conflict.detect",
+      "description": "Detect konflik antar modul",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 23,
+      "id": "erp_all.module.scale.adjust",
+      "source_id": "module.scale.adjust",
+      "operation": "module.scale.adjust",
+      "description": "Adjust modul sesuai skala perusahaan",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 24,
+      "id": "erp_all.module.compliance.add",
+      "source_id": "module.compliance.add",
+      "operation": "module.compliance.add",
+      "description": "Add modul compliance (PDP, PCI, dll)",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 25,
+      "id": "erp_all.module.integration.suggest",
+      "source_id": "module.integration.suggest",
+      "operation": "module.integration.suggest",
+      "description": "Saran modul integrasi (payment, WA)",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 26,
+      "id": "erp_all.module.license.check",
+      "source_id": "module.license.check",
+      "operation": "module.license.check",
+      "description": "Cek license modul (open-source vs paid)",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 27,
+      "id": "erp_all.module.finalize",
+      "source_id": "module.finalize",
+      "operation": "module.finalize",
+      "description": "Finalize daftar modul yang akan dibuild",
+      "layer": {
+        "number": 2,
+        "name": "MODULE SELECTOR"
+      }
+    },
+    {
+      "number": 28,
+      "id": "erp_all.theme.color.industry",
+      "source_id": "theme.color.industry",
+      "operation": "theme.color.industry",
+      "description": "Pilih color palette per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 29,
+      "id": "erp_all.theme.layout.industry",
+      "source_id": "theme.layout.industry",
+      "operation": "theme.layout.industry",
+      "description": "Pilih layout per industri (dashboard vs form)",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 30,
+      "id": "erp_all.theme.typography.industry",
+      "source_id": "theme.typography.industry",
+      "operation": "theme.typography.industry",
+      "description": "Pilih typography per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 31,
+      "id": "erp_all.theme.icon.set.industry",
+      "source_id": "theme.icon.set.industry",
+      "operation": "theme.icon.set.industry",
+      "description": "Pilih icon set per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 32,
+      "id": "erp_all.theme.terminology.apply",
+      "source_id": "theme.terminology.apply",
+      "operation": "theme.terminology.apply",
+      "description": "Apply terminology industri (Pelanggan vs Customer)",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 33,
+      "id": "erp_all.theme.language.set",
+      "source_id": "theme.language.set",
+      "operation": "theme.language.set",
+      "description": "Set bahasa (ID, EN, bilingual)",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 34,
+      "id": "erp_all.theme.dark_mode.support",
+      "source_id": "theme.dark_mode.support",
+      "operation": "theme.dark_mode.support",
+      "description": "Support dark mode",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 35,
+      "id": "erp_all.theme.responsive.optimize",
+      "source_id": "theme.responsive.optimize",
+      "operation": "theme.responsive.optimize",
+      "description": "Optimize responsive per device",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 36,
+      "id": "erp_all.theme.branding.apply",
+      "source_id": "theme.branding.apply",
+      "operation": "theme.branding.apply",
+      "description": "Apply branding user (logo, nama)",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 37,
+      "id": "erp_all.theme.accessibility.ensure",
+      "source_id": "theme.accessibility.ensure",
+      "operation": "theme.accessibility.ensure",
+      "description": "Ensure WCAG AA compliance",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 38,
+      "id": "erp_all.theme.components.customize",
+      "source_id": "theme.components.customize",
+      "operation": "theme.components.customize",
+      "description": "Customize komponen per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 39,
+      "id": "erp_all.theme.dashboard.layout",
+      "source_id": "theme.dashboard.layout",
+      "operation": "theme.dashboard.layout",
+      "description": "Layout dashboard per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 40,
+      "id": "erp_all.theme.navigation.style",
+      "source_id": "theme.navigation.style",
+      "operation": "theme.navigation.style",
+      "description": "Style navigasi per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 41,
+      "id": "erp_all.theme.report.template",
+      "source_id": "theme.report.template",
+      "operation": "theme.report.template",
+      "description": "Template report per industri",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 42,
+      "id": "erp_all.theme.preview.generate",
+      "source_id": "theme.preview.generate",
+      "operation": "theme.preview.generate",
+      "description": "Generate preview tema sebelum apply",
+      "layer": {
+        "number": 3,
+        "name": "THEME SELECTOR"
+      }
+    },
+    {
+      "number": 43,
+      "id": "erp_all.schema.entity.identify",
+      "source_id": "schema.entity.identify",
+      "operation": "schema.entity.identify",
+      "description": "Identify entity per modul",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 44,
+      "id": "erp_all.schema.relation.design",
+      "source_id": "schema.relation.design",
+      "operation": "schema.relation.design",
+      "description": "Design relation antar entity",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 45,
+      "id": "erp_all.schema.field.define",
+      "source_id": "schema.field.define",
+      "operation": "schema.field.define",
+      "description": "Define field per entity",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 46,
+      "id": "erp_all.schema.data_type.select",
+      "source_id": "schema.data_type.select",
+      "operation": "schema.data_type.select",
+      "description": "Select data type (VARCHAR, INT, JSONB)",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 47,
+      "id": "erp_all.schema.constraint.add",
+      "source_id": "schema.constraint.add",
+      "operation": "schema.constraint.add",
+      "description": "Add constraint (PK, FK, unique, check)",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 48,
+      "id": "erp_all.schema.index.optimize",
+      "source_id": "schema.index.optimize",
+      "operation": "schema.index.optimize",
+      "description": "Optimize index untuk query",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 49,
+      "id": "erp_all.schema.normalization.apply",
+      "source_id": "schema.normalization.apply",
+      "operation": "schema.normalization.apply",
+      "description": "Apply normalization (3NF)",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 50,
+      "id": "erp_all.schema.denormalization.selective",
+      "source_id": "schema.denormalization.selective",
+      "operation": "schema.denormalization.selective",
+      "description": "Selective denormalization untuk performance",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 51,
+      "id": "erp_all.schema.audit.column",
+      "source_id": "schema.audit.column",
+      "operation": "schema.audit.column",
+      "description": "Add audit column (created_at, updated_at)",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 52,
+      "id": "erp_all.schema.soft.delete",
+      "source_id": "schema.soft.delete",
+      "operation": "schema.soft.delete",
+      "description": "Soft delete support",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 53,
+      "id": "erp_all.schema.multi.tenant",
+      "source_id": "schema.multi.tenant",
+      "operation": "schema.multi.tenant",
+      "description": "Multi-tenant schema (row-level isolation)",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 54,
+      "id": "erp_all.schema.migration.generate",
+      "source_id": "schema.migration.generate",
+      "operation": "schema.migration.generate",
+      "description": "Generate migration file",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 55,
+      "id": "erp_all.schema.seed.generate",
+      "source_id": "schema.seed.generate",
+      "operation": "schema.seed.generate",
+      "description": "Generate seed data",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 56,
+      "id": "erp_all.schema.er.diagram",
+      "source_id": "schema.er.diagram",
+      "operation": "schema.er.diagram",
+      "description": "Generate ER diagram",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 57,
+      "id": "erp_all.schema.document.generate",
+      "source_id": "schema.document.generate",
+      "operation": "schema.document.generate",
+      "description": "Generate schema documentation",
+      "layer": {
+        "number": 4,
+        "name": "SCHEMA GENERATOR"
+      }
+    },
+    {
+      "number": 58,
+      "id": "erp_all.core.auth.user",
+      "source_id": "core.auth.user",
+      "operation": "core.auth.user",
+      "description": "Manajemen user & auth",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 59,
+      "id": "erp_all.core.auth.role",
+      "source_id": "core.auth.role",
+      "operation": "core.auth.role",
+      "description": "Role-based access control (RBAC)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 60,
+      "id": "erp_all.core.auth.sso",
+      "source_id": "core.auth.sso",
+      "operation": "core.auth.sso",
+      "description": "Single Sign-On (SAML, OAuth, OIDC)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 61,
+      "id": "erp_all.core.auth.mfa",
+      "source_id": "core.auth.mfa",
+      "operation": "core.auth.mfa",
+      "description": "Multi-factor authentication",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 62,
+      "id": "erp_all.core.audit.log",
+      "source_id": "core.audit.log",
+      "operation": "core.audit.log",
+      "description": "Audit log semua aksi",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 63,
+      "id": "erp_all.core.notification",
+      "source_id": "core.notification",
+      "operation": "core.notification",
+      "description": "Notification (email, SMS, push, IM)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 64,
+      "id": "erp_all.core.settings.config",
+      "source_id": "core.settings.config",
+      "operation": "core.settings.config",
+      "description": "System configuration",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 65,
+      "id": "erp_all.core.tenant.management",
+      "source_id": "core.tenant.management",
+      "operation": "core.tenant.management",
+      "description": "Multi-tenant management",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 66,
+      "id": "erp_all.core.localization",
+      "source_id": "core.localization",
+      "operation": "core.localization",
+      "description": "Multi-language & currency",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 67,
+      "id": "erp_all.core.timezone.management",
+      "source_id": "core.timezone.management",
+      "operation": "core.timezone.management",
+      "description": "Timezone management",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 68,
+      "id": "erp_all.core.file.storage",
+      "source_id": "core.file.storage",
+      "operation": "core.file.storage",
+      "description": "File & document storage",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 69,
+      "id": "erp_all.core.attachment.management",
+      "source_id": "core.attachment.management",
+      "operation": "core.attachment.management",
+      "description": "Attachment management",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 70,
+      "id": "erp_all.core.workflow.engine",
+      "source_id": "core.workflow.engine",
+      "operation": "core.workflow.engine",
+      "description": "Workflow engine (BPMN)",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 71,
+      "id": "erp_all.core.report.builder",
+      "source_id": "core.report.builder",
+      "operation": "core.report.builder",
+      "description": "Custom report builder",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 72,
+      "id": "erp_all.core.dashboard.builder",
+      "source_id": "core.dashboard.builder",
+      "operation": "core.dashboard.builder",
+      "description": "Custom dashboard builder",
+      "layer": {
+        "number": 5,
+        "name": "CORE MODULES"
+      }
+    },
+    {
+      "number": 73,
+      "id": "erp_all.finance.journal.entry",
+      "source_id": "finance.journal.entry",
+      "operation": "finance.journal.entry",
+      "description": "Jurnal umum (manual entry)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 74,
+      "id": "erp_all.finance.general.ledger",
+      "source_id": "finance.general.ledger",
+      "operation": "finance.general.ledger",
+      "description": "Buku besar (General Ledger)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 75,
+      "id": "erp_all.finance.accounts.payable",
+      "source_id": "finance.accounts.payable",
+      "operation": "finance.accounts.payable",
+      "description": "Hutang (AP)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 76,
+      "id": "erp_all.finance.accounts.receivable",
+      "source_id": "finance.accounts.receivable",
+      "operation": "finance.accounts.receivable",
+      "description": "Piutang (AR)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 77,
+      "id": "erp_all.finance.cash.bank",
+      "source_id": "finance.cash.bank",
+      "operation": "finance.cash.bank",
+      "description": "Kas & bank",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 78,
+      "id": "erp_all.finance.fixed.assets",
+      "source_id": "finance.fixed.assets",
+      "operation": "finance.fixed.assets",
+      "description": "Aset tetap",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 79,
+      "id": "erp_all.finance.depreciation",
+      "source_id": "finance.depreciation",
+      "operation": "finance.depreciation",
+      "description": "Penyusutan aset (straight-line, declining)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 80,
+      "id": "erp_all.finance.tax.ppn",
+      "source_id": "finance.tax.ppn",
+      "operation": "finance.tax.ppn",
+      "description": "PPN (Pajak Pertambahan Nilai)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 81,
+      "id": "erp_all.finance.tax.pph",
+      "source_id": "finance.tax.pph",
+      "operation": "finance.tax.pph",
+      "description": "PPh (Pajak Penghasilan)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 82,
+      "id": "erp_all.finance.budgeting",
+      "source_id": "finance.budgeting",
+      "operation": "finance.budgeting",
+      "description": "Anggaran",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 83,
+      "id": "erp_all.finance.cost.accounting",
+      "source_id": "finance.cost.accounting",
+      "operation": "finance.cost.accounting",
+      "description": "Cost accounting",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 84,
+      "id": "erp_all.finance.financial.statement",
+      "source_id": "finance.financial.statement",
+      "operation": "finance.financial.statement",
+      "description": "Laporan keuangan (Neraca, LR)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 85,
+      "id": "erp_all.finance.cashflow.statement",
+      "source_id": "finance.cashflow.statement",
+      "operation": "finance.cashflow.statement",
+      "description": "Laporan arus kas",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 86,
+      "id": "erp_all.finance.equity.management",
+      "source_id": "finance.equity.management",
+      "operation": "finance.equity.management",
+      "description": "Modal & ekuitas",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 87,
+      "id": "erp_all.finance.retained.earning",
+      "source_id": "finance.retained.earning",
+      "operation": "finance.retained.earning",
+      "description": "Laba ditahan",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 88,
+      "id": "erp_all.finance.multi.currency",
+      "source_id": "finance.multi.currency",
+      "operation": "finance.multi.currency",
+      "description": "Multi-currency",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 89,
+      "id": "erp_all.finance.fiscal.year",
+      "source_id": "finance.fiscal.year",
+      "operation": "finance.fiscal.year",
+      "description": "Tahun buku",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 90,
+      "id": "erp_all.finance.closing.period",
+      "source_id": "finance.closing.period",
+      "operation": "finance.closing.period",
+      "description": "Tutup buku periode (monthly, yearly)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 91,
+      "id": "erp_all.finance.invoice",
+      "source_id": "finance.invoice",
+      "operation": "finance.invoice",
+      "description": "Invoice & billing",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 92,
+      "id": "erp_all.finance.payment.processing",
+      "source_id": "finance.payment.processing",
+      "operation": "finance.payment.processing",
+      "description": "Payment gateway integration",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 93,
+      "id": "erp_all.finance.reconciliation",
+      "source_id": "finance.reconciliation",
+      "operation": "finance.reconciliation",
+      "description": "Rekonsiliasi bank",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 94,
+      "id": "erp_all.finance.tax.efaktur",
+      "source_id": "finance.tax.e faktur",
+      "operation": "finance.tax.efaktur",
+      "description": "E-Faktur integration (DJP)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 95,
+      "id": "erp_all.finance.tax.ebupot",
+      "source_id": "finance.tax.e bupot",
+      "operation": "finance.tax.ebupot",
+      "description": "E-Bupot integration (PPh)",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 96,
+      "id": "erp_all.finance.sak.psak.compliance",
+      "source_id": "finance.sak.psak.compliance",
+      "operation": "finance.sak.psak.compliance",
+      "description": "Compliance SAK/PSAK/ETAP",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 97,
+      "id": "erp_all.finance.audit.trail",
+      "source_id": "finance.audit.trail",
+      "operation": "finance.audit.trail",
+      "description": "Audit trail transaksi",
+      "layer": {
+        "number": 6,
+        "name": "FINANCE MODULE - COMPLETE"
+      }
+    },
+    {
+      "number": 98,
+      "id": "erp_all.hr.employee.management",
+      "source_id": "hr.employee.management",
+      "operation": "hr.employee.management",
+      "description": "Data karyawan",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 99,
+      "id": "erp_all.hr.attendance",
+      "source_id": "hr.attendance",
+      "operation": "hr.attendance",
+      "description": "Absensi (fingerprint, face, GPS)",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 100,
+      "id": "erp_all.hr.leave.management",
+      "source_id": "hr.leave.management",
+      "operation": "hr.leave.management",
+      "description": "Cuti & izin",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 101,
+      "id": "erp_all.hr.payroll",
+      "source_id": "hr.payroll",
+      "operation": "hr.payroll",
+      "description": "Penggajian",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 102,
+      "id": "erp_all.hr.tax.pph21",
+      "source_id": "hr.tax.pph21",
+      "operation": "hr.tax.pph21",
+      "description": "PPh 21 otomatis",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 103,
+      "id": "erp_all.hr.bpjs",
+      "source_id": "hr.bpjs",
+      "operation": "hr.bpjs",
+      "description": "BPJS Kesehatan & Ketenagakerjaan",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 104,
+      "id": "erp_all.hr.recruitment",
+      "source_id": "hr.recruitment",
+      "operation": "hr.recruitment",
+      "description": "Rekrutmen",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 105,
+      "id": "erp_all.hr.performance.review",
+      "source_id": "hr.performance.review",
+      "operation": "hr.performance.review",
+      "description": "Performance review",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 106,
+      "id": "erp_all.hr.training",
+      "source_id": "hr.training",
+      "operation": "hr.training",
+      "description": "Training & development",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 107,
+      "id": "erp_all.hr.organization.structure",
+      "source_id": "hr.organization.structure",
+      "operation": "hr.organization.structure",
+      "description": "Struktur organisasi",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 108,
+      "id": "erp_all.hr.time.overtime",
+      "source_id": "hr.time.overtime",
+      "operation": "hr.time.overtime",
+      "description": "Lembur",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 109,
+      "id": "erp_all.hr.shift.management",
+      "source_id": "hr.shift.management",
+      "operation": "hr.shift.management",
+      "description": "Shift kerja",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 110,
+      "id": "erp_all.hr.expense.claim",
+      "source_id": "hr.expense.claim",
+      "operation": "hr.expense.claim",
+      "description": "Klaim biaya",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 111,
+      "id": "erp_all.hr.loan.management",
+      "source_id": "hr.loan.management",
+      "operation": "hr.loan.management",
+      "description": "Pinjaman karyawan",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 112,
+      "id": "erp_all.hr.exit.management",
+      "source_id": "hr.exit.management",
+      "operation": "hr.exit.management",
+      "description": "Resign & exit interview",
+      "layer": {
+        "number": 7,
+        "name": "HR & PAYROLL MODULE"
+      }
+    },
+    {
+      "number": 113,
+      "id": "erp_all.inventory.product.master",
+      "source_id": "inventory.product.master",
+      "operation": "inventory.product.master",
+      "description": "Master produk",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 114,
+      "id": "erp_all.inventory.stock.management",
+      "source_id": "inventory.stock.management",
+      "operation": "inventory.stock.management",
+      "description": "Manajemen stok",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 115,
+      "id": "erp_all.inventory.warehouse",
+      "source_id": "inventory.warehouse",
+      "operation": "inventory.warehouse",
+      "description": "Multi-warehouse",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 116,
+      "id": "erp_all.inventory.stock.opname",
+      "source_id": "inventory.stock.opname",
+      "operation": "inventory.stock.opname",
+      "description": "Stock opname",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 117,
+      "id": "erp_all.inventory.barcode",
+      "source_id": "inventory.barcode",
+      "operation": "inventory.barcode",
+      "description": "Barcode & QR",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 118,
+      "id": "erp_all.inventory.batch.tracking",
+      "source_id": "inventory.batch.tracking",
+      "operation": "inventory.batch.tracking",
+      "description": "Batch & expiry tracking",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 119,
+      "id": "erp_all.inventory.serial.number",
+      "source_id": "inventory.serial.number",
+      "operation": "inventory.serial.number",
+      "description": "Serial number tracking",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 120,
+      "id": "erp_all.procurement.purchase.request",
+      "source_id": "procurement.purchase.request",
+      "operation": "procurement.purchase.request",
+      "description": "Purchase request",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 121,
+      "id": "erp_all.procurement.purchase.order",
+      "source_id": "procurement.purchase.order",
+      "operation": "procurement.purchase.order",
+      "description": "Purchase order",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 122,
+      "id": "erp_all.procurement.vendor.management",
+      "source_id": "procurement.vendor.management",
+      "operation": "procurement.vendor.management",
+      "description": "Vendor management",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 123,
+      "id": "erp_all.procurement.rfq",
+      "source_id": "procurement.rfq",
+      "operation": "procurement.rfq",
+      "description": "Request for quotation",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 124,
+      "id": "erp_all.procurement.goods.receipt",
+      "source_id": "procurement.goods.receipt",
+      "operation": "procurement.goods.receipt",
+      "description": "Penerimaan barang",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 125,
+      "id": "erp_all.procurement.vendor.invoice",
+      "source_id": "procurement.vendor.invoice",
+      "operation": "procurement.vendor.invoice",
+      "description": "Invoice vendor",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 126,
+      "id": "erp_all.procurement.three.way.match",
+      "source_id": "procurement.three.way.match",
+      "operation": "procurement.three.way.match",
+      "description": "3-way match (PO, GR, Invoice)",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 127,
+      "id": "erp_all.procurement.vendor.performance",
+      "source_id": "procurement.vendor.performance",
+      "operation": "procurement.vendor.performance",
+      "description": "Vendor performance rating",
+      "layer": {
+        "number": 8,
+        "name": "INVENTORY & PROCUREMENT"
+      }
+    },
+    {
+      "number": 128,
+      "id": "erp_all.sales.customer.master",
+      "source_id": "sales.customer.master",
+      "operation": "sales.customer.master",
+      "description": "Master customer",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 129,
+      "id": "erp_all.sales.quotation",
+      "source_id": "sales.quotation",
+      "operation": "sales.quotation",
+      "description": "Quotation",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 130,
+      "id": "erp_all.sales.order",
+      "source_id": "sales.order",
+      "operation": "sales.order",
+      "description": "Sales order",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 131,
+      "id": "erp_all.sales.delivery",
+      "source_id": "sales.delivery",
+      "operation": "sales.delivery",
+      "description": "Pengiriman",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 132,
+      "id": "erp_all.sales.sales.invoice",
+      "source_id": "sales.sales.invoice",
+      "operation": "sales.sales.invoice",
+      "description": "Invoice penjualan",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 133,
+      "id": "erp_all.sales.sales.return",
+      "source_id": "sales.sales.return",
+      "operation": "sales.sales.return",
+      "description": "Retur penjualan",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 134,
+      "id": "erp_all.crm.lead.management",
+      "source_id": "crm.lead.management",
+      "operation": "crm.lead.management",
+      "description": "Lead management",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 135,
+      "id": "erp_all.crm.opportunity",
+      "source_id": "crm.opportunity",
+      "operation": "crm.opportunity",
+      "description": "Opportunity tracking",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 136,
+      "id": "erp_all.crm.activity",
+      "source_id": "crm.activity",
+      "operation": "crm.activity",
+      "description": "Activity tracking",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 137,
+      "id": "erp_all.crm.pipeline",
+      "source_id": "crm.pipeline",
+      "operation": "crm.pipeline",
+      "description": "Sales pipeline",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 138,
+      "id": "erp_all.crm.customer.360",
+      "source_id": "crm.customer.360",
+      "operation": "crm.customer.360",
+      "description": "Customer 360 view",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 139,
+      "id": "erp_all.crm.contact.management",
+      "source_id": "crm.contact.management",
+      "operation": "crm.contact.management",
+      "description": "Contact management",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 140,
+      "id": "erp_all.crm.campaign.management",
+      "source_id": "crm.campaign.management",
+      "operation": "crm.campaign.management",
+      "description": "Campaign management",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 141,
+      "id": "erp_all.crm.satisfaction.survey",
+      "source_id": "crm.satisfaction.survey",
+      "operation": "crm.satisfaction.survey",
+      "description": "CSAT & NPS survey",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 142,
+      "id": "erp_all.crm.referral.program",
+      "source_id": "crm.referral.program",
+      "operation": "crm.referral.program",
+      "description": "Referral program",
+      "layer": {
+        "number": 9,
+        "name": "SALES & CRM MODULE"
+      }
+    },
+    {
+      "number": 143,
+      "id": "erp_all.isp.customer.subscriber",
+      "source_id": "isp.customer.subscriber",
+      "operation": "isp.customer.subscriber",
+      "description": "Data pelanggan internet",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 144,
+      "id": "erp_all.isp.service.plan",
+      "source_id": "isp.service.plan",
+      "operation": "isp.service.plan",
+      "description": "Paket internet (speed, quota, price)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 145,
+      "id": "erp_all.isp.billing.cycle",
+      "source_id": "isp.billing.cycle",
+      "operation": "isp.billing.cycle",
+      "description": "Siklus billing (monthly, daily)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 146,
+      "id": "erp_all.isp.invoice.recurring",
+      "source_id": "isp.invoice.recurring",
+      "operation": "isp.invoice.recurring",
+      "description": "Invoice recurring otomatis",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 147,
+      "id": "erp_all.isp.payment.collection",
+      "source_id": "isp.payment.collection",
+      "operation": "isp.payment.collection",
+      "description": "Pembayaran (transfer, VA, e-wallet)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 148,
+      "id": "erp_all.isp.suspension.management",
+      "source_id": "isp.suspension.management",
+      "operation": "isp.suspension.management",
+      "description": "Suspensi pelanggan tunggak",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 149,
+      "id": "erp_all.isp.ticket.troubleshooting",
+      "source_id": "isp.ticket.troubleshooting",
+      "operation": "isp.ticket.troubleshooting",
+      "description": "Tiket gangguan internet",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 150,
+      "id": "erp_all.isp.network.monitoring",
+      "source_id": "isp.network.monitoring",
+      "operation": "isp.network.monitoring",
+      "description": "Monitoring jaringan (ping, latency)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 151,
+      "id": "erp_all.isp.olt.management",
+      "source_id": "isp.olt.management",
+      "operation": "isp.olt.management",
+      "description": "Manajemen OLT (fiber)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 152,
+      "id": "erp_all.isp.onu.management",
+      "source_id": "isp.onu.management",
+      "operation": "isp.onu.management",
+      "description": "Manajemen ONU/ONT",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 153,
+      "id": "erp_all.isp.ip.address.management",
+      "source_id": "isp.ip.address.management",
+      "operation": "isp.ip.address.management",
+      "description": "IP address pool (DHCP, static)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 154,
+      "id": "erp_all.isp.bandwidth.management",
+      "source_id": "isp.bandwidth.management",
+      "operation": "isp.bandwidth.management",
+      "description": "Bandwidth shaping (QoS)",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 155,
+      "id": "erp_all.isp.coverage.area",
+      "source_id": "isp.coverage.area",
+      "operation": "isp.coverage.area",
+      "description": "Coverage area mapping",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 156,
+      "id": "erp_all.isp.installation.schedule",
+      "source_id": "isp.installation.schedule",
+      "operation": "isp.installation.schedule",
+      "description": "Jadwal instalasi teknisi",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 157,
+      "id": "erp_all.isp.field.operations",
+      "source_id": "isp.field.operations",
+      "operation": "isp.field.operations",
+      "description": "Operasional teknisi lapangan",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 158,
+      "id": "erp_all.isp.cpe.management",
+      "source_id": "isp.cpe.management",
+      "operation": "isp.cpe.management",
+      "description": "Customer Premises Equipment",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 159,
+      "id": "erp_all.isp.fiber.route",
+      "source_id": "isp.fiber.route",
+      "operation": "isp.fiber.route",
+      "description": "Fiber route management",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 160,
+      "id": "erp_all.isp.splitter.management",
+      "source_id": "isp.splitter.management",
+      "operation": "isp.splitter.management",
+      "description": "Splitter GPON management",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 161,
+      "id": "erp_all.isp.speedtest.integration",
+      "source_id": "isp.speedtest.integration",
+      "operation": "isp.speedtest.integration",
+      "description": "Speedtest integration",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 162,
+      "id": "erp_all.isp.auto.provisioning",
+      "source_id": "isp.auto.provisioning",
+      "operation": "isp.auto.provisioning",
+      "description": "Auto-provisioning ONU/ONT",
+      "layer": {
+        "number": 10,
+        "name": "ISP-SPECIFIC MODULES"
+      }
+    },
+    {
+      "number": 163,
+      "id": "erp_all.mfg.bom",
+      "source_id": "mfg.bom",
+      "operation": "mfg.bom",
+      "description": "Bill of material",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 164,
+      "id": "erp_all.mfg.production.order",
+      "source_id": "mfg.production.order",
+      "operation": "mfg.production.order",
+      "description": "Production order",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 165,
+      "id": "erp_all.mfg.work.center",
+      "source_id": "mfg.work.center",
+      "operation": "mfg.work.center",
+      "description": "Work center",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 166,
+      "id": "erp_all.mfg.routing",
+      "source_id": "mfg.routing",
+      "operation": "mfg.routing",
+      "description": "Routing produksi",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 167,
+      "id": "erp_all.mfg.mrp",
+      "source_id": "mfg.mrp",
+      "operation": "mfg.mrp",
+      "description": "Material requirement planning",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 168,
+      "id": "erp_all.mfg.quality.control",
+      "source_id": "mfg.quality.control",
+      "operation": "mfg.quality.control",
+      "description": "Quality control",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 169,
+      "id": "erp_all.mfg.maintenance",
+      "source_id": "mfg.maintenance",
+      "operation": "mfg.maintenance",
+      "description": "Maintenance mesin",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 170,
+      "id": "erp_all.mfg.production.costing",
+      "source_id": "mfg.production.costing",
+      "operation": "mfg.production.costing",
+      "description": "Costing produksi",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 171,
+      "id": "erp_all.mfg.shop.floor.control",
+      "source_id": "mfg.shop.floor.control",
+      "operation": "mfg.shop.floor.control",
+      "description": "Shop floor control",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 172,
+      "id": "erp_all.mfg.production.scheduling",
+      "source_id": "mfg.production.scheduling",
+      "operation": "mfg.production.scheduling",
+      "description": "Production scheduling",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 173,
+      "id": "erp_all.mfg.scrap.management",
+      "source_id": "mfg.scrap.management",
+      "operation": "mfg.scrap.management",
+      "description": "Scrap & waste management",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 174,
+      "id": "erp_all.mfg.subcontracting",
+      "source_id": "mfg.subcontracting",
+      "operation": "mfg.subcontracting",
+      "description": "Subcontracting",
+      "layer": {
+        "number": 11,
+        "name": "MANUFACTURING MODULE"
+      }
+    },
+    {
+      "number": 175,
+      "id": "erp_all.pm.project.master",
+      "source_id": "pm.project.master",
+      "operation": "pm.project.master",
+      "description": "Master project",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 176,
+      "id": "erp_all.pm.task.management",
+      "source_id": "pm.task.management",
+      "operation": "pm.task.management",
+      "description": "Task management",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 177,
+      "id": "erp_all.pm.gantt.chart",
+      "source_id": "pm.gantt.chart",
+      "operation": "pm.gantt.chart",
+      "description": "Gantt chart",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 178,
+      "id": "erp_all.pm.time.tracking",
+      "source_id": "pm.time.tracking",
+      "operation": "pm.time.tracking",
+      "description": "Time tracking",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 179,
+      "id": "erp_all.pm.resource.allocation",
+      "source_id": "pm.resource.allocation",
+      "operation": "pm.resource.allocation",
+      "description": "Resource allocation",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 180,
+      "id": "erp_all.pm.milestone",
+      "source_id": "pm.milestone",
+      "operation": "pm.milestone",
+      "description": "Milestone tracking",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 181,
+      "id": "erp_all.pm.issue.tracking",
+      "source_id": "pm.issue.tracking",
+      "operation": "pm.issue.tracking",
+      "description": "Issue & bug tracking",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 182,
+      "id": "erp_all.pm.project.billing",
+      "source_id": "pm.project.billing",
+      "operation": "pm.project.billing",
+      "description": "Project billing",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 183,
+      "id": "erp_all.pm.risk.management",
+      "source_id": "pm.risk.management",
+      "operation": "pm.risk.management",
+      "description": "Risk management",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 184,
+      "id": "erp_all.pm.project.portfolio",
+      "source_id": "pm.project.portfolio",
+      "operation": "pm.project.portfolio",
+      "description": "Project portfolio",
+      "layer": {
+        "number": 12,
+        "name": "PROJECT MANAGEMENT MODULE"
+      }
+    },
+    {
+      "number": 185,
+      "id": "erp_all.pos.cashier",
+      "source_id": "pos.cashier",
+      "operation": "pos.cashier",
+      "description": "Kasir POS",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 186,
+      "id": "erp_all.pos.transaction",
+      "source_id": "pos.transaction",
+      "operation": "pos.transaction",
+      "description": "Transaksi penjualan",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 187,
+      "id": "erp_all.pos.cash.management",
+      "source_id": "pos.cash.management",
+      "operation": "pos.cash.management",
+      "description": "Manajemen kas",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 188,
+      "id": "erp_all.retail.promotion",
+      "source_id": "retail.promotion",
+      "operation": "retail.promotion",
+      "description": "Promo & discount",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 189,
+      "id": "erp_all.retail.loyalty.program",
+      "source_id": "retail.loyalty.program",
+      "operation": "retail.loyalty.program",
+      "description": "Program loyalitas",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 190,
+      "id": "erp_all.retail.coupon",
+      "source_id": "retail.coupon",
+      "operation": "retail.coupon",
+      "description": "Kupon",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 191,
+      "id": "erp_all.retail.gift.card",
+      "source_id": "retail.gift.card",
+      "operation": "retail.gift.card",
+      "description": "Gift card",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 192,
+      "id": "erp_all.retail.customer.display",
+      "source_id": "retail.customer.display",
+      "operation": "retail.customer.display",
+      "description": "Customer display",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 193,
+      "id": "erp_all.retail.shelf.management",
+      "source_id": "retail.shelf.management",
+      "operation": "retail.shelf.management",
+      "description": "Manajemen rak & display",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 194,
+      "id": "erp_all.retail.price.tag",
+      "source_id": "retail.price.tag",
+      "operation": "retail.price.tag",
+      "description": "Price tag digital",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 195,
+      "id": "erp_all.retail.stock.opname.pos",
+      "source_id": "retail.stock.opname.pos",
+      "operation": "retail.stock.opname.pos",
+      "description": "Stock opname khusus retail",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 196,
+      "id": "erp_all.retail.shift.cashier",
+      "source_id": "retail.shift.cashier",
+      "operation": "retail.shift.cashier",
+      "description": "Shift kasir",
+      "layer": {
+        "number": 13,
+        "name": "POS & RETAIL MODULE"
+      }
+    },
+    {
+      "number": 197,
+      "id": "erp_all.ecommerce.catalog",
+      "source_id": "ecommerce.catalog",
+      "operation": "ecommerce.catalog",
+      "description": "Katalog produk",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 198,
+      "id": "erp_all.ecommerce.cart",
+      "source_id": "ecommerce.cart",
+      "operation": "ecommerce.cart",
+      "description": "Shopping cart",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 199,
+      "id": "erp_all.ecommerce.checkout",
+      "source_id": "ecommerce.checkout",
+      "operation": "ecommerce.checkout",
+      "description": "Checkout",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 200,
+      "id": "erp_all.ecommerce.payment",
+      "source_id": "ecommerce.payment",
+      "operation": "ecommerce.payment",
+      "description": "Payment gateway",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 201,
+      "id": "erp_all.ecommerce.shipping",
+      "source_id": "ecommerce.shipping",
+      "operation": "ecommerce.shipping",
+      "description": "Shipping integration",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 202,
+      "id": "erp_all.ecommerce.marketplace",
+      "source_id": "ecommerce.marketplace",
+      "operation": "ecommerce.marketplace",
+      "description": "Marketplace sync (Tokopedia, Shopee)",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 203,
+      "id": "erp_all.ecommerce.review",
+      "source_id": "ecommerce.review",
+      "operation": "ecommerce.review",
+      "description": "Customer review",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 204,
+      "id": "erp_all.ecommerce.return",
+      "source_id": "ecommerce.return",
+      "operation": "ecommerce.return",
+      "description": "Return management",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 205,
+      "id": "erp_all.ecommerce.wishlist",
+      "source_id": "ecommerce.wishlist",
+      "operation": "ecommerce.wishlist",
+      "description": "Wishlist",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 206,
+      "id": "erp_all.ecommerce.promo.code",
+      "source_id": "ecommerce.promo.code",
+      "operation": "ecommerce.promo.code",
+      "description": "Promo code",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 207,
+      "id": "erp_all.ecommerce.abandoned.cart",
+      "source_id": "ecommerce.abandoned.cart",
+      "operation": "ecommerce.abandoned.cart",
+      "description": "Abandoned cart recovery",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 208,
+      "id": "erp_all.ecommerce.analytics",
+      "source_id": "ecommerce.analytics",
+      "operation": "ecommerce.analytics",
+      "description": "E-commerce analytics",
+      "layer": {
+        "number": 14,
+        "name": "E-COMMERCE MODULE"
+      }
+    },
+    {
+      "number": 209,
+      "id": "erp_all.property.unit.management",
+      "source_id": "property.unit.management",
+      "operation": "property.unit.management",
+      "description": "Unit property (rumah, apartemen, ruko)",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 210,
+      "id": "erp_all.property.tenant.management",
+      "source_id": "property.tenant.management",
+      "operation": "property.tenant.management",
+      "description": "Tenant management",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 211,
+      "id": "erp_all.property.lease.agreement",
+      "source_id": "property.lease.agreement",
+      "operation": "property.lease.agreement",
+      "description": "Lease agreement",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 212,
+      "id": "erp_all.property.rent.collection",
+      "source_id": "property.rent.collection",
+      "operation": "property.rent.collection",
+      "description": "Rent collection",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 213,
+      "id": "erp_all.property.maintenance",
+      "source_id": "property.maintenance",
+      "operation": "property.maintenance",
+      "description": "Property maintenance",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 214,
+      "id": "erp_all.property.facility",
+      "source_id": "property.facility",
+      "operation": "property.facility",
+      "description": "Facility management",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 215,
+      "id": "erp_all.property.utility",
+      "source_id": "property.utility",
+      "operation": "property.utility",
+      "description": "Utility (listrik, air, gas)",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 216,
+      "id": "erp_all.property.security",
+      "source_id": "property.security",
+      "operation": "property.security",
+      "description": "Security & access control",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 217,
+      "id": "erp_all.property.parking",
+      "source_id": "property.parking",
+      "operation": "property.parking",
+      "description": "Parking management",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 218,
+      "id": "erp_all.property.billing",
+      "source_id": "property.billing",
+      "operation": "property.billing",
+      "description": "Property billing",
+      "layer": {
+        "number": 15,
+        "name": "PROPERTY & REAL ESTATE MODULE"
+      }
+    },
+    {
+      "number": 219,
+      "id": "erp_all.construction.project",
+      "source_id": "construction.project",
+      "operation": "construction.project",
+      "description": "Construction project",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 220,
+      "id": "erp_all.construction.budget",
+      "source_id": "construction.budget",
+      "operation": "construction.budget",
+      "description": "RAB (Rencana Anggaran Biaya)",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 221,
+      "id": "erp_all.construction.progress",
+      "source_id": "construction.progress",
+      "operation": "construction.progress",
+      "description": "Progress billing",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 222,
+      "id": "erp_all.construction.equipment",
+      "source_id": "construction.equipment",
+      "operation": "construction.equipment",
+      "description": "Equipment management",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 223,
+      "id": "erp_all.construction.labor",
+      "source_id": "construction.labor",
+      "operation": "construction.labor",
+      "description": "Labor management",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 224,
+      "id": "erp_all.construction.subcontractor",
+      "source_id": "construction.subcontractor",
+      "operation": "construction.subcontractor",
+      "description": "Subcontractor management",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 225,
+      "id": "erp_all.construction.safety",
+      "source_id": "construction.safety",
+      "operation": "construction.safety",
+      "description": "Safety (HSE/K3)",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 226,
+      "id": "erp_all.construction.quality",
+      "source_id": "construction.quality",
+      "operation": "construction.quality",
+      "description": "Quality control",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 227,
+      "id": "erp_all.construction.drawings",
+      "source_id": "construction.drawings",
+      "operation": "construction.drawings",
+      "description": "Drawings & documents",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 228,
+      "id": "erp_all.construction.handover",
+      "source_id": "construction.handover",
+      "operation": "construction.handover",
+      "description": "Handover & defect liability",
+      "layer": {
+        "number": 16,
+        "name": "CONSTRUCTION MODULE"
+      }
+    },
+    {
+      "number": 229,
+      "id": "erp_all.healthcare.patient",
+      "source_id": "healthcare.patient",
+      "operation": "healthcare.patient",
+      "description": "Patient management",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 230,
+      "id": "erp_all.healthcare.medical.record",
+      "source_id": "healthcare.medical.record",
+      "operation": "healthcare.medical.record",
+      "description": "Medical record (EMR)",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 231,
+      "id": "erp_all.healthcare.appointment",
+      "source_id": "healthcare.appointment",
+      "operation": "healthcare.appointment",
+      "description": "Appointment scheduling",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 232,
+      "id": "erp_all.healthcare.billing",
+      "source_id": "healthcare.billing",
+      "operation": "healthcare.billing",
+      "description": "Healthcare billing",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 233,
+      "id": "erp_all.healthcare.insurance",
+      "source_id": "healthcare.insurance",
+      "operation": "healthcare.insurance",
+      "description": "Asuransi (BPJS, private)",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 234,
+      "id": "erp_all.healthcare.pharmacy",
+      "source_id": "healthcare.pharmacy",
+      "operation": "healthcare.pharmacy",
+      "description": "Pharmacy management",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 235,
+      "id": "erp_all.healthcare.lab",
+      "source_id": "healthcare.lab",
+      "operation": "healthcare.lab",
+      "description": "Laboratorium",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 236,
+      "id": "erp_all.healthcare.radiology",
+      "source_id": "healthcare.radiology",
+      "operation": "healthcare.radiology",
+      "description": "Radiology",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 237,
+      "id": "erp_all.healthcare.inpatient",
+      "source_id": "healthcare.inpatient",
+      "operation": "healthcare.inpatient",
+      "description": "Rawat inap",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 238,
+      "id": "erp_all.healthcare.outpatient",
+      "source_id": "healthcare.outpatient",
+      "operation": "healthcare.outpatient",
+      "description": "Rawat jalan",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 239,
+      "id": "erp_all.healthcare.ambulance",
+      "source_id": "healthcare.ambulance",
+      "operation": "healthcare.ambulance",
+      "description": "Ambulance",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 240,
+      "id": "erp_all.healthcare.clinical.analytics",
+      "source_id": "healthcare.clinical.analytics",
+      "operation": "healthcare.clinical.analytics",
+      "description": "Clinical analytics",
+      "layer": {
+        "number": 17,
+        "name": "HEALTHCARE MODULE"
+      }
+    },
+    {
+      "number": 241,
+      "id": "erp_all.education.student",
+      "source_id": "education.student",
+      "operation": "education.student",
+      "description": "Student management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 242,
+      "id": "erp_all.education.admission",
+      "source_id": "education.admission",
+      "operation": "education.admission",
+      "description": "Admission (PPDB)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 243,
+      "id": "erp_all.education.academic",
+      "source_id": "education.academic",
+      "operation": "education.academic",
+      "description": "Academic (kurikulum, jadwal, nilai)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 244,
+      "id": "erp_all.education.attendance",
+      "source_id": "education.attendance",
+      "operation": "education.attendance",
+      "description": "Attendance siswa",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 245,
+      "id": "erp_all.education.finance",
+      "source_id": "education.finance",
+      "operation": "education.finance",
+      "description": "Finance (SPP, beasiswa)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 246,
+      "id": "erp_all.education.library",
+      "source_id": "education.library",
+      "operation": "education.library",
+      "description": "Library management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 247,
+      "id": "erp_all.education.parent.portal",
+      "source_id": "education.parent.portal",
+      "operation": "education.parent.portal",
+      "description": "Parent portal",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 248,
+      "id": "erp_all.education.teacher",
+      "source_id": "education.teacher",
+      "operation": "education.teacher",
+      "description": "Teacher management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 249,
+      "id": "erp_all.education.report.card",
+      "source_id": "education.report.card",
+      "operation": "education.report.card",
+      "description": "Report card (rapor)",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 250,
+      "id": "erp_all.education.alumni",
+      "source_id": "education.alumni",
+      "operation": "education.alumni",
+      "description": "Alumni management",
+      "layer": {
+        "number": 18,
+        "name": "EDUCATION MODULE"
+      }
+    },
+    {
+      "number": 251,
+      "id": "erp_all.logistics.shipment",
+      "source_id": "logistics.shipment",
+      "operation": "logistics.shipment",
+      "description": "Shipment management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 252,
+      "id": "erp_all.logistics.fleet",
+      "source_id": "logistics.fleet",
+      "operation": "logistics.fleet",
+      "description": "Fleet management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 253,
+      "id": "erp_all.logistics.driver",
+      "source_id": "logistics.driver",
+      "operation": "logistics.driver",
+      "description": "Driver management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 254,
+      "id": "erp_all.logistics.route",
+      "source_id": "logistics.route",
+      "operation": "logistics.route",
+      "description": "Route optimization",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 255,
+      "id": "erp_all.logistics.tracking",
+      "source_id": "logistics.tracking",
+      "operation": "logistics.tracking",
+      "description": "Real-time tracking",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 256,
+      "id": "erp_all.logistics.warehouse",
+      "source_id": "logistics.warehouse",
+      "operation": "logistics.warehouse",
+      "description": "Warehouse management (WMS)",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 257,
+      "id": "erp_all.logistics.cross.docking",
+      "source_id": "logistics.cross.docking",
+      "operation": "logistics.cross.docking",
+      "description": "Cross docking",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 258,
+      "id": "erp_all.logistics.customs",
+      "source_id": "logistics.customs",
+      "operation": "logistics.customs",
+      "description": "Customs (import/export)",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 259,
+      "id": "erp_all.logistics.freight",
+      "source_id": "logistics.freight",
+      "operation": "logistics.freight",
+      "description": "Freight forwarding",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 260,
+      "id": "erp_all.logistics.courier",
+      "source_id": "logistics.courier",
+      "operation": "logistics.courier",
+      "description": "Courier management",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 261,
+      "id": "erp_all.logistics.last.mile",
+      "source_id": "logistics.last.mile",
+      "operation": "logistics.last.mile",
+      "description": "Last mile delivery",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 262,
+      "id": "erp_all.logistics.reverse.logistics",
+      "source_id": "logistics.reverse.logistics",
+      "operation": "logistics.reverse.logistics",
+      "description": "Reverse logistics (return)",
+      "layer": {
+        "number": 19,
+        "name": "LOGISTICS & TRANSPORTATION MODULE"
+      }
+    },
+    {
+      "number": 263,
+      "id": "erp_all.agriculture.farm",
+      "source_id": "agriculture.farm",
+      "operation": "agriculture.farm",
+      "description": "Farm management",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 264,
+      "id": "erp_all.agriculture.crop",
+      "source_id": "agriculture.crop",
+      "operation": "agriculture.crop",
+      "description": "Crop tracking",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 265,
+      "id": "erp_all.agriculture.harvest",
+      "source_id": "agriculture.harvest",
+      "operation": "agriculture.harvest",
+      "description": "Harvest management",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 266,
+      "id": "erp_all.agriculture.inventory",
+      "source_id": "agriculture.inventory",
+      "operation": "agriculture.inventory",
+      "description": "Inventory (benih, pupuk, pestisida)",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 267,
+      "id": "erp_all.agriculture.equipment",
+      "source_id": "agriculture.equipment",
+      "operation": "agriculture.equipment",
+      "description": "Equipment management",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 268,
+      "id": "erp_all.agriculture.labor",
+      "source_id": "agriculture.labor",
+      "operation": "agriculture.labor",
+      "description": "Farm labor",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 269,
+      "id": "erp_all.agriculture.weather",
+      "source_id": "agriculture.weather",
+      "operation": "agriculture.weather",
+      "description": "Weather integration",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 270,
+      "id": "erp_all.agriculture.supply.chain",
+      "source_id": "agriculture.supply.chain",
+      "operation": "agriculture.supply.chain",
+      "description": "Supply chain",
+      "layer": {
+        "number": 20,
+        "name": "AGRICULTURE MODULE"
+      }
+    },
+    {
+      "number": 271,
+      "id": "erp_all.integration.api.rest",
+      "source_id": "integration.api.rest",
+      "operation": "integration.api.rest",
+      "description": "REST API endpoint",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 272,
+      "id": "erp_all.integration.api.graphql",
+      "source_id": "integration.api.graphql",
+      "operation": "integration.api.graphql",
+      "description": "GraphQL endpoint",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 273,
+      "id": "erp_all.integration.api.grpc",
+      "source_id": "integration.api.grpc",
+      "operation": "integration.api.grpc",
+      "description": "gRPC endpoint",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 274,
+      "id": "erp_all.integration.api.websocket",
+      "source_id": "integration.api.websocket",
+      "operation": "integration.api.websocket",
+      "description": "WebSocket real-time",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 275,
+      "id": "erp_all.integration.webhook.send",
+      "source_id": "integration.webhook.send",
+      "operation": "integration.webhook.send",
+      "description": "Send webhook",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 276,
+      "id": "erp_all.integration.webhook.receive",
+      "source_id": "integration.webhook.receive",
+      "operation": "integration.webhook.receive",
+      "description": "Receive webhook",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 277,
+      "id": "erp_all.integration.event.bus",
+      "source_id": "integration.event.bus",
+      "operation": "integration.event.bus",
+      "description": "Internal event bus (Kafka)",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 278,
+      "id": "erp_all.integration.message.queue",
+      "source_id": "integration.message.queue",
+      "operation": "integration.message.queue",
+      "description": "Message queue (RabbitMQ)",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 279,
+      "id": "erp_all.integration.etl.pipeline",
+      "source_id": "integration.etl.pipeline",
+      "operation": "integration.etl.pipeline",
+      "description": "ETL pipeline",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 280,
+      "id": "erp_all.integration.data.sync",
+      "source_id": "integration.data.sync",
+      "operation": "integration.data.sync",
+      "description": "Bidirectional data sync",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 281,
+      "id": "erp_all.integration.scheduler",
+      "source_id": "integration.scheduler",
+      "operation": "integration.scheduler",
+      "description": "Scheduled sync (cron)",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 282,
+      "id": "erp_all.integration.connector.builder",
+      "source_id": "integration.connector.builder",
+      "operation": "integration.connector.builder",
+      "description": "Custom connector builder",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 283,
+      "id": "erp_all.integration.auth.oauth2",
+      "source_id": "integration.auth.oauth2",
+      "operation": "integration.auth.oauth2",
+      "description": "OAuth2 client",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 284,
+      "id": "erp_all.integration.auth.api_key",
+      "source_id": "integration.auth.api_key",
+      "operation": "integration.auth.api_key",
+      "description": "API key auth",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 285,
+      "id": "erp_all.integration.auth.jwt",
+      "source_id": "integration.auth.jwt",
+      "operation": "integration.auth.jwt",
+      "description": "JWT auth",
+      "layer": {
+        "number": 21,
+        "name": "INTEGRATION HUB"
+      }
+    },
+    {
+      "number": 286,
+      "id": "erp_all.connector.whm.cpanel",
+      "source_id": "connector.whm.cpanel",
+      "operation": "connector.whm.cpanel",
+      "description": "WHM/cPanel integration (untuk ISP)",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 287,
+      "id": "erp_all.connector.wordpress",
+      "source_id": "connector.wordpress",
+      "operation": "connector.wordpress",
+      "description": "WordPress integration",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 288,
+      "id": "erp_all.connector.shopify",
+      "source_id": "connector.shopify",
+      "operation": "connector.shopify",
+      "description": "Shopify integration",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 289,
+      "id": "erp_all.connector.woocommerce",
+      "source_id": "connector.woocommerce",
+      "operation": "connector.woocommerce",
+      "description": "WooCommerce integration",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 290,
+      "id": "erp_all.connector.tokopedia",
+      "source_id": "connector.tokopedia",
+      "operation": "connector.tokopedia",
+      "description": "Tokopedia API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 291,
+      "id": "erp_all.connector.shopee",
+      "source_id": "connector.shopee",
+      "operation": "connector.shopee",
+      "description": "Shopee API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 292,
+      "id": "erp_all.connector.hubspot",
+      "source_id": "connector.hubspot",
+      "operation": "connector.hubspot",
+      "description": "HubSpot CRM",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 293,
+      "id": "erp_all.connector.salesforce",
+      "source_id": "connector.salesforce",
+      "operation": "connector.salesforce",
+      "description": "Salesforce CRM",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 294,
+      "id": "erp_all.connector.zoho",
+      "source_id": "connector.zoho",
+      "operation": "connector.zoho",
+      "description": "Zoho CRM",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 295,
+      "id": "erp_all.connector.wa.business",
+      "source_id": "connector.wa.business",
+      "operation": "connector.wa.business",
+      "description": "WhatsApp Business API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 296,
+      "id": "erp_all.connector.telegram.bot",
+      "source_id": "connector.telegram.bot",
+      "operation": "connector.telegram.bot",
+      "description": "Telegram Bot API",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 297,
+      "id": "erp_all.connector.xendit",
+      "source_id": "connector.xendit",
+      "operation": "connector.xendit",
+      "description": "Xendit (payment gateway)",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 298,
+      "id": "erp_all.connector.midtrans",
+      "source_id": "connector.midtrans",
+      "operation": "connector.midtrans",
+      "description": "Midtrans (payment gateway)",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 299,
+      "id": "erp_all.connector.djp.efaktur",
+      "source_id": "connector.djp.efaktur",
+      "operation": "connector.djp.efaktur",
+      "description": "DJP e-Faktur",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 300,
+      "id": "erp_all.connector.djp.ebupot",
+      "source_id": "connector.djp.ebupot",
+      "operation": "connector.djp.ebupot",
+      "description": "DJP e-Bupot",
+      "layer": {
+        "number": 22,
+        "name": "EXTERNAL CONNECTORS"
+      }
+    },
+    {
+      "number": 301,
+      "id": "erp_all.workflow.define",
+      "source_id": "workflow.define",
+      "operation": "workflow.define",
+      "description": "Define workflow (BPMN)",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 302,
+      "id": "erp_all.workflow.trigger.event",
+      "source_id": "workflow.trigger.event",
+      "operation": "workflow.trigger.event",
+      "description": "Trigger on event",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 303,
+      "id": "erp_all.workflow.trigger.schedule",
+      "source_id": "workflow.trigger.schedule",
+      "operation": "workflow.trigger.schedule",
+      "description": "Trigger on schedule",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 304,
+      "id": "erp_all.workflow.trigger.webhook",
+      "source_id": "workflow.trigger.webhook",
+      "operation": "workflow.trigger.webhook",
+      "description": "Trigger on webhook",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 305,
+      "id": "erp_all.workflow.action.send_email",
+      "source_id": "workflow.action.send_email",
+      "operation": "workflow.action.send_email",
+      "description": "Action: send email",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 306,
+      "id": "erp_all.workflow.action.call_api",
+      "source_id": "workflow.action.call_api",
+      "operation": "workflow.action.call_api",
+      "description": "Action: call external API",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 307,
+      "id": "erp_all.workflow.action.update_record",
+      "source_id": "workflow.action.update_record",
+      "operation": "workflow.action.update_record",
+      "description": "Action: update record",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 308,
+      "id": "erp_all.workflow.action.create_task",
+      "source_id": "workflow.action.create_task",
+      "operation": "workflow.action.create_task",
+      "description": "Action: create task",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 309,
+      "id": "erp_all.workflow.condition.branch",
+      "source_id": "workflow.condition.branch",
+      "operation": "workflow.condition.branch",
+      "description": "Conditional branching",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 310,
+      "id": "erp_all.workflow.parallel.split",
+      "source_id": "workflow.parallel.split",
+      "operation": "workflow.parallel.split",
+      "description": "Parallel execution",
+      "layer": {
+        "number": 23,
+        "name": "WORKFLOW ENGINE"
+      }
+    },
+    {
+      "number": 311,
+      "id": "erp_all.report.financial.statement",
+      "source_id": "report.financial.statement",
+      "operation": "report.financial.statement",
+      "description": "Laporan keuangan (Neraca, LR, Arus Kas)",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 312,
+      "id": "erp_all.report.sales.analytics",
+      "source_id": "report.sales.analytics",
+      "operation": "report.sales.analytics",
+      "description": "Sales analytics",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 313,
+      "id": "erp_all.report.inventory.movement",
+      "source_id": "report.inventory.movement",
+      "operation": "report.inventory.movement",
+      "description": "Inventory movement report",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 314,
+      "id": "erp_all.report.customer.aging",
+      "source_id": "report.customer.aging",
+      "operation": "report.customer.aging",
+      "description": "Customer aging (AR)",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 315,
+      "id": "erp_all.report.vendor.aging",
+      "source_id": "report.vendor.aging",
+      "operation": "report.vendor.aging",
+      "description": "Vendor aging (AP)",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 316,
+      "id": "erp_all.report.profit.loss",
+      "source_id": "report.profit.loss",
+      "operation": "report.profit.loss",
+      "description": "Profit & loss",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 317,
+      "id": "erp_all.report.cash.flow",
+      "source_id": "report.cash.flow",
+      "operation": "report.cash.flow",
+      "description": "Cash flow statement",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 318,
+      "id": "erp_all.report.kpi.dashboard",
+      "source_id": "report.kpi.dashboard",
+      "operation": "report.kpi.dashboard",
+      "description": "KPI dashboard",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 319,
+      "id": "erp_all.report.custom.query",
+      "source_id": "report.custom.query",
+      "operation": "report.custom.query",
+      "description": "Custom SQL query",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 320,
+      "id": "erp_all.report.export.excel",
+      "source_id": "report.export.excel",
+      "operation": "report.export.excel",
+      "description": "Export ke Excel/PDF",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 321,
+      "id": "erp_all.report.scheduled",
+      "source_id": "report.scheduled",
+      "operation": "report.scheduled",
+      "description": "Scheduled report (email)",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 322,
+      "id": "erp_all.report.executive.summary",
+      "source_id": "report.executive.summary",
+      "operation": "report.executive.summary",
+      "description": "Executive summary",
+      "layer": {
+        "number": 24,
+        "name": "REPORT & ANALYTICS"
+      }
+    },
+    {
+      "number": 323,
+      "id": "erp_all.comm.email.send",
+      "source_id": "comm.email.send",
+      "operation": "comm.email.send",
+      "description": "Send email",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 324,
+      "id": "erp_all.comm.sms.send",
+      "source_id": "comm.sms.send",
+      "operation": "comm.sms.send",
+      "description": "Send SMS",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 325,
+      "id": "erp_all.comm.wa.send",
+      "source_id": "comm.wa.send",
+      "operation": "comm.wa.send",
+      "description": "Send WhatsApp",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 326,
+      "id": "erp_all.comm.push.notify",
+      "source_id": "comm.push.notify",
+      "operation": "comm.push.notify",
+      "description": "Push notification",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 327,
+      "id": "erp_all.comm.template.management",
+      "source_id": "comm.template.management",
+      "operation": "comm.template.management",
+      "description": "Template management",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 328,
+      "id": "erp_all.comm.campaign.bulk",
+      "source_id": "comm.campaign.bulk",
+      "operation": "comm.campaign.bulk",
+      "description": "Bulk campaign",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 329,
+      "id": "erp_all.comm.auto.responder",
+      "source_id": "comm.auto.responder",
+      "operation": "comm.auto.responder",
+      "description": "Auto responder",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 330,
+      "id": "erp_all.comm.chat.internal",
+      "source_id": "comm.chat.internal",
+      "operation": "comm.chat.internal",
+      "description": "Internal chat (team)",
+      "layer": {
+        "number": 25,
+        "name": "COMMUNICATION MODULE"
+      }
+    },
+    {
+      "number": 331,
+      "id": "erp_all.bi.etl.extract",
+      "source_id": "bi.etl.extract",
+      "operation": "bi.etl.extract",
+      "description": "ETL: extract",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 332,
+      "id": "erp_all.bi.etl.transform",
+      "source_id": "bi.etl.transform",
+      "operation": "bi.etl.transform",
+      "description": "ETL: transform",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 333,
+      "id": "erp_all.bi.etl.load",
+      "source_id": "bi.etl.load",
+      "operation": "bi.etl.load",
+      "description": "ETL: load ke data warehouse",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 334,
+      "id": "erp_all.bi.olap.cube",
+      "source_id": "bi.olap.cube",
+      "operation": "bi.olap.cube",
+      "description": "OLAP cube",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 335,
+      "id": "erp_all.bi.datawarehouse",
+      "source_id": "bi.datawarehouse",
+      "operation": "bi.datawarehouse",
+      "description": "Data warehouse (Snowflake schema)",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 336,
+      "id": "erp_all.bi.dashboard.realtime",
+      "source_id": "bi.dashboard.realtime",
+      "operation": "bi.dashboard.realtime",
+      "description": "Real-time dashboard",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 337,
+      "id": "erp_all.bi.predictive.analytics",
+      "source_id": "bi.predictive.analytics",
+      "operation": "bi.predictive.analytics",
+      "description": "Predictive analytics (ML)",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 338,
+      "id": "erp_all.bi.report.scheduling",
+      "source_id": "bi.report.scheduling",
+      "operation": "bi.report.scheduling",
+      "description": "Scheduled report",
+      "layer": {
+        "number": 26,
+        "name": "BI & DATA WAREHOUSE"
+      }
+    },
+    {
+      "number": 339,
+      "id": "erp_all.builder.scaffold.project",
+      "source_id": "builder.scaffold.project",
+      "operation": "builder.scaffold.project",
+      "description": "Scaffold ERP project",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 340,
+      "id": "erp_all.builder.gen.frontend",
+      "source_id": "builder.gen.frontend",
+      "operation": "builder.gen.frontend",
+      "description": "Generate frontend (Next.js)",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 341,
+      "id": "erp_all.builder.gen.backend",
+      "source_id": "builder.gen.backend",
+      "operation": "builder.gen.backend",
+      "description": "Generate backend (NestJS)",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 342,
+      "id": "erp_all.builder.gen.database",
+      "source_id": "builder.gen.database",
+      "operation": "builder.gen.database",
+      "description": "Generate database (PostgreSQL)",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 343,
+      "id": "erp_all.builder.gen.api",
+      "source_id": "builder.gen.api",
+      "operation": "builder.gen.api",
+      "description": "Generate REST & GraphQL API",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 344,
+      "id": "erp_all.builder.gen.auth",
+      "source_id": "builder.gen.auth",
+      "operation": "builder.gen.auth",
+      "description": "Generate auth (JWT, OAuth)",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 345,
+      "id": "erp_all.builder.gen.workflow",
+      "source_id": "builder.gen.workflow",
+      "operation": "builder.gen.workflow",
+      "description": "Generate workflow",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 346,
+      "id": "erp_all.builder.gen.report",
+      "source_id": "builder.gen.report",
+      "operation": "builder.gen.report",
+      "description": "Generate report templates",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 347,
+      "id": "erp_all.builder.gen.dashboard",
+      "source_id": "builder.gen.dashboard",
+      "operation": "builder.gen.dashboard",
+      "description": "Generate dashboard",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 348,
+      "id": "erp_all.builder.gen.menu",
+      "source_id": "builder.gen.menu",
+      "operation": "builder.gen.menu",
+      "description": "Generate menu sesuai modul",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 349,
+      "id": "erp_all.builder.test.run",
+      "source_id": "builder.test.run",
+      "operation": "builder.test.run",
+      "description": "Run automated tests",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 350,
+      "id": "erp_all.builder.deploy.ssh",
+      "source_id": "builder.deploy.ssh",
+      "operation": "builder.deploy.ssh",
+      "description": "Deploy via SSH ke VPS",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 351,
+      "id": "erp_all.builder.deploy.docker",
+      "source_id": "builder.deploy.docker",
+      "operation": "builder.deploy.docker",
+      "description": "Deploy via Docker Compose",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 352,
+      "id": "erp_all.builder.deploy.k8s",
+      "source_id": "builder.deploy.k8s",
+      "operation": "builder.deploy.k8s",
+      "description": "Deploy via Kubernetes",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 353,
+      "id": "erp_all.builder.ssl.setup",
+      "source_id": "builder.ssl.setup",
+      "operation": "builder.ssl.setup",
+      "description": "Setup SSL (Let's Encrypt)",
+      "layer": {
+        "number": 27,
+        "name": "AUTO-BUILDER & DEPLOYER"
+      }
+    },
+    {
+      "number": 354,
+      "id": "erp_all.compliance.pdp",
+      "source_id": "compliance.pdp",
+      "operation": "compliance.pdp",
+      "description": "UU PDP (Perlindungan Data Pribadi)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 355,
+      "id": "erp_all.compliance.pajak",
+      "source_id": "compliance.pajak",
+      "operation": "compliance.pajak",
+      "description": "Compliance pajak (PPN, PPh)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 356,
+      "id": "erp_all.compliance.bpjs",
+      "source_id": "compliance.bpjs",
+      "operation": "compliance.bpjs",
+      "description": "BPJS compliance",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 357,
+      "id": "erp_all.compliance.komdigi",
+      "source_id": "compliance.komdigi",
+      "operation": "compliance.komdigi",
+      "description": "Komdigi (untuk ISP)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 358,
+      "id": "erp_all.compliance.bssn",
+      "source_id": "compliance.bssn",
+      "operation": "compliance.bssn",
+      "description": "BSSN (cyber security)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 359,
+      "id": "erp_all.compliance.iso27001",
+      "source_id": "compliance.iso27001",
+      "operation": "compliance.iso27001",
+      "description": "ISO 27001",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 360,
+      "id": "erp_all.compliance.soc2",
+      "source_id": "compliance.soc2",
+      "operation": "compliance.soc2",
+      "description": "SOC 2",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 361,
+      "id": "erp_all.compliance.hipaa",
+      "source_id": "compliance.hipaa",
+      "operation": "compliance.hipaa",
+      "description": "HIPAA (untuk healthcare)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 362,
+      "id": "erp_all.compliance.pci.dss",
+      "source_id": "compliance.pci.dss",
+      "operation": "compliance.pci.dss",
+      "description": "PCI-DSS (untuk payment)",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    },
+    {
+      "number": 363,
+      "id": "erp_all.compliance.audit.trail",
+      "source_id": "compliance.audit.trail",
+      "operation": "compliance.audit.trail",
+      "description": "Audit trail compliance",
+      "layer": {
+        "number": 28,
+        "name": "COMPLIANCE & REGULATORY"
+      }
+    }
+  ]
+}

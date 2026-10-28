@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "release": "2026.10.28.2",
+  "previous": "2026.10.28.1",
+  "restart_required": true,
+  "ascii_brand_unchanged": true,
+  "lsp_still_enabled": true,
+  "native_tools": 15,
+  "mcp_tools": 17,
+  "total_tools": 32,
+  "gateway_limit": 32,
+  "core_dispatch": "media action=capabilities; legacy direct name remains callable",
+  "existing_sessions_signalled": false,
+  "gateway_modified": false,
+  "backup_private": "/Users/id/.config/harmonika-terminal/tool-budget-backup-2026.10.28.2"
+}

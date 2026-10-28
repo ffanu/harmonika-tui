@@ -94,7 +94,7 @@ test('structured provider error remains explicit and degraded', async () => {
 
 /* ---------------- tool registry ---------------- */
 
-test('listTools exposes 8 tools including project creation with closed schemas', () => {
+test('listTools exposes 11 tools including project creation with closed schemas', () => {
   const core = createCore({ callerCwd: mkProject('registry') });
   const tools = core.listTools();
   assert.deepEqual(
@@ -107,6 +107,9 @@ test('listTools exposes 8 tools including project creation with closed schemas',
       'read_pdf',
       'analyze_video',
       'transcribe_audio',
+      'media_capabilities',
+      'browse_page',
+      'upscale_image',
       'generate_image',
     ]
   );
@@ -664,7 +667,7 @@ test('mcp-server.cjs speaks MCP: initialize + tools/list over stdio, stdout prot
     assert.deepEqual(ping, {});
 
     const listed = await request('tools/list', {});
-    assert.equal(listed.tools.length, 8);
+    assert.equal(listed.tools.length, 11);
     assert.deepEqual(
       listed.tools.map((t) => t.name),
       [
@@ -675,7 +678,10 @@ test('mcp-server.cjs speaks MCP: initialize + tools/list over stdio, stdout prot
         'read_pdf',
         'analyze_video',
         'transcribe_audio',
-        'generate_image',
+        'media_capabilities',
+      'browse_page',
+      'upscale_image',
+      'generate_image',
       ]
     );
     assert.equal(foreignLines, 0, 'stdout must carry MCP protocol frames only');
@@ -704,7 +710,7 @@ test('GPU bridge writes guarded PNG without calling mentor RPC',async()=>{
 });
 test('mentor fallback is allowed only when GPU explicitly did not dispatch',async()=>{
  const project=mkProject('bridge-fallback');let calls=0;
- const core=createCore({callerCwd:project,rpc:async()=>{calls++;return {ok:true,status:'ok',mime_type:'image/png',image_base64:pngBuffer().toString('base64')};},mediaBridge:{generate:async()=>({handled:false,not_dispatched:true}),close(){}}});
+ const core=createCore({allowMediaFallback:true,callerCwd:project,rpc:async()=>{calls++;return {ok:true,status:'ok',mime_type:'image/png',image_base64:pngBuffer().toString('base64')};},mediaBridge:{generate:async()=>({handled:false,not_dispatched:true}),close(){}}});
  assert.notEqual((await core.callTool('generate_image',{prompt:'test',output_file:'fallback.png'})).isError,true);assert.equal(calls,1);
 });
 test('uncertain GPU submission never falls back or writes a second image',async()=>{
@@ -739,4 +745,18 @@ test('failed media readiness never falsely reports generation ready or uses SSH'
     const response=await core.callTool('capabilities',{}), data=parseResult(response);
     assert.equal(response.isError,true);assert.equal(data.backend.available,false);assert.equal(legacyCalls,0);
   } finally {core.shutdown();}
+});
+
+
+test('offline media returns structured degraded without implicit mentor fallback',async()=>{
+ const project=mkProject('offline-structured');let calls=0;
+ const core=createCore({callerCwd:project,rpc:async()=>{calls++;throw new Error('must not dispatch');},mediaBridge:{generate:async()=>({handled:false,not_dispatched:true}),close(){}}});
+ try {const r=await core.callTool('generate_image',{prompt:'a city',output_file:'offline.png'}),v=parseResult(r);assert.equal(r.isError,true);assert.equal(v.status,'degraded');assert.equal(v.error,'image_engine_offline');assert.equal(v.retry_safe,true);assert.equal(v.operation_state,'not_dispatched');assert.equal(calls,0);assert.equal(fs.existsSync(path.join(project,'offline.png')),false);}finally{core.shutdown();}
+});
+
+test('GPU busy and VRAM full are customer-safe structured tool responses',async()=>{
+ for(const code of ['worker_busy','worker_vram_full','invalid_worker_response']){
+  const project=mkProject('degraded-'+code),core=createCore({callerCwd:project,rpc:neverRpc,mediaBridge:{generate:async()=>{const e=new Error('PRIVATE_SENTINEL_CUSTOMER');e.code=code;throw e;},close(){}}});
+  try{const r=await core.callTool('generate_image',{prompt:'PRIVATE_SENTINEL_CUSTOMER',output_file:'result.png'}),v=parseResult(r);assert.equal(v.status,'degraded');assert.equal(v.error,code);assert.equal(JSON.stringify(v).includes('PRIVATE_SENTINEL_CUSTOMER'),false);assert.equal(fs.existsSync(path.join(project,'result.png')),false);}finally{core.shutdown();}
+ }
 });

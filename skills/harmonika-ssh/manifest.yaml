@@ -1,0 +1,38 @@
+schema_version: 1
+id: harmonika-ssh
+name: Harmonika SSH
+description: Registered local SSH and SFTP connector with key authentication.
+entrypoint: tools/ssh-mcp.cjs
+platforms: [darwin, linux]
+operations:
+  - id: ssh.connect
+    tool: ssh_connect
+  - id: ssh.exec
+    tool: ssh_exec
+  - id: ssh.upload
+    tool: ssh_upload
+  - id: ssh.download
+    tool: ssh_download
+  - id: remote.targets
+    tool: remote_targets
+  - id: telnet.connect
+    tool: telnet_connect
+  - id: telnet.exec
+    tool: telnet_exec
+  - id: vnc.connect
+    tool: vnc_connect
+  - id: vnc.capture
+    tool: vnc_capture
+  - id: vnc.control
+    tool: vnc_control
+readiness:
+  requires: [paramiko_runtime, registered_target, private_key, pinned_known_hosts]
+permissions:
+  native_tui_approval: true
+  public_api: false
+  bash_ssh: false
+limits:
+  connect_seconds: 8
+  exec_seconds: 120
+  transfer_bytes: 10485760
+  output_bytes: 65536

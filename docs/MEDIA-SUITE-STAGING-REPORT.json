@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-27T08:20:36.507821+00:00",
+  "status": "staged_not_installed",
+  "components": {
+    "audio.transcribe": "implementation_and_tests_prepared",
+    "image.upscale": "implementation_and_tests_prepared",
+    "browser.inspect": "navigation_inspection_prepared_autonomous_actions_not_implemented",
+    "audio.synthesize": "research_adapter_prepared_commercial_activation_blocked_by_NC_weights"
+  },
+  "local_tests": {
+    "passed": 23,
+    "failures": 0,
+    "python": "3.9 local contract QA, production requires3.12",
+    "aiohttp": "3.12.15 QA; deployment pins3.14.5"
+  },
+  "target_connectivity": [
+    {
+      "port": 22023,
+      "tcp_connected": false,
+      "errno": 35
+    },
+    {
+      "port": 22022,
+      "tcp_connected": false,
+      "errno": 35
+    }
+  ],
+  "native_windows_job_object_tested": false,
+  "real_target_inference_tested": false,
+  "target_models_downloaded_this_task": false,
+  "server_files_modified": false,
+  "services_started_or_restarted": false,
+  "shared_routes_activated": false,
+  "customer_data_used": false,
+  "code_scope": "backend/media_suite + tests/media_suite",
+  "reviewer": "OpenCode read-only upstream compatibility/license audit",
+  "implementation": "Codex",
+  "superseded_by": "MEDIA-SUITE-ACTIVATION-REPORT.json"
+}

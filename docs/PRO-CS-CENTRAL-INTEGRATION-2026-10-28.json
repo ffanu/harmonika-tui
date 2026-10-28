@@ -1,0 +1,234 @@
+{
+  "checked_at": "2026-10-28T02:14:43.762550+00:00",
+  "status": "central_hook_and_agent_native_provider_active",
+  "production_hook_active": true,
+  "shared_core_engine_active": true,
+  "integration": "advisory_preflight_not_delivery_authorization",
+  "target": "harmonika-ai.service",
+  "target_path": "/opt/harmonika-ai/api/server.js",
+  "stage": "/opt/harmonika-ai/pro-cs-engine-stage",
+  "unit_tests_passed": 12,
+  "handler_tests": [
+    {
+      "client": "public-ai",
+      "streaming": false,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "public-ai",
+      "streaming": true,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "member-ai",
+      "streaming": false,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "member-ai",
+      "streaming": true,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "customer-agent",
+      "streaming": false,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "customer-agent",
+      "streaming": true,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "website-cs-autoreply",
+      "streaming": false,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "website-cs-autoreply",
+      "streaming": true,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "website-cs-preview",
+      "streaming": false,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "website-cs-preview",
+      "streaming": true,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "internal-agent",
+      "streaming": false,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    },
+    {
+      "client": "internal-agent",
+      "streaming": true,
+      "http": 200,
+      "pro_cs": "connected",
+      "contract_preserved": true,
+      "provider": "synthetic_fixture",
+      "engine": "real_private_pro_cs"
+    }
+  ],
+  "review": {
+    "Codex": "implementation and tests",
+    "OpenCode": "independent read-only review; completed; UTF8/patch assertions/contract preservation/circuit breaker addressed"
+  },
+  "existing_customer_channel_sources_modified": true,
+  "existing_service_processes_restarted": [
+    "harmonika-ai.service"
+  ],
+  "pending": "No pending provider migration. Full customer response quality and all media/model adapters remain outside synthetic verification.",
+  "sha256": {
+    "engine-bridge.cjs": "fdf0d0e663555262cd29325244f029375ba93f4bf2d2bb06cec1707c66eb8573",
+    "README.md": "91881e6e1bf929aba3e7a4c8ff6035b68990134e8ae7d6f99d774060a317c84e",
+    "patch_engine.py": "d1958284eecaf5e0171d70ff5a55d470e45ac5436274ebd4f02afc28a7686819",
+    "activate.py": "0b09ac6f31cf822ff611f1387f2da69793a3168f0f7a87e60282235a271614ca"
+  },
+  "restart": {
+    "user_explicitly_approved": true,
+    "old_pid": 1487202,
+    "new_pid": 2226199,
+    "health_http": 200
+  },
+  "production_handler_tests": [
+    {
+      "client": "public-ai",
+      "http": 200,
+      "pro_cs": "connected",
+      "test": "deterministic_tool_selection_only",
+      "provider_invoked": false,
+      "customer_messages_sent": false
+    },
+    {
+      "client": "customer-agent",
+      "http": 200,
+      "pro_cs": "connected",
+      "test": "deterministic_tool_selection_only",
+      "provider_invoked": false,
+      "customer_messages_sent": false
+    },
+    {
+      "client": "website-cs-autoreply",
+      "http": 200,
+      "pro_cs": "connected",
+      "test": "deterministic_tool_selection_only",
+      "provider_invoked": false,
+      "customer_messages_sent": false
+    },
+    {
+      "client": "website-cs-preview",
+      "http": 200,
+      "pro_cs": "connected",
+      "test": "deterministic_tool_selection_only",
+      "provider_invoked": false,
+      "customer_messages_sent": false
+    },
+    {
+      "client": "member-ai",
+      "http": 422,
+      "pro_cs": "connected",
+      "test": "attachment_guard_negative",
+      "provider_invoked": false,
+      "customer_messages_sent": false
+    }
+  ],
+  "production_tui_test": {
+    "public_api_http": 200,
+    "real_internal_model_decision": true,
+    "tool_contract_preserved": true,
+    "finish_reason": "tool_calls",
+    "no_function_executed": true
+  },
+  "agent_worker_provider_routing": {
+    "current": "native_harmonika_only",
+    "modified": true,
+    "configured_providers": [
+      "harmonika"
+    ],
+    "legacy_direct_providers_enabled": false,
+    "local_opencode_bypassed": true
+  },
+  "customer_messages_sent_by_tests": false,
+  "production_runtime_metadata": {
+    "connected_clients": [
+      "public-ai",
+      "customer-agent",
+      "website-cs-autoreply",
+      "website-cs-preview",
+      "member-ai",
+      "internal-agent"
+    ],
+    "kind": "advisory_preflight",
+    "observed_latency_ms": [
+      36,
+      2,
+      1,
+      2,
+      1,
+      3
+    ],
+    "raw_customer_logs_collected": false
+  },
+  "agent_provider_migration_report": "/Users/id/Projects/harmonika-cs-provider/ACTIVATION-REPORT.json",
+  "channel_routing": {
+    "cs": [
+      "codex",
+      "opencode/zai"
+    ],
+    "hai_text": [
+      "google",
+      "codex"
+    ],
+    "cs_google_enabled": false
+  },
+  "current_channel_report": "/Users/id/Projects/harmonika-cs-provider/CHANNEL-ROUTING-REPORT.json"
+}

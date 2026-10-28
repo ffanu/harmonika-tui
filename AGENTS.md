@@ -9,6 +9,10 @@
 - Skill tidak boleh mengklaim tool/provider/dependensi yang belum diuji tersedia.
 - Root Codex mengintegrasikan dan menguji. Worker hanya mengubah scope tugasnya.
 - Jangan masukkan credential/session/private account ke paket atau log.
+- Workbench memakai server/socket tmux privat per peluncuran; jangan mengubah
+  konfigurasi tmux pengguna atau mengirim signal ke sesi yang sudah berjalan.
+- Metrik hanya metadata read-only. Jangan membaca messages.parts/title atau
+  membuka log backend mentah demi panel monitoring; jangan menebak token/biaya/ETA.
 
 ## Filosofi core mandiri
 

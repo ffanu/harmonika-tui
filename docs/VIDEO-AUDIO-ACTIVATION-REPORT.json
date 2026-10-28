@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-28",
+  "status": "owner_terminal_active",
+  "video_profiles": [
+    {
+      "seconds": 1,
+      "width": 832,
+      "height": 480
+    },
+    {
+      "seconds": 10,
+      "width": 480,
+      "height": 272,
+      "frames": 160
+    }
+  ],
+  "speech": {
+    "active": true,
+    "languages": [
+      "id",
+      "en"
+    ],
+    "voice_quality": "synthetic",
+    "engine_location": "PC1 CPU",
+    "mcp_action": "media.synthesize_speech"
+  },
+  "narration": {
+    "active": true,
+    "mcp_action": "video.narrate",
+    "full_native_terminal_test": "passed",
+    "speech_is_not_truncated": true
+  },
+  "artifact": {
+    "path": "/Users/id/Downloads/harmonika-ai/video/promosi-internet-harmonika-10-detik-suara.mp4",
+    "duration_seconds": 10,
+    "audio_codec": "aac",
+    "video_codec": "h264",
+    "bytes": 217950,
+    "sha256": "d12b1eb50891c3afcc82f0a57ef1da95b8d0d57f3e634694173aeeef7254406a",
+    "decode": "passed",
+    "audio_peak_db": -3.1
+  },
+  "tests": {
+    "video_routing_python": 13,
+    "video_toolkit_python": 23,
+    "node": 13,
+    "total_passed": 49
+  },
+  "main_linux_gateways_restarted": false,
+  "user_tui_signaled": false,
+  "tool_budget": 31,
+  "web_production_activation": "still_separately_staged_not_claimed_active",
+  "customer_data_used": false
+}

@@ -1,0 +1,35 @@
+[Unit]
+Description=Harmonika private SSH connector API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=harmonika-remote
+Group=harmonika-remote
+WorkingDirectory=/opt/harmonika-ai/remote-access/current
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HARMONIKA_REMOTE_ROOT=/var/lib/harmonika-remote-access
+Environment=HARMONIKA_SSH_STATE_DIR=/var/lib/harmonika-remote-access/worker-audit
+Environment=HARMONIKA_SSH_CONFIG=/etc/harmonika-remote/targets.json
+Environment=HARMONIKA_REMOTE_TOKEN_FILE=/etc/harmonika-remote/api.token
+Environment=HARMONIKA_REMOTE_APPROVAL_FILE=/etc/harmonika-remote/approval.token
+Environment=HARMONIKA_REMOTE_PORT=18231
+ExecStart=/opt/harmonika-ai/remote-access/venv/bin/python -m remote_access.api
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/harmonika-remote-access
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+MemoryMax=384M
+TasksMax=64
+LimitNOFILE=256
+
+[Install]
+WantedBy=multi-user.target

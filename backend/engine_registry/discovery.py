@@ -21,6 +21,9 @@ import time
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
+from .failure_log import FailureLog
+from . import failure_log
+
 __all__ = ["Discovery", "SanitizedError", "SkillNotRegistered"]
 
 CODE_OK = "OK"
@@ -52,6 +55,14 @@ _SAFE_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
 _SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")
 _HEX64 = re.compile(r"^[0-9a-f]{64}$")
 _SKILL_ID = re.compile(r"^[a-z][a-z0-9_]*(\.[a-z0-9_]+)*$")
+# Registry error codes mapped onto the fixed technical failure-log allowlist.
+_FAILURE_ERROR_TYPES = {
+    CODE_PAYLOAD: "invalid_input",
+    CODE_PLUGIN: "skill_exception",
+    CODE_TIMEOUT: "skill_timeout",
+    CODE_OUTPUT: "invalid_output",
+    "E_CANCELLED": "cancelled",
+}
 _BOUNDARY_KEYS = ("max_input_tokens", "max_output_tokens", "max_chat_messages", "max_tool_calls")
 _UNSAFE_TOP_LEVEL = (ast.While, ast.For, ast.AsyncFor, ast.Raise, ast.If, ast.Try, ast.With, ast.AsyncWith)
 
@@ -185,6 +196,7 @@ class Discovery:
         self._closed = False
         self._ensure_schema()
         info=os.stat(self._database);self._db_identity=(info.st_dev,info.st_ino)
+        self._failure_log=FailureLog(self._database)
 
     async def refresh(self, *, wait=False, timeout=10.0) -> Dict[str, Any]:
         """Run one bounded scan in a worker thread and swap the snapshot."""
@@ -263,12 +275,16 @@ class Discovery:
         if entry is None:
             raise SkillNotRegistered(CODE_NOT_REGISTERED)
         from .schema import validate,SchemaError
+        input_started=time.monotonic()
         try:
             encoded=json.dumps(payload,allow_nan=False).encode()
             # Conservative byte upper bounds; token declarations are not a tokenizer.
             if len(encoded)>min(65536,entry.descriptor['context']['max_input_tokens']):raise SchemaError('skill_input_length')
             validate(payload,entry.descriptor['input_schema'])
-        except (SchemaError,ValueError,TypeError):raise SanitizedError(CODE_PAYLOAD) from None
+        except (SchemaError,ValueError,TypeError):
+            # Registered skill with rejected input: technical invalid_input event only.
+            await self._record_failure(skill_id,'invalid_input',round((time.monotonic()-input_started)*1000,3))
+            raise SanitizedError(CODE_PAYLOAD) from None
         started=time.monotonic();code=CODE_OK
         try:
             source=entry.source
@@ -294,6 +310,17 @@ class Discovery:
             except SanitizedError:
                 if code==CODE_OK:raise
                 logging.getLogger('harmonika.discovery.audit').warning('execution_audit_unavailable')
+            if code!=CODE_OK:
+                # Technical failure event for registered skills; never affects the
+                # error being propagated to the caller and never blocks cancellation.
+                await self._record_failure(skill_id,_FAILURE_ERROR_TYPES.get(code,failure_log.DEFAULT_ERROR_TYPE),round((time.monotonic()-started)*1000,3))
+
+    async def _record_failure(self,skill_id,error_type,latency):
+        """Best-effort failure-log write; mechanical warning only on unavailability."""
+        try:status=await asyncio.to_thread(self._failure_log.record,skill_id,error_type,latency)
+        except Exception:status=failure_log.LOGGING_UNAVAILABLE
+        if status==failure_log.LOGGING_UNAVAILABLE:
+            logging.getLogger('harmonika.discovery.failure').warning('failure_log_unavailable')
 
     def close(self) -> None:
         with self._lock:
@@ -315,7 +342,7 @@ class Discovery:
         try:
             connection.execute("PRAGMA busy_timeout=5000")
             tables={r[0] for r in connection.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
-            if tables-{'engine_discovery_status','engine_discovery_summary','engine_discovery_execution'}:raise SanitizedError(CODE_DATABASE)
+            if tables-{'engine_discovery_status','engine_discovery_summary','engine_discovery_execution','skill_failures'}:raise SanitizedError(CODE_DATABASE)
             os.chmod(self._database,0o600)
             connection.execute("CREATE TABLE IF NOT EXISTS engine_discovery_execution (skill_id TEXT PRIMARY KEY, sha256 TEXT NOT NULL, latency_ms REAL NOT NULL, error_code TEXT NOT NULL, updated_at TEXT NOT NULL)")
             connection.execute(
@@ -331,6 +358,7 @@ class Discovery:
                 "finished_at TEXT, valid INTEGER NOT NULL, rejected INTEGER NOT NULL,"
                 "error_codes TEXT NOT NULL, result TEXT NOT NULL, truncated INTEGER NOT NULL)"
             )
+            connection.execute(failure_log.TABLE_DDL)
             connection.commit()
         finally:
             connection.close()

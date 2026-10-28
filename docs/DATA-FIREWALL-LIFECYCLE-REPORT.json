@@ -1,0 +1,131 @@
+{
+  "status": "active",
+  "backup": "/var/lib/harmonika-lifecycle-backups/20261025-050456",
+  "files": [
+    "engine_registry/discovery.py",
+    "engine_registry/failure_log.py",
+    "master_engine/service.py",
+    "master_engine/diagnostics.py",
+    "rtx-queue/backend/rtx_queue/adapter.py",
+    "rtx-queue/backend/rtx_queue/service.py",
+    "rtx-queue/backend/rtx_queue/diagnostics.py"
+  ],
+  "related_services_restarted": [
+    "harmonika-master-skills",
+    "harmonika-rtx-queue"
+  ],
+  "unrelated_services_unchanged": true,
+  "native_database_identity_unchanged": true,
+  "diagnostics": {
+    "graphics": {
+      "status": "online",
+      "checked_at": "2026-10-25T05:04:59Z",
+      "latency_ms": 697.008
+    },
+    "registry_errors": {
+      "status": "ok",
+      "count": 0,
+      "recent": []
+    },
+    "graphics_errors": {
+      "status": "ok",
+      "count": 0,
+      "recent": []
+    }
+  },
+  "helper_release": "2026.10.25.38",
+  "timezone": "UTC",
+  "verified_at": "2026-10-25",
+  "lifecycle": [
+    "Use",
+    "Log",
+    "Correct",
+    "Test",
+    "Activate"
+  ],
+  "data_firewall": {
+    "failure_table_columns": [
+      "timestamp",
+      "skill_id",
+      "error_type",
+      "latency"
+    ],
+    "latency_unit": "milliseconds",
+    "customer_payload_logged": false,
+    "raw_exception_logged": false,
+    "credentials_logged": false,
+    "database_journal_mode": "wal",
+    "database_quick_check": "ok",
+    "retention_max_rows": 1000,
+    "retention_age_days_on_append": 7
+  },
+  "tests": {
+    "registry_discovery": 107,
+    "failure_log": 21,
+    "schema_guard": 2,
+    "wal": 4,
+    "rtx_queue_including_isolation": 30,
+    "master_http_actual_service_venv": 10,
+    "master_diagnostics_actual_service_venv": 4,
+    "windows_worker": 12,
+    "state_diagnostics": 4,
+    "mcp_media": 36
+  },
+  "real_smoke": {
+    "status": "passed",
+    "installed_release": "2026.10.25.38",
+    "transport": "stdio MCP \u2192 HTTPS \u2192 private queue \u2192 Windows GPU",
+    "elapsed_seconds": 23.251,
+    "image_bytes": 315663,
+    "provider": "Harmonika Ai",
+    "output_mode": "0600",
+    "image_base64_in_tool_context": false,
+    "sha256": "4800dec7261add02d162ad4d91e6c3ee1941e1e501d06e2b05da32827fee9336"
+  },
+  "doctor": {
+    "ok": true,
+    "release": "2026.10.25.38",
+    "binary_verified": true,
+    "runtime_verified": true,
+    "automatic_update": false,
+    "active_sessions_untouched": true
+  },
+  "controlled_invalid_input_followed_by_valid_input": {
+    "invalid": "invalid_skill_input",
+    "valid": "completed",
+    "words": 3
+  },
+  "isolated_faults": [
+    "offline",
+    "busy",
+    "vram_full",
+    "bad_payload",
+    "timeout_after_dispatch",
+    "sqlite_logging_failure"
+  ],
+  "initial_activation_issue": {
+    "code": "aiohttp_requestkey_unavailable",
+    "rolled_back": true,
+    "corrected": true,
+    "tested_using_actual_service_venv": true
+  },
+  "final_cli_output": "Harmonika TUI | Sesi & cache\nNative: empty | Integritas: not_checked\nCache: empty | Berlaku: 0 | Kedaluwarsa: 0\nBelum ada checkpoint yang berlaku.\nEngine discovery: ready | Aktif: 1 | Ditolak: 0\nGraphics Engine PC 2: Online | Probe: 1961 ms\nError skill terisolasi: 2\n  2026-10-25T05:05:49Z | text.metrics | invalid_input | 0 ms\n  2026-10-25T05:05:26Z | image.generate | graphics_busy | 1986 ms\n",
+  "implementation_files": {
+    "backend/engine_registry/failure_log.py": "6fd711c6469c3bdc1bc952d3ad830b6666c8c856696c57075b912595b9cce8f3",
+    "backend/master_engine/diagnostics.py": "62a5b6f9290d8d6a399c17fde70259984daddb613475e5849fb4590e4ea24bbe",
+    "backend/rtx_queue/diagnostics.py": "5ed9544442d366eeb56e61f9d0a61c89206e0406ae44385fd140473d93fe0a16",
+    "runtime/tools/state_store.py": "274e32f24b97404ba4313db36f63c7f80f3e5b8b102717edc02515b3b0e3a51e",
+    "runtime/tools/mcp-core.cjs": "2f7b3d95740a7c43aafca5d2544ed7f9753a3fa48199f920e068c30955cc72a9",
+    "backend/rtx_flux/worker.py": "8b0f6d4b2b015f5a7fb3d1b592769050b5757cc32e5708a8c32bc64a5b936b40"
+  },
+  "windows_final_health": {
+    "ok": true,
+    "busy": false,
+    "memory_full": false,
+    "recovery_required": false,
+    "legacy_worker_untouched": true
+  },
+  "windows_worker_sha256_verified": true,
+  "total_passing_checks": 230,
+  "maintenance_connection_closed": true
+}

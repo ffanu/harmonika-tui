@@ -33,7 +33,7 @@ def build(release):
     destination=SOURCE/'dist'/release
     destination.mkdir(parents=True,exist_ok=False)
     tools=destination/'tools';tools.mkdir()
-    for name in ['mcp-core.cjs','mcp-server.cjs','media_bridge.cjs','project-access.cjs','paths.cjs','transcribe.py','state_store.py','tui_gateway.py','clipboard.py','ai_integration.py','ai_adapters.py','skill_registry.py','skill_executor.py','document_skill_worker.py','skill_cli.py','coding_catalog.py','coding_cli.py','telco_cli.py','telco_catalog.json','legal_cli.py','legal_catalog.json','builder_cli.py','builder_catalog.json','master_cli.py','mobile_cli.py','core_cli.py','seo_network.py','seo_extra.py','seo_visual.py','seo_visual.cjs','seo_skill_worker.py','engineering_evidence.py','engineering_skill_worker.py']:
+    for name in ['mcp-core.cjs','mcp-server.cjs','ssh-mcp.cjs','ssh-protocol-check.cjs','ssh_connector.py','remote_connector.py','media_bridge.cjs','project-access.cjs','paths.cjs','transcribe.py','state_store.py','tui_gateway.py','clipboard.py','ai_integration.py','ai_adapters.py','skill_registry.py','skill_executor.py','document_skill_worker.py','skill_cli.py','coding_catalog.py','coding_cli.py','telco_cli.py','telco_catalog.json','legal_cli.py','legal_catalog.json','builder_cli.py','builder_catalog.json','master_cli.py','erp_cli.py','mobile_cli.py','core_cli.py','seo_network.py','seo_extra.py','seo_visual.py','seo_visual.cjs','seo_skill_worker.py','engineering_evidence.py','engineering_skill_worker.py']:
         shutil.copy2(SOURCE/'runtime/tools'/name,tools/name)
     guard=(SOURCE/'runtime/tools/project-file-guard.cjs').read_text()
     (tools/'project-file-guard.cjs').write_text(guard)
@@ -48,6 +48,8 @@ def build(release):
     (tools/'docs').mkdir()
     for name in ('LEGAL-ENGINE.md','LEGAL-AUDIT.md','WEB-BUILDER.md','WEB-BUILDER-AUDIT.md','MASTER-SKILLS.md','MOBILE-BUILDER.md','CORE-FOUNDATION.md'):shutil.copy2(SOURCE/'docs'/name,tools/'docs'/name)
     shutil.copy2(SOURCE/'UPSTREAM-LICENSE.md',tools/'UPSTREAM-LICENSE.md')
+    shutil.copy2(SOURCE/'runtime/ssh-requirements.lock',tools/'ssh-requirements.lock')
+    shutil.copy2(SOURCE/'docs/SSH-CONNECTOR-SPEC.txt',tools/'docs/SSH-CONNECTOR-SPEC.txt')
     files={str(p.relative_to(destination)):{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
     notes_env=os.environ.get('HARMONIKA_RELEASE_NOTES','')
     release_notes=[n.strip() for n in notes_env.split('|') if n.strip()] if notes_env else [

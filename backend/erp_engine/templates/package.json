@@ -1,0 +1,17 @@
+{
+  "name": "harmonika-erp-starter",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "build": "npm run build -w apps/api && npm run build -w apps/web",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "overrides": {
+    "multer": "2.5.0",
+    "postcss": "8.5.31",
+    "sharp": "0.35.5"
+  }
+}

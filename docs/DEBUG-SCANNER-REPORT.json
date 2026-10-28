@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-27",
+  "status": "scoped_scanner_active_full290_not_complete",
+  "source": {
+    "file": "Harmonika_AI_Debug_Security_Scanner_Engine.txt",
+    "full_read": true,
+    "lines": 1342,
+    "sha256": "0d274c40408e9a6c2a864807104cb88c76c448e1b67e9918c7383996a45270d3",
+    "header_declared": 245,
+    "numbered_operations": 290,
+    "layers": 25
+  },
+  "active": {
+    "backend": "/opt/harmonika-ai/debug_scanner",
+    "namespace": "debug_scan",
+    "public_api": "https://chat.harmonika.id/v1/skills/invoke",
+    "source_operations": 69,
+    "orchestrators": [
+      "debug_scan.catalog",
+      "debug_scan.scan"
+    ],
+    "callable_entrypoints": 71,
+    "tui_release": "2026.10.27.5",
+    "tui_skills": 22,
+    "new_native_mcp_tools": 0
+  },
+  "readiness": {
+    "available": 69,
+    "unavailable": 221
+  },
+  "features": {
+    "source_static_analysis": true,
+    "operator_registered_http_probe": true,
+    "arbitrary_url_fetch": false,
+    "browser_execution": "use_existing_networkless_workflow.browser",
+    "redacted_pdf_reports": true,
+    "confirmed_exploit_detection": false,
+    "autonomous_exploitation": false,
+    "automatic_fix_or_deploy": false,
+    "compliance_certified": false,
+    "private_customer_database_access": false,
+    "scheduled_monitor_installed": false
+  },
+  "verification": {
+    "unit_tests_passed": 134,
+    "each_active_plugin_discovery_tested": 71,
+    "public_contracts_passed": 71,
+    "existing_master_analyzer_regressions": 11,
+    "real_owned_http_probe_tested": true,
+    "loopback_fixture_cleaned": true,
+    "unregistered_target_denied": true,
+    "real_software_chromium": {
+      "software_chromium": true,
+      "page_errors_observed": 1,
+      "overflow_detected": true,
+      "screenshot_sha256": "d8b703065ce02da7570de760b8bf4e60a39a56caf69248041bd06e44fcae5a36"
+    },
+    "actual_pdf_saved_and_read_by_pypdf": true,
+    "pdf_artifact": {
+      "name": "harmonika-debug-report.pdf",
+      "mime_type": "application/pdf",
+      "sha256": "e543f112d6be6ea173083db7c251b3b7f1b8477d1d17695e3d5b03b7e350fceb",
+      "artifact_path": "/Users/id/Downloads/harmonika-ai/pdf/harmonika-debug-report-f4038de61582.pdf"
+    },
+    "erp_regression_passed": true,
+    "source_hash_pin_and_decoded_hash_tested": true,
+    "native_doctor_ok": true,
+    "physical_mobile_or_desktop_device_tested": false,
+    "stress_tested": false,
+    "installed_cli_catalog_and_pdf_passed": true,
+    "installed_cli_pdf_artifact": {
+      "name": "harmonika-debug-report.pdf",
+      "mime_type": "application/pdf",
+      "sha256": "e543f112d6be6ea173083db7c251b3b7f1b8477d1d17695e3d5b03b7e350fceb",
+      "artifact_path": "/Users/id/Downloads/harmonika-ai/pdf/harmonika-debug-report-a65b96c76ff2.pdf"
+    },
+    "new_operation_invalid_payload_rejections": 16,
+    "public_direct_result_parity_checks": 16,
+    "tui_doctor_ok": true,
+    "installed_cli_combined_checks_and_pdf_passed": true,
+    "private_pdf_mode": "0600",
+    "native_binary_signature_verified": true,
+    "service_pids_unchanged": true
+  },
+  "capacity": {
+    "registry_source_bytes": 62491833,
+    "registry_source_limit_bytes": 64000000,
+    "headroom_bytes": 1508167,
+    "compression": "Per-handler transitive trusted-source capture, LZMA bounded32MiB decoder, exact byte/SHA verification before compile",
+    "source_budget_or_RAM_limits_increased": false,
+    "remaining_source_bytes": 1508167,
+    "scanner_plugin_source_bytes": 483940
+  },
+  "safety": {
+    "gateway_restart": false,
+    "existing_business_database_opened": false,
+    "production_application_fix_applied": false,
+    "arbitrary_url_or_exploit_enabled": false,
+    "credentials_or_source_logged": false,
+    "gpu_or_drm_modified": false,
+    "target_registry_entries_after_test": 0,
+    "native_binary_or_user_config_changed": false,
+    "user_sessions_restarted": false,
+    "git_commits_or_pushes": false,
+    "supplied_source_executed_by_static_scanner": false
+  },
+  "issues_fixed": [
+    "Previous worker attempt produced no files; same OpenCode session resumed and delivered29 tested static cases",
+    "Basename collisions no longer discard distinct source findings",
+    "Constructed SQL identifiers remain candidates even with bound values; local assignment propagation added",
+    "Unsupported security language needs_toolchain and empty source no_input, no clean claim",
+    "Request schemas carry actual required fields and typed limits; unknown data denied",
+    "Caller confidence/evidence labels never authorize production fixes or prove root cause",
+    "Package reduced to fit existing64MB source budget; no increase of RAM/scan limits",
+    "Real PDF transport verifies SHA/private0600/no active PDF actions",
+    "Installed CLI catalog bypasses artifact recursion for deeply nested source schemas; regression plus real catalog/PDF passed",
+    "Dependency-sliced trusted packages release source capacity without changing 64MB registry limit",
+    "New typed schemas qualified through discovery; arbitrary typed case values validated by bounded handler",
+    "Advanced Python taint/structural CFG/dead code/normalized clones automatically included in scan",
+    "Explicit logic/configuration pipeline checks produce candidate report entries, not clean claims on failed cases/cycles",
+    "Duplicate globals and tuple declarations hardened for isolated packaged execution"
+  ],
+  "collaboration": {
+    "static_initial_implementation": "OpenCode GLM5.3 in isolated worktree",
+    "integration_hardening_and_final_qualification": "Codex",
+    "claude_used": false,
+    "worker_worktree_cleaned": true,
+    "phase2_advanced_python_implementation": "OpenCode GLM5.3; 53 focused tests",
+    "phase2_models_configuration_packaging_integration": "Codex; 134 total tests and full API qualification"
+  },
+  "not_complete": {
+    "operations": 221,
+    "notes": [
+      "Registered device/debugger/toolchain required for Android/iOS/desktop/firmware/memory profiles",
+      "Authorized connectors needed for infrastructure capture, CI sends, verified advisory feed, monitoring and knowledge store",
+      "Backup/staging/approval/real deployment target required for safe automatic fix workflows; not implemented",
+      "No full OWASP audit, confirmed exploit, legal chain-of-custody or compliance certification is claimed"
+    ]
+  },
+  "phase2_added_operations": [
+    "sast.data.flow",
+    "sast.control.flow",
+    "sast.dead.code",
+    "sast.duplication",
+    "logic.state.machine",
+    "logic.workflow.bug",
+    "logic.data.consistency",
+    "logic.calculation.error",
+    "logic.edge.case",
+    "logic.integration.mismatch",
+    "logic.race.condition",
+    "logic.concurrency",
+    "sec.jwt.vulnerability",
+    "sec.cors.misconfig",
+    "uiux.color.contrast",
+    "uiux.accessibility"
+  ]
+}

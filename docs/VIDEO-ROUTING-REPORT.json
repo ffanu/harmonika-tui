@@ -1,0 +1,98 @@
+{
+  "terminal_routing": "active_new_mcp_sessions",
+  "web_routing": "staging_verified_awaiting_explicit_webui_restart_exception",
+  "core_services_restarted": false,
+  "automated_tests": {
+    "python_facade": 8,
+    "node_mcp": 7,
+    "web_http": 9,
+    "total_passed": 24
+  },
+  "real_terminal_artifact": {
+    "ok": true,
+    "status": "ok",
+    "provider": "Harmonika Ai",
+    "output_file": "/Users/id/Downloads/harmonika-ai/video/harmonika-video-c461e3387858a27b9b92dbf6cf2e2bb2.mp4",
+    "bytes": 67393,
+    "sha256": "c67fe1915d97a585c1136038d2779af44de127798c9d82a70256f1d39e9760d9",
+    "duration_seconds": 1,
+    "new_file": true
+  },
+  "real_web_browser": [
+    {
+      "name": "desktop",
+      "status": {
+        "http": 200,
+        "data": {
+          "id": "4cbca46b08bfa61673cb8691bc29a598",
+          "message": "Video siap diputar.",
+          "state": "completed",
+          "video": {
+            "audio": false,
+            "duration_seconds": 1,
+            "height": 480,
+            "url": "/api/videos/4cbca46b08bfa61673cb8691bc29a598/file",
+            "width": 832
+          }
+        }
+      },
+      "played": {
+        "duration": 1,
+        "currentTime": 0.206,
+        "width": 832,
+        "height": 480,
+        "error": null
+      },
+      "range": {
+        "status": 206,
+        "bytes": 100
+      },
+      "history_restored": true,
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "status": {
+        "http": 200,
+        "data": {
+          "id": "4cbca46b08bfa61673cb8691bc29a598",
+          "message": "Video siap diputar.",
+          "state": "completed",
+          "video": {
+            "audio": false,
+            "duration_seconds": 1,
+            "height": 480,
+            "url": "/api/videos/4cbca46b08bfa61673cb8691bc29a598/file",
+            "width": 832
+          }
+        }
+      },
+      "played": {
+        "duration": 1,
+        "currentTime": 0.4018,
+        "width": 832,
+        "height": 480,
+        "error": null
+      },
+      "range": {
+        "status": 206,
+        "bytes": 100
+      },
+      "history_restored": true,
+      "errors": []
+    }
+  ],
+  "cross_owner_access": "denied_404",
+  "profile": {
+    "seconds": 1,
+    "width": 832,
+    "height": 480,
+    "audio": false,
+    "audience": "internal_owner"
+  },
+  "contributions": {
+    "Codex": "implementation, deployment, automated and real end-to-end tests",
+    "OpenCode": "read-only TUI routing review"
+  },
+  "customer_data_used": false
+}

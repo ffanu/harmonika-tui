@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-28",
+  "contributors": {
+    "Codex": "implementation and verification",
+    "OpenCode": "read-only shared SEO/security review",
+    "Claude": "not used"
+  },
+  "scope": [
+    "central registry accuracy",
+    "shared SEO adapter",
+    "image-to-video owner route",
+    "owner web video and narration pilot"
+  ],
+  "active": {
+    "seo_shared_backend": true,
+    "seo_tui_mcp": true,
+    "seo_tools": {
+      "available": 10,
+      "performance": "degraded/live provider dependent",
+      "visual": "blocked CPU browser isolation qualification",
+      "search_console": "Google authorization required",
+      "ga4": "Google authorization required"
+    },
+    "owner_tui_framepack_adapter": true,
+    "native_tool_budget": 32,
+    "production_master_registry": true,
+    "production_hai_web_owner_video_narration": true,
+    "windows_broker_request_recovery_fix": true
+  },
+  "prepared_not_activated": {},
+  "verification": {
+    "node_tests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "video_routing_python": {
+      "passed": 21,
+      "failed": 0
+    },
+    "video_toolkit_python": {
+      "passed": 24,
+      "failed": 0
+    },
+    "seo_shared_python": {
+      "passed": 3,
+      "failed": 0
+    },
+    "web_python": {
+      "passed": 12,
+      "failed": 0
+    },
+    "master_initial_linux_tests": {
+      "passed": 13,
+      "failed": 0
+    },
+    "real_seo_page_audit": true,
+    "real_seo_drift_capture": true,
+    "tui_artifact_sha_verified_download": true,
+    "private_ip_ssrf_denied": true,
+    "cross_principal_job_and_artifact_denied": true,
+    "same_request_id_no_duplicate": true,
+    "web_mocked_job_ui_desktop_mobile": true,
+    "web_mocked_ui_javascript_errors": 0,
+    "physical_mobile_tested": false,
+    "production_source_hashes_match_baseline": true,
+    "master_final_linux_tests": {
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 31.824
+    },
+    "focused_tests_total": 88,
+    "public_models_http": 200,
+    "public_skills_metadata_http": 200
+  },
+  "safety": {
+    "main_api_pid": 1487202,
+    "production_web_pid": 1540280,
+    "public_gateway_pid": 1379498,
+    "production_master_pid": 1327592,
+    "existing_core_services_restarted": true,
+    "customer_services_changed": false,
+    "gpu_driver_or_drm_configuration_changed": false,
+    "cpu_visual_capture_gate": "disabled after unexpected drm_open in direct browser diagnostics despite disable-gpu; no further direct CPU browser launches",
+    "logs": "mechanical metadata only; report artifacts are private and principal scoped",
+    "restart_scope": "explicitly approved registry/WebUI/video broker only"
+  },
+  "real_jobs_pending": {},
+  "resume": {
+    "web_stage": "/opt/harmonika-ai/video-integrations-stage",
+    "web_port": 18265,
+    "master_stage": "/opt/harmonika-ai/master-integration-stage",
+    "master_port": 18268,
+    "hot_owner_transport": 18264,
+    "windows_broker_pending": "C:/Users/Kraken/harmonika-video-toolkit-source/broker_av.pending.py",
+    "linux_activation_helpers": "both staged activate.py dry-run guards pass; never use apply switches without user exception",
+    "local_browser_report": "../harmonika-hai-video/artifacts/priority-narration-browser.json",
+    "next": "Three approved restarts completed and verified; CPU visual capture and Google authorization remain separate readiness limitations."
+  },
+  "activation": {
+    "approved_by_user": "restart saja",
+    "checked_at": "2026-10-28T01:10:15.437542+00:00",
+    "services": {
+      "harmonika-master-skills.service": {
+        "active": true,
+        "old_pid": 1327592,
+        "new_pid": 2212976
+      },
+      "harmonika-hai-web.service": {
+        "active": true,
+        "old_pid": 1540280,
+        "new_pid": 2213604
+      },
+      "windows_video_broker": {
+        "active": true,
+        "old_pid": 38920,
+        "new_pid": 37952,
+        "queue_empty_before_restart": true,
+        "launch_method": "Win32_Process.Create outside SSH job lifetime",
+        "request_recovery_verified_after_ssh_closed": true
+      }
+    },
+    "checks": {
+      "hai_https": 200,
+      "models_api": 200,
+      "seo_metadata_api": 200,
+      "shared_seo_registry_active": true,
+      "production_release_sha256_matches": true,
+      "real_web_video_seconds": 10,
+      "real_web_video_range": 206,
+      "real_web_narration": true,
+      "narration_range": 206,
+      "foreign_owner_narration": 404,
+      "framepack_completed": true,
+      "video_maintenance_removed": true
+    },
+    "main_api_pid_unchanged": 1487202,
+    "public_gateway_pid_unchanged": 1379498,
+    "video_access": "existing owner admin pilot; no unrestricted public media entitlement",
+    "initial_broker_launch_issue": "SSH closed detached subprocess; replaced with Windows process-manager launch and verified from new connection"
+  }
+}

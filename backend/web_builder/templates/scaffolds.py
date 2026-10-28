@@ -265,6 +265,9 @@ export async function DELETE(_request: Request, context: Context) {
 
 
 def _nextjs(args: Dict[str, Any]) -> Dict[str, Any]:
+    if args.get("template")=="harmonika-fullstack":
+        from ..fullstack_template import generate
+        return generate(args["project"])
     project = args["project"]
     resource = args["resource"]
     port = args["port"]
@@ -4093,6 +4096,7 @@ _register("scaffold.nextjs", 47, "Scaffold a runnable Next.js (App Router, TypeS
     "required": ["project"],
     "properties": {
         "project": _SLUG_S,
+        "template": {"type":"string","enum":["builtin","harmonika-fullstack"],"default":"builtin"},
         "resource": dict(_ROUTE_S, **{"default": "tasks"}),
         "port": _PORT_S,
         "tailwind": {"type": "boolean", "default": False},

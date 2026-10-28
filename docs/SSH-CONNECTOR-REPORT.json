@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-26",
+  "product": "Harmonika TUI",
+  "release": "2026.10.26.2",
+  "status": "active_local",
+  "skills": [
+    "ssh.connect",
+    "ssh.exec",
+    "ssh.upload",
+    "ssh.download"
+  ],
+  "transport": "dedicated local MCP + Paramiko SSH/SFTP",
+  "bash_ssh_allowed": false,
+  "authentication": "existing private key, no stored password",
+  "host_verification": "pinned known_hosts, reject unknown or changed keys",
+  "target_alias": "vps",
+  "target_port": 22023,
+  "remote_execution_policy": "operator-registered executable allowlist; currently read-only diagnostics",
+  "tests": {
+    "ssh_protocol_and_guard_tests": 21,
+    "project_file_guard_regressions": 20,
+    "signed_release_regressions": 10,
+    "cross_platform_integrity_regressions": 10,
+    "total_passed": 61,
+    "failed": 0
+  },
+  "staging": {
+    "type": "isolated loopback SSH/SFTP server with temporary fixture keys",
+    "result": "passed",
+    "separate_staging_vps_tested": false
+  },
+  "production_smoke": {
+    "verified_key_connection": true,
+    "remote_uname": "Linux",
+    "mcp_connect_and_exec": true,
+    "mcp_denied_shell": true,
+    "cli_targets_and_exec": true,
+    "sftp_roundtrip_sha256_match": true,
+    "own_fixture_cleaned": true,
+    "existing_remote_files_changed": false
+  },
+  "doctor": {
+    "ok": true,
+    "signed_release": true,
+    "binary_verified": true,
+    "skills": 20,
+    "ssh_mcp_tools": 4
+  },
+  "privacy": {
+    "audit_columns": [
+      "timestamp",
+      "skill_id",
+      "status",
+      "error_type",
+      "latency_ms"
+    ],
+    "audit_content_logged": false,
+    "keys_in_repo": false,
+    "credentials_sent_to_models": false
+  },
+  "activation": {
+    "native_binary_unchanged": true,
+    "user_sessions_restarted": false,
+    "public_release_published": false,
+    "firewall_changed": false,
+    "coding_sandbox_network_changed": false,
+    "auto_approval_enabled": false
+  },
+  "limits": {
+    "connect_seconds": 8,
+    "exec_seconds": 120,
+    "transfer_bytes": 10485760,
+    "stdout_stderr_bytes": 65536,
+    "automatic_mutation_retry": false,
+    "platforms": [
+      "macOS",
+      "Linux"
+    ]
+  },
+  "remaining_user_step": "Existing TUI sessions may require MCP reconnect or normal reopen/resume to load newly configured server. Never restart another user session automatically.",
+  "changed_files": [
+    "runtime/tools/ssh_connector.py",
+    "runtime/tools/ssh-mcp.cjs",
+    "runtime/tools/ssh-protocol-check.cjs",
+    "runtime/tools/project-file-guard.cjs",
+    "runtime/harmonika.py",
+    "runtime/install.py",
+    "runtime/package-release.py",
+    "runtime/ssh-requirements.lock",
+    "skills/harmonika-ssh/SKILL.md",
+    "skills/harmonika-ssh/manifest.yaml",
+    "tests/ssh/test_connector.py",
+    "scripts/activate-ssh-helper.py",
+    "docs/SSH-CONNECTOR-SPEC.txt",
+    "README.md"
+  ],
+  "reference_note": "Exact named FullStack Builder txt was not found; available technical template and existing connector implementation were inspected."
+}

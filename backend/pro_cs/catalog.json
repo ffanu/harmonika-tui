@@ -1,0 +1,1465 @@
+{
+  "schema_version": 1,
+  "source_sha256": "a1b2b0be6cc6dc499f0c4e24884fd4c4e46ee114fd8b20d52a233a99013a8e3e",
+  "source_count": 243,
+  "skills": [
+    {
+      "number": 1,
+      "id": "ctx.session.load.fast",
+      "description": "Load session state dari Redis (< 50ms)",
+      "layer": 1
+    },
+    {
+      "number": 2,
+      "id": "ctx.session.cache",
+      "description": "Cache session untuk akses cepat",
+      "layer": 1
+    },
+    {
+      "number": 3,
+      "id": "ctx.user.profile.load",
+      "description": "Load user profile (cached)",
+      "layer": 1
+    },
+    {
+      "number": 4,
+      "id": "ctx.user.profile.cache",
+      "description": "Cache user profile di memory",
+      "layer": 1
+    },
+    {
+      "number": 5,
+      "id": "ctx.conversation.summary",
+      "description": "Load summary percakapan (bukan full history)",
+      "layer": 1
+    },
+    {
+      "number": 6,
+      "id": "ctx.conversation.compress",
+      "description": "Compress history lama jadi summary",
+      "layer": 1
+    },
+    {
+      "number": 7,
+      "id": "ctx.channel.detect",
+      "description": "Detect channel (WA, web, telegram, dll)",
+      "layer": 1
+    },
+    {
+      "number": 8,
+      "id": "ctx.language.detect",
+      "description": "Detect bahasa user (fast)",
+      "layer": 1
+    },
+    {
+      "number": 9,
+      "id": "ctx.timezone.detect",
+      "description": "Detect timezone user",
+      "layer": 1
+    },
+    {
+      "number": 10,
+      "id": "ctx.device.detect",
+      "description": "Detect device (mobile, desktop)",
+      "layer": 1
+    },
+    {
+      "number": 11,
+      "id": "ctx.time.context",
+      "description": "Load time context (pagi, siang, malam)",
+      "layer": 1
+    },
+    {
+      "number": 12,
+      "id": "ctx.previous.topic",
+      "description": "Load topik sebelumnya (quick)",
+      "layer": 1
+    },
+    {
+      "number": 13,
+      "id": "ctx.user.tier",
+      "description": "Load tier user (regular, VIP, VVIP)",
+      "layer": 1
+    },
+    {
+      "number": 14,
+      "id": "ctx.user.sentiment.history",
+      "description": "Load sentiment history user",
+      "layer": 1
+    },
+    {
+      "number": 15,
+      "id": "ctx.context.prefetch",
+      "description": "Prefetch context yang mungkin dibutuhkan",
+      "layer": 1
+    },
+    {
+      "number": 16,
+      "id": "file.detect.type",
+      "description": "Detect jenis file (MIME type)",
+      "layer": 2
+    },
+    {
+      "number": 17,
+      "id": "file.validate",
+      "description": "Validate file (size, format, virus)",
+      "layer": 2
+    },
+    {
+      "number": 18,
+      "id": "file.store.temp",
+      "description": "Store file temporary (auto-delete after)",
+      "layer": 2
+    },
+    {
+      "number": 19,
+      "id": "file.store.permanent",
+      "description": "Store file permanent (untuk reference)",
+      "layer": 2
+    },
+    {
+      "number": 20,
+      "id": "file.read.pdf",
+      "description": "Baca PDF (extract text, image, table)",
+      "layer": 2
+    },
+    {
+      "number": 21,
+      "id": "file.read.pdf.scanned",
+      "description": "Baca PDF scan (OCR)",
+      "layer": 2
+    },
+    {
+      "number": 22,
+      "id": "file.read.pdf.form",
+      "description": "Baca PDF form (fillable)",
+      "layer": 2
+    },
+    {
+      "number": 23,
+      "id": "file.read.word",
+      "description": "Baca Word (.docx, .doc)",
+      "layer": 2
+    },
+    {
+      "number": 24,
+      "id": "file.read.excel",
+      "description": "Baca Excel (.xlsx, .xls)",
+      "layer": 2
+    },
+    {
+      "number": 25,
+      "id": "file.read.powerpoint",
+      "description": "Baca PowerPoint (.pptx)",
+      "layer": 2
+    },
+    {
+      "number": 26,
+      "id": "file.read.csv",
+      "description": "Baca CSV",
+      "layer": 2
+    },
+    {
+      "number": 27,
+      "id": "file.read.json",
+      "description": "Baca JSON",
+      "layer": 2
+    },
+    {
+      "number": 28,
+      "id": "file.read.xml",
+      "description": "Baca XML",
+      "layer": 2
+    },
+    {
+      "number": 29,
+      "id": "file.read.yaml",
+      "description": "Baca YAML",
+      "layer": 2
+    },
+    {
+      "number": 30,
+      "id": "file.read.txt",
+      "description": "Baca plain text",
+      "layer": 2
+    },
+    {
+      "number": 31,
+      "id": "file.read.html",
+      "description": "Baca HTML (strip tag)",
+      "layer": 2
+    },
+    {
+      "number": 32,
+      "id": "file.read.markdown",
+      "description": "Baca Markdown",
+      "layer": 2
+    },
+    {
+      "number": 33,
+      "id": "file.read.image.jpg",
+      "description": "Baca JPG/PNG (VLM + OCR)",
+      "layer": 2
+    },
+    {
+      "number": 34,
+      "id": "file.read.image.tiff",
+      "description": "Baca TIFF",
+      "layer": 2
+    },
+    {
+      "number": 35,
+      "id": "file.read.image.svg",
+      "description": "Baca SVG (extract element)",
+      "layer": 2
+    },
+    {
+      "number": 36,
+      "id": "file.read.image.raw",
+      "description": "Baca RAW (camera)",
+      "layer": 2
+    },
+    {
+      "number": 37,
+      "id": "file.read.image.medical",
+      "description": "Baca DICOM (medical image)",
+      "layer": 2
+    },
+    {
+      "number": 38,
+      "id": "file.read.video.mp4",
+      "description": "Baca video (extract frame + audio)",
+      "layer": 2
+    },
+    {
+      "number": 39,
+      "id": "file.read.video.avi",
+      "description": "Baca AVI",
+      "layer": 2
+    },
+    {
+      "number": 40,
+      "id": "file.read.video.mov",
+      "description": "Baca MOV",
+      "layer": 2
+    },
+    {
+      "number": 41,
+      "id": "file.read.video.frame.extract",
+      "description": "Extract key frame dari video",
+      "layer": 2
+    },
+    {
+      "number": 42,
+      "id": "file.read.audio.mp3",
+      "description": "Baca MP3 (ASR)",
+      "layer": 2
+    },
+    {
+      "number": 43,
+      "id": "file.read.audio.wav",
+      "description": "Baca WAV",
+      "layer": 2
+    },
+    {
+      "number": 44,
+      "id": "file.read.audio.ogg",
+      "description": "Baca OGG",
+      "layer": 2
+    },
+    {
+      "number": 45,
+      "id": "file.read.audio.transcribe",
+      "description": "Transcribe audio ke text",
+      "layer": 2
+    },
+    {
+      "number": 46,
+      "id": "file.read.zip",
+      "description": "Extract & baca isi ZIP",
+      "layer": 2
+    },
+    {
+      "number": 47,
+      "id": "file.read.rar",
+      "description": "Extract & baca isi RAR",
+      "layer": 2
+    },
+    {
+      "number": 48,
+      "id": "file.read.7z",
+      "description": "Extract & baca isi 7Z",
+      "layer": 2
+    },
+    {
+      "number": 49,
+      "id": "file.read.tar.gz",
+      "description": "Extract & baca isi tar.gz",
+      "layer": 2
+    },
+    {
+      "number": 50,
+      "id": "file.read.email.eml",
+      "description": "Baca email (.eml)",
+      "layer": 2
+    },
+    {
+      "number": 51,
+      "id": "file.read.email.msg",
+      "description": "Baca Outlook email (.msg)",
+      "layer": 2
+    },
+    {
+      "number": 52,
+      "id": "file.read.calendar.ics",
+      "description": "Baca calendar invite (.ics)",
+      "layer": 2
+    },
+    {
+      "number": 53,
+      "id": "file.read.vcard",
+      "description": "Baca contact card (.vcf)",
+      "layer": 2
+    },
+    {
+      "number": 54,
+      "id": "file.read.ebook.epub",
+      "description": "Baca EPUB",
+      "layer": 2
+    },
+    {
+      "number": 55,
+      "id": "file.read.ebook.mobi",
+      "description": "Baca MOBI",
+      "layer": 2
+    },
+    {
+      "number": 56,
+      "id": "extract.text.from.file",
+      "description": "Extract text dari file apapun",
+      "layer": 3
+    },
+    {
+      "number": 57,
+      "id": "extract.image.from.file",
+      "description": "Extract image dari file (PDF, Word, PPT)",
+      "layer": 3
+    },
+    {
+      "number": 58,
+      "id": "extract.table.from.file",
+      "description": "Extract table (PDF, Excel, Word)",
+      "layer": 3
+    },
+    {
+      "number": 59,
+      "id": "extract.metadata.from.file",
+      "description": "Extract metadata (author, date, size)",
+      "layer": 3
+    },
+    {
+      "number": 60,
+      "id": "extract.data.structured",
+      "description": "Extract structured data (JSON, XML)",
+      "layer": 3
+    },
+    {
+      "number": 61,
+      "id": "extract.contact.from.file",
+      "description": "Extract contact info (email, phone, name)",
+      "layer": 3
+    },
+    {
+      "number": 62,
+      "id": "extract.date.from.file",
+      "description": "Extract tanggal & waktu",
+      "layer": 3
+    },
+    {
+      "number": 63,
+      "id": "extract.location.from.file",
+      "description": "Extract lokasi (address, GPS)",
+      "layer": 3
+    },
+    {
+      "number": 64,
+      "id": "extract.amount.from.file",
+      "description": "Extract nominal uang",
+      "layer": 3
+    },
+    {
+      "number": 65,
+      "id": "extract.signature.from.file",
+      "description": "Extract signature (PDF, image)",
+      "layer": 3
+    },
+    {
+      "number": 66,
+      "id": "extract.qr.code",
+      "description": "Decode QR code dari image",
+      "layer": 3
+    },
+    {
+      "number": 67,
+      "id": "extract.barcode",
+      "description": "Decode barcode dari image",
+      "layer": 3
+    },
+    {
+      "number": 68,
+      "id": "extract.handwriting",
+      "description": "OCR handwriting (surat tulisan tangan)",
+      "layer": 3
+    },
+    {
+      "number": 69,
+      "id": "extract.license.plate",
+      "description": "OCR plat nomor",
+      "layer": 3
+    },
+    {
+      "number": 70,
+      "id": "extract.id.card",
+      "description": "OCR KTP/SIM/Passport",
+      "layer": 3
+    },
+    {
+      "number": 71,
+      "id": "file.analyze.content",
+      "description": "Analyze isi file (apa ini?)",
+      "layer": 4
+    },
+    {
+      "number": 72,
+      "id": "file.analyze.context",
+      "description": "Analyze konteks (kenapa user kirim?)",
+      "layer": 4
+    },
+    {
+      "number": 73,
+      "id": "file.analyze.relevance",
+      "description": "Analyze relevance ke topik chat",
+      "layer": 4
+    },
+    {
+      "number": 74,
+      "id": "file.analyze.summary",
+      "description": "Summary isi file",
+      "layer": 4
+    },
+    {
+      "number": 75,
+      "id": "file.analyze.key.points",
+      "description": "Extract key points dari file",
+      "layer": 4
+    },
+    {
+      "number": 76,
+      "id": "file.analyze.sentiment",
+      "description": "Analyze sentiment di file (klaim, komplain)",
+      "layer": 4
+    },
+    {
+      "number": 77,
+      "id": "file.analyze.intent",
+      "description": "Analyze intent user dari file",
+      "layer": 4
+    },
+    {
+      "number": 78,
+      "id": "file.analyze.action.needed",
+      "description": "Identify action yang dibutuhkan",
+      "layer": 4
+    },
+    {
+      "number": 79,
+      "id": "file.analyze.urgency",
+      "description": "Assess urgency dari file",
+      "layer": 4
+    },
+    {
+      "number": 80,
+      "id": "file.analyze.cross.reference",
+      "description": "Cross-reference dengan data internal",
+      "layer": 4
+    },
+    {
+      "number": 81,
+      "id": "file.analyze.authenticity",
+      "description": "Check keaslian file (metadata, hash)",
+      "layer": 4
+    },
+    {
+      "number": 82,
+      "id": "file.analyze.fraud.indicator",
+      "description": "Detect fraud indicator",
+      "layer": 4
+    },
+    {
+      "number": 83,
+      "id": "file.analyze.compliance",
+      "description": "Check compliance (regulasi, policy)",
+      "layer": 4
+    },
+    {
+      "number": 84,
+      "id": "file.analyze.risk",
+      "description": "Assess risk dari file",
+      "layer": 4
+    },
+    {
+      "number": 85,
+      "id": "file.analyze.duplicate",
+      "description": "Check duplicate file",
+      "layer": 4
+    },
+    {
+      "number": 86,
+      "id": "intent.detect.fast",
+      "description": "Quick intent detection (cached model)",
+      "layer": 5
+    },
+    {
+      "number": 87,
+      "id": "intent.classify",
+      "description": "Classify: tanya, keluh, bantuan, kritik, puji",
+      "layer": 5
+    },
+    {
+      "number": 88,
+      "id": "intent.multi.detect",
+      "description": "Detect multi-intent (user mau beberapa hal)",
+      "layer": 5
+    },
+    {
+      "number": 89,
+      "id": "intent.ambiguity.detect",
+      "description": "Detect ambiguous intent (perlu clarify)",
+      "layer": 5
+    },
+    {
+      "number": 90,
+      "id": "emotion.detect.realtime",
+      "description": "Real-time emotion detection",
+      "layer": 5
+    },
+    {
+      "number": 91,
+      "id": "emotion.track.trend",
+      "description": "Track emotion trend (makin marah?)",
+      "layer": 5
+    },
+    {
+      "number": 92,
+      "id": "emotion.empathy.response",
+      "description": "Generate empathy response",
+      "layer": 5
+    },
+    {
+      "number": 93,
+      "id": "urgency.assess",
+      "description": "Assess urgency (low, medium, high, crisis)",
+      "layer": 5
+    },
+    {
+      "number": 94,
+      "id": "sarcasm.detect",
+      "description": "Detect sarkasme",
+      "layer": 5
+    },
+    {
+      "number": 95,
+      "id": "frustration.detect",
+      "description": "Detect frustrasi user",
+      "layer": 5
+    },
+    {
+      "number": 96,
+      "id": "satisfaction.detect",
+      "description": "Detect satisfaction (kalau puas)",
+      "layer": 5
+    },
+    {
+      "number": 97,
+      "id": "churn.risk.detect",
+      "description": "Detect churn risk (akan pindah)",
+      "layer": 5
+    },
+    {
+      "number": 98,
+      "id": "crisis.detect",
+      "description": "Detect crisis (suicide, self-harm)",
+      "layer": 5
+    },
+    {
+      "number": 99,
+      "id": "intent.confidence.score",
+      "description": "Score confidence per intent",
+      "layer": 5
+    },
+    {
+      "number": 100,
+      "id": "intent.escalate.if.low",
+      "description": "Escalate kalau intent tidak clear",
+      "layer": 5
+    },
+    {
+      "number": 101,
+      "id": "context.build.smart",
+      "description": "Build context dari semua source",
+      "layer": 6
+    },
+    {
+      "number": 102,
+      "id": "context.infer.hidden",
+      "description": "Infer hidden intent (yang tidak diomong)",
+      "layer": 6
+    },
+    {
+      "number": 103,
+      "id": "context.combine.multi",
+      "description": "Combine multi-modal context (file + chat + history)",
+      "layer": 6
+    },
+    {
+      "number": 104,
+      "id": "context.resolve.reference",
+      "description": "Resolve reference (\"dia\", \"itu\", \"yang tadi\")",
+      "layer": 6
+    },
+    {
+      "number": 105,
+      "id": "context.predict.next",
+      "description": "Predict pertanyaan berikutnya (prefetch)",
+      "layer": 6
+    },
+    {
+      "number": 106,
+      "id": "context.topic.switch.detect",
+      "description": "Detect perubahan topik",
+      "layer": 6
+    },
+    {
+      "number": 107,
+      "id": "context.relevance.filter",
+      "description": "Filter context yang tidak relevan",
+      "layer": 6
+    },
+    {
+      "number": 108,
+      "id": "context.priority.rank",
+      "description": "Rank context by priority",
+      "layer": 6
+    },
+    {
+      "number": 109,
+      "id": "context.summarize.compressed",
+      "description": "Compress context untuk LLM input",
+      "layer": 6
+    },
+    {
+      "number": 110,
+      "id": "context.token.optimize",
+      "description": "Optimize token usage (hemat cost)",
+      "layer": 6
+    },
+    {
+      "number": 111,
+      "id": "context.cache.frequent",
+      "description": "Cache frequent context pattern",
+      "layer": 6
+    },
+    {
+      "number": 112,
+      "id": "context.invalidate.stale",
+      "description": "Invalidate stale context",
+      "layer": 6
+    },
+    {
+      "number": 113,
+      "id": "kb.company.info",
+      "description": "Info perusahaan (nama, alamat, jam, kontak)",
+      "layer": 7
+    },
+    {
+      "number": 114,
+      "id": "kb.product.catalog",
+      "description": "Catalog produk (spec, price, stock)",
+      "layer": 7
+    },
+    {
+      "number": 115,
+      "id": "kb.service.info",
+      "description": "Info layanan (paket, harga, garansi)",
+      "layer": 7
+    },
+    {
+      "number": 116,
+      "id": "kb.faq.search",
+      "description": "Search FAQ (pertanyaan umum)",
+      "layer": 7
+    },
+    {
+      "number": 117,
+      "id": "kb.sop.search",
+      "description": "Search SOP (prosedur claim, return)",
+      "layer": 7
+    },
+    {
+      "number": 118,
+      "id": "kb.article.search",
+      "description": "Search knowledge article",
+      "layer": 7
+    },
+    {
+      "number": 119,
+      "id": "kb.pricing.search",
+      "description": "Search harga & promo",
+      "layer": 7
+    },
+    {
+      "number": 120,
+      "id": "kb.terms.search",
+      "description": "Search T&C, privacy policy",
+      "layer": 7
+    },
+    {
+      "number": 121,
+      "id": "kb.troubleshooting",
+      "description": "Search troubleshooting guide",
+      "layer": 7
+    },
+    {
+      "number": 122,
+      "id": "kb.tutorial.search",
+      "description": "Search tutorial",
+      "layer": 7
+    },
+    {
+      "number": 123,
+      "id": "kb.policy.search",
+      "description": "Search internal policy",
+      "layer": 7
+    },
+    {
+      "number": 124,
+      "id": "kb.user.history",
+      "description": "Search riwayat user (transaksi, tiket)",
+      "layer": 7
+    },
+    {
+      "number": 125,
+      "id": "kb.user.profile",
+      "description": "Get profile user (status, preferensi)",
+      "layer": 7
+    },
+    {
+      "number": 126,
+      "id": "kb.external.web.search",
+      "description": "Web search kalau KB tidak ada",
+      "layer": 7
+    },
+    {
+      "number": 127,
+      "id": "kb.freshness.check",
+      "description": "Check freshness data KB",
+      "layer": 7
+    },
+    {
+      "number": 128,
+      "id": "antihalluc.fact.check",
+      "description": "Fact check vs knowledge base",
+      "layer": 8
+    },
+    {
+      "number": 129,
+      "id": "antihalluc.source.cite",
+      "description": "WAJIB cite sumber",
+      "layer": 8
+    },
+    {
+      "number": 130,
+      "id": "antihalluc.confidence.score",
+      "description": "Score confidence (0-100)",
+      "layer": 8
+    },
+    {
+      "number": 131,
+      "id": "antihalluc.uncertain.admit",
+      "description": "Admit kalau tidak tahu",
+      "layer": 8
+    },
+    {
+      "number": 132,
+      "id": "antihalluc.verify.before.send",
+      "description": "Verify sebelum kirim",
+      "layer": 8
+    },
+    {
+      "number": 133,
+      "id": "antihalluc.scope.limit",
+      "description": "Limit scope (jangan out-of-scope)",
+      "layer": 8
+    },
+    {
+      "number": 134,
+      "id": "antihalluc.no.invention",
+      "description": "No invention (jangan karang)",
+      "layer": 8
+    },
+    {
+      "number": 135,
+      "id": "antihalluc.disclaimer.add",
+      "description": "Add disclaimer kalau perlu",
+      "layer": 8
+    },
+    {
+      "number": 136,
+      "id": "antihalluc.escalate.if.uncertain",
+      "description": "Escalate ke human kalau ragu",
+      "layer": 8
+    },
+    {
+      "number": 137,
+      "id": "antihalluc.kb.search.first",
+      "description": "Search KB dulu sebelum jawab",
+      "layer": 8
+    },
+    {
+      "number": 138,
+      "id": "antihalluc.web.search.if.needed",
+      "description": "Web search kalau KB tidak ada",
+      "layer": 8
+    },
+    {
+      "number": 139,
+      "id": "antihalluc.cross.reference",
+      "description": "Cross-reference multiple source",
+      "layer": 8
+    },
+    {
+      "number": 140,
+      "id": "antihalluc.evidence.required",
+      "description": "Evidence required untuk setiap claim",
+      "layer": 8
+    },
+    {
+      "number": 141,
+      "id": "antihalluc.alternative.give",
+      "description": "Give alternative kalau tidak yakin",
+      "layer": 8
+    },
+    {
+      "number": 142,
+      "id": "antihalluc.never.guess",
+      "description": "Never guess (lebih baik admit tidak tahu)",
+      "layer": 8
+    },
+    {
+      "number": 143,
+      "id": "response.generate.natural",
+      "description": "Generate natural language response",
+      "layer": 9
+    },
+    {
+      "number": 144,
+      "id": "response.tone.empathy",
+      "description": "Tone: empathy (kalau user marah/sedih)",
+      "layer": 9
+    },
+    {
+      "number": 145,
+      "id": "response.tone.formal",
+      "description": "Tone: formal (B2B, corporate)",
+      "layer": 9
+    },
+    {
+      "number": 146,
+      "id": "response.tone.casual",
+      "description": "Tone: casual (B2C, e-commerce)",
+      "layer": 9
+    },
+    {
+      "number": 147,
+      "id": "response.tone.friendly",
+      "description": "Tone: friendly (default)",
+      "layer": 9
+    },
+    {
+      "number": 148,
+      "id": "response.tone.professional",
+      "description": "Tone: professional",
+      "layer": 9
+    },
+    {
+      "number": 149,
+      "id": "response.personalize",
+      "description": "Personalize (pakai nama, refer history)",
+      "layer": 9
+    },
+    {
+      "number": 150,
+      "id": "response.format.wa",
+      "description": "Format untuk WhatsApp (emoji, line break)",
+      "layer": 9
+    },
+    {
+      "number": 151,
+      "id": "response.format.web",
+      "description": "Format untuk web chat",
+      "layer": 9
+    },
+    {
+      "number": 152,
+      "id": "response.format.email",
+      "description": "Format untuk email",
+      "layer": 9
+    },
+    {
+      "number": 153,
+      "id": "response.format.voice",
+      "description": "Format untuk voice output (TTS)",
+      "layer": 9
+    },
+    {
+      "number": 154,
+      "id": "response.length.short",
+      "description": "Pendek (1-3 kalimat) - quick reply",
+      "layer": 9
+    },
+    {
+      "number": 155,
+      "id": "response.length.medium",
+      "description": "Medium (1 paragraph) - default",
+      "layer": 9
+    },
+    {
+      "number": 156,
+      "id": "response.length.long",
+      "description": "Panjang (multi-paragraph) - penjelasan",
+      "layer": 9
+    },
+    {
+      "number": 157,
+      "id": "response.streaming",
+      "description": "Stream response token-by-token",
+      "layer": 9
+    },
+    {
+      "number": 158,
+      "id": "speed.cache.frequent",
+      "description": "Cache frequent question-answer",
+      "layer": 10
+    },
+    {
+      "number": 159,
+      "id": "speed.prefetch.context",
+      "description": "Prefetch context yang mungkin dibutuhkan",
+      "layer": 10
+    },
+    {
+      "number": 160,
+      "id": "speed.parallel.process",
+      "description": "Parallel processing (file + intent + KB)",
+      "layer": 10
+    },
+    {
+      "number": 161,
+      "id": "speed.model.small",
+      "description": "Pakai small model untuk task simple",
+      "layer": 10
+    },
+    {
+      "number": 162,
+      "id": "speed.model.large",
+      "description": "Pakai large model hanya untuk task complex",
+      "layer": 10
+    },
+    {
+      "number": 163,
+      "id": "speed.token.optimize",
+      "description": "Optimize token (hemat cost & waktu)",
+      "layer": 10
+    },
+    {
+      "number": 164,
+      "id": "speed.batch.process",
+      "description": "Batch process multiple request",
+      "layer": 10
+    },
+    {
+      "number": 165,
+      "id": "speed.edge.cache",
+      "description": "Cache di edge (CDN)",
+      "layer": 10
+    },
+    {
+      "number": 166,
+      "id": "speed.compression",
+      "description": "Compress response (gzip)",
+      "layer": 10
+    },
+    {
+      "number": 167,
+      "id": "speed.latency.monitor",
+      "description": "Monitor latency real-time",
+      "layer": 10
+    },
+    {
+      "number": 168,
+      "id": "action.account.query",
+      "description": "Query account info (saldo, status)",
+      "layer": 11
+    },
+    {
+      "number": 169,
+      "id": "action.account.update",
+      "description": "Update account (ubah profil, paket)",
+      "layer": 11
+    },
+    {
+      "number": 170,
+      "id": "action.billing.invoice",
+      "description": "Generate & send invoice",
+      "layer": 11
+    },
+    {
+      "number": 171,
+      "id": "action.billing.refund",
+      "description": "Process refund",
+      "layer": 11
+    },
+    {
+      "number": 172,
+      "id": "action.billing.waive",
+      "description": "Waive fee (with approval)",
+      "layer": 11
+    },
+    {
+      "number": 173,
+      "id": "action.ticket.create",
+      "description": "Create support ticket",
+      "layer": 11
+    },
+    {
+      "number": 174,
+      "id": "action.ticket.update",
+      "description": "Update ticket status",
+      "layer": 11
+    },
+    {
+      "number": 175,
+      "id": "action.escalate.human",
+      "description": "Escalate to human agent",
+      "layer": 11
+    },
+    {
+      "number": 176,
+      "id": "action.notify.team",
+      "description": "Notify internal team",
+      "layer": 11
+    },
+    {
+      "number": 177,
+      "id": "action.suspend.service",
+      "description": "Suspend service (with SOP)",
+      "layer": 11
+    },
+    {
+      "number": 178,
+      "id": "action.activate.service",
+      "description": "Activate service",
+      "layer": 11
+    },
+    {
+      "number": 179,
+      "id": "action.schedule.callback",
+      "description": "Schedule callback from human",
+      "layer": 11
+    },
+    {
+      "number": 180,
+      "id": "escalate.trigger.low.conf",
+      "description": "Escalate: confidence < 60%",
+      "layer": 12
+    },
+    {
+      "number": 181,
+      "id": "escalate.trigger.complex",
+      "description": "Escalate: complex issue",
+      "layer": 12
+    },
+    {
+      "number": 182,
+      "id": "escalate.trigger.angry",
+      "description": "Escalate: customer angry",
+      "layer": 12
+    },
+    {
+      "number": 183,
+      "id": "escalate.trigger.vip",
+      "description": "Escalate: VIP customer",
+      "layer": 12
+    },
+    {
+      "number": 184,
+      "id": "escalate.trigger.high.value",
+      "description": "Escalate: high-value transaction",
+      "layer": 12
+    },
+    {
+      "number": 185,
+      "id": "escalate.context.transfer",
+      "description": "Transfer context ke human",
+      "layer": 12
+    },
+    {
+      "number": 186,
+      "id": "escalate.summary.generate",
+      "description": "Generate summary percakapan",
+      "layer": 12
+    },
+    {
+      "number": 187,
+      "id": "escalate.queue.manage",
+      "description": "Manage agent queue",
+      "layer": 12
+    },
+    {
+      "number": 188,
+      "id": "escalate.agent.assign",
+      "description": "Assign ke agent (skill-based routing)",
+      "layer": 12
+    },
+    {
+      "number": 189,
+      "id": "escalate.notify.agent",
+      "description": "Notify agent (Slack/WA/IM)",
+      "layer": 12
+    },
+    {
+      "number": 190,
+      "id": "memory.short.term.store",
+      "description": "Store short-term memory (current session)",
+      "layer": 13
+    },
+    {
+      "number": 191,
+      "id": "memory.short.term.retrieve",
+      "description": "Retrieve short-term memory",
+      "layer": 13
+    },
+    {
+      "number": 192,
+      "id": "memory.long.term.store",
+      "description": "Store long-term memory (cross-session)",
+      "layer": 13
+    },
+    {
+      "number": 193,
+      "id": "memory.long.term.retrieve",
+      "description": "Retrieve long-term memory",
+      "layer": 13
+    },
+    {
+      "number": 194,
+      "id": "memory.semantic.search",
+      "description": "Semantic search di memory",
+      "layer": 13
+    },
+    {
+      "number": 195,
+      "id": "memory.forget.manage",
+      "description": "Manage forgetting (GDPR)",
+      "layer": 13
+    },
+    {
+      "number": 196,
+      "id": "memory.encrypt.at.rest",
+      "description": "Encrypt memory at rest",
+      "layer": 13
+    },
+    {
+      "number": 197,
+      "id": "memory.category.tag",
+      "description": "Tag memory by category",
+      "layer": 13
+    },
+    {
+      "number": 198,
+      "id": "memory.importance.score",
+      "description": "Score importance",
+      "layer": 13
+    },
+    {
+      "number": 199,
+      "id": "memory.compress.summary",
+      "description": "Compress old memory jadi summary",
+      "layer": 13
+    },
+    {
+      "number": 200,
+      "id": "memory.user.profile.update",
+      "description": "Update user profile dari memory",
+      "layer": 13
+    },
+    {
+      "number": 201,
+      "id": "memory.conversation.summary",
+      "description": "Auto-summarize conversation",
+      "layer": 13
+    },
+    {
+      "number": 202,
+      "id": "conv.opening",
+      "description": "Opening percakapan (greeting)",
+      "layer": 14
+    },
+    {
+      "number": 203,
+      "id": "conv.closing",
+      "description": "Closing percakapan (goodbye)",
+      "layer": 14
+    },
+    {
+      "number": 204,
+      "id": "conv.small.talk",
+      "description": "Small talk (basa-basi)",
+      "layer": 14
+    },
+    {
+      "number": 205,
+      "id": "conv.topic.suggest",
+      "description": "Suggest topik (kalau user bingung)",
+      "layer": 14
+    },
+    {
+      "number": 206,
+      "id": "conv.clarify.ask",
+      "description": "Ask clarification (kalau ambiguous)",
+      "layer": 14
+    },
+    {
+      "number": 207,
+      "id": "conv.handoff.human",
+      "description": "Handoff ke human agent",
+      "layer": 14
+    },
+    {
+      "number": 208,
+      "id": "conv.feedback.collect",
+      "description": "Collect feedback post-chat",
+      "layer": 14
+    },
+    {
+      "number": 209,
+      "id": "conv.satisfaction.measure",
+      "description": "Measure CSAT",
+      "layer": 14
+    },
+    {
+      "number": 210,
+      "id": "conv.followup.schedule",
+      "description": "Schedule follow-up",
+      "layer": 14
+    },
+    {
+      "number": 211,
+      "id": "conv.proactive.reach",
+      "description": "Proactive reach (follow-up)",
+      "layer": 14
+    },
+    {
+      "number": 212,
+      "id": "qa.response.check",
+      "description": "Check response sebelum kirim",
+      "layer": 15
+    },
+    {
+      "number": 213,
+      "id": "qa.tone.check",
+      "description": "Check tone sesuai brand voice",
+      "layer": 15
+    },
+    {
+      "number": 214,
+      "id": "qa.fact.check",
+      "description": "Fact-check final",
+      "layer": 15
+    },
+    {
+      "number": 215,
+      "id": "qa.privacy.check",
+      "description": "Privacy check (PII filter)",
+      "layer": 15
+    },
+    {
+      "number": 216,
+      "id": "qa.toxicity.filter",
+      "description": "Filter toxic content",
+      "layer": 15
+    },
+    {
+      "number": 217,
+      "id": "qa.audit.random",
+      "description": "Random audit (sample 5%)",
+      "layer": 15
+    },
+    {
+      "number": 218,
+      "id": "qa.scorecard",
+      "description": "QA scorecard per agent",
+      "layer": 15
+    },
+    {
+      "number": 219,
+      "id": "qa.improve.from.feedback",
+      "description": "Improve dari feedback",
+      "layer": 15
+    },
+    {
+      "number": 220,
+      "id": "learn.interaction.log",
+      "description": "Log semua interaksi",
+      "layer": 16
+    },
+    {
+      "number": 221,
+      "id": "learn.pattern.detect",
+      "description": "Detect pattern (FAQ baru)",
+      "layer": 16
+    },
+    {
+      "number": 222,
+      "id": "learn.knowledge.gap",
+      "description": "Identify knowledge gap",
+      "layer": 16
+    },
+    {
+      "number": 223,
+      "id": "learn.knowledge.update",
+      "description": "Auto-suggest knowledge update",
+      "layer": 16
+    },
+    {
+      "number": 224,
+      "id": "learn.fine.tune.dataset",
+      "description": "Build dataset untuk fine-tune",
+      "layer": 16
+    },
+    {
+      "number": 225,
+      "id": "learn.ab.test",
+      "description": "A/B test response variants",
+      "layer": 16
+    },
+    {
+      "number": 226,
+      "id": "learn.feedback.collect",
+      "description": "Collect feedback (thumbs up/down)",
+      "layer": 16
+    },
+    {
+      "number": 227,
+      "id": "learn.csat.track",
+      "description": "Track CSAT score",
+      "layer": 16
+    },
+    {
+      "number": 228,
+      "id": "analytics.volume.track",
+      "description": "Track volume chat",
+      "layer": 17
+    },
+    {
+      "number": 229,
+      "id": "analytics.topic.distribution",
+      "description": "Topic distribution",
+      "layer": 17
+    },
+    {
+      "number": 230,
+      "id": "analytics.response.time",
+      "description": "Track response time",
+      "layer": 17
+    },
+    {
+      "number": 231,
+      "id": "analytics.satisfaction.track",
+      "description": "Track CSAT per topik",
+      "layer": 17
+    },
+    {
+      "number": 232,
+      "id": "analytics.agent.performance",
+      "description": "Agent performance (human + AI)",
+      "layer": 17
+    },
+    {
+      "number": 233,
+      "id": "analytics.churn.predict",
+      "description": "Churn prediction",
+      "layer": 17
+    },
+    {
+      "number": 234,
+      "id": "analytics.forecast.volume",
+      "description": "Forecast volume",
+      "layer": 17
+    },
+    {
+      "number": 235,
+      "id": "analytics.export.report",
+      "description": "Export analytics report",
+      "layer": 17
+    },
+    {
+      "number": 236,
+      "id": "privacy.consent.manage",
+      "description": "Manage consent user",
+      "layer": 18
+    },
+    {
+      "number": 237,
+      "id": "privacy.data.minimize",
+      "description": "Minimize data collection",
+      "layer": 18
+    },
+    {
+      "number": 238,
+      "id": "privacy.retention.policy",
+      "description": "Retention policy (auto-delete)",
+      "layer": 18
+    },
+    {
+      "number": 239,
+      "id": "privacy.right.to.erasure",
+      "description": "Right to erasure (GDPR/PDP)",
+      "layer": 18
+    },
+    {
+      "number": 240,
+      "id": "privacy.right.to.access",
+      "description": "Right to access (export data)",
+      "layer": 18
+    },
+    {
+      "number": 241,
+      "id": "privacy.audit.log",
+      "description": "Audit log semua akses data",
+      "layer": 18
+    },
+    {
+      "number": 242,
+      "id": "privacy.encryption",
+      "description": "Encryption at rest + in transit",
+      "layer": 18
+    },
+    {
+      "number": 243,
+      "id": "privacy.dpo.contact",
+      "description": "Provide DPO contact info",
+      "layer": 18
+    }
+  ]
+}

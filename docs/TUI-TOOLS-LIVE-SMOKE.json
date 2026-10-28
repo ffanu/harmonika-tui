@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "stream_completed": true,
+  "answer_char_count": 11,
+  "live": true,
+  "http_statuses": [
+    200,
+    200
+  ],
+  "reply_rendered": true,
+  "captured": true,
+  "tool_counts": [
+    32,
+    0
+  ],
+  "tool_names": [
+    [
+      "bash",
+      "edit",
+      "glob",
+      "grep",
+      "ls",
+      "lsp_call_hierarchy",
+      "lsp_definition",
+      "lsp_diagnostics",
+      "lsp_references",
+      "lsp_symbols",
+      "mcp_harmonika-seo_seo",
+      "mcp_harmonika-ssh_remote_targets",
+      "mcp_harmonika-ssh_ssh_connect",
+      "mcp_harmonika-ssh_ssh_download",
+      "mcp_harmonika-ssh_ssh_exec",
+      "mcp_harmonika-ssh_ssh_upload",
+      "mcp_harmonika-ssh_telnet",
+      "mcp_harmonika-ssh_vnc",
+      "mcp_harmonika-video_video",
+      "mcp_harmonika_analyze_image",
+      "mcp_harmonika_analyze_video",
+      "mcp_harmonika_create_directory",
+      "mcp_harmonika_generate_image",
+      "mcp_harmonika_media",
+      "mcp_harmonika_read_pdf",
+      "mcp_harmonika_transcribe_audio",
+      "mcp_harmonika_web_search",
+      "multiedit",
+      "question",
+      "todos",
+      "view",
+      "write"
+    ],
+    []
+  ],
+  "schema_source": "real native PTY + active MCP/LSP config",
+  "private_content_logged": false
+}

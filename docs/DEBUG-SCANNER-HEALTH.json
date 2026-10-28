@@ -1,0 +1,20 @@
+{
+  "services": {
+    "harmonika-ai.service": [
+      "MainPID=1487202",
+      "ActiveState=active"
+    ],
+    "harmonika-master-skills.service": [
+      "MainPID=1327592",
+      "ActiveState=active"
+    ],
+    "harmonika-web-chat-live.service": [
+      "MainPID=1379498",
+      "ActiveState=active"
+    ]
+  },
+  "target_registry_entries": 0,
+  "source_bytes": 62491833,
+  "scanner_plugin_count": 71,
+  "service_pids_unchanged": true
+}

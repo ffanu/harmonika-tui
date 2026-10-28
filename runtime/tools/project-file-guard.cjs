@@ -35,7 +35,7 @@ function managedSkillRead(value) {
     const engineeringResource=/^harmonika-engineering\/scripts\/engineering_analyzers\.py$/.test(relative);
     const seoResource=/^harmonika-seo\/scripts\/seo_analyzers\.py$/.test(relative);
     const documentResource=/^harmonika-documents\/(?:manifest\.yaml|requirements\.txt|scripts\/(?:document_common|pdf_worker|pdf_handler|docx_handler|xlsx_handler|pptx_handler)\.py)$/.test(relative);
-    return inside(base,file)&&(documentResource||seoResource||engineeringResource||/^harmonika-(?:ui|debug|browser-qa|documents|seo|engineering|git|release|tui-dev|async-concurrency|ai-integration|terminal-qa|state-persistence)\/(?:SKILL\.md|references\/[A-Za-z0-9][A-Za-z0-9_-]*\.md|scripts\/(?:smoke\.cjs|documents\.py|terminal_qa\.py|fixture\.py|async_runtime\.py|stream_protocol\.py))$/.test(relative))&&fs.statSync(file).isFile();
+    return inside(base,file)&&(documentResource||seoResource||engineeringResource||/^harmonika-(?:erp|ssh|ui|debug|browser-qa|documents|seo|engineering|git|release|tui-dev|async-concurrency|ai-integration|terminal-qa|state-persistence)\/(?:SKILL\.md|references\/[A-Za-z0-9][A-Za-z0-9_-]*\.md|scripts\/(?:smoke\.cjs|documents\.py|terminal_qa\.py|fixture\.py|async_runtime\.py|stream_protocol\.py))$/.test(relative))&&fs.statSync(file).isFile();
   }catch{return false;}
 }
 function evaluate(payload) {
@@ -66,6 +66,7 @@ function evaluate(payload) {
       if(typeof working!=='string'||!inside(root,canonical(path.resolve(declaredRoot,working)))) return deny('Terminal harus tetap di folder proyek.');
       const command=input.command;
       if(typeof command!=='string'||!command.trim()||command.length>8000) return deny('Perintah terminal tidak valid.');
+      if(/\b(?:ssh|scp|sftp)\b/i.test(command)) return deny('Gunakan MCP harmonika-ssh: ssh_connect, ssh_exec, ssh_upload atau ssh_download dengan alias target terdaftar. Koneksi memakai key dan known_hosts, bukan bash atau password.');
       if(/\b(?:kill|pkill|killall|shutdown|reboot|poweroff|halt|sudo|su|launchctl|systemctl|osascript|ssh|scp|sftp|curl|wget|rm|rmdir|chmod|chown)\b/i.test(command)||/git\s+(?:reset\b[^\n]*--hard|clean\b|push\b[^\n]*(?:--force|-f)|checkout\s+--)/i.test(command)||/\.ssh|\.codex|\.config|\.env\b|\bid_(?:rsa|ed25519)\b|os\.kill|process\.kill|\$\(|`/.test(command)||/\bcd\s+(?:["']?(?:\/|~|\.\.))/.test(command)) return deny('Perintah berisiko atau akses di luar proyek diblokir. Gunakan tool yang sesuai dan persetujuan pengguna; jangan hentikan proses pengguna.');
       return {};
     }

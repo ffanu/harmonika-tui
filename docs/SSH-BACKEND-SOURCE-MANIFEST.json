@@ -1,0 +1,14 @@
+{
+  "remote_access/service.py": "f694c00738111ae5bd69ae9c465ae1ef20ed1d6099f116be1d32b6a96f851766",
+  "remote_access/control.py": "842a2cff012aaca79b0028d14cab608da2c05465b3c9b4fb0ce02bb8203a679b",
+  "remote_access/__init__.py": "cc029bd48d5f81624d17150375169ccb22504ec0cb457a3c05869ff158fbef19",
+  "remote_access/api.py": "cd26780d2af32eceed358513e6e0c70b19c25199e6b08c246ae85235c7195aed",
+  "remote_access/connector.py": "cd9ae79d07cd05a5c307eb6fb6fb94f1e8b20bd5d73fb5e1f2fe2182b12ecc60",
+  "remote_access/ssh_connector.py": "fc314920a0f19dd2909400d5835d64c06905326dc14fa953c52aca5f77eb6662",
+  "remote_access/client.cjs": "7a447379694872908a10e36204991c3c18bfa48a88723af3b8354b8c1ef2f8fd",
+  "README.md": "da8e976ad5c5c04267fef86a6c601b7c0c3f81c965d355b092930c2706b66149",
+  "requirements.lock": "07f7625b275506cc74b0fea5256d18f26ffa03377f20a6888e4b99229bd12388",
+  "monitoring/alerts.yaml": "672c68203e7cb4b9f626bc5a00de403f0fb78abc2cd83f5999405bcb30355cb0",
+  "monitoring/dashboard.json": "e1ebbf5bb7804940d3b178e76b44f6ef51daac056168481ced62112ba3ba3167",
+  "monitoring/prometheus-example.yaml": "a52726d6f242fe38b8ce460a1f0dcad6af6b2b6b09d8fdf9ddb4aa1f14fd133a"
+}

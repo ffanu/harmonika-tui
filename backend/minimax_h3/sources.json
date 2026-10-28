@@ -1,0 +1,16 @@
+[
+  {
+    "folder": "launcher-source",
+    "repo": "ThomasEricB/minimax-h3-pinokio",
+    "revision": "5fd0b65ad0d455892f573e50c8dfcb29799cc60d",
+    "sha256": "663d70f99c0a4ee88851e78692d578cac77147f78e2ced7389e330f85f401a92",
+    "bytes": 5842703
+  },
+  {
+    "folder": "ComfyUI",
+    "repo": "comfyanonymous/ComfyUI",
+    "revision": "426f5eea52a7ece1dd599fff4cb6cd1f352ddd24",
+    "sha256": "01f381c8330f5c5bec9bd3d4c651e8b53b45ffb70020b9e1e947fc63f93a1548",
+    "bytes": 13595371
+  }
+]

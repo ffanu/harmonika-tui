@@ -1,0 +1,50 @@
+# Optional template. Not applied to any running cluster. Provision an audited image,
+# operator-owned key/known_hosts/config secrets; projected Secret symlinks are
+# deliberately not accepted by the connector. Init copies into owner-only tmpfs.
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: harmonika-remote-access}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: harmonika-remote-access}}
+  template:
+    metadata: {labels: {app: harmonika-remote-access}}
+    spec:
+      securityContext: {runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
+      initContainers:
+        - name: provision-owner-files
+          image: harmonika-remote-access:verified
+          command: ["python", "-c", "import pathlib,shutil,os; [(shutil.copyfile(p,'/run/remote/'+p.name),os.chmod('/run/remote/'+p.name,0o600)) for p in pathlib.Path('/provisioned').iterdir() if p.is_file() and not p.name.startswith('.')]"]
+          volumeMounts:
+            - {name: projected, mountPath: /provisioned, readOnly: true}
+            - {name: credentials, mountPath: /run/remote}
+      containers:
+        - name: api
+          image: harmonika-remote-access:verified
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          resources: {requests: {cpu: 100m, memory: 128Mi}, limits: {cpu: "1", memory: 384Mi}}
+          volumeMounts:
+            - {name: credentials, mountPath: /run/remote, readOnly: true}
+            - {name: state, mountPath: /data}
+      volumes:
+        - name: projected
+          secret: {secretName: harmonika-remote-access, defaultMode: 288}
+        - name: credentials
+          emptyDir: {medium: Memory, sizeLimit: 8Mi}
+        - name: state
+          persistentVolumeClaim: {claimName: harmonika-remote-access}
+---
+# Replace sample /32 with the approved destination IP; no blanket SSH egress.
+# Loopback API is intended for a same-pod authenticated gateway sidecar.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: harmonika-remote-access}
+spec:
+  podSelector: {matchLabels: {app: harmonika-remote-access}}
+  policyTypes: [Ingress, Egress]
+  ingress: []
+  egress:
+    - to: [{ipBlock: {cidr: 192.0.2.10/32}}]
+      ports: [{protocol: TCP, port: 22059}]
+    - to: [{namespaceSelector: {matchLabels: {kubernetes.io/metadata.name: kube-system}}}]
+      ports: [{protocol: UDP, port: 53}, {protocol: TCP, port: 53}]

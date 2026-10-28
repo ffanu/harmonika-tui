@@ -1,6 +1,8 @@
 """Keep generation stable; independently route vision to a private local worker."""
 class WorkerRouter:
     def __init__(self,primary,vision):self.primary=primary;self.vision=vision
+    @property
+    def connection(self):return self.primary.connection
     async def start(self):
         await self.primary.start()
         try:await self.vision.start()

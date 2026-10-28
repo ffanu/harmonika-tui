@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "checks": {
+    "native_home_and_workbench_status": true,
+    "native_command_palette": true,
+    "physical_F2_metrics_popup": true,
+    "physical_F3_events_popup": true,
+    "physical_F4_file_code_pane": true,
+    "manual_run_requires_confirmation": true,
+    "manual_run_inline_output": true,
+    "real_native_streamed_code": true,
+    "native_lsp_auto_start_on_file_read": true,
+    "resize_80x24": true,
+    "native_binary_identical": true,
+    "fixture_model_only": true,
+    "clean_exit": true
+  },
+  "isolated": true,
+  "production_model_calls": false,
+  "binary_sha256": "94f297e1d6163d42af82835a4d1ffdaa95f0420782b5c962ab18fe46e97956c8",
+  "fixture_dir": "/private/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-workbench-qa-be_zs0gp",
+  "captures": "docs/mockups/workbench-captures"
+}

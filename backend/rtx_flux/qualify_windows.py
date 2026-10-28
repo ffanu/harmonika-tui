@@ -1,5 +1,5 @@
 """Real local-GPU quality/latency fixtures; no external inference or customer data."""
-import base64,hashlib,io,json,time,urllib.request
+import base64,hashlib,io,json,os,subprocess,threading,time,urllib.request
 from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parent
@@ -16,6 +16,17 @@ def post(data):
   first=r.read(1);first_ms=round((time.monotonic()-start)*1000);v=json.loads(first+r.read())
  return v,first_ms,time.monotonic()-start
 def main():
+ if os.name!='nt':raise RuntimeError('windows_gpu_qualification_only')
+ stop=threading.Event();samples=[]
+ def monitor():
+  while not stop.is_set():
+   try:
+    r=subprocess.run(['nvidia-smi','--query-gpu=memory.used,memory.total,utilization.gpu','--format=csv,noheader,nounits'],capture_output=True,text=True,timeout=3)
+    if r.returncode==0:
+     used,total,util=map(int,r.stdout.strip().splitlines()[0].split(','));samples.append({'used_mib':used,'total_mib':total,'util_percent':util})
+   except Exception:pass
+   stop.wait(1)
+ thread=threading.Thread(target=monitor,daemon=True);thread.start()
  out=ROOT/'qualification';out.mkdir(exist_ok=True);rows=[]
  for i,(name,prompt) in enumerate(CASES):
   v,first,elapsed=post({'prompt':prompt,'width':1024,'height':1024,'seed':20261025+i})
@@ -28,6 +39,7 @@ def main():
   (out/(name+'.png')).write_bytes(binary)
   rows.append({'name':name,'seconds':round(elapsed,2),'first_byte_ms':first,'bytes':len(binary),'sha256':hashlib.sha256(binary).hexdigest(),'seed':v.get('seed')})
   (ROOT/'qualification-progress.json').write_text(json.dumps({'status':'running','cases':rows},indent=2))
- report={'status':'technical_passed_visual_review_required','model':'black-forest-labs/FLUX.2-klein-4B','cases':rows,'local_gpu_only':True,'approved':False}
+ stop.set();thread.join(timeout=4)
+ report={'peak_total_gpu_used_mib':max((x['used_mib'] for x in samples),default=None),'gpu_samples':len(samples),'status':'technical_passed_visual_review_required','model':'black-forest-labs/FLUX.2-klein-4B','cases':rows,'local_gpu_only':True,'approved':False}
  (ROOT/'qualification-report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))
 if __name__=='__main__':main()

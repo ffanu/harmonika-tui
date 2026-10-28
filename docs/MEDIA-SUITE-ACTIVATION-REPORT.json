@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-27T12:12:58.482155+00:00",
+  "status": "private_runtimes_active_and_tested",
+  "windows_ssh_verified": true,
+  "windows_host": "DESKTOP-KK0CTT2",
+  "gpu": "RTX5070 12GB",
+  "components": {
+    "audio.transcribe": {
+      "state": "private_api_ready",
+      "language_tested": "id",
+      "execution": "Windows CPU INT8"
+    },
+    "image.upscale": {
+      "state": "private_api_ready",
+      "scale": 4,
+      "tested_resolution": "256x256 to1024x1024",
+      "execution": "Windows CUDA"
+    },
+    "browser.inspect": {
+      "state": "private_api_ready",
+      "real_dom_navigation": true,
+      "autonomous_click_forms_enabled": false,
+      "execution": "Linux sandboxed Chromium; GPU disabled"
+    },
+    "audio.synthesize": {
+      "state": "private_research_api_ready",
+      "language_tested": "en",
+      "commercial_public_enabled": false,
+      "weights_license": "CC-BY-NC-4.0"
+    }
+  },
+  "local_contract_tests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "windows_native_qualification": {
+    "audio.transcribe": {
+      "real_test_passed": true,
+      "timestamp": 1793102356.2831867,
+      "latency_seconds": 1.734,
+      "research_only": false
+    },
+    "image.upscale": {
+      "real_test_passed": true,
+      "timestamp": 1793102570.745709,
+      "latency_seconds": 8.266,
+      "research_only": false
+    },
+    "audio.synthesize": {
+      "real_test_passed": true,
+      "timestamp": 1793102616.7385418,
+      "latency_seconds": 43.328,
+      "research_only": true
+    }
+  },
+  "windows_process_cleanup": {
+    "job_object_cleanup_verified": true,
+    "foreign_processes_modified": false
+  },
+  "linux_native_qualification": {
+    "browser.inspect": {
+      "real_test_passed": true,
+      "timestamp": 1793102112.8576057,
+      "latency_seconds": 1.783,
+      "research_only": false
+    }
+  },
+  "cross_pc_rest": {
+    "transport": "authenticated_loopback_ssh_tunnel",
+    "capabilities": {
+      "audio.transcribe": {
+        "ready": true,
+        "research_only": false
+      },
+      "image.upscale": {
+        "ready": true,
+        "research_only": false
+      },
+      "browser.inspect": {
+        "ready": false,
+        "research_only": false
+      },
+      "audio.synthesize": {
+        "ready": true,
+        "research_only": true
+      }
+    },
+    "tests": {
+      "audio.transcribe": {
+        "completed": true,
+        "idempotency_passed": true,
+        "latency": 1.781,
+        "indonesian_verified": true,
+        "expected_keyword_detected": true
+      },
+      "image.upscale": {
+        "completed": true,
+        "idempotency_passed": true,
+        "latency": 7.984,
+        "width": 1024,
+        "height": 1024,
+        "scale": 4,
+        "bytes": 825118,
+        "sha256": "b005f4ef4b6a821786cb65f34d10cc03617bf079f17e283e6062629d293373f5"
+      },
+      "audio.synthesize": {
+        "completed": true,
+        "idempotency_passed": true,
+        "latency": 42.094,
+        "duration_seconds": 3.093,
+        "research_only": true,
+        "bytes": 148524,
+        "sha256": "0870828926c2b49026cdd46b3889ce7792d2affc9a2f00687a95d1e4514cf075"
+      }
+    },
+    "public_route_changed": false,
+    "customer_data_used": false,
+    "unauthenticated_denied": true
+  },
+  "tts_roundtrip": {
+    "tts_audio_not_silent": true,
+    "tts_expected_words_detected": true
+  },
+  "services": {
+    "linux_browser": "harmonika-media-suite.service",
+    "linux_tunnel": "harmonika-media-rtx-tunnel.service",
+    "windows": "Harmonika-Media-runtime-20261027 at user logon"
+  },
+  "private_ports": {
+    "linux_browser": 18230,
+    "linux_to_windows_tunnel": 18232,
+    "windows_worker": 18231
+  },
+  "security": {
+    "customer_media_used": false,
+    "raw_input_in_diagnostic_logs": false,
+    "keys_in_repo": false,
+    "tunnel_key_shell_access": false,
+    "tunnel_key_permitted_target": "127.0.0.1:18231",
+    "global_userns_restriction": 1,
+    "chromium_root_owned": true,
+    "chromium_sandbox_enabled": true,
+    "gpu_enabled_on_linux": false
+  },
+  "scope": {
+    "existing_services_restarted": false,
+    "existing_flux_h3_vision_environments_modified": false,
+    "gpu_driver_modified": false,
+    "apk_ios_endpoint_modified": false,
+    "public_routes_modified": false,
+    "tui_binary_modified": false,
+    "shared_automatic_routing_activated": false
+  },
+  "contributions": {
+    "Codex": "implementation, isolated install, native qualification and cross-PC API tests",
+    "OpenCode": "read-only upstream compatibility and licensing audit"
+  },
+  "source_sha256": {
+    "service.py": "18d5454ca406b1d1c749f3928b2471e4ba5e3b8004dee29c40e5374f997c7e2d",
+    "models.json": "7d5ae7c38564d44d24dbfa2bd5e4e42b3112d693763a5b86e1cf47ffbcd6fbde",
+    "engines.py": "c7d9b95b938a28a1d95686de5ffcce72d3ce935f66ed6166235c2264ffbe8b3e",
+    "client.py": "5c78793d0f17beb2447a5d26dd4523a208e55e226dd3baf61952510bd52a5f9c",
+    "README.md": "0351942aa1fb3ad0bd9d52227713c9905361b70cfa23203175a09b456f585241",
+    "torch-wheels.json": "928b1e6cbf00654db20a57fc9b47a3a06639438fc4eeb927db7caccd3aa459ef",
+    "probe.py": "578edd83e23880e00350cb64c924c8bb690527adacdde7f8feb2397c2ee05f9e",
+    "contracts.py": "00dd90b9538b574ad3d76700fae8f7ef2aeb121b72260b99822d549260e6a20b",
+    "process.py": "0bd5c8a50d939ca57d26a676272ca91e5e8ad66e57000e3e2fd9d7caa92d9705",
+    "install.py": "5e4c51bb7d99811b0b42893f6af7ad0eb66c6050f3c4890498958bcd9abc18f1",
+    "AGENTS.md": "efd4bb34b7865c065a63b89a3e6c7ed229c1c07b6201e7812148637977de30ab",
+    "qualify.py": "f10c01d148638db5d7ee07abc24251e1f1c7a2047fcf9c5a1b7a422bd03f71c7"
+  }
+}

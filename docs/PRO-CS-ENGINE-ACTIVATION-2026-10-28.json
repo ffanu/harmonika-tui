@@ -1,0 +1,228 @@
+{
+  "checked_at": "2026-10-28T01:39:07.870117+00:00",
+  "source": {
+    "file": "Harmonika_AI_Pro_Customer_Service_Engine.txt",
+    "sha256": "a1b2b0be6cc6dc499f0c4e24884fd4c4e46ee114fd8b20d52a233a99013a8e3e",
+    "full_lines": 1252,
+    "actual_catalog_count": 243,
+    "guide_header_count": 215
+  },
+  "contributors": {
+    "Codex": "implementation, deployment, tests",
+    "OpenCode": "read-only policy and compatibility review"
+  },
+  "deployment": {
+    "service": "harmonika-pro-cs.service",
+    "loopback_port": 18321,
+    "enabled_at_boot": true,
+    "existing_customer_channels_changed": false,
+    "existing_service_pids_unchanged": {
+      "main_api": 1487202,
+      "public_gateway": 1379498,
+      "registry": 2212976,
+      "webui": 2213604
+    },
+    "public_stateless_skills": [
+      "pro_cs.catalog",
+      "pro_cs.analyze",
+      "pro_cs.validate",
+      "pro_cs.intent",
+      "pro_cs.privacy",
+      "pro_cs.extract"
+    ],
+    "signed_owner_operations": [
+      "pro_cs_capabilities",
+      "pro_cs_invoke",
+      "pro_cs_plan",
+      "pro_cs_validate",
+      "pro_cs_takeover",
+      "pro_cs_close"
+    ]
+  },
+  "readiness": {
+    "catalog": 243,
+    "bounded_operations_implemented": 56,
+    "context_or_connector_required": 187,
+    "full_243_operational": false,
+    "all_channels_automatically_integrated": false,
+    "auto_send": false,
+    "confidence_calibrated": false,
+    "evidence_independently_verified": false,
+    "continuous_training": false
+  },
+  "tests": {
+    "unit_tests": {
+      "passed": 30,
+      "failed": 0
+    },
+    "real_reader_fixtures": {
+      "ok": true,
+      "real_fixture_count": 19,
+      "formats": [
+        {
+          "format": "pdf",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "docx",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "xlsx",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "pptx",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "png",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "jpg",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "tiff",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "txt",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "json",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "csv",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "xml",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "svg",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "yaml",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "html",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "md",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "ics",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "vcf",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "eml",
+          "status": "completed",
+          "visual_model_invoked": false
+        },
+        {
+          "format": "zip",
+          "status": "completed",
+          "visual_model_invoked": false
+        }
+      ]
+    },
+    "signed_rpc": {
+      "gateway_signed_rpc": true,
+      "preview_validation": true,
+      "new_message_invalidates_draft": true,
+      "negation_preserved": true,
+      "takeover_suppresses_reply": true,
+      "close_suppresses_reply": true,
+      "real_isolated_file_reader": true,
+      "financial_mutation_disabled": true
+    },
+    "public_gateway": [
+      {
+        "skill_id": "pro_cs.catalog",
+        "http": 200,
+        "status": "completed"
+      },
+      {
+        "skill_id": "pro_cs.analyze",
+        "http": 200,
+        "status": "completed"
+      },
+      {
+        "skill_id": "pro_cs.intent",
+        "http": 200,
+        "status": "completed"
+      },
+      {
+        "skill_id": "pro_cs.privacy",
+        "http": 200,
+        "status": "completed"
+      },
+      {
+        "skill_id": "pro_cs.extract",
+        "http": 200,
+        "status": "completed"
+      },
+      {
+        "skill_id": "pro_cs.validate",
+        "http": 200,
+        "status": "completed"
+      }
+    ],
+    "unauthenticated_service_http": 403,
+    "state_journal_mode": "wal",
+    "raw_chat_in_database_or_logs": false
+  },
+  "limits": {
+    "max_file_bytes": 8388608,
+    "upload_100mb": false,
+    "raw_pdf_scan_ocr": false,
+    "actual_vlm_in_new_reader": false,
+    "asr_model_bound_in_new_reader": false,
+    "refund_ticket_service_mutations_executed": false,
+    "long_term_content_memory": "consent adapter required",
+    "source_and_paraphrase_check": "conservative extractive preview validation; not a hallucination-free guarantee",
+    "llm_latency_sla_verified": false
+  },
+  "files_sha256": {
+    "catalog.py": "70840727278a5c9a07f7a00078c0ecc4b97eefa25bc51c8dc4693d98e186d45c",
+    "service.py": "3125f561f60ed638e4b28e921ea0281e24e6d18c311b5a740eb5943f2e6935f8",
+    "readers.py": "196ae126b20bad4bde8f9fd0a9b609a85e85864d4c8c10f78872965f7ccaa8fd",
+    "register.py": "1571e4d67bfcb83bfc294dea113e121a62d0c8c2077449774da64459ddcd0749",
+    "rpc_proxy.py": "66ee6a48913030b949fac3500d6209447f99e231ed386136aec3a348cac9f445",
+    "core.py": "0c5d97ce879ff22dbcd9894315c924e66b710fbdf7152134b3334a578479ead1",
+    "harmonika-pro-cs.service": "ee1fae3a92ff64ef5442dafa4203b311c8969000b8de85893cb37bd56579952e",
+    "README.md": "f1ec65e6602038579a612cb3abdd65571e6f66016bcc50d4bee50cfa60ea31aa",
+    "verify_files.py": "ed2825abe360344a2b3b2baee36ffdd7d76368f28c9a925d2d058b5d70576d0b",
+    "catalog.json": "83e851bf2fe96c1ebf7c770f993d66e5e4677d568037a47921ff16728d838572"
+  }
+}

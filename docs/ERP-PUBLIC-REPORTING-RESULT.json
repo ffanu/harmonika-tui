@@ -1,0 +1,33 @@
+{
+  "synthetic_input_only": true,
+  "tests": [
+    {
+      "operation": "finance.financial.statement",
+      "passed": true,
+      "report_type": "financial_statements"
+    },
+    {
+      "operation": "report.financial.statement",
+      "passed": true,
+      "report_type": "financial_statements"
+    },
+    {
+      "operation": "finance.cashflow.statement",
+      "passed": true,
+      "report_type": "cash_flow"
+    },
+    {
+      "operation": "report.cash.flow",
+      "passed": true,
+      "report_type": "cash_flow"
+    },
+    {
+      "operation": "report.profit.loss",
+      "passed": true,
+      "report_type": "profit_loss"
+    },
+    {
+      "invalid_account_rejected": true
+    }
+  ]
+}

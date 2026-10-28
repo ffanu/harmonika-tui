@@ -1,0 +1,8 @@
+{
+  "native_auto_lsp": true,
+  "startup_node_client_count": 0,
+  "after_file_read_node_client_count": 4,
+  "view_tool_available": true,
+  "view_tool_called": true,
+  "configured_lsp_count": 5
+}

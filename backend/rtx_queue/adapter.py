@@ -3,9 +3,11 @@ import asyncio
 import base64
 import hashlib
 import json
+import time
 from pathlib import Path
 import aiohttp
-from .core import RTXError,RESULT_LIMIT,safe_id,validate_endpoint
+from .core import RTXError,RESULT_LIMIT,safe_id,validate_endpoint,image_info
+from .diagnostics import observed,health_state,STATE_CODES
 
 class RTXAdapter:
     def __init__(self,endpoint,mode='v1',token='',connect_timeout=3,job_timeout=120,poll_interval=1):
@@ -13,7 +15,7 @@ class RTXAdapter:
         self.endpoint=validate_endpoint(endpoint,mode);self.mode=mode;self.token=token
         if mode=='v1' and not token:raise RTXError('worker_secret_required')
         if not 0<connect_timeout<=30 or not 0<job_timeout<=600:raise RTXError('invalid_timeout')
-        self.connect_timeout=connect_timeout;self.job_timeout=job_timeout;self.poll_interval=poll_interval;self.session=None
+        self.connect_timeout=connect_timeout;self.job_timeout=job_timeout;self.poll_interval=poll_interval;self.session=None;self.connection=observed("unknown")
     async def start(self):
         self.session=aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=self.job_timeout,connect=self.connect_timeout,sock_read=min(self.job_timeout,15)),trust_env=False,cookie_jar=aiohttp.DummyCookieJar(),auto_decompress=False,connector=aiohttp.TCPConnector(limit=2))
     async def close(self):
@@ -23,35 +25,54 @@ class RTXAdapter:
         try:
             async with self.session.request(method,self.endpoint+path,headers={**self.headers(),**(extra_headers or {})},allow_redirects=False,**kwargs) as response:
                 if response.status==404:raise RTXError('remote_job_not_found',409,uncertain=method!='GET')
-                if response.status in (401,403):raise RTXError('worker_auth_failed',503,uncertain=method!='GET')
-                if response.status==429:raise RTXError('worker_busy',503,uncertain=method!='GET')
+                if response.status in (401,403):raise RTXError('worker_auth_failed',503,uncertain=False)
+                if response.status==429:raise RTXError('worker_busy',503,uncertain=False)
+                if response.status in (400,413,415,422):raise RTXError('worker_invalid_request',422,uncertain=False)
+                if response.status==503:
+                    raw=await response.content.read(8193)
+                    code=''
+                    if len(raw)<=8192:
+                        try:
+                            body=json.loads(raw);code=body.get('error','')
+                            if isinstance(code,dict):code=code.get('code','')
+                        except (ValueError,TypeError,AttributeError):pass
+                    mapped={'model_not_approved':'worker_warming','model_warming':'worker_warming','gpu_memory_full':'worker_vram_full','worker_busy':'worker_busy','gpu_job_recovery_required':'gpu_job_recovery_required'}.get(code) if isinstance(code,str) else None
+                    raise RTXError(mapped or 'worker_http_error',503,uncertain=not bool(mapped) and method!='GET')
                 if response.status not in (200,201,202):raise RTXError('worker_http_error',503,uncertain=method!='GET')
                 if 'application/json' not in response.headers.get('Content-Type',''):raise RTXError('invalid_worker_response',502,uncertain=method!='GET')
-                chunks=[];size=0
+                chunks=[];size=0;structure=0
                 async for chunk in response.content.iter_chunked(65536):
-                    size+=len(chunk)
+                    size+=len(chunk);structure+=sum(chunk.count(token) for token in (b'{',b'[',b',',b':'))
+                    if structure>32768:raise RTXError('invalid_worker_response',502,uncertain=method!='GET')
                     if size>limit:raise RTXError('worker_response_too_large',502,uncertain=method!='GET')
                     chunks.append(chunk)
-                value=json.loads(b''.join(chunks))
+                value=json.loads(b''.join(chunks),parse_constant=lambda _: (_ for _ in ()).throw(ValueError('invalid_constant')))
                 if not isinstance(value,dict):raise ValueError()
                 return value
         except aiohttp.ClientConnectorError:raise RTXError('rtx_offline',503,uncertain=False) from None
         except (asyncio.TimeoutError,aiohttp.ClientError):raise RTXError('rtx_timeout_or_connection_lost',504,uncertain=method!='GET') from None
         except RTXError:raise
-        except (ValueError,UnicodeError):raise RTXError('invalid_worker_response',502,uncertain=method!='GET') from None
+        except (ValueError,UnicodeError,TypeError,RecursionError,OverflowError):raise RTXError('invalid_worker_response',502,uncertain=method!='GET') from None
     async def health(self):
-        path='/health' if self.mode=='legacy' else '/v1/rtx/health'
+        path='/health' if self.mode=='legacy' else '/v1/rtx/health';started=time.monotonic()
         try:
             value=await asyncio.wait_for(self.json_request('GET',path),self.connect_timeout)
             if self.mode=='legacy':
+                state=health_state(value);self.connection=observed(state,(time.monotonic()-started)*1000)
                 ready=value.get('ok') is True and value.get('cuda') is True and value.get('device')=='cuda'
                 return {'ready':ready,'generate':ready,'analyze':False,'references':False}
             caps=value.get('capabilities',{})
+            self.connection=observed('online' if value.get('ok') is True and isinstance(caps,dict) else 'unavailable',(time.monotonic()-started)*1000)
             if value.get('ok') is not True or not isinstance(caps,dict):return {'ready':False,'generate':False,'analyze':False,'references':False}
             return {'ready':True,'generate':caps.get('generate') is True,'analyze':caps.get('analyze') is True,'references':caps.get('references') is True}
-        except (RTXError,asyncio.TimeoutError):return {'ready':False,'generate':False,'analyze':False,'references':False}
+        except (RTXError,asyncio.TimeoutError) as e:
+            state={'worker_auth_failed':'auth_failed','invalid_worker_response':'bad_payload','worker_response_too_large':'bad_payload','rtx_timeout_or_connection_lost':'timeout'}.get(getattr(e,'code',''),'timeout' if isinstance(e,asyncio.TimeoutError) else 'offline')
+            self.connection=observed(state,(time.monotonic()-started)*1000)
+            return {'ready':False,'generate':False,'analyze':False,'references':False}
     async def run(self,job,store):
         ready=await self.health()
+        state=self.connection['status']
+        if state in STATE_CODES:raise RTXError(STATE_CODES[state],503)
         if not ready['ready']:raise RTXError('rtx_offline',503)
         payload=json.loads(job['payload'])
         if not ready.get(job['kind']):raise RTXError('vision_unavailable' if job['kind']=='analyze' else 'generation_unavailable',503)
@@ -64,10 +85,18 @@ class RTXAdapter:
         width,height=map(int,payload['size'].split('x'))
         result=await self.json_request('POST','/generate',limit=24*1024*1024,json={'prompt':payload['prompt'],'width':width,'height':height,'steps':4,'guidance_scale':0.0})
         try:
-            if result.get('ok') is not True or result.get('device')!='cuda' or not isinstance(result.get('b64_png'),str):raise ValueError()
+            if result.get('ok') is not True:
+                code=result.get('error')
+                if isinstance(code,dict):code=code.get('code')
+                mapped={'gpu_memory_full':'worker_vram_full','worker_busy':'worker_busy','gpu_job_recovery_required':'gpu_job_recovery_required','render_timeout':'rtx_job_timeout','invalid_comfy_payload':'invalid_worker_response'}.get(code) if isinstance(code,str) else None
+                raise RTXError(mapped or 'remote_job_failed',503,uncertain=result.get('uncertain') is True)
+            if result.get('device')!='cuda' or not isinstance(result.get('b64_png'),str):raise ValueError()
             data=base64.b64decode(result['b64_png'],validate=True)
-            if len(data)>RESULT_LIMIT:raise ValueError()
+            if len(data)>RESULT_LIMIT or not data.startswith(b'\x89PNG\r\n\x1a\n'):raise ValueError()
+            info=await asyncio.to_thread(image_info,data)
+            if info['mime_type']!='image/png' or info['width']>2048 or info['height']>2048:raise ValueError()
             return {'text':'','images':[data]}
+        except RTXError:raise
         except (ValueError,TypeError):raise RTXError('invalid_image_result',502) from None
     async def _v1(self,job,payload,store):
         form=aiohttp.FormData();references=[]

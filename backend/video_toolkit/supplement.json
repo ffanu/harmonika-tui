@@ -1,0 +1,72 @@
+[
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/models_clip_open-clip-xlm-roberta-large-vit-huge-14-bf16.safetensors",
+    "bytes": 2386119506,
+    "sha256": "742b68fe1cade9e54863aee12aed5390a994269957bd0638799b141cbc236ad8",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/models_clip_open-clip-xlm-roberta-large-vit-huge-14-bf16.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/models_clip_open-clip-xlm-roberta-large-vit-huge-14-bf16.safetensors"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/sentencepiece.bpe.model",
+    "bytes": 5069051,
+    "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/sentencepiece.bpe.model",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/sentencepiece.bpe.model"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/special_tokens_map.json",
+    "bytes": 280,
+    "sha256": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/special_tokens_map.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/special_tokens_map.json"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/tokenizer.json",
+    "bytes": 17082660,
+    "sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer.json"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "xlm-roberta-large/tokenizer_config.json",
+    "bytes": 418,
+    "sha256": "efb5c0d09722e5fe59a462cd2a9976ee216d55b037597d997cd3fe833216da15",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer_config.json",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/xlm-roberta-large/tokenizer_config.json"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "Wan2.1_VAE.safetensors",
+    "bytes": 507593157,
+    "sha256": "3ce0c02b9470532e7f63f3e2f8e83b0681fdeaa432e969c412482d2b3b78267b",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE.safetensors"
+  },
+  {
+    "group": "wangp",
+    "repo": "DeepBeepMeep/Wan2.1",
+    "revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "file": "Wan2.1_VAE_upscale2x_imageonly_real_v1.safetensors",
+    "bytes": 507684560,
+    "sha256": "2413554bbec24215185662d009893cf4666b8e777efece2d895e03e1a6b63e06",
+    "relative": "models/hub/models--DeepBeepMeep--Wan2.1/snapshots/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE_upscale2x_imageonly_real_v1.safetensors",
+    "url": "https://huggingface.co/DeepBeepMeep/Wan2.1/resolve/a4c0cc35033229072cb6d5a92952c3d51716837f/Wan2.1_VAE_upscale2x_imageonly_real_v1.safetensors"
+  }
+]

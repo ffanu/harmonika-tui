@@ -1,0 +1,19 @@
+[Unit]
+Description=Harmonika isolated CPU backend toolchain
+After=network.target
+[Service]
+ExecStart=/usr/bin/python3 /opt/harmonika-ai/toolchain-setup/service.py
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ReadWritePaths=/opt/harmonika-ai/toolchain-runtime/verification.json
+MemoryMax=2G
+CPUQuota=200%
+Environment=CUDA_VISIBLE_DEVICES=
+Environment=OMP_NUM_THREADS=2
+Environment=DO_NOT_TRACK=1
+[Install]
+WantedBy=multi-user.target

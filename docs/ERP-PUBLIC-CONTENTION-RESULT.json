@@ -1,0 +1,10 @@
+{
+  "controlled_parallel_calls": 2,
+  "operations": [
+    "catalog",
+    "generate"
+  ],
+  "both_passed": true,
+  "stress_test": false,
+  "source_files": 52
+}

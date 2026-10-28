@@ -1,0 +1,519 @@
+{
+  "synthetic_only": true,
+  "total": 102,
+  "passed": 102,
+  "failed": 0,
+  "scope": "pure_entrypoint_contracts_not_business_deployment",
+  "tests": [
+    {
+      "skill_id": "erp_all.builder.gen.api",
+      "passed": true,
+      "latency_ms": 3445.1
+    },
+    {
+      "skill_id": "erp_all.builder.gen.auth",
+      "passed": true,
+      "latency_ms": 496.0
+    },
+    {
+      "skill_id": "erp_all.builder.gen.backend",
+      "passed": true,
+      "latency_ms": 472.4
+    },
+    {
+      "skill_id": "erp_all.builder.gen.dashboard",
+      "passed": true,
+      "latency_ms": 3435.7
+    },
+    {
+      "skill_id": "erp_all.builder.gen.database",
+      "passed": true,
+      "latency_ms": 476.2
+    },
+    {
+      "skill_id": "erp_all.builder.gen.frontend",
+      "passed": true,
+      "latency_ms": 513.9
+    },
+    {
+      "skill_id": "erp_all.builder.gen.menu",
+      "passed": true,
+      "latency_ms": 3508.9
+    },
+    {
+      "skill_id": "erp_all.builder.gen.report",
+      "passed": true,
+      "latency_ms": 493.1
+    },
+    {
+      "skill_id": "erp_all.builder.gen.workflow",
+      "passed": true,
+      "latency_ms": 494.2
+    },
+    {
+      "skill_id": "erp_all.builder.scaffold.project",
+      "passed": true,
+      "latency_ms": 3469.4
+    },
+    {
+      "skill_id": "erp_all.catalog",
+      "passed": true,
+      "latency_ms": 438.8
+    },
+    {
+      "skill_id": "erp_all.crm.pipeline",
+      "passed": true,
+      "latency_ms": 396.6
+    },
+    {
+      "skill_id": "erp_all.crm.satisfaction.survey",
+      "passed": true,
+      "latency_ms": 3340.9
+    },
+    {
+      "skill_id": "erp_all.finance.budgeting",
+      "passed": true,
+      "latency_ms": 371.3
+    },
+    {
+      "skill_id": "erp_all.finance.cashflow.statement",
+      "passed": true,
+      "latency_ms": 394.1
+    },
+    {
+      "skill_id": "erp_all.finance.depreciation",
+      "passed": true,
+      "latency_ms": 3929.4
+    },
+    {
+      "skill_id": "erp_all.finance.financial.statement",
+      "passed": true,
+      "latency_ms": 430.9
+    },
+    {
+      "skill_id": "erp_all.finance.general.ledger",
+      "passed": true,
+      "latency_ms": 421.6
+    },
+    {
+      "skill_id": "erp_all.finance.invoice",
+      "passed": true,
+      "latency_ms": 3689.1
+    },
+    {
+      "skill_id": "erp_all.finance.journal.entry",
+      "passed": true,
+      "latency_ms": 379.7
+    },
+    {
+      "skill_id": "erp_all.finance.multi.currency",
+      "passed": true,
+      "latency_ms": 403.0
+    },
+    {
+      "skill_id": "erp_all.finance.reconciliation",
+      "passed": true,
+      "latency_ms": 3683.6
+    },
+    {
+      "skill_id": "erp_all.generate",
+      "passed": true,
+      "latency_ms": 484.3
+    },
+    {
+      "skill_id": "erp_all.hr.attendance",
+      "passed": true,
+      "latency_ms": 380.6
+    },
+    {
+      "skill_id": "erp_all.hr.expense.claim",
+      "passed": true,
+      "latency_ms": 3810.3
+    },
+    {
+      "skill_id": "erp_all.hr.leave.management",
+      "passed": true,
+      "latency_ms": 387.4
+    },
+    {
+      "skill_id": "erp_all.hr.loan.management",
+      "passed": true,
+      "latency_ms": 400.6
+    },
+    {
+      "skill_id": "erp_all.hr.payroll",
+      "passed": true,
+      "latency_ms": 3656.7
+    },
+    {
+      "skill_id": "erp_all.hr.time.overtime",
+      "passed": true,
+      "latency_ms": 392.1
+    },
+    {
+      "skill_id": "erp_all.industry.analyze.spec",
+      "passed": true,
+      "latency_ms": 414.5
+    },
+    {
+      "skill_id": "erp_all.industry.clarify",
+      "passed": true,
+      "latency_ms": 3634.2
+    },
+    {
+      "skill_id": "erp_all.industry.classify",
+      "passed": true,
+      "latency_ms": 404.1
+    },
+    {
+      "skill_id": "erp_all.industry.confidence.score",
+      "passed": true,
+      "latency_ms": 392.2
+    },
+    {
+      "skill_id": "erp_all.industry.detect.context",
+      "passed": true,
+      "latency_ms": 3653.7
+    },
+    {
+      "skill_id": "erp_all.industry.detect.keywords",
+      "passed": true,
+      "latency_ms": 386.9
+    },
+    {
+      "skill_id": "erp_all.industry.profile.build",
+      "passed": true,
+      "latency_ms": 388.3
+    },
+    {
+      "skill_id": "erp_all.industry.region.detect",
+      "passed": true,
+      "latency_ms": 3893.2
+    },
+    {
+      "skill_id": "erp_all.industry.scale.assess",
+      "passed": true,
+      "latency_ms": 394.7
+    },
+    {
+      "skill_id": "erp_all.industry.terminology.extract",
+      "passed": true,
+      "latency_ms": 407.0
+    },
+    {
+      "skill_id": "erp_all.industry.tier.set",
+      "passed": true,
+      "latency_ms": 3646.7
+    },
+    {
+      "skill_id": "erp_all.inventory.batch.tracking",
+      "passed": true,
+      "latency_ms": 370.2
+    },
+    {
+      "skill_id": "erp_all.inventory.stock.management",
+      "passed": true,
+      "latency_ms": 374.6
+    },
+    {
+      "skill_id": "erp_all.inventory.stock.opname",
+      "passed": true,
+      "latency_ms": 3847.0
+    },
+    {
+      "skill_id": "erp_all.isp.billing.cycle",
+      "passed": true,
+      "latency_ms": 375.3
+    },
+    {
+      "skill_id": "erp_all.mfg.bom",
+      "passed": true,
+      "latency_ms": 370.8
+    },
+    {
+      "skill_id": "erp_all.mfg.mrp",
+      "passed": true,
+      "latency_ms": 4135.7
+    },
+    {
+      "skill_id": "erp_all.mfg.production.costing",
+      "passed": true,
+      "latency_ms": 402.5
+    },
+    {
+      "skill_id": "erp_all.mfg.production.scheduling",
+      "passed": true,
+      "latency_ms": 380.0
+    },
+    {
+      "skill_id": "erp_all.mfg.quality.control",
+      "passed": true,
+      "latency_ms": 3949.0
+    },
+    {
+      "skill_id": "erp_all.mfg.routing",
+      "passed": true,
+      "latency_ms": 412.6
+    },
+    {
+      "skill_id": "erp_all.mfg.scrap.management",
+      "passed": true,
+      "latency_ms": 379.8
+    },
+    {
+      "skill_id": "erp_all.module.conflict.detect",
+      "passed": true,
+      "latency_ms": 3590.9
+    },
+    {
+      "skill_id": "erp_all.module.dependency.resolve",
+      "passed": true,
+      "latency_ms": 403.6
+    },
+    {
+      "skill_id": "erp_all.module.exclude.irrelevant",
+      "passed": true,
+      "latency_ms": 393.7
+    },
+    {
+      "skill_id": "erp_all.module.finalize",
+      "passed": true,
+      "latency_ms": 3669.8
+    },
+    {
+      "skill_id": "erp_all.module.mapping.industry",
+      "passed": true,
+      "latency_ms": 395.9
+    },
+    {
+      "skill_id": "erp_all.module.optional.suggest",
+      "passed": true,
+      "latency_ms": 394.0
+    },
+    {
+      "skill_id": "erp_all.module.priority.rank",
+      "passed": true,
+      "latency_ms": 3642.8
+    },
+    {
+      "skill_id": "erp_all.module.required.select",
+      "passed": true,
+      "latency_ms": 402.4
+    },
+    {
+      "skill_id": "erp_all.module.scale.adjust",
+      "passed": true,
+      "latency_ms": 411.4
+    },
+    {
+      "skill_id": "erp_all.plan",
+      "passed": true,
+      "latency_ms": 3913.2
+    },
+    {
+      "skill_id": "erp_all.pm.gantt.chart",
+      "passed": true,
+      "latency_ms": 392.1
+    },
+    {
+      "skill_id": "erp_all.pm.issue.tracking",
+      "passed": true,
+      "latency_ms": 378.0
+    },
+    {
+      "skill_id": "erp_all.pm.milestone",
+      "passed": true,
+      "latency_ms": 4081.6
+    },
+    {
+      "skill_id": "erp_all.pm.project.billing",
+      "passed": true,
+      "latency_ms": 361.3
+    },
+    {
+      "skill_id": "erp_all.pm.project.portfolio",
+      "passed": true,
+      "latency_ms": 366.4
+    },
+    {
+      "skill_id": "erp_all.pm.resource.allocation",
+      "passed": true,
+      "latency_ms": 3796.1
+    },
+    {
+      "skill_id": "erp_all.pm.risk.management",
+      "passed": true,
+      "latency_ms": 365.9
+    },
+    {
+      "skill_id": "erp_all.pm.time.tracking",
+      "passed": true,
+      "latency_ms": 383.7
+    },
+    {
+      "skill_id": "erp_all.pos.cash.management",
+      "passed": true,
+      "latency_ms": 3613.8
+    },
+    {
+      "skill_id": "erp_all.pos.transaction",
+      "passed": true,
+      "latency_ms": 373.1
+    },
+    {
+      "skill_id": "erp_all.procurement.rfq",
+      "passed": true,
+      "latency_ms": 384.9
+    },
+    {
+      "skill_id": "erp_all.procurement.three.way.match",
+      "passed": true,
+      "latency_ms": 3731.9
+    },
+    {
+      "skill_id": "erp_all.procurement.vendor.performance",
+      "passed": true,
+      "latency_ms": 376.8
+    },
+    {
+      "skill_id": "erp_all.report.cash.flow",
+      "passed": true,
+      "latency_ms": 376.9
+    },
+    {
+      "skill_id": "erp_all.report.customer.aging",
+      "passed": true,
+      "latency_ms": 3823.9
+    },
+    {
+      "skill_id": "erp_all.report.export.excel",
+      "passed": true,
+      "latency_ms": 399.2
+    },
+    {
+      "skill_id": "erp_all.report.financial.statement",
+      "passed": true,
+      "latency_ms": 372.4
+    },
+    {
+      "skill_id": "erp_all.report.profit.loss",
+      "passed": true,
+      "latency_ms": 3906.2
+    },
+    {
+      "skill_id": "erp_all.report.vendor.aging",
+      "passed": true,
+      "latency_ms": 388.6
+    },
+    {
+      "skill_id": "erp_all.retail.promotion",
+      "passed": true,
+      "latency_ms": 394.0
+    },
+    {
+      "skill_id": "erp_all.schema.audit.column",
+      "passed": true,
+      "latency_ms": 3703.0
+    },
+    {
+      "skill_id": "erp_all.schema.constraint.add",
+      "passed": true,
+      "latency_ms": 433.8
+    },
+    {
+      "skill_id": "erp_all.schema.data_type.select",
+      "passed": true,
+      "latency_ms": 484.6
+    },
+    {
+      "skill_id": "erp_all.schema.document.generate",
+      "passed": true,
+      "latency_ms": 3553.1
+    },
+    {
+      "skill_id": "erp_all.schema.entity.identify",
+      "passed": true,
+      "latency_ms": 453.9
+    },
+    {
+      "skill_id": "erp_all.schema.er.diagram",
+      "passed": true,
+      "latency_ms": 440.3
+    },
+    {
+      "skill_id": "erp_all.schema.field.define",
+      "passed": true,
+      "latency_ms": 3603.2
+    },
+    {
+      "skill_id": "erp_all.schema.index.optimize",
+      "passed": true,
+      "latency_ms": 424.7
+    },
+    {
+      "skill_id": "erp_all.schema.migration.generate",
+      "passed": true,
+      "latency_ms": 441.9
+    },
+    {
+      "skill_id": "erp_all.schema.multi.tenant",
+      "passed": true,
+      "latency_ms": 3745.8
+    },
+    {
+      "skill_id": "erp_all.schema.relation.design",
+      "passed": true,
+      "latency_ms": 467.2
+    },
+    {
+      "skill_id": "erp_all.schema.soft.delete",
+      "passed": true,
+      "latency_ms": 448.3
+    },
+    {
+      "skill_id": "erp_all.theme.branding.apply",
+      "passed": true,
+      "latency_ms": 3354.2
+    },
+    {
+      "skill_id": "erp_all.theme.color.industry",
+      "passed": true,
+      "latency_ms": 389.8
+    },
+    {
+      "skill_id": "erp_all.theme.components.customize",
+      "passed": true,
+      "latency_ms": 399.9
+    },
+    {
+      "skill_id": "erp_all.theme.dashboard.layout",
+      "passed": true,
+      "latency_ms": 3870.4
+    },
+    {
+      "skill_id": "erp_all.theme.layout.industry",
+      "passed": true,
+      "latency_ms": 396.4
+    },
+    {
+      "skill_id": "erp_all.theme.navigation.style",
+      "passed": true,
+      "latency_ms": 392.8
+    },
+    {
+      "skill_id": "erp_all.theme.responsive.optimize",
+      "passed": true,
+      "latency_ms": 3746.5
+    },
+    {
+      "skill_id": "erp_all.theme.terminology.apply",
+      "passed": true,
+      "latency_ms": 369.9
+    },
+    {
+      "skill_id": "erp_all.theme.typography.industry",
+      "passed": true,
+      "latency_ms": 386.8
+    }
+  ]
+}

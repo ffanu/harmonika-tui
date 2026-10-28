@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-28",
+  "status": "owner_terminal_neural_active",
+  "human_voice_approval": "pending",
+  "default_voice": "wanita_provisional",
+  "engine_location": "PC1 Linux CPU",
+  "rtx_required_for_speech": false,
+  "silent_basic_fallback": false,
+  "automated_tests_passed": 31,
+  "http_checks": {
+    "unauthorized": 401,
+    "unknown_voice": 400,
+    "oversize": 400,
+    "concurrent_statuses": [
+      200,
+      429
+    ]
+  },
+  "inference_samples": {
+    "phase": "inference_verified",
+    "health": {
+      "ok": true,
+      "ready": true,
+      "speech_synthesis": true,
+      "languages": [
+        "id",
+        "en"
+      ],
+      "voices": [
+        "wanita",
+        "pria",
+        "wanita-2",
+        "pria-2"
+      ],
+      "voice_quality": "neural_synthetic",
+      "sample_rate": 44100,
+      "busy": false,
+      "local_cpu": true
+    },
+    "samples": [
+      {
+        "ok": true,
+        "status": "ok",
+        "provider": "Harmonika Ai",
+        "sha256": "b762713b11348644fe555c3a1e15db00643420589d2939c5577eaf29c1b58c72",
+        "bytes": 712748,
+        "mime_type": "audio/wav",
+        "duration_seconds": 8.080544217687075,
+        "sample_rate": 44100,
+        "channels": 1,
+        "language": "id",
+        "voice": "wanita",
+        "voice_quality": "neural_synthetic",
+        "synthetic_audio": true,
+        "disclosure": "Suara sintetis dibuat oleh Harmonika Ai.",
+        "latency_seconds": 2.146,
+        "peak_db": -8.88,
+        "rms_db": -24.44,
+        "clipped_fraction": 0.0,
+        "test_fixture": "synthetic_public_promo",
+        "customer_data_used": false
+      },
+      {
+        "ok": true,
+        "status": "ok",
+        "provider": "Harmonika Ai",
+        "sha256": "6e52888f112c596cd9e04b8680d24f1056d64a5103ddb561df9e8e047f3f26fb",
+        "bytes": 712748,
+        "mime_type": "audio/wav",
+        "duration_seconds": 8.080544217687075,
+        "sample_rate": 44100,
+        "channels": 1,
+        "language": "id",
+        "voice": "pria",
+        "voice_quality": "neural_synthetic",
+        "synthetic_audio": true,
+        "disclosure": "Suara sintetis dibuat oleh Harmonika Ai.",
+        "latency_seconds": 2.179,
+        "peak_db": -5.9,
+        "rms_db": -25.37,
+        "clipped_fraction": 0.0,
+        "test_fixture": "synthetic_public_promo",
+        "customer_data_used": false
+      }
+    ]
+  },
+  "asr_reference_checks": [
+    {
+      "voice": "wanita",
+      "reference_words_match": true,
+      "backend_asr_ok": true
+    },
+    {
+      "voice": "pria",
+      "reference_words_match": true,
+      "backend_asr_ok": true
+    }
+  ],
+  "native_terminal": [
+    {
+      "name": "mcp_harmonika-video_video",
+      "is_error": false,
+      "voice_quality": "neural_synthetic",
+      "voice": "wanita",
+      "audio": true
+    }
+  ],
+  "video_samples": [
+    {
+      "voice": "wanita",
+      "path": "/Users/id/Downloads/harmonika-ai/video/promosi-harmonika-10-detik-neural-wanita.mp4",
+      "bytes": 258411,
+      "sha256": "cfb45c065fbbcbb1426a93776bc75af10b4f3ec3eb82c2607aaa9dbee6968622",
+      "duration_seconds": 10,
+      "codec_audio": "aac",
+      "sample_rate": 44100,
+      "decode_passed": true
+    },
+    {
+      "voice": "pria",
+      "path": "/Users/id/Downloads/harmonika-ai/video/promosi-harmonika-10-detik-neural-pria.mp4",
+      "bytes": 266817,
+      "sha256": "4312bf88b2f09469cceb75076cbba8c1b5682c053adefcee86d154a1f5b03773",
+      "duration_seconds": 10,
+      "codec_audio": "aac",
+      "sample_rate": 44100,
+      "decode_passed": true
+    }
+  ],
+  "existing_services_restarted": false,
+  "public_api_changed": false,
+  "customer_data_used": false
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://github.com/deepbeepmeep/smplfitter/releases/download/v0.2.10/smplfitter-0.2.10-py3-none-any.whl",
+    "file": "smplfitter-0.2.10-py3-none-any.whl",
+    "sha256": "bd33a3f854b50770e37a66db05a4b75c66b45fdd88ec1aa40e56784df9df7b54",
+    "bytes": 61979
+  },
+  {
+    "url": "https://github.com/deepbeepmeep/chumpy/releases/download/v0.71/chumpy-0.71-py3-none-any.whl",
+    "file": "chumpy-0.71-py3-none-any.whl",
+    "sha256": "ab6c59c799e2a1011a36f4e080309383c0631354c881689affa4a89b7f9d7925",
+    "bytes": 61444
+  }
+]

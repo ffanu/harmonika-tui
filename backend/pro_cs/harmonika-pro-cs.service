@@ -1,0 +1,20 @@
+[Unit]
+Description=Harmonika evidence-aware preview and conversation guards
+After=network.target
+[Service]
+WorkingDirectory=/opt/harmonika-ai/pro-cs
+ExecStart=/usr/bin/python3 /opt/harmonika-ai/pro-cs/service.py
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ReadWritePaths=/var/lib/harmonika-pro-cs
+MemoryMax=1G
+CPUQuota=200%
+TasksMax=64
+Environment=CUDA_VISIBLE_DEVICES=
+Environment=OMP_NUM_THREADS=1
+[Install]
+WantedBy=multi-user.target

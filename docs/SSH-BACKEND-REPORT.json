@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-26",
+  "input": {
+    "name": "membangun backend ssh.txt",
+    "line_count": 1979,
+    "sha256": "8239cdca6f8316c4c668aee59e165a1d146efd8b0703c3f9e346a21d303dbb8f",
+    "fully_read": true
+  },
+  "status": "active_private_backend",
+  "release": "2026.10.26-ssh2",
+  "tui_release": "2026.10.26.4",
+  "service": "harmonika-remote-access.service",
+  "base_url": "http://127.0.0.1:18231",
+  "endpoint_prefix": "/api/v1/ssh",
+  "features": [
+    "key-auth and pinned known_hosts",
+    "registered-target test/execute/upload/download/tunnel REST",
+    "Paramiko shared worker, async process isolation",
+    "private owner auth; public AI tokens rejected",
+    "server-issued sessions",
+    "30/minute actor,target,IP and 100/session, cooldown300s",
+    "single-use approval bound to exact operation, expires60s",
+    "private-state SQLite WAL, HMAC audit chain",
+    "metrics with technical labels only",
+    "dynamic registry disable and SSH_ENABLED flag",
+    "separate OS user and hardened systemd",
+    "internal Node client with concurrent session singleflight"
+  ],
+  "testing": {
+    "mac_python_tests": 58,
+    "node_tests": 2,
+    "linux_api_tests": 25,
+    "release_regression_tests": 10,
+    "staging_live_smoke_checks": 9,
+    "production_live_smoke_checks": 9,
+    "failed_final": 0,
+    "actual_ssh": true,
+    "sftp_checksum_roundtrip": true,
+    "tunnel_vnc_port": true,
+    "blocked_command": true,
+    "approval_replay_rejected": true,
+    "public_token_denied": true,
+    "audit_hmac_valid": true
+  },
+  "safety": {
+    "main_gateway_restarted": false,
+    "main_gateway_pid_unchanged": true,
+    "existing_application_endpoints_modified": false,
+    "private_mac_key_copied_to_backend": false,
+    "new_dedicated_backend_key": true,
+    "staging_key_revoked": true,
+    "staging_service_stopped": true,
+    "own_transfer_fixtures_cleaned": true,
+    "firewall_changed": false,
+    "public_api_root_access": false,
+    "credentials_in_repo": false,
+    "raw_command_or_output_in_audit": false
+  },
+  "monitoring": {
+    "metrics_endpoint": "active",
+    "hmac_integrity_endpoint": "active",
+    "grafana_dashboard_template": "ready",
+    "prometheus_alerts_template": "ready",
+    "external_prometheus_grafana_loki": "not_connected; operator collector details required"
+  },
+  "deployment_variants": {
+    "bare_metal_systemd": "deployed_and_tested",
+    "docker": "template_only_not_built",
+    "kubernetes": "template_only_not_applied",
+    "vault_hsm": "not_configured; credentials currently owner-only files",
+    "automatic_key_rotation": "not_enabled; manual workflow documented"
+  },
+  "source_manifest": {
+    "remote_access/service.py": "f694c00738111ae5bd69ae9c465ae1ef20ed1d6099f116be1d32b6a96f851766",
+    "remote_access/control.py": "842a2cff012aaca79b0028d14cab608da2c05465b3c9b4fb0ce02bb8203a679b",
+    "remote_access/__init__.py": "cc029bd48d5f81624d17150375169ccb22504ec0cb457a3c05869ff158fbef19",
+    "remote_access/api.py": "cd26780d2af32eceed358513e6e0c70b19c25199e6b08c246ae85235c7195aed",
+    "remote_access/connector.py": "cd9ae79d07cd05a5c307eb6fb6fb94f1e8b20bd5d73fb5e1f2fe2182b12ecc60",
+    "remote_access/ssh_connector.py": "fc314920a0f19dd2909400d5835d64c06905326dc14fa953c52aca5f77eb6662",
+    "remote_access/client.cjs": "7a447379694872908a10e36204991c3c18bfa48a88723af3b8354b8c1ef2f8fd",
+    "README.md": "da8e976ad5c5c04267fef86a6c601b7c0c3f81c965d355b092930c2706b66149",
+    "requirements.lock": "07f7625b275506cc74b0fea5256d18f26ffa03377f20a6888e4b99229bd12388",
+    "monitoring/alerts.yaml": "672c68203e7cb4b9f626bc5a00de403f0fb78abc2cd83f5999405bcb30355cb0",
+    "monitoring/dashboard.json": "e1ebbf5bb7804940d3b178e76b44f6ef51daac056168481ced62112ba3ba3167",
+    "monitoring/prometheus-example.yaml": "a52726d6f242fe38b8ce460a1f0dcad6af6b2b6b09d8fdf9ddb4aa1f14fd133a"
+  },
+  "guide_parts": {
+    "1-2_diagnosis_prerequisites": "verified",
+    "3_installation": "bare_metal_active; container/cluster_templates",
+    "4_key_setup": "dedicated_backend_and_staging_keys; staging_revoked",
+    "5_configuration": "private_registry_and_known_hosts",
+    "6_policy": "dedicated_tool_recommended_alternative",
+    "7_network": "existing_custom_port_verified; no_broad_firewall_rules",
+    "8_python": "implemented_and_active",
+    "9_node": "internal_HTTP_adapter_to_single_Python_transport",
+    "10_security": "auth_limits_approval_pinning; vault_external_not_connected",
+    "11_testing": "local_linux_staging_production_passed",
+    "12_troubleshooting": "runbook",
+    "13_monitoring": "metrics_integrity_live; collector_templates",
+    "14_rollback": "previous_release_preserved; pause_and_manual_rollback_documented"
+  }
+}

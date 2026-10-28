@@ -1,0 +1,18 @@
+[Unit]
+Description=Harmonika private video toolkit tunnel
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -F /dev/null -NT -i /etc/harmonika-ai/video_toolkit_tunnel_ed25519 -p 22022 -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/root/.ssh/known_hosts -o ConnectTimeout=10 -o ExitOnForwardFailure=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -L 127.0.0.1:18240:127.0.0.1:18237 kraken@103.157.24.189
+Restart=on-failure
+RestartSec=15
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target

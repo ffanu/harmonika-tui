@@ -1,0 +1,97 @@
+{
+  "scope": "isolated_video_toolkit",
+  "engines": [
+    "wangp",
+    "framepack",
+    "mmaudio"
+  ],
+  "dependencies_and_cuda_probes_passed": true,
+  "models_manifest_files": 55,
+  "local_contract_tests_passed": 19,
+  "private_bridge": {
+    "authenticated_health": true,
+    "unauthorized_denied": true,
+    "missing_owned_artifact_denied": true,
+    "offline_structured_degraded": true,
+    "research_audio_api_blocked": true,
+    "tunnel_key_shell_denied": true,
+    "real_render_completed": true,
+    "render_latency_seconds": 114.05,
+    "idempotency_single_job": true,
+    "artifact_download_hash_verified": true,
+    "source_prompt_not_in_sqlite": true,
+    "temporary_inputs_removed": true,
+    "duplicate_broker_refused_live": true
+  },
+  "existing_main_services_restarted": false,
+  "public_routes_registered": false,
+  "customer_data_used": false,
+  "inference_readiness": "all_three_private_qualification_passed",
+  "license_notes": {
+    "mmaudio_official_weights": "CC-BY-NC-4.0; research CLI only",
+    "wangp_code": "private in-house only here; no paid/public white-label API"
+  },
+  "real_qualification": {
+    "mmaudio": {
+      "verified": true,
+      "duration_seconds": 8.010884353741497,
+      "latency_seconds": 50.02,
+      "research_only": true,
+      "sample_rate": 44100
+    },
+    "wangp": {
+      "verified": true,
+      "duration_seconds": 1,
+      "frames": 16,
+      "steps": 50,
+      "latency_seconds": 416.11,
+      "sha256": "6436579084ba385fd43be3ca834eb8e7f1145bba64f7214a8684d86f69dcd0e8"
+    },
+    "framepack": {
+      "verified": true,
+      "status": "completed",
+      "frames": 30,
+      "duration_seconds": 1.0,
+      "width": 832,
+      "height": 480,
+      "audio": false,
+      "steps": 25,
+      "sha256": "dea502dcde4b48988680e7e905ecb8cedf3eb9ce3c139d15c18b4890e8ef7602",
+      "latency_seconds": 1450.36
+    }
+  },
+  "package_snapshots": {
+    "wangp": 176,
+    "framepack": 80,
+    "mmaudio": 117
+  },
+  "model_files_sha256_verified": 55,
+  "model_files_by_engine": {
+    "framepack": 28,
+    "mmaudio": 12,
+    "wangp": 15
+  },
+  "model_total_gib": 62.31,
+  "visual_verification": {
+    "wan": "white router, neutral colors; first/last sample visually inspected",
+    "framepack": "reference router, phone and room retained; first/last sample visually inspected",
+    "both_video_files_fully_decode": true
+  },
+  "limitations": [
+    "Private operator installation; no public API or existing WebUI routing changed.",
+    "Video profiles qualified at one second only.",
+    "FramePack first cold qualification took1450.36seconds; not a real-time service.",
+    "MMAudio official weights restricted to noncommercial research.",
+    "Windows broker is a current detached process; Windows logon autostart was not configured."
+  ],
+  "review": {
+    "implementation_and_tests": "Codex",
+    "source_and_runtime_review": "OpenCode",
+    "notes": [
+      "Cold checkpoint I/O confirmed by successful progression and render.",
+      "VRAM preflight raised to6GiB for future FramePack jobs.",
+      "Prompt text never echoed in mechanical runtime error codes.",
+      "Default25FramePack steps and parent40minute watchdog already implemented."
+    ]
+  }
+}

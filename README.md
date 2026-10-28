@@ -6,7 +6,7 @@
 
 Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal yang terkontrol.
 
-**19 panduan skill** · **8 tool MCP** · **5 LSP** · **Update manual terverifikasi**
+**22 panduan skill** · **17 tool MCP** · **5 LSP** · **Update manual terverifikasi**
 
 [Website](https://harmonika.id) · [Status rilis](docs/STATUS.md) · [Dokumentasi](#mulai)
 
@@ -36,6 +36,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 |---|---|
 | `harmonika-ui` | Implementasi UI responsif, aksesibilitas, dan kesesuaian referensi. |
 | `harmonika-debug` | Reproduksi bug, diagnosis berbasis bukti, serta pengujian regresi. |
+| `harmonika-debug-scanner` | Scanner backend dengan bukti teredaksi, probe target terdaftar, dan laporan PDF; readiness tiap fungsi dinyatakan jelas. |
 | `harmonika-browser-qa` | Bukti browser nyata pada viewport desktop dan mobile. |
 | `harmonika-shared-core` | Data terbatas, memory terenkripsi per token, workflow DAG dan adaptor workspace melalui API internal. |
 | `harmonika-skill-index` | Discovery capability, analisis defensif, dan pemeriksaan HTML browser terisolasi. |
@@ -46,6 +47,8 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 | `harmonika-engineering` | Review kode, diagnosis berbasis bukti, rencana pengujian dan dokumentasi dari input yang dikirim. |
 | `harmonika-seo` | Audit halaman/teknis/konten/schema/sitemap, visual, drift, strategi dan adapter data Google. |
 | `harmonika-documents` | Baca/buat dokumen melalui runtime lokal yang terdeteksi. |
+| `harmonika-erp` | Planner 25 industri dan source starter ERP; readiness domain ditampilkan eksplisit. |
+| `harmonika-ssh` | Koneksi key-auth dan SFTP ke target terdaftar melalui MCP khusus; policy bash tetap terpisah. |
 | `harmonika-git` | Review perubahan dan alur Git tanpa tindakan destruktif otomatis. |
 | `harmonika-release` | Pemeriksaan rilis, paket, verifikasi, dan rencana pemulihan. |
 | `harmonika-tui-dev` | Layout terminal, resize, fokus keyboard, dan clipping ANSI. |
@@ -312,3 +315,40 @@ Katalog memuat99 handler: OCR/gambar/audio/video sampel melalui worker CPU teris
 riset portal publik, perbandingan versi, dan watch privat. Registri advokat tetap
 degraded saat sumber penerbit gagal. Lihat [kontrak dan batas legal](docs/LEGAL-ENGINE.md).
 Bukan pengganti advokat; metadata/pengamatan bukan kepastian hukum.
+
+## SSH terdaftar
+
+`harmonika ssh targets` menampilkan alias yang disiapkan pemilik. Tool MCP
+`ssh_connect`, `ssh_exec`, `ssh_upload`, dan `ssh_download` memakai konektor
+Paramiko, host key terverifikasi dan key lokal privat. Tidak perlu membuka
+network sandbox coding atau menaruh password dalam chat. Exec dibatasi
+executable operator; transfer dalam root proyek/remote yang terdaftar, tanpa
+overwrite. Audit SQLite hanya mencatat mekanik dan latensi, bukan command atau isi.
+Runtime SSH saat ini diuji di macOS/Linux POSIX; Windows belum diaktifkan.
+Lihat [spec dan runbook](docs/SSH-CONNECTOR-SPEC.txt).
+
+## Backend SSH privat
+
+REST async SSH/SFTP/tunnel untuk operator tersedia sebagai layanan terpisah di
+engine Linux, dengan owner token, registry target, approval sekali pakai, rate
+limit dan audit mekanik berantai HMAC. API publik tidak mendapat akses key server.
+[Setup, endpoint, batas dan rollback](backend/remote_access/README.md).
+
+## ERP multi-industri
+
+Planner25 profil, schema dan source starter Next/Nest/PostgreSQL dapat dipanggil
+melalui `harmonika erp`.100 entrypoint tersedia lewat registry backend tanpa
+menambah tool MCP. Katalog363 ID tetap membedakan kemampuan yang belum dibuat;
+ini fondasi MVP, bukan ERP penuh untuk semua industri.
+[Kontrak dan batas](backend/erp_engine/README.md) · [Hasil uji](docs/ERP-ENGINE-REPORT.json).
+
+## Workbench terminal Harmonika
+
+Rilis lokal `2026.10.28.2` mempertahankan binary, ASCII, brand dan theme Harmonika.
+Jalankan `harmonika` pada terminal baru: F2 membuka metrik, F3 kejadian teredaksi,
+F4 file/kode, F5 diff, F7 shell proyek, dan F8 durasi respons. Ctrl+P serta chat
+native tetap bekerja. LSP mulai ketika file terkait dibaca. Tidak ada pembaruan
+upstream otomatis atau penghentian sesi yang sudah terbuka.
+
+[Shortcut, pengujian dan batas fitur](docs/TUI-WORKBENCH.md) ·
+[Bukti aktivasi](docs/TUI-WORKBENCH-ACTIVATION.json).

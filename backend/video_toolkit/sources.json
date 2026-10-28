@@ -1,0 +1,23 @@
+{
+  "wangp": {
+    "repo": "deepbeepmeep/Wan2GP",
+    "revision": "97845dc88f43a9827097a18392f2318561d0d43b",
+    "archive_sha256": "2cfb7022504ec604a3d91bee797c235ae2ca68c4fd3efb917b8cded12e3bc918",
+    "archive_bytes": 39557554,
+    "url": "https://codeload.github.com/deepbeepmeep/Wan2GP/zip/97845dc88f43a9827097a18392f2318561d0d43b"
+  },
+  "framepack": {
+    "repo": "lllyasviel/FramePack",
+    "revision": "97fe5dbe06ac1f337ece08935b1076a35eefeeb9",
+    "archive_sha256": "669dc74b47bf5d58db5a97c31223ccfebe7daaa46c885e1425c196498d10908a",
+    "archive_bytes": 48884,
+    "url": "https://codeload.github.com/lllyasviel/FramePack/zip/97fe5dbe06ac1f337ece08935b1076a35eefeeb9"
+  },
+  "mmaudio": {
+    "repo": "hkchengrex/MMAudio",
+    "revision": "974010a026c731054592d8f777218bd9d85a6c24",
+    "archive_sha256": "1b522758cb4a7c588a8da6c9a632599e653aaeb6bd00df3a7197e16cb72665bb",
+    "archive_bytes": 9692702,
+    "url": "https://codeload.github.com/hkchengrex/MMAudio/zip/974010a026c731054592d8f777218bd9d85a6c24"
+  }
+}

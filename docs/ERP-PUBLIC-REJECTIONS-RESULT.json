@@ -1,0 +1,30 @@
+{
+  "synthetic_only": true,
+  "tests": [
+    {
+      "scenario": "analysis_missing_data",
+      "passed": true,
+      "error_code": "invalid_skill_input"
+    },
+    {
+      "scenario": "malformed_modules",
+      "passed": true,
+      "error_code": "invalid_skill_input"
+    },
+    {
+      "scenario": "module_conflict",
+      "passed": true,
+      "error_code": "skill_execution_failed"
+    },
+    {
+      "scenario": "journal_aggregate_overflow",
+      "passed": true,
+      "error_code": "skill_execution_failed"
+    },
+    {
+      "scenario": "remote_brand_logo",
+      "passed": true,
+      "error_code": "skill_execution_failed"
+    }
+  ]
+}

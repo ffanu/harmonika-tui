@@ -1,0 +1,208 @@
+{
+  "date": "2026-10-26",
+  "release": "2026.10.26.3",
+  "status": "active_local",
+  "root_cause": "Exact requested SSH target was not registered; existing local key was not authorized on that target.",
+  "fixes": [
+    "Owner-verified key enrolled without replacing existing authorized_keys",
+    "Registered chr alias and pinned endpoint root@chr.banyu.live:22059",
+    "Exact registered endpoint resolves to alias automatically",
+    "remote_targets discovery before refusal",
+    "Telnet and VNC over registered SSH tunnel",
+    "Dedicated async backend boundary with per-invocation worker"
+  ],
+  "native_terminal_test": {
+    "command": "harmonika run with isolated socket and data directory",
+    "exit_code": 0,
+    "duration_seconds": 49.15,
+    "ssh": "verified public-key auth, uname -s -> Linux, exit 0",
+    "telnet": "temporary loopback fixture through real SSH tunnel, login and show status -> QA TELNET OK",
+    "vnc": "authenticated real server, private PNG 1366x768 captured",
+    "stderr_present": false
+  },
+  "production_telnet": "No production destination supplied; public port23 on chr was unavailable. Test fixture is not a production device.",
+  "vnc_control": "Implemented; real RFB fixture click tested. Production profile remains capture-only.",
+  "tests": {
+    "ssh_and_remote_protocol_tests": 33,
+    "project_guard_tests": 20,
+    "release_integrity_regressions": 10,
+    "total_passed_this_turn": 63,
+    "failed": 0,
+    "async_backend_smoke": "passed"
+  },
+  "data_firewall": {
+    "password_saved": false,
+    "credentials_in_repo": false,
+    "audit_fields": [
+      "timestamp",
+      "skill_id",
+      "status",
+      "error_type",
+      "latency_ms"
+    ],
+    "screenshots_in_audit": false,
+    "command_output_in_audit": false
+  },
+  "activation": {
+    "signed_release": true,
+    "binary_unchanged": true,
+    "user_sessions_restarted": false,
+    "public_api_root_access": false,
+    "public_listeners_opened": false,
+    "temporary_telnet_fixture_cleaned": true
+  },
+  "components": [
+    "backend/remote_access/connector.py",
+    "backend/remote_access/service.py",
+    "runtime/tools/remote_connector.py",
+    "runtime/tools/ssh_connector.py",
+    "runtime/tools/ssh-mcp.cjs",
+    "skills/harmonika-ssh/SKILL.md"
+  ],
+  "mechanic_evidence": [
+    [
+      "remote.targets",
+      "completed",
+      "",
+      5
+    ],
+    [
+      "remote.targets",
+      "started",
+      "",
+      0
+    ],
+    [
+      "vnc.capture",
+      "completed",
+      "",
+      2179
+    ],
+    [
+      "vnc.capture",
+      "started",
+      "",
+      0
+    ],
+    [
+      "telnet.exec",
+      "completed",
+      "",
+      786
+    ],
+    [
+      "telnet.exec",
+      "started",
+      "",
+      0
+    ],
+    [
+      "vnc.connect",
+      "completed",
+      "",
+      2230
+    ],
+    [
+      "vnc.connect",
+      "started",
+      "",
+      0
+    ],
+    [
+      "telnet.connect",
+      "completed",
+      "",
+      767
+    ],
+    [
+      "telnet.connect",
+      "started",
+      "",
+      0
+    ],
+    [
+      "ssh.exec",
+      "completed",
+      "",
+      740
+    ],
+    [
+      "ssh.exec",
+      "started",
+      "",
+      0
+    ],
+    [
+      "ssh.connect",
+      "completed",
+      "",
+      577
+    ],
+    [
+      "ssh.connect",
+      "started",
+      "",
+      0
+    ],
+    [
+      "remote.targets",
+      "completed",
+      "",
+      7
+    ],
+    [
+      "remote.targets",
+      "started",
+      "",
+      0
+    ],
+    [
+      "vnc.capture",
+      "completed",
+      "",
+      2495
+    ],
+    [
+      "vnc.capture",
+      "started",
+      "",
+      0
+    ],
+    [
+      "vnc.connect",
+      "completed",
+      "",
+      2468
+    ],
+    [
+      "vnc.connect",
+      "started",
+      "",
+      0
+    ],
+    [
+      "ssh.exec",
+      "completed",
+      "",
+      753
+    ],
+    [
+      "ssh.exec",
+      "started",
+      "",
+      0
+    ],
+    [
+      "ssh.connect",
+      "completed",
+      "",
+      592
+    ],
+    [
+      "ssh.connect",
+      "started",
+      "",
+      0
+    ]
+  ]
+}

@@ -335,6 +335,7 @@ async function httpsRpc(payload, apiKey) {
     return parsed;
   } catch (err) {
     if (err instanceof ToolError) throw err;
+    if(['transcribe_audio','upscale_image','browse_page'].includes(payload.operation)){const failure=new ToolError('media_submission_unknown');failure.uncertain=true;throw failure;}
     throw new ToolError(err && err.name === 'AbortError' ? 'backend_timeout' : 'backend_unavailable');
   } finally {
     clearTimeout(timer);
@@ -403,7 +404,7 @@ function defaultRpc(payload, deps) {
     });
     child.stdin.on('error', () => { /* surfaced via close/error */ });
     child.stdin.end(input);
-  });
+  }).catch(error=>{if(['transcribe_audio','upscale_image','browse_page'].includes(payload.operation)){error.uncertain=true;}throw error;});
 }
 
 /* ---------------- default local media helpers ---------------- */
@@ -586,6 +587,9 @@ const ARG_SPECS = Object.freeze({
     file_path: Object.freeze({ required: true, max: 4096 }),
     language: Object.freeze({ required: false, max: LIMITS.LANGUAGE_MAX_CHARS, pattern: /^[A-Za-z][A-Za-z0-9_-]{0,31}$/ }),
   }),
+  media_capabilities: Object.freeze({}),
+  browse_page: Object.freeze({url:Object.freeze({required:true,max:2048})}),
+  upscale_image: Object.freeze({file_path:Object.freeze({required:true,max:4096}),output_file:Object.freeze({required:true,max:4096})}),
   generate_image: Object.freeze({
     prompt: Object.freeze({ required: true, max: LIMITS.PROMPT_MAX_CHARS }),
     output_file: Object.freeze({ required: true, max: 4096 }),
@@ -641,6 +645,7 @@ function backendResult(res, extraKeys) {
     ...pickSafe(res, extraKeys || BACKEND_SAFE_KEYS),
   };
   if (safeError !== undefined) shaped.error = safeError;
+  if(res.ok===false&&res.retry_safe===false){shaped.retry_safe=false;shaped.retryable=false;shaped.operation_state='uncertain';}
   return shaped;
 }
 
@@ -713,7 +718,7 @@ const TOOL_DEFS = Object.freeze([
   },
   {
     name: 'transcribe_audio',
-    description: 'Transcribe a local audio file with the local ASR runtime (no audio is uploaded).',
+    description: 'Transcribe audio using the private Harmonika backend (audio is uploaded to Harmonika). WAV/MP3/FLAC/OGG up to8MiB; other/larger inputs use the existing local ASR runtime.',
     inputSchema: objSchema(
       {
         file_path: { type: 'string', description: 'Audio path inside the project (or a media file in ~/Downloads)' },
@@ -723,6 +728,9 @@ const TOOL_DEFS = Object.freeze([
     ),
     annotations: { readOnlyHint: true },
   },
+  {name:'media_capabilities',description:'Periksa kesiapan ASR, pembesaran gambar, dan browser Harmonika. Suara penelitian tidak tersedia untuk publik.',inputSchema:objSchema({},[]),annotations:{readOnlyHint:true}},
+  {name:'browse_page',description:'Baca judul dan teks halaman HTTPS publik pada host yang terdaftar di Harmonika. Profil terisolasi, tanpa login, klik, atau submit formulir.',inputSchema:objSchema({url:{type:'string',maxLength:2048}},['url']),annotations:{readOnlyHint:true}},
+  {name:'upscale_image',description:'Perbesar gambar 4x melalui backend Harmonika. Input PNG/JPEG/WebP maksimal1024x1024. Simpan PNG baru; tidak menimpa file. Detail hasil bukan bukti faktual.',inputSchema:objSchema({file_path:{type:'string'},output_file:{type:'string'}},['file_path','output_file']),annotations:{readOnlyHint:false,destructiveHint:false}},
   {
     name: 'generate_image',
     description: 'Generate a PNG image from a prompt; the file is created exclusively (mode 0600, never overwritten) inside the project.',
@@ -748,7 +756,13 @@ function createCore(overrides) {
     rpc: (payload) => defaultRpc(payload, internalDeps),
     ffprobe: defaultFfprobe,
     extractFrames: defaultExtractFrames,
-    asr: defaultAsr,
+    asr: async (file,language) => {
+      if(!overrides?.rpc&&process.env.HARMONIKA_TRANSPORT!=='owner-ssh'&&(process.env.HARMONIKA_MEDIA_BRIDGE==='0'||!readLicensedKey()))return defaultAsr(file,language);
+      if(fs.statSync(file).size>8*1024*1024||!['.wav','.mp3','.flac','.ogg','.oga'].includes(path.extname(file).toLowerCase()))return defaultAsr(file,language);
+      const result=await deps.rpc({operation:'transcribe_audio',audio_base64:fs.readFileSync(file).toString('base64'),language:language||'auto'});
+      if(result?.ok===false&&result.retry_safe===true&&result.error?.code==='media_unavailable'&&fs.existsSync(BIN.asrPython)&&fs.existsSync(BIN.asrScript))return defaultAsr(file,language);
+      return result;
+    },
     exists: (p) => fs.existsSync(p),
     ...(overrides || {}),
   };
@@ -796,6 +810,18 @@ function createCore(overrides) {
   }
 
   const ops = {
+    async media_capabilities(){return backendResult(await deps.rpc({operation:'media_capabilities'}),['features','browser_scope','speech_public_status']);},
+    async browse_page(args){return backendResult(await deps.rpc({operation:'browse_page',url:args.url}),['pages','page_text','read_only','existing_profile_used','warnings']);},
+    async upscale_image(args){
+      const f=resolveInputFile(args.file_path,'image',deps.callerCwd,deps);validateImageHeader(f.canonical,f.ext);
+      const out=resolveOutputFile(args.output_file);
+      const r=await deps.rpc({operation:'upscale_image',image_base64:fs.readFileSync(f.canonical).toString('base64')});
+      if(r?.ok!==true||r.status!=='ok')return backendResult(r);
+      if(typeof r.image_base64!=='string'||r.image_base64.length>23*1024*1024)throw new ToolError('invalid_backend_image');
+      const png=Buffer.from(r.image_base64,'base64');if(!png.length||png.length>16*1024*1024||detectImageMime(png)!=='image/png')throw new ToolError('invalid_backend_image');
+      let fd;try{fd=fs.openSync(out,'wx',0o600);fs.writeFileSync(fd,png);}catch(e){if(fd!==undefined){fs.closeSync(fd);fd=undefined;try{fs.unlinkSync(out);}catch{}}throw e;}finally{if(fd!==undefined)fs.closeSync(fd);}
+      return {ok:true,status:'ok',provider:DISPLAY_PROVIDER,output_file:out,bytes:png.length,width:r.width,height:r.height,scale:r.scale,warnings:r.warnings};
+    },
     async create_directory(args) {return projectAccess.createDirectory(args.directory);},
     async capabilities() {
       let remote;
@@ -887,7 +913,7 @@ function createCore(overrides) {
       const res = await deps.asr(f.canonical, args.language);
       const shaped = backendResult(res, ['transcript', 'language', 'confidence', 'language_probability', 'seconds', 'truncated', 'warnings']);
       shaped.audio_path = path.basename(f.canonical);
-      shaped.transcription_scope = 'local_asr_audio_only';
+      shaped.transcription_scope = overrides?.asr?'local_asr_audio_only':'harmonika_backend_or_local_asr';
       return shaped;
     },
 

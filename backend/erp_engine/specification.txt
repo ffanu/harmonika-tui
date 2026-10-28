@@ -1,0 +1,1392 @@
+================================================================================
+     HARMONIKA AI - COMPLETE ERP ENGINE FOR ALL INDUSTRIES
+          Engine ERP Cerdas yang Bisa:
+          - Auto-Detect Bidang Usaha dari Spec User
+          - Auto-Pilih Modul yang Relevan
+          - Auto-Select Tema UI Sesuai Industri
+          - Auto-Build & Deploy ERP Lengkap
+          - Paham Konteks Setiap Industri (ISP, Retail, Manufaktur, dll)
+          - Multi-Industry Templates (25+ industri)
+================================================================================
+
+Tujuan: Membangun ERP engine dimana Harmonika AI bisa OTONOM:
+  1. Baca spec perusahaan user (nama, bidang, skala)
+  2. Auto-detect industri (ISP, retail, manufaktur, jasa, dll)
+  3. Auto-pilih modul yang relevan untuk industri tersebut
+  4. Auto-select tema UI/UX yang sesuai (warna, layout, terminology)
+  5. Auto-generate database schema
+  6. Auto-build frontend + backend
+  7. Auto-deploy ke server
+  8. Auto-configure integrasi (payment, WA, email, dll)
+  9. Hasil: ERP ready-to-use khusus untuk perusahaan tersebut
+
+
+================================================================================
+  ARSITEKTUR ERP ENGINE
+================================================================================
+
+       ┌──────────────────────────────────────────────────────────┐
+       │  User Input: "Saya punya ISP di Jakarta, 500 pelanggan"│
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Industry Detector (AI)                                  │
+       │  - Analyze keywords: "ISP", "pelanggan", "internet"      │
+       │  - Detect: TELECOMMUNICATIONS / ISP                     │
+       │  - Confidence: 95%                                       │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Module Selector                                         │
+       │  - Industry: ISP                                         │
+       │  - Required modules: Core + Finance + HR + Sales +      │
+       │    ISP Billing + ISP Ticketing + Network Monitoring +   │
+       │    Field Operations + CRM                                │
+       │  - Optional modules: Inventory (for spare parts)        │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Theme Selector                                          │
+       │  - Industry: ISP/Telco                                   │
+       │  - Color: Tech Blue (#0066CC) + White                    │
+       │  - Layout: Dashboard-heavy, NOC-style                    │
+       │  - Terminology: "Pelanggan", "Paket", "OLT", "ONU"       │
+       │  - Icons: Network, Signal, Tower                         │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Schema Generator                                        │
+       │  - Generate DB schema per module terpilih                │
+       │  - ISP: subscribers, plans, invoices, tickets, OLT, ONU  │
+       │  - Relations, indexes, constraints                       │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Code Builder                                            │
+       │  - Frontend: Next.js + shadcn/ui + tema industri         │
+       │  - Backend: NestJS + Prisma                              │
+       │  - Database: PostgreSQL                                  │
+       │  - Generate CRUD per module                              │
+       │  - Generate workflows                                    │
+       │  - Generate reports                                      │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Deployer                                                │
+       │  - Deploy ke VPS via SSH (skill SSH)                     │
+       │  - Setup Docker + nginx + SSL                            │
+       │  - Configure DNS                                         │
+       │  - Setup monitoring                                      │
+       └────────────────────────┬─────────────────────────────────┘
+                            |
+                            v
+       ┌──────────────────────────────────────────────────────────┐
+       │  Output: ERP Live                                        │
+       │  - URL: https://erp.nama-perusahaan.com                  │
+       │  - Admin login                                           │
+       │  - Sample data                                           │
+       │  - Documentation                                         │
+       └──────────────────────────────────────────────────────────┘
+
+
+================================================================================
+  DAFTAR LENGKAP SKILL (285 SKILLS)
+================================================================================
+
+--------------------------------------------------------------------------------
+[Layer 1] INDUSTRY DETECTOR (15 skills)
+--------------------------------------------------------------------------------
+Skill untuk auto-detect bidang usaha dari spec user
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+1   | industry.analyze.spec           | Analyze spec user untuk detect industri
+2   | industry.detect.keywords        | Detect keywords industri (ISP, retail, dll)
+3   | industry.detect.context         | Detect dari konteks kalimat
+4   | industry.classify               | Klasifikasi industri ke kategori
+5   | industry.confidence.score       | Score confidence deteksi
+6   | industry.clarify                | Minta klarifikasi kalau ambigu
+7   | industry.subcategory.detect     | Detect sub-kategori (ISP vs Telco vs Mobile)
+8   | industry.scale.assess           | Assess skala (UMKM, SME, Enterprise)
+9   | industry.region.detect          | Detect region (Indonesia, ASEAN, Global)
+10  | industry.regulation.check       | Cek regulasi yang berlaku per industri
+11  | industry.terminology.extract    | Extract terminology khas industri
+12  | industry.benchmark.find         | Find benchmark perusahaan sejenis
+13  | industry.competitor.analyze     | Analyze competitor di industri sama
+14  | industry.tier.set               | Set tier (micro, small, medium, large)
+15  | industry.profile.build          | Build profile industri lengkap
+
+
+--------------------------------------------------------------------------------
+[Layer 2] MODULE SELECTOR (12 skills)
+--------------------------------------------------------------------------------
+Skill untuk pilih modul yang relevan per industri
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+16  | module.mapping.industry        | Mapping industri ke modul required
+17  | module.required.select         | Pilih modul WAJIB untuk industri
+18  | module.optional.suggest        | Saran modul optional
+19  | module.exclude.irrelevant      | Exclude modul yang tidak relevan
+20  | module.priority.rank           | Rank modul berdasar prioritas
+21  | module.dependency.resolve      | Resolve dependency antar modul
+22  | module.conflict.detect         | Detect konflik antar modul
+23  | module.scale.adjust            | Adjust modul sesuai skala perusahaan
+24  | module.compliance.add          | Add modul compliance (PDP, PCI, dll)
+25  | module.integration.suggest     | Saran modul integrasi (payment, WA)
+26  | module.license.check           | Cek license modul (open-source vs paid)
+27  | module.finalize                | Finalize daftar modul yang akan dibuild
+
+
+--------------------------------------------------------------------------------
+[Layer 3] THEME SELECTOR (15 skills)
+--------------------------------------------------------------------------------
+Skill untuk auto-select tema UI/UX sesuai industri
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+28  | theme.color.industry           | Pilih color palette per industri
+29  | theme.layout.industry          | Pilih layout per industri (dashboard vs form)
+30  | theme.typography.industry      | Pilih typography per industri
+31  | theme.icon.set.industry        | Pilih icon set per industri
+32  | theme.terminology.apply        | Apply terminology industri (Pelanggan vs Customer)
+33  | theme.language.set             | Set bahasa (ID, EN, bilingual)
+34  | theme.dark_mode.support        | Support dark mode
+35  | theme.responsive.optimize      | Optimize responsive per device
+36  | theme.branding.apply           | Apply branding user (logo, nama)
+37  | theme.accessibility.ensure     | Ensure WCAG AA compliance
+38  | theme.components.customize     | Customize komponen per industri
+39  | theme.dashboard.layout         | Layout dashboard per industri
+40  | theme.navigation.style         | Style navigasi per industri
+41  | theme.report.template          | Template report per industri
+42  | theme.preview.generate         | Generate preview tema sebelum apply
+
+
+--------------------------------------------------------------------------------
+[Layer 4] SCHEMA GENERATOR (15 skills)
+--------------------------------------------------------------------------------
+Skill untuk generate database schema
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+43  | schema.entity.identify         | Identify entity per modul
+44  | schema.relation.design         | Design relation antar entity
+45  | schema.field.define            | Define field per entity
+46  | schema.data_type.select        | Select data type (VARCHAR, INT, JSONB)
+47  | schema.constraint.add          | Add constraint (PK, FK, unique, check)
+48  | schema.index.optimize          | Optimize index untuk query
+49  | schema.normalization.apply     | Apply normalization (3NF)
+50  | schema.denormalization.selective | Selective denormalization untuk performance
+51  | schema.audit.column            | Add audit column (created_at, updated_at)
+52  | schema.soft.delete             | Soft delete support
+53  | schema.multi.tenant            | Multi-tenant schema (row-level isolation)
+54  | schema.migration.generate      | Generate migration file
+55  | schema.seed.generate           | Generate seed data
+56  | schema.er.diagram              | Generate ER diagram
+57  | schema.document.generate       | Generate schema documentation
+
+
+--------------------------------------------------------------------------------
+[Layer 5] CORE MODULES (15 skills)
+--------------------------------------------------------------------------------
+Modul inti yang pasti ada di ERP apapun
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+58  | core.auth.user                 | Manajemen user & auth
+59  | core.auth.role                 | Role-based access control (RBAC)
+60  | core.auth.sso                  | Single Sign-On (SAML, OAuth, OIDC)
+61  | core.auth.mfa                  | Multi-factor authentication
+62  | core.audit.log                 | Audit log semua aksi
+63  | core.notification              | Notification (email, SMS, push, IM)
+64  | core.settings.config           | System configuration
+65  | core.tenant.management         | Multi-tenant management
+66  | core.localization              | Multi-language & currency
+67  | core.timezone.management       | Timezone management
+68  | core.file.storage              | File & document storage
+69  | core.attachment.management     | Attachment management
+70  | core.workflow.engine           | Workflow engine (BPMN)
+71  | core.report.builder            | Custom report builder
+72  | core.dashboard.builder         | Custom dashboard builder
+
+
+--------------------------------------------------------------------------------
+[Layer 6] FINANCE MODULE - COMPLETE (25 skills)
+--------------------------------------------------------------------------------
+Pembukuan keuangan lengkap sesuai standar akuntansi Indonesia
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+73  | finance.journal.entry          | Jurnal umum (manual entry)
+74  | finance.general.ledger         | Buku besar (General Ledger)
+75  | finance.accounts.payable       | Hutang (AP)
+76  | finance.accounts.receivable    | Piutang (AR)
+77  | finance.cash.bank              | Kas & bank
+78  | finance.fixed.assets           | Aset tetap
+79  | finance.depreciation           | Penyusutan aset (straight-line, declining)
+80  | finance.tax.ppn                | PPN (Pajak Pertambahan Nilai)
+81  | finance.tax.pph                | PPh (Pajak Penghasilan)
+82  | finance.budgeting              | Anggaran
+83  | finance.cost.accounting        | Cost accounting
+84  | finance.financial.statement    | Laporan keuangan (Neraca, LR)
+85  | finance.cashflow.statement     | Laporan arus kas
+86  | finance.equity.management      | Modal & ekuitas
+87  | finance.retained.earning       | Laba ditahan
+88  | finance.multi.currency         | Multi-currency
+89  | finance.fiscal.year            | Tahun buku
+90  | finance.closing.period         | Tutup buku periode (monthly, yearly)
+91  | finance.invoice                | Invoice & billing
+92  | finance.payment.processing     | Payment gateway integration
+93  | finance.reconciliation         | Rekonsiliasi bank
+94  | finance.tax.e faktur           | E-Faktur integration (DJP)
+95  | finance.tax.e bupot            | E-Bupot integration (PPh)
+96  | finance.sak.psak.compliance    | Compliance SAK/PSAK/ETAP
+97  | finance.audit.trail            | Audit trail transaksi
+
+
+--------------------------------------------------------------------------------
+[Layer 7] HR & PAYROLL MODULE (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+98  | hr.employee.management         | Data karyawan
+99  | hr.attendance                  | Absensi (fingerprint, face, GPS)
+100 | hr.leave.management            | Cuti & izin
+101 | hr.payroll                     | Penggajian
+102 | hr.tax.pph21                   | PPh 21 otomatis
+103 | hr.bpjs                        | BPJS Kesehatan & Ketenagakerjaan
+104 | hr.recruitment                 | Rekrutmen
+105 | hr.performance.review          | Performance review
+106 | hr.training                    | Training & development
+107 | hr.organization.structure      | Struktur organisasi
+108 | hr.time.overtime               | Lembur
+109 | hr.shift.management            | Shift kerja
+110 | hr.expense.claim               | Klaim biaya
+111 | hr.loan.management             | Pinjaman karyawan
+112 | hr.exit.management             | Resign & exit interview
+
+
+--------------------------------------------------------------------------------
+[Layer 8] INVENTORY & PROCUREMENT (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+113 | inventory.product.master       | Master produk
+114 | inventory.stock.management     | Manajemen stok
+115 | inventory.warehouse            | Multi-warehouse
+116 | inventory.stock.opname         | Stock opname
+117 | inventory.barcode              | Barcode & QR
+118 | inventory.batch.tracking       | Batch & expiry tracking
+119 | inventory.serial.number        | Serial number tracking
+120 | procurement.purchase.request   | Purchase request
+121 | procurement.purchase.order     | Purchase order
+122 | procurement.vendor.management  | Vendor management
+123 | procurement.rfq                | Request for quotation
+124 | procurement.goods.receipt      | Penerimaan barang
+125 | procurement.vendor.invoice     | Invoice vendor
+126 | procurement.three.way.match    | 3-way match (PO, GR, Invoice)
+127 | procurement.vendor.performance | Vendor performance rating
+
+
+--------------------------------------------------------------------------------
+[Layer 9] SALES & CRM MODULE (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+128 | sales.customer.master          | Master customer
+129 | sales.quotation                | Quotation
+130 | sales.order                    | Sales order
+131 | sales.delivery                 | Pengiriman
+132 | sales.sales.invoice            | Invoice penjualan
+133 | sales.sales.return             | Retur penjualan
+134 | crm.lead.management            | Lead management
+135 | crm.opportunity                | Opportunity tracking
+136 | crm.activity                   | Activity tracking
+137 | crm.pipeline                   | Sales pipeline
+138 | crm.customer.360               | Customer 360 view
+139 | crm.contact.management         | Contact management
+140 | crm.campaign.management        | Campaign management
+141 | crm.satisfaction.survey        | CSAT & NPS survey
+142 | crm.referral.program           | Referral program
+
+
+--------------------------------------------------------------------------------
+[Layer 10] ISP-SPECIFIC MODULES (20 skills)
+--------------------------------------------------------------------------------
+Khusus untuk perusahaan internet (ISP / RT-RW Net / Fiber Provider)
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+143 | isp.customer.subscriber        | Data pelanggan internet
+144 | isp.service.plan               | Paket internet (speed, quota, price)
+145 | isp.billing.cycle              | Siklus billing (monthly, daily)
+146 | isp.invoice.recurring          | Invoice recurring otomatis
+147 | isp.payment.collection         | Pembayaran (transfer, VA, e-wallet)
+148 | isp.suspension.management      | Suspensi pelanggan tunggak
+149 | isp.ticket.troubleshooting     | Tiket gangguan internet
+150 | isp.network.monitoring         | Monitoring jaringan (ping, latency)
+151 | isp.olt.management             | Manajemen OLT (fiber)
+152 | isp.onu.management             | Manajemen ONU/ONT
+153 | isp.ip.address.management      | IP address pool (DHCP, static)
+154 | isp.bandwidth.management       | Bandwidth shaping (QoS)
+155 | isp.coverage.area              | Coverage area mapping
+156 | isp.installation.schedule      | Jadwal instalasi teknisi
+157 | isp.field.operations           | Operasional teknisi lapangan
+158 | isp.cpe.management             | Customer Premises Equipment
+159 | isp.fiber.route                | Fiber route management
+160 | isp.splitter.management        | Splitter GPON management
+161 | isp.speedtest.integration      | Speedtest integration
+162 | isp.auto.provisioning          | Auto-provisioning ONU/ONT
+
+
+--------------------------------------------------------------------------------
+[Layer 11] MANUFACTURING MODULE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+163 | mfg.bom                        | Bill of material
+164 | mfg.production.order           | Production order
+165 | mfg.work.center                | Work center
+166 | mfg.routing                    | Routing produksi
+167 | mfg.mrp                        | Material requirement planning
+168 | mfg.quality.control            | Quality control
+169 | mfg.maintenance                | Maintenance mesin
+170 | mfg.production.costing         | Costing produksi
+171 | mfg.shop.floor.control         | Shop floor control
+172 | mfg.production.scheduling      | Production scheduling
+173 | mfg.scrap.management           | Scrap & waste management
+174 | mfg.subcontracting             | Subcontracting
+
+
+--------------------------------------------------------------------------------
+[Layer 12] PROJECT MANAGEMENT MODULE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+175 | pm.project.master              | Master project
+176 | pm.task.management             | Task management
+177 | pm.gantt.chart                 | Gantt chart
+178 | pm.time.tracking               | Time tracking
+179 | pm.resource.allocation         | Resource allocation
+180 | pm.milestone                   | Milestone tracking
+181 | pm.issue.tracking              | Issue & bug tracking
+182 | pm.project.billing             | Project billing
+183 | pm.risk.management             | Risk management
+184 | pm.project.portfolio           | Project portfolio
+
+
+--------------------------------------------------------------------------------
+[Layer 13] POS & RETAIL MODULE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+185 | pos.cashier                    | Kasir POS
+186 | pos.transaction                | Transaksi penjualan
+187 | pos.cash.management            | Manajemen kas
+188 | retail.promotion               | Promo & discount
+189 | retail.loyalty.program         | Program loyalitas
+190 | retail.coupon                  | Kupon
+191 | retail.gift.card               | Gift card
+192 | retail.customer.display        | Customer display
+193 | retail.shelf.management        | Manajemen rak & display
+194 | retail.price.tag               | Price tag digital
+195 | retail.stock.opname.pos        | Stock opname khusus retail
+196 | retail.shift.cashier           | Shift kasir
+
+
+--------------------------------------------------------------------------------
+[Layer 14] E-COMMERCE MODULE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+197 | ecommerce.catalog              | Katalog produk
+198 | ecommerce.cart                 | Shopping cart
+199 | ecommerce.checkout             | Checkout
+200 | ecommerce.payment              | Payment gateway
+201 | ecommerce.shipping             | Shipping integration
+202 | ecommerce.marketplace          | Marketplace sync (Tokopedia, Shopee)
+203 | ecommerce.review               | Customer review
+204 | ecommerce.return               | Return management
+205 | ecommerce.wishlist             | Wishlist
+206 | ecommerce.promo.code           | Promo code
+207 | ecommerce.abandoned.cart       | Abandoned cart recovery
+208 | ecommerce.analytics            | E-commerce analytics
+
+
+--------------------------------------------------------------------------------
+[Layer 15] PROPERTY & REAL ESTATE MODULE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+209 | property.unit.management       | Unit property (rumah, apartemen, ruko)
+210 | property.tenant.management     | Tenant management
+211 | property.lease.agreement       | Lease agreement
+212 | property.rent.collection       | Rent collection
+213 | property.maintenance           | Property maintenance
+214 | property.facility              | Facility management
+215 | property.utility               | Utility (listrik, air, gas)
+216 | property.security              | Security & access control
+217 | property.parking               | Parking management
+218 | property.billing               | Property billing
+
+
+--------------------------------------------------------------------------------
+[Layer 16] CONSTRUCTION MODULE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+219 | construction.project           | Construction project
+220 | construction.budget            | RAB (Rencana Anggaran Biaya)
+221 | construction.progress          | Progress billing
+222 | construction.equipment         | Equipment management
+223 | construction.labor             | Labor management
+224 | construction.subcontractor     | Subcontractor management
+225 | construction.safety            | Safety (HSE/K3)
+226 | construction.quality           | Quality control
+227 | construction.drawings          | Drawings & documents
+228 | construction.handover          | Handover & defect liability
+
+
+--------------------------------------------------------------------------------
+[Layer 17] HEALTHCARE MODULE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+229 | healthcare.patient             | Patient management
+230 | healthcare.medical.record      | Medical record (EMR)
+231 | healthcare.appointment         | Appointment scheduling
+232 | healthcare.billing             | Healthcare billing
+233 | healthcare.insurance           | Asuransi (BPJS, private)
+234 | healthcare.pharmacy            | Pharmacy management
+235 | healthcare.lab                 | Laboratorium
+236 | healthcare.radiology           | Radiology
+237 | healthcare.inpatient           | Rawat inap
+238 | healthcare.outpatient          | Rawat jalan
+239 | healthcare.ambulance           | Ambulance
+240 | healthcare.clinical.analytics  | Clinical analytics
+
+
+--------------------------------------------------------------------------------
+[Layer 18] EDUCATION MODULE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+241 | education.student              | Student management
+242 | education.admission            | Admission (PPDB)
+243 | education.academic             | Academic (kurikulum, jadwal, nilai)
+244 | education.attendance           | Attendance siswa
+245 | education.finance              | Finance (SPP, beasiswa)
+246 | education.library              | Library management
+247 | education.parent.portal        | Parent portal
+248 | education.teacher              | Teacher management
+249 | education.report.card          | Report card (rapor)
+250 | education.alumni               | Alumni management
+
+
+--------------------------------------------------------------------------------
+[Layer 19] LOGISTICS & TRANSPORTATION MODULE (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+251 | logistics.shipment             | Shipment management
+252 | logistics.fleet                | Fleet management
+253 | logistics.driver               | Driver management
+254 | logistics.route                | Route optimization
+255 | logistics.tracking             | Real-time tracking
+256 | logistics.warehouse            | Warehouse management (WMS)
+257 | logistics.cross.docking        | Cross docking
+258 | logistics.customs              | Customs (import/export)
+259 | logistics.freight              | Freight forwarding
+260 | logistics.courier              | Courier management
+261 | logistics.last.mile            | Last mile delivery
+262 | logistics.reverse.logistics    | Reverse logistics (return)
+
+
+--------------------------------------------------------------------------------
+[Layer 20] AGRICULTURE MODULE (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+263 | agriculture.farm               | Farm management
+264 | agriculture.crop               | Crop tracking
+265 | agriculture.harvest            | Harvest management
+266 | agriculture.inventory          | Inventory (benih, pupuk, pestisida)
+267 | agriculture.equipment          | Equipment management
+268 | agriculture.labor              | Farm labor
+269 | agriculture.weather            | Weather integration
+270 | agriculture.supply.chain       | Supply chain
+
+
+--------------------------------------------------------------------------------
+[Layer 21] INTEGRATION HUB (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+271 | integration.api.rest           | REST API endpoint
+272 | integration.api.graphql        | GraphQL endpoint
+273 | integration.api.grpc           | gRPC endpoint
+274 | integration.api.websocket      | WebSocket real-time
+275 | integration.webhook.send       | Send webhook
+276 | integration.webhook.receive    | Receive webhook
+277 | integration.event.bus          | Internal event bus (Kafka)
+278 | integration.message.queue      | Message queue (RabbitMQ)
+279 | integration.etl.pipeline       | ETL pipeline
+280 | integration.data.sync          | Bidirectional data sync
+281 | integration.scheduler          | Scheduled sync (cron)
+282 | integration.connector.builder  | Custom connector builder
+283 | integration.auth.oauth2        | OAuth2 client
+284 | integration.auth.api_key       | API key auth
+285 | integration.auth.jwt           | JWT auth
+
+
+--------------------------------------------------------------------------------
+[Layer 22] EXTERNAL CONNECTORS (15 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+286 | connector.whm.cpanel           | WHM/cPanel integration (untuk ISP)
+287 | connector.wordpress            | WordPress integration
+288 | connector.shopify              | Shopify integration
+289 | connector.woocommerce          | WooCommerce integration
+290 | connector.tokopedia            | Tokopedia API
+291 | connector.shopee               | Shopee API
+292 | connector.hubspot              | HubSpot CRM
+293 | connector.salesforce           | Salesforce CRM
+294 | connector.zoho                 | Zoho CRM
+295 | connector.wa.business          | WhatsApp Business API
+296 | connector.telegram.bot         | Telegram Bot API
+297 | connector.xendit               | Xendit (payment gateway)
+298 | connector.midtrans             | Midtrans (payment gateway)
+299 | connector.djp.efaktur          | DJP e-Faktur
+300 | connector.djp.ebupot           | DJP e-Bupot
+
+
+--------------------------------------------------------------------------------
+[Layer 23] WORKFLOW ENGINE (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+301 | workflow.define                | Define workflow (BPMN)
+302 | workflow.trigger.event         | Trigger on event
+303 | workflow.trigger.schedule      | Trigger on schedule
+304 | workflow.trigger.webhook       | Trigger on webhook
+305 | workflow.action.send_email     | Action: send email
+306 | workflow.action.call_api       | Action: call external API
+307 | workflow.action.update_record  | Action: update record
+308 | workflow.action.create_task    | Action: create task
+309 | workflow.condition.branch      | Conditional branching
+310 | workflow.parallel.split        | Parallel execution
+
+
+--------------------------------------------------------------------------------
+[Layer 24] REPORT & ANALYTICS (12 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+311 | report.financial.statement     | Laporan keuangan (Neraca, LR, Arus Kas)
+312 | report.sales.analytics         | Sales analytics
+313 | report.inventory.movement      | Inventory movement report
+314 | report.customer.aging          | Customer aging (AR)
+315 | report.vendor.aging            | Vendor aging (AP)
+316 | report.profit.loss             | Profit & loss
+317 | report.cash.flow               | Cash flow statement
+318 | report.kpi.dashboard           | KPI dashboard
+319 | report.custom.query            | Custom SQL query
+320 | report.export.excel            | Export ke Excel/PDF
+321 | report.scheduled               | Scheduled report (email)
+322 | report.executive.summary       | Executive summary
+
+
+--------------------------------------------------------------------------------
+[Layer 25] COMMUNICATION MODULE (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+323 | comm.email.send                | Send email
+324 | comm.sms.send                  | Send SMS
+325 | comm.wa.send                   | Send WhatsApp
+326 | comm.push.notify               | Push notification
+327 | comm.template.management       | Template management
+328 | comm.campaign.bulk             | Bulk campaign
+329 | comm.auto.responder            | Auto responder
+330 | comm.chat.internal             | Internal chat (team)
+
+
+--------------------------------------------------------------------------------
+[Layer 26] BI & DATA WAREHOUSE (8 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+331 | bi.etl.extract                 | ETL: extract
+332 | bi.etl.transform               | ETL: transform
+333 | bi.etl.load                    | ETL: load ke data warehouse
+334 | bi.olap.cube                   | OLAP cube
+335 | bi.datawarehouse               | Data warehouse (Snowflake schema)
+336 | bi.dashboard.realtime          | Real-time dashboard
+337 | bi.predictive.analytics        | Predictive analytics (ML)
+338 | bi.report.scheduling           | Scheduled report
+
+
+--------------------------------------------------------------------------------
+[Layer 27] AUTO-BUILDER & DEPLOYER (15 skills)
+--------------------------------------------------------------------------------
+Skill untuk auto-build & deploy ERP
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+339 | builder.scaffold.project       | Scaffold ERP project
+340 | builder.gen.frontend           | Generate frontend (Next.js)
+341 | builder.gen.backend            | Generate backend (NestJS)
+342 | builder.gen.database           | Generate database (PostgreSQL)
+343 | builder.gen.api                | Generate REST & GraphQL API
+344 | builder.gen.auth               | Generate auth (JWT, OAuth)
+345 | builder.gen.workflow           | Generate workflow
+346 | builder.gen.report             | Generate report templates
+347 | builder.gen.dashboard          | Generate dashboard
+348 | builder.gen.menu               | Generate menu sesuai modul
+349 | builder.test.run               | Run automated tests
+350 | builder.deploy.ssh             | Deploy via SSH ke VPS
+351 | builder.deploy.docker          | Deploy via Docker Compose
+352 | builder.deploy.k8s             | Deploy via Kubernetes
+353 | builder.ssl.setup              | Setup SSL (Let's Encrypt)
+
+
+--------------------------------------------------------------------------------
+[Layer 28] COMPLIANCE & REGULATORY (10 skills)
+--------------------------------------------------------------------------------
+
+#   | Skill ID                       | Fungsi
+----|--------------------------------|------------------------------------------
+354 | compliance.pdp                 | UU PDP (Perlindungan Data Pribadi)
+355 | compliance.pajak               | Compliance pajak (PPN, PPh)
+356 | compliance.bpjs                | BPJS compliance
+357 | compliance.komdigi             | Komdigi (untuk ISP)
+358 | compliance.bssn                | BSSN (cyber security)
+359 | compliance.iso27001            | ISO 27001
+360 | compliance.soc2                | SOC 2
+361 | compliance.hipaa               | HIPAA (untuk healthcare)
+362 | compliance.pci.dss             | PCI-DSS (untuk payment)
+363 | compliance.audit.trail         | Audit trail compliance
+
+
+================================================================================
+  INDUSTRY TEMPLATES (25+ INDUSTRI)
+================================================================================
+
+Engine ini punya template siap pakai untuk 25+ industri:
+
+1. ISP / TELEKOMUNIKASI (RT-RW Net, Fiber Provider, Mobile Operator)
+   Required Modules:
+   ✅ Core + Finance + HR + Sales + CRM
+   ✅ ISP Billing + ISP Ticketing + Network Monitoring
+   ✅ Field Operations + Inventory (spare parts)
+   ✅ Integration Hub + External Connectors (WHM, WA, Payment)
+   
+   Theme: Tech Blue (#0066CC), NOC-style dashboard, terminology "Pelanggan/Paket/OLT/ONU"
+   
+   Compliance: Komdigi, BSSN, PDP
+   Example Companies: Telkom, IndiHome, Biznet, RT-RW Net
+
+2. RETAIL (Toko, Minimarket, Butik, Apotek)
+   Required Modules:
+   ✅ Core + Finance + HR + Inventory + POS
+   ✅ E-Commerce + CRM + Loyalty + Promotion
+   ✅ Procurement + Sales
+   
+   Theme: Vibrant (Orange/Red), POS-heavy, terminology "Barang/Stok/Kasir"
+   
+   Compliance: PDP, Pajak
+   Example: Alfamart, Indomaret, butik lokal
+
+3. MANUFAKTUR (Pabrik Tekstil, Otomotif, Elektronik, Food)
+   Required Modules:
+   ✅ Core + Finance + HR + Inventory + Procurement
+   ✅ Manufacturing (BOM, MRP, Production Order, QC)
+   ✅ Sales + Project + Cost Accounting
+   
+   Theme: Industrial (Gray/Blue), production dashboard, terminology "BOM/MRP/Work Center"
+   
+   Compliance: PDP, Pajak, ISO
+   Example: Astra, Toyota, Indofood
+
+4. JASA / SERVICE (Konsultan, Agen, Repair, Salon)
+   Required Modules:
+   ✅ Core + Finance + HR + Project + CRM
+   ✅ Scheduling + Billing + Sales
+   
+   Theme: Modern (Purple/Blue), calendar-based, terminology "Klien/Appointment/Ticket"
+   
+   Compliance: PDP, Pajak
+   Example: Klinik, salon, jasa servis
+
+5. DISTRIBUTOR (Grosir, Distributor Barang)
+   Required Modules:
+   ✅ Core + Finance + HR + Inventory + Procurement
+   ✅ Sales + Warehouse + Shipping + CRM
+   
+   Theme: Logistics (Green/Blue), warehouse dashboard, terminology "Principal/Distributor/Outlet"
+   
+   Compliance: PDP, Pajak
+   Example: Distributor FMCG
+
+6. KONSTRUKSI (Kontraktor, Developer)
+   Required Modules:
+   ✅ Core + Finance + HR + Project + Inventory
+   ✅ Procurement + Construction + Equipment + Progress Billing
+   
+   Theme: Construction (Yellow/Black), project dashboard, terminology "Proyek/RAB/Mandor"
+   
+   Compliance: PDP, Pajak, K3
+   Example: PT Wijaya Karya, PP
+
+7. PROPERTY (Pengembang, Manajemen Gedung)
+   Required Modules:
+   ✅ Core + Finance + HR + Sales + Property Management
+   ✅ Tenant Management + Maintenance + Facility
+   
+   Theme: Premium (Gold/Dark), property listing, terminology "Unit/Sewa/Tenant"
+   
+   Compliance: PDP, Pajak
+   Example: Ciputra, Agung Podomoro
+
+8. PERTAMBANGAN (Batubara, Emas, Nikel)
+   Required Modules:
+   ✅ Core + Finance + HR + Inventory + Mining Operations
+   ✅ Equipment Management + Safety + Compliance
+   
+   Theme: Earth (Brown/Orange), mining dashboard, terminology "Tambang/OMZ/Hauling"
+   
+   Compliance: PDP, Pajak, Minerba
+   Example: Adaro, Aneka Tambang
+
+9. PERTANIAN (Perkebunan, Agroindustri)
+   Required Modules:
+   ✅ Core + Finance + HR + Inventory + Farm Management
+   ✅ Crop Tracking + Harvest + Supply Chain
+   
+   Theme: Natural (Green/Yellow), farm dashboard, terminology "Lahan/Tanaman/Panen"
+   
+   Compliance: PDP, Pajak
+   Example: Astra Agro, Sinar Mas
+
+10. PENDIDIKAN (Sekolah, Universitas, Kursus)
+    Required Modules:
+    ✅ Core + Finance + HR + Student Management + Academic
+    ✅ Scheduling + Grading + Parent Portal + Library
+    
+    Theme: Education (Blue/Green), academic dashboard, terminology "Siswa/Nilai/SPP"
+    
+    Compliance: PDP, Pajak
+    Example: SMA, Universitas, bimbel
+
+11. KESEHATAN (Klinik, Rumah Sakit, Lab)
+    Required Modules:
+    ✅ Core + Finance + HR + Patient Management + Medical Records
+    ✅ Billing + Pharmacy + Insurance + Lab
+    
+    Theme: Medical (White/Teal), patient dashboard, terminology "Pasien/RM/Resep"
+    
+    Compliance: PDP, Pajak, HIPAA
+    Example: RS Siloam, Klinik Kimia Farma
+
+12. LOGISTIK (Ekspedisi, Kurir, Freight Forwarder)
+    Required Modules:
+    ✅ Core + Finance + HR + Fleet Management + Shipment
+    ✅ Tracking + Warehouse + Customs
+    
+    Theme: Logistics (Blue/Orange), shipment dashboard, terminology "Shipment/Fleet/AWB"
+    
+    Compliance: PDP, Pajak, Customs
+    Example: JNE, JNT, SiCepat
+
+13. PERBANKAN / FINTECH (Bank, Koperasi, P2P Lending)
+    Required Modules:
+    ✅ Core + Finance + HR + Customer + Loan Management
+    ✅ Transaction + Risk + Compliance
+    
+    Theme: Banking (Navy Blue/Gold), transaction dashboard, terminology "Nasabah/Transaksi/Loan"
+    
+    Compliance: PDP, Pajak, OJK
+    Example: BCA, Koperasi, P2P
+
+14. ASURANSI (Life, General, Syariah)
+    Required Modules:
+    ✅ Core + Finance + HR + Policy Management + Claims
+    ✅ Underwriting + Reinsurance + Agent
+    
+    Theme: Insurance (Blue/White), policy dashboard, terminology "Polis/Klaim/Premi"
+    
+    Compliance: PDP, Pajak, OJK
+    Example: Allianz, Sinarmas
+
+15. OTOMOTIF (Dealer, Bengkel, Spare Part)
+    Required Modules:
+    ✅ Core + Finance + HR + Inventory + Sales
+    ✅ Service + Spare Part + Warranty
+    
+    Theme: Automotive (Red/Black), service dashboard, terminology "Kendaraan/Servis/Part"
+    
+    Compliance: PDP, Pajak
+    Example: Toyota dealer, bengkel
+
+16. F&B / RESTORAN (Resto, Cafe, Catering, Cloud Kitchen)
+    Required Modules:
+    ✅ Core + Finance + HR + Inventory + POS
+    ✅ Recipe + Table Management + Kitchen Order + Delivery
+    
+    Theme: Food (Orange/Red), POS dashboard, terminology "Menu/Meja/Order"
+    
+    Compliance: PDP, Pajak, BPOM
+    Example: Resto, cafe, catering
+
+17. PHARMACY (Apotek, Distributor Obat)
+    Required Modules:
+    ✅ Core + Finance + HR + Inventory + POS
+    ✅ Prescription + Batch + Expiry + BPJS
+    
+    Theme: Pharmacy (Green/White), prescription dashboard, terminology "Obat/Resep/Batch"
+    
+    Compliance: PDP, Pajak, BPOM
+    Example: K24, Apotek Kimia Farma
+
+18. AGENSI / ADVERTISING (Digital Agency, Marketing)
+    Required Modules:
+    ✅ Core + Finance + HR + Project + CRM
+    ✅ Campaign + Creative + Billing + Time Tracking
+    
+    Theme: Creative (Purple/Pink), project dashboard, terminology "Client/Campaign/Deliverable"
+    
+    Compliance: PDP, Pajak
+    Example: Digital agency, production house
+
+19. TRANSPORTASI (Bus, Travel, Truck, Taxi)
+    Required Modules:
+    ✅ Core + Finance + HR + Fleet + Route
+    ✅ Ticketing + Schedule + Driver + Maintenance
+    
+    Theme: Transport (Blue/White), fleet dashboard, terminology "Armada/Rute/Tiket"
+    
+    Compliance: PDP, Pajak, Kemenhub
+    Example: Bus, travel, trucking
+
+20. ENERGI (PLTS, PLTU, Gas, Renewable)
+    Required Modules:
+    ✅ Core + Finance + HR + Asset + Maintenance
+    ✅ Production + Distribution + Compliance
+    
+    Theme: Energy (Yellow/Green), production dashboard, terminology "Generator/Grid/kWh"
+    
+    Compliance: PDP, Pajak, Kemen ESDM
+    Example: PLN, PLTS developer
+
+21. TELEKOMUNIKASI MOBILE (Operator Seluler)
+    Required Modules:
+    ✅ Core + Finance + HR + Subscriber + Plan
+    ✅ Billing + Roaming + Interconnect + Numbering
+    
+    Theme: Telco (Blue/Red), NOC dashboard, terminology "Subscriber/IMSI/HLR"
+    
+    Compliance: PDP, Pajak, Komdigi
+    Example: Telkomsel, XL, Indosat
+
+22. HOTEL / HOSPITALITY (Hotel, Resort, Villa)
+    Required Modules:
+    ✅ Core + Finance + HR + Reservation + Front Office
+    ✅ Housekeeping + F&B + Spa + Event
+    
+    Theme: Hospitality (Gold/Brown), reservation dashboard, terminology "Guest/Room/Check-in"
+    
+    Compliance: PDP, Pajak
+    Example: Hotel, villa, resort
+
+23. EVENT ORGANIZER (Wedding, Concert, Corporate Event)
+    Required Modules:
+    ✅ Core + Finance + HR + Project + Vendor
+    ✅ Guest + Venue + Catering + Budget
+    
+    Theme: Event (Vibrant), project dashboard, terminology "Event/Vendor/Guest"
+    
+    Compliance: PDP, Pajak
+    Example: EO, wedding organizer
+
+24. KONSULTAN (Legal, Tax, Management, IT)
+    Required Modules:
+    ✅ Core + Finance + HR + Project + CRM
+    ✅ Time Tracking + Billing + Document Management
+    
+    Theme: Professional (Navy/Silver), project dashboard, terminology "Client/Case/Billable"
+    
+    Compliance: PDP, Pajak
+    Example: KAP, konsultan hukum
+
+25. STARTUP / TECH (SaaS, Marketplace, App)
+    Required Modules:
+    ✅ Core + Finance + HR + Subscription + Analytics
+    ✅ User Management + Billing + Support
+    
+    Theme: Tech (Modern Blue/Purple), analytics dashboard, terminology "User/MRR/Churn"
+    
+    Compliance: PDP, Pajak
+    Example: SaaS startup
+
+
+================================================================================
+  CONTOH WORKFLOW: BUILD ERP ISP
+================================================================================
+
+User: "Saya punya ISP di Jakarta, 500 pelanggan, butuh ERP
+       untuk billing & gangguan. Paket 20Mbps Rp 250rb/bulan."
+
+AI eksekusi (OTONOM):
+
+# Step 1: DETECT INDUSTRY
+industry.analyze.spec("ISP Jakarta 500 pelanggan billing gangguan paket 20Mbps")
+  -> Keywords: ISP, pelanggan, billing, paket, Mbps
+  -> Industry: TELECOMMUNICATIONS / ISP
+  -> Sub-category: Fixed Broadband (Fiber/Wireless)
+  -> Scale: Small (500 pelanggan)
+  -> Region: Indonesia (Jakarta)
+  -> Confidence: 95%
+
+# Step 2: SELECT MODULES
+module.mapping.industry("ISP")
+  Required modules (10):
+  1. Core (auth, audit, notif, workflow)
+  2. Finance (ledger, invoice, payment, tax)
+  3. HR (employee, payroll, attendance)
+  4. Sales & CRM (customer, quotation, ticket)
+  5. ISP Billing (subscriber, plan, recurring invoice)
+  6. ISP Ticketing (gangguan, troubleshooting)
+  7. Network Monitoring (OLT, ONU, uptime)
+  8. Field Operations (teknisi, dispatch, install)
+  9. Inventory (spare parts: ONU, kabel, router)
+  10. Integration Hub (payment, WA, email)
+
+# Step 3: SELECT THEME
+theme.color.industry("ISP")
+  -> Primary: Tech Blue (#0066CC)
+  -> Secondary: White (#FFFFFF)
+  -> Accent: Signal Green (#00C853)
+  
+theme.layout.industry("ISP")
+  -> Dashboard-heavy (NOC-style)
+  -> Sidebar menu (Pelanggan, Billing, Tiket, Network, Laporan)
+  
+theme.terminology.apply("ISP")
+  -> "Pelanggan" (bukan Customer)
+  -> "Paket" (bukan Plan)
+  -> "Tiket Gangguan" (bukan Ticket)
+  -> "Tagihan" (bukan Invoice)
+
+# Step 4: GENERATE SCHEMA
+schema.entity.identify(modules)
+  Entities (25 tables):
+  - subscribers, plans, subscriptions, invoices, payments
+  - tickets, ticket_comments, ticket_assignees
+  - olts, onus, ip_pools, bandwidth_profiles
+  - technicians, work_orders, installations
+  - spare_parts, stock_movements
+  - users, roles, permissions, audit_logs
+  
+schema.relation.design()
+  - subscribers 1:N subscriptions
+  - subscriptions 1:N invoices
+  - invoices 1:N payments
+  - tickets N:1 subscribers
+  - onus N:1 olts
+  - work_orders N:1 technicians
+
+# Step 5: SCAFFOLD PROJECT
+builder.scaffold.project({
+    name: "ERP-ISP-JakartaFiber",
+    stack: "Next.js + NestJS + PostgreSQL + Prisma",
+    industry: "ISP"
+})
+
+# Step 6: GENERATE BACKEND
+builder.gen.backend({
+    framework: "NestJS",
+    modules: [10 modules],
+    orm: "Prisma",
+    auth: "JWT + RBAC"
+})
+  -> Generate 80+ API endpoints
+  -> Generate 25 Prisma models
+  -> Generate auth, middleware, validation
+
+# Step 7: GENERATE FRONTEND
+builder.gen.frontend({
+    framework: "Next.js 15",
+    ui: "shadcn/ui + Tailwind",
+    theme: tech_blue,
+    modules: [10 modules]
+})
+  -> Generate 50+ pages
+  -> Generate 30+ components
+  -> Generate dashboard NOC-style
+  -> Generate menu sesuai modul
+
+# Step 8: GENERATE ISP-SPECIFIC
+isp.customer.subscriber -> CRUD subscriber + profile
+isp.service.plan -> CRUD paket (10, 20, 50, 100 Mbps)
+isp.billing.cycle -> Setup billing cycle (1 setiap bulan)
+isp.invoice.recurring -> Auto-generate invoice tiap tanggal 1
+isp.payment.collection -> Integrasi Xendit (VA, e-wallet)
+isp.suspension.management -> Auto-suspend tunggak >7 hari
+isp.ticket.troubleshooting -> Tiket gangguan + SLA
+isp.olt.management -> CRUD OLT (Huawei, ZTE, Fiberhome)
+isp.onu.management -> Register ONT ke OLT
+isp.network.monitoring -> Ping monitoring + alert
+isp.bandwidth.management -> QoS per paket
+isp.field.operations -> Dispatch teknisi + GPS tracking
+
+# Step 9: SETUP WORKFLOWS
+workflow.define({
+    name: "Invoice Reminder & Auto-Suspend",
+    trigger: schedule("0 9 * * *"),
+    steps: [
+        "Check arrears > 3 days",
+        "Send WA reminder (template H-3)",
+        "If arrears > 7 days: suspend service",
+        "Notify technician for ONU disable"
+    ]
+})
+
+workflow.define({
+    name: "Gangguan Auto-Dispatch",
+    trigger: event("ticket.created"),
+    steps: [
+        "Cek jenis gangguan",
+        "Cek OLT area pelanggan",
+        "Assign teknisi terdekat",
+        "Send WA ke pelanggan (estimasi)"
+    ]
+})
+
+# Step 10: INTEGRATE EXTERNAL
+connector.wa.business -> WhatsApp notif (invoice, gangguan)
+connector.xendit -> Payment gateway (VA, e-wallet, CC)
+connector.telegram.bot -> Internal team notif
+integration.webhook.receive -> Dari Xendit (payment success)
+integration.webhook.send -> Ke WHM (suspend/unsuspend)
+
+# Step 11: COMPLIANCE
+compliance.pdp -> UU PDP (data pelanggan)
+compliance.pajak -> PPN 11% di invoice
+compliance.komdigi -> Report ke Komdigi (kalau perlu)
+
+# Step 12: TEST
+builder.test.run()
+  -> Unit test: 156 tests passed
+  -> Integration test: 78 tests passed
+  -> E2E test: 45 tests passed
+
+# Step 13: DEPLOY
+builder.deploy.ssh({
+    server: "103.x.x.x",
+    user: "root",
+    compose: "docker-compose.prod.yml"
+})
+builder.ssl.setup({domain: "erp.jakartafiber.co.id"})
+
+# Step 14: OUTPUT
+✅ URL: https://erp.jakartafiber.co.id
+✅ Admin: admin@jakartafiber.co.id / ********
+✅ Sample data: 500 subscribers, 4 plans, 10 OLT
+✅ Documentation: README.md
+✅ API docs: /api/docs (Swagger)
+
+# Step 15: POST-DEPLOY
+monitor.uptime -> UptimeRobot
+monitor.error.track -> Sentry
+comm.wa.send -> Welcome message to owner
+
+
+================================================================================
+  CONTOH WORKFLOW: BUILD ERP RETAIL (TOKO)
+================================================================================
+
+User: "Saya punya toko elektronik di Bandung, butuh sistem kasir
+       + inventory + laporan penjualan."
+
+AI eksekusi:
+
+# Step 1: DETECT
+industry.analyze.spec("toko elektronik Bandung kasir inventory laporan")
+  -> Industry: RETAIL / Electronics Store
+  -> Scale: Small (1 toko)
+  -> Region: Indonesia (Bandung)
+  -> Confidence: 92%
+
+# Step 2: MODULES
+  Required (8):
+  1. Core
+  2. Finance (simple)
+  3. Inventory (produk elektronik)
+  4. POS (kasir)
+  5. Sales
+  6. CRM (loyalty)
+  7. Procurement (beli dari supplier)
+  8. Report (laporan penjualan)
+
+# Step 3: THEME
+  Color: Vibrant Orange (#FF6B35) + White
+  Layout: POS-heavy (kasir di home)
+  Terminology: "Barang", "Stok", "Kasir", "Struk"
+
+# Step 4: GENERATE
+  -> 15 entities (products, categories, stock, sales, customers)
+  -> 30+ API endpoints
+  -> 20+ pages (POS, inventory, report)
+  -> 1 dashboard (sales today, top products)
+
+# Step 5: DEPLOY
+  -> https://pos.toko-elektronik-bandung.com
+
+# Step 6: OUTPUT
+  ✅ Sistem kasir siap pakai
+  ✅ Inventory management
+  ✅ Laporan penjualan harian/bulanan
+  ✅ Support barcode scanner
+  ✅ Print struk thermal
+
+
+================================================================================
+  TECH STACK RECOMMENDED
+================================================================================
+
+Frontend:
+  - Next.js 15 + TypeScript
+  - shadcn/ui + Tailwind CSS
+  - React Query (data fetching)
+  - Zustand (state management)
+  - Recharts (chart)
+
+Backend:
+  - NestJS + TypeScript
+  - Prisma ORM
+  - PostgreSQL
+  - Redis (cache)
+  - BullMQ (queue)
+
+DevOps:
+  - Docker + Docker Compose
+  - Kubernetes (kalau scale)
+  - GitHub Actions (CI/CD)
+  - Nginx (reverse proxy)
+  - Let's Encrypt (SSL)
+
+Monitoring:
+  - Sentry (error tracking)
+  - Prometheus + Grafana
+  - Loki (logs)
+
+External:
+  - Xendit / Midtrans (payment)
+  - WhatsApp Business API
+  - DJP e-Faktur
+  - Google Maps API
+
+
+================================================================================
+  PRIORITAS BUILD (PHASED)
+================================================================================
+
+Phase 1 - MVP "Core ERP + Industry Detector" (Bulan 1-3)
+  Goal: Bisa detect industri & build ERP basic
+  WAJIB (30 skills):
+  - industry.analyze.spec, industry.detect.keywords, industry.classify
+  - module.mapping.industry, module.required.select, module.finalize
+  - theme.color.industry, theme.layout.industry, theme.terminology.apply
+  - schema.entity.identify, schema.relation.design, schema.field.define
+  - core.auth.user, core.auth.role, core.audit.log, core.notification
+  - finance.general.ledger, finance.invoice, finance.payment.processing
+  - sales.customer.master, sales.quotation, sales.order
+  - inventory.product.master, inventory.stock.management
+  - builder.scaffold.project, builder.gen.frontend, builder.gen.backend
+  - builder.gen.database, builder.deploy.ssh, builder.ssl.setup
+  - integration.api.rest, integration.auth.jwt
+
+Phase 2 - "Industry Templates" (Bulan 4-6)
+  Goal: 5 template industri (ISP, Retail, Manufaktur, Jasa, F&B)
+  Tambahkan (40 skills):
+  - isp.customer.subscriber, isp.service.plan, isp.billing.cycle
+  - isp.invoice.recurring, isp.payment.collection, isp.suspension.management
+  - isp.ticket.troubleshooting, isp.network.monitoring, isp.olt.management
+  - pos.cashier, pos.transaction, pos.cash.management
+  - retail.promotion, retail.loyalty.program
+  - mfg.bom, mfg.production.order, mfg.mrp
+  - pm.project.master, pm.task.management, pm.time.tracking
+  - ecommerce.catalog, ecommerce.cart, ecommerce.checkout
+  - connector.wa.business, connector.xendit, connector.midtrans
+  - workflow.define, workflow.trigger.event, workflow.action.send_email
+  - report.financial.statement, report.sales.analytics
+  - hr.employee.management, hr.payroll, hr.attendance
+  - finance.tax.ppn, finance.tax.pph, finance.cashflow.statement
+  - builder.gen.api, builder.gen.workflow, builder.gen.report
+  - builder.test.run
+
+Phase 3 - "More Industries" (Bulan 7-9)
+  Goal: 15+ template industri
+  Tambahkan (40 skills):
+  - Property, Construction, Healthcare, Education, Logistics
+  - Agriculture, Mining, Energy, Transportation, Hospitality
+  - Banking, Insurance, Automotive, Pharmacy, Event
+  - compliance.pdp, compliance.pajak, compliance.bpjs
+  - bi.etl.extract, bi.datawarehouse, bi.dashboard.realtime
+  - crm.customer.360, crm.campaign.management
+  - connector.wordpress, connector.shopify, connector.tokopedia, connector.shopee
+  - connector.hubspot, connector.telegram.bot
+  - hr.bpjs, hr.tax.pph21, hr.recruitment
+  - finance.depreciation, finance.reconciliation, finance.multi_currency
+  - inventory.batch.tracking, inventory.warehouse, procurement.purchase.order
+  - sales.delivery, sales.sales_return, crm.lead.management
+  - builder.deploy.k8s
+
+Phase 4 - "Enterprise & AI" (Bulan 10+)
+  Goal: Full enterprise + AI-powered
+  Tambahkan (40 skills):
+  - industry.competitor.analyze, industry.benchmark.find
+  - module.compliance.add, module.integration.suggest
+  - schema.multi.tenant, schema.normalization.apply
+  - core.auth.sso, core.auth.mfa, core.tenant.management
+  - bi.predictive.analytics, bi.olap.cube
+  - bi.report.scheduling, report.executive.summary
+  - hr.performance.review, hr.training, hr.exit.management
+  - finance.sak.psak.compliance, finance.tax.e faktur, finance.audit.trail
+  - mfg.quality.control, mfg.maintenance, mfg.shop.floor.control
+  - construction.budget, construction.progress, construction.safety
+  - healthcare.medical.record, healthcare.insurance, healthcare.pharmacy
+  - education.academic, education.report.card, education.parent.portal
+  - logistics.fleet, logistics.route, logistics.tracking
+  - compliance.iso27001, compliance.soc2, compliance.hipaa
+  - builder.deploy.docker, builder.gen.menu, builder.gen.dashboard
+
+
+================================================================================
+  SUMMARY
+================================================================================
+
+| Layer                              | Skills | Fungsi                  |
+|------------------------------------|--------|-------------------------|
+| Industry Detector                  |   15   | Auto-detect bidang usaha|
+| Module Selector                    |   12   | Pilih modul relevan     |
+| Theme Selector                     |   15   | Pilih tema UI/UX        |
+| Schema Generator                   |   15   | Generate DB schema      |
+| Core Modules                       |   15   | Auth, audit, notif      |
+| Finance Module (Complete)          |   25   | Pembukuan lengkap       |
+| HR & Payroll                       |   15   | SDM & payroll           |
+| Inventory & Procurement            |   15   | Stok & pembelian        |
+| Sales & CRM                        |   15   | Penjualan & CRM         |
+| ISP-Specific                       |   20   | Khusus ISP              |
+| Manufacturing                      |   12   | Khusus pabrik           |
+| Project Management                 |   10   | Manajemen proyek        |
+| POS & Retail                       |   12   | Kasir & retail          |
+| E-Commerce                         |   12   | Toko online             |
+| Property & Real Estate             |   10   | Property                |
+| Construction                       |   10   | Konstruksi              |
+| Healthcare                         |   12   | Kesehatan               |
+| Education                          |   10   | Pendidikan              |
+| Logistics                          |   12   | Logistik                |
+| Agriculture                        |    8   | Pertanian               |
+| Integration Hub                    |   15   | Koneksi sistem          |
+| External Connectors                |   15   | Connector siap pakai    |
+| Workflow Engine                    |   10   | Otomasi proses          |
+| Report & Analytics                 |   12   | Laporan                 |
+| Communication                      |    8   | Email, WA, SMS          |
+| BI & Data Warehouse                |    8   | Business intelligence   |
+| Auto-Builder & Deployer            |   15   | Auto build & deploy     |
+| Compliance & Regulatory            |   10   | Compliance              |
+| TOTAL                              |  347   |                         |
+
+
+================================================================================
+  REKOMENDASI STARTER PACK (MVP)
+================================================================================
+
+Untuk MVP, bangun 30 skill Phase 1 ini:
+
+INDUSTRY DETECTION (5):
+- industry.analyze.spec
+- industry.detect.keywords
+- industry.classify
+- industry.confidence.score
+- industry.clarify
+
+MODULE & THEME (5):
+- module.mapping.industry
+- module.required.select
+- theme.color.industry
+- theme.layout.industry
+- theme.terminology.apply
+
+CORE (5):
+- core.auth.user
+- core.auth.role
+- core.audit.log
+- core.notification
+- builder.scaffold.project
+
+BUILDER (5):
+- builder.gen.frontend
+- builder.gen.backend
+- builder.gen.database
+- builder.deploy.ssh
+- builder.ssl.setup
+
+BASIC MODULES (10):
+- finance.general.ledger
+- finance.invoice
+- finance.payment.processing
+- sales.customer.master
+- sales.quotation
+- sales.order
+- inventory.product.master
+- inventory.stock.management
+- integration.api.rest
+- integration.auth.jwt
+
+Tech stack:
+- Next.js 15 + NestJS + PostgreSQL + Prisma
+- Docker + nginx + Let's Encrypt
+- SSH skill (sudah ada)
+
+Estimasi build MVP: 12 minggu (3 bulan)
+
+Dengan MVP ini, AI bisa:
+- Detect 5 industri awal (ISP, Retail, Manufaktur, Jasa, F&B)
+- Pilih modul relevan
+- Generate tema sesuai industri
+- Build ERP basic (auth, finance, sales, inventory)
+- Deploy ke VPS via SSH
+- Setup SSL
+
+
+================================================================================
+  END OF COMPLETE ERP ENGINE DOCUMENT
+================================================================================

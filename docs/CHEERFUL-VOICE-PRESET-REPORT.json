@@ -1,0 +1,57 @@
+{
+  "status": "owner_terminal_active",
+  "date": "2026-10-28",
+  "approved_voices": [
+    "wanita",
+    "pria"
+  ],
+  "style": "promosi_ceria",
+  "native_emotion_control": false,
+  "implementation": "preserved-copy phrase delivery, bounded pauses and mild pace adjustment",
+  "style_human_approval": "pending_listening",
+  "tests_passed": {
+    "python": 19,
+    "node": 13
+  },
+  "native_terminal": [
+    {
+      "name": "mcp_harmonika_media",
+      "ok": true,
+      "style": "promosi_ceria",
+      "native_emotion_control": false,
+      "voice": "wanita"
+    }
+  ],
+  "asr": [
+    {
+      "voice": "wanita",
+      "reference_words_exact": true,
+      "transcript": "Yuk, kenalan dengan harmonika. Cek paket internet rumah dan ketersediaan jaringan di lokasi Kakak.",
+      "note": null
+    },
+    {
+      "voice": "pria",
+      "reference_words_exact": false,
+      "transcript": "Yuk, kenalan dengan harmonika. Cek paket internet rumah dan ketersediaan jaringan di lokasi kaka.",
+      "note": "ASR spelling kaka vs Kakak in male sample; human evaluation still needed"
+    }
+  ],
+  "video": {
+    "ok": true,
+    "status": "ok",
+    "provider": "Harmonika Ai",
+    "output_file": "/Users/id/Downloads/harmonika-ai/video/harmonika-promosi-ceria-10-detik.mp4",
+    "bytes": 245566,
+    "sha256": "7bd65fc8f660e7da08d54c3d3cdebca010b49edfb9763918b765418aa07a0327",
+    "duration_seconds": 10,
+    "audio": true,
+    "voice_quality": "neural_synthetic",
+    "voice": "wanita",
+    "style": "promosi_ceria",
+    "native_emotion_control": false,
+    "synthetic_audio": true,
+    "new_file": true
+  },
+  "existing_services_restarted": false,
+  "customer_data_used": false
+}

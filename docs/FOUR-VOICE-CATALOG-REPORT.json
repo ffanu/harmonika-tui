@@ -1,0 +1,49 @@
+{
+  "approved_voices": [
+    "Wanita 1",
+    "Wanita 2",
+    "Pria 1",
+    "Pria 2"
+  ],
+  "additional_voice_tests": [
+    {
+      "ok": true,
+      "status": "ok",
+      "provider": "Harmonika Ai",
+      "output_file": "/Users/id/Downloads/harmonika-ai/audio/harmonika-wanita-2-promosi-ceria.wav",
+      "bytes": 610194,
+      "sha256": "738182364bc2d0adf96bcd145e5cdef070ef41ee2a71fa205e76f279a750c298",
+      "duration_seconds": 6.917,
+      "language": "id",
+      "voice_quality": "neural_synthetic",
+      "voice": "wanita-2",
+      "style": "promosi_ceria",
+      "native_emotion_control": false,
+      "synthetic_audio": true,
+      "disclosure": "Suara sintetis dibuat oleh Harmonika Ai.",
+      "mime_type": "audio/wav",
+      "wav_decode_verified": true
+    },
+    {
+      "ok": true,
+      "status": "ok",
+      "provider": "Harmonika Ai",
+      "output_file": "/Users/id/Downloads/harmonika-ai/audio/harmonika-pria-2-promosi-ceria.wav",
+      "bytes": 628626,
+      "sha256": "0415e8828f58dd5b9ca50934316fa409b85e402d2ad18863cf6dae660f3a0aac",
+      "duration_seconds": 7.126,
+      "language": "id",
+      "voice_quality": "neural_synthetic",
+      "voice": "pria-2",
+      "style": "promosi_ceria",
+      "native_emotion_control": false,
+      "synthetic_audio": true,
+      "disclosure": "Suara sintetis dibuat oleh Harmonika Ai.",
+      "mime_type": "audio/wav",
+      "wav_decode_verified": true
+    }
+  ],
+  "tool_budget_unchanged": 31,
+  "existing_services_restarted": false,
+  "customer_data_used": false
+}

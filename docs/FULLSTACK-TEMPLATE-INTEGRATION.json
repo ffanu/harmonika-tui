@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-27",
+  "status": "active_template_generation_verified",
+  "staging": {
+    "stage": "/opt/harmonika-ai/fullstack-template-stage-7f0803eb2a",
+    "staged_http_auto_build": true,
+    "private_zip_verified": true,
+    "cross_tenant_denied": true,
+    "project_files": 74,
+    "upstream_installers_executed": false,
+    "port_3000_used": false,
+    "dependencies_installed": false,
+    "nextjs_build_executed": false,
+    "production_activated": false
+  },
+  "local_tests": {
+    "run": 165,
+    "passed": 149,
+    "skipped": 16,
+    "failed": 0
+  },
+  "new_focused_tests": 5,
+  "real_tcp_port_allocation_tested": true,
+  "source_archive_sha256": "c41039da4901e04b34ab91cd1ef9e2e1b47bbe119ec535ebfe67bfae6e6287ae",
+  "activation_script": "scripts/activate-fullstack-template.py",
+  "pending": [
+    "Actual dependency installation, Next.js production build and app-specific tests",
+    "Domain/TLS provisioning when an actual project and domain are selected"
+  ],
+  "production_gateway_or_existing_services_changed": "Only harmonika-web-builder.service restarted; gateway/AI/master PIDs unchanged",
+  "server_staging_tests": {
+    "template": 5,
+    "http": 6,
+    "core": 10,
+    "passed": 21,
+    "skipped": 0,
+    "failed": 0
+  },
+  "activation_preflight": {
+    "passed": true,
+    "active_builder_jobs": 0,
+    "activation_requested": false
+  },
+  "activation": {
+    "stage": "/opt/harmonika-ai/fullstack-template-stage-7f0803eb2a",
+    "preflight_passed": true,
+    "active_jobs": 0,
+    "activation_requested": true,
+    "only_service": "harmonika-web-builder.service",
+    "activated": true,
+    "backup": "/var/backups/harmonika-fullstack-template/1793062463043263445",
+    "template_build_verified": false,
+    "unrelated_service_pids_unchanged": true,
+    "user_explicit_restart_approval": true
+  },
+  "live_verification": {
+    "public_api": "https://chat.harmonika.id/v1/builder",
+    "installed_tui_helper_used": true,
+    "live_schema_verified": true,
+    "auto_nextjs_template_verified": true,
+    "job_completed": true,
+    "zip_verified": true,
+    "files": 74,
+    "upstream_installers_executed": false,
+    "port_3000_used": false,
+    "framework_build_executed": false,
+    "owned_test_project_removed": true
+  }
+}

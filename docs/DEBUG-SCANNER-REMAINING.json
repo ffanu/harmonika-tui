@@ -1,0 +1,2879 @@
+{
+  "source_sha256": "0d274c40408e9a6c2a864807104cb88c76c448e1b67e9918c7383996a45270d3",
+  "unavailable": [
+    {
+      "number": 7,
+      "operation": "target.source.access",
+      "description": "Akses source code (kalau ada)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      },
+      "id": "debug_scan.target.source.access",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 8,
+      "operation": "target.binary.analyze",
+      "description": "Analyze binary (kalau tidak ada source)",
+      "layer": {
+        "number": 1,
+        "name": "TARGET CLASSIFIER"
+      },
+      "id": "debug_scan.target.binary.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 15,
+      "operation": "sast.symbolic.exec",
+      "description": "Symbolic execution",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      },
+      "id": "debug_scan.sast.symbolic.exec",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 22,
+      "operation": "sast.versions.diff",
+      "description": "Diff antar versi (git blame)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      },
+      "id": "debug_scan.sast.versions.diff",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 23,
+      "operation": "sast.commit.history",
+      "description": "Commit history analysis",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      },
+      "id": "debug_scan.sast.commit.history",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 25,
+      "operation": "sast.type.check",
+      "description": "Type check (mypy, tsc, pyright)",
+      "layer": {
+        "number": 2,
+        "name": "STATIC ANALYSIS (SAST)"
+      },
+      "id": "debug_scan.sast.type.check",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 27,
+      "operation": "dast.debug.attach",
+      "description": "Attach debugger ke process",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.debug.attach",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 28,
+      "operation": "dast.breakpoint.set",
+      "description": "Set breakpoint strategis",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.breakpoint.set",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 29,
+      "operation": "dast.step.trace",
+      "description": "Step-by-step trace execution",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.step.trace",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 30,
+      "operation": "dast.memory.inspect",
+      "description": "Inspect memory state",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.memory.inspect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 31,
+      "operation": "dast.var.watch",
+      "description": "Watch variable changes",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.var.watch",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 32,
+      "operation": "dast.call.stack",
+      "description": "Capture call stack",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.call.stack",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 33,
+      "operation": "dast.profile.cpu",
+      "description": "CPU profiling",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.profile.cpu",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 34,
+      "operation": "dast.profile.memory",
+      "description": "Memory profiling (leak detect)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.profile.memory",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 35,
+      "operation": "dast.profile.io",
+      "description": "I/O profiling",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.profile.io",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 36,
+      "operation": "dast.trace.system",
+      "description": "System call tracing (strace)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.trace.system",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 37,
+      "operation": "dast.trace.network",
+      "description": "Network packet capture",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.trace.network",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 38,
+      "operation": "dast.trace.file",
+      "description": "File access trace",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.trace.file",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 39,
+      "operation": "dast.fuzz.input",
+      "description": "Fuzz testing (input mutation)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.fuzz.input",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 40,
+      "operation": "dast.load.test",
+      "description": "Load testing (reproduce perf bug)",
+      "layer": {
+        "number": 3,
+        "name": "DYNAMIC ANALYSIS (DAST)"
+      },
+      "id": "debug_scan.dast.load.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 43,
+      "operation": "web.frontend.render.bug",
+      "description": "Scan render bug (CSS, layout)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.frontend.render.bug",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 46,
+      "operation": "web.frontend.memory.leak",
+      "description": "Scan memory leak (browser)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.frontend.memory.leak",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 47,
+      "operation": "web.frontend.performance",
+      "description": "Scan frontend performance (Lighthouse)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.frontend.performance",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 48,
+      "operation": "web.frontend.accessibility",
+      "description": "Scan accessibility (WCAG)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.frontend.accessibility",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 50,
+      "operation": "web.backend.slow.query",
+      "description": "Scan slow query (DB)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.backend.slow.query",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 51,
+      "operation": "web.backend.deadlock",
+      "description": "Scan deadlock",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.backend.deadlock",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 52,
+      "operation": "web.backend.connection.leak",
+      "description": "Scan connection leak (DB, HTTP)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.backend.connection.leak",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 53,
+      "operation": "web.backend.memory.leak",
+      "description": "Scan memory leak (server)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.backend.memory.leak",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 54,
+      "operation": "web.backend.cpu.spike",
+      "description": "Scan CPU spike",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.backend.cpu.spike",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 55,
+      "operation": "web.backend.crash",
+      "description": "Scan crash (segfault, OOM)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.backend.crash",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 57,
+      "operation": "web.api.rate.limit",
+      "description": "Scan rate limit issue",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.api.rate.limit",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 58,
+      "operation": "web.api.authentication",
+      "description": "Scan authentication bug",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.api.authentication",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 59,
+      "operation": "web.api.authorization",
+      "description": "Scan authorization bug (IDOR)",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.api.authorization",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 60,
+      "operation": "web.api.validation",
+      "description": "Scan input validation bug",
+      "layer": {
+        "number": 4,
+        "name": "WEB BUG SCANNER"
+      },
+      "id": "debug_scan.web.api.validation",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 61,
+      "operation": "mobile.android.scan",
+      "description": "Scan Android APK (static + dynamic)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.android.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 62,
+      "operation": "mobile.android.crash",
+      "description": "Scan crash (logcat, ANR)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.android.crash",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 63,
+      "operation": "mobile.android.memory",
+      "description": "Scan memory leak (LeakCanary)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.android.memory",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 64,
+      "operation": "mobile.android.battery",
+      "description": "Scan battery drain",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.android.battery",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 65,
+      "operation": "mobile.android.network",
+      "description": "Scan network usage",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.android.network",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 66,
+      "operation": "mobile.android.permission",
+      "description": "Scan permission issue",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.android.permission",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 67,
+      "operation": "mobile.ios.scan",
+      "description": "Scan iOS IPA",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.ios.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 68,
+      "operation": "mobile.ios.crash",
+      "description": "Scan crash (crash log)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.ios.crash",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 69,
+      "operation": "mobile.ios.memory",
+      "description": "Scan memory leak (Instruments)",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.ios.memory",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 70,
+      "operation": "mobile.ios.battery",
+      "description": "Scan battery drain",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.ios.battery",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 71,
+      "operation": "mobile.ui.render",
+      "description": "Scan UI render bug",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.ui.render",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 72,
+      "operation": "mobile.ui.responsive",
+      "description": "Scan responsive issue",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.ui.responsive",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 73,
+      "operation": "mobile.network.offline",
+      "description": "Scan offline handling",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.network.offline",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 74,
+      "operation": "mobile.storage.corrupt",
+      "description": "Scan storage corruption",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.storage.corrupt",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 75,
+      "operation": "mobile.push.notif",
+      "description": "Scan push notification bug",
+      "layer": {
+        "number": 5,
+        "name": "MOBILE BUG SCANNER"
+      },
+      "id": "debug_scan.mobile.push.notif",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 76,
+      "operation": "desktop.windows.scan",
+      "description": "Scan Windows app (EXE)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.windows.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 77,
+      "operation": "desktop.windows.crash",
+      "description": "Scan crash (BSOD, event log)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.windows.crash",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 78,
+      "operation": "desktop.windows.registry",
+      "description": "Scan registry issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.windows.registry",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 79,
+      "operation": "desktop.macos.scan",
+      "description": "Scan macOS app",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.macos.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 80,
+      "operation": "desktop.macos.crash",
+      "description": "Scan crash (crash report)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.macos.crash",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 81,
+      "operation": "desktop.linux.scan",
+      "description": "Scan Linux app",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.linux.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 82,
+      "operation": "desktop.linux.core.dump",
+      "description": "Analyze core dump",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.linux.core.dump",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 83,
+      "operation": "desktop.memory.leak",
+      "description": "Scan memory leak (Valgrind)",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.memory.leak",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 84,
+      "operation": "desktop.cpu.usage",
+      "description": "Scan CPU usage issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.cpu.usage",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 85,
+      "operation": "desktop.disk.usage",
+      "description": "Scan disk usage issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.disk.usage",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 86,
+      "operation": "desktop.gpu.driver",
+      "description": "Scan GPU driver issue",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.gpu.driver",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 87,
+      "operation": "desktop.compat.os",
+      "description": "Scan OS compatibility",
+      "layer": {
+        "number": 6,
+        "name": "DESKTOP BUG SCANNER"
+      },
+      "id": "debug_scan.desktop.compat.os",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 88,
+      "operation": "iot.firmware.scan",
+      "description": "Scan firmware (binary analysis)",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.firmware.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 89,
+      "operation": "iot.firmware.extract",
+      "description": "Extract filesystem dari firmware",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.firmware.extract",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 90,
+      "operation": "iot.network.scan",
+      "description": "Scan IoT device di network",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.network.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 91,
+      "operation": "iot.protocol.analyze",
+      "description": "Analyze protocol (MQTT, CoAP, Zigbee)",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.protocol.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 92,
+      "operation": "iot.credential.check",
+      "description": "Check default credential",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.credential.check",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 93,
+      "operation": "iot.update.mechanism",
+      "description": "Check OTA update security",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.update.mechanism",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 94,
+      "operation": "iot.privacy.data",
+      "description": "Check privacy data handling",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.privacy.data",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 95,
+      "operation": "iot.physical.security",
+      "description": "Check physical security (UART, JTAG)",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.physical.security",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 96,
+      "operation": "iot.cloud.connect",
+      "description": "Check cloud connectivity",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.cloud.connect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 97,
+      "operation": "iot.resource.constraint",
+      "description": "Check resource constraint issue",
+      "layer": {
+        "number": 7,
+        "name": "IOT DEVICE BUG SCANNER"
+      },
+      "id": "debug_scan.iot.resource.constraint",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 98,
+      "operation": "net.latency.high",
+      "description": "Scan high latency",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.latency.high",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 99,
+      "operation": "net.packet.loss",
+      "description": "Scan packet loss",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.packet.loss",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 100,
+      "operation": "net.bandwidth.bottleneck",
+      "description": "Scan bandwidth bottleneck",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.bandwidth.bottleneck",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 101,
+      "operation": "net.dns.issue",
+      "description": "Scan DNS issue",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.dns.issue",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 102,
+      "operation": "net.routing.loop",
+      "description": "Scan routing loop",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.routing.loop",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 103,
+      "operation": "net.firewall.misconfig",
+      "description": "Scan firewall misconfiguration",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.firewall.misconfig",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 104,
+      "operation": "net.vpn.issue",
+      "description": "Scan VPN issue",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.vpn.issue",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 105,
+      "operation": "net.load.balancer",
+      "description": "Scan load balancer bug",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.load.balancer",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 106,
+      "operation": "net.cdn.cache",
+      "description": "Scan CDN cache issue",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.cdn.cache",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 107,
+      "operation": "net.ddos.detect",
+      "description": "Detect DDoS attack",
+      "layer": {
+        "number": 8,
+        "name": "NETWORK BUG SCANNER"
+      },
+      "id": "debug_scan.net.ddos.detect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 109,
+      "operation": "perf.high.cpu",
+      "description": "Scan high CPU usage",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.high.cpu",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 110,
+      "operation": "perf.high.memory",
+      "description": "Scan high memory usage",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.high.memory",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 111,
+      "operation": "perf.db.slow.query",
+      "description": "Scan slow database query",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.db.slow.query",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 112,
+      "operation": "perf.n.plus.one",
+      "description": "Scan N+1 query problem",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.n.plus.one",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 113,
+      "operation": "perf.cache.miss",
+      "description": "Scan cache miss issue",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.cache.miss",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 114,
+      "operation": "perf.gc.frequent",
+      "description": "Scan frequent garbage collection",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.gc.frequent",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 115,
+      "operation": "perf.thread.contention",
+      "description": "Scan thread contention",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.thread.contention",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 116,
+      "operation": "perf.io.bottleneck",
+      "description": "Scan I/O bottleneck",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.io.bottleneck",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 117,
+      "operation": "perf.network.bottleneck",
+      "description": "Scan network bottleneck",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.network.bottleneck",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 118,
+      "operation": "perf.frontend.blocking",
+      "description": "Scan frontend render blocking",
+      "layer": {
+        "number": 9,
+        "name": "PERFORMANCE BUG SCANNER"
+      },
+      "id": "debug_scan.perf.frontend.blocking",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 120,
+      "operation": "logic.business.rule",
+      "description": "Scan business rule violation",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      },
+      "id": "debug_scan.logic.business.rule",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 126,
+      "operation": "logic.validation.bypass",
+      "description": "Scan validation bypass",
+      "layer": {
+        "number": 10,
+        "name": "LOGIC BUG SCANNER"
+      },
+      "id": "debug_scan.logic.validation.bypass",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 130,
+      "operation": "uiux.visual.glitch",
+      "description": "Scan visual glitch",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.visual.glitch",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 131,
+      "operation": "uiux.layout.break",
+      "description": "Scan layout break",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.layout.break",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 133,
+      "operation": "uiux.cross.browser",
+      "description": "Scan cross-browser issue",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.cross.browser",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 136,
+      "operation": "uiux.font.render",
+      "description": "Scan font rendering issue",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.font.render",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 137,
+      "operation": "uiux.animation.glitch",
+      "description": "Scan animation glitch",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.animation.glitch",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 138,
+      "operation": "uiux.form.validation",
+      "description": "Scan form validation UX",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.form.validation",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 139,
+      "operation": "uiux.user.flow.friction",
+      "description": "Scan user flow friction",
+      "layer": {
+        "number": 11,
+        "name": "UI/UX BUG SCANNER"
+      },
+      "id": "debug_scan.uiux.user.flow.friction",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 143,
+      "operation": "sec.csrf.test",
+      "description": "CSRF testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.csrf.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 144,
+      "operation": "sec.ssrf.test",
+      "description": "SSRF testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.ssrf.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 145,
+      "operation": "sec.xxe.test",
+      "description": "XXE testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.xxe.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 146,
+      "operation": "sec.idor.test",
+      "description": "IDOR / BOLA testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.idor.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 147,
+      "operation": "sec.auth.bypass",
+      "description": "Authentication bypass testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.auth.bypass",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 149,
+      "operation": "sec.file.upload",
+      "description": "File upload vulnerability testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.file.upload",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 150,
+      "operation": "sec.lfi.rfi",
+      "description": "LFI/RFI testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.lfi.rfi",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 152,
+      "operation": "sec.business.logic",
+      "description": "Business logic flaws",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.business.logic",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 153,
+      "operation": "sec.api.fuzz",
+      "description": "API fuzzing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.api.fuzz",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 154,
+      "operation": "sec.graphql.test",
+      "description": "GraphQL security testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.graphql.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 155,
+      "operation": "sec.websocket.test",
+      "description": "WebSocket security testing",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.websocket.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 157,
+      "operation": "sec.csp.bypass",
+      "description": "CSP bypass test",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.csp.bypass",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 160,
+      "operation": "sec.dependency.scan",
+      "description": "Dependency vulnerability (Snyk)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.dependency.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 162,
+      "operation": "sec.container.scan",
+      "description": "Container security (Trivy)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.container.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 163,
+      "operation": "sec.infrastructure.scan",
+      "description": "Infrastructure security (tfsec)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.infrastructure.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 164,
+      "operation": "sec.compliance.check",
+      "description": "Compliance check (PCI, HIPAA, SOC2)",
+      "layer": {
+        "number": 12,
+        "name": "SECURITY VULNERABILITY SCANNER"
+      },
+      "id": "debug_scan.sec.compliance.check",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 165,
+      "operation": "crash.dump.analyze",
+      "description": "Analyze crash dump (.dmp, core)",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.crash.dump.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 166,
+      "operation": "crash.stack.unwind",
+      "description": "Stack unwinding",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.crash.stack.unwind",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 167,
+      "operation": "crash.frame.analyze",
+      "description": "Frame analysis",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.crash.frame.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 168,
+      "operation": "memory.leak.detect",
+      "description": "Memory leak detection",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.memory.leak.detect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 169,
+      "operation": "memory.corruption.find",
+      "description": "Memory corruption (buffer overflow, UAF)",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.memory.corruption.find",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 170,
+      "operation": "memory.heap.inspect",
+      "description": "Heap inspection",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.memory.heap.inspect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 171,
+      "operation": "memory.stack.inspect",
+      "description": "Stack inspection",
+      "layer": {
+        "number": 13,
+        "name": "MEMORY & CRASH ANALYZER"
+      },
+      "id": "debug_scan.memory.stack.inspect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 177,
+      "operation": "evidence.memory.dump",
+      "description": "Memory dump (core dump)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.memory.dump",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 178,
+      "operation": "evidence.network.capture",
+      "description": "Network capture (pcap)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.network.capture",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 179,
+      "operation": "evidence.disk.snapshot",
+      "description": "Disk snapshot",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.disk.snapshot",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 180,
+      "operation": "evidence.process.snapshot",
+      "description": "Process state snapshot",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.process.snapshot",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 181,
+      "operation": "evidence.config.capture",
+      "description": "Config state capture",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.config.capture",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 182,
+      "operation": "evidence.env.capture",
+      "description": "Environment variables capture",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.env.capture",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 185,
+      "operation": "evidence.chain.custody",
+      "description": "Chain of custody (legal-grade)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.chain.custody",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 186,
+      "operation": "evidence.store.secure",
+      "description": "Store evidence securely (immutable)",
+      "layer": {
+        "number": 14,
+        "name": "EVIDENCE COLLECTOR"
+      },
+      "id": "debug_scan.evidence.store.secure",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 188,
+      "operation": "rca.fault.tree",
+      "description": "Fault tree analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.fault.tree",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 189,
+      "operation": "rca.fishbone",
+      "description": "Fishbone (Ishikawa) diagram",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.fishbone",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 190,
+      "operation": "rca.cause.effect",
+      "description": "Cause-effect mapping",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.cause.effect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 192,
+      "operation": "rca.contributing.factor",
+      "description": "Identify contributing factors",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.contributing.factor",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 193,
+      "operation": "rca.timing.analyze",
+      "description": "Timing analysis (when did it start)",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.timing.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 194,
+      "operation": "rca.change.analyze",
+      "description": "What changed recently (git diff)",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.change.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 195,
+      "operation": "rca.environment.analyze",
+      "description": "Environment factor analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.environment.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 196,
+      "operation": "rca.human.factor",
+      "description": "Human error analysis",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.human.factor",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 197,
+      "operation": "rca.upstream.dependency",
+      "description": "Upstream dependency check",
+      "layer": {
+        "number": 15,
+        "name": "ROOT CAUSE ANALYZER"
+      },
+      "id": "debug_scan.rca.upstream.dependency",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 199,
+      "operation": "solution.options.generate",
+      "description": "Generate 2-3 fix options",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.options.generate",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 200,
+      "operation": "solution.risk.assess",
+      "description": "Risk assessment per option",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.risk.assess",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 201,
+      "operation": "solution.blast.radius",
+      "description": "Blast radius analysis",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.blast.radius",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 202,
+      "operation": "solution.cost.benefit",
+      "description": "Cost-benefit analysis",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.cost.benefit",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 203,
+      "operation": "solution.recommend.safest",
+      "description": "Recommend safest option",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.recommend.safest",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 204,
+      "operation": "solution.alternative.if.fail",
+      "description": "Backup plan if fix fails",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.alternative.if.fail",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 205,
+      "operation": "solution.escalate.if.uncertain",
+      "description": "Escalate if uncertain",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.escalate.if.uncertain",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 206,
+      "operation": "solution.peer.review",
+      "description": "Request peer review (human)",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.peer.review",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 207,
+      "operation": "solution.document.rationale",
+      "description": "Document decision rationale",
+      "layer": {
+        "number": 16,
+        "name": "SOLUTION PROPOSER"
+      },
+      "id": "debug_scan.solution.document.rationale",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 209,
+      "operation": "fix.backup.create",
+      "description": "Backup target (snapshot/git)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.backup.create",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 210,
+      "operation": "fix.staging.apply",
+      "description": "Apply di STAGING (never prod langsung)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.staging.apply",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 211,
+      "operation": "fix.test.regression",
+      "description": "Run regression test",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.test.regression",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 212,
+      "operation": "fix.test.unit",
+      "description": "Run unit test",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.test.unit",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 213,
+      "operation": "fix.test.integration",
+      "description": "Run integration test",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.test.integration",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 214,
+      "operation": "fix.verify.solution",
+      "description": "Verify fix solves problem",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.verify.solution",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 215,
+      "operation": "fix.verify.no.regression",
+      "description": "Verify no new bug introduced",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.verify.no.regression",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 216,
+      "operation": "fix.rollback.plan",
+      "description": "Prepare rollback plan",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.rollback.plan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 217,
+      "operation": "fix.production.deploy",
+      "description": "Deploy ke production (after staging pass)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.production.deploy",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 218,
+      "operation": "fix.monitor.post",
+      "description": "Monitor post-deploy (24h)",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.monitor.post",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 219,
+      "operation": "fix.alert.anomaly",
+      "description": "Alert if anomaly post-deploy",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.alert.anomaly",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 220,
+      "operation": "fix.rollback.execute",
+      "description": "Execute rollback if needed",
+      "layer": {
+        "number": 17,
+        "name": "SAFE FIX EXECUTOR"
+      },
+      "id": "debug_scan.fix.rollback.execute",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 221,
+      "operation": "verify.reproduce.original",
+      "description": "Reproduce original bug (should fail now)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.reproduce.original",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 222,
+      "operation": "verify.reproduce.fixed",
+      "description": "Reproduce with fix (should pass now)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.reproduce.fixed",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 223,
+      "operation": "verify.edge.case",
+      "description": "Test edge cases",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.edge.case",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 224,
+      "operation": "verify.load.test",
+      "description": "Load test (no perf regression)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.load.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 225,
+      "operation": "verify.security.test",
+      "description": "Security test (no new vuln)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.security.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 226,
+      "operation": "verify.code.review",
+      "description": "Code review by peer/human",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.code.review",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 227,
+      "operation": "verify.user.acceptance",
+      "description": "User acceptance test (UAT)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.user.acceptance",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 228,
+      "operation": "verify.smoke.test",
+      "description": "Smoke test production",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.smoke.test",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 229,
+      "operation": "verify.canary.deploy",
+      "description": "Canary deploy (5% traffic dulu)",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.canary.deploy",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 230,
+      "operation": "verify.full.pass",
+      "description": "Full verification pass",
+      "layer": {
+        "number": 18,
+        "name": "VERIFICATION & VALIDATION"
+      },
+      "id": "debug_scan.verify.full.pass",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 231,
+      "operation": "audit.log.action",
+      "description": "Log semua aksi (append-only)",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.log.action",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 232,
+      "operation": "audit.log.decision",
+      "description": "Log semua decision + rationale",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.log.decision",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 233,
+      "operation": "audit.log.evidence",
+      "description": "Log evidence reference",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.log.evidence",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 234,
+      "operation": "audit.log.change",
+      "description": "Log semua perubahan",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.log.change",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 235,
+      "operation": "audit.log.access",
+      "description": "Log semua akses ke system",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.log.access",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 239,
+      "operation": "audit.report.lessons",
+      "description": "Lessons learned report",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.report.lessons",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 240,
+      "operation": "audit.timeline.reconstruct",
+      "description": "Reconstruct full timeline",
+      "layer": {
+        "number": 19,
+        "name": "AUDIT LOG & REPORTING"
+      },
+      "id": "debug_scan.audit.timeline.reconstruct",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 241,
+      "operation": "escalate.confidence.low",
+      "description": "Escalate: confidence < 80%",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.confidence.low",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 242,
+      "operation": "escalate.critical.severity",
+      "description": "Escalate: critical severity",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.critical.severity",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 243,
+      "operation": "escalate.production.risk",
+      "description": "Escalate: risk ke production",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.production.risk",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 244,
+      "operation": "escalate.complex.root.cause",
+      "description": "Escalate: root cause kompleks",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.complex.root.cause",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 245,
+      "operation": "escalate.no.evidence",
+      "description": "Escalate: tidak ada cukup evidence",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.no.evidence",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 246,
+      "operation": "escalate.context.transfer",
+      "description": "Transfer context ke human",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.context.transfer",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 247,
+      "operation": "escalate.summary.generate",
+      "description": "Generate summary untuk human",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.summary.generate",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 248,
+      "operation": "escalate.wait.human",
+      "description": "Wait for human confirmation",
+      "layer": {
+        "number": 20,
+        "name": "ESCALATION & HUMAN HANDOFF"
+      },
+      "id": "debug_scan.escalate.wait.human",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 249,
+      "operation": "kb.bug.pattern.search",
+      "description": "Search bug pattern (similar issue)",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.bug.pattern.search",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 250,
+      "operation": "kb.solution.search",
+      "description": "Search solution database",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.solution.search",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 251,
+      "operation": "kb.postmortem.search",
+      "description": "Search postmortem reports",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.postmortem.search",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 252,
+      "operation": "kb.runbook.search",
+      "description": "Search runbook (SOP)",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.runbook.search",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 253,
+      "operation": "kb.convention.search",
+      "description": "Search coding convention",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.convention.search",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 254,
+      "operation": "kb.history.search",
+      "description": "Search historical fix",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.history.search",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 255,
+      "operation": "kb.learn.from.fix",
+      "description": "Learn from fix (update KB)",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.learn.from.fix",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 256,
+      "operation": "kb.share.organization",
+      "description": "Share knowledge ke org",
+      "layer": {
+        "number": 21,
+        "name": "KNOWLEDGE BASE"
+      },
+      "id": "debug_scan.kb.share.organization",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 258,
+      "operation": "monitor.anomaly.detect",
+      "description": "Anomaly detection",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      },
+      "id": "debug_scan.monitor.anomaly.detect",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 259,
+      "operation": "monitor.threshold.alert",
+      "description": "Threshold-based alert",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      },
+      "id": "debug_scan.monitor.threshold.alert",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 260,
+      "operation": "monitor.trend.analyze",
+      "description": "Trend analysis",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      },
+      "id": "debug_scan.monitor.trend.analyze",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 262,
+      "operation": "monitor.uptime.track",
+      "description": "Uptime tracking",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      },
+      "id": "debug_scan.monitor.uptime.track",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 263,
+      "operation": "monitor.slo.track",
+      "description": "SLO tracking",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      },
+      "id": "debug_scan.monitor.slo.track",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 264,
+      "operation": "monitor.incident.auto",
+      "description": "Auto-incident declaration",
+      "layer": {
+        "number": 22,
+        "name": "MONITORING & EARLY WARNING"
+      },
+      "id": "debug_scan.monitor.incident.auto",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 265,
+      "operation": "cicd.scan.on.commit",
+      "description": "Scan on every git commit",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.scan.on.commit",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 266,
+      "operation": "cicd.scan.on.pr",
+      "description": "Scan on pull request",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.scan.on.pr",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 267,
+      "operation": "cicd.scan.on.deploy",
+      "description": "Scan before deploy",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.scan.on.deploy",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 268,
+      "operation": "cicd.scan.scheduled",
+      "description": "Scheduled scan (daily, weekly)",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.scan.scheduled",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 270,
+      "operation": "cicd.report.to.pr",
+      "description": "Report hasil scan ke PR comment",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.report.to.pr",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 271,
+      "operation": "cicd.badge.generate",
+      "description": "Generate quality badge",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.badge.generate",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 272,
+      "operation": "cicd.notify.slack",
+      "description": "Notify ke Slack kalau ada bug",
+      "layer": {
+        "number": 23,
+        "name": "CI/CD INTEGRATION"
+      },
+      "id": "debug_scan.cicd.notify.slack",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 275,
+      "operation": "lang.java.scan",
+      "description": "Scan Java",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.java.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 276,
+      "operation": "lang.csharp.scan",
+      "description": "Scan C#",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.csharp.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 277,
+      "operation": "lang.go.scan",
+      "description": "Scan Go",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.go.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 278,
+      "operation": "lang.rust.scan",
+      "description": "Scan Rust",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.rust.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 279,
+      "operation": "lang.php.scan",
+      "description": "Scan PHP",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.php.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 280,
+      "operation": "lang.ruby.scan",
+      "description": "Scan Ruby",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.ruby.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 281,
+      "operation": "lang.swift.scan",
+      "description": "Scan Swift",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.swift.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 282,
+      "operation": "lang.kotlin.scan",
+      "description": "Scan Kotlin",
+      "layer": {
+        "number": 24,
+        "name": "MULTI-LANGUAGE SUPPORT"
+      },
+      "id": "debug_scan.lang.kotlin.scan",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 285,
+      "operation": "ethics.data.privacy",
+      "description": "Privacy data target",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      },
+      "id": "debug_scan.ethics.data.privacy",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 286,
+      "operation": "ethics.responsible.disclosure",
+      "description": "Responsible disclosure (kalau find vuln)",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      },
+      "id": "debug_scan.ethics.responsible.disclosure",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "implementation_missing"
+    },
+    {
+      "number": 287,
+      "operation": "compliance.gdpr",
+      "description": "GDPR compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      },
+      "id": "debug_scan.compliance.gdpr",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 288,
+      "operation": "compliance.pci.dss",
+      "description": "PCI-DSS compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      },
+      "id": "debug_scan.compliance.pci.dss",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 289,
+      "operation": "compliance.hipaa",
+      "description": "HIPAA compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      },
+      "id": "debug_scan.compliance.hipaa",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    },
+    {
+      "number": 290,
+      "operation": "compliance.soc2",
+      "description": "SOC 2 compliance",
+      "layer": {
+        "number": 25,
+        "name": "COMPLIANCE & ETHICS"
+      },
+      "id": "debug_scan.compliance.soc2",
+      "status": "unavailable",
+      "mode": null,
+      "reason": "registered_runtime_or_toolchain_required"
+    }
+  ],
+  "count": 221
+}

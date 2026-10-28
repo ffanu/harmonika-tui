@@ -9,6 +9,16 @@ MODEL='black-forest-labs/FLUX.2-klein-4B'
 COMFY='http://127.0.0.1:18190'
 PROMPT_LIMIT=12000
 
+class RenderFailure(Exception):
+    def __init__(self,code):self.code=code;super().__init__(code)
+
+def comfy_failure(history):
+    for item in history.get('status',{}).get('messages',[]):
+        if isinstance(item,(list,tuple)) and len(item)==2 and item[0]=='execution_error' and isinstance(item[1],dict):
+            kind=item[1].get('exception_type')
+            if isinstance(kind,str) and kind.rsplit('.',1)[-1] in {'OutOfMemoryError','CUDAOutOfMemoryError'}:return 'gpu_memory_full'
+    return 'image_render_failed'
+
 def workflow(prompt,width,height,seed,prefix):
     return {
       '1':{'class_type':'UNETLoader','inputs':{'unet_name':'flux-2-klein-4b-fp8.safetensors','weight_dtype':'default'}},
@@ -42,11 +52,40 @@ def validate(data):
     return prompt,width,height,seed
 
 class Worker:
-    def __init__(self,root=ROOT):self.root=root;self.session=None;self.active=False;self.tasks=set();self.approved=False;self.warmed=False;self.uncertain_pid=None
+    def __init__(self,root=ROOT):self.root=root;self.session=None;self.active=False;self.tasks=set();self.approved=False;self.warmed=False;self.uncertain_pid=None;self.last_failure=None;self.last_failure_time=0
     async def start(self,app):
         self.session=aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=15),trust_env=False,cookie_jar=aiohttp.DummyCookieJar())
         try:self.approved=json.loads((self.root/'approval.json').read_text()).get('approved') is True
         except (OSError,ValueError):pass
+        if self.approved:
+            task=asyncio.create_task(self.warmup());self.tasks.add(task)
+            task.add_done_callback(self.tasks.discard);task.add_done_callback(lambda t:t.exception() if not t.cancelled() else None)
+    def refresh_approval(self):
+        try:self.approved=json.loads((self.root/'approval.json').read_text()).get('approved') is True
+        except (OSError,ValueError):self.approved=False
+    async def warmup(self):
+        for attempt in range(90):
+            try:
+                stats=await self.request('GET','/system_stats')
+                if stats.get('devices'):break
+            except Exception:pass
+            await asyncio.sleep(2)
+        else:return
+        for attempt in range(3):
+            if self.uncertain_pid:
+                for _ in range(90):
+                    try:
+                        h=await self.request('GET','/history/'+self.uncertain_pid)
+                        if self.uncertain_pid in h:self.uncertain_pid=None;break
+                    except Exception:pass
+                    await asyncio.sleep(2)
+                if self.uncertain_pid:return
+            if self.active:return
+            self.active=True
+            try:
+                await self.render({'prompt':'A blue geometric sphere on a white background, high quality studio lighting','width':1024,'height':1024,'seed':20261025})
+                return
+            except Exception:await asyncio.sleep(3)
     async def stop(self,app):
         if self.tasks:await asyncio.gather(*self.tasks,return_exceptions=True)
         await self.session.close()
@@ -57,11 +96,16 @@ class Worker:
             if len(data)>8*1024*1024:raise ValueError('comfy_response_limit')
             return json.loads(data)
     async def health(self,req):
-        ready=False
+        self.refresh_approval()
+        ready=False;memory_full=False;comfy_busy=False
         try:
             v=await asyncio.wait_for(self.request('GET','/system_stats'),1.5)
-            ready=any(d.get('type')=='cuda' for d in v.get('devices',[]))
-        except Exception:pass
+            devices=[d for d in v.get('devices',[]) if d.get('type')=='cuda']
+            ready=bool(devices)
+            memory_full=any(type(d.get('vram_free')) is int and d['vram_free']<256*1024*1024 for d in devices)
+            q=await asyncio.wait_for(self.request('GET','/queue'),1)
+            comfy_busy=bool(q.get('queue_running') or q.get('queue_pending'))
+        except Exception:ready=False
         if self.uncertain_pid:
             try:
                 h=await asyncio.wait_for(self.request('GET','/history/'+self.uncertain_pid),1)
@@ -69,7 +113,7 @@ class Worker:
                     await asyncio.wait_for(self.request('POST','/history',json={'delete':[self.uncertain_pid]}),1)
                     self.uncertain_pid=None
             except Exception:pass
-        return web.json_response({'ok':ready and self.approved and not self.uncertain_pid,'model':MODEL,'device':'cuda','cuda':ready,'loaded':ready and self.warmed,'busy':self.active,'quality':'1024','approved':self.approved,'recovery_required':bool(self.uncertain_pid)})
+        return web.json_response({'ok':ready and self.approved and self.warmed and not self.uncertain_pid and not memory_full,'model':MODEL,'device':'cuda','cuda':ready,'loaded':ready and self.warmed,'busy':self.active or comfy_busy,'memory_full':memory_full,'quality':'1024','approved':self.approved,'recovery_required':bool(self.uncertain_pid)})
     async def render(self,data):
         prompt,width,height,seed=validate(data);prefix='harmonika-flux-'+secrets.token_hex(12)
         start=time.monotonic();pid=None
@@ -82,7 +126,7 @@ class Worker:
                     result=await self.request('GET','/history/'+pid)
                     if pid in result:
                         item=result[pid]
-                        if item.get('status',{}).get('status_str')=='error':raise ValueError('render_failed')
+                        if item.get('status',{}).get('status_str')=='error':raise RenderFailure(comfy_failure(item))
                         outputs=item.get('outputs',{}).get('13',{}).get('images',[])
                         if outputs:break
                     await asyncio.sleep(.3)
@@ -118,9 +162,10 @@ class Worker:
                 else:self.uncertain_pid=pid
             self.active=False
     async def generate(self,req):
+        self.refresh_approval()
         try:data=await req.json();validate(data)
         except Exception:return web.json_response({'ok':False,'error':'invalid_request'},status=422)
-        if not self.approved and req.headers.get('X-Harmonika-Qualification')!='local-test':return web.json_response({'ok':False,'error':'model_not_approved'},status=503)
+        if (not self.approved or not self.warmed) and req.headers.get('X-Harmonika-Qualification')!='local-test':return web.json_response({'ok':False,'error':'model_not_approved'},status=503)
         if self.uncertain_pid:return web.json_response({'ok':False,'error':'gpu_job_recovery_required'},status=503)
         if self.active:return web.json_response({'ok':False,'error':'worker_busy'},status=429)
         self.active=True;task=asyncio.create_task(self.render(data));self.tasks.add(task);task.add_done_callback(self.tasks.discard);task.add_done_callback(lambda t:t.exception() if not t.cancelled() else None)
@@ -131,14 +176,19 @@ class Worker:
                 await asyncio.wait([task],timeout=4)
                 if not task.done():await response.write(b' ')
             try:result=task.result()
-            except Exception:result={'ok':False,'error':'image_render_failed'}
+            except Exception as exc:
+                code=exc.code if isinstance(exc,RenderFailure) else 'render_timeout' if isinstance(exc,TimeoutError) else 'image_render_failed'
+                self.last_failure=code;self.last_failure_time=time.monotonic()
+                result={'ok':False,'error':code,'uncertain':bool(self.uncertain_pid),'retry_safe':not bool(self.uncertain_pid)}
             await response.write(json.dumps(result).encode());await response.write_eof()
         except (ConnectionError,asyncio.CancelledError):
             # Shielded inference remains in self.tasks and holds the admission gate.
             pass
         return response
 
+WORKER_KEY=web.AppKey('worker',Worker)
+
 def create_app(root=ROOT):
-    w=Worker(root);app=web.Application(client_max_size=32768);app.on_startup.append(w.start);app.on_cleanup.append(w.stop)
+    w=Worker(root);app=web.Application(client_max_size=32768);app[WORKER_KEY]=w;app.on_startup.append(w.start);app.on_cleanup.append(w.stop)
     app.router.add_get('/health',w.health);app.router.add_post('/generate',w.generate);return app
 if __name__=='__main__':web.run_app(create_app(),host='127.0.0.1',port=18191,access_log=None,print=None)

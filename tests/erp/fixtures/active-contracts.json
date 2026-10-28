@@ -1,0 +1,1321 @@
+{
+  "inventory.batch.tracking": {
+    "as_of": "2026-10-26",
+    "required": 5,
+    "batches": [
+      {
+        "id": "expired",
+        "expiry": "2026-10-26",
+        "quantity": 10
+      },
+      {
+        "id": "later",
+        "expiry": "2026-12-01",
+        "quantity": 10
+      },
+      {
+        "id": "sooner",
+        "expiry": "2026-11-01",
+        "quantity": 3
+      }
+    ]
+  },
+  "retail.promotion": {
+    "subtotal_minor": "1001",
+    "discount_bps": 5000,
+    "cap_minor": "300"
+  },
+  "pos.cash.management": {
+    "opening_minor": "100",
+    "cash_in_minor": "200",
+    "cash_out_minor": "50",
+    "counted_minor": "240"
+  },
+  "pos.transaction": {
+    "lines": [
+      {
+        "unit_minor": "100",
+        "quantity": 3
+      }
+    ],
+    "tax_bps": 0,
+    "tendered_minor": "500"
+  },
+  "mfg.production.costing": {
+    "materials": [
+      {
+        "quantity": 3,
+        "unit_minor": "100"
+      }
+    ],
+    "labor_minor": "1",
+    "overhead_minor": "0",
+    "units": 3
+  },
+  "crm.pipeline": {
+    "opportunities": [
+      {
+        "id": "a",
+        "stage": "QUALIFIED",
+        "value_minor": "1001",
+        "probability_bps": 5000
+      },
+      {
+        "id": "b",
+        "stage": "WON",
+        "value_minor": "200",
+        "probability_bps": 10000
+      }
+    ]
+  },
+  "crm.satisfaction.survey": {
+    "csat": [],
+    "nps": [
+      0,
+      1,
+      10
+    ]
+  },
+  "isp.billing.cycle": {
+    "start": "2026-12-31",
+    "frequency": "daily",
+    "count": 2
+  },
+  "pm.gantt.chart": {
+    "operations": [
+      {
+        "id": "<script>alert(1)</script>",
+        "duration_minutes": 5,
+        "predecessors": []
+      }
+    ]
+  },
+  "pm.issue.tracking": {
+    "as_of": "2026-10-26",
+    "issues": [
+      {
+        "id": "i",
+        "status": "RESOLVED",
+        "priority": "HIGH",
+        "opened_on": "2026-10-20",
+        "resolved_on": "2026-10-22",
+        "closed_on": null
+      }
+    ]
+  },
+  "pm.milestone": {
+    "as_of": "2026-10-26",
+    "tasks": [
+      {
+        "id": "t",
+        "status": "DONE"
+      }
+    ],
+    "milestones": [
+      {
+        "id": "m",
+        "status": "PENDING",
+        "due_on": "2026-10-25",
+        "task_ids": [
+          "t"
+        ]
+      }
+    ]
+  },
+  "mfg.mrp": {
+    "bom": [
+      {
+        "item": "A",
+        "components": [
+          {
+            "item": "B",
+            "quantity": 2
+          }
+        ]
+      },
+      {
+        "item": "B",
+        "components": [
+          {
+            "item": "C",
+            "quantity": 3
+          }
+        ]
+      }
+    ],
+    "demand": [
+      {
+        "item": "A",
+        "quantity": 5
+      }
+    ],
+    "stock": [
+      {
+        "item": "A",
+        "quantity": 1
+      },
+      {
+        "item": "B",
+        "quantity": 2
+      }
+    ]
+  },
+  "inventory.stock.opname": {
+    "rows": [
+      {
+        "item": "p",
+        "recorded": 10,
+        "counted": 8
+      }
+    ]
+  },
+  "pm.project.portfolio": {
+    "projects": []
+  },
+  "mfg.production.scheduling": {
+    "jobs": [
+      {
+        "id": "A",
+        "duration_minutes": 10,
+        "predecessors": [],
+        "work_center": "w",
+        "ready_minute": 0
+      },
+      {
+        "id": "B",
+        "duration_minutes": 5,
+        "predecessors": [],
+        "work_center": "w",
+        "ready_minute": 0
+      },
+      {
+        "id": "C",
+        "duration_minutes": 2,
+        "predecessors": [
+          "A",
+          "B"
+        ],
+        "work_center": "x",
+        "ready_minute": 0
+      }
+    ],
+    "work_centers": [
+      {
+        "id": "w",
+        "available_minute": 3
+      },
+      {
+        "id": "x",
+        "available_minute": 0
+      }
+    ]
+  },
+  "pm.project.billing": {
+    "entries": [
+      {
+        "id": "time1",
+        "seconds": 1800,
+        "rate_minor_per_hour": "1001"
+      }
+    ],
+    "tax_bps": 0
+  },
+  "pm.risk.management": {
+    "risks": [
+      {
+        "id": "a",
+        "probability_bps": 5000,
+        "impact_minor": "1001"
+      },
+      {
+        "id": "b",
+        "probability_bps": 10000,
+        "impact_minor": "900"
+      }
+    ]
+  },
+  "mfg.quality.control": {
+    "inspected": 10,
+    "accepted": 10,
+    "rejected": 0,
+    "criteria": [
+      {
+        "id": "width",
+        "unit": "mm_x100",
+        "value_scaled": 1000,
+        "minimum_scaled": 990,
+        "maximum_scaled": 1010
+      }
+    ]
+  },
+  "pm.resource.allocation": {
+    "resources": [
+      {
+        "id": "tech",
+        "capacity_units": 2
+      }
+    ],
+    "assignments": [
+      {
+        "id": "a",
+        "resource_id": "tech",
+        "start_minute": 0,
+        "end_minute": 10,
+        "units": 2
+      },
+      {
+        "id": "b",
+        "resource_id": "tech",
+        "start_minute": 5,
+        "end_minute": 20,
+        "units": 2
+      }
+    ]
+  },
+  "mfg.routing": {
+    "operations": [
+      {
+        "id": "A",
+        "duration_minutes": 5,
+        "predecessors": []
+      },
+      {
+        "id": "B",
+        "duration_minutes": 10,
+        "predecessors": [
+          "A"
+        ]
+      }
+    ]
+  },
+  "mfg.scrap.management": {
+    "issued_quantity": 100,
+    "good_quantity": 90,
+    "scrap_quantity": 5
+  },
+  "mfg.bom": {
+    "bom": [
+      {
+        "item": "A",
+        "components": [
+          {
+            "item": "C",
+            "quantity": 2
+          }
+        ]
+      },
+      {
+        "item": "B",
+        "components": [
+          {
+            "item": "C",
+            "quantity": 3
+          }
+        ]
+      }
+    ],
+    "demand": [
+      {
+        "item": "A",
+        "quantity": 1
+      },
+      {
+        "item": "B",
+        "quantity": 2
+      }
+    ],
+    "stock": [
+      {
+        "item": "C",
+        "quantity": 5
+      }
+    ]
+  },
+  "procurement.three.way.match": {
+    "purchase_order": [
+      {
+        "item": "p",
+        "quantity": 1,
+        "unit_minor": "100",
+        "currency": "IDR"
+      }
+    ],
+    "receipt": [
+      {
+        "item": "p",
+        "quantity": 1,
+        "unit_minor": "100",
+        "currency": "IDR"
+      }
+    ],
+    "invoice": [
+      {
+        "item": "p",
+        "quantity": 1,
+        "unit_minor": "100",
+        "currency": "IDR"
+      }
+    ]
+  },
+  "pm.time.tracking": {
+    "entries": [
+      {
+        "resource": "tech1",
+        "start": "2026-10-26T23:30:00+07:00",
+        "end": "2026-10-27T00:30:00+07:00"
+      }
+    ]
+  },
+  "finance.journal.entry": {
+    "lines": [
+      {
+        "account": "cash",
+        "debit_minor": "100",
+        "credit_minor": "0"
+      },
+      {
+        "account": "revenue",
+        "debit_minor": "0",
+        "credit_minor": "100"
+      }
+    ]
+  },
+  "finance.invoice": {
+    "lines": [
+      {
+        "unit_minor": "100000000000000001",
+        "quantity": 2
+      }
+    ],
+    "tax_bps": 0
+  },
+  "report.export.excel": {
+    "title": "R&D <Harmonika>",
+    "headers": [
+      "ID",
+      "Note"
+    ],
+    "rows": [
+      [
+        "000123",
+        "=HYPERLINK(\"https://example.invalid\")"
+      ],
+      [
+        "999999999999999999",
+        "A&B <text>"
+      ]
+    ]
+  },
+  "report.customer.aging": {
+    "as_of": "2026-10-26",
+    "invoices": [
+      {
+        "id": "1",
+        "due": "2026-10-26",
+        "total_minor": "100",
+        "paid_minor": "40"
+      },
+      {
+        "id": "2",
+        "due": "2026-09-25",
+        "total_minor": "99",
+        "paid_minor": "0"
+      }
+    ]
+  },
+  "report.vendor.aging": {
+    "as_of": "2026-10-26",
+    "invoices": [
+      {
+        "id": "1",
+        "due": "2026-10-26",
+        "total_minor": "100",
+        "paid_minor": "40"
+      },
+      {
+        "id": "2",
+        "due": "2026-09-25",
+        "total_minor": "99",
+        "paid_minor": "0"
+      }
+    ]
+  },
+  "finance.budgeting": {
+    "rows": [
+      {
+        "account": "expense",
+        "budget_minor": "100",
+        "actual_minor": "120"
+      }
+    ]
+  },
+  "finance.multi.currency": {
+    "amount_minor": "123",
+    "rate_numerator": "16000",
+    "rate_denominator": "1",
+    "source_decimals": 2,
+    "target_decimals": 0
+  },
+  "finance.depreciation": {
+    "cost_minor": "1001",
+    "residual_minor": "100",
+    "periods": 12,
+    "method": "straight_line"
+  },
+  "finance.reconciliation": {
+    "bank": [
+      {
+        "id": "b",
+        "reference": "r",
+        "amount_minor": "100",
+        "direction": "in",
+        "currency": "IDR"
+      }
+    ],
+    "ledger": [
+      {
+        "id": "l",
+        "reference": "r",
+        "amount_minor": "100",
+        "direction": "in",
+        "currency": "USD"
+      }
+    ]
+  },
+  "hr.attendance": {
+    "punches": [
+      {
+        "employee": "e1",
+        "check_in": "2026-10-26T09:00:00+07:00",
+        "check_out": "2026-10-26T10:00:00+07:00",
+        "id": "a"
+      },
+      {
+        "employee": "e2",
+        "check_in": "2026-10-26T09:00:00+07:00",
+        "check_out": "2026-10-26T10:00:00+07:00",
+        "id": "q1"
+      }
+    ]
+  },
+  "hr.expense.claim": {
+    "policy": [
+      {
+        "category": "travel",
+        "cap_minor": "1000"
+      },
+      {
+        "category": "meal",
+        "cap_minor": "200"
+      }
+    ],
+    "claims": [
+      {
+        "id": "c1",
+        "employee": "e1",
+        "category": "travel",
+        "amount_minor": "800"
+      },
+      {
+        "id": "c2",
+        "employee": "e1",
+        "category": "travel",
+        "amount_minor": "1200"
+      },
+      {
+        "id": "c3",
+        "employee": "e2",
+        "category": "meal",
+        "amount_minor": "200"
+      }
+    ]
+  },
+  "hr.leave.management": {
+    "balances": [
+      {
+        "employee": "e",
+        "leave_type": "a",
+        "granted_units": 10,
+        "taken_units": 2
+      }
+    ],
+    "requests": [
+      {
+        "id": "q",
+        "employee": "e",
+        "leave_type": "a",
+        "units": 3
+      }
+    ]
+  },
+  "hr.loan.management": {
+    "loans": [
+      {
+        "id": "l1",
+        "employee": "e1",
+        "principal_minor": "1000",
+        "charges_minor": "1",
+        "payments": [
+          {
+            "id": "p1",
+            "amount_minor": "100"
+          },
+          {
+            "id": "p2",
+            "amount_minor": "500"
+          }
+        ],
+        "installments": 3
+      },
+      {
+        "id": "l2",
+        "employee": "e2",
+        "principal_minor": "500",
+        "charges_minor": "0",
+        "payments": [
+          {
+            "id": "p3",
+            "amount_minor": "500"
+          }
+        ],
+        "installments": 0
+      }
+    ]
+  },
+  "hr.time.overtime": {
+    "days": [
+      {
+        "id": "d1",
+        "employee": "e1",
+        "date": "2028-02-29",
+        "regular_minutes": 480,
+        "worked_minutes": 600,
+        "overtime_rate_minor_per_hour": "100"
+      }
+    ]
+  },
+  "hr.payroll": {
+    "employees": [
+      {
+        "id": "e1",
+        "earnings": [
+          {
+            "component": "base",
+            "amount_minor": "5000000"
+          },
+          {
+            "component": "transport",
+            "amount_minor": "500000"
+          }
+        ],
+        "deductions": [
+          {
+            "component": "loan",
+            "amount_minor": "300000"
+          },
+          {
+            "component": "other",
+            "amount_minor": "200000"
+          }
+        ]
+      },
+      {
+        "id": "e2",
+        "earnings": [
+          {
+            "component": "base",
+            "amount_minor": "1000"
+          }
+        ],
+        "deductions": []
+      }
+    ]
+  },
+  "finance.financial.statement": {
+    "period": "2026-01",
+    "currency": "IDR",
+    "accounts": [
+      {
+        "code": "cash",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "bank",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "equipment",
+        "type": "asset",
+        "is_cash": false
+      },
+      {
+        "code": "capital",
+        "type": "equity",
+        "is_cash": false
+      },
+      {
+        "code": "revenue",
+        "type": "revenue",
+        "is_cash": false
+      },
+      {
+        "code": "expense",
+        "type": "expense",
+        "is_cash": false
+      }
+    ],
+    "journals": []
+  },
+  "finance.cashflow.statement": {
+    "period": "2026-01",
+    "currency": "IDR",
+    "accounts": [
+      {
+        "code": "cash",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "bank",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "equipment",
+        "type": "asset",
+        "is_cash": false
+      },
+      {
+        "code": "capital",
+        "type": "equity",
+        "is_cash": false
+      },
+      {
+        "code": "revenue",
+        "type": "revenue",
+        "is_cash": false
+      },
+      {
+        "code": "expense",
+        "type": "expense",
+        "is_cash": false
+      }
+    ],
+    "journals": [
+      {
+        "id": "capital",
+        "period": "2025-12",
+        "status": "POSTED",
+        "cashflow_category": "financing",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "1000",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "capital",
+            "debit_minor": "0",
+            "credit_minor": "1000"
+          }
+        ]
+      },
+      {
+        "id": "sales",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "rent",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "expense",
+            "debit_minor": "50",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "50"
+          }
+        ]
+      },
+      {
+        "id": "purchase",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "investing",
+        "lines": [
+          {
+            "account_code": "equipment",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "transfer",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "internal_transfer",
+        "lines": [
+          {
+            "account_code": "bank",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      },
+      {
+        "id": "future",
+        "period": "2026-02",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      }
+    ]
+  },
+  "report.financial.statement": {
+    "period": "2026-01",
+    "currency": "IDR",
+    "accounts": [
+      {
+        "code": "cash",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "bank",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "equipment",
+        "type": "asset",
+        "is_cash": false
+      },
+      {
+        "code": "capital",
+        "type": "equity",
+        "is_cash": false
+      },
+      {
+        "code": "revenue",
+        "type": "revenue",
+        "is_cash": false
+      },
+      {
+        "code": "expense",
+        "type": "expense",
+        "is_cash": false
+      }
+    ],
+    "journals": [
+      {
+        "id": "capital",
+        "period": "2025-12",
+        "status": "POSTED",
+        "cashflow_category": "financing",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "1000",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "capital",
+            "debit_minor": "0",
+            "credit_minor": "1000"
+          }
+        ]
+      },
+      {
+        "id": "sales",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "rent",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "expense",
+            "debit_minor": "50",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "50"
+          }
+        ]
+      },
+      {
+        "id": "purchase",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "investing",
+        "lines": [
+          {
+            "account_code": "equipment",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "transfer",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "internal_transfer",
+        "lines": [
+          {
+            "account_code": "bank",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      },
+      {
+        "id": "future",
+        "period": "2026-02",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      }
+    ]
+  },
+  "report.profit.loss": {
+    "period": "2026-01",
+    "currency": "IDR",
+    "accounts": [
+      {
+        "code": "cash",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "bank",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "equipment",
+        "type": "asset",
+        "is_cash": false
+      },
+      {
+        "code": "capital",
+        "type": "equity",
+        "is_cash": false
+      },
+      {
+        "code": "revenue",
+        "type": "revenue",
+        "is_cash": false
+      },
+      {
+        "code": "expense",
+        "type": "expense",
+        "is_cash": false
+      }
+    ],
+    "journals": [
+      {
+        "id": "capital",
+        "period": "2025-12",
+        "status": "POSTED",
+        "cashflow_category": "financing",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "1000",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "capital",
+            "debit_minor": "0",
+            "credit_minor": "1000"
+          }
+        ]
+      },
+      {
+        "id": "sales",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "rent",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "expense",
+            "debit_minor": "50",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "50"
+          }
+        ]
+      },
+      {
+        "id": "purchase",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "investing",
+        "lines": [
+          {
+            "account_code": "equipment",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "transfer",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "internal_transfer",
+        "lines": [
+          {
+            "account_code": "bank",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      },
+      {
+        "id": "future",
+        "period": "2026-02",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      }
+    ]
+  },
+  "report.cash.flow": {
+    "period": "2026-01",
+    "currency": "IDR",
+    "accounts": [
+      {
+        "code": "cash",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "bank",
+        "type": "asset",
+        "is_cash": true
+      },
+      {
+        "code": "equipment",
+        "type": "asset",
+        "is_cash": false
+      },
+      {
+        "code": "capital",
+        "type": "equity",
+        "is_cash": false
+      },
+      {
+        "code": "revenue",
+        "type": "revenue",
+        "is_cash": false
+      },
+      {
+        "code": "expense",
+        "type": "expense",
+        "is_cash": false
+      }
+    ],
+    "journals": [
+      {
+        "id": "capital",
+        "period": "2025-12",
+        "status": "POSTED",
+        "cashflow_category": "financing",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "1000",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "capital",
+            "debit_minor": "0",
+            "credit_minor": "1000"
+          }
+        ]
+      },
+      {
+        "id": "sales",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "rent",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "expense",
+            "debit_minor": "50",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "50"
+          }
+        ]
+      },
+      {
+        "id": "purchase",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "investing",
+        "lines": [
+          {
+            "account_code": "equipment",
+            "debit_minor": "200",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "200"
+          }
+        ]
+      },
+      {
+        "id": "transfer",
+        "period": "2026-01",
+        "status": "POSTED",
+        "cashflow_category": "internal_transfer",
+        "lines": [
+          {
+            "account_code": "bank",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "cash",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      },
+      {
+        "id": "future",
+        "period": "2026-02",
+        "status": "POSTED",
+        "cashflow_category": "operating",
+        "lines": [
+          {
+            "account_code": "cash",
+            "debit_minor": "100",
+            "credit_minor": "0"
+          },
+          {
+            "account_code": "revenue",
+            "debit_minor": "0",
+            "credit_minor": "100"
+          }
+        ]
+      }
+    ]
+  },
+  "procurement.vendor.performance": {
+    "as_of": "2026-10-27",
+    "weights": [
+      {
+        "metric": "on_time_delivery",
+        "weight_bps": 4000
+      },
+      {
+        "metric": "quantity_accuracy",
+        "weight_bps": 3000
+      },
+      {
+        "metric": "quality_acceptance",
+        "weight_bps": 3000
+      }
+    ],
+    "records": []
+  },
+  "procurement.rfq": {
+    "as_of": "2026-10-27",
+    "currency": "IDR",
+    "required": [
+      {
+        "item": "A",
+        "quantity": 3
+      }
+    ],
+    "quotes": [
+      {
+        "vendor": "solo",
+        "submitted_on": "2026-10-27",
+        "valid_until": "2026-10-27",
+        "tax_bps": 1000,
+        "shipping_minor": "0",
+        "shipping_taxable": true,
+        "discount_minor": "0",
+        "lines": [
+          {
+            "item": "A",
+            "unit_minor": "15"
+          }
+        ]
+      }
+    ]
+  },
+  "finance.general.ledger": {
+    "lines": [
+      {
+        "account": "cash",
+        "debit_minor": "1000",
+        "credit_minor": "0"
+      },
+      {
+        "account": "capital",
+        "debit_minor": "0",
+        "credit_minor": "1000"
+      }
+    ]
+  },
+  "inventory.stock.management": {
+    "initial": 10,
+    "movements": [
+      -3,
+      5
+    ]
+  }
+}
