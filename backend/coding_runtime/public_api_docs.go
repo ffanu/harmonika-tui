@@ -141,7 +141,7 @@ BELUM TERBUKA UNTUK TOKEN PUBLIK
 - Upload PDF/dokumen/gambar, analisis video/audio, generate/edit gambar dan file hasil.
 - Riwayat permanen server, reset/stop endpoint khusus, multi-conversation, replay/resume dan WebSocket.
 - Token ini tidak memberi akses data pelanggan, ERP, billing, pembayaran, CS, browser atau akun internal.
-- Jangan mengirim attachment_ids, Base64 atau image_url ke chat publik. Content multimodal ditolak, bukan dianggap telah dianalisis.
+- Media (image_url/audio/video/file) tidak dianalisis: part tersebut diganti penanda teks dan percakapan tetap berjalan. Jangan mengandalkan API chat publik untuk membaca isi media.
 - Selalu baca features di GET /v1/public-ai/capabilities. Aktifkan UI hanya jika flag fitur yang sesuai true.
 
 1. CHAT JSON NON-STREAM
@@ -269,9 +269,6 @@ CHECKLIST INSTALASI
 }
 
 func publicAIChatInputError(input publicAIChatCompletionRequest) (int, string) {
-	if len(input.AttachmentIDs) > 0 {
-		return http.StatusUnprocessableEntity, "unsupported_media"
-	}
 	for _, m := range input.Messages {
 		if text, ok := m.Content.(string); ok && publicAIMaxMessageBytes > 0 && len([]byte(text)) > publicAIMaxMessageBytes {
 			return 413, "message_too_large"
@@ -295,14 +292,15 @@ func publicAIChatInputError(input publicAIChatCompletionRequest) (int, string) {
 					continue
 				}
 				kind, _ := p["type"].(string)
-				if kind != "" && kind != "text" && kind != "input_text" {
+				// Tool history is plain text context; media parts are degraded to a text marker
+				// by publicAIContentText instead of failing the whole conversation.
+				switch kind {
+				case "", "text", "input_text", "tool", "tool-call", "tool_call", "tool-result", "tool_result", "reasoning",
+					"image_url", "input_image", "image", "input_audio", "audio_url", "audio", "video_url", "video", "file", "file_id", "document":
+				default:
 					return http.StatusUnprocessableEntity, "unsupported_media"
 				}
-				for _, field := range []string{"image_url", "input_image", "input_audio", "audio_url", "video_url", "file", "file_id"} {
-					if _, present := p[field]; present {
-						return http.StatusUnprocessableEntity, "unsupported_media"
-					}
-				}
+
 			}
 		}
 		if publicAIMaxMessageBytes > 0 && len([]byte(publicAIContentText(m.Content))) > publicAIMaxMessageBytes {

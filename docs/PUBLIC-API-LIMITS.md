@@ -47,3 +47,26 @@ The web chat unit runs with `MemoryMax=2G` (drop-in
 `/etc/systemd/system/harmonika-web-chat-live.service.d/message-limits.conf`). It idled at ~8 MB with a
 ~18 MB peak before the change; the extra headroom covers JSON decode of a 64 MiB body. If the body cap
 is raised much higher, raise `MemoryMax` accordingly or the kernel will OOM-kill the service.
+
+## Sessions that contain tool history or media
+
+A resumed terminal session sends its whole history, which includes `tool`, `tool-call`,
+`tool-result` and sometimes `image_url` parts. Two rules used to fail those sessions forever with
+`422 unsupported_media`, showing the same "Input teks melampaui batas" text as the size error:
+
+| Input | Before | After |
+| --- | --- | --- |
+| `tool-call` / `tool-result` parts | `422 unsupported_media` | **200 OK** — rendered as `[tool name] {...}` text |
+| `image_url` / `audio_url` / `video_url` / `file` parts | `422 unsupported_media` | **200 OK** — replaced by a marker such as `[media image_url tidak dikirim karena API publik hanya menerima teks]` |
+| `attachment_ids` | `422 unsupported_media` | **200 OK** — attachments are ignored |
+| unknown part type | `422` | `422` (still guarded) |
+
+Rejected requests now log their redacted shape (`public_ai_input_rejected code=... shape=[...types...]`)
+so a failing session can be diagnosed without logging any user content.
+
+Verified end to end by resuming the previously failing session
+`ses_e633d83b5ffe871k5uvtbLpDs8` (79 messages, one 335 KiB tool output, one image part): the reply
+came back normally instead of the 422 error.
+
+Note: text-only degradation means the model never sees the actual image bytes. For real vision use
+the media tools (`analyze_image`), not the public chat endpoint.
