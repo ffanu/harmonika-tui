@@ -152,3 +152,32 @@ Rebrand nama produk diperbolehkan MIT, tetapi menghapus notice tidak.
 
 Urutan yang disarankan: **0 -> 1 -> 3 -> 2 -> 4**. Fase 3 didahulukan dari 2 karena
 risiko brand/keamanan lebih mahal daripada risiko fitur yang belum ada.
+
+## 11. Status pelaksanaan (terukur, bukan rencana)
+
+Fase 0-4 dikerjakan pada branch fork `harmonika/main` dan diverifikasi ulang setelah build:
+
+| Item | Hasil terukur |
+| --- | --- |
+| Fase 0 | Fork nyata: `harmonika/main` (2 commit brand), tag `brand-v1`, `upstream` remote ditambahkan. |
+| Patch series | `engine/patches/0001..0002`; `engine/scripts/verify-patches.sh` membuktikan apply ke `8bca532` menghasilkan tree identik `662b31bd0589`. |
+| Fase 1 | `packages/util/src/brand.ts` jadi satu-satunya sumber brand; `env()` membaca `HARMONIKA_*` lalu `OPENCODE_*`. Rebrand kini 17 file / +250 -113. |
+| Fase 2 | Web UI tertanam: `serve` menjawab `GET /` **HTTP 200**, 9.489 byte HTML. `LSP`, `formatter`, `agents` (plan/review/explore), `commands` (test/ship), `snapshots: true` ada di template; entri yang binary-nya tidak ada otomatis dibuang oleh `render-config.py`. |
+| Fase 3 | `upgrade` hanya memakai manifest `chat.harmonika.id/.../engine/update.json` (sha256 diverifikasi, binary diganti dengan cadangan `.bak`). `npm/pnpm/bun/yarn/vp/brew/winget` ditolak. Binary tidak lagi memuat `opencode.ai/update/api`. `pair --remote` butuh `HARMONIKA_ALLOW_REMOTE_TUNNEL=1`. `stats` mencetak `harmonika.id`. Provider `opencode/*` hilang dari `models` (0 baris) via `disabled_providers`. |
+| Fase 4 | `engine/scripts/{build,smoke,release,verify-patches}-engine.sh`; smoke 8/8 lolos termasuk cek ketiadaan endpoint upstream dan web UI 200. |
+
+Perintah verifikasi cepat:
+
+```bash
+engine/scripts/verify-patches.sh                  # tree patch == harmonika/main
+engine/scripts/smoke-engine.sh engine/bin/harmonika-darwin-arm64
+engine/scripts/release-engine.sh 1.0.1 --build    # manifest + tanda tangan
+```
+
+Sisa pekerjaan yang **belum** dikerjakan dan alasannya:
+
+- **Desktop app, VS Code extension, console/web stats**: butuh pipeline build dan hosting terpisah; belum ada permintaan produk.
+- **Websearch provider**: butuh API key pihak ketiga (firecrawl/parallel/tinyfish); template sengaja tidak menyalakannya agar tidak ada fitur yang gagal senyap.
+- **Rename `.opencode/` -> `.harmonika/` di project**: `Brand.projectDirs` sudah menyiapkannya, tetapi pemetaan masih membaca `.opencode`; migrasi butuh keputusan produk.
+- **LSP live `ready`**: config sudah menyiapkan 6 server; instalasi binary-nya bergantung pada `npm`/`go`/`pip` di mesin pengguna (installer melaporkan bila dilewati).
+- **Rebase 47 commit upstream**: sengaja ditunda sampai patch series ini stabil dan teruji.

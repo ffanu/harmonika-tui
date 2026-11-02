@@ -98,3 +98,40 @@ harmonika-setup --show          # cek key tersimpan (terpotong)
 - Fitur yang bergantung pada layanan (gambar, vision, video, dokumen) butuh MCP server + tunnel ke worker;
   tanpa itu chat tetap berjalan, hanya tool terkait yang tidak tersedia.
 - Kebijakan penggunaan ada di [`../SAFETY.md`](../SAFETY.md).
+
+## 6. Skrip rilis & verifikasi
+
+| Skrip | Fungsi |
+| --- | --- |
+| `scripts/build-engine.sh [target...]` | Build binary dari fork (`darwin-arm64` default, web UI selalu ikut). |
+| `scripts/smoke-engine.sh <binary>` | 8 pemeriksaan: versi, brand, absennya endpoint update upstream, `debug paths`, `debug config`, `models`, web UI HTTP 200, penolakan `--method npm`. |
+| `scripts/release-engine.sh <versi> [--build] [--upload]` | Manifest `engine/update.json` (+ `.sig` Ed25519) dan unggah binary ke `chat.harmonika.id`. |
+| `scripts/verify-patches.sh` | Apply seluruh patch ke commit upstream lalu bandingkan tree dengan `harmonika/main`. |
+
+Contoh rilis penuh:
+
+```bash
+engine/scripts/build-engine.sh darwin-arm64 linux-x64 linux-arm64 windows-x64
+engine/scripts/smoke-engine.sh engine/bin/harmonika-darwin-arm64
+engine/scripts/release-engine.sh 1.0.1 --upload
+```
+
+`harmonika upgrade` membaca manifest itu, memverifikasi `sha256`, mencadangkan binary lama ke `.bak`,
+lalu mengganti binary berjalan (di Windows file baru disiapkan sebagai `<exe>.<versi>.new`).
+Tidak ada jalur ke npm, Homebrew, WinGet, atau API rilis pihak lain.
+
+## 7. Perintah bahasa yang dipakai sehari-hari
+
+```bash
+harmonika                 # TUI
+harmonika serve --port N  # API + web UI (browser)
+harmonika models          # hanya provider Harmonika
+harmonika upgrade         # pembaruan engine dari manifest Harmonika ID
+harmonika-setup           # ganti API key
+```
+
+## 8. Status modul
+
+Lihat [`../docs/ENGINE-MODULE-STRATEGY.md`](../docs/ENGINE-MODULE-STRATEGY.md) bagian *Status pelaksanaan*:
+web UI, LSP, formatter, agents, commands, snapshots aktif lewat konfigurasi; `share`, `pair --remote`,
+dan seluruh jalur distribusi upstream dimatikan.

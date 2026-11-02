@@ -1,0 +1,504 @@
+From 5be0ae48b030af1a9b803e1010e2f41023841dc6 Mon Sep 17 00:00:00 2001
+From: Harmonika AI <dev@harmonika.id>
+Date: Mon, 2 Nov 2026 20:40:59 +0700
+Subject: [PATCH 2/2] brand: single brand layer, env compat shim, upstream-free
+ distribution
+
+- packages/util/src/brand.ts is the only place product identity lives; config dir,
+  config names, version/channel/artifact and URLs all read from it. env() resolves
+  HARMONIKA_* first and falls back to OPENCODE_* so both names keep working.
+- global.ts and config/discovery.ts consume Brand instead of literals; build.ts emits
+  the CLI defines from Brand.
+- upgrade no longer touches upstream: it reads the Harmonika manifest, verifies sha256
+  and replaces the running binary (staged file on Windows). Package managers, brew,
+  winget and the upstream release API are refused with guidance.
+- updater service fails closed for every method, so nothing can silently install an
+  upstream build; the TUI auto-check is opt-in via HARMONIKA_ENGINE_AUTOCHECK.
+- pair --remote requires HARMONIKA_ALLOW_REMOTE_TUNNEL=1; stats prints harmonika.id.
+---
+ packages/cli/script/build.ts                  |   9 +-
+ packages/cli/src/commands/handlers/default.ts |   5 +-
+ packages/cli/src/commands/handlers/pair.ts    |   8 +
+ packages/cli/src/commands/handlers/stats.ts   |   7 +-
+ packages/cli/src/commands/handlers/upgrade.ts | 171 +++++++++++-------
+ packages/cli/src/services/updater.ts          |  26 ++-
+ packages/core/src/config/discovery.ts         |   5 +-
+ packages/util/src/brand.ts                    |  48 +++++
+ packages/util/src/global.ts                   |   7 +-
+ 9 files changed, 200 insertions(+), 86 deletions(-)
+ create mode 100644 packages/util/src/brand.ts
+
+diff --git a/packages/cli/script/build.ts b/packages/cli/script/build.ts
+index f5f18c5..f13f57c 100755
+--- a/packages/cli/script/build.ts
++++ b/packages/cli/script/build.ts
+@@ -15,6 +15,7 @@ import { verifyArtifact, verifySimulationGraph } from "./verify-artifact"
+ import { resolveOpencodePty } from "./opencode-pty"
+ import { NativeArch } from "../../../script/native-arch"
+ import { bundledModelsSnapshot, modelsSnapshotPlugin } from "../../core/script/models-snapshot"
++import { Brand } from "../../util/src/brand"
+ 
+ const dir = path.resolve(import.meta.dirname, "..")
+ const binary = "opencode"
+@@ -193,10 +194,10 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
+       windows: {},
+     },
+     define: {
+-      OPENCODE_VERSION: `'1.0.0'`,
+-      OPENCODE_CLI_NAME: "'harmonika'",
+-      OPENCODE_CHANNEL: `'stable'`,
+-      OPENCODE_ARTIFACT: `'cli'`,
++      OPENCODE_VERSION: JSON.stringify(Brand.version),
++      OPENCODE_CLI_NAME: JSON.stringify(Brand.cliName),
++      OPENCODE_CHANNEL: JSON.stringify(Brand.channel),
++      OPENCODE_ARTIFACT: JSON.stringify(Brand.artifact),
+       ...(highlights ? { OPENCODE_RELEASE_HIGHLIGHTS: JSON.stringify(highlights) } : {}),
+       OPENCODE_LIBC: item.os === "linux" ? `'${item.abi ?? "glibc"}'` : "undefined",
+       // FFF_LIBC selects the fff native lib variant: "musl" or "gnu".
+diff --git a/packages/cli/src/commands/handlers/default.ts b/packages/cli/src/commands/handlers/default.ts
+index c23e2be..d7c36fe 100644
+--- a/packages/cli/src/commands/handlers/default.ts
++++ b/packages/cli/src/commands/handlers/default.ts
+@@ -66,7 +66,10 @@ export default Runtime.handler(Commands, (input) =>
+     const resultListeners = new Set<(result: Updater.RunResult) => void>()
+     // Background checks, `/update` lookups, and manual installs take turns so two installs never overlap.
+     const checking = yield* Semaphore.make(1)
+-    yield* updater
++    // Engine updates are published by Harmonika ID, so the upstream auto-check is off
++    // unless an operator opts in explicitly.
++    if (process.env.HARMONIKA_ENGINE_AUTOCHECK === "1")
++      yield* updater
+       .run((version) => {
+         installing = version
+         installListeners.forEach((notify) => notify(version))
+diff --git a/packages/cli/src/commands/handlers/pair.ts b/packages/cli/src/commands/handlers/pair.ts
+index d1bee74..f4ca2a7 100644
+--- a/packages/cli/src/commands/handlers/pair.ts
++++ b/packages/cli/src/commands/handlers/pair.ts
+@@ -17,6 +17,14 @@ export default Runtime.handler(
+       return yield* Effect.fail(
+         new Error("Pairing requires the background service; run `opencode service unset disabled` first"),
+       )
++    if (input.remote && process.env.HARMONIKA_ALLOW_REMOTE_TUNNEL !== "1")
++      return yield* Effect.fail(
++        new Error(
++          "Pairing lewat tunnel publik dinonaktifkan. Server lokal hanya bisa dipasangkan dengan --url <alamat>,\n" +
++            "karena menerbitkan akses internet lewat infrastruktur pihak lain bukan jalur resmi Harmonika AI. " +
++            "Set HARMONIKA_ALLOW_REMOTE_TUNNEL=1 bila Anda memang menghendakinya.",
++        ),
++      )
+     if (input.remote && Option.isSome(input.url))
+       return yield* Effect.fail(new Error("--remote cannot be combined with --url"))
+     if (input.remote && config.remote === undefined) {
+diff --git a/packages/cli/src/commands/handlers/stats.ts b/packages/cli/src/commands/handlers/stats.ts
+index b6507ab..a6b10b8 100644
+--- a/packages/cli/src/commands/handlers/stats.ts
++++ b/packages/cli/src/commands/handlers/stats.ts
+@@ -8,6 +8,7 @@ import { Commands } from "../commands"
+ import { Runtime } from "../../framework/runtime"
+ import { ServerConnection } from "../../services/server-connection"
+ import { errorMessage } from "../../util/error"
++import { Brand } from "@opencode/util/brand"
+ 
+ const handler = Effect.fn("cli.stats")(function* (input: Runtime.Input<typeof Commands.commands.stats>) {
+   const days = Option.getOrUndefined(input.days)
+@@ -108,7 +109,7 @@ export function renderStats(stats: SessionStatsInfo, options: RenderOptions) {
+       : `${style(formatPercent(toolRate), primary, options.color)} tool success`
+   const details = options.models || options.tools || options.cost
+   const empty = stats.sessions === 0 && stats.prompts === 0 && stats.steps === 0
+-  const heading = `${style("opencode stats", primary, options.color)} ${style(`· ${options.label} · ${options.scope}`, "2", options.color)}`
++  const heading = `${style(Brand.cliName + " stats", primary, options.color)} ${style(`· ${options.label} · ${options.scope}`, "2", options.color)}`
+   const lines = details
+     ? [style(`${options.label} · ${options.scope}`, "2", options.color)]
+     : empty
+@@ -117,7 +118,7 @@ export function renderStats(stats: SessionStatsInfo, options: RenderOptions) {
+           "",
+           style("no activity in this range", "2", options.color),
+           "",
+-          style("opencode.ai", "2", options.color),
++          style("harmonika.id", "2", options.color),
+         ]
+       : [
+           heading,
+@@ -128,7 +129,7 @@ export function renderStats(stats: SessionStatsInfo, options: RenderOptions) {
+           `${metricCount(stats.prompts, "prompt", options.color)} · ${metricCount(stats.steps, "step", options.color)} · ${metricCount(totalTokens, "token", options.color)}`,
+           `${toolSummary} · ${metricCount(stats.activeDays, "active day", options.color)} · best streak ${style(stats.streak.toString(), primary, options.color)} day${stats.streak === 1 ? "" : "s"}`,
+           "",
+-          style("opencode.ai", "2", options.color),
++          style("harmonika.id", "2", options.color),
+         ]
+ 
+   if (options.cost) lines.push(...(lines.length > 0 ? [""] : []), ...renderCost(stats))
+diff --git a/packages/cli/src/commands/handlers/upgrade.ts b/packages/cli/src/commands/handlers/upgrade.ts
+index af7c221..80897a1 100644
+--- a/packages/cli/src/commands/handlers/upgrade.ts
++++ b/packages/cli/src/commands/handlers/upgrade.ts
+@@ -1,81 +1,114 @@
+-import { intro, log, outro, spinner } from "@clack/prompts"
++import { log } from "@clack/prompts"
+ import { Effect, Option } from "effect"
++import { createHash } from "node:crypto"
++import { chmod, copyFile, rename, rm, writeFile } from "node:fs/promises"
++import path from "node:path"
++import { Brand, UpdateManifestUrl } from "@opencode/util/brand"
+ import { Commands } from "../commands"
+ import { Runtime } from "../../framework/runtime"
+-import { Updater } from "../../services/updater"
+-import { handlePromptErrors } from "../../ui/prompt"
+ import { OPENCODE_VERSION } from "../../version"
+-import { stripVTControlCharacters } from "node:util"
+ 
+-export default Runtime.handler(
+-  Commands.commands.upgrade,
+-  Effect.fn("cli.upgrade")(
+-    function* (input) {
+-      intro("Upgrade")
+-      const updater = yield* Updater.Service
+-      const method = Option.getOrUndefined(input.method) ?? (yield* updater.method())
+-      if (!method)
+-        return yield* Effect.fail(
+-          new Error("Could not detect the installation method. Pass --method to choose how to upgrade OpenCode."),
+-        )
++/**
++ * Engine upgrade for Harmonika AI.
++ *
++ * Distribution is owned by Harmonika ID. The upstream installer, package
++ * managers and vendor taps are intentionally never invoked: they would replace
++ * this binary with an unrelated build and silently undo the product.
++ */
++interface Manifest {
++  readonly version?: string
++  readonly notes?: readonly string[]
++  readonly binaries?: Record<string, { readonly url?: string; readonly sha256?: string }>
++}
+ 
+-      log.info(`Using method: ${method}`)
+-      const target = Option.getOrUndefined(input.target) ?? (yield* updater.latest(method))
+-      const version = target.trim().replace(/^v/, "")
+-      if (version === OPENCODE_VERSION) {
+-        log.warn(`OpenCode upgrade skipped: ${version} is already installed`)
+-        outro("Done")
+-        return
+-      }
++const platformKey = () => `${process.platform === "win32" ? "windows" : process.platform}-${process.arch}`
+ 
+-      log.info(`From ${OPENCODE_VERSION} → ${version}`)
+-      const progress = spinner()
+-      progress.start("Upgrading...")
+-      yield* updater.upgrade(method, target).pipe(
+-        Effect.tap(() => Effect.sync(() => progress.stop("Upgrade complete"))),
+-        Effect.tapCause(() => Effect.sync(() => progress.stop("Upgrade failed", 1))),
+-      )
+-      outro("Done")
++const fetchManifest = Effect.fnUntraced(function* () {
++  return yield* Effect.tryPromise({
++    try: async (signal) => {
++      const response = await fetch(UpdateManifestUrl, {
++        signal: AbortSignal.any([signal, AbortSignal.timeout(10_000)]),
++      })
++      if (!response.ok) throw new Error(`manifest HTTP ${response.status}`)
++      return (await response.json()) as Manifest
++    },
++    catch: (cause) => new Error(`Tidak dapat menghubungi ${UpdateManifestUrl} (${String(cause)})`),
++  })
++})
++
++const download = Effect.fnUntraced(function* (url: string, expected: string) {
++  const target = path.join(path.dirname(process.execPath), `.${Brand.cliName}.download`)
++  yield* Effect.tryPromise({
++    try: async (signal) => {
++      const response = await fetch(url, { signal: AbortSignal.any([signal, AbortSignal.timeout(300_000)]) })
++      if (!response.ok) throw new Error(`HTTP ${response.status}`)
++      const bytes = new Uint8Array(await response.arrayBuffer())
++      const digest = createHash("sha256").update(bytes).digest("hex")
++      if (digest !== expected) throw new Error("sha256 tidak cocok")
++      await writeFile(target, bytes)
++      await chmod(target, 0o755)
+     },
+-    (effect) =>
+-      handlePromptErrors(
+-        effect.pipe(
+-          Effect.mapError((error) =>
+-            error instanceof Updater.UpgradeError ? new Error(formatUpgradeError(error), { cause: error }) : error,
+-          ),
++    catch: (cause) => new Error(`Unduhan gagal: ${String(cause)}`),
++  })
++  return target
++})
++
++export default Runtime.handler(
++  Commands.commands.upgrade,
++  Effect.fn("cli.upgrade")(function* (input) {
++    const requestedMethod = Option.getOrUndefined(input.method)
++    if (requestedMethod !== undefined && requestedMethod !== "curl")
++      return yield* Effect.fail(
++        new Error(
++          `${Brand.product} tidak memakai ${requestedMethod}. Distribusi engine hanya lewat Harmonika ID:\n` +
++            `  harmonika upgrade            (periksa & pasang pembaruan engine)\n` +
++            `  sh engine/install.sh         (instalasi ulang + verifikasi API key)`,
+         ),
+-      ),
+-  ),
+-)
++      )
+ 
+-function formatUpgradeError(error: Updater.UpgradeError) {
+-  const clean = (value: string) => stripVTControlCharacters(value).replaceAll("\r", "").trim()
+-  const line = (value: string) => clean(value).replace(/\s+/g, " ")
+-  const detail = wrap(clean(error.detail), Math.max(24, (process.stdout.columns ?? 80) - 7)).join("\n")
+-  return [
+-    line(error.title),
+-    "",
+-    detail,
+-    ...(error.command ? ["", field("Command", line(error.command))] : []),
+-    field("Retry", line(error.retry)),
+-  ].join("\n")
+-}
++    const manifest = yield* fetchManifest()
++    const latest = (manifest.version ?? "").trim().replace(/^v/, "")
++    const requested = Option.getOrUndefined(input.target)?.trim().replace(/^v/, "")
++    const target = requested && requested.length > 0 ? requested : latest
+ 
+-function field(label: string, value: string) {
+-  const prefix = label.padEnd(9)
+-  const width = Math.max(24, Math.min(61, (process.stdout.columns ?? 80) - prefix.length - 10))
+-  const lines = wrap(value, width)
+-  return lines.map((line, index) => `${index === 0 ? prefix : " ".repeat(prefix.length)}${line}`).join("\n")
+-}
++    log.info(`${Brand.product} engine · terpasang ${OPENCODE_VERSION} · tersedia ${latest || "tidak diketahui"}`)
+ 
+-function wrap(value: string, width: number) {
+-  return value.split("\n").flatMap((source) => {
+-    if (source.length <= width) return [source]
+-    return source.split(/\s+/).reduce<string[]>((result, word) => {
+-      const index = result.length - 1
+-      if (index < 0 || result[index].length + word.length + 1 > width) result.push(word)
+-      else result[index] += ` ${word}`
+-      return result
+-    }, [])
+-  })
+-}
++    if (!target) return yield* Effect.fail(new Error("Manifest pembaruan tidak memuat versi."))
++    if (target === OPENCODE_VERSION) {
++      log.success(`${Brand.product} engine sudah versi terbaru (${target}).`)
++      return
++    }
++
++    const key = platformKey()
++    const entry = manifest.binaries?.[key]
++    if (!entry?.url || !entry.sha256)
++      return yield* Effect.fail(
++        new Error(
++          `Belum ada binary ${key} di manifest. Tersedia: ${Object.keys(manifest.binaries ?? {}).join(", ") || "tidak ada"}`,
++        ),
++      )
++
++    const downloaded = yield* download(entry.url, entry.sha256)
++    const current = process.execPath
++    if (process.platform === "win32") {
++      const staged = `${current}.${target}.new`
++      yield* Effect.tryPromise({ try: () => copyFile(downloaded, staged), catch: (cause) => new Error(String(cause)) })
++      yield* Effect.sync(() => rm(downloaded, { force: true }))
++      log.success(`Binary ${target} siap di ${staged}. Tutup Harmonika, ganti file lama, lalu jalankan lagi.`)
++      return
++    }
++
++    const backup = `${current}.bak`
++    yield* Effect.tryPromise({
++      try: async () => {
++        await copyFile(current, backup)
++        await rename(downloaded, current)
++        await chmod(current, 0o755)
++      },
++      catch: (cause) => new Error(`Gagal memasang binary baru: ${String(cause)}`),
++    })
++    log.success(`${Brand.product} engine diperbarui ${OPENCODE_VERSION} → ${target}. Cadangan: ${backup}`)
++    log.info("Jalankan ulang `harmonika` untuk memakai versi baru.")
++    for (const note of manifest.notes ?? []) log.info(`• ${note}`)
++  }),
++)
+diff --git a/packages/cli/src/services/updater.ts b/packages/cli/src/services/updater.ts
+index d08e929..bb31b34 100644
+--- a/packages/cli/src/services/updater.ts
++++ b/packages/cli/src/services/updater.ts
+@@ -10,6 +10,7 @@ import { stripVTControlCharacters } from "node:util"
+ import { RetainedImage } from "./retained-image"
+ import { action, parseReleaseVersion, type Policy } from "./updater-action"
+ import { errorMessage } from "../util/error"
++import { Brand, EngineInstallerUrl, UpdateManifestUrl } from "@opencode/util/brand"
+ 
+ export const methods = ["curl", "npm", "pnpm", "bun", "yarn", "vp", "brew", "winget"] as const
+ 
+@@ -46,7 +47,7 @@ const decodeVpPackages = Schema.decodeUnknownOption(
+ )
+ 
+ const installNames: Record<Method, string> = {
+-  curl: "The OpenCode installer",
++  curl: "Installer Harmonika AI",
+   npm: "npm",
+   pnpm: "pnpm",
+   bun: "Bun",
+@@ -273,6 +274,15 @@ const make = Effect.gen(function* () {
+   }
+ 
+   const release = Effect.fnUntraced(function* (method?: Method) {
++    // Harmonika AI distributes its own engine builds; the upstream release API is not used.
++    return yield* Effect.fail(
++      new UpgradeError({
++        title: `Pembaruan ${Brand.product} tidak lewat jalur ini`,
++        detail: `Jalankan \`${Brand.cliName} upgrade\` untuk memakai manifest ${UpdateManifestUrl}.`,
++        retry: `Jalankan ${Brand.cliName} upgrade tanpa --method.`,
++      }),
++    )
++
+     const distribution = method === "brew" ? "homebrew" : "npm"
+     // Homebrew Core builds its formula on its own schedule, so the tap release does not describe it.
+     const core = method === "brew" && installedFormula === "opencode"
+@@ -281,7 +291,7 @@ const make = Effect.gen(function* () {
+         fetch(
+           core
+             ? "https://formulae.brew.sh/api/formula/opencode.json"
+-            : `https://opencode.ai/update/api/${encodeURIComponent(channel)}/${encodeURIComponent(OPENCODE_ARTIFACT)}/${distribution}?current=${encodeURIComponent(OPENCODE_VERSION)}`,
++            : `${UpdateManifestUrl}?current=${encodeURIComponent(OPENCODE_VERSION)}`,
+           {
+             signal: AbortSignal.any([signal, AbortSignal.timeout(10_000)]),
+           },
+@@ -423,6 +433,14 @@ const make = Effect.gen(function* () {
+   }
+ 
+   const upgrade = Effect.fnUntraced(function* (method: Method, input: string) {
++    return yield* Effect.fail(
++      new UpgradeError({
++        title: `Metode ${method} tidak berlaku untuk ${Brand.product}`,
++        detail: `Instalasi ${method} akan menimpa engine Harmonika dengan build lain. Engine hanya dipasang dari manifest ${UpdateManifestUrl}.`,
++        retry: `Jalankan ${Brand.cliName} upgrade atau sh engine/install.sh.`,
++      }),
++    )
++
+     if (!parseReleaseVersion(input)) return yield* Effect.fail(new Error(`Invalid version: ${input}`))
+     const version = input.trim().replace(/^v/, "")
+     const packageName =
+@@ -480,8 +498,8 @@ const make = Effect.gen(function* () {
+           const installer = path.join(directory, "install")
+           yield* runUpgrade({
+             method,
+-            command: ["curl", "-fsSL", "-o", installer, "https://opencode.ai/v2/install"],
+-            displayCommand: ["curl", "-fsSL", "https://opencode.ai/v2/install"],
++            command: ["curl", "-fsSL", "-o", installer, EngineInstallerUrl],
++            displayCommand: ["curl", "-fsSL", EngineInstallerUrl],
+             title: "Could not download the OpenCode installer",
+             retry: "Check your network, then run opencode upgrade again.",
+           })
+diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
+index 7476344..24bcd84 100644
+--- a/packages/core/src/config/discovery.ts
++++ b/packages/core/src/config/discovery.ts
+@@ -7,9 +7,10 @@ import { FSUtil } from "@opencode/util/fs-util"
+ import { Global } from "@opencode/util/global"
+ import { Location } from "../location.js"
+ import { AbsolutePath } from "../schema.js"
++import { Brand } from "@opencode/util/brand"
+ import type { Options } from "../config.js"
+ 
+-export const names = ["config.json", "harmonika.json", "opencode.json", "opencode.jsonc"]
++export const names = [...Brand.configNames]
+ 
+ /** Eligible sources in priority order, including paths that may appear later. */
+ export interface Sources {
+@@ -27,7 +28,7 @@ export interface Sources {
+ /** Platform system configuration directory (`/Library/Application Support/opencode`, `/etc/opencode`, `%ProgramData%\opencode`). */
+ export function systemDirectory(platform: NodeJS.Platform = process.platform, env: NodeJS.ProcessEnv = process.env) {
+   if (platform === "darwin") return AbsolutePath.make("/Library/Application Support/opencode")
+-  if (platform === "win32") return AbsolutePath.make(path.join(env.ProgramData || "C:\\ProgramData", "harmonika-terminal"))
++  if (platform === "win32") return AbsolutePath.make(path.join(env.ProgramData || "C:\\ProgramData", Brand.configDirName))
+   return AbsolutePath.make("/etc/opencode")
+ }
+ 
+diff --git a/packages/util/src/brand.ts b/packages/util/src/brand.ts
+new file mode 100644
+index 0000000..a13371d
+--- /dev/null
++++ b/packages/util/src/brand.ts
+@@ -0,0 +1,48 @@
++/**
++ * Single source of truth for Harmonika branding.
++ *
++ * The rebrand stays small on purpose: upstream internals keep their own names
++ * (package scopes, `OPENCODE_*` build defines), and every user-visible string,
++ * path and default flows through this module so a rebase to upstream never
++ * conflicts with dozens of scattered literals.
++ *
++ * Import as `@opencode/util/brand`.
++ */
++const PREFIX = "HARMONIKA"
++
++export const Brand = {
++  product: "Harmonika AI",
++  vendor: "Harmonika ID",
++  cliName: "harmonika",
++  version: "1.0.0",
++  channel: "stable",
++  artifact: "cli",
++  website: "https://harmonika.id",
++  docs: "https://harmonika.id/docs",
++  apiBase: "https://chat.harmonika.id/v1",
++  assetsBase: "https://chat.harmonika.id/assets/harmonika-terminal",
++  /** Directory name under XDG config/data/state. */
++  configDirName: "harmonika-terminal",
++  /** Config file names in priority order; upstream names stay readable for migration. */
++  configNames: ["config.json", "harmonika.json", "opencode.json", "opencode.jsonc"],
++  /** Per-project state directories; the second entry is read for backwards compatibility. */
++  projectDirs: [".harmonika", ".opencode"],
++  databaseName: "harmonika",
++  envPrefix: PREFIX,
++} as const
++
++/**
++ * Read a setting with Harmonika priority and an upstream fallback.
++ *
++ * `env("CONFIG_DIR")` resolves `HARMONIKA_CONFIG_DIR`, then `OPENCODE_CONFIG_DIR`.
++ * Nothing writes to the upstream name, so a shared environment stays predictable.
++ */
++export function env(name: string, fallback?: string): string | undefined {
++  return process.env[`${PREFIX}_${name}`] ?? process.env[`OPENCODE_${name}`] ?? fallback
++}
++
++/** Absolute upgrade manifest published by Harmonika ID. */
++export const UpdateManifestUrl = `${Brand.assetsBase}/engine/update.json`
++
++/** Installer published by Harmonika ID for engine binaries. */
++export const EngineInstallerUrl = `${Brand.assetsBase}/engine/install.sh`
+\ No newline at end of file
+diff --git a/packages/util/src/global.ts b/packages/util/src/global.ts
+index f6c95ec..06c02d7 100644
+--- a/packages/util/src/global.ts
++++ b/packages/util/src/global.ts
+@@ -8,13 +8,14 @@ import { Context, Effect, Layer } from "effect"
+ import { roots } from "#global-roots"
+ import { Flock } from "./flock.js"
+ import { makeGlobalNode } from "./effect/app-node.js"
++import { Brand, env } from "./brand.js"
+ 
+-const app = "harmonika-terminal"
++const app = Brand.configDirName
+ const { data, cache, config, state, tmp } = roots(app)
+ 
+ const paths = {
+   get home() {
+-    return process.env.HARMONIKA_TEST_HOME ?? os.homedir()
++    return env("TEST_HOME") ?? os.homedir()
+   },
+   data,
+   bin: path.join(cache, "bin"),
+@@ -76,7 +77,7 @@ const acquire = (input: Partial<Interface>) =>
+ 
+ const layer = Layer.effect(
+   Service,
+-  Effect.suspend(() => acquire({ config: process.env.HARMONIKA_CONFIG_DIR ?? Path.config })),
++  Effect.suspend(() => acquire({ config: env("CONFIG_DIR") ?? Path.config })),
+ )
+ 
+ export const node = makeGlobalNode({ service: Service, layer: layer, deps: [] })
+-- 
+2.54.0 (Apple Git-157)
+

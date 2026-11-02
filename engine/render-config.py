@@ -8,6 +8,7 @@ starts with a broken tool entry.
 import argparse
 import json
 import os
+import shutil
 
 
 def main():
@@ -29,6 +30,30 @@ def main():
     if not args.mcp_server or not os.path.isfile(args.mcp_server):
         config.pop('mcp', None)
 
+    # Keep the config honest: drop LSP servers and formatters whose command is not
+    # installed, so a fresh machine never shows a broken tool entry.
+    dropped = []
+    lsp = config.get('lsp')
+    if isinstance(lsp, dict):
+        for name in list(lsp):
+            entry = lsp[name]
+            command = entry.get('command') if isinstance(entry, dict) else None
+            if isinstance(command, list) and command and shutil.which(command[0]) is None:
+                dropped.append('lsp:' + name)
+                del lsp[name]
+        if not lsp:
+            config.pop('lsp', None)
+    formatter = config.get('formatter')
+    if isinstance(formatter, dict):
+        for name in list(formatter):
+            entry = formatter[name]
+            command = entry.get('command') if isinstance(entry, dict) else None
+            if isinstance(command, list) and command and shutil.which(command[0]) is None:
+                dropped.append('formatter:' + name)
+                del formatter[name]
+        if not formatter:
+            config.pop('formatter', None)
+
     config.setdefault('provider', {}).setdefault('harmonika', {}).setdefault('options', {})
     options = config['provider']['harmonika']['options']
     if options.get('apiKey') != '{env:HARMONIKA_API_KEY}':
@@ -38,6 +63,9 @@ def main():
     with open(args.out, 'w', encoding='utf-8') as handle:
         json.dump(config, handle, indent=2, ensure_ascii=False)
         handle.write('\n')
+
+    if dropped:
+        print('Dilewati (perintah belum terpasang): ' + ', '.join(sorted(dropped)))
 
 
 if __name__ == '__main__':

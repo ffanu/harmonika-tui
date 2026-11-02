@@ -14,6 +14,7 @@ SELF_DIR=$(cd "$(dirname "$0")" && pwd)
 ENGINE_HOME="$SELF_DIR"
 API_KEY=""
 INSTALL_LAUNCHER=1
+WITH_TOOLS=1
 MCP_SERVER="$HOME/.config/harmonika-terminal/mcp_server.py"
 PYTHON=$(command -v python3 2>/dev/null || true)
 [ -n "$PYTHON" ] || PYTHON=/usr/bin/python3
@@ -24,6 +25,7 @@ while [ $# -gt 0 ]; do
     --engine-home) ENGINE_HOME=$2; shift 2 ;;
     --mcp-server) MCP_SERVER=$2; shift 2 ;;
     --no-launcher) INSTALL_LAUNCHER=0; shift ;;
+    --skip-tools) WITH_TOOLS=0; shift ;;
     -h|--help)
       sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) printf 'Unknown option: %s\n' "$1" >&2; exit 2 ;;
@@ -110,6 +112,45 @@ for folder in gambar document zip pdf; do
   chmod 700 "$HOME/Downloads/harmonika-ai/$folder"
   touch "$HOME/Downloads/harmonika-ai/$folder/.keep"
 done
+
+# ---------------------------------------------------------------- dev toolchain
+# LSP servers and the formatter are fetched from public registries. They are only
+# installed when the package manager exists; failures are reported, never fatal.
+provision_tools() {
+  NPM_BIN=$(command -v npm 2>/dev/null || true)
+  if [ -n "$NPM_BIN" ]; then
+    if ! command -v typescript-language-server >/dev/null 2>&1 || \
+       ! command -v vscode-html-language-server >/dev/null 2>&1 || \
+       ! command -v prettier >/dev/null 2>&1; then
+      printf 'Memasang LSP TypeScript/HTML/CSS/JSON + prettier (npm --prefix %s)...\n' "$HOME/.local"
+      "$NPM_BIN" install -g --prefix "$HOME/.local" --silent \
+        typescript typescript-language-server vscode-langservers-extracted prettier \
+        >/dev/null 2>&1 && printf '  ok\n' || printf '  gagal (lewati)\n' >&2
+    fi
+  else
+    printf 'npm tidak ditemukan: LSP TypeScript/HTML/CSS/JSON dilewati.\n' >&2
+  fi
+
+  if ! command -v pyright-langserver >/dev/null 2>&1 && command -v python3 >/dev/null 2>&1; then
+    VENV="$HOME/.local/share/harmonika-engine/pyright-venv"
+    printf 'Memasang pyright di %s...\n' "$VENV"
+    python3 -m venv "$VENV" >/dev/null 2>&1 && \
+      "$VENV/bin/pip" install --quiet --upgrade pip >/dev/null 2>&1 && \
+      "$VENV/bin/pip" install --quiet pyright >/dev/null 2>&1 && \
+      ln -sf "$VENV/bin/pyright-langserver" "$HOME/.local/bin/pyright-langserver" 2>/dev/null && \
+      printf '  ok\n' || printf '  gagal (lewati)\n' >&2
+  fi
+
+  if ! command -v gopls >/dev/null 2>&1 && command -v go >/dev/null 2>&1; then
+    printf 'Memasang gopls...\n'
+    GOBIN="$HOME/.local/bin" go install golang.org/x/tools/gopls@latest >/dev/null 2>&1 && \
+      printf '  ok\n' || printf '  gagal (lewati)\n' >&2
+  fi
+}
+
+if [ "$WITH_TOOLS" = "1" ]; then
+  provision_tools || true
+fi
 
 if [ "$INSTALL_LAUNCHER" = "1" ]; then
   mkdir -p "$HOME/.local/bin"

@@ -2,8 +2,14 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "harmonika/harmonika-ai",
   "small_model": "harmonika/harmonika-ai",
-  "instructions": ["@HOME@/.config/harmonika/HARMONIKA.md"],
-  "skills": ["@HOME@/.config/harmonika-terminal/current/skills"],
+  "share": "disabled",
+  "snapshots": true,
+  "instructions": [
+    "@HOME@/.config/harmonika/HARMONIKA.md"
+  ],
+  "skills": [
+    "@HOME@/.config/harmonika-terminal/current/skills"
+  ],
   "provider": {
     "harmonika": {
       "npm": "@ai-sdk/openai-compatible",
@@ -12,16 +18,148 @@
         "apiKey": "{env:HARMONIKA_API_KEY}"
       },
       "models": {
-        "harmonika-ai": {"name": "Harmonika Ai", "attachment": false, "reasoning": false, "tool_call": true},
-        "harmonika-ai-codex": {"name": "Harmonika Ai Pro", "attachment": false, "reasoning": false, "tool_call": true},
-        "harmonika-ai-google": {"name": "Harmonika Ai Fast", "attachment": false, "reasoning": false, "tool_call": true}
+        "harmonika-ai": {
+          "name": "Harmonika Ai",
+          "attachment": false,
+          "reasoning": false,
+          "tool_call": true
+        },
+        "harmonika-ai-codex": {
+          "name": "Harmonika Ai Pro",
+          "attachment": false,
+          "reasoning": false,
+          "tool_call": true
+        },
+        "harmonika-ai-google": {
+          "name": "Harmonika Ai Fast",
+          "attachment": false,
+          "reasoning": false,
+          "tool_call": true
+        }
       }
+    }
+  },
+  "disabled_providers": [
+    "opencode"
+  ],
+  "agents": {
+    "plan": {
+      "description": "Rencana bertahap sebelum menulis kode",
+      "mode": "primary",
+      "system": "Susun rencana bertahap (maksimal 7 langkah) dengan risiko dan cara verifikasi. Jangan mengubah berkas pada mode ini."
+    },
+    "review": {
+      "description": "Tinjau diff: bug, keamanan, dan keterbacaan",
+      "mode": "subagent",
+      "system": "Tinjau hanya perubahan yang diberikan. Laporkan temuan dengan berkas, baris, alasan, dan usulan perbaikan. Jangan menulis ulang seluruh berkas."
+    },
+    "explore": {
+      "description": "Petakan kode untuk menjawab satu pertanyaan",
+      "mode": "subagent",
+      "system": "Telusuri kode dengan pencarian terarah. Kembalikan jalur berkas, simbol, dan alur datanya saja."
+    }
+  },
+  "commands": {
+    "test": {
+      "description": "Jalankan uji proyek dan ringkas kegagalan",
+      "template": "Jalankan uji proyek ini. Ringkas setiap kegagalan dengan berkas, baris, dan penyebab paling mungkin. Jangan ubah uji agar lulus."
+    },
+    "ship": {
+      "description": "Siapkan perubahan untuk dirilis",
+      "template": "Periksa diff, jalankan uji, lalu susun ringkasan perubahan dan risikonya. Jangan menandatangani atau menerbitkan apa pun."
+    }
+  },
+  "formatter": {
+    "prettier": {
+      "command": [
+        "prettier",
+        "--write",
+        "$FILE"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".json",
+        ".md",
+        ".css",
+        ".html"
+      ]
+    }
+  },
+  "lsp": {
+    "typescript": {
+      "command": [
+        "typescript-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs"
+      ]
+    },
+    "python": {
+      "command": [
+        "pyright-langserver",
+        "--stdio"
+      ],
+      "extensions": [
+        ".py",
+        ".pyi"
+      ]
+    },
+    "go": {
+      "command": [
+        "gopls"
+      ],
+      "extensions": [
+        ".go"
+      ]
+    },
+    "html": {
+      "command": [
+        "vscode-html-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".html",
+        ".htm"
+      ]
+    },
+    "css": {
+      "command": [
+        "vscode-css-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".css",
+        ".scss",
+        ".less"
+      ]
+    },
+    "json": {
+      "command": [
+        "vscode-json-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".json",
+        ".jsonc"
+      ]
     }
   },
   "mcp": {
     "harmonika": {
       "type": "local",
-      "command": ["@PYTHON@", "@MCP_SERVER@"],
+      "command": [
+        "@PYTHON@",
+        "@MCP_SERVER@"
+      ],
       "enabled": true
     }
   },
@@ -39,7 +177,11 @@
     "websearch": "allow",
     "lsp": "allow",
     "skill": "allow",
-    "external_directory": {"*": "allow"}
+    "external_directory": {
+      "*": "allow"
+    }
   },
-  "experimental": {"mcp_timeout": 600000}
+  "experimental": {
+    "mcp_timeout": 600000
+  }
 }
