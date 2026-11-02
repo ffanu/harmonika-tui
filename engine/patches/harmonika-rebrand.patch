@@ -1,0 +1,291 @@
+diff --git a/package.json b/package.json
+index 02e5cc8..ecc8711 100644
+--- a/package.json
++++ b/package.json
+@@ -1,8 +1,8 @@
+ {
+   "$schema": "https://json.schemastore.org/package.json",
+-  "name": "opencode",
+-  "description": "AI-powered development tool",
+-  "version": "2.2.5",
++  "name": "harmonika-tui",
++  "description": "Harmonika AI Terminal Workspace",
++  "version": "1.0.0",
+   "private": true,
+   "type": "module",
+   "packageManager": "bun@1.4.4",
+@@ -184,4 +184,4 @@
+     "@pierre/trees@1.0.0-beta.6": "patches/@pierre%2Ftrees@1.0.0-beta.6.patch",
+     "@brendonovich/vite-plugin-opencode@0.1.3": "patches/@brendonovich%2Fvite-plugin-opencode@0.1.3.patch"
+   }
+-}
++}
+\ No newline at end of file
+diff --git a/packages/cli/script/build.ts b/packages/cli/script/build.ts
+index 80a67fe..f5f18c5 100755
+--- a/packages/cli/script/build.ts
++++ b/packages/cli/script/build.ts
+@@ -185,7 +185,7 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
+       outfile: path.join(outdir, name, "bin", binary),
+       execArgv: [
+         "--smol",
+-        `--user-agent=opencode/${Script.channel}/${Script.version}/cli`,
++        `--user-agent=harmonika/${Script.channel}/${Script.version}/cli`,
+         "--use-system-ca",
+         "--no-warnings",
+         "--",
+@@ -193,9 +193,9 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
+       windows: {},
+     },
+     define: {
+-      OPENCODE_VERSION: `'${Script.version}'`,
+-      OPENCODE_CLI_NAME: "'opencode'",
+-      OPENCODE_CHANNEL: `'${Script.channel}'`,
++      OPENCODE_VERSION: `'1.0.0'`,
++      OPENCODE_CLI_NAME: "'harmonika'",
++      OPENCODE_CHANNEL: `'stable'`,
+       OPENCODE_ARTIFACT: `'cli'`,
+       ...(highlights ? { OPENCODE_RELEASE_HIGHLIGHTS: JSON.stringify(highlights) } : {}),
+       OPENCODE_LIBC: item.os === "linux" ? `'${item.abi ?? "glibc"}'` : "undefined",
+diff --git a/packages/cli/src/commands/commands.ts b/packages/cli/src/commands/commands.ts
+index f49959e..5939e56 100644
+--- a/packages/cli/src/commands/commands.ts
++++ b/packages/cli/src/commands/commands.ts
+@@ -46,13 +46,13 @@ const PermissionParams = {
+   ),
+ }
+ 
+-const Root = Spec.make(typeof OPENCODE_CLI_NAME === "string" ? OPENCODE_CLI_NAME : "opencode", {
+-  description: "OpenCode command line interface",
++const Root = Spec.make(typeof OPENCODE_CLI_NAME === "string" ? OPENCODE_CLI_NAME : "harmonika", {
++  description: "Harmonika AI Terminal Workspace",
+   params: {
+     ...ServerParams,
+     ...PermissionParams,
+     directory: Argument.String("directory").pipe(
+-      Argument.withDescription("Directory to start OpenCode in"),
++      Argument.withDescription("Directory to start Harmonika in"),
+       Argument.optional,
+     ),
+     continue: Flag.Boolean("continue").pipe(
+@@ -69,7 +69,7 @@ const Root = Spec.make(typeof OPENCODE_CLI_NAME === "string" ? OPENCODE_CLI_NAME
+   },
+   commands: [
+     Spec.make("upgrade", {
+-      description: "Upgrade OpenCode to the latest or a specific version",
++      description: "Upgrade Harmonika to the latest or a specific version",
+       aliases: ["update"],
+       params: {
+         target: Argument.String("target").pipe(
+@@ -84,7 +84,7 @@ const Root = Spec.make(typeof OPENCODE_CLI_NAME === "string" ? OPENCODE_CLI_NAME
+       },
+     }),
+     Spec.make("uninstall", {
+-      description: "Uninstall OpenCode, keeping session data, configuration, and state",
++      description: "Uninstall Harmonika, keeping session data, configuration, and state",
+       params: {
+         dryRun: Flag.Boolean("dry-run").pipe(
+           Flag.withDescription("Show what would be removed without removing"),
+@@ -398,7 +398,7 @@ const Root = Spec.make(typeof OPENCODE_CLI_NAME === "string" ? OPENCODE_CLI_NAME
+       },
+     }),
+     Spec.make("run", {
+-      description: "Run OpenCode with a message",
++      description: "Run Harmonika with a message",
+       globalFlags: ServerFlags,
+       params: {
+         message: Argument.String("message").pipe(
+diff --git a/packages/core/src/app.ts b/packages/core/src/app.ts
+index 2b3df29..2843bc7 100644
+--- a/packages/core/src/app.ts
++++ b/packages/core/src/app.ts
+@@ -15,7 +15,7 @@ export const Metadata = Context.Reference<Info>("@opencode/App", {
+ 
+ export function make(input: Partial<Info> = {}): Info {
+   return {
+-    name: input.name ?? "opencode",
++    name: input.name ?? "harmonika",
+     version: input.version ?? "unknown",
+     channel: input.channel ?? "unknown",
+   }
+diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
+index e7fa005..7476344 100644
+--- a/packages/core/src/config/discovery.ts
++++ b/packages/core/src/config/discovery.ts
+@@ -9,7 +9,7 @@ import { Location } from "../location.js"
+ import { AbsolutePath } from "../schema.js"
+ import type { Options } from "../config.js"
+ 
+-export const names = ["opencode.json", "opencode.jsonc"]
++export const names = ["config.json", "harmonika.json", "opencode.json", "opencode.jsonc"]
+ 
+ /** Eligible sources in priority order, including paths that may appear later. */
+ export interface Sources {
+@@ -27,7 +27,7 @@ export interface Sources {
+ /** Platform system configuration directory (`/Library/Application Support/opencode`, `/etc/opencode`, `%ProgramData%\opencode`). */
+ export function systemDirectory(platform: NodeJS.Platform = process.platform, env: NodeJS.ProcessEnv = process.env) {
+   if (platform === "darwin") return AbsolutePath.make("/Library/Application Support/opencode")
+-  if (platform === "win32") return AbsolutePath.make(path.join(env.ProgramData || "C:\\ProgramData", "opencode"))
++  if (platform === "win32") return AbsolutePath.make(path.join(env.ProgramData || "C:\\ProgramData", "harmonika-terminal"))
+   return AbsolutePath.make("/etc/opencode")
+ }
+ 
+diff --git a/packages/core/src/project.ts b/packages/core/src/project.ts
+index 63a523b..83f6116 100644
+--- a/packages/core/src/project.ts
++++ b/packages/core/src/project.ts
+@@ -307,7 +307,7 @@ const layer = Layer.effect(
+       })
+ 
+     const cached = Effect.fnUntraced(function* (dir: string) {
+-      return yield* fs.readFileString(path.join(dir, "opencode")).pipe(
++      return yield* fs.readFileString(path.join(dir, "harmonika")).pipe(
+         Effect.map((value) => value.trim()),
+         Effect.map((value) => (value ? ID.make(value) : undefined)),
+         Effect.orElseSucceed(() => undefined),
+diff --git a/packages/tui/package.json b/packages/tui/package.json
+index ca223b7..942bc54 100644
+--- a/packages/tui/package.json
++++ b/packages/tui/package.json
+@@ -76,4 +76,4 @@
+     "@types/bun": "catalog:",
+     "@typescript/native": "catalog:"
+   }
+-}
++}
+\ No newline at end of file
+diff --git a/packages/tui/src/component/logo.tsx b/packages/tui/src/component/logo.tsx
+index 2c3abc3..6fb07a3 100644
+--- a/packages/tui/src/component/logo.tsx
++++ b/packages/tui/src/component/logo.tsx
+@@ -8,6 +8,7 @@ import { go, logo } from "../logo"
+ export function Logo() {
+   const theme = useTheme()
+   const dimensions = useTerminalDimensions()
++  const accentOrange = RGBA.fromInts(255, 123, 0)
+ 
+   const renderLine = (line: string, fg: RGBA, bold: boolean): JSX.Element[] => {
+     const shadow = tint(theme.background.base, fg, 0.25)
+@@ -55,21 +56,21 @@ export function Logo() {
+         <For each={go.right.slice(1)}>
+           {(line) => <box flexDirection="row">{renderLine(line, theme.text.base, true)}</box>}
+         </For>
+-      ) : dimensions().width < 44 ? (
++      ) : dimensions().width < 76 ? (
+         <>
+           <For each={logo.left.slice(1)}>
+-            {(line) => <box flexDirection="row">{renderLine(line, theme.text.muted, false)}</box>}
++            {(line) => <box flexDirection="row">{renderLine(line, theme.text.base, true)}</box>}
+           </For>
+           <For each={logo.right}>
+-            {(line) => <box flexDirection="row">{renderLine(line, theme.text.base, true)}</box>}
++            {(line) => <box flexDirection="row">{renderLine(line, accentOrange, true)}</box>}
+           </For>
+         </>
+       ) : (
+         <For each={logo.left}>
+           {(line, index) => (
+             <box flexDirection="row" gap={1}>
+-              <box flexDirection="row">{renderLine(line, theme.text.muted, false)}</box>
+-              <box flexDirection="row">{renderLine(logo.right[index()], theme.text.base, true)}</box>
++              <box flexDirection="row">{renderLine(line, theme.text.base, true)}</box>
++              <box flexDirection="row">{renderLine(logo.right[index()], accentOrange, true)}</box>
+             </box>
+           )}
+         </For>
+diff --git a/packages/tui/src/logo.ts b/packages/tui/src/logo.ts
+index 8c570fb..0340db4 100644
+--- a/packages/tui/src/logo.ts
++++ b/packages/tui/src/logo.ts
+@@ -1,9 +1,31 @@
+ export const logo = {
+-  left: ["                   ", "█▀▀█ █▀▀█ █▀▀█ █▀▀▄", "█__█ █__█ █^^^ █__█", "▀▀▀▀ █▀▀▀ ▀▀▀▀ ▀~~▀"],
+-  right: ["             ▄     ", "█▀▀▀ █▀▀█ █▀▀█ █▀▀█", "█___ █__█ █__█ █^^^", "▀▀▀▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀▀"],
++  left: [
++    "                                                           ",
++    "█   █  ▄▀▀▀▄  █▀▀▀▄  █▀▄▀█  ▄▀▀▀▄  █▀▀▄█  ▀█▀  █  ▄▀  ▄▀▀▀▄",
++    "█▀▀▀█  █▀▀▀█  █▀▀▀▄  █ ▀ █  █   █  █  ▀█   █   █▀▀▄   █▀▀▀█",
++    "▀   ▀  ▀   ▀  ▀   ▀  ▀   ▀   ▀▀▀   ▀   ▀  ▀▀▀  ▀   ▀  ▀   ▀",
++  ],
++  right: [
++    "            ",
++    "  ▄▀▀▀▄  ▀█▀",
++    "  █▀▀▀█   █ ",
++    "  ▀   ▀  ▀▀▀",
++  ],
+ }
+ 
+ export const go = {
+-  left: ["    ", "█▀▀▀", "█_^█", "▀▀▀▀"],
+-  right: ["    ", "█▀▀█", "█__█", "▀▀▀▀"],
++  left: [
++    "             ",
++    "█   █  ▄▀▀▀▄",
++    "█▀▀▀█  █▀▀▀█",
++    "▀   ▀  ▀   ▀",
++  ],
++  right: [
++    "          ",
++    "▄▀▀▀▄  ▀█▀",
++    "█▀▀▀█   █ ",
++    "▀   ▀  ▀▀▀",
++  ],
+ }
++
++
+diff --git a/packages/tui/src/util/presentation.ts b/packages/tui/src/util/presentation.ts
+index d6416a0..17db950 100644
+--- a/packages/tui/src/util/presentation.ts
++++ b/packages/tui/src/util/presentation.ts
+@@ -17,8 +17,8 @@ function wordmark(pad = "") {
+       .join("")
+ 
+   return logo.left.map((line, index) => {
+-    const left = draw(line, dim, "\x1b[38;5;235m", "\x1b[48;5;235m")
+-    const right = draw(logo.right[index] ?? "", reset, "\x1b[38;5;238m", "\x1b[48;5;238m")
++    const left = draw(line, "\x1b[1;97m", "\x1b[38;5;235m", "\x1b[48;5;235m")
++    const right = draw(logo.right[index] ?? "", "\x1b[1;38;2;255;123;0m", "\x1b[38;5;238m", "\x1b[48;5;238m")
+     return `${pad}${left} ${right}`
+   })
+ }
+@@ -33,10 +33,10 @@ export function epilogue(input: { readonly session?: SessionEpilogue; readonly u
+     ...wordmark("  "),
+     "",
+     ...(input.updatedVersion
+-      ? [`  ${dim}Run ${reset}${bold}opencode${reset}${dim} to use ${reset}${bold}${input.updatedVersion}${reset}`, ""]
++      ? [`  ${dim}Run ${reset}${bold}harmonika${reset}${dim} to use ${reset}${bold}${input.updatedVersion}${reset}`, ""]
+       : []),
+     ...(input.session
+-      ? [row("Session", input.session.title), row("Continue", `opencode -s ${input.session.sessionID}`), ""]
++      ? [row("Session", input.session.title), row("Continue", `harmonika -s ${input.session.sessionID}`), ""]
+       : []),
+   ].join("\n")
+ }
+diff --git a/packages/util/src/global.ts b/packages/util/src/global.ts
+index 5fe51f8..f6c95ec 100644
+--- a/packages/util/src/global.ts
++++ b/packages/util/src/global.ts
+@@ -9,12 +9,12 @@ import { roots } from "#global-roots"
+ import { Flock } from "./flock.js"
+ import { makeGlobalNode } from "./effect/app-node.js"
+ 
+-const app = "opencode"
++const app = "harmonika-terminal"
+ const { data, cache, config, state, tmp } = roots(app)
+ 
+ const paths = {
+   get home() {
+-    return process.env.OPENCODE_TEST_HOME ?? os.homedir()
++    return process.env.HARMONIKA_TEST_HOME ?? os.homedir()
+   },
+   data,
+   bin: path.join(cache, "bin"),
+@@ -76,7 +76,7 @@ const acquire = (input: Partial<Interface>) =>
+ 
+ const layer = Layer.effect(
+   Service,
+-  Effect.suspend(() => acquire({ config: process.env.OPENCODE_CONFIG_DIR ?? Path.config })),
++  Effect.suspend(() => acquire({ config: process.env.HARMONIKA_CONFIG_DIR ?? Path.config })),
+ )
+ 
+ export const node = makeGlobalNode({ service: Service, layer: layer, deps: [] })

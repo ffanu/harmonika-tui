@@ -1,0 +1,45 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "harmonika/harmonika-ai",
+  "small_model": "harmonika/harmonika-ai",
+  "instructions": ["@HOME@/.config/harmonika/HARMONIKA.md"],
+  "skills": ["@HOME@/.config/harmonika-terminal/current/skills"],
+  "provider": {
+    "harmonika": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://chat.harmonika.id/v1",
+        "apiKey": "{env:HARMONIKA_API_KEY}"
+      },
+      "models": {
+        "harmonika-ai": {"name": "Harmonika Ai", "attachment": false, "reasoning": false, "tool_call": true},
+        "harmonika-ai-codex": {"name": "Harmonika Ai Pro", "attachment": false, "reasoning": false, "tool_call": true},
+        "harmonika-ai-google": {"name": "Harmonika Ai Fast", "attachment": false, "reasoning": false, "tool_call": true}
+      }
+    }
+  },
+  "mcp": {
+    "harmonika": {
+      "type": "local",
+      "command": ["@PYTHON@", "@MCP_SERVER@"],
+      "enabled": true
+    }
+  },
+  "permission": {
+    "read": "allow",
+    "edit": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "bash": "allow",
+    "task": "allow",
+    "todowrite": "allow",
+    "question": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "lsp": "allow",
+    "skill": "allow",
+    "external_directory": {"*": "allow"}
+  },
+  "experimental": {"mcp_timeout": 600000}
+}

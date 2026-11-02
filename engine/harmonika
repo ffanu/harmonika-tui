@@ -1,0 +1,50 @@
+#!/bin/sh
+# Harmonika TUI launcher (portable).
+# Reads the Harmonika API key from the environment or the owner-only key file,
+# then execs the rebranded TUI binary. No key is ever written to config.
+set -e
+
+case "$0" in
+  */*) SELF_DIR=$(cd "$(dirname "$0")" && pwd) ;;
+  *) SELF_DIR=$(cd "$(dirname "$(command -v "$0")")" && pwd) ;;
+ esac
+ENGINE_HOME="${HARMONIKA_ENGINE_HOME:-$SELF_DIR}"
+
+if [ -z "${HARMONIKA_API_KEY:-}" ]; then
+  for candidate in "$HOME/.config/harmonika/harmonika-api-key" \
+                   "$HOME/.config/harmonika-terminal/api-key"; do
+    if [ -r "$candidate" ]; then
+      HARMONIKA_API_KEY=$(tr -d '\r\n' < "$candidate")
+      export HARMONIKA_API_KEY
+      break
+    fi
+  done
+fi
+
+if [ -z "${HARMONIKA_API_KEY:-}" ]; then
+  printf '%s\n' "Harmonika AI: API key belum diset." \
+    "Jalankan: harmonika-setup   (atau: export HARMONIKA_API_KEY=hai_live_...)" >&2
+  exit 2
+fi
+
+export HARMONIKA_GLOBAL_CONFIG="${HARMONIKA_GLOBAL_CONFIG:-$HOME/.config/harmonika-terminal}"
+export OPENCODE_CONFIG_DIR="$HARMONIKA_GLOBAL_CONFIG"
+
+for dir in "$ENGINE_HOME/bin" "$HOME/.local/share/harmonika-engine/bin"; do
+  if [ -x "$dir/harmonika" ]; then
+    BINARY="$dir/harmonika"
+    break
+  fi
+done
+
+if [ -z "${BINARY:-}" ]; then
+  printf '%s\n' "Harmonika AI: binary tidak ditemukan." \
+    "Letakkan binary di $ENGINE_HOME/bin/harmonika atau jalankan script build di engine/README.md" >&2
+  exit 1
+fi
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  xattr -d com.apple.quarantine "$BINARY" 2>/dev/null || true
+fi
+
+exec "$BINARY" "$@"
