@@ -1,0 +1,32 @@
+From 0f7ebd07e20cc738d042e2daffabc3993ab39ffa Mon Sep 17 00:00:00 2001
+From: Harmonika AI <dev@harmonika.id>
+Date: Mon, 2 Nov 2026 21:08:08 +0700
+Subject: [PATCH 4/4] upgrade: detect an interactive terminal via stdin or
+ stdout
+
+Bun does not always report stdin as a TTY even inside a real terminal, so the
+Yes/No/Later prompt was skipped. Accept either stream, and allow
+HARMONIKA_UPGRADE_PROMPT=1 to force the prompt for tests and wrappers.
+---
+ packages/cli/src/commands/handlers/upgrade.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/packages/cli/src/commands/handlers/upgrade.ts b/packages/cli/src/commands/handlers/upgrade.ts
+index caff7af..62bd4b7 100644
+--- a/packages/cli/src/commands/handlers/upgrade.ts
++++ b/packages/cli/src/commands/handlers/upgrade.ts
+@@ -149,7 +149,10 @@ function recordDeferral(version: string) {
+  * upgrade so automation never hangs waiting for stdin.
+  */
+ const askDecision = Effect.fnUntraced(function* (target: string) {
+-  if (!process.stdin.isTTY || process.env.HARMONIKA_UPGRADE_ASSUME_YES === "1") return "yes" as const
++  // Bun does not always mark stdin as a TTY even under a real terminal, so accept either
++  // stream. Automation can force the non-interactive path explicitly.
++  const interactive = Boolean(process.stdin.isTTY || process.stdout.isTTY || process.env.HARMONIKA_UPGRADE_PROMPT === "1")
++  if (!interactive || process.env.HARMONIKA_UPGRADE_ASSUME_YES === "1") return "yes" as const
+   const answer = yield* Effect.promise(() =>
+     select<string>({
+       message: `Pembaruan ${Brand.product} ${OPENCODE_VERSION} → ${target}. Pilih tindakan:`,
+-- 
+2.54.0 (Apple Git-157)
+

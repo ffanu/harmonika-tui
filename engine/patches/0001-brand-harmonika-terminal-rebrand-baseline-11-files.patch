@@ -1,7 +1,7 @@
-From 85634c8b411e2bd23444b9de794183c125b9469d Mon Sep 17 00:00:00 2001
+From bfc3805e58d571459a122c323e7fbefb3319cb99 Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:33:58 +0700
-Subject: [PATCH 1/2] brand: harmonika terminal rebrand baseline (11 files)
+Subject: [PATCH 1/4] brand: harmonika terminal rebrand baseline (11 files)
 
 ---
  package.json                          |  8 +++----

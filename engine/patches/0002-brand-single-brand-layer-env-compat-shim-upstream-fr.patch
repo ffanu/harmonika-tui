@@ -1,7 +1,7 @@
-From 5be0ae48b030af1a9b803e1010e2f41023841dc6 Mon Sep 17 00:00:00 2001
+From e747c3e3c437963a0a36600a535a3ebb5bb5cd3a Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:40:59 +0700
-Subject: [PATCH 2/2] brand: single brand layer, env compat shim, upstream-free
+Subject: [PATCH 2/4] brand: single brand layer, env compat shim, upstream-free
  distribution
 
 - packages/util/src/brand.ts is the only place product identity lives; config dir,

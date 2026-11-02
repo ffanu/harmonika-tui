@@ -26,10 +26,10 @@ for target in $TARGETS; do
   rm -rf dist
   OPENCODE_TARGET="$target" "$BUN" run script/build.ts
   case "$target" in
-    windows-*) name=harmonika-${target}.exe ;;
-    *) name=harmonika-${target} ;;
+    windows-*) name=harmonika-${target}.exe; artifact=opencode.exe ;;
+    *) name=harmonika-${target}; artifact=opencode ;;
   esac
-  cp "dist/cli-$target/bin/opencode" "$OUT/$name"
+  cp "dist/cli-$target/bin/$artifact" "$OUT/$name"
   chmod +x "$OUT/$name"
   shasum -a 256 "$OUT/$name" | awk '{print "   sha256 " $1}'
 done

@@ -11,9 +11,11 @@ set -eu
 SELF_DIR=$(cd "$(dirname "$0")" && pwd)
 ROOT=$(cd "$SELF_DIR/../.." && pwd)
 SRC=${SRC:-$HOME/Projects/harmonika-tui-src}
-BASE=${1:-$(git -C "$SRC" rev-parse harmonika/main~2)}
 BRANCH=${BRANCH:-harmonika/main}
 PATCHES="$ROOT/engine/patches"
+COUNT=$(ls "$PATCHES"/*.patch 2>/dev/null | wc -l | tr -d ' ')
+[ "$COUNT" -gt 0 ] || { echo "tidak ada patch di $PATCHES" >&2; exit 1; }
+BASE=${1:-$(git -C "$SRC" rev-parse "harmonika/main~$COUNT")}
 WORK=$(mktemp -d /tmp/harmonika-verify.XXXXXX)
 
 trap 'git -C "$SRC" worktree remove --force "$WORK" >/dev/null 2>&1 || rm -rf "$WORK"' EXIT

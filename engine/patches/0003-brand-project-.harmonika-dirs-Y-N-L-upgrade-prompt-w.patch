@@ -1,0 +1,281 @@
+From c4db12fe8ccae9ed3475d04401580489a1cb43fa Mon Sep 17 00:00:00 2001
+From: Harmonika AI <dev@harmonika.id>
+Date: Mon, 2 Nov 2026 20:54:59 +0700
+Subject: [PATCH 3/4] brand: project .harmonika dirs, Y/N/L upgrade prompt with
+ changelog
+
+- config/discovery.ts reads Brand.projectDirs (.harmonika then .opencode) for project
+  config directories instead of the hardcoded upstream name.
+- mcp/add.ts prefers config.json/harmonika.json and scans every project dir.
+- plan plugin adopts .harmonika for new installs but keeps an existing .opencode/plan.
+- retained-image and updater recognise the branded install path.
+- upgrade shows the manifest changelog, then asks [Y] Yes / [N] No / [L] Later; non-TTY
+  sessions proceed automatically. Later writes a marker that surfaces as a startup
+  reminder and is cleared once the upgrade lands.
+---
+ packages/cli/src/commands/handlers/default.ts | 18 +++++++
+ packages/cli/src/commands/handlers/mcp/add.ts | 10 ++--
+ packages/cli/src/commands/handlers/upgrade.ts | 54 ++++++++++++++++++-
+ packages/cli/src/services/retained-image.ts   |  4 +-
+ packages/cli/src/services/updater.ts          |  4 +-
+ packages/core/src/config/discovery.ts         |  9 ++--
+ packages/core/src/plugin/plan.ts              |  8 ++-
+ 7 files changed, 95 insertions(+), 12 deletions(-)
+
+diff --git a/packages/cli/src/commands/handlers/default.ts b/packages/cli/src/commands/handlers/default.ts
+index d7c36fe..cc700fb 100644
+--- a/packages/cli/src/commands/handlers/default.ts
++++ b/packages/cli/src/commands/handlers/default.ts
+@@ -15,6 +15,8 @@ import { Service } from "@opencode/client/effect/service"
+ import { OpenCode } from "@opencode/client/promise"
+ import { findSession } from "../../session-target"
+ import { errorMessage } from "../../util/error"
++import { readFileSync } from "node:fs"
++import path from "node:path"
+ 
+ export default Runtime.handler(Commands, (input) =>
+   Effect.gen(function* () {
+@@ -66,6 +68,11 @@ export default Runtime.handler(Commands, (input) =>
+     const resultListeners = new Set<(result: Updater.RunResult) => void>()
+     // Background checks, `/update` lookups, and manual installs take turns so two installs never overlap.
+     const checking = yield* Semaphore.make(1)
++    // A deferred upgrade reminds once per launch. Everything else stays silent: engine
++    // updates are published by Harmonika ID, not by the upstream checker.
++    const deferredNotice = deferredUpgrade()
++    if (deferredNotice) log.warn(`Pembaruan ${deferredNotice} ditunda. Jalankan ` + "`harmonika upgrade`" + " untuk memasangnya.")
++
+     // Engine updates are published by Harmonika ID, so the upstream auto-check is off
+     // unless an operator opts in explicitly.
+     if (process.env.HARMONIKA_ENGINE_AUTOCHECK === "1")
+@@ -161,3 +168,14 @@ export default Runtime.handler(Commands, (input) =>
+     }).pipe(Effect.provide(LayerNode.compile(Global.node)))
+   }),
+ )
++
++/** Read the deferred-upgrade marker written by `harmonika upgrade` when the user picks Later. */
++function deferredUpgrade(): string | undefined {
++  try {
++    const file = path.join(path.dirname(process.execPath), ".harmonika-update-deferred")
++    const value = readFileSync(file, "utf8").trim()
++    return value || undefined
++  } catch {
++    return undefined
++  }
++}
+diff --git a/packages/cli/src/commands/handlers/mcp/add.ts b/packages/cli/src/commands/handlers/mcp/add.ts
+index 9e8a708..c52fbe3 100644
+--- a/packages/cli/src/commands/handlers/mcp/add.ts
++++ b/packages/cli/src/commands/handlers/mcp/add.ts
+@@ -6,6 +6,7 @@ import { applyEdits, modify } from "jsonc-parser"
+ import { Global } from "@opencode/util/global"
+ import { Commands } from "../../commands"
+ import { Runtime } from "../../../framework/runtime"
++import { Brand } from "@opencode/util/brand"
+ 
+ export default Runtime.handler(
+   Commands.commands.mcp.commands.add,
+@@ -39,10 +40,11 @@ export default Runtime.handler(
+ 
+ export async function resolveConfigPath(directory: string) {
+   const candidates = [
+-    path.join(directory, "opencode.json"),
+-    path.join(directory, "opencode.jsonc"),
+-    path.join(directory, ".opencode", "opencode.json"),
+-    path.join(directory, ".opencode", "opencode.jsonc"),
++    path.join(directory, "config.json"),
++    path.join(directory, "harmonika.json"),
++    ...Brand.projectDirs.flatMap((dir) =>
++      Brand.configNames.map((name) => path.join(directory, dir, name)),
++    ),
+   ]
+   for (const candidate of candidates) {
+     if (
+diff --git a/packages/cli/src/commands/handlers/upgrade.ts b/packages/cli/src/commands/handlers/upgrade.ts
+index 80897a1..caff7af 100644
+--- a/packages/cli/src/commands/handlers/upgrade.ts
++++ b/packages/cli/src/commands/handlers/upgrade.ts
+@@ -1,4 +1,4 @@
+-import { log } from "@clack/prompts"
++import { isCancel, log, select } from "@clack/prompts"
+ import { Effect, Option } from "effect"
+ import { createHash } from "node:crypto"
+ import { chmod, copyFile, rename, rm, writeFile } from "node:fs/promises"
+@@ -79,6 +79,10 @@ export default Runtime.handler(
+       return
+     }
+ 
++    // Changelog: the manifest notes describe what the new build changes, so the decision is
++    // informed instead of blind. Notes are plain text from Harmonika ID.
++    for (const note of manifest.notes ?? []) log.info(`• ${note}`)
++
+     const key = platformKey()
+     const entry = manifest.binaries?.[key]
+     if (!entry?.url || !entry.sha256)
+@@ -88,6 +92,17 @@ export default Runtime.handler(
+         ),
+       )
+ 
++    const decision = yield* askDecision(target)
++    if (decision === "later") {
++      recordDeferral(target)
++      log.warn(`Ditunda. Harmonika akan menanyakan lagi saat dibuka berikutnya (${OPENCODE_VERSION} → ${target}).`)
++      return
++    }
++    if (decision === "no") {
++      log.info("Dilewati. Jalankan `harmonika upgrade` kapan saja untuk memperbarui.")
++      return
++    }
++
+     const downloaded = yield* download(entry.url, entry.sha256)
+     const current = process.execPath
+     if (process.platform === "win32") {
+@@ -107,8 +122,45 @@ export default Runtime.handler(
+       },
+       catch: (cause) => new Error(`Gagal memasang binary baru: ${String(cause)}`),
+     })
++    try {
++      rm(deferralPath(), { force: true })
++    } catch {
++      // best effort
++    }
+     log.success(`${Brand.product} engine diperbarui ${OPENCODE_VERSION} → ${target}. Cadangan: ${backup}`)
+     log.info("Jalankan ulang `harmonika` untuk memakai versi baru.")
+     for (const note of manifest.notes ?? []) log.info(`• ${note}`)
+   }),
+ )
++
++/** Deferral marker so the next launch can ask again instead of silently staying stale. */
++const deferralPath = () => path.join(path.dirname(process.execPath), `.${Brand.cliName}-update-deferred`)
++
++function recordDeferral(version: string) {
++  try {
++    require("node:fs").writeFileSync(deferralPath(), `${version}\n`)
++  } catch {
++    // A read-only install directory must not break the command.
++  }
++}
++
++/**
++ * Ask Yes / No / Later. Non-interactive sessions (pipes, CI, `--auto`) proceed with the
++ * upgrade so automation never hangs waiting for stdin.
++ */
++const askDecision = Effect.fnUntraced(function* (target: string) {
++  if (!process.stdin.isTTY || process.env.HARMONIKA_UPGRADE_ASSUME_YES === "1") return "yes" as const
++  const answer = yield* Effect.promise(() =>
++    select<string>({
++      message: `Pembaruan ${Brand.product} ${OPENCODE_VERSION} → ${target}. Pilih tindakan:`,
++      initialValue: "yes",
++      options: [
++        { value: "yes", label: "[Y] Yes", hint: "pasang sekarang" },
++        { value: "no", label: "[N] No", hint: "lewati, tanpa pengingat" },
++        { value: "later", label: "[L] Later", hint: "ingatkan lagi saat harmonika dibuka" },
++      ],
++    }),
++  )
++  if (isCancel(answer)) return "no" as const
++  return answer === "yes" || answer === "later" ? (answer as "yes" | "later") : ("no" as const)
++})
+diff --git a/packages/cli/src/services/retained-image.ts b/packages/cli/src/services/retained-image.ts
+index ef1521a..6914b66 100644
+--- a/packages/cli/src/services/retained-image.ts
++++ b/packages/cli/src/services/retained-image.ts
+@@ -3,6 +3,7 @@ export * as RetainedImage from "./retained-image"
+ import { Effect, FileSystem } from "effect"
+ import { randomBytes } from "node:crypto"
+ import path from "node:path"
++import { Brand } from "@opencode/util/brand"
+ 
+ // Windows refuses to delete the last hard link of a running executable, and bun 1.4 spins
+ // forever when its package replacement meets one. Any other link to the image can be removed,
+@@ -61,7 +62,8 @@ export function installed(home: string) {
+   return (
+     executable.split(path.sep).includes("node_modules") ||
+     /[\\/]winget[\\/]packages[\\/]/i.test(executable) ||
+-    executable === path.resolve(home, ".opencode", "bin", "opencode.exe")
++    Brand.projectDirs.some((dir) => executable === path.resolve(home, dir, "bin", `${Brand.cliName}.exe`)) ||
++    Brand.projectDirs.some((dir) => executable === path.resolve(home, dir, "bin", Brand.cliName))
+   )
+ }
+ 
+diff --git a/packages/cli/src/services/updater.ts b/packages/cli/src/services/updater.ts
+index bb31b34..df1153d 100644
+--- a/packages/cli/src/services/updater.ts
++++ b/packages/cli/src/services/updater.ts
+@@ -190,9 +190,9 @@ const make = Effect.gen(function* () {
+ 
+   const curlPath = path.resolve(
+     global.home,
+-    ".opencode",
++    Brand.projectDirs[0]!,
+     "bin",
+-    process.platform === "win32" ? "opencode.exe" : "opencode",
++    process.platform === "win32" ? `${Brand.cliName}.exe` : Brand.cliName,
+   )
+   const curlBinary = yield* fs.realPath(curlPath).pipe(Effect.orElseSucceed(() => curlPath))
+ 
+diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
+index 24bcd84..f8a8c42 100644
+--- a/packages/core/src/config/discovery.ts
++++ b/packages/core/src/config/discovery.ts
+@@ -12,6 +12,9 @@ import type { Options } from "../config.js"
+ 
+ export const names = [...Brand.configNames]
+ 
++/** Per-project directories, newest first; the legacy upstream name stays readable. */
++export const projectDirs = [...Brand.projectDirs]
++
+ /** Eligible sources in priority order, including paths that may appear later. */
+ export interface Sources {
+   readonly system?: { readonly path: AbsolutePath; readonly present: boolean }
+@@ -80,7 +83,7 @@ export const discover = Effect.fn("ConfigDiscovery.discover")(function* (options
+     globalRoots.slice(0, configDirectories.length).includes(current) || options?.project === false
+       ? []
+       : yield* fs.up({ targets: ["."], start: location.directory }).pipe(Effect.orDie)
+-  const candidates = [".claude", ".agents", ".opencode", ...names.toReversed()]
++  const candidates = [".claude", ".agents", ...projectDirs, ...names.toReversed()]
+   const discovered = yield* Effect.forEach(
+     directories,
+     (directory) =>
+@@ -141,9 +144,9 @@ export const discover = Effect.fn("ConfigDiscovery.discover")(function* (options
+     preferences,
+     global: globalEnabled ? globalDirectory : undefined,
+     explicit: options?.file ? AbsolutePath.make(path.resolve(options.file)) : undefined,
+-    direct: visible.filter((item) => ![".agents", ".claude", ".opencode"].includes(path.basename(item))).toReversed(),
++    direct: visible.filter((item) => ![".agents", ".claude", ...projectDirs].includes(path.basename(item))).toReversed(),
+     project: yield* Effect.forEach(
+-      visibleEntries.filter((entry) => path.basename(entry.item) === ".opencode").toReversed(),
++      visibleEntries.filter((entry) => projectDirs.includes(path.basename(entry.item))).toReversed(),
+       (entry) =>
+         entry.missing
+           ? Effect.succeed({ path: entry.item, present: false })
+diff --git a/packages/core/src/plugin/plan.ts b/packages/core/src/plugin/plan.ts
+index 63939de..df1c6d7 100644
+--- a/packages/core/src/plugin/plan.ts
++++ b/packages/core/src/plugin/plan.ts
+@@ -6,8 +6,10 @@ import { Agent } from "@opencode/schema/agent"
+ import type { SessionEvent } from "@opencode/schema/session-event"
+ import { Global } from "@opencode/util/global"
+ import { Effect, Stream } from "effect"
++import { existsSync } from "node:fs"
+ import path from "path"
+ import { Permission } from "../permission.js"
++import { Brand } from "@opencode/util/brand"
+ 
+ const plan = Agent.ID.make("plan")
+ 
+@@ -28,7 +30,11 @@ export const Plugin = define({
+   id: "opencode.plan",
+   effect: Effect.fn(function* (ctx) {
+     const global = yield* Global.Service
+-    const directory = path.join(global.home, ".opencode", "plan")
++    // Plans used to live under the upstream directory; adopt the brand directory for new
++    // installs but never orphan plans that already exist there.
++    const legacy = path.join(global.home, Brand.projectDirs[1] ?? ".opencode", "plan")
++    const branded = path.join(global.home, Brand.projectDirs[0]!, "plan")
++    const directory = existsSync(legacy) ? legacy : branded
+     const enterReminder = enter(directory)
+     yield* ctx.agent.transform((editor) => {
+       editor.update(plan, (item) => {
+-- 
+2.54.0 (Apple Git-157)
+

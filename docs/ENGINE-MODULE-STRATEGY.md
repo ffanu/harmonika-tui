@@ -181,3 +181,21 @@ Sisa pekerjaan yang **belum** dikerjakan dan alasannya:
 - **Rename `.opencode/` -> `.harmonika/` di project**: `Brand.projectDirs` sudah menyiapkannya, tetapi pemetaan masih membaca `.opencode`; migrasi butuh keputusan produk.
 - **LSP live `ready`**: config sudah menyiapkan 6 server; instalasi binary-nya bergantung pada `npm`/`go`/`pip` di mesin pengguna (installer melaporkan bila dilewati).
 - **Rebase 47 commit upstream**: sengaja ditunda sampai patch series ini stabil dan teruji.
+
+## 12. Lanjutan: A2, A3, A5, A4, A1 (selesai)
+
+| Item | Hasil terukur |
+| --- | --- |
+| **A2** LSP + formatter nyata | `typescript-language-server`, `vscode-{html,css,json}-language-server`, `prettier` (npm) dan `pyright-langserver` (venv) terpasang. Config hasil install: LSP = `typescript, python, html, css, json`; formatter = `prettier`. `go` otomatis dibuang karena `gopls` tidak ada. |
+| **A3** Direktori proyek `.harmonika/` | `discovery.ts` memakai `Brand.projectDirs`; `mcp/add.ts`, `plan.ts`, `retained-image.ts`, `updater.ts` mengikuti. Proyek dengan `.opencode/` lama tetap terbaca, dan `plan` tidak memindahkan direktori yang sudah berisi rencana. |
+| **A5** Prompt `[Y] Yes / [N] No / [L] Later` | Changelog dari `manifest.notes` tampil sebelum prompt. Uji PTY: memilih **Later** menghasilkan `Ditunda. Harmonika akan menanyakan lagi...` dan marker `.harmonika-update-deferred` berisi `1.0.9`. Non-TTY otomatis lanjut; `HARMONIKA_UPGRADE_ASSUME_YES=1` memaksa lanjut, `HARMONIKA_UPGRADE_PROMPT=1` memaksa prompt. Deteksi TTY memakai `stdin` **atau** `stdout` karena Bun tidak selalu menandai stdin. |
+| **A4** Binary semua platform | `darwin-arm64` 230 MB, `darwin-x64` 244 MB, `linux-x64` 257 MB, `linux-arm64` 252 MB, `windows-x64.exe` 264 MB. Manifest memuat 5 platform; sha256 tiap binary diverifikasi cocok antara lokal dan server. |
+| **A1** Rebase 47 commit upstream | `git rebase origin/dev` ke `67139d6` **tanpa konflik**; patch series diperbarui jadi 3 commit dan `verify-patches.sh` membuktikan reproduksi tree. Seluruh binary A4 dibangun dari source yang sudah ter-rebase. |
+
+Verifikasi cepat:
+
+```bash
+engine/scripts/verify-patches.sh                       # tree patch == harmonika/main
+engine/scripts/smoke-engine.sh engine/bin/harmonika-darwin-arm64
+curl -s https://chat.harmonika.id/assets/harmonika-terminal/engine/update.json | python3 -m json.tool
+```
