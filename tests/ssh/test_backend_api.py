@@ -55,6 +55,11 @@ class API(unittest.IsolatedAsyncioTestCase):
   r=await self.client.post('/api/v1/ssh/test',json={'target':'stage'},headers=self.headers);v=await r.json();self.assertEqual(r.status,200,v);self.assertTrue(v['success'])
  async def test_real_command(self):
   r=await self.client.post('/api/v1/ssh/execute',json={'target':'stage','command':'uname -s'},headers=self.headers);v=await r.json();self.assertEqual(r.status,200,v);self.assertIn(os.uname().sysname,v['data']['stdout'])
+ async def test_routeros_command_and_discovery(self):
+  value=json.loads(self.fixture.config.read_text());t=value['targets']['stage'];t.update(platform='routeros',allowed_routeros_paths=['/system/resource'],allow_upload=False,allow_download=False);t.pop('remote_root');self.fixture.config.write_text(json.dumps(value))
+  r=await self.client.get('/api/v1/ssh/targets',headers=self.auth);self.assertEqual((await r.json())['targets'][0]['platform'],'routeros')
+  r=await self.client.post('/api/v1/ssh/execute',json={'target':'stage','command':'/system resource print'},headers=self.headers);v=await r.json();self.assertEqual(r.status,200,v);self.assertIn('fixture-routeros',v['data']['stdout'])
+  r=await self.client.post('/api/v1/ssh/execute',json={'target':'stage','command':'/system reboot'},headers=self.headers);self.assertEqual(r.status,403)
  async def test_no_auth_denied(self):
   r=await self.client.post('/api/v1/ssh/test',json={'target':'stage'});self.assertEqual(r.status,401)
  async def test_public_token_denied(self):

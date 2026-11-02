@@ -102,7 +102,8 @@ def event_lines(data,level='ALL'):
 
 
 HELP=['F2  Metrik perangkat dan koneksi','F3  Kejadian teknis (1 Semua · 2 Info · 3 Warn · 4 Error)',
-      'F4  File + pratinjau kode','F5  Git diff (hanya lihat)','F7  Terminal proyek','F8  Respons/proses berjalan','F11 Zoom / Zen',
+      'F4  File + pratinjau kode','F5  Git diff (hanya lihat)','Ctrl+V / F6  Tempel path file Finder atau teks (tanpa lampiran gambar)',
+      'F7  Terminal proyek','F8  Respons/proses berjalan','F11 Zoom / Zen',
       '', 'Ctrl+P · Shift+Tab · input tetap mengikuti TUI native.',
       'File: / cari · Tab fokus · ↑↓ navigasi · Enter kode · c salin · e edit · r run · q tutup.',
       'Kode penuh memakai penomoran dan syntax highlighting dari bat.',

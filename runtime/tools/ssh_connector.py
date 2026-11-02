@@ -5,6 +5,13 @@ from contextlib import contextmanager
 
 LIMIT = 10 * 1024 * 1024
 OUTPUT_LIMIT = 65536
+# Explicit read-only RouterOS menus. Never allow arbitrary scripts/export/secrets.
+ROUTEROS_PATHS = frozenset(('/system/resource', '/system/identity', '/system/routerboard',
+ '/system/package', '/system/clock', '/system/health', '/interface', '/interface/ethernet',
+ '/interface/bridge', '/interface/bridge/port', '/interface/bridge/vlan', '/interface/vlan',
+ '/ip/address', '/ip/route', '/ipv6/address', '/ipv6/route', '/ip/dns', '/ip/service',
+ '/ip/firewall/filter', '/ip/firewall/nat', '/ip/firewall/mangle', '/ip/firewall/raw',
+ '/ipv6/firewall/filter', '/queue/simple', '/queue/tree', '/ppp/active'))
 SKILLS = ('ssh.connect', 'ssh.exec', 'ssh.upload', 'ssh.download', 'ssh.tunnel')
 FIELDS = {
  'ssh.connect': {'target'},
@@ -54,11 +61,34 @@ def target(config, alias):
  require(type(t.get('port',22)) is int and 1 <= t.get('port',22) <= 65535, 'invalid_config')
  require(type(t.get('username')) is str and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_.-]{0,63}', t['username']), 'invalid_config')
  require(t['username'] != 'root' or t.get('allow_root') is True, 'root_not_authorized')
- private_file(t.get('identity_file',''))
+ require(t.get('platform','posix') in ('posix','routeros'), 'invalid_config')
+ require(t.get('auth_method','public_key') in ('public_key','password'), 'invalid_config')
+ private_file(t.get('password_file','') if t.get('auth_method')=='password' else t.get('identity_file',''))
  private_file(t.get('known_hosts',''), private=False)
  require(type(t.get('allowed_executables',[])) is list and all(type(x) is str and x.startswith('/') and '\x00' not in x for x in t.get('allowed_executables',[])), 'invalid_config')
- require(type(t.get('remote_root')) is str and t['remote_root'].startswith('/') and '..' not in PurePosixPath(t['remote_root']).parts, 'invalid_config')
+ if t.get('platform')=='routeros':
+  paths=t.get('allowed_routeros_paths',[])
+  require(type(paths) is list and bool(paths) and all(type(x) is str and x in ROUTEROS_PATHS for x in paths), 'invalid_config')
+  require(not t.get('allow_upload') and not t.get('allow_download') and not t.get('tunnels'), 'invalid_config')
+ else:require(type(t.get('remote_root')) is str and t['remote_root'].startswith('/') and '..' not in PurePosixPath(t['remote_root']).parts, 'invalid_config')
  return t
+
+def command(t, argv):
+ """Serialize only an operator-approved command in the target's own language."""
+ if t.get('platform')!='routeros':
+  require(argv[0] in t.get('allowed_executables',[]), 'ssh_command_not_allowed')
+  return ' '.join(shlex.quote(x) for x in argv)
+ # Accept /system/resource/print and /system resource print without shell quoting.
+ require(all(re.fullmatch(r'[A-Za-z0-9/ -]+', x or '') for x in argv), 'ssh_command_not_allowed')
+ raw=' '.join(argv)
+ require(re.fullmatch(r'/[a-z]+(?:[ /][a-z-]+)*',raw), 'ssh_command_not_allowed')
+ words=raw.replace('/',' ').split()
+ require(words.count('print')==1, 'ssh_command_not_allowed')
+ require('/' not in raw.split('print',1)[1], 'ssh_command_not_allowed')
+ pivot=words.index('print');path='/'+'/'.join(words[:pivot]);options=words[pivot+1:]
+ require(path in ROUTEROS_PATHS and path in t.get('allowed_routeros_paths',[]), 'ssh_command_not_allowed')
+ require(len(options)==len(set(options)) and set(options)<= {'detail','terse','stats','count-only','without-paging'}, 'ssh_command_not_allowed')
+ return path+' print'+(' '+' '.join(options) if options else '')
 
 def validate(skill, args):
  require(skill in SKILLS and type(args) is dict and not set(args)-FIELDS[skill] and 'target' in args, 'invalid_input')
@@ -112,20 +142,26 @@ def connection(t):
  try:
   client.load_host_keys(t['known_hosts'])
   client.set_missing_host_key_policy(paramiko.RejectPolicy())
-  passphrase = private_file(t['passphrase_file']).read_text().rstrip('\r\n') if t.get('passphrase_file') else None
-  key = paramiko.PKey.from_path(t['identity_file'],passphrase=passphrase)
-  client.connect(t['host'], port=t.get('port',22), username=t['username'], pkey=key, allow_agent=False, look_for_keys=False, timeout=8, banner_timeout=8, auth_timeout=8, channel_timeout=8)
+  if t.get('auth_method')=='password':
+   secret=private_file(t['password_file']).read_text().rstrip('\r\n')
+   require(0<len(secret)<=4096 and '\x00' not in secret, 'invalid_config')
+   auth={'password':secret}
+  else:
+   passphrase = private_file(t['passphrase_file']).read_text().rstrip('\r\n') if t.get('passphrase_file') else None
+   auth={'pkey':paramiko.PKey.from_path(t['identity_file'],passphrase=passphrase)}
+  client.connect(t['host'], port=t.get('port',22), username=t['username'], **auth, allow_agent=False, look_for_keys=False, timeout=8, banner_timeout=8, auth_timeout=8, channel_timeout=8)
+  auth.clear()
   yield client
  finally: client.close()
 
 def execute(client, t, args):
- require(args['argv'][0] in t.get('allowed_executables',[]), 'ssh_command_not_allowed')
+ wire_command=command(t,args['argv'])
  timeout = args.get('timeout_seconds',30)
  channel = client.get_transport().open_session(timeout=8)
  started = False; out = bytearray(); err = bytearray(); deadline = time.monotonic()+timeout
  try:
   channel.settimeout(1)
-  channel.exec_command(' '.join(shlex.quote(x) for x in args['argv'])); started=True
+  channel.exec_command(wire_command); started=True
   while True:
    if time.monotonic() >= deadline: raise SSHError('ssh_timeout', uncertain=True)
    for ready, recv, buf in ((channel.recv_ready,channel.recv,out),(channel.recv_stderr_ready,channel.recv_stderr,err)):
@@ -138,7 +174,12 @@ def execute(client, t, args):
    if channel.closed and not channel.exit_status_ready(): raise SSHError('remote_state_unknown', uncertain=True)
    time.sleep(.01)
   require(code >= 0, 'remote_state_unknown')
-  return {'exit_code':code, 'stdout':out.decode('utf-8','replace'), 'stderr':err.decode('utf-8','replace'), 'executed':True}
+  stdout=out.decode('utf-8','replace');stderr=err.decode('utf-8','replace')
+  if t.get('platform')=='routeros' and code==0:
+   # RouterOS may report a CLI error with SSH exit status zero.
+   if stderr.strip() or re.search(r'(?im)^\s*(failure:|syntax error|bad command name|expected end of command|not enough permissions|no such command)', stdout):
+    code=1
+  return {'exit_code':code, 'stdout':stdout, 'stderr':stderr, 'executed':True}
  except (OSError,EOFError): raise SSHError('remote_state_unknown' if started else 'ssh_connection_failed',uncertain=started) from None
  finally: channel.close()
 
@@ -210,11 +251,11 @@ def invoke(skill,args,config_path=None):
  try:
   validate(skill,args);config=load_config(config_path);args={**args,'target':resolve_alias(config,args['target'])};t=target(config,args['target'])
   # Fail closed before any network activity when audit persistence is unavailable.
-  if skill == 'ssh.exec':require(args['argv'][0] in t.get('allowed_executables',[]),'ssh_command_not_allowed')
+  if skill == 'ssh.exec':command(t,args['argv'])
   if skill in ('ssh.upload','ssh.download'):local_path(config,args)
   audit(skill,'started','',0)
   with connection(t) as client:
-   if skill=='ssh.connect':data={'target':args['target'],'verified':True,'persistent_session':False,'authentication':'public_key','allowed_executables':t.get('allowed_executables',[]),'upload_enabled':t.get('allow_upload') is True,'download_enabled':t.get('allow_download') is True}
+   if skill=='ssh.connect':data={'target':args['target'],'verified':True,'persistent_session':False,'authentication':t.get('auth_method','public_key'),'platform':t.get('platform','posix'),'allowed_routeros_paths':t.get('allowed_routeros_paths',[]),'allowed_executables':t.get('allowed_executables',[]),'upload_enabled':t.get('allow_upload') is True,'download_enabled':t.get('allow_download') is True}
    elif skill=='ssh.exec':data=execute(client,t,args)
    elif skill=='ssh.tunnel':
     profile=t.get('tunnels',{}).get(args.get('tunnel'))
@@ -246,7 +287,7 @@ def invoke(skill,args,config_path=None):
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('action',choices=['invoke','targets']);a=parser.parse_args()
  if a.action=='targets':
-  config=load_config();print(json.dumps({'schema_version':1,'ok':True,'targets':[{'target':key,'operations':['ssh.connect']+(['ssh.exec']if t.get('allowed_executables')else[])+(['ssh.upload']if t.get('allow_upload')else[])+(['ssh.download']if t.get('allow_download')else[])}for key,t in config['targets'].items()]}));return
+  config=load_config();print(json.dumps({'schema_version':1,'ok':True,'targets':[{'target':key,'platform':t.get('platform','posix'),'operations':['ssh.connect']+(['ssh.exec']if t.get('allowed_executables') or t.get('allowed_routeros_paths') else[])+(['ssh.upload']if t.get('allow_upload')else[])+(['ssh.download']if t.get('allow_download')else[])}for key,t in config['targets'].items()]}));return
  raw=sys.stdin.buffer.read(32769);require(len(raw)<=32768,'input_too_large');payload=json.loads(raw)
  require(type(payload) is dict and set(payload)=={'skill_id','input'},'invalid_input')
  print(json.dumps(invoke(payload['skill_id'],payload['input']),ensure_ascii=False))

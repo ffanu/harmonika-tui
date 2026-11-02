@@ -22,7 +22,7 @@ def targets(config, query=''):
     for alias,t in config['targets'].items():
         endpoint=f"{t['username']}@{t['host']}:{t.get('port',22)}"
         if not query or query in (alias,t['host'],endpoint,'ssh://'+endpoint):
-            found.append({'target':alias,'protocol':'ssh','endpoint':endpoint,'authentication':'public_key'})
+            found.append({'target':alias,'protocol':'ssh','endpoint':endpoint,'authentication':t.get('auth_method','public_key'),'platform':t.get('platform','posix'),'allowed_executables':t.get('allowed_executables',[]),'allowed_routeros_paths':t.get('allowed_routeros_paths',[])})
     for alias,t in config.get('remote_targets',{}).items():
         if not query or query in (alias,t.get('via_ssh')):
             found.append({'target':alias,'protocol':t['protocol'],'via_ssh':t.get('via_ssh'),'ready':True})

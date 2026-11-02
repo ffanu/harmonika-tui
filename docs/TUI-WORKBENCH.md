@@ -11,6 +11,21 @@ Jalankan `harmonika` seperti biasa pada jendela terminal baru. Sesi yang sudah
 berjalan tetap berjalan dengan versi yang dibukanya. `harmonika --no-workbench`
 atau `HARMONIKA_WORKBENCH=0 harmonika` membuka TUI native langsung.
 
+Rilis lokal `2026.11.01.3`: salin file di Finder/Downloads dengan **Cmd+C**, lalu
+gunakan **Ctrl+V** atau **F6** pada kolom chat. File ditempel sebagai path absolut
+berupa teks, selalu dibungkus kutip agar `/` tidak membuka menu perintah. Beberapa file didukung.
+Shortcut ini tidak membaca isi atau mengunggah gambar dan tidak mengirim pesan
+otomatis. Clipboard teks biasa tetap bisa ditempel; clipboard gambar tanpa referensi
+file meminta pengguna menyalin file asal dari Finder, tanpa menebak lokasinya.
+Rilis `2026.11.01.4` menangani **Cmd+V** melalui relay input terminal privat: paste
+file Finder diterjemahkan menjadi path literal. Teks/code paste tetap menggunakan
+bracketed paste. Buka ulang TUI sekali setelah update; client terminal yang sudah
+berjalan belum memiliki relay baru. Tidak mengubah shortcut macOS secara global.
+File paths dikirim sebagai input literal; paste teks multiline tetap menggunakan
+bracketed paste. Ini menghindari deteksi lampiran gambar pada PasteMsg native.
+Rilis .2 hanya lolos fixture file kosong; .3 diuji lewat tombol Ctrl+V dengan file
+gambar valid dari Finder ke model fixture lokal (tanpa API eksternal).
+
 | Tombol | Fitur |
 |---|---|
 | F1 | Panduan shortcut tambahan |
@@ -88,3 +103,20 @@ kredensial pemilik dan menguji endpoint asli; report hanya mencatat nama/jumlah
 tool, status HTTP dan metadata penyelesaian stream. Prompt, jawaban dan key tidak
 dituliskan ke report. Buka ulang TUI untuk memuat daftar MCP baru; sesi lama
 tidak dihentikan otomatis.
+
+## Perbaikan budget setelah Studio — rilis 2026.11.01.1
+
+Konfigurasi aktif setelah penambahan Studio mengirim33 definisi, melewati batas32.
+Uji PTY dengan seluruh MCP/LSP mereproduksi33 definisi tanpa membaca sesi pengguna.
+Read PDF, sampled-frame video analysis, dan transkripsi kini memakai
+`media action=read_pdf|analyze_video|transcribe_audio`. Handler, validasi path,
+dan pemanggilan nama lama tetap tersedia. Total menjadi30 termasuk15 tool native,
+SSH/Telnet/VNC, SEO, video generation dan Studio. Tidak ada kemampuan dihapus.
+
+Rilis incremental ditandatangani Ed25519; satu-satunya file runtime yang berubah
+adalah `tools/compact-core-mcp.cjs`. Binary/ASCII/branding dan service backend tidak
+berubah. Tidak ada update otomatis atau penghentian sesi. Sesi TUI yang sudah
+memuat registry lama perlu dibuka ulang/resume agar membaca daftar baru.
+
+Test regresi mencakup seluruh daftar plugin termasuk Studio, dispatch lama/baru,
+dan smoke PTY nyata. Bukti teredaksi: `docs/verification/tool-budget-20261101/`.

@@ -7,7 +7,7 @@ description: Discover registered SSH, Telnet and VNC targets, execute verified r
 
 Gunakan tool MCP `harmonika-ssh` untuk koneksi SSH, bukan `bash ssh/scp`.
 
-- `ssh_connect` memverifikasi key dan host terdaftar; koneksi ditutup setelah pemeriksaan.
+- `ssh_connect` memverifikasi host terdaftar; key atau password berasal dari berkas privat operator, bukan argumen tool. Koneksi ditutup setelah pemeriksaan.
 - `ssh_exec` menjalankan argv yang executable-nya diizinkan operator pada target.
 - `ssh_upload` / `ssh_download` memakai SFTP, path relatif dalam root terdaftar,
   batas 10 MiB, dan menolak overwrite serta symlink.
@@ -25,6 +25,24 @@ Gunakan tool MCP `harmonika-ssh` untuk koneksi SSH, bukan `bash ssh/scp`.
 
 CLI: `harmonika ssh targets`; `harmonika ssh invoke` membaca envelope JSON stdin.
 Kontrak: `docs/SSH-CONNECTOR-SPEC.txt`. SSH tidak memerlukan AI provider tambahan.
+
+## Audit MikroTik RouterOS
+
+- Temukan target menggunakan `remote_targets`. Periksa `platform`: `routeros`
+  berbeda dari `posix`. Nama alias `chr` saja bukan bukti bahwa host menjalankan RouterOS.
+- Hubungkan dengan `ssh_connect`, lalu gunakan `ssh_exec` misalnya
+  `{"target":"router-audit","argv":["/system/resource","print"]}`.
+  Bentuk `/system resource print` dan `/system/resource/print` juga diterima.
+- Gunakan hanya menu `allowed_routeros_paths` dari discovery. Audit baca-saja:
+  resource, interface, alamat/rute, firewall, queue sesuai izin target.
+- Jangan jalankan `uname`, `bash`, `sudo`, `export`, script, atau perubahan
+  konfigurasi untuk audit RouterOS. Tidak ada auto-retry command.
+- Jika target belum terdaftar, minta endpoint, port, username dan metode akses.
+  Jangan menganggap tidak punya kemampuan SSH. Operator menyimpan credential
+  serta fingerprint host terverifikasi di konfigurasi privat terlebih dahulu.
+- Password tidak diterima dalam payload MCP/API dan tidak boleh masuk chat/log.
+  Jangan mengarang hasil login/audit. Timeout, izin gagal atau exit status tidak
+  diketahui harus dilaporkan sebagai kegagalan/uncertain.
 
 ## Temukan koneksi sebelum menyatakan tidak bisa
 

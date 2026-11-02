@@ -1,0 +1,32 @@
+{
+  "duration_seconds": 10.0,
+  "frames": 160,
+  "width": 512,
+  "height": 288,
+  "audio": false,
+  "sha256": "c7ae67d4f36ca0a5db6fe5060d0797fd04912ef58f5e8b8ab02db6990cf23e43",
+  "bytes": 238136,
+  "segmented": true,
+  "seamless_continuity_guaranteed": false,
+  "release": "2026.11.01.5",
+  "real_image_to_video_verified": true,
+  "real_qualified_seconds": 10,
+  "flexible_duration": true,
+  "admission": "available storage; positive integer seconds",
+  "segment_seconds": 10,
+  "cpu_multisegment_verified_seconds": [
+    11,
+    13
+  ],
+  "backend_tests_passed": 8,
+  "node_tests_passed": 15,
+  "native_binary_unchanged": true,
+  "existing_gateway_restarted": false,
+  "new_service": "harmonika-flex-video.service",
+  "source_files": {
+    "backend/flex_video/engine.py": "0d6a7004f4ada8d6df64dbe718df88d3eaa865245752eb7452fe5301179f91c1",
+    "backend/flex_video/server.py": "248fb385f2be490ee594308d6c68395b936bfe8c0cb6ed16a1f4f83abb4ffa56",
+    "backend/flex_video/proxy.py": "fba51d5fe09fa0f686d98a4d05d9b0a6f302fc87ea72dba585e9d4a3bc1491e8",
+    "runtime/tools/video-mcp.cjs": "db31bf846ddd1e313383dc2780874ddce44736e30af634173817bd34806e45a8"
+  }
+}

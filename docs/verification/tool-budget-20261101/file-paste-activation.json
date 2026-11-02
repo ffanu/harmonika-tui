@@ -1,0 +1,13 @@
+{
+  "release": "2026.11.01.3",
+  "verified": true,
+  "unit_tests_passed": 23,
+  "real_ctrl_v_with_finder_image": "passed",
+  "multiline_and_code_paste": "passed",
+  "runtime_rebuilt": true,
+  "binary_brand_preserved": true,
+  "running_workbenches_bindings_updated": 2,
+  "user_sessions_stopped": false,
+  "clipboard_modified": false,
+  "root_cause": "Native bracketed paste auto-attached valid images; unquoted leading slash opened command menu. File references now use literal input with quoting."
+}

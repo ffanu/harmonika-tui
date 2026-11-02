@@ -30,6 +30,8 @@ def main():
         'tools/workbench.py':SOURCE/'runtime/tools/workbench.py',
         'tools/workbench_model.py':SOURCE/'runtime/tools/workbench_model.py',
         'tools/workbench_ui.py':SOURCE/'runtime/tools/workbench_ui.py',
+        'tools/file_paste.py':SOURCE/'runtime/tools/file_paste.py',
+        'tools/terminal_paste.py':SOURCE/'runtime/tools/terminal_paste.py',
         'tools/workbench-tmux':artifacts/'workbench-tmux',
         'tools/workbench-runtime.json':artifacts/'workbench-runtime.json',
         'tools/workbench-thirdparty.txt':artifacts/'workbench-thirdparty.txt',

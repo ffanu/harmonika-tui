@@ -3,24 +3,25 @@
   "synthetic_fixture": true,
   "checks": {
     "clipboard_backup": {
-      "available": true,
-      "representations": 2,
+      "available": false,
+      "representations": null,
       "backup_kept_in_memory": true,
-      "original_change_count": 1411,
+      "original_change_count": null,
       "error": null
     },
     "pty_launch": {
       "ok": true,
-      "pid": 68335
+      "pid": 39445
     },
     "startup_mouse_enable_sequences": [
+      "1000",
       "1002",
       "1006"
     ],
     "startup_ready": {
       "ok": true,
-      "seconds": 0.25,
-      "onboarding_ready_prompt": true
+      "seconds": 0.75,
+      "onboarding_ready_prompt": false
     },
     "fixture_response_visible": {
       "ok": true,
@@ -36,53 +37,37 @@
     "sgr_wheel_scroll": {
       "ok": true,
       "visible_marker_span_at_bottom": {
-        "top": 153,
+        "top": 154,
         "bottom": 169,
-        "count": 17
+        "count": 16
       },
       "visible_marker_span_after_wheel_up": {
-        "top": 143,
+        "top": 144,
         "bottom": 163,
-        "count": 21
+        "count": 20
       },
       "visible_marker_span_after_wheel_down": {
-        "top": 153,
+        "top": 154,
         "bottom": 169,
-        "count": 17
+        "count": 16
       },
       "screen_hash_changed": true,
       "wheel_up_single_tick_deltas": [
         -1
       ],
       "wheel_down_single_tick_tops": [
-        144,
-        145
+        145,
+        146
       ],
       "wheel_down_single_tick_verdict": "works:+1_per_tick",
       "emulator_validation": "MiniTerm agrees with independent pyte on every checkpoint (see validate-wheel-pyte.py)",
       "note": "top visible marker index decreases on wheel-up and returns on wheel-down; singleton ticks verified in both directions"
     },
     "native_clipboard_copy": {
-      "ok": true,
-      "path": "drag_select_code_autocopy",
-      "copied_marker_count": 3,
-      "copied_sample": [
-        "HKSMOKE-L160",
-        "HKSMOKE-L161"
-      ],
-      "copied_sha256": "a064161d8235e349",
-      "exact_code_slice_of_response": true,
-      "physical_clipboard": true,
-      "note": "copied text verified as a literal contiguous substring of the fixture code block, including partial boundary lines; content kept out of logs",
-      "copy_attempts": [
-        {
-          "row": 10,
-          "change_before": 1413,
-          "change_after": 1414,
-          "raw_repaint_bytes": 903,
-          "clip_marker_count": 3
-        }
-      ]
+      "ok": false,
+      "path": null,
+      "physical_clipboard": false,
+      "note": "osascript/NSPasteboard unavailable: physical clipboard proof not possible, reported honestly"
     },
     "resize_and_still_alive": {
       "ok": true,
@@ -91,9 +76,9 @@
         80
       ],
       "markers_after_resize_scroll": [
-        159,
         160,
         161,
+        162,
         "...",
         167,
         168,
@@ -114,21 +99,15 @@
     },
     "binary_unmodified": {
       "ok": true,
-      "sha256_prefix": "1e9455f58a9a4e06"
+      "sha256_prefix": "a178ad1891a84440"
     },
     "fixture_model_only": {
       "ok": true,
       "requests": 2
-    },
-    "clipboard_restore": {
-      "ok": true,
-      "stdout": "{\"ok\":true,\"failed\":0,\"redeclared\":0,\"changeCount\":\"1416\"}",
-      "byte_identical_readback": true,
-      "representations_restored": 2
     }
   },
   "events": [],
-  "fixture_gateway_port": 64123,
+  "fixture_gateway_port": 63125,
   "product_findings": [
     {
       "id": "chat-wheel-down-singleton-dropped-RETRACTED",
@@ -140,6 +119,6 @@
       "product_verdict": "wheel handling correct in both directions in the shipped frozen binary; no product defect"
     }
   ],
-  "elapsed_seconds": 18.86,
-  "ok": true
+  "elapsed_seconds": 16.67,
+  "ok": false
 }

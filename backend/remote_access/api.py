@@ -40,12 +40,18 @@ class Runtime:
     except ValueError:raise ControlError('invalid_input') from None
    else:argv=v['argv']
    require(type(argv) is list and 1<=len(argv)<=64 and all(type(x) is str and '\x00' not in x and len(x)<=8192 for x in argv),'invalid_input')
-   name=Path(argv[0]).name
-   require(name not in BLOCKED,'ssh_command_not_allowed',403)
-   candidates=[x for x in t.get('allowed_executables',[]) if x==argv[0] or ('/' not in argv[0] and Path(x).name==argv[0])]
-   require(len(candidates)==1,'ssh_command_not_allowed',403);argv=[candidates[0],*argv[1:]]
+   if t.get('platform')=='routeros':
+    try:ssh.command(t,argv)
+    except ssh.SSHError as exc:raise ControlError(exc.code,403) from None
+    risky=False
+   else:
+    name=Path(argv[0]).name
+    require(name not in BLOCKED,'ssh_command_not_allowed',403)
+    candidates=[x for x in t.get('allowed_executables',[]) if x==argv[0] or ('/' not in argv[0] and Path(x).name==argv[0])]
+    require(len(candidates)==1,'ssh_command_not_allowed',403);argv=[candidates[0],*argv[1:]]
+    risky=name not in READ_ONLY
    timeout=v.get('timeout_seconds',v.get('timeout',30));require(type(timeout) is int and 1<=timeout<=120,'invalid_input')
-   args.update(argv=argv,timeout_seconds=timeout);risky=name not in READ_ONLY
+   args.update(argv=argv,timeout_seconds=timeout)
   elif operation in ('upload','download'):
    args.update({k:v.get(k) for k in ('project_root','local_path','remote_path')})
    try:ssh.validate('ssh.'+operation,args);ssh.local_path(c,args);ssh.relative(args['remote_path'])

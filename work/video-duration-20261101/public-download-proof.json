@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "status": "ok",
+  "provider": "Harmonika Ai",
+  "output_file": "/Users/id/Downloads/harmonika-ai/video/harmonika-video-d04aeec3e6d80f0362a8cc2958ce8a18.mp4",
+  "bytes": 238136,
+  "sha256": "c7ae67d4f36ca0a5db6fe5060d0797fd04912ef58f5e8b8ab02db6990cf23e43",
+  "duration_seconds": 10,
+  "audio": false,
+  "new_file": true
+}

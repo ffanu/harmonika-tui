@@ -34,14 +34,17 @@ class Files(paramiko.SFTPServerInterface):
 class Auth(paramiko.ServerInterface):
  def __init__(self,key):self.key=key
  def check_auth_publickey(self,username,key):return paramiko.AUTH_SUCCESSFUL if username=='staging' and key==self.key else paramiko.AUTH_FAILED
- def get_allowed_auths(self,username):return 'publickey'
+ def check_auth_password(self,username,password):return paramiko.AUTH_SUCCESSFUL if username=='staging' and password=='fixture-password' else paramiko.AUTH_FAILED
+ def get_allowed_auths(self,username):return 'publickey,password'
  def check_channel_request(self,kind,chanid):return paramiko.OPEN_SUCCEEDED if kind=='session' else paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
  def check_channel_exec_request(self,channel,command):
   def work():
    import shlex
    try:
     argv=shlex.split(command.decode());time.sleep(.02)
-    if argv[0]=='/fixture/timeout':time.sleep(2);data=b'late';code=0
+    if command==b'/system/resource print':data=b'uptime: 1d\nversion: fixture-routeros\n';code=0
+    elif command==b'/system/identity print':data=b'failure: not enough permissions';code=0
+    elif argv[0]=='/fixture/timeout':time.sleep(2);data=b'late';code=0
     elif argv[0]=='/fixture/output':data=b'x'*70000;code=0
     elif argv[0]=='/fixture/fail':data=b'failed';code=7
     elif argv[0]=='/fixture/echo':data=' '.join(argv[1:]).encode();code=0

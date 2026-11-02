@@ -34,3 +34,11 @@ docs/mockups/
 docs/artifacts/
 backend/web_builder/assets/*.tar
 
+# Media artifacts produced by local verification runs (kept out of the repository;
+# publish them with the release bundle instead).
+work/**/*.jpg
+work/**/*.jpeg
+work/**/*.png
+work/**/*.mp4
+work/**/*.webm
+work/**/*.wav

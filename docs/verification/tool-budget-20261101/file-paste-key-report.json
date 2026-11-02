@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "case": "finder_path",
+      "preserved_exactly": true,
+      "paste_did_not_autosend": true
+    },
+    {
+      "case": "unicode_multiline",
+      "preserved_exactly": true,
+      "paste_did_not_autosend": true
+    },
+    {
+      "case": "long_code_100_lines",
+      "preserved_exactly": true,
+      "paste_did_not_autosend": true
+    }
+  ],
+  "clipboard_access": "read-only Finder references; contents not read or logged",
+  "gateway": "local fixture only",
+  "existing_sessions_touched": false
+}

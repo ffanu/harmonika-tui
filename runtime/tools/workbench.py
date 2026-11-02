@@ -79,6 +79,9 @@ def tmux_configuration(context):
     for key,kind in [('F1','help'),('F2','metrics'),('F3','events'),('F5','diff'),('F7','terminal'),('F8','jobs')]:
         lines.append('bind-key -n '+key+' display-popup -E -w 90% -h 85% '+json.dumps(command(context,kind)))
     lines.append('bind-key -n F4 run-shell -b '+json.dumps(command(context,'toggle-files')))
+    paste=command(context,'paste-path')+' --pane '+"'#{pane_id}'"
+    for key in ('C-v','F6'):
+        lines.append('bind-key -n '+key+' run-shell '+json.dumps(paste))
     lines.append('bind-key -n F11 resize-pane -Z')
     return '\n'.join(lines)+'\n'
 
@@ -107,6 +110,9 @@ def start(binary,args,config,data,detached=False,offline=False):
     argv=[tmux,'-u','-L',socket,'-f',str(cfg),'new-session','-s','harmonika','-n','Chat','-c',project]
     if detached:argv+=['-d','-x','150','-y','42']
     argv.append(shlex.join([binary,*args]))
+    if not detached and sys.stdin.isatty() and sys.stdout.isatty():
+        from terminal_paste import run_client
+        return run_client(argv,env,project)
     result=subprocess.run(argv,env=env,cwd=project)
     if detached:
         if result.returncode:raise ValueError('workbench_start_failed')
@@ -169,10 +175,11 @@ def main():
     if '--' in argv:
         split=argv.index('--');native_args=argv[split+1:];argv=argv[:split]
     parser=argparse.ArgumentParser(description='Harmonika terminal workbench')
-    parser.add_argument('action',choices=['start','status','help','metrics','events','jobs','files','toggle-files','diff','terminal'])
+    parser.add_argument('action',choices=['start','status','help','metrics','events','jobs','files','toggle-files','diff','terminal','paste-path'])
     parser.add_argument('--context');parser.add_argument('--binary');parser.add_argument('--config');parser.add_argument('--data')
     parser.add_argument('--detached-test',action='store_true');parser.add_argument('--offline',action='store_true')
     parser.add_argument('--compact',action='store_true')
+    parser.add_argument('--pane')
     args=parser.parse_args(argv)
     if args.action=='start':
         value=start(args.binary,native_args,args.config,args.data,args.detached_test,args.offline)
@@ -180,6 +187,16 @@ def main():
         raise SystemExit(value)
     if not args.context:raise ValueError('workbench_context_required')
     context=read_context(args.context)
+    if args.action=='paste-path':
+        from file_paste import paste_into_pane
+        try:paste_into_pane(context,args.pane)
+        except Exception as error:
+            code=str(error) if isinstance(error,ValueError) else ''
+            messages={'clipboard_no_file_or_text':'Salin file dari Finder (Cmd+C), lalu Ctrl+V. Gambar tanpa path tidak dilampirkan.',
+                      'clipboard_chat_only':'Paste path tersedia pada kolom chat Harmonika.',
+                      'clipboard_file_missing':'File clipboard sudah dipindah/hilang. Salin ulang dari Finder.'}
+            tmux_call(context,'display-message',messages.get(code,'Clipboard belum dapat ditempel. Salin file/teks lalu coba lagi.'))
+        return
     if args.action=='status':
         print(status_line(load_sample(args.context,refresh=True),args.compact));return
     if args.action=='toggle-files':toggle_files(args.context);return

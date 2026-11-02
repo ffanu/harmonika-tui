@@ -1,0 +1,18 @@
+{
+  "release": "2026.11.01.1",
+  "previous_release": "2026.10.29.1",
+  "tools_before": 33,
+  "tools_after": 30,
+  "gateway_limit": 32,
+  "unit_tests_passed": 25,
+  "real_gateway_http": [
+    200,
+    200
+  ],
+  "stream_completed": true,
+  "signed_release_verified": true,
+  "binary_brand_unchanged": true,
+  "existing_user_sessions_stopped": false,
+  "server_modified": false,
+  "reopen_session_required": true
+}
