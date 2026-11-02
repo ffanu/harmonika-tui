@@ -68,6 +68,9 @@ Yang dilakukan installer:
 2. Merender `~/.config/harmonika-terminal/harmonika.json` dari `config/harmonika.json`
    dengan `apiKey: "{env:HARMONIKA_API_KEY}"` — **key tidak pernah ditulis ke config**.
 3. Membuang blok `mcp` bila server MCP tidak ditemukan (agar tidak ada tool yang error di mesin baru).
+3b. Bila `runtime/license.py` tersedia, key diverifikasi ke server dulu (termasuk aturan
+   1 key = 1 perangkat). Jika verifikasi gagal (offline/kuota/sudah terikat), installer tetap
+   menyimpan key dan memberi peringatan agar bisa diaktifkan ulang lewat `harmonika-setup`.
 4. Membuat `~/.config/harmonika/HARMONIKA.md` (aturan identitas + folder auto-save).
 5. Membuat `~/Downloads/harmonika-ai/{gambar,document,zip,pdf}`.
 6. Memasang `~/.local/bin/harmonika` (launcher) dan `~/.local/bin/harmonika-setup` (ganti key).

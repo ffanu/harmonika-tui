@@ -53,7 +53,24 @@ if [ -z "$API_KEY" ]; then
 fi
 
 umask 077
-printf '%s\n' "$API_KEY" > "$CONFIG_HOME/harmonika-api-key"
+VERIFIED=0
+LICENSE_PY=""
+for candidate in "$SELF_DIR/../runtime/license.py" \
+                 "$HOME/.config/harmonika-terminal/current/tools/license.py"; do
+  if [ -f "$candidate" ]; then LICENSE_PY="$candidate"; break; fi
+done
+if [ -n "$LICENSE_PY" ] && command -v python3 >/dev/null 2>&1; then
+  if python3 "$LICENSE_PY" activate "$API_KEY" >/dev/null 2>&1; then
+    VERIFIED=1
+    printf 'API key terverifikasi server dan terkunci untuk perangkat ini (1 key = 1 device).\n'
+  else
+    printf 'Peringatan: key belum dapat diverifikasi server (offline, kuota, atau sudah terikat perangkat lain).\n' >&2
+    printf 'Key tetap disimpan; aktifkan ulang dengan: harmonika-setup\n' >&2
+  fi
+fi
+if [ "$VERIFIED" = "0" ]; then
+  printf '%s\n' "$API_KEY" > "$CONFIG_HOME/harmonika-api-key"
+fi
 chmod 600 "$CONFIG_HOME/harmonika-api-key"
 umask 022
 
