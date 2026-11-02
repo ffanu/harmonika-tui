@@ -199,7 +199,7 @@ BATAS DAN ERROR
 - Internal tool calling: kirim tools, tool_choice (auto/none/required/function), messages assistant.tool_calls dan tool.tool_call_id. SSE meneruskan delta.tool_calls dan finish_reason=tool_calls. Client wajib menjalankan tool dengan persetujuan/sandbox sendiri lalu mengirim hasilnya. API tidak mengeksekusi command atau mengedit file client.
 - 400 invalid_json / messages_required / message_required: koreksi payload.
 - 401 missing_api_key / invalid_api_key: periksa token; token revoked juga ditolak.
-- 413 message_too_large: pendekkan teks. 422 unsupported_media: input ini belum didukung token publik.
+- Tidak ada batas panjang pesan (unlimited, berlaku untuk semua token). Hanya body JSON yang dibatasi server. 422 unsupported_media: media belum didukung token publik.
 - 429 quota_exceeded: hentikan retry cepat; tunggu jendela kuota atau hubungi pengelola.
 - 502 engine_error: backend belum menghasilkan jawaban; lakukan retry terbatas dengan jeda. Fallback tidak menjamin selalu berhasil.
 - 503 quota_unavailable: verifikasi kuota gagal; akses ditahan sementara, bukan dianggap kuota tak terbatas.
@@ -273,11 +273,11 @@ func publicAIChatInputError(input publicAIChatCompletionRequest) (int, string) {
 		return http.StatusUnprocessableEntity, "unsupported_media"
 	}
 	for _, m := range input.Messages {
-		if text, ok := m.Content.(string); ok && len([]byte(text)) > publicAIMaxMessageBytes {
+		if text, ok := m.Content.(string); ok && publicAIMaxMessageBytes > 0 && len([]byte(text)) > publicAIMaxMessageBytes {
 			return 413, "message_too_large"
 		}
 		for _, call := range m.ToolCalls {
-			if len([]byte(call.Function.Arguments)) > publicAIMaxMessageBytes {
+			if publicAIMaxMessageBytes > 0 && len([]byte(call.Function.Arguments)) > publicAIMaxMessageBytes {
 				return 413, "message_too_large"
 			}
 		}
@@ -305,7 +305,7 @@ func publicAIChatInputError(input publicAIChatCompletionRequest) (int, string) {
 				}
 			}
 		}
-		if len([]byte(publicAIContentText(m.Content))) > publicAIMaxMessageBytes {
+		if publicAIMaxMessageBytes > 0 && len([]byte(publicAIContentText(m.Content))) > publicAIMaxMessageBytes {
 			return http.StatusRequestEntityTooLarge, "message_too_large"
 		}
 	}
