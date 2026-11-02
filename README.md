@@ -282,6 +282,32 @@ Source telah diuji pada **Mac Apple Silicon**. Pengujian meliputi tool MCP, pemb
 
 [Status terperinci dan penghalang publik →](docs/STATUS.md)
 
+## Pertahanan: fraud, anti-bot, privasi dan QA
+
+Dua tool MCP defensif baru tersedia di TUI maupun lewat skill:
+
+- **`trust_guard`** (`runtime/tools/trust_engine.py`) — engine offline tanpa akses jaringan:
+  - `fraud_risk`: skor risiko dari telemetri login/checkout yang diberikan operator
+    (velocity, credential stuffing, password spraying, device drift, impossible travel,
+    card testing, session sharing, mismatch client hints). Identitas dikembalikan sebagai
+    referensi pseudonim (`account:ref_...`), bukan nilai mentah.
+  - `captcha_audit`: audit deployment CAPTCHA milik sendiri (verifikasi server, single-use
+    token, expiry, action/skor reCAPTCHA v3, rate limit, CSRF, CSP).
+  - `privacy_audit`: permukaan sidik jari (navigator, canvas, WebGL, audio, RTCPeerConnection,
+    localStorage), atribut cookie, dan header keamanan, masing-masing dengan mitigasi.
+  - `bot_defense_plan`: rencana berlapis (edge → identity → session → payments →
+    observability → incident) beserta daftar jalan pintas yang sengaja tidak disediakan.
+- **`qa_matrix`** (`runtime/tools/qa_matrix.cjs`) — audit responsif + aksesibilitas pada lima
+  profil perangkat emulasi (desktop terang/gelap, tablet, mobile, mobile kecil; `en-US` dan
+  `id-ID`): overflow horizontal, elemen melebar, tap target < 24px, gambar tanpa `alt`,
+  gambar rusak, input tanpa label, id duplikat, sampel kontras rendah, teks < 12px, serta
+  error console; menulis `report.json` dan screenshot per profil.
+
+Keduanya hanya menganalisis data yang diberikan pengguna untuk sistem miliknya sendiri, tidak
+melakukan eksekusi source, tidak menyimpan PII, dan tidak menyediakan spoofing sidik jari,
+pemecahan CAPTCHA, atau teknik menghindari deteksi pihak lain. Batas lengkap ada di
+[SAFETY.md](SAFETY.md).
+
 ## Struktur repository
 
 ```text
