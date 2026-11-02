@@ -28,7 +28,7 @@ def main():
     password = str(request.get('password', ''))
     command = str(request.get('command', ''))
     timeout = max(1, min(int(request.get('timeout', 30)), 120))
-    expected = (request.get('hostkey_sha256') or '').strip().lower()
+    expected = (request.get('hostkey_sha256') or '').strip()  # base64 is case sensitive
     key_path = str(request.get('key_path') or '')
 
     if not host or not username or not command:
@@ -45,10 +45,13 @@ def main():
         class Pinned(paramiko.MissingHostKeyPolicy):
             def missing_host_key(self, client, hostname, key):
                 digest = hashlib.sha256(key.asbytes())
-                accepted = {digest.hexdigest(),
-                            base64.b64encode(digest.digest()).decode().rstrip('=').lower(),
-                            'sha256:' + base64.b64encode(digest.digest()).decode().rstrip('=').lower()}
-                if expected not in accepted:
+                hexd = digest.hexdigest()
+                b64 = base64.b64encode(digest.digest()).decode().rstrip('=')
+                target = expected
+                if target[:7].lower() == 'sha256:':
+                    target = target[7:]
+                ok = (target == b64) or (target.lower() == hexd)
+                if not ok:
                     raise paramiko.SSHException('hostkey_mismatch')
                 client._host_keys.add(hostname, key.get_name(), key)
         client.set_missing_host_key_policy(Pinned())
