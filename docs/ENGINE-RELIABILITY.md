@@ -70,3 +70,50 @@ journalctl -u harmonika-ai.service | grep -c codex_exit
 
 Longer term, keep GPU-heavy services (browsers, Xvfb) off this host or cap them, because a stuck
 `amdgpu` modeset deadlocks every process that touches the display path.
+
+## Root cause #2 (the real one): Codex rejects input above 1 MiB
+
+After the first fix the failures continued. Capturing `stderr` finally revealed the cause:
+
+```
+turn/start failed: Input exceeds the maximum length of 1048576 characters
+(code -32602) {"input_error_code":"input_too_large","max_chars":1048576,"actual_chars":1094653}
+```
+
+The planner pipes the whole conversation into `codex exec`, and **codex itself caps a turn at
+1,048,576 characters**. A long terminal session (many tool results) passes 1 MiB, codex exits 1,
+and the planner reports `tool_engine_unavailable`. This is why the error looked like a limit that
+never lifted: removing the 100 KiB API cap simply moved the wall from 100 KiB to 1 MiB.
+
+### Fix: planner-level input compaction
+
+`internal-tool-planner.js` now budgets the payload to **900,000 chars** and degrades context in
+three passes, only as far as needed:
+
+1. Clip every message except the newest user turn to 12,000 chars (head 60% + tail, with a visible
+   marker marker `[... isi dipotong agar muat batas mesin ...]`).
+2. If still too large, keep system messages plus the last 14 messages.
+3. If still too large, shrink the newest user turn as well and trim `tools` to 24 entries.
+
+The compacted payload is used for the prompt, for the tool-name enum and for response validation,
+so the model never sees a tool it cannot call. Each compaction logs
+`planner_input_compacted notes=[...] chars=N` for traceability.
+
+### Verified
+
+| Test | Before | After |
+| --- | --- | --- |
+| 1.6 MiB conversation (1,682,101 chars) | exit 1, `tool_engine_unavailable` | **200**, compacted to 254,589 chars |
+| Travel project turn (`npm run lint`) | failed | **200**, answered "Lint: 7 error dan 2 warning." |
+| Resumed session `ses_e633d83b5ffe871k5uvtbLpDs8` | failed | **200**, answered "OK" |
+| `codex_exit` after the new process started | 3 in 40 s | **0** |
+
+## Root cause #3: a stale LaunchAgent spawned the terminal every 10 seconds
+
+`~/Library/LaunchAgents/id.harmonika.tui.gateway.plist` (left over from the previous Crush-based
+terminal) ran `harmonika network serve` with `KeepAlive=true` and `ThrottleInterval=10`. The new
+engine has no `network` subcommand, so it printed help and exited 1 — forever. The log held **10,790**
+failed entries and a 231 MB binary was spawned every 10 seconds.
+
+The plist was moved to `~/.config/harmonika-terminal/disabled-agents/` and unloaded; the loop stopped
+immediately. Restore it only if a gateway service is genuinely needed again.
