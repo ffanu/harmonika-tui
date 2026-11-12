@@ -27,3 +27,9 @@
   status degraded. Jangan mengarang analisis atau menganggap GPU/model selalu siap.
 - Mentor inference tidak berarti training otomatis; jangan menggabungkan history
   pengguna atau menyimpan dataset pelatihan tanpa rancangan dan otorisasi terpisah.
+
+## OCR CPU bersama (2026-11-05)
+- Ekstraksi teks gambar/PDF memakai gateway OCR Linux CPU; tidak membutuhkan RTX.
+- `analyze_image` default `mode=ocr`; `mode=vision` khusus analisis adegan/layout RTX.
+- Pertahankan metadata local_only, untrusted content, dan tanda ketidakpastian OCR.
+- OCR tidak membuktikan keaslian ID; analisis percakapan tetap memakai model chat.

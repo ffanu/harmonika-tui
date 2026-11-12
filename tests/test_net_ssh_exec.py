@@ -27,12 +27,12 @@ class HelperGuardTests(unittest.TestCase):
 
     def test_result_is_single_json_object(self):
         code, out = run(json.dumps({'host': '127.0.0.1', 'port': 1, 'username': 'x',
-                                    'password': 'y', 'command': 'true', 'timeout': 2}))
+                                    'password': 'synthetic-secret-never-echo', 'command': 'true', 'timeout': 2}))
         payload = json.loads(out)
         self.assertIsInstance(payload, dict)
         self.assertIn('ok', payload)
         self.assertFalse(payload['ok'])
-        self.assertNotIn('y', json.dumps(payload))
+        self.assertNotIn('synthetic-secret-never-echo', json.dumps(payload))
         self.assertIn(code, (3, 4, 5, 6))
 
 

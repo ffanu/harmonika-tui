@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "module": "zimbra-mailjet",
+  "module_version": "1.4.3",
+  "qa_topics": 24,
+  "verified_at": "2026-11-12T10:02:10.451487+00:00",
+  "installed_skill_docs_match_source": true,
+  "owner_adapters_match_source": true,
+  "mcp_native_registered": true,
+  "fresh_cli_acceptance": {
+    "result": "passed",
+    "installed_skill_documents_read": true,
+    "qa_tool_invoked": true,
+    "returned_module_version": "1.4.3",
+    "native_tool_discovered": true
+  },
+  "existing_sessions_require_relaunch_for_mcp_reload": true,
+  "user_sessions_restarted": false,
+  "binary_ascii_brand_modified": false,
+  "signed_release_payload_modified": false,
+  "report_contains_credentials_or_customer_data": false,
+  "pre_push_validation": {
+    "python_tests_passed": 200,
+    "mcp_core_tests_passed": 37,
+    "browser_qa_tests_passed": 5,
+    "total_tests_passed": 242,
+    "credential_and_private_account_scan": "passed",
+    "diff_whitespace_check": "passed"
+  }
+}

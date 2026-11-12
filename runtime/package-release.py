@@ -23,6 +23,26 @@ def sign(data):
     raw=json.dumps(data,sort_keys=True,separators=(',',':')).encode()
     return subprocess.run([NODE,'-e',SIGN_JS,str(ROOT/'signing-private.pem')],input=raw,capture_output=True,check=True).stdout
 
+def copy_config_transaction_tools(tools):
+    # Bind the caller's validation copy to the canonical backend engine source.
+    shutil.copy2(SOURCE/'runtime/tools/config_transaction_client.py', tools/'config_transaction_client.py')
+    shutil.copy2(SOURCE/'backend/config_transaction/engine.py', tools/'config_transaction_engine.py')
+
+def copy_browser_macro_tools(tools):
+    for name in ('desktop_browser.py', 'browser_audit.py', 'browser_macro.py', 'play_console.py'):
+        shutil.copy2(SOURCE/'runtime/tools'/name, tools/name)
+    shutil.copy2(SOURCE/'backend/play_console/engine.py', tools/'play_console_engine.py')
+
+def copy_zimbra_tools(tools):
+    for name in ('service_probe.py','service_probe_transport.py','zimbra_probe.py','zimbra_tls_probe.py','zimbra_renewal_probe.py','zimbra_relay_probe.py','zimbra_ops.py','mailjet_credentials.py','mailjet_native.py'):
+        shutil.copy2(SOURCE/'runtime/tools'/name,tools/name)
+    shutil.copy2(SOURCE/'backend/zimbra/engine.py',tools/'zimbra_engine.py')
+    shutil.copy2(SOURCE/'backend/zimbra/knowledge.py',tools/'zimbra_knowledge.py')
+    shutil.copy2(SOURCE/'backend/zimbra/tls.py',tools/'zimbra_tls.py')
+    shutil.copy2(SOURCE/'backend/zimbra/renewal.py',tools/'zimbra_renewal.py')
+    shutil.copy2(SOURCE/'backend/zimbra/ssl_worker.py',tools/'zimbra_ssl_worker.py')
+    shutil.copy2(SOURCE/'backend/zimbra/relay.py',tools/'zimbra_relay.py')
+
 def build(release):
     if (SOURCE/'runtime/tools/coding_catalog.py').read_bytes() != (SOURCE/'backend/coding_runtime/catalog.py').read_bytes():raise ValueError('coding_catalog_mismatch')
     ROOT.mkdir(parents=True,exist_ok=True,mode=0o700)
@@ -35,6 +55,9 @@ def build(release):
     tools=destination/'tools';tools.mkdir()
     for name in ['mcp-core.cjs','mcp-server.cjs','ssh-mcp.cjs','ssh-protocol-check.cjs','ssh_connector.py','remote_connector.py','media_bridge.cjs','project-access.cjs','paths.cjs','transcribe.py','state_store.py','tui_gateway.py','clipboard.py','ai_integration.py','ai_adapters.py','skill_registry.py','skill_executor.py','document_skill_worker.py','skill_cli.py','coding_catalog.py','coding_cli.py','telco_cli.py','telco_catalog.json','legal_cli.py','legal_catalog.json','builder_cli.py','builder_catalog.json','master_cli.py','erp_cli.py','mobile_cli.py','core_cli.py','seo_network.py','seo_extra.py','seo_visual.py','seo_visual.cjs','seo_skill_worker.py','engineering_evidence.py','engineering_skill_worker.py','trust_engine.py','trust_cli.py','qa_matrix.cjs','net_ssh_exec.py']:
         shutil.copy2(SOURCE/'runtime/tools'/name,tools/name)
+    copy_config_transaction_tools(tools)
+    copy_browser_macro_tools(tools)
+    copy_zimbra_tools(tools)
     guard=(SOURCE/'runtime/tools/project-file-guard.cjs').read_text()
     (tools/'project-file-guard.cjs').write_text(guard)
     shutil.copy2(SOURCE/'runtime/protocol-check.cjs',tools/'protocol-check.cjs')

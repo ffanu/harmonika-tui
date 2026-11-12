@@ -113,8 +113,33 @@ const PAGE_AUDIT = () => {
   const vw = window.innerWidth;
   const style = (el) => getComputedStyle(el);
   const rect = (el) => el.getBoundingClientRect();
+  // Tailwind v4 emits lab()/oklch(); the canvas does not normalise those, but
+  // color-mix(in srgb, <colour> 100%, transparent) resolves to color(srgb ...).
+  const colourProbe = document.createElement('span');
+  colourProbe.style.display = 'none';
+  document.body.appendChild(colourProbe);
+  const toRgb = (value) => {
+    colourProbe.style.backgroundColor = '';
+    colourProbe.style.backgroundColor = `color-mix(in srgb, ${value} 100%, transparent)`;
+    return getComputedStyle(colourProbe).backgroundColor;
+  };
   const parseColor = (value) => {
-    const match = value.match(/rgba?\(([^)]+)\)/);
+    if (!value || value === 'transparent' || value === 'none') return null;
+    let source = value;
+    if (!/^rgba?\(/.test(source) && !/^color\(/.test(source)) {
+      try {
+        source = toRgb(source);
+      } catch {
+        return null;
+      }
+    }
+    // Out-of-gamut colours (Tailwind oklch -> srgb) can carry negative components.
+    const srgb = source.match(/color\(srgb\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)(?:\s*\/\s*([\d.]+))?\)/);
+    if (srgb) {
+      const clamp = (value) => Math.min(255, Math.max(0, Number(value) * 255));
+      return { r: clamp(srgb[1]), g: clamp(srgb[2]), b: clamp(srgb[3]), a: srgb[4] ? Number(srgb[4]) : 1 };
+    }
+    const match = source.match(/rgba?\(([^)]+)\)/);
     if (!match) return null;
     const parts = match[1].split(',').map((n) => parseFloat(n.trim()));
     if (parts.length < 3) return null;
@@ -129,13 +154,15 @@ const PAGE_AUDIT = () => {
   };
   const background = (element) => {
     let node = element;
+    let image = false;
     while (node && node !== document.documentElement) {
-      const colour = style(node).backgroundColor;
-      const parsed = colour && colour !== 'transparent' ? parseColor(colour) : null;
-      if (parsed && parsed.a > 0.5) return parsed;
+      const computed = style(node);
+      if (computed.backgroundImage && computed.backgroundImage !== 'none') image = true;
+      const parsed = computed.backgroundColor ? parseColor(computed.backgroundColor) : null;
+      if (parsed && parsed.a > 0.5) return { colour: parsed, undetermined: image };
       node = node.parentElement;
     }
-    return { r: 255, g: 255, b: 255 };
+    return { colour: { r: 255, g: 255, b: 255 }, undetermined: image };
   };
   const contrast = (fg, bg) => {
     const l1 = luminance(fg);
@@ -153,8 +180,18 @@ const PAGE_AUDIT = () => {
   });
   const interactive = Array.from(document.querySelectorAll('a[href],button,input,select,textarea,[role="button"]'));
   const smallTargets = interactive.filter((el) => {
-    const box = rect(el);
-    return box.width > 0 && box.height > 0 && (box.height < 24 || box.width < 24);
+    // A checkbox/radio wrapped in a <label> inherits the label box as its target.
+    const labelled = el.closest('label');
+    const box = rect(labelled && /^(checkbox|radio)$/.test(el.type || '') ? labelled : el);
+    if (!(box.width > 0 && box.height > 0)) return false;
+    if (box.height >= 24 && box.width >= 24) return false;
+    const computed = style(el);
+    // WCAG 2.5.8 exempts targets inline within a sentence.
+    if (el.tagName === 'A' && computed.display === 'inline') return false;
+    // Visually hidden helpers (sr-only) are 1x1 by design; they are not touch targets.
+    if (box.width <= 1 || box.height <= 1) return false;
+    if (computed.clip !== 'auto' && computed.clip !== '' && computed.position === 'absolute') return false;
+    return true;
   });
   const images = Array.from(document.images);
   const inputs = Array.from(document.querySelectorAll('input,select,textarea')).filter((el) =>
@@ -170,6 +207,7 @@ const PAGE_AUDIT = () => {
   });
   let lowContrast = [];
   let tinyText = [];
+  let unverified = 0;
   for (const el of textNodes.slice(0, 400)) {
     const computed = style(el);
     const size = parseFloat(computed.fontSize);
@@ -177,9 +215,20 @@ const PAGE_AUDIT = () => {
     if (fg && size) {
       const bold = parseInt(computed.fontWeight, 10) >= 700;
       const large = size >= 24 || (bold && size >= 18.66);
-      const ratio = contrast(fg, background(el));
-      if (ratio < (large ? 3 : 4.5) && lowContrast.length < 12) {
-        lowContrast.push({ tag: el.tagName.toLowerCase(), ratio: Math.round(ratio * 100) / 100 });
+      const backdrop = background(el);
+      if (backdrop.undetermined) {
+        unverified += 1;
+      } else {
+        const ratio = contrast(fg, backdrop.colour);
+        if (ratio < (large ? 3 : 4.5) && lowContrast.length < 12) {
+          lowContrast.push({
+            tag: el.tagName.toLowerCase(),
+            ratio: Math.round(ratio * 100) / 100,
+            text: (el.textContent || '').trim().slice(0, 24),
+            fg: `rgb(${Math.round(fg.r)},${Math.round(fg.g)},${Math.round(fg.b)})`,
+            bg: `rgb(${Math.round(backdrop.colour.r)},${Math.round(backdrop.colour.g)},${Math.round(backdrop.colour.b)})`,
+          });
+        }
       }
     }
     if (size && size < 12 && tinyText.length < 20) tinyText.push(el.tagName.toLowerCase());
@@ -195,6 +244,7 @@ const PAGE_AUDIT = () => {
     imagesBroken: images.filter((img) => img.complete && img.naturalWidth === 0).length,
     unlabeledInputs: unlabeled.length,
     lowContrast: lowContrast,
+    contrastUnverified: unverified,
     tinyText: Array.from(new Set(tinyText)),
     duplicateIds: duplicates.slice(0, 8),
     headingCount: document.querySelectorAll('h1').length,
@@ -214,7 +264,7 @@ function checksFor(device, audit) {
   add('viewport-meta', audit.hasViewportMeta, null);
   add('html-lang', !!audit.htmlLang, audit.htmlLang || null);
   add('document-title', audit.title.trim().length > 0, audit.title);
-  add('single-h1', audit.h1Count === 1, 'h1 count=' + audit.h1Count);
+  add('single-h1', audit.headingCount === 1, 'h1 count=' + audit.headingCount);
   add('images-have-alt', audit.imagesMissingAlt === 0,
     audit.imagesMissingAlt ? audit.imagesMissingAlt + ' images missing alt' : null);
   add('images-loadable', audit.imagesBroken === 0,

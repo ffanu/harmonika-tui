@@ -1,0 +1,21 @@
+{
+  "verified_on": "2026-11-12",
+  "private_account_data": false,
+  "sources": [
+    {
+      "topic": "Third-party SDK warnings",
+      "url": "https://support.google.com/googleplay/android-developer/answer/10358880",
+      "guidance": "Check the exact dependency/version and SDK owner guidance. Distinguish an outdated-version warning from a policy violation or critical issue. Do not invent the affected library."
+    },
+    {
+      "topic": "Trader status declaration",
+      "url": "https://support.google.com/googleplay/android-developer/answer/17594752",
+      "guidance": "Google documents a declaration deadline of February 1, 2027. Review Manage account, Account details, About you; declaration must reflect the owner's actual circumstances. Never choose or submit status automatically."
+    },
+    {
+      "topic": "Policy announcement October 29, 2026",
+      "url": "https://support.google.com/googleplay/android-developer/answer/18100766",
+      "guidance": "Check applicable changes and separate deadlines. For API 37+ consider local-network and location declaration requirements only when the actual manifest/features use those capabilities; do not infer violations from the target SDK alone."
+    }
+  ]
+}

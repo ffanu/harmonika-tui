@@ -2,6 +2,17 @@
 
 Source preview Harmonika TUI, 25 Oktober 2026.
 
+## Sinkronisasi modul Zimbra/Mailjet — 12 November 2026
+
+- Modul operator 1.4.3 dan 24 topik Q&A tersedia pada runtime TUI.
+- Panduan `harmonika-zimbra` terpasang diselaraskan dengan source; adapter MCP
+  diverifikasi cocok dengan source dan `mailjet_native` terdaftar.
+- Uji sesi CLI terisolasi membaca panduan terpasang, menemukan tool native dan
+  memanggil `zimbra_qa(mailjet_provisioning)` dengan hasil versi 1.4.3.
+- Sesi yang sudah terbuka perlu diluncurkan ulang untuk memuat ulang proses MCP.
+  Tidak ada penghentian sesi pengguna atau perubahan binary/ASCII/brand.
+- [Bukti teknis](TUI-ZIMBRA-MAILJET-UPDATE-2026-11-12.json).
+
 ## Bridge RTX untuk TUI — 25 Oktober 2026
 
 - Aktif: API privat `/v1/media/*`, async queue dan tool MCP `generate_image`.

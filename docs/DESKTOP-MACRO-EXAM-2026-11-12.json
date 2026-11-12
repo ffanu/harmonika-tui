@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-12",
+  "engine": "harmonika-browser-macro",
+  "version": "1.0.1",
+  "active": true,
+  "tested_desktop": "macOS Chrome",
+  "coordinator": "Linux private SSH stdio",
+  "easy": "passed",
+  "medium": "passed",
+  "hard": "passed",
+  "native_final_macro_steps_verified": 8,
+  "preview_dispatches_final_run": 1,
+  "cross_origin_frame": "blocked_as_expected",
+  "focused_tests": 20,
+  "config_regression_tests": 24,
+  "desktop_audit_regression_tests": 25,
+  "total_tests_passed": 69,
+  "sqlite_journal_mode": "wal",
+  "mechanics_columns": [
+    "timestamp",
+    "skill_id",
+    "error_type",
+    "latency"
+  ],
+  "raw_page_data_sent_to_coordinator": false,
+  "fixes": [
+    "stale semantic references rejected",
+    "disabled and obscured controls guarded",
+    "select and checkbox filter controls",
+    "nested panel reveal",
+    "same-origin iframe observation/actions",
+    "typed macro sequential postconditions and lock",
+    "pre-existing click proof rejected"
+  ],
+  "limits": [
+    "Cross-origin iframe requires separate supported connector",
+    "Windows/Linux desktop control not verified",
+    "VNC allow_control remains disabled; no policy change",
+    "No raw keyboard/OS desktop automation implied",
+    "No cross-request exactly-once replay guarantee"
+  ]
+}

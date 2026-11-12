@@ -721,7 +721,7 @@ test('uncertain GPU submission never falls back or writes a second image',async(
 test('unavailable local vision is explicit degraded and never calls a mentor',async()=>{
  const project=mkProject('local-vision-degraded');fs.writeFileSync(path.join(project,'input.png'),pngBuffer());
  const core=createCore({callerCwd:project,rpc:neverRpc,mediaBridge:{analyze:async()=>{const e=new Error('local_vision_unavailable');e.code='local_vision_unavailable';throw e;},close(){}}});
- const result=await core.callTool('analyze_image',{file_path:'input.png',prompt:'describe'});assert.equal(result.isError,true);const value=parseResult(result);assert.equal(value.status,'degraded');assert.equal(value.analysis_performed,false);assert.equal(value.processing_mode,'local_only');core.shutdown();
+ const result=await core.callTool('analyze_image',{file_path:'input.png',prompt:'describe',mode:'vision'});assert.equal(result.isError,true);const value=parseResult(result);assert.equal(value.status,'degraded');assert.equal(value.analysis_performed,false);assert.equal(value.processing_mode,'local_only');core.shutdown();
 });
 
 
@@ -760,3 +760,9 @@ test('GPU busy and VRAM full are customer-safe structured tool responses',async(
   try{const r=await core.callTool('generate_image',{prompt:'PRIVATE_SENTINEL_CUSTOMER',output_file:'result.png'}),v=parseResult(r);assert.equal(v.status,'degraded');assert.equal(v.error,code);assert.equal(JSON.stringify(v).includes('PRIVATE_SENTINEL_CUSTOMER'),false);assert.equal(fs.existsSync(path.join(project,'result.png')),false);}finally{core.shutdown();}
  }
 });
+
+ test('OCR defaults to shared gateway and never needs GPU',async()=>{
+ const project=mkProject('cpu-ocr');fs.writeFileSync(path.join(project,'input.png'),pngBuffer());let calls=0;
+ const core=createCore({callerCwd:project,rpc:async p=>{calls++;assert.equal(p.operation,'analyze_image');return {ok:true,engine:'paddleocr-v5-local-cpu',text:'TEST',processing_mode:'local_only'};},mediaBridge:{analyze:async()=>{throw Error('GPU must not run');},close(){}}});
+ try {const value=parseResult(await core.callTool('analyze_image',{file_path:'input.png',prompt:'read'}));assert.equal(value.text,'TEST');assert.equal(value.engine,'Harmonika Ai');assert.equal(value.processing_mode,'local_only');assert.equal(calls,1);}finally{core.shutdown();}
+ });

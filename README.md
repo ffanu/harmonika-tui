@@ -63,6 +63,13 @@ Helper baru memakai Python stdlib dan fixture sintetis; hasil self-test membukti
 
 ## Engine modular
 
+Pemulihan Zimbra pada runtime operator menyediakan `zimbra_health`,
+`zimbra_component`, `zimbra_tls_audit`, `zimbra_ssl_plan`, `zimbra_mailjet_plan`
+dan `zimbra_qa`. Dua puluh empat Q&A menjadi panduan
+diagnosis otomatis; izin proses tetap mengikuti target dan tindakan pengguna.
+Pengetahuan pure yang sama tersedia melalui skill backend `zimbra.qa`.
+[Alur, batas dan pengujian](backend/zimbra/README.md).
+
 Kontrak `AIRequest → AIIntegration → AIAdapter` memisahkan TUI dari model guru, lokal, atau LLM mandiri. Payload, event, dan identitas UI tetap sama. [Interface dan contoh pemakaian](docs/AI-INTEGRATION.md). [Restart aman dan verifikasi](docs/GATEWAY-MAINTENANCE.md).
 
 ## Unified engine backend
@@ -378,3 +385,7 @@ upstream otomatis atau penghentian sesi yang sudah terbuka.
 
 [Shortcut, pengujian dan batas fitur](docs/TUI-WORKBENCH.md) ·
 [Bukti aktivasi](docs/TUI-WORKBENCH-ACTIVATION.json).
+
+### Pembaruan OCR bersama — 5 November 2026
+
+Adapter `analyze_image` default memakai OCR CPU Linux melalui gateway; pilih `mode: "vision"` untuk analisis visual RTX. `read_pdf` memakai OCR bersama dengan batas 10 MiB / 5 halaman. OCR mengembalikan teks tidak tepercaya, bukan validasi keaslian ID. Tanda ketidakpastian harus dipertahankan. Adapter TUI aktif MacBook juga menyediakan `ocr_document`; mulai proses TUI baru untuk memuat pembaruan MCP.

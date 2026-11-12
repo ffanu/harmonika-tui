@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-12",
+  "engine_version": "1.3.0",
+  "target_alias": "zimbra-exam",
+  "learner": "Harmonika native CLI supervised by Codex",
+  "result": "engine_updated_tests_passed_ssl_scheduler_activated",
+  "native_exam": {
+    "initial_preflight": "incomplete_no_progress_supervisor_stopped_own_exam_process",
+    "initial_build": "mock_orchestration_only_live_adapter_missing",
+    "correction": "fixed_readonly_preflight_tool_and_concrete_scoped_linux_worker",
+    "retest": {
+      "passed": 3,
+      "total": 3,
+      "checks": [
+        "twice_daily_due_only_not_forced_monthly",
+        "dry_run_and_dual_hook_isolation",
+        "actual_maintenance_blocker_and_no_false_activation_claim"
+      ]
+    }
+  },
+  "verification": {
+    "local_automated_tests": {
+      "passed": 124,
+      "groups": {
+        "zimbra": 82,
+        "service_probe": 5,
+        "ssh_contract_and_transport": 13,
+        "configuration_transaction": 24
+      }
+    },
+    "linux_worker_tests": {
+      "passed": 24,
+      "subset_rerun": true,
+      "actual_openssl_rsa_ec_fixtures": true
+    },
+    "live_inspection_passed": true,
+    "sqlite_log_fields": [
+      "timestamp",
+      "skill_id",
+      "error_type",
+      "latency"
+    ],
+    "health_after": "healthy_18_components_running",
+    "scoped_proxy_maintenance_executed": true
+  },
+  "integration": {
+    "linux_core_sources_installed": true,
+    "public_gateway_qa_version": "1.3.0",
+    "qa_topics": 20,
+    "gateway_invocation_verified": true,
+    "mcp_new_tool": "zimbra_ssl_plan",
+    "owner_and_mirror_installed": true,
+    "existing_tui_processes_restarted": false,
+    "discovery_sha256": "7b2955573f7720e1326e116d788c913518741a3af073984d21c4cfcc1e7984b6"
+  },
+  "automation": {
+    "schedule_prepared": "twice_daily_checks_renew_only_when_due",
+    "worker_approval_default": false,
+    "lock_and_private_backups": true,
+    "preserves_existing_sans": true,
+    "os_trust_hostname_rsa_ec_keymatch": true,
+    "known_failure_vendor_rollback": true,
+    "unknown_mutation_persistent_reconciliation_marker": true,
+    "mechanics_only_sqlite": true,
+    "source_sha256": "a231f71d96db145d26a5b5d260837e27688017bbcef18c5b95f6b4339461c75e"
+  },
+  "activation": {
+    "staging_acme_tested": true,
+    "production_material_and_vendor_verifycrt_passed": true,
+    "production_issuance_or_deploy_tested": false,
+    "production_certificate_changed": false,
+    "forced_issuance": false,
+    "scheduler": "certbot.timer",
+    "schedule": "twice_daily_due_only",
+    "timer_enabled_observed": true,
+    "existing_monthly_timer_and_hooks_changed": true,
+    "maintenance_authorization": "Recorded owner approval for scoped proxy maintenance; Zimbra restart only for a changed certificate or confirmed rollback.",
+    "initial_scheduled_worker": "unchanged_success",
+    "all_18_components_running_observed": true,
+    "shared_other_lineages_preserved": true,
+    "limits": [
+      "Future due production issuance/deployment has not been exercised by forcing renewal.",
+      "Application health observations do not prove external message delivery."
+    ]
+  }
+}
