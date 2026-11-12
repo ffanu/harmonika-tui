@@ -1,0 +1,24 @@
+[Unit]
+Description=Harmonika qualified high-resolution video coordinator
+After=network.target harmonika-high-video-tunnel.service
+
+[Service]
+Type=simple
+User=root
+UMask=0077
+WorkingDirectory=/opt/harmonika-ai/high-video
+ExecStart=/usr/bin/python3 /opt/harmonika-ai/high-video/server.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/harmonika-high-video
+StateDirectory=harmonika-high-video
+StateDirectoryMode=0700
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "scope": "native owner TUI video quality routing, Linux gateway and Windows RTX",
+  "verification_state": "complete",
+  "local_date": "2026-11-13",
+  "updated_at_utc": "2026-11-12T18:20:11.454975+00:00",
+  "default_profile": {
+    "model": "Wan 2.2 TI2V 5B FP16",
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "steps": 20,
+    "native_latent_height": 736,
+    "upscaled": false,
+    "audio": false,
+    "qualified_segment_seconds": 5,
+    "long_duration": "sequential reference-conditioned segments, storage admission",
+    "seamless_continuity_guaranteed": false
+  },
+  "model_inventory": {
+    "manifest_sha256": "84e62700874acb7c6c45d15a2ec2fc5ca31feec79306669fbb0dd342ccb3243c",
+    "verified_files": [
+      {
+        "relative": "text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "bytes": 6735906897,
+        "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+        "bytes": 9999658848,
+        "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+      },
+      {
+        "relative": "vae/wan2.2_vae.safetensors",
+        "bytes": 1409400960,
+        "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors",
+        "bytes": 14293923632,
+        "sha256": "cad711ae211c8b23455ec68cd6a190a33a3d874234a77eb57266d73f8f0e6c9f"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors",
+        "bytes": 14293923632,
+        "sha256": "e71b96d7c82e638694c5e7fb98fac4bfb0e4ddc5fbbb4b1df40da8f0f1278a97"
+      },
+      {
+        "relative": "vae/wan_2.1_vae.safetensors",
+        "bytes": 253815318,
+        "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+      }
+    ]
+  },
+  "gpu_qualifications": [
+    {
+      "job_id": "7a3f6270ec508b07ba507241bc3e2f21",
+      "result": {
+        "status": "completed",
+        "family": "wan22_5b",
+        "model": "Wan 2.2 TI2V 5B FP16",
+        "width": 1280,
+        "height": 720,
+        "native_height": 736,
+        "fps": 24,
+        "steps": 20,
+        "quality": "high",
+        "upscaled": false,
+        "duration_seconds": 1.0,
+        "frames": 24,
+        "audio": false,
+        "bytes": 258969,
+        "sha256": "44d04c56510a076edc32277967ed820d43d5d739e7e4d0823ffd531d63d83877"
+      },
+      "wall_seconds": 75.82
+    },
+    {
+      "job_id": "fe599e466683449b876ec202d763bb62",
+      "result": {
+        "status": "completed",
+        "family": "wan22_14b",
+        "model": "Wan 2.2 14B FP8",
+        "width": 1280,
+        "height": 720,
+        "native_height": 720,
+        "fps": 16,
+        "steps": 20,
+        "quality": "high",
+        "upscaled": false,
+        "duration_seconds": 1.0,
+        "frames": 16,
+        "audio": false,
+        "bytes": 448771,
+        "sha256": "3de852dfc9e718673fac149dcb97140616beb2e15a840e4a04028f7b6802beca"
+      },
+      "wall_seconds": 376.31
+    },
+    {
+      "job_id": "14b10e857c4e4a8d901791c58eae64d4",
+      "result": {
+        "status": "completed",
+        "family": "wan22_5b",
+        "model": "Wan 2.2 TI2V 5B FP16",
+        "width": 1280,
+        "height": 720,
+        "native_height": 736,
+        "fps": 24,
+        "steps": 20,
+        "quality": "high",
+        "upscaled": false,
+        "workflow_sha256": "8a0b2da8b8d10d9664ccc48a74a5cbb73fbd8ea26cee70b7877f83115a74a54a",
+        "duration_seconds": 5.0,
+        "frames": 120,
+        "audio": false,
+        "bytes": 1417567,
+        "sha256": "4dff982f642602d26fbebf9ddbca2622d48c84bd6d4c74ec64ccdbdb835f0ce7"
+      },
+      "wall_seconds": 447.0
+    },
+    {
+      "job_id": "20ebae85a46045ceb2633050842f6162",
+      "result": {
+        "status": "completed",
+        "family": "wan22_5b",
+        "model": "Wan 2.2 TI2V 5B FP16",
+        "width": 1280,
+        "height": 720,
+        "native_height": 736,
+        "fps": 24,
+        "steps": 20,
+        "quality": "high",
+        "upscaled": false,
+        "workflow_sha256": "8a0b2da8b8d10d9664ccc48a74a5cbb73fbd8ea26cee70b7877f83115a74a54a",
+        "duration_seconds": 5.0,
+        "frames": 120,
+        "audio": false,
+        "bytes": 1157294,
+        "sha256": "abb6e0c275761b07d269e00c947c3f501907f131a1c264b16b797096494d5bf6"
+      },
+      "wall_seconds": 441.93
+    }
+  ],
+  "profile_activation": {
+    "workflow_sha256": "8a0b2da8b8d10d9664ccc48a74a5cbb73fbd8ea26cee70b7877f83115a74a54a",
+    "visual_reviewed": true,
+    "active": {
+      "video.generate": {
+        "family": "wan22_5b",
+        "width": 1280,
+        "height": 720,
+        "fps": 24,
+        "steps": 20,
+        "status": "verified",
+        "max_segment_seconds": 5,
+        "evidence_job": "20ebae85a46045ceb2633050842f6162",
+        "evidence_sha256": "abb6e0c275761b07d269e00c947c3f501907f131a1c264b16b797096494d5bf6",
+        "decoded_frames": 120
+      },
+      "video.animate_image": {
+        "family": "wan22_5b",
+        "width": 1280,
+        "height": 720,
+        "fps": 24,
+        "steps": 20,
+        "status": "verified",
+        "max_segment_seconds": 5,
+        "evidence_job": "14b10e857c4e4a8d901791c58eae64d4",
+        "evidence_sha256": "4dff982f642602d26fbebf9ddbca2622d48c84bd6d4c74ec64ccdbdb835f0ce7",
+        "decoded_frames": 120
+      }
+    }
+  },
+  "visual_review": {
+    "5b_text_5s": "representative first, middle and last decoded frames reviewed; no colored particle artifacts",
+    "5b_image_5s": "reference subject preserved; representative frames reviewed; generated background may change",
+    "14b_1s": "decoded 720p diagnostic contains colored particle artifacts; excluded from active profile"
+  },
+  "runtime": {
+    "linux_coordinator": "127.0.0.1:18266",
+    "linux_forward": "127.0.0.1:18262",
+    "windows_broker": "127.0.0.1:18261",
+    "windows_comfy": "127.0.0.1:18193",
+    "c_drive_models": true,
+    "d_drive_offline": true,
+    "existing_comfy_preserved": true,
+    "global_gpu_interrupts": false,
+    "physical_reboot_tested": false,
+    "boot_tasks_configured": true,
+    "idle_gpu_memory_mib_after_qualification": 2526,
+    "comfyui_version": "0.42.0",
+    "boot_task_principal": "SYSTEM",
+    "boot_execution_limit": "PT0S",
+    "watchdog_contains_both_tasks": true,
+    "c_drive_free_bytes_observed": 150825619456,
+    "prompt_guidance": {
+      "preferred_language": "en",
+      "reference_for_exact_product": true,
+      "extra_cloud_prompt_service_enabled": false
+    },
+    "existing_user_processes_signalled": false,
+    "prompt_extension_reference": "https://github.com/Wan-Video/Wan2.2#2-using-prompt-extension",
+    "sqlite_journal_mode": "wal",
+    "idle_gpu_memory_mib_after_native_exam": 1859,
+    "idle_gpu_utilization_percent_after_native_exam": 0
+  },
+  "native_tui": {
+    "capabilities": {
+      "ok": true,
+      "quality": "high",
+      "quality_profiles": {
+        "video.animate_image": {
+          "family": "wan22_5b",
+          "fps": 24,
+          "height": 720,
+          "max_segment_seconds": 5,
+          "model": "Wan 2.2 TI2V 5B FP16",
+          "native_height": 736,
+          "quality": "high",
+          "steps": 20,
+          "upscaled": false,
+          "width": 1280
+        },
+        "video.generate": {
+          "family": "wan22_5b",
+          "fps": 24,
+          "height": 720,
+          "max_segment_seconds": 5,
+          "model": "Wan 2.2 TI2V 5B FP16",
+          "native_height": 736,
+          "quality": "high",
+          "steps": 20,
+          "upscaled": false,
+          "width": 1280
+        }
+      },
+      "flexible_duration": true,
+      "default_resolution": {
+        "height": 720,
+        "width": 1280
+      },
+      "preview_fallback": false
+    },
+    "submit_responses": [
+      {
+        "ok": true,
+        "job_id": "d04aa13e98f8a6f380e3de47539169be",
+        "request_id": "76d545d12d8973d8f752750bdddb46d2",
+        "state": "queued"
+      }
+    ],
+    "session_id": "ses_e2f254c53ffe5U2sEF8oXdw7Ec",
+    "text_10s": {
+      "job_id": "d04aa13e98f8a6f380e3de47539169be",
+      "state": "completed",
+      "download_verified": true,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "frames": 240,
+      "duration_seconds": 10,
+      "audio": false,
+      "bytes": 4119804,
+      "sha256": "2c2223407e626e3c36724b5972935ac49b0769b13626672893a3a72692a242bc",
+      "full_decode_passed": true,
+      "visual_review": "sharp video, but free-form Indonesian product prompt did not produce a faithful router; reference-conditioned exam added",
+      "wall_seconds": 900.93,
+      "private_inputs_removed": true
+    },
+    "reference_10s": {
+      "job_id": "d04ae8d1a7ef79f89a55f94fe31d4538",
+      "state": "completed",
+      "reference_sha256": "d12cf1be2f768be553781dd956a738c92520f32a522ad4ed3411b532425f5a91",
+      "english_prompt_observed": true,
+      "first_segment_visual_review": "main white router silhouette/color match the supplied reference at the inspected mid-frame; no particle artifacts",
+      "download_verified": true,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "frames": 240,
+      "duration_seconds": 10,
+      "audio": false,
+      "bytes": 2733152,
+      "sha256": "12fadbef65500bd518e54ae74e2846a598976c258f3d5bbd49b16583f33b1ebe",
+      "full_decode_passed": true,
+      "wall_seconds": 912.23,
+      "private_inputs_removed": true,
+      "visual_review": "six representative frames, including the segment boundary and final frame, retain the main reference router silhouette/color; no colored particle artifacts; segment camera shifts remain possible",
+      "download_file": "~/Downloads/harmonika-ai/video/harmonika-video-d04ae8d1a7ef79f89a55f94fe31d4538.mp4"
+    },
+    "native_submissions": 2,
+    "gpu_segments_completed": 4,
+    "gpu_segment_latencies_seconds": [
+      438.08,
+      448.08,
+      448.08,
+      448.06
+    ]
+  },
+  "unit_checks": {
+    "high_video": 16,
+    "video_routing": 21,
+    "signed_native_activation": 5,
+    "signed_package": 41,
+    "durable_child_runtime": 3,
+    "native_video_companion": 3,
+    "total_passed": 89
+  },
+  "live_boundary_checks": {
+    "unauthorized_http_401": true,
+    "invalid_owner_rejected": true,
+    "idempotency_returns_same_job": true,
+    "idempotency_conflict_rejected": true,
+    "early_download_rejected": true,
+    "wrong_owner_isolated": true,
+    "synthetic_prompt_absent_from_sqlite_wal": true,
+    "service_token_absent_from_sqlite_wal": true,
+    "qualification_private_inputs_removed": true,
+    "non_ascii_invalid_auth_returns_401": true,
+    "native_reference_bytes_match_mac_file": true,
+    "all_four_native_gpu_segment_inputs_removed": true,
+    "coordinator_keeps_only_result_json_and_mp4": true
+  },
+  "release": {
+    "signed_package_sha256": "d316b9764f48e48c6d0bd63ac84150fd9176000f7f0833d1a5299838314e2c53",
+    "native_adapter_sha256": "db9190c2686273935b4caa74fb32eecb344fc0276df88704aac3388ab9531b66",
+    "branded_binary_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "branded_binary_changed": false,
+    "version": "2026.11.13.2",
+    "source_files_verified_without_weights_or_credentials": true
+  },
+  "windows_source_sha256": {
+    "broker.py": "4c317bc76e65c9f85942fbd1b02c19439436d782e748baa5cf08a0778743bb89",
+    "workflow.py": "8a0b2da8b8d10d9664ccc48a74a5cbb73fbd8ea26cee70b7877f83115a74a54a",
+    "runner.py": "13aaa6fa2565400609668839dcd289b01fa652d1875186afb3ac8485b87e1800",
+    "qualify.py": "401e8c666c1ddc4917b286e7056a11b404b9b7fbbc8085ebb7f73cf5116be63e",
+    "models.json": "84e62700874acb7c6c45d15a2ec2fc5ca31feec79306669fbb0dd342ccb3243c"
+  },
+  "checkpoints": [
+    {
+      "question": "Is high quality a real render rather than a larger export label?",
+      "answer": "Real 720p GPU render; 5B latent cropped from 736 to 720 pixels, no upscale."
+    },
+    {
+      "question": "Does TUI reach the new backend?",
+      "answer": "Native TUI completed and downloaded both text-to-video and reference-conditioned 10-second jobs. Independent FFprobe, full FFmpeg decode and SHA-256 checks passed."
+    },
+    {
+      "question": "Is 14B active?",
+      "answer": "No; visual diagnostic failed quality review."
+    }
+  ],
+  "linux_source_sha256": {
+    "server.py": "0a1658c6263e405c32a601ff2e53d9ec17d33cbfde4d1dc53abd649e7180b8d7",
+    "coordinator.py": "f2bca96d3d060a628bbd0fc3dadac27c1d927523449b80bc9c7d08fc1820f12a",
+    "proxy.py": "6e9547690afdd9c30a3804122fcd4dec7f2af02e58b2199e60521b8298f9737a"
+  },
+  "limitations": [
+    "Free-form text prompts do not guarantee faithful product appearance; use a supplied reference.",
+    "Long videos contain sequential reference-conditioned segments; seamless continuity is not guaranteed.",
+    "Raw generation is silent; existing Studio workflow is required for audio.",
+    "14B diagnostic not promoted because representative frames contain colored particle artifacts.",
+    "Physical reboot was not performed; SYSTEM boot triggers, watchdog membership and live service operation were verified."
+  ]
+}

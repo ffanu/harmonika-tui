@@ -70,6 +70,12 @@ def project(row):
 
 def execute(data,owner):
  op=data.get('operation')
+ for name in ('high_video_proxy','flex_video_proxy'):
+  path=ROOT/(name+'.py')
+  if path.is_file():
+   spec=importlib.util.spec_from_file_location('harmonika_'+name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+   routed=module.route(data,owner)
+   if routed is not None:return routed
  if op in ('pro_cs_capabilities','pro_cs_invoke','pro_cs_plan','pro_cs_validate','pro_cs_takeover','pro_cs_close'):
   spec=importlib.util.spec_from_file_location('harmonika_pro_cs',ROOT/'pro_cs_proxy.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module.dispatch(data,owner)
  if op in ('backend_tools_capabilities','backend_tools_self_test'):
