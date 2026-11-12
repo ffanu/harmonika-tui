@@ -17,6 +17,7 @@ import urllib.request
 CONTROL = Path(__file__).resolve().parent
 LEGACY_CONTROL = CONTROL.parent/'harmonika-video-toolkit-source'
 JOBS = Path(r'C:\HarmonikaVideo\jobs')
+PORT = 18261
 
 
 def load(name, path):
@@ -135,7 +136,7 @@ def main():
     legacy.CONTROL = CONTROL
     class QualityHTTPServer(legacy.ThreadingHTTPServer):
         def __init__(self, address, handler):
-            super().__init__(('127.0.0.1', 18261), handler)
+            super().__init__(('127.0.0.1', PORT), handler)
     legacy.ThreadingHTTPServer = QualityHTTPServer
 
     class QualityBroker(QualityLifecycle, legacy.Broker):

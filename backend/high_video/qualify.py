@@ -23,8 +23,9 @@ def evidence(jid, kind, maximum):
     result = json.loads((job/'result.json').read_text())
     proof_hash = result.get('workflow_sha256')
     p = wf.profile(result['family']); wf.verify_models(result['family'])
+    expected_hash = wf.workflow_hash_for_family(result['family']) if hasattr(wf, 'workflow_hash_for_family') else wf.workflow_hash()
     if (source['kind'] != kind or result.get('status') != 'completed'
-            or proof_hash != wf.workflow_hash()
+            or proof_hash != expected_hash
             or not 1 <= maximum <= 10 or result['duration_seconds'] < maximum
             or any(result.get(k) != p[k] for k in ('width', 'height', 'fps', 'steps', 'quality', 'upscaled'))):
         raise ValueError('unqualified_evidence')
@@ -44,6 +45,7 @@ def evidence(jid, kind, maximum):
                    check=True, timeout=180, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return {**{k: p[k] for k in ('family', 'width', 'height', 'fps', 'steps')},
             'status': 'verified', 'max_segment_seconds': maximum, 'evidence_job': jid,
+            'workflow_sha256': expected_hash,
             'evidence_sha256': digest, 'decoded_frames': int(stream['nb_read_frames'])}
 
 

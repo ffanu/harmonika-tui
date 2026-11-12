@@ -1,5 +1,10 @@
 # Native 720p video on the Windows RTX
 
+The latest A14B routing/presets are documented in
+[`../wan14/README.md`](../wan14/README.md). This directory remains the shared
+transport and preserved 5B recovery service; current readiness comes from
+backend capabilities. The original report below records the earlier 5B release.
+
 Harmonika's owner TUI generates video through the Linux gateway, an authenticated
 loopback coordinator, an SSH tunnel and a separate Windows ComfyUI runtime.
 New requests use qualified Wan 2.2 profiles. Failed/unavailable high quality
@@ -14,9 +19,10 @@ Existing video handles remain readable through the old routes.
 | Dedicated ComfyUI | 127.0.0.1:18193 | GPU text encoder, denoising and tiled VAE |
 
 The engine supports Wan 2.2 T2V with separate 14B high/low noise FP8 weights.
-The qualified default on this 12 GB GPU is Wan 2.2 TI2V 5B FP16 for both text
-and image animation; the 14B one-second diagnostic had visible particle
-artifacts and is not promoted merely because its MP4 decoded successfully.
+The preserved base qualification on this 12 GB GPU uses Wan 2.2 TI2V 5B FP16 for
+both text and image animation. An early 14B one-second diagnostic had visible
+particle artifacts; later A14B qualification and reference-guidance corrections
+are recorded by the separate `wan14` module. Decoding alone is insufficient.
 Image animation preserves the supplied reference. Both workflows export 1280×720 at 20
 sampling steps. The 5B latent is 1280×736; export crops 16 pixels, without
 upscaling. Requested durations longer than the qualified GPU segment are built

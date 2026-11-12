@@ -11,8 +11,8 @@ import threading
 CONTROL = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('quality_coordinator', CONTROL/'coordinator.py')
 coordinator = importlib.util.module_from_spec(spec); spec.loader.exec_module(coordinator)
-TOKEN = Path('/etc/harmonika-ai/video-toolkit.token').read_text().strip()
-engine = coordinator.Engine('/var/lib/harmonika-high-video', TOKEN)
+TOKEN = None
+engine = None
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -22,7 +22,7 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
     def do_POST(self):
-        if self.path != '/rpc' or not hmac.compare_digest(self.headers.get('Authorization', '').encode('utf-8'), ('Bearer '+TOKEN).encode('utf-8')):
+        if TOKEN is None or self.path != '/rpc' or not hmac.compare_digest(self.headers.get('Authorization', '').encode('utf-8'), ('Bearer '+TOKEN).encode('utf-8')):
             self.send_error(401); return
         try:
             length = int(self.headers.get('Content-Length', '0'))
@@ -77,6 +77,13 @@ class Server(ThreadingHTTPServer):
         pass
 
 
-if __name__ == '__main__':
+def main(root='/var/lib/harmonika-high-video', port=18266, worker_base='http://127.0.0.1:18262'):
+    global TOKEN, engine
+    TOKEN = Path('/etc/harmonika-ai/video-toolkit.token').read_text().strip()
+    engine = coordinator.Engine(root, TOKEN, base=worker_base)
     threading.Thread(target=engine.worker, daemon=True).start()
-    Server(('127.0.0.1', 18266), Handler).serve_forever()
+    Server(('127.0.0.1', port), Handler).serve_forever()
+
+
+if __name__ == '__main__':
+    main()

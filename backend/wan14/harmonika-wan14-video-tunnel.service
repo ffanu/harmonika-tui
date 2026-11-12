@@ -1,0 +1,19 @@
+[Unit]
+Description=Harmonika private Wan A14B worker tunnel
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -L 127.0.0.1:18264:127.0.0.1:18263 -F /dev/null -NT -i /etc/harmonika-ai/video_toolkit_tunnel_ed25519 -p 22022 -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/root/.ssh/known_hosts -o ConnectTimeout=10 -o ExitOnForwardFailure=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=3 kraken@103.157.24.189
+Restart=on-failure
+RestartSec=15
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

@@ -87,7 +87,7 @@ def run(job):
         if data.get('kind') == 'video.animate_image':
             image_name = upload((job/'input.png').read_bytes(), jid)
         nodes = wf.build(family, data['prompt'], seconds, jid, image_name)
-        workflow_sha = wf.workflow_hash()
+        workflow_sha = wf.workflow_hash_for_family(family) if hasattr(wf, 'workflow_hash_for_family') else wf.workflow_hash()
         marker.write_text(json.dumps({'prompt_id': prompt_id, 'state': 'submitting', 'workflow_sha256': workflow_sha}))
         submitted = True
         result = request('POST', '/prompt', {'prompt_id': prompt_id, 'client_id': 'harmonika-hq-'+jid, 'prompt': nodes})

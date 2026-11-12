@@ -1,0 +1,601 @@
+{
+  "schema_version": 1,
+  "verification_state": "complete",
+  "scope": "Wan 2.2 A14B FP8 text/reference video on RTX 12GB through private backend and native TUI",
+  "updated_at_utc": "2026-11-12T19:28:30.430975+00:00",
+  "model_inventory": {
+    "manifest_sha256": "0bf874e3fdd100e839b8c7c71dbd202cc21cfb5ff70a2bff703bdc7fa242bdc7",
+    "verified_files": [
+      {
+        "relative": "text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "bytes": 6735906897,
+        "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+        "bytes": 9999658848,
+        "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+      },
+      {
+        "relative": "vae/wan2.2_vae.safetensors",
+        "bytes": 1409400960,
+        "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors",
+        "bytes": 14293923632,
+        "sha256": "cad711ae211c8b23455ec68cd6a190a33a3d874234a77eb57266d73f8f0e6c9f"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors",
+        "bytes": 14293923632,
+        "sha256": "e71b96d7c82e638694c5e7fb98fac4bfb0e4ddc5fbbb4b1df40da8f0f1278a97"
+      },
+      {
+        "relative": "vae/wan_2.1_vae.safetensors",
+        "bytes": 253815318,
+        "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+        "bytes": 14294742832,
+        "sha256": "6122e79d55e0f235698d11d657f3b196c5273c830da00b2b013c5a048d5e6a42"
+      },
+      {
+        "relative": "diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+        "bytes": 14294742832,
+        "sha256": "5471a457b6ac404202a5fbe6c11595a3d5641fc766b00f38763f72303fffc21e"
+      },
+      {
+        "relative": "loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+        "bytes": 1226977424,
+        "sha256": "d176c808d6fc461999b68e321efcb7501b20b8c3797523ed0df14f7d1deff11e"
+      },
+      {
+        "relative": "loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors",
+        "bytes": 1226977424,
+        "sha256": "024f21de095bc8fad9809ded3e9e49a2e170dcf27075da8145ba7d60d8aab7f9"
+      },
+      {
+        "relative": "loras/wan2.2_t2v_lightx2v_4steps_lora_v1.1_high_noise.safetensors",
+        "bytes": 1226977424,
+        "sha256": "698321cb86bd30c4af06c9b84e656a1048c8cb54e06d50694536fb5de37fde41"
+      },
+      {
+        "relative": "loras/wan2.2_t2v_lightx2v_4steps_lora_v1.1_low_noise.safetensors",
+        "bytes": 1226977424,
+        "sha256": "ec95216e614b3c132c11bfb387b11feedf62163150ccc9068bca8a189771e75a"
+      }
+    ]
+  },
+  "workflow_source_sha256": "688523e7346c643825d473567bd4c2399c96cf3b00e57a75ec8b1ff15b454360",
+  "base_workflow_sha256": "8a0b2da8b8d10d9664ccc48a74a5cbb73fbd8ea26cee70b7877f83115a74a54a",
+  "focused_test_suites": {
+    "wan14": 13,
+    "high_video": 16,
+    "video_routing": 21
+  },
+  "focused_unit_tests_passed": 50,
+  "text_visual_review": {
+    "sha256": "89cfd9ea603a3b5ebfa37e6b5cc81133d780847c8825fca15d3adc7a1ed14398",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "16/1",
+          "nb_read_frames": "80"
+        }
+      ],
+      "format": {
+        "duration": "5.000000"
+      }
+    },
+    "full_decode": "passed",
+    "visual_reviewed": true,
+    "sample_times_seconds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "findings": [
+      "stable router silhouette",
+      "natural colors",
+      "no visible rainbow or particle artifacts",
+      "small generated surface text and indicator-light variation"
+    ],
+    "fixture": "synthetic only"
+  },
+  "prior_20_step_diagnostic": {
+    "job_id": "7020071b96134e8a8660ecec40fad9bc",
+    "operator_scoped_cancel_requested": true,
+    "qualification": false
+  },
+  "alternatives": {
+    "Wan_A14B": "approximately 27B total / 14B active per denoising step",
+    "LTX_2_5": "22B verified upstream, not installed or qualified here",
+    "120B_video": "no verified compatible local model selected"
+  },
+  "data_firewall": {
+    "fixtures": "synthetic router only",
+    "credentials_in_report": false,
+    "chat_in_logs_or_sqlite": false,
+    "original_user_processes_signalled": false,
+    "D_disk_intentionally_offline": true,
+    "owned_fixture_inputs_erased": true
+  },
+  "default_profiles": {
+    "video.animate_image": {
+      "family": "wan22_i2v_14b_guided",
+      "fps": 16,
+      "height": 720,
+      "max_segment_seconds": 1,
+      "model": "Wan 2.2 I2V A14B FP8 + guided 20-step",
+      "native_height": 720,
+      "quality": "high",
+      "steps": 20,
+      "upscaled": false,
+      "width": 1280
+    },
+    "video.generate": {
+      "family": "wan22_t2v_14b_lightx2v",
+      "fps": 16,
+      "height": 720,
+      "max_segment_seconds": 5,
+      "model": "Wan 2.2 T2V A14B FP8 + LightX2V 4-step",
+      "native_height": 720,
+      "quality": "high",
+      "steps": 4,
+      "upscaled": false,
+      "width": 1280
+    }
+  },
+  "gpu_qualifications": [
+    {
+      "job_id": "33d97e07f6f24b2402a623a873710089",
+      "kind": "text",
+      "elapsed_seconds": 492.06,
+      "result": {
+        "status": "completed",
+        "family": "wan22_t2v_14b_lightx2v",
+        "model": "Wan 2.2 T2V A14B FP8 + LightX2V 4-step",
+        "width": 1280,
+        "height": 720,
+        "native_height": 720,
+        "fps": 16,
+        "steps": 4,
+        "quality": "high",
+        "upscaled": false,
+        "workflow_sha256": "553f00bc7160eb51e05970b5e584cdedcfeb8360f38d3cfee19ec7991e1d4bd6",
+        "duration_seconds": 5.0,
+        "frames": 80,
+        "audio": false,
+        "bytes": 1715344,
+        "sha256": "89cfd9ea603a3b5ebfa37e6b5cc81133d780847c8825fca15d3adc7a1ed14398"
+      }
+    },
+    {
+      "job_id": "535f4547a84735e145b3765da16d73d2",
+      "elapsed_seconds": 381.2,
+      "result": {
+        "status": "completed",
+        "family": "wan22_i2v_14b_guided",
+        "model": "Wan 2.2 I2V A14B FP8 + guided 20-step",
+        "width": 1280,
+        "height": 720,
+        "native_height": 720,
+        "fps": 16,
+        "steps": 20,
+        "quality": "high",
+        "upscaled": false,
+        "workflow_sha256": "171410716f35d1a2e2aae4c16b0c3c7f2a854c9695090860079d4dedaa6cba67",
+        "duration_seconds": 1.0,
+        "frames": 16,
+        "audio": false,
+        "bytes": 269238,
+        "sha256": "d371c1aea01de7b6a6de230a6d3277ee20dcce6b6d04dfc7477294e62571096c"
+      }
+    }
+  ],
+  "guided_visual_review": {
+    "sha256": "d371c1aea01de7b6a6de230a6d3277ee20dcce6b6d04dfc7477294e62571096c",
+    "bytes": 269238,
+    "full_decode": "passed",
+    "visual_reviewed": true,
+    "sample_frame_indices": [
+      0,
+      8,
+      15
+    ],
+    "findings": [
+      "router silhouette retained",
+      "no people or hands in sampled frames",
+      "natural colors",
+      "no rainbow/particle artifacts"
+    ],
+    "limitation": "short synthetic fixture; arbitrary prompt/reference fidelity is not guaranteed"
+  },
+  "source_sha256": {
+    "bridge.py": "d1b0076db39cde3b45abe1cb24be9f7ce858229500e64429b14c73b1231e100b",
+    "broker.py": "79216a085c25ccfc060d1cad2362e5bf421c9c334ec2dea2ef8f3a0a13d3d6a0",
+    "guided_workflow.py": "6fef6a65da903813a0e08897bb4588af08b1f2520901af773e323467fb524a1f",
+    "install_models.py": "6677872e85982feb811726af2b495b13f74a7abe3646646debe3b59aeb150d14",
+    "install_windows.py": "f7eb25fac4e65133029d4b27f491e4e3c279209c93a84ada98dd3dc838ad2942",
+    "pinned_download.py": "0a1f7b64e6b997b33239102636c71ab41c14d4469dd05ce5fad57695309b487d",
+    "qualify.py": "2962b5c23d6e680110867686ab63de847fcee6a8d0d201adbd4b1e914a208dc7",
+    "runner.py": "eb1cfe57dfcd41b08b646beafb4d08d80ff3d110467f5e2c3ebd228bcf403089",
+    "workflow.py": "688523e7346c643825d473567bd4c2399c96cf3b00e57a75ec8b1ff15b454360"
+  },
+  "windows_task": {
+    "TaskName": "HarmonikaWan14Video",
+    "State": 4,
+    "UserId": "SYSTEM",
+    "Limit": "PT0S",
+    "Instances": "IgnoreNew"
+  },
+  "disk_1": {
+    "Number": 1,
+    "IsOffline": true
+  },
+  "C_free_bytes": 102612635648,
+  "active_profile": {
+    "workflow_sha256": "6fef6a65da903813a0e08897bb4588af08b1f2520901af773e323467fb524a1f",
+    "visual_reviewed": true,
+    "active": {
+      "video.generate": {
+        "family": "wan22_t2v_14b_lightx2v",
+        "width": 1280,
+        "height": 720,
+        "fps": 16,
+        "steps": 4,
+        "status": "verified",
+        "max_segment_seconds": 5,
+        "evidence_job": "33d97e07f6f24b2402a623a873710089",
+        "workflow_sha256": "553f00bc7160eb51e05970b5e584cdedcfeb8360f38d3cfee19ec7991e1d4bd6",
+        "evidence_sha256": "89cfd9ea603a3b5ebfa37e6b5cc81133d780847c8825fca15d3adc7a1ed14398",
+        "decoded_frames": 80
+      },
+      "video.animate_image": {
+        "family": "wan22_i2v_14b_guided",
+        "width": 1280,
+        "height": 720,
+        "fps": 16,
+        "steps": 20,
+        "status": "verified",
+        "max_segment_seconds": 1,
+        "evidence_job": "535f4547a84735e145b3765da16d73d2",
+        "workflow_sha256": "171410716f35d1a2e2aae4c16b0c3c7f2a854c9695090860079d4dedaa6cba67",
+        "evidence_sha256": "d371c1aea01de7b6a6de230a6d3277ee20dcce6b6d04dfc7477294e62571096c",
+        "decoded_frames": 16
+      }
+    }
+  },
+  "native_adapter_capabilities": {
+    "audience": "internal_owner",
+    "audio": false,
+    "audio_requires_narration_step": true,
+    "audio_requires_studio": true,
+    "can_add_speech": false,
+    "default_resolution": {
+      "height": 720,
+      "width": 1280
+    },
+    "duration_seconds": [
+      1,
+      10
+    ],
+    "duration_seconds_range": {
+      "admission": "available_disk",
+      "minimum": 1,
+      "mode": "segmented"
+    },
+    "flexible_duration": true,
+    "image_to_video": true,
+    "image_to_video_duration_range": {
+      "admission": "available_disk",
+      "minimum": 1,
+      "mode": "segmented"
+    },
+    "image_to_video_duration_seconds": [
+      1,
+      10
+    ],
+    "native_video_audio": false,
+    "ok": true,
+    "preferred_prompt_language": "en",
+    "preview_fallback": false,
+    "provider": "Harmonika Ai",
+    "public_enabled": false,
+    "quality": "high",
+    "quality_profiles": {
+      "video.animate_image": {
+        "family": "wan22_i2v_14b_guided",
+        "fps": 16,
+        "height": 720,
+        "max_segment_seconds": 1,
+        "model": "Wan 2.2 I2V A14B FP8 + guided 20-step",
+        "native_height": 720,
+        "quality": "high",
+        "steps": 20,
+        "upscaled": false,
+        "width": 1280
+      },
+      "video.generate": {
+        "family": "wan22_t2v_14b_lightx2v",
+        "fps": 16,
+        "height": 720,
+        "max_segment_seconds": 5,
+        "model": "Wan 2.2 T2V A14B FP8 + LightX2V 4-step",
+        "native_height": 720,
+        "quality": "high",
+        "steps": 4,
+        "upscaled": false,
+        "width": 1280
+      }
+    },
+    "reference_recommended_for_product_fidelity": true,
+    "seamless_continuity_guaranteed": false,
+    "status": "ok",
+    "video_generation": true
+  },
+  "old_owned_job_recovery": {
+    "error_code": null,
+    "job_id": "d04ae8d1a7ef79f89a55f94fe31d4538",
+    "ok": true,
+    "poll_after_seconds": 10,
+    "progress_seconds": 10,
+    "provider": "Harmonika Ai",
+    "result": {
+      "audio": false,
+      "bytes": 2733152,
+      "duration_seconds": 10,
+      "fps": 24,
+      "frames": 240,
+      "height": 720,
+      "models": [
+        "Wan 2.2 TI2V 5B FP16"
+      ],
+      "quality": "high",
+      "seamless_continuity_guaranteed": false,
+      "segmented": true,
+      "sha256": "12fadbef65500bd518e54ae74e2846a598976c258f3d5bbd49b16583f33b1ebe",
+      "upscaled": false,
+      "width": 1280
+    },
+    "state": "completed"
+  },
+  "native_initial_exam": {
+    "job_id": "d04a3a34c57dad187ca27cd244e453a9",
+    "state": "completed",
+    "requested_seconds": 1,
+    "progress_seconds": 1,
+    "result": {
+      "duration_seconds": 1.0,
+      "frames": 16,
+      "width": 1280,
+      "height": 720,
+      "fps": 16,
+      "audio": false,
+      "quality": "high",
+      "upscaled": false,
+      "models": [
+        "Wan 2.2 I2V A14B FP8 + LightX2V 4-step"
+      ],
+      "sha256": "3fd6e6b55be0a73476adff5427623951d525085350c59cb80e9e2578d5eea315",
+      "bytes": 354524,
+      "segmented": false,
+      "seamless_continuity_guaranteed": false
+    },
+    "private_inputs_erased": true,
+    "journal_mode": "wal",
+    "db_columns": [
+      "id",
+      "owner",
+      "idem",
+      "digest",
+      "state",
+      "error",
+      "seconds",
+      "progress",
+      "created"
+    ],
+    "marker_enabled": true,
+    "facade_sha256": "f15ead2f1f992c2484364ffc5936d251d0f849e49b75c386cda3689bdbd2195a",
+    "semantic_result": "failed_unrequested_people_hands",
+    "transport_result": "passed_status_download_sha256_full_decode"
+  },
+  "initial_i2v_fast_failure": {
+    "transport_decode_checksum": "passed",
+    "semantic_compliance": "failed_unrequested_people_hands",
+    "native_job_id": "d04a3a34c57dad187ca27cd244e453a9",
+    "correction": "full 20-step I2V experts, CFG=3.5, explicit exclusions in negative conditioning",
+    "gpu_exam": {
+      "job_id": "f57984b7b2d06336d7e6d09eca7d203f",
+      "kind": "image",
+      "elapsed_seconds": 772.61,
+      "result": {
+        "status": "completed",
+        "family": "wan22_i2v_14b_lightx2v",
+        "model": "Wan 2.2 I2V A14B FP8 + LightX2V 4-step",
+        "width": 1280,
+        "height": 720,
+        "native_height": 720,
+        "fps": 16,
+        "steps": 4,
+        "quality": "high",
+        "upscaled": false,
+        "workflow_sha256": "553f00bc7160eb51e05970b5e584cdedcfeb8360f38d3cfee19ec7991e1d4bd6",
+        "duration_seconds": 5.0,
+        "frames": 80,
+        "audio": false,
+        "bytes": 1566796,
+        "sha256": "3ba12157a718530e4ba75398d584fec5a8885e76fc4956649cbe2f0cefa96d50"
+      }
+    }
+  },
+  "native_binary_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+  "native_companion_version": "2026.11.13.2",
+  "no_new_native_binary_or_ui_changes": true,
+  "limitations": [
+    "Text and image presets are not a speed/fidelity equivalence claim to 5B.",
+    "Guided reference rendering cost 381.2 seconds for the one-second diagnostic on RTX 12GB.",
+    "Image segments qualified for one second; longer requested durations still use continuation/assembly, not a one-second total cap.",
+    "Text segments qualified for five seconds.",
+    "Native output is silent; Studio/narration is separate.",
+    "Arbitrary prompt/reference fidelity and seamless segment transitions are not guaranteed."
+  ],
+  "native_final_exam": {
+    "job_id": "d04a72d0611bc885380a7d0c2469c988",
+    "state": "completed",
+    "requested_seconds": 1,
+    "progress_seconds": 1,
+    "result": {
+      "duration_seconds": 1.0,
+      "frames": 16,
+      "width": 1280,
+      "height": 720,
+      "fps": 16,
+      "audio": false,
+      "quality": "high",
+      "upscaled": false,
+      "models": [
+        "Wan 2.2 I2V A14B FP8 + guided 20-step"
+      ],
+      "sha256": "3e2e84393b9b50a89542574566fce2783412d50e0c2e0adc0195ddc8f03f99a9",
+      "bytes": 292740,
+      "segmented": false,
+      "seamless_continuity_guaranteed": false
+    },
+    "private_inputs_erased": true,
+    "journal_mode": "wal",
+    "db_columns": [
+      "id",
+      "owner",
+      "idem",
+      "digest",
+      "state",
+      "error",
+      "seconds",
+      "progress",
+      "created"
+    ],
+    "total_distinct_native_exam_jobs": 2,
+    "marker_enabled": true,
+    "facade_sha256": "f15ead2f1f992c2484364ffc5936d251d0f849e49b75c386cda3689bdbd2195a",
+    "download_sha256_verified": true,
+    "full_decode": "passed",
+    "visual_reviewed": true,
+    "visual_frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "semantic_result": "passed_stationary_router_without_added_people_or_hands",
+    "remaining_visual_variation": "exposure/background changes; exact image pixel fidelity is not guaranteed"
+  },
+  "windows_runtime_final": {
+    "native_worker_jobs": [
+      {
+        "job_id": "e7d6630880d9ed5608908285d48eaeeb",
+        "state": "completed",
+        "error": null,
+        "latency_seconds": 66.02,
+        "result": {
+          "status": "completed",
+          "family": "wan22_i2v_14b_lightx2v",
+          "model": "Wan 2.2 I2V A14B FP8 + LightX2V 4-step",
+          "width": 1280,
+          "height": 720,
+          "native_height": 720,
+          "fps": 16,
+          "steps": 4,
+          "quality": "high",
+          "upscaled": false,
+          "workflow_sha256": "553f00bc7160eb51e05970b5e584cdedcfeb8360f38d3cfee19ec7991e1d4bd6",
+          "duration_seconds": 1.0,
+          "frames": 16,
+          "audio": false,
+          "bytes": 361271,
+          "sha256": "9de8aea8dae6ef46330c8c4fc66ce83d3fc9b107303d426e6b2265df41b4f88e"
+        }
+      },
+      {
+        "job_id": "1ed4795f4623c0274a0f54ecd44c7e3f",
+        "state": "completed",
+        "error": null,
+        "latency_seconds": 372.05,
+        "result": {
+          "status": "completed",
+          "family": "wan22_i2v_14b_guided",
+          "model": "Wan 2.2 I2V A14B FP8 + guided 20-step",
+          "width": 1280,
+          "height": 720,
+          "native_height": 720,
+          "fps": 16,
+          "steps": 20,
+          "quality": "high",
+          "upscaled": false,
+          "workflow_sha256": "171410716f35d1a2e2aae4c16b0c3c7f2a854c9695090860079d4dedaa6cba67",
+          "duration_seconds": 1.0,
+          "frames": 16,
+          "audio": false,
+          "bytes": 293941,
+          "sha256": "76d959a11efc83e7530366ab1048c230725546948bd833ef7d706c8c94469988"
+        }
+      }
+    ],
+    "gpu": "0 %, 1281 MiB, 46",
+    "comfy_queue_counts": {
+      "queue_running": 0,
+      "queue_pending": 0
+    },
+    "C_free_bytes": 102611718144,
+    "supervisor": {
+      "schema_version": 1,
+      "component": "Wan14Video",
+      "timestamp": "2026-11-12T19:19:46.0455728Z",
+      "status": "process_started",
+      "pid": 14008,
+      "launches": 2
+    },
+    "owned_diagnostic_inputs_erased": true
+  },
+  "linux_source_sha256": {
+    "server.py": "a8706198d9c0ac3d46f47e649f54ea4430b27924b379b9a0b5664f173748ce0f",
+    "bridge.py": "d1b0076db39cde3b45abe1cb24be9f7ce858229500e64429b14c73b1231e100b",
+    "proxy.py": "4a2b56541686213c48d6981eaaa06d56f1e699502e12ca2bc67c9f7769b4c8d4"
+  },
+  "deployed_required_sources_match_repo": true,
+  "local_artifacts": [
+    "/Users/id/Downloads/harmonika-ai/video/wan22-14b-text-5s.mp4",
+    "/Users/id/Downloads/harmonika-ai/video/wan22-14b-guided-reference-1s.mp4",
+    "/Users/id/Downloads/harmonika-ai/video/harmonika-video-d04a72d0611bc885380a7d0c2469c988.mp4"
+  ],
+  "activation": {
+    "windows_port": 18263,
+    "linux_tunnel_port": 18264,
+    "linux_coordinator_port": 18268,
+    "marker": "/etc/harmonika-ai/wan14-video.enabled",
+    "status": "active",
+    "rollback": "remove only wan14-video.enabled; existing qualified base route remains installed",
+    "original_user_services_restarted": false,
+    "only_new_candidate_broker_reloaded": true
+  }
+}

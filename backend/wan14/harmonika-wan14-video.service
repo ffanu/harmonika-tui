@@ -1,0 +1,24 @@
+[Unit]
+Description=Harmonika qualified Wan A14B video coordinator
+After=network.target harmonika-wan14-video-tunnel.service
+
+[Service]
+Type=simple
+User=root
+UMask=0077
+WorkingDirectory=/opt/harmonika-ai/wan14-video
+ExecStart=/usr/bin/python3 /opt/harmonika-ai/wan14-video/server.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/harmonika-wan14-video
+StateDirectory=harmonika-wan14-video
+StateDirectoryMode=0700
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

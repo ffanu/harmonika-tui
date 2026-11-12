@@ -70,7 +70,7 @@ def project(row):
 
 def execute(data,owner):
  op=data.get('operation')
- for name in ('high_video_proxy','flex_video_proxy'):
+ for name in ('wan14_video_proxy','high_video_proxy','flex_video_proxy'):
   path=ROOT/(name+'.py')
   if path.is_file():
    spec=importlib.util.spec_from_file_location('harmonika_'+name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)

@@ -5,11 +5,12 @@ from pathlib import Path
 import urllib.request
 
 ENABLED = Path('/etc/harmonika-ai/high-video.enabled')
+BASE = 'http://127.0.0.1:18266/rpc'
 
 
 def call(action, owner, **values):
     try:
-        req = urllib.request.Request('http://127.0.0.1:18266/rpc', method='POST',
+        req = urllib.request.Request(BASE, method='POST',
                                      headers={'Content-Type': 'application/json', 'Authorization': 'Bearer '+Path('/etc/harmonika-ai/video-toolkit.token').read_text().strip()},
                                      data=json.dumps({'action': action, 'owner': owner, **values}).encode())
         with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=15) as response:
