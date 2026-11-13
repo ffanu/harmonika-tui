@@ -4,14 +4,24 @@ const {createHash}=require('node:crypto');
 const BUDGET=150000;
 const size=x=>JSON.stringify(x).length;
 const hash=x=>createHash('sha256').update(x).digest('hex');
+function latestRequest(messages){
+ // Tool-read images can be inserted as image-only user messages by the adapter.
+ // They are part of the current task, not a new human instruction boundary.
+ let latest=-1,lastUser=-1;
+ messages.forEach((m,i)=>{
+  if(m.role!=='user')return;
+  lastUser=i;
+  if(typeof m.content==='string'?m.content.trim():Array.isArray(m.content)&&m.content.some(p=>p?.type==='text'&&typeof p.text==='string'&&p.text.trim()))latest=i;
+ });
+ return latest<0?lastUser:latest;
+}
 function excerpt(text,keep=1200){
  return text.slice(0,keep)+'\n[Earlier tool output abbreviated for transport. sha256='+hash(text)+'. Omitted text is NOT execution evidence; reread the original file/result before acting.]\n'+text.slice(-keep);
 }
 function project(input){
  if(!input||!Array.isArray(input.messages)||size(input)>8*1024*1024)return input;
  // Never clip declarations, instructions, current user requests or tool arguments.
- const data=JSON.parse(JSON.stringify(input));let latest=-1;
- data.messages.forEach((m,i)=>{if(m.role==='user')latest=i});
+ const data=JSON.parse(JSON.stringify(input));let latest=latestRequest(data.messages);
  if(size(data)<=BUDGET)return input;
  // Old binary attachments are references, not text decision context. Keep user text intact.
  for(let i=0;i<latest;i++){
@@ -48,7 +58,10 @@ function project(input){
    if(size(data)<=BUDGET)break;
   }
  }
- // If mandatory current context itself cannot fit, leave admission to the backend.
- return size(data)<=BUDGET?data:input;
+ // Mandatory media may exceed the soft target. Preserve it, but do not undo
+ // safe historical reductions: reverting here reintroduces old screenshots
+ // and can turn a usable current request into an HTTP 413.
+ // Backend admission still governs a request whose mandatory content is large.
+ return size(data)<size(input)?data:input;
 }
 module.exports={project,BUDGET};

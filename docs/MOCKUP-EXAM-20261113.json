@@ -1,0 +1,177 @@
+{
+  "date": "2026-11-13",
+  "scope": "Owner native Harmonika mockup workflow and Windows RTX inspector; synthetic exams only",
+  "test_method": "Actual branded harmonika run --standalone in isolated test databases; real PNGs inspected by Codex",
+  "status": "technical_workflow_passed_with_visual_uncertainty",
+  "engines": {
+    "photographic_generation": "FLUX.2 Klein 4B / flux2-klein-4b on Windows RTX",
+    "precise_layout": "HTML/CSS exported by Chromium at deviceScaleFactor 1",
+    "inspection": "Qwen3-VL 8B / qwen3-vl-8b-rtx-local, GPU verified"
+  },
+  "exams": {
+    "product": {
+      "render_count": 4,
+      "initial_false_positive": "Three-quarter perspective was claimed despite a predominantly frontal pouch",
+      "targeted_revision": "Last render restores ivory front, sage label, visible dark-green right gusset; original files preserved",
+      "verified_by_codex": [
+        "one pouch",
+        "cream front",
+        "sage blank label",
+        "visible right side",
+        "pedestal and beans",
+        "no visible text or watermark"
+      ],
+      "uncertain": [
+        "exact camera angle",
+        "exact perspective geometry",
+        "material identity from pixels alone"
+      ],
+      "artifact": {
+        "file": "product/corrected.png",
+        "dimensions": [
+          2048,
+          1536
+        ],
+        "bytes": 3262811,
+        "sha256": "0c71b597f1eee0743386c3a673c0990b588966ecd4d2940dd5ab0775849679c0"
+      },
+      "generation_job_id": "gw_8ffce244cb83450e",
+      "inspection_job_id": "job_mcp02c0063092ea4573bec2a0f2183196f5",
+      "native_exit_code": 0
+    },
+    "website": {
+      "viewports_passed": [
+        390,
+        768,
+        1440
+      ],
+      "exact_copy_and_prices": true,
+      "overflow": false,
+      "browser_errors": 0,
+      "codex_pixel_review": "Desktop and mobile show coherent hierarchy, visible copy and unclipped layout",
+      "artifacts": [
+        {
+          "file": "website/desktop1440.png",
+          "dimensions": [
+            1440,
+            1254
+          ],
+          "bytes": 368920,
+          "sha256": "4f60c2445c7aa656e31b15871fe2a48964fbcef2d0c60e15c34f9be82f81a91b"
+        },
+        {
+          "file": "website/mobile390.png",
+          "dimensions": [
+            390,
+            1607
+          ],
+          "bytes": 144217,
+          "sha256": "0a437ba13d9d1ed10a254085328a98c32da061296bd8563aa0878e5ec08f9bf9"
+        }
+      ],
+      "native_exit_code": 0
+    },
+    "long_poster": {
+      "panels": 5,
+      "panel_dimensions": [
+        1080,
+        1080
+      ],
+      "browser_clipping": false,
+      "footer_in_bounds": true,
+      "coverage_complete": true,
+      "tile_count": 3,
+      "tiles": [
+        {
+          "box": [
+            0,
+            0,
+            1080,
+            2048
+          ],
+          "job_id": "job_mcpc0d3ff8c5c4840a5a2c31cbc53b4697a"
+        },
+        {
+          "box": [
+            0,
+            1920,
+            1080,
+            3968
+          ],
+          "job_id": "job_mcp879ca9881790441691262da11c19d651"
+        },
+        {
+          "box": [
+            0,
+            3840,
+            1080,
+            5400
+          ],
+          "job_id": "job_mcp4cbcb18036004b1da8ecd170e408fceb"
+        }
+      ],
+      "bottom_footer_observed": true,
+      "codex_pixel_review": "Full original poster inspected; five legible panels and visible footer, consistent spacing and palette",
+      "native_global_composition_claim": "Explicitly unverified by the text model; no invented direct pixel observation",
+      "artifact": {
+        "file": "long-poster/poster.png",
+        "dimensions": [
+          1080,
+          5400
+        ],
+        "bytes": 344977,
+        "sha256": "20973196dd9b1f2022e95a6bcdb8cb6ca8062b1d410f33b1bf793c5230f2428f"
+      },
+      "native_final_exit_code": 0,
+      "native_recovery_tool_calls": 3,
+      "recovery_created_new_gpu_jobs": false
+    }
+  },
+  "fixed_failures": [
+    {
+      "error": "image_dimensions_exceeded",
+      "change": "Overlapping pixel-preserving tiles with bounded source size, sequential jobs and one deadline",
+      "real_retest": "Same 1080x5400 diagnostic accepted on RTX with three tiles covering bottom pixel"
+    },
+    {
+      "error": "visual_qa_false_positive",
+      "change": "Neutral front/side observation and per-criterion verified/unmet/uncertain review; full brief rechecked after revision"
+    },
+    {
+      "error": "native_http_413",
+      "change": "Keep safe history reductions even when mandatory current media exceeds soft transport budget"
+    },
+    {
+      "error": "repeated_image_read_without_progress",
+      "change": "Image-only adapter attachments do not move the boundary past current task QA receipts",
+      "real_retest": "Same session finishes with existing QA receipts, one overview read and no new GPU jobs"
+    },
+    {
+      "error": "activation_skips_new_helpers_when_already_active",
+      "change": "Refresh changed helper modules independently of MCP delegate patching; preserve private MCP bytes; unchanged reruns create no backups"
+    }
+  ],
+  "verification": {
+    "python_visual_and_activation_tests": 8,
+    "python_tile_tests": 5,
+    "python_worker_tests": 14,
+    "node_context_tests": 6,
+    "total_tests": 33,
+    "independent_artifact_checks": 16
+  },
+  "activation": {
+    "owner_visual_media_sha256": "cd7f841dbab9102e856e1f7509406968452012c68919394579d790be86ef33a3",
+    "owner_context_projection_sha256": "bf496672afcc93fe72a222b19d3c8e2c1e0b6e3d1fc9ef01bc88d8a041c56e14",
+    "owner_visual_skill_sha256": "37b4214571216b8f4bdb53186a2da4608cfd691a5056971a1ce0580c1ef4e48c",
+    "binary_unchanged": true,
+    "verified_boundary": "New standalone native processes; no user server stopped",
+    "shared_linux_web_vision_route": "Not changed or newly claimed by this update"
+  },
+  "limits": [
+    "No universal aesthetic guarantee",
+    "VLM observations may be inaccurate; geometric tile coverage is not global composition quality",
+    "Precise camera angles remain unverified",
+    "No Windows reboot test in this run",
+    "No private credentials, customer files or chat history included"
+  ]
+}

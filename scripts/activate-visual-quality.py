@@ -1,6 +1,9 @@
 """Private atomic MCP patch. Backups stay outside Git; no secret values are emitted."""
-import ast,datetime,hashlib,os,pathlib,shutil
-p=pathlib.Path.home()/'.config/harmonika-terminal/mcp_server.py'
+import argparse,ast,datetime,hashlib,os,pathlib
+parser=argparse.ArgumentParser()
+parser.add_argument("--owner",type=pathlib.Path,default=pathlib.Path.home()/".config/harmonika-terminal")
+args=parser.parse_args()
+p=args.owner.resolve()/'mcp_server.py'
 original=p.read_bytes();s=original.decode();t=ast.parse(s);edits=[]
 for n in t.body:
  if isinstance(n,ast.FunctionDef) and n.name=='tool_generate_fluxhd':
@@ -30,8 +33,6 @@ for n in t.body:
   if 'from visual_media import analyze' in ast.get_source_segment(s,n):
    continue
   edits.append((n.lineno-1,n.end_lineno,'def tool_analyze_visual_image(args):\n    from visual_media import analyze\n    return analyze(args, VISION_TOKEN)'))
-if not edits:
- print({'already_active':True});raise SystemExit(0)
 lines=s.splitlines()
 for a,b,new in sorted(edits,reverse=True):lines[a:b]=new.splitlines()
 new='\n'.join(lines)+'\n'
@@ -46,14 +47,25 @@ for a,c,b,d,v in sorted(replacements,reverse=True):
  if a==b:lines[a]=lines[a][:c]+v+lines[a][d:]
 new='\n'.join(lines)+'\n'
 compile(new,str(p),'exec')
-backup=p.parent/'visual-quality-backups'/datetime.datetime.now().strftime('%Y%m%d-%H%M%S');backup.mkdir(parents=True,mode=0o700)
-b=backup/'mcp_server.py';b.write_bytes(original);b.chmod(0o600)
+# Already-delegating installations still need updated helper code.
+updated_mcp = new.encode() if edits else original
+candidates = {p: updated_mcp}
 for name in ('visual_media.py','media_tunnels.py'):
- helper=p.parent/name
- if helper.exists():
-  (backup/name).write_bytes(helper.read_bytes());(backup/name).chmod(0o600)
  source=pathlib.Path(__file__).resolve().parents[1]/'runtime/tools'/name
- tmphelper=helper.with_suffix('.visual.tmp');tmphelper.write_bytes(source.read_bytes());tmphelper.chmod(0o600);tmphelper.replace(helper)
+ data=source.read_bytes();compile(data,str(source),'exec')
+ candidates[p.parent/name]=data
+changes={target:data for target,data in candidates.items() if not target.exists() or target.read_bytes()!=data}
+if not changes:
+ print({'already_active':True,'updated_files':0});raise SystemExit(0)
+snapshots={target:target.read_bytes() if target.exists() else None for target in changes}
 if p.read_bytes()!=original:raise SystemExit('concurrent_edit')
-tmp=p.with_suffix('.visual.tmp');tmp.write_text(new);tmp.chmod(0o600);tmp.replace(p)
-print({'patched_functions':len(edits),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'private_backup':str(backup)})
+backup=p.parent/'visual-quality-backups'/datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f')
+backup.mkdir(parents=True,mode=0o700)
+for target,old in snapshots.items():
+ if old is not None:
+  b=backup/target.name;b.write_bytes(old);b.chmod(0o600)
+for target,data in changes.items():
+ current=target.read_bytes() if target.exists() else None
+ if current!=snapshots[target]:raise SystemExit('concurrent_edit')
+ tmp=target.with_suffix('.visual.tmp');tmp.write_bytes(data);tmp.chmod(0o600);tmp.replace(target)
+print({'patched_functions':len(edits),'updated_files':len(changes),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'private_backup':str(backup)})

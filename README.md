@@ -166,7 +166,7 @@ target/akun berizin. [Kontrak dan batas](docs/WEB-BUILDER.md) ·
 
 ## Pipeline Windows RTX
 
-Adapter HTTP async dan antrean persisten tersedia sebagai backend privat terpisah. Generate RTX nyata sudah diuji; vision worker nyata belum tersedia. [Kontrak, batas dan deployment](backend/rtx_queue/README.md).
+Adapter HTTP async dan antrean persisten tersedia sebagai backend privat terpisah. Generate RTX dan inspector visual Windows sudah diuji langsung dari TUI; routing vision pada antrean Linux tetap membutuhkan validasi tersendiri. [Kontrak, batas dan deployment](backend/rtx_queue/README.md).
 
 ## Mouse, clipboard dan koneksi
 
@@ -400,3 +400,5 @@ pembaruan helper; runtime backend yang dipulihkan langsung berlaku pada API.
 ### Pemeriksaan visual dan desain lokal
 
 OCR RTX 8B, pemeriksaan layout dengan `analyze_image mode=vision`, serta ekspor mockup PNG desktop/mobile memakai alur QA terpisah. Profil gambar melaporkan model aktual; ukuran MB bukan penilaian kualitas. [Arsitektur, aktivasi privat dan batas pengujian](backend/visual_quality/README.md).
+
+Mockup panjang diperiksa dalam potongan bertumpang tindih tanpa mengecilkan piksel. QA membedakan kriteria yang terbukti, belum sesuai, dan tidak pasti, termasuk sudut produk. [Ujian mockup nyata 13 November 2026](docs/MOCKUP-EXAM-20261113.json).
