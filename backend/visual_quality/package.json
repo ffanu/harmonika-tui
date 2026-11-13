@@ -1,0 +1,1 @@
+{"name":"harmonika-visual-context-guard","version":"2026.11.13.1","type":"module","exports":{".":"./context_guard.mjs","./server":"./context_guard.mjs"},"harmonika":{"api":"harmonika-tui-plugin-v2","nativeBinary":"preserve"}}

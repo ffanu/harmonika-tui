@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-13T04:48:12.024714+00:00",
+  "scope": "Actual isolated native Harmonika TUI session, shared Linux OCR API, Windows local RTX workers. Public HAI web chat not retested.",
+  "status": "passed_for_tested_cases",
+  "qa": [
+    {
+      "level": "easy",
+      "case": "new product photograph",
+      "passed": true,
+      "pixels_reviewed": true,
+      "issue_corrected": "Hardcoded model label and stale parameter count removed; actual engine now returned."
+    },
+    {
+      "level": "standard",
+      "case": "responsive ISP website PNG and editable source",
+      "passed": true,
+      "browser_profiles": 5,
+      "all_profile_checks_passed": true,
+      "issues_corrected": [
+        "small mobile touch targets",
+        "exact screenshot width via deviceScaleFactor 1",
+        "offline visual inspector"
+      ]
+    },
+    {
+      "level": "hard",
+      "case": "poster with new RTX photo and exact typography",
+      "passed": true,
+      "width": 1080,
+      "height": 1350,
+      "required_copy_checks_passed": 5,
+      "native_vision_review": true,
+      "ocr_cpu_fallback_reported_honestly": true
+    },
+    {
+      "level": "hard",
+      "case": "same-session website revision",
+      "passed": true,
+      "source_changes_only_cta_label_and_color": true,
+      "photo_identical": true,
+      "prices_and_packages_identical": true,
+      "desktop_and_mobile_vision_review": true,
+      "initial_failure": "HTTP 413 invalid_tool_arguments on oversized history",
+      "correction": "Native v2 transient context guard; old binary attachments omitted and historical outputs bounded; durable history intact."
+    },
+    {
+      "level": "hard",
+      "case": "dense table OCR",
+      "passed": true,
+      "rows": 14,
+      "quantity_sum": 105,
+      "printed_amount_sum_idr": 1312500,
+      "unpaid_state_correct": true,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false
+    },
+    {
+      "level": "regression",
+      "case": "combined identifier ambiguity and text aliases",
+      "passed": true,
+      "unique_identifiers_for_review": 17,
+      "i1l_guard_identifiers": 9,
+      "all_text_aliases_consistent": true,
+      "raw_identifier_spelling_not_treated_as_verified": true,
+      "csv_review_note_refreshed": true
+    }
+  ],
+  "automated_tests": {
+    "visual_privacy_transport_model_validation": 7,
+    "existing_vision_contract": 14,
+    "ocr_runtime_startup_identifier": 10,
+    "context_projection": 4,
+    "total_passed": 35,
+    "private_activation_fixture_idempotent": true
+  },
+  "windows_vision": {
+    "active": true,
+    "model": "qwen3-vl:8b-instruct",
+    "model_digest": "70e58e37beb15464e19aa903dedb2cba828b89c0fb186f75ff2738c7347b96eb",
+    "port": 18188,
+    "local_only": true,
+    "startup_task": "HarmonikaVisionQuality",
+    "boot_trigger_configured": true,
+    "execution_time_limit": "PT0S",
+    "supervisor_launches": 1,
+    "actual_reboot_test_performed": false,
+    "database_mode": "wal",
+    "database_quick_check": "ok",
+    "database_text_rows": 0,
+    "completed_visual_jobs": 6,
+    "private_observation_ram_limit": 128,
+    "private_observation_ttl_seconds": 1800
+  },
+  "actual_image_generation": {
+    "ok": true,
+    "file": "/Users/id/Downloads/harmonika-high-quality-17cef67930ae.png",
+    "bytes": 3215041,
+    "quality": "high",
+    "model": "FLUX.2 Klein 4B",
+    "engine": "flux2-klein-4b",
+    "job_id": "gw_ab2afd2eac504dc0",
+    "width": 2048,
+    "height": 1536,
+    "sha256": "4c2931790f53f3c2e47dcd9751ab22cda1e0a8a707665f284347bca44aefb5d9"
+  },
+  "native_context_transport": {
+    "timestamp": "2026-11-13T04:46:37.668Z",
+    "input_chars": 1619429,
+    "output_chars": 132344,
+    "message_count": 129,
+    "system_chars": 35065,
+    "tool_schema_chars": 14582,
+    "current_turn_chars": 11458,
+    "projection_applied": true,
+    "role_sizes": {
+      "system": {
+        "count": 1,
+        "chars": 35063,
+        "max": 35063
+      },
+      "user": {
+        "count": 17,
+        "chars": 1366098,
+        "max": 629799
+      },
+      "assistant": {
+        "count": 48,
+        "chars": 44582,
+        "max": 2885
+      },
+      "tool": {
+        "count": 63,
+        "chars": 158845,
+        "max": 16646
+      }
+    }
+  },
+  "activation": {
+    "new_native_launches_verified": true,
+    "shared_linux_ocr_endpoint": "https://chat.harmonika.id/v1/ocr",
+    "mac_key_auth_tunnels": [
+      18188,
+      18200
+    ],
+    "native_binary_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "existing_native_binary_preserved": true,
+    "backend_gateway_or_existing_user_services_restarted": false,
+    "windows_D_disk_preserved_offline": true,
+    "mcp_tools_preserved": true,
+    "private_backups": "/Users/id/.config/harmonika-terminal/visual-quality-backups",
+    "git_commit_or_push_performed": false,
+    "verified_native_mode": "harmonika run --standalone --format json --auto, isolated synthetic session database"
+  },
+  "installed_modules": {
+    "shared_ocr.py": {
+      "sha256": "e0cdba490ea8a912ca4f6a18f9a529c1a7326b447533b1da0a702cf3ce6e8604",
+      "matches_source": true
+    },
+    "visual_media.py": {
+      "sha256": "65db223f0d9df1e1c2f9431af8b6c170a0861e677c48bf8c7dbd289e2074c0e6",
+      "matches_source": true
+    },
+    "media_tunnels.py": {
+      "sha256": "35a9771dc2b9d1b604fb5d4a657283d0779523d839ad57c8dc7e9e368568a8c2",
+      "matches_source": true
+    }
+  },
+  "data_firewall": {
+    "raw_customer_chat_or_private_documents_in_report": false,
+    "keys_or_passwords_in_report": false,
+    "worker_sqlite_contains_observation_text": false,
+    "request_projection_state_contains_text_or_session_ids": false,
+    "fixtures_synthetic": true
+  },
+  "limitations": [
+    "Visual quality is assessed on the tested images; this does not guarantee every design category.",
+    "OCR ambiguous characters require human or independent source review.",
+    "CPU fallback can be used when RTX is busy; actual provenance must be reported.",
+    "Shared Linux asynchronous image queue did not advertise a verified vision route and was not changed; native vision path was verified directly.",
+    "Existing already-open TUI processes may keep old modules until the user opens a new process."
+  ],
+  "artifacts": [
+    {
+      "file": "ocr/easy.png",
+      "width": 1500,
+      "height": 420,
+      "bytes": 31622,
+      "sha256": "f33e4d5d9668dd75de4e47efb3596d533ad99372a97bf47e799bf793d2fdca5b"
+    },
+    {
+      "file": "ocr/hard.png",
+      "width": 1800,
+      "height": 2200,
+      "bytes": 145881,
+      "sha256": "3484ff15fad95da957e2016fca5c3299636f92b2ae0e8e3269d9f38a64af062c"
+    },
+    {
+      "file": "ocr/invoice.png",
+      "width": 1800,
+      "height": 1500,
+      "bytes": 80173,
+      "sha256": "8ca90749dfeea06791a03055a6b9e1ebc13d9bd5e17bdbdf4f0323ef06418815"
+    },
+    {
+      "file": "poster/hero.png",
+      "width": 2048,
+      "height": 1536,
+      "bytes": 3215041,
+      "sha256": "4c2931790f53f3c2e47dcd9751ab22cda1e0a8a707665f284347bca44aefb5d9"
+    },
+    {
+      "file": "poster/poster-1080x1350.png",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 883628,
+      "sha256": "7a84bf40fb62a4010b1d52d3f6b509e5fecd262bf7f5dbf339442698a6e32f4e"
+    },
+    {
+      "file": "website/mobile-390.png",
+      "width": 390,
+      "height": 1601,
+      "bytes": 192867,
+      "sha256": "2b780460d5c64459b4a3da1f1b6dd270bf0b8af8ecda2c28c357f738c32596a2"
+    },
+    {
+      "file": "website/qa-run-01/shot-desktop-1440.png",
+      "width": 1440,
+      "height": 1083,
+      "bytes": 279363,
+      "sha256": "c9b9f23ae1bdecdfa3ec170a8fce19df6bdd495a88f586c7279f8626cabe7818"
+    },
+    {
+      "file": "website/qa-run-01/shot-desktop-dark-1280.png",
+      "width": 1280,
+      "height": 1083,
+      "bytes": 274736,
+      "sha256": "1dba206735d4c47ffdd62d6928a4e4e94c74aee97dad041d54fc2441285349f4"
+    },
+    {
+      "file": "website/qa-run-01/shot-mobile-390.png",
+      "width": 780,
+      "height": 3158,
+      "bytes": 379598,
+      "sha256": "aaaafe5907d5b324dd92e6f0ca79c668a375244ee7d7684857126456d3c133e5"
+    },
+    {
+      "file": "website/qa-run-01/shot-mobile-small-360.png",
+      "width": 720,
+      "height": 3166,
+      "bytes": 343379,
+      "sha256": "294c79491bad91f2a5d286ddf8406ae62260111c1bedbd5749ef212e50657146"
+    },
+    {
+      "file": "website/qa-run-01/shot-tablet-834.png",
+      "width": 1668,
+      "height": 2224,
+      "bytes": 421912,
+      "sha256": "859ba261560818e1ee14912691bb046342dc52f94556de43434acb329c70bf7e"
+    },
+    {
+      "file": "website/qa-run-02/shot-desktop-1440.png",
+      "width": 1440,
+      "height": 1083,
+      "bytes": 279363,
+      "sha256": "c9b9f23ae1bdecdfa3ec170a8fce19df6bdd495a88f586c7279f8626cabe7818"
+    },
+    {
+      "file": "website/qa-run-02/shot-desktop-dark-1280.png",
+      "width": 1280,
+      "height": 1083,
+      "bytes": 274736,
+      "sha256": "1dba206735d4c47ffdd62d6928a4e4e94c74aee97dad041d54fc2441285349f4"
+    },
+    {
+      "file": "website/qa-run-02/shot-mobile-390.png",
+      "width": 780,
+      "height": 3202,
+      "bytes": 379995,
+      "sha256": "ae6cb869738c6f04eec61d3ffa4713464ca1740f4d24ce4fc390dc8c3ca2fe77"
+    },
+    {
+      "file": "website/qa-run-02/shot-mobile-small-360.png",
+      "width": 720,
+      "height": 3210,
+      "bytes": 343664,
+      "sha256": "eef160dd5fd4247e5b7e2a615551f885eefaebc43522748d3f2b41dfbbb7080a"
+    },
+    {
+      "file": "website/qa-run-02/shot-tablet-834.png",
+      "width": 1668,
+      "height": 2224,
+      "bytes": 421912,
+      "sha256": "859ba261560818e1ee14912691bb046342dc52f94556de43434acb329c70bf7e"
+    },
+    {
+      "file": "website/revised/before-1440.png",
+      "width": 1440,
+      "height": 1083,
+      "bytes": 279363,
+      "sha256": "c9b9f23ae1bdecdfa3ec170a8fce19df6bdd495a88f586c7279f8626cabe7818"
+    },
+    {
+      "file": "website/revised/before-390.png",
+      "width": 390,
+      "height": 1601,
+      "bytes": 131158,
+      "sha256": "75903ac89fe5cf38005277b5cc010ff64d1ee45dca321064052440ddd743b66d"
+    },
+    {
+      "file": "website/revised/revised-1440.png",
+      "width": 1440,
+      "height": 1083,
+      "bytes": 279821,
+      "sha256": "e9b59bda336581b4753337fa696b0e039adf9b27314b018e8deb761fae132e51"
+    },
+    {
+      "file": "website/revised/revised-390.png",
+      "width": 390,
+      "height": 1601,
+      "bytes": 131532,
+      "sha256": "f1906b616b304636e11ec823198dadc31ecb61f8d4217768f7bebe3a812288ca"
+    },
+    {
+      "file": "website/revised/router.png",
+      "width": 2048,
+      "height": 1536,
+      "bytes": 2739621,
+      "sha256": "5a5dc41ea2cdd222282e51b2eb6a78ac3c60dfdcc4e7820606e7cd803fe2bd3d"
+    },
+    {
+      "file": "website/router.png",
+      "width": 2048,
+      "height": 1536,
+      "bytes": 2739621,
+      "sha256": "5a5dc41ea2cdd222282e51b2eb6a78ac3c60dfdcc4e7820606e7cd803fe2bd3d"
+    }
+  ]
+}

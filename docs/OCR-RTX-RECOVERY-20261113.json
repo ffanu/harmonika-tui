@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-13T02:36:20.956707+00:00",
+  "verification_state": "complete_for_ocr_recovery_and_native_adapter",
+  "root_cause": "OCR HTTP worker alive, local Ollama listener 11439 absent and not supervised",
+  "active_primary": "Qwen3-VL 8B instruct / local Windows RTX",
+  "available_smaller_model": "Qwen3-VL 2B instruct",
+  "cpu_fallback": "PaddleOCR PP-OCRv5 / Linux CPU, explicitly reported",
+  "runtime": {
+    "health": {
+      "ok": true,
+      "ready": true,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "processing_mode": "local_only",
+      "stateless": true
+    },
+    "runtime_state": {
+      "schema_version": 1,
+      "component": "OCRRuntime",
+      "timestamp": "2026-11-13T02:30:12.2661684Z",
+      "status": "process_started",
+      "pid": 4244,
+      "launches": 2
+    },
+    "C_free_bytes": 102392459264,
+    "tasks": [
+      {
+        "TaskName": "HarmonikaOCRRuntime",
+        "State": "Running",
+        "User": "SYSTEM",
+        "Limit": "PT0S",
+        "Restart": 999,
+        "BootTrigger": true
+      },
+      {
+        "TaskName": "HarmonikaStatelessOCR",
+        "State": "Running",
+        "User": "Kraken",
+        "Limit": "PT0S",
+        "Restart": 999,
+        "BootTrigger": true
+      }
+    ],
+    "D_disk": {
+      "IsOffline": true
+    }
+  },
+  "recovery_test": {
+    "own_idle_runtime_failure_injected": true,
+    "recovered": true,
+    "seconds": 9.03,
+    "launches": 2,
+    "engine": "qwen3-vl-8b-rtx-local",
+    "original_user_processes_signalled": false,
+    "legacy_launcher_idempotent": true,
+    "legacy_launcher_exit": 0
+  },
+  "focused_unit_tests_passed": 8,
+  "api_fixture_results": [
+    {
+      "exam": "easy",
+      "ok": true,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "elapsed_seconds": 9.21,
+      "expected_fields": 3,
+      "missing": [],
+      "page_count": 1,
+      "review_required": false,
+      "primary_device": "windows_rtx",
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "exam": "invoice",
+      "ok": true,
+      "engine": "paddleocr-v5-local-cpu",
+      "elapsed_seconds": 13.45,
+      "expected_fields": 5,
+      "missing": [],
+      "page_count": 1,
+      "review_required": true,
+      "primary_device": "windows_rtx",
+      "fallback_used": true,
+      "error": null
+    },
+    {
+      "exam": "hard",
+      "ok": true,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "elapsed_seconds": 14.94,
+      "expected_fields": 16,
+      "missing": [],
+      "page_count": 1,
+      "review_required": true,
+      "primary_device": "windows_rtx",
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "exam": "pdf",
+      "ok": true,
+      "engine": "mixed_local",
+      "elapsed_seconds": 16.52,
+      "expected_fields": 8,
+      "missing": [
+        "HAI-4827"
+      ],
+      "page_count": 2,
+      "review_required": true,
+      "primary_device": "windows_rtx",
+      "fallback_used": true,
+      "error": null
+    }
+  ],
+  "pdf_identifier_correction": {
+    "previous_misread_flagged": true,
+    "no_character_guessed": true,
+    "I1l_review_count": 2
+  },
+  "native_invoice_exam": {
+    "passed": true,
+    "actual_engine": "qwen3-vl-8b-rtx-local",
+    "fallback_used": false,
+    "table_rows_correct": 3,
+    "total_675000_correct": true,
+    "unpaid_state_correct": true,
+    "ambiguous_identifiers_preserved": true,
+    "authenticity_not_claimed": true
+  },
+  "native_scanned_pdf_exam": {
+    "passed": true,
+    "pages": 2,
+    "document_studio_read_used": true,
+    "page1_engine": "qwen3-vl-8b-rtx-local",
+    "page2_engine": "paddleocr-v5-local-cpu",
+    "fallback_explicit": true,
+    "ambiguous_ticket_preserved": true,
+    "invoice_total_and_unpaid_state_correct": true
+  },
+  "mcp": {
+    "mcp_tool_count": 44,
+    "ocr_tools_available": true,
+    "invalid_image_rejected": true,
+    "analysis_performed": false,
+    "exit_code": 0
+  },
+  "adapter_activation": {
+    "installed": true,
+    "target": "/Users/id/.config/harmonika-crush/shared_ocr.py",
+    "before_sha256": "d862dd6e4427474b7f1c03a7b66811d7333ccdb570fc61b0350ded22ce985f5e",
+    "after_sha256": "a7f331dffba5f544642de800537710ccd7279cb218f9d29f843533fa83437349",
+    "native_binary_changed": false,
+    "persistent_rollback_backup": true
+  },
+  "native_binary_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+  "data_firewall": {
+    "fixtures": "synthetic text/invoice/table/scanned PDF only",
+    "private_customer_data_used": false,
+    "credentials_in_report": false,
+    "raw_inference_output_logged": false,
+    "stateless_worker": true,
+    "no_automatic_training": true
+  },
+  "limitations": [
+    "GPU/model transitions can select the explicitly reported CPU fallback.",
+    "Qwen 8B is preferred subject to VRAM; smaller model is explicitly identified when selected.",
+    "I/l/1 ambiguity review is added in the TUI adapter; server-wide OCR schema remains unchanged.",
+    "OCR text and review flags do not prove document authenticity or perfect recognition.",
+    "Existing already-open MCP processes may keep their imported helper until reconnected; a fresh real native process was tested."
+  ],
+  "source_sha256": {
+    "backend/ocr_rtx/harden_startup.py": "04060fc6ea1c84f0909009a4876c0519b8c0d7892b200d6b34489db60c1269b7",
+    "backend/ocr_rtx/install_runtime.py": "a94d18ec8d418a199789888bc3e6c2f2afcc66b7c65cd30032fedb65bd3334b0",
+    "backend/ocr_rtx/ollama_runtime.py": "2ae1cedfdc36d1420d8fa5cedb57f11588f0562c6d22862b1df4c6ff8cceedb5",
+    "runtime/tools/shared_ocr.py": "a7f331dffba5f544642de800537710ccd7279cb218f9d29f843533fa83437349"
+  },
+  "credential_scan_new_files": "passed"
+}

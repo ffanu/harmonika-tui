@@ -28,8 +28,17 @@
 - Mentor inference tidak berarti training otomatis; jangan menggabungkan history
   pengguna atau menyimpan dataset pelatihan tanpa rancangan dan otorisasi terpisah.
 
-## OCR CPU bersama (2026-11-05)
-- Ekstraksi teks gambar/PDF memakai gateway OCR Linux CPU; tidak membutuhkan RTX.
-- `analyze_image` default `mode=ocr`; `mode=vision` khusus analisis adegan/layout RTX.
+## OCR lokal bersama (diperbarui 2026-11-13)
+- Gateway OCR memakai Windows RTX Qwen3-VL 8B sebagai pilihan utama; 2B tersedia
+  sesuai VRAM dan PaddleOCR PP-OCRv5 Linux CPU menjadi fallback yang dilaporkan.
+- `analyze_image` default `mode=ocr`; `mode=vision` untuk analisis adegan/layout RTX.
+- Runtime/worker OCR diawasi startup task dan watchdog. Health harus diuji dengan
+  ekstraksi nyata; pertahankan metadata engine aktual/fallback serta pola O/0, I/l/1.
 - Pertahankan metadata local_only, untrusted content, dan tanda ketidakpastian OCR.
 - OCR tidak membuktikan keaslian ID; analisis percakapan tetap memakai model chat.
+
+## Desain visual dan konteks (2026-11-13)
+- Foto/ilustrasi memakai generator RTX; UI/teks presisi diekspor sebagai PNG dari browser, scale 1.
+- Periksa piksel dengan mode=vision, teks dengan OCR dan DOM; jangan menyamakan byte PNG dengan kualitas.
+- Metadata model wajib berasal dari hasil backend. Jaga pasangan call/result saat mengurangi konteks transport; jangan mengubah riwayat asli atau mengklaim teks yang dihilangkan sebagai bukti eksekusi.
+- Worker visual menyimpan observasi di RAM berbatas, SQLite hanya mekanika, tanpa isi gambar/chat.

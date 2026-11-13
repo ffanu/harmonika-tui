@@ -6,7 +6,7 @@
 
 Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal yang terkontrol.
 
-**22 panduan skill** · **17 tool MCP** · **5 LSP** · **Update manual terverifikasi**
+**Skill modular** · **OCR & desain RTX** · **5 LSP** · **Update manual terverifikasi**
 
 [Website](https://harmonika.id) · [Status rilis](docs/STATUS.md) · [Dokumentasi](#mulai)
 
@@ -35,6 +35,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 | Skill | Fokus |
 |---|---|
 | `harmonika-ui` | Implementasi UI responsif, aksesibilitas, dan kesesuaian referensi. |
+| `harmonika-visual-design` | Foto RTX, mockup PNG desktop/mobile, tipografi presisi, dan pemeriksaan visual serta OCR. |
 | `harmonika-debug` | Reproduksi bug, diagnosis berbasis bukti, serta pengujian regresi. |
 | `harmonika-debug-scanner` | Scanner backend dengan bukti teredaksi, probe target terdaftar, dan laporan PDF; readiness tiap fungsi dinyatakan jelas. |
 | `harmonika-browser-qa` | Bukti browser nyata pada viewport desktop dan mobile. |
@@ -386,6 +387,16 @@ upstream otomatis atau penghentian sesi yang sudah terbuka.
 [Shortcut, pengujian dan batas fitur](docs/TUI-WORKBENCH.md) ·
 [Bukti aktivasi](docs/TUI-WORKBENCH-ACTIVATION.json).
 
-### Pembaruan OCR bersama — 5 November 2026
+### Pembaruan OCR bersama — 13 November 2026
 
-Adapter `analyze_image` default memakai OCR CPU Linux melalui gateway; pilih `mode: "vision"` untuk analisis visual RTX. `read_pdf` memakai OCR bersama dengan batas 10 MiB / 5 halaman. OCR mengembalikan teks tidak tepercaya, bukan validasi keaslian ID. Tanda ketidakpastian harus dipertahankan. Adapter TUI aktif MacBook juga menyediakan `ocr_document`; mulai proses TUI baru untuk memuat pembaruan MCP.
+Adapter `analyze_image` default memakai OCR Windows RTX Qwen3-VL 8B melalui gateway,
+dengan PaddleOCR PP-OCRv5 Linux CPU sebagai fallback yang dilaporkan. Pilih
+`mode: "vision"` untuk analisis adegan visual. PDF scan memakai OCR bersama dengan
+batas 10 MiB / 5 halaman. Adapter TUI menyediakan `ocr_document` dan mempertahankan
+ketidakpastian O/0 serta I/l/1 pada kode. Mulai proses TUI baru untuk memuat
+pembaruan helper; runtime backend yang dipulihkan langsung berlaku pada API.
+[Pemulihan, pengujian dan batas OCR](backend/ocr_rtx/README.md).
+
+### Pemeriksaan visual dan desain lokal
+
+OCR RTX 8B, pemeriksaan layout dengan `analyze_image mode=vision`, serta ekspor mockup PNG desktop/mobile memakai alur QA terpisah. Profil gambar melaporkan model aktual; ukuran MB bukan penilaian kualitas. [Arsitektur, aktivasi privat dan batas pengujian](backend/visual_quality/README.md).
