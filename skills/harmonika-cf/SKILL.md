@@ -4,23 +4,25 @@ description: Manage Cloudflare domains, DNS records, and account data via the Cl
 ---
 
 When the user asks about Cloudflare (domains, DNS, zones, records, caches,
-SSL) and provides — or previously provided — an API token, do NOT search for
-browser tabs or connectors. Call the Cloudflare REST API directly:
+SSL), do NOT search for browser tabs or connectors. Use the private vault
+connector — the credential lives encrypted in the vault, never in commands:
 
 ```sh
-curl -s -H "Authorization: Bearer $CF_TOKEN" \
-  "https://api.cloudflare.com/client/v4/zones?per_page=50"
+python3 ~/.config/harmonika/access/cloudflare_zones.py
 ```
+
+That prints the domain list as JSON. For DNS records of a zone, use the
+`ZonesReader` class in the same module (`dns_records(zone_id)`).
 
 ## Decision tree (follow strictly, no wandering)
 
-1. Token available (user provided, or stored credential)?
-   → Use it immediately with the API. This is a 1-call task.
-2. No token at all?
-   → Say so in ONE message and ask for a token with `Zone:Read` scope
-   (or offer the dashboard URL). Do not open browsers, do not scan tabs.
-3. API returns `invalid_api_key` / `authentication error`?
-   → Tell the user the token is invalid/expired in ONE message. Stop.
+1. Vault connector available (`saved/cloudflare-ffanu-zoneread`)?
+   → Use it immediately. This is a 1-call task.
+2. User pastes a NEW token in chat?
+   → Store it via `save_cloudflare_zoneread.py` (token via stdin, never argv),
+     then use the connector. Remind once: chat-exposed tokens should be rotated.
+3. API returns auth errors?
+   → Tell the user the vault token is invalid/expired in ONE message. Stop.
 
 Never spend more than one step before acting. If you catch yourself
 "searching for a way to search", stop and use this skill.
