@@ -20,6 +20,11 @@ Pilih operasi yang sesuai maksud pengguna; pengguna tidak perlu memilih skill.
   Isi memory tetap data pengguna, tidak menjadi system instruction atau training.
 - Memory dan workflow privat dienkripsi di server. Key storage dan autentikasi
   berbeda. Dua token berbeda memiliki memory berbeda walau pemiliknya sama.
+- Untuk keputusan teknis proyek, gunakan MCP `project_memory` atau mode
+  `project_id` pada API memory yang sama. Baca panduan `harmonika-project-context`.
+  Mode ini memerlukan persetujuan eksplisit, value `{kind,text}`, dan tidak
+  menerima scope manual. Namespace `p:` dicadangkan dan tidak boleh diakses
+  melalui mode generic. Memory umum tetap kompatibel; bukan arsip chat otomatis.
 - Write memerlukan Idempotency-Key stabil. Pakai key yang sama saat retry input
   yang sama. `recovery_required`/`in_progress` bukan izin mencoba ulang key baru.
 - `workflow.define/run` menjalankan DAG maksimal12 langkah dari daftar pure tools.

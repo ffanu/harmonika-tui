@@ -1,0 +1,196 @@
+{
+  "status": "active_verified",
+  "date": "2026-11-13",
+  "scope": "Backend autonomous task controller and actual native CLI workflow verification",
+  "synthetic_test_data_only": true,
+  "architecture": {
+    "planner": "backend internal-tool-planner",
+    "execution": "native client tool executor with existing permission policy",
+    "state": "reconstructed from caller-owned current task history; no new conversation archive",
+    "task_contract_exposed_to_client": false,
+    "phase_is_model_declaration": true,
+    "task_proof": "validated receipt references plus independent artifact and function tests"
+  },
+  "changes": [
+    "Internal task phases, honest remaining checklist and concrete blocked/waiting next step.",
+    "Require an actual tool for discover/execute/verify; reject final promises without an action.",
+    "Require observed current-task receipt references and empty remaining list for completion; reject latest explicit failed check.",
+    "Correct a third unchanged empty check before it reaches the executor.",
+    "One bounded internal correction before any client call; no mutation replay or additional permissions.",
+    "Normal content/tool_calls JSON and SSE remain compatible."
+  ],
+  "verification": {
+    "automatic_tests": {
+      "local_controller_and_regression": 57,
+      "linux_planner_integration": 9,
+      "failed": 0
+    },
+    "real_model_decision_scenarios": {
+      "passed": 6,
+      "cases": [
+        {
+          "id": "plain_answer",
+          "passed": true,
+          "tool_names": []
+        },
+        {
+          "id": "act_instead_of_promise",
+          "passed": true,
+          "tool_names": [
+            "fixture_read"
+          ]
+        },
+        {
+          "id": "failed_test_is_not_done",
+          "passed": true,
+          "tool_names": [
+            "fixture_read"
+          ]
+        },
+        {
+          "id": "empty_job_no_third_poll",
+          "passed": true,
+          "tool_names": [
+            "get_job_status"
+          ]
+        },
+        {
+          "id": "continue_completed_task",
+          "passed": true,
+          "tool_names": []
+        },
+        {
+          "id": "missing_capability",
+          "passed": true,
+          "tool_names": []
+        }
+      ]
+    },
+    "actual_native_cli": {
+      "passed": 3,
+      "functional_tests_passed": 17,
+      "fixture_root": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-native-autonomy-5rxhxd2t",
+      "existing_user_sessions_reused": false,
+      "global_provider_or_permission_config_changed": false,
+      "cases": [
+        {
+          "case": "easy",
+          "native_exit_code": 0,
+          "external_test_exit_code": 0,
+          "tests_unchanged": true,
+          "result_file_created": true,
+          "duration_seconds": 87.3,
+          "native_log_bytes": 24121,
+          "isolated_data_files": 6,
+          "tool_steps": 9,
+          "observed_test_runs": [
+            {
+              "tests": 1,
+              "pass": 0,
+              "fail": 1
+            },
+            {
+              "tests": 1,
+              "pass": 1,
+              "fail": 0
+            }
+          ],
+          "all_observed_file_access_inside_fixture": true,
+          "final_answer_review": "Concise plain text; reported test counts match observed TAP output; no unfinished action delegated back to user.",
+          "final_answer": "Bug `add` di `math.js` sudah diperbaiki dari `a-b` menjadi `a+b`, tanpa mengubah assertion test.\n\nPengujian `node --test`: awalnya 1 gagal; setelah perbaikan 1 lulus, 0 gagal. `HASIL.md` sudah dibuat dan dibaca kembali untuk memverifikasi isinya.",
+          "test_sha256": "4059482de2c1668e4377a2bb6b36f1132e4a04f72fd125673a5e8fc6c476d8e7"
+        },
+        {
+          "case": "medium",
+          "native_exit_code": 0,
+          "external_test_exit_code": 0,
+          "tests_unchanged": true,
+          "result_file_created": true,
+          "duration_seconds": 99.4,
+          "native_log_bytes": 38888,
+          "tool_steps": 9,
+          "observed_test_runs": [
+            {
+              "tests": 7,
+              "pass": 2,
+              "fail": 5
+            },
+            {
+              "tests": 7,
+              "pass": 7,
+              "fail": 0
+            }
+          ],
+          "all_observed_file_access_inside_fixture": true,
+          "final_answer_review": "Concise plain text; reported test counts match observed TAP output; no unfinished action delegated back to user.",
+          "final_answer": "slugify di slug.js sudah diperbaiki sesuai kebutuhan, tanpa mengubah assertion test. Tes awal: 2 lulus, 5 gagal. Tes setelah perbaikan: seluruh 7 tes lulus. HASIL.md sudah dibuat dan dibaca kembali.",
+          "test_sha256": "26ea8d578f1e3a9f9ed0d0d108fc133f477cc69aaa9c73eb66b1f2b647bf69bb"
+        },
+        {
+          "case": "hard",
+          "native_exit_code": 0,
+          "external_test_exit_code": 0,
+          "tests_unchanged": true,
+          "result_file_created": true,
+          "duration_seconds": 99.5,
+          "native_log_bytes": 43529,
+          "tool_steps": 7,
+          "observed_test_runs": [
+            {
+              "tests": 9,
+              "pass": 4,
+              "fail": 5
+            },
+            {
+              "tests": 9,
+              "pass": 9,
+              "fail": 0
+            }
+          ],
+          "all_observed_file_access_inside_fixture": true,
+          "final_answer_review": "Concise plain text; reported test counts match observed TAP output; no unfinished action delegated back to user.",
+          "final_answer": "parseCsv di csv.js sudah diperbaiki tanpa dependency. Tes awal: 4 lulus, 5 gagal. Tes ulang: seluruh 9 test lulus, termasuk quoted fields, CRLF, input kosong, dan validasi error. Test tidak diubah. HASIL.md sudah dibuat dan dibaca kembali untuk verifikasi.",
+          "test_sha256": "8347e37fb6a358127eb22b8ed150ae615f1edc74e61353b044e6ef9d57ab6105"
+        }
+      ]
+    },
+    "git_diff_check": "passed",
+    "native_binary_replaced": false,
+    "long_context_sse_regression": {
+      "http_status": 200,
+      "payload_chars": 1365077,
+      "five_needles_correct": true,
+      "sse_done": true,
+      "duration_ms": 9819,
+      "synthetic_only": true
+    },
+    "public_health_http": 200
+  },
+  "activation": {
+    "status": "active_verified",
+    "backup": "/var/backups/harmonika-agent-controller/20261113T133408Z",
+    "files": {
+      "internal-tool-planner.js": "f89751d893167f1f06509d8c95bd02cf1ef283528678596a78aee9d724482d02",
+      "decision-recovery.cjs": "a8100f681f0c25aa8da6b6abf1d28e405b2ed07c58138275d52a5834ca288a74",
+      "agent-controller.cjs": "5e8a6a0acebb088bff2cf06618e537a67b23d6385be860e5bb7fc953409d19dd"
+    },
+    "services_restarted": [
+      "harmonika-ai"
+    ],
+    "unrelated_service_pids_unchanged": true,
+    "health_http": 200,
+    "user_terminal_process_modified": false,
+    "verified_at": "2026-11-13T13:41:35.847621+00:00"
+  },
+  "collaboration": {
+    "Codex": "Design, implementation, integration, activation and all final verification.",
+    "OpenCode": "Read-only TUI/adapter audit; execution loop belongs to native client, controller to backend. No code edits or service changes by this worker.",
+    "Claude": "not invoked"
+  },
+  "limits": [
+    "Task state is model-declared; receipt IDs do not prove all semantic claims or universal correctness.",
+    "Three real CLI cases cover a bounded programming workflow, not every remote, media, deployment or external service task.",
+    "No new private credential connector, global permission relaxation or automatic training was added.",
+    "OpenCode also identified optional metadata-panel and legacy-adapter refinements; they are outside this task-control change."
+  ]
+}

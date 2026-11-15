@@ -1,0 +1,575 @@
+{
+  "date": "2026-11-13",
+  "scope": "Supervised ERP website mockup design through actual Harmonika native TUI; isolated fictional data",
+  "session_id": "ses_e2bf092ebffeBg0RKVarstmd46",
+  "status": "native_mockup_and_shared_qa_engine_verified_active",
+  "attribution": {
+    "mockup_source_and_revisions": "Harmonika via its own native tools",
+    "independent_checks_and_engine_updates": "Codex",
+    "external_subagents_invoked": false
+  },
+  "findings": [
+    {
+      "issue": "Initial desktop page height 1493 exceeded PNG height 1080; bottom content cropped",
+      "fix": "Harmonika detected the first failure and rearranged desktop panels"
+    },
+    {
+      "issue": "Tablet width 768 overflowed to 898px after initial desktop correction",
+      "fix": "Harmonika reflowed navigation/cards/table using feedback and new responsive matrix"
+    },
+    {
+      "issue": "Mobile supporting text and table names fell below 12px",
+      "fix": "Harmonika raised font sizes and reflowed order rows"
+    },
+    {
+      "issue": "Footer contrast 4.35:1",
+      "fix": "New QA flagged it; Harmonika darkened footer text"
+    },
+    {
+      "issue": "Fixed desktop contract exceeded by two pixels after typography revision",
+      "fix": "New frame gate rejected it; Harmonika reduced spacing and rechecked"
+    },
+    {
+      "issue": "September/November labels split inside single words despite previous vision pass",
+      "fix": "Codex pixel review caught it; engine gained a label-break check; Harmonika added mobile abbreviations with full accessible/desktop labels"
+    },
+    {
+      "issue": "QA returned headingCount but checked h1Count",
+      "fix": "QA schema corrected and real-browser regression verifies a valid single h1 passes"
+    }
+  ],
+  "mockup": {
+    "checks": {
+      "responsiveReport": "qa-responsive-r5/report.json",
+      "frameReport": "qa-frames-r5/report.json",
+      "responsiveVerdict": "pass",
+      "frameVerdict": "pass",
+      "profiles": [
+        {
+          "name": "desktop-1440",
+          "width": 1440,
+          "overflowPx": 0,
+          "tinyText": [],
+          "splitLabels": [],
+          "failed": []
+        },
+        {
+          "name": "desktop-dark-1280",
+          "width": 1280,
+          "overflowPx": 0,
+          "tinyText": [],
+          "splitLabels": [],
+          "failed": []
+        },
+        {
+          "name": "tablet-834",
+          "width": 834,
+          "overflowPx": 0,
+          "tinyText": [],
+          "splitLabels": [],
+          "failed": []
+        },
+        {
+          "name": "tablet-768",
+          "width": 768,
+          "overflowPx": 0,
+          "tinyText": [],
+          "splitLabels": [],
+          "failed": []
+        },
+        {
+          "name": "mobile-390",
+          "width": 390,
+          "overflowPx": 0,
+          "tinyText": [],
+          "splitLabels": [],
+          "failed": []
+        },
+        {
+          "name": "mobile-small-360",
+          "width": 360,
+          "overflowPx": 0,
+          "tinyText": [],
+          "splitLabels": [],
+          "failed": []
+        }
+      ],
+      "frames": [
+        {
+          "name": "desktop",
+          "image": {
+            "width": 1440,
+            "height": 1080
+          },
+          "splitLabels": [],
+          "requiredRegions": [
+            {
+              "selector": ".kpis strong",
+              "count": 4,
+              "insideFrame": true
+            },
+            {
+              "selector": ".chart",
+              "count": 1,
+              "insideFrame": true
+            },
+            {
+              "selector": "tbody tr",
+              "count": 5,
+              "insideFrame": true
+            },
+            {
+              "selector": ".activity",
+              "count": 1,
+              "insideFrame": true
+            },
+            {
+              "selector": "footer",
+              "count": 1,
+              "insideFrame": true
+            }
+          ],
+          "failed": []
+        },
+        {
+          "name": "mobile",
+          "image": {
+            "width": 390,
+            "height": 1600
+          },
+          "splitLabels": [],
+          "requiredRegions": [
+            {
+              "selector": ".kpis strong",
+              "count": 4,
+              "insideFrame": true
+            },
+            {
+              "selector": ".chart",
+              "count": 1,
+              "insideFrame": true
+            },
+            {
+              "selector": "tbody tr",
+              "count": 5,
+              "insideFrame": true
+            },
+            {
+              "selector": ".activity",
+              "count": 1,
+              "insideFrame": true
+            },
+            {
+              "selector": "footer",
+              "count": 1,
+              "insideFrame": true
+            }
+          ],
+          "failed": []
+        }
+      ]
+    },
+    "data_consistency": {
+      "checks": {
+        "revenue_matches_latest_month": true,
+        "trend_has_six_months": true,
+        "orders_are_five": true,
+        "required_nav_count": true,
+        "synthetic_payment_example_matches": true
+      },
+      "november_revenue": 248500000,
+      "month_values": [
+        [
+          "Juni",
+          172
+        ],
+        [
+          "Juli",
+          186
+        ],
+        [
+          "Agustus",
+          198
+        ],
+        [
+          "September",
+          213
+        ],
+        [
+          "Oktober",
+          232
+        ],
+        [
+          "November",
+          248.5
+        ]
+      ]
+    },
+    "independent_profiles": [
+      {
+        "width": 1440,
+        "height": 1080,
+        "errors": [],
+        "blocked": [],
+        "labels": {
+          "Harmonika ERP": true,
+          "Pendapatan": true,
+          "Pesanan": true,
+          "Stok Menipis": true,
+          "Piutang Jatuh Tempo": true
+        },
+        "offscreen": [],
+        "small": [],
+        "lang": "id",
+        "viewport": true,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollHeight": 1080,
+        "rows": 5,
+        "images": [],
+        "svg_count": 0,
+        "canvas_count": 0,
+        "screenshot": "/Users/id/Downloads/harmonika-ai/erp-mockup-exam-20261113/qa-codex/independent-1440x1080.png"
+      },
+      {
+        "width": 390,
+        "height": 1600,
+        "errors": [],
+        "blocked": [],
+        "labels": {
+          "Harmonika ERP": true,
+          "Pendapatan": true,
+          "Pesanan": true,
+          "Stok Menipis": true,
+          "Piutang Jatuh Tempo": true
+        },
+        "offscreen": [
+          {
+            "text": "Keuangan",
+            "x": 369.765625,
+            "y": 61,
+            "width": 81.84375,
+            "height": 34,
+            "font": 14
+          },
+          {
+            "text": "Laporan",
+            "x": 454.609375,
+            "y": 61,
+            "width": 69.390625,
+            "height": 34,
+            "font": 14
+          },
+          {
+            "text": "Pengaturan",
+            "x": 527,
+            "y": 61,
+            "width": 90.40625,
+            "height": 34,
+            "font": 14
+          }
+        ],
+        "small": [],
+        "lang": "id",
+        "viewport": true,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollHeight": 1600,
+        "rows": 5,
+        "images": [],
+        "svg_count": 0,
+        "canvas_count": 0,
+        "screenshot": "/Users/id/Downloads/harmonika-ai/erp-mockup-exam-20261113/qa-codex/independent-390x1600.png"
+      },
+      {
+        "width": 360,
+        "height": 800,
+        "errors": [],
+        "blocked": [],
+        "labels": {
+          "Harmonika ERP": true,
+          "Pendapatan": true,
+          "Pesanan": true,
+          "Stok Menipis": true,
+          "Piutang Jatuh Tempo": true
+        },
+        "offscreen": [
+          {
+            "text": "Persediaan",
+            "x": 277.9375,
+            "y": 61,
+            "width": 88.828125,
+            "height": 34,
+            "font": 14
+          },
+          {
+            "text": "Keuangan",
+            "x": 369.765625,
+            "y": 61,
+            "width": 81.84375,
+            "height": 34,
+            "font": 14
+          },
+          {
+            "text": "Laporan",
+            "x": 454.609375,
+            "y": 61,
+            "width": 69.390625,
+            "height": 34,
+            "font": 14
+          },
+          {
+            "text": "Pengaturan",
+            "x": 527,
+            "y": 61,
+            "width": 90.40625,
+            "height": 34,
+            "font": 14
+          }
+        ],
+        "small": [],
+        "lang": "id",
+        "viewport": true,
+        "scrollWidth": 360,
+        "clientWidth": 360,
+        "scrollHeight": 1459,
+        "rows": 5,
+        "images": [],
+        "svg_count": 0,
+        "canvas_count": 0,
+        "screenshot": "/Users/id/Downloads/harmonika-ai/erp-mockup-exam-20261113/qa-codex/independent-360x800.png"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "errors": [],
+        "blocked": [],
+        "labels": {
+          "Harmonika ERP": true,
+          "Pendapatan": true,
+          "Pesanan": true,
+          "Stok Menipis": true,
+          "Piutang Jatuh Tempo": true
+        },
+        "offscreen": [],
+        "small": [],
+        "lang": "id",
+        "viewport": true,
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "scrollHeight": 1564,
+        "rows": 5,
+        "images": [],
+        "svg_count": 0,
+        "canvas_count": 0,
+        "screenshot": "/Users/id/Downloads/harmonika-ai/erp-mockup-exam-20261113/qa-codex/independent-768x1024.png"
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "errors": [],
+        "blocked": [],
+        "labels": {
+          "Harmonika ERP": true,
+          "Pendapatan": true,
+          "Pesanan": true,
+          "Stok Menipis": true,
+          "Piutang Jatuh Tempo": true
+        },
+        "offscreen": [],
+        "small": [],
+        "lang": "id",
+        "viewport": true,
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "scrollHeight": 1072,
+        "rows": 5,
+        "images": [],
+        "svg_count": 0,
+        "canvas_count": 0,
+        "screenshot": "/Users/id/Downloads/harmonika-ai/erp-mockup-exam-20261113/qa-codex/independent-1280x800.png"
+      }
+    ]
+  },
+  "tests": {
+    "node_regression_tests": 4,
+    "python_activation_tests": 2,
+    "browser_firewall_suite": "passed"
+  },
+  "artifacts": {
+    "docs/mockups/desktop.png": {
+      "bytes": 138769,
+      "sha256": "a3de1f70ff045a79e604d8f711db0ddf236c73b368e8cf910d36498478bc650b"
+    },
+    "docs/mockups/mobile.png": {
+      "bytes": 109682,
+      "sha256": "b3912a877db77ee09a5ccf2e26cbcacc93ff09dc548954df0a7582dd2af2bb1a"
+    },
+    "docs/mockups/index.html": {
+      "bytes": 1824,
+      "sha256": "60ffa7ea14958809389c5b6a954022f0921b192c7724fd847ae55f50a9db24bb"
+    },
+    "docs/mockups/style.css": {
+      "bytes": 5747,
+      "sha256": "8a86bc16f037eba00d59d4ed4872cc66e65a3c0bb831694f3d0aea5afd753d0b"
+    },
+    "docs/mockups/data.js": {
+      "bytes": 1983,
+      "sha256": "2e78ea6be21387ca7a3a3a7551be4804fe8ddc8e87a0ad1b0a44d028e342c371"
+    }
+  },
+  "activation": {
+    "owner_mcp_adapter": true,
+    "fresh_native_tool_frames_verified": true,
+    "backend_guidance": "hot-read marked section installed without gateway restart",
+    "backend_browser_cli": "pass: six responsive profiles, two exact frames, negative clipping rejected without PNG",
+    "backend_browser_detail": "Playwright-core 1.62.1 / Chromium 151.0.7922.34 revision 1234; explicit screen-media PDF raster + Poppler CPU mode, separate from compositor screenshot. No GPU activation, download or gateway restart."
+  },
+  "limitations": [
+    "Static design controls, not a working ERP/database/API",
+    "Chromium emulation and automated visual review; no physical-device or full WCAG certification",
+    "Pixel review and data semantics remain necessary even when automatic checks pass",
+    "No automatic model training and no GitHub push",
+    "Linux PNGs use browser screen-media PDF raster export, not compositor capture; single-page guard and pixel review are required."
+  ],
+  "backend_evidence": {
+    "cpu-responsive-padded": {
+      "verdict": "pass",
+      "browserVersion": "151.0.7922.34",
+      "profiles": [
+        {
+          "name": "desktop-1440",
+          "width": 1440,
+          "height": 900,
+          "image": {
+            "width": 1440,
+            "height": 1076
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-responsive-padded/shot-desktop-1440.png"
+        },
+        {
+          "name": "desktop-dark-1280",
+          "width": 1280,
+          "height": 800,
+          "image": {
+            "width": 1280,
+            "height": 1076
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-responsive-padded/shot-desktop-dark-1280.png"
+        },
+        {
+          "name": "tablet-834",
+          "width": 834,
+          "height": 1112,
+          "image": {
+            "width": 1668,
+            "height": 3136
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-responsive-padded/shot-tablet-834.png"
+        },
+        {
+          "name": "tablet-768",
+          "width": 768,
+          "height": 1024,
+          "image": {
+            "width": 1536,
+            "height": 3136
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-responsive-padded/shot-tablet-768.png"
+        },
+        {
+          "name": "mobile-390",
+          "width": 390,
+          "height": 844,
+          "image": {
+            "width": 780,
+            "height": 2926
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-responsive-padded/shot-mobile-390.png"
+        },
+        {
+          "name": "mobile-small-360",
+          "width": 360,
+          "height": 640,
+          "image": {
+            "width": 720,
+            "height": 2926
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-responsive-padded/shot-mobile-small-360.png"
+        }
+      ]
+    },
+    "cpu-frames": {
+      "verdict": "pass",
+      "browserVersion": "151.0.7922.34",
+      "profiles": [
+        {
+          "name": "desktop",
+          "width": 1440,
+          "height": 1080,
+          "image": {
+            "width": 1440,
+            "height": 1080
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-frames/shot-desktop.png"
+        },
+        {
+          "name": "mobile",
+          "width": 390,
+          "height": 1600,
+          "image": {
+            "width": 390,
+            "height": 1600
+          },
+          "method": "chromium-screen-pdf-raster",
+          "failed": [],
+          "screenshot": "/root/harmonika-mockup-quality-exam-20261113/cpu-frames/shot-mobile.png"
+        }
+      ]
+    },
+    "cpu-negative": {
+      "verdict": "needs-work",
+      "browserVersion": "151.0.7922.34",
+      "profiles": [
+        {
+          "name": "mobile",
+          "width": 390,
+          "height": 800,
+          "image": null,
+          "method": null,
+          "failed": [
+            "frame-content-fits",
+            "frame-region:footer",
+            "capture-export"
+          ],
+          "screenshot": null
+        }
+      ]
+    },
+    "source_hashes": {
+      "index.html": "60ffa7ea14958809389c5b6a954022f0921b192c7724fd847ae55f50a9db24bb",
+      "style.css": "8a86bc16f037eba00d59d4ed4872cc66e65a3c0bb831694f3d0aea5afd753d0b",
+      "data.js": "2e78ea6be21387ca7a3a3a7551be4804fe8ddc8e87a0ad1b0a44d028e342c371"
+    },
+    "qa_engine_sha256": "f7ba8b3a324e30c415a238f0b0ed86eac66e3bcaf36b1487cb0861d6a3b68267",
+    "guide_present": true
+  },
+  "references": [
+    "https://playwright.dev/docs/api/class-page#page-pdf",
+    "https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-captureScreenshot"
+  ]
+}

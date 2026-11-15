@@ -1,0 +1,55 @@
+{
+  "audited_at": "2026-11-12T16:56:28.071885+00:00",
+  "scope": "read_only_video_quality_and_routing_audit",
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5070",
+    "vram_mib": 12227
+  },
+  "last_actual_tui_render": {
+    "job_id": "65e6be12b3aad2dd824b5d484049e466",
+    "engine": "WanGP",
+    "model": "Wan 2.1 T2V 1.3B",
+    "preset": "preview",
+    "width": 480,
+    "height": 272,
+    "fps": 16,
+    "steps": 20,
+    "seconds": 10,
+    "frames": 160,
+    "audio": false,
+    "inference_verified": true
+  },
+  "routing_findings": {
+    "ten_second_text_requests": "Linux flex proxy deliberately bypasses ComfyUI route and uses the older WanGP AV broker.",
+    "other_duration_requests": "Flex adapter calls Windows ComfyUI gateway but explicitly requests and re-encodes 512x288/16fps previews.",
+    "windows_gateway_workflow": "Configured Wan 2.2 I2V 14B high/low-noise FP8 with LightX2V four-step LoRA; defaults1280x704, overridden by flex adapter.",
+    "advertised_filenames_are_not_readiness": true
+  },
+  "newer_models_current_access": {
+    "wan22_i2v_14b_high_low": "Both model entries are links to D; unavailable while D is Offline. Full integrity before taking D Offline was not verified in this audit.",
+    "wan22_t2v_14b_high": {
+      "bytes": 618659840,
+      "safetensors_header_valid": false
+    },
+    "wan22_t2v_14b_low": {
+      "bytes": 0,
+      "complete": false
+    },
+    "wan22_ti2v_5b": {
+      "bytes": 604452941,
+      "expected_bytes_from_header": 9999658848,
+      "complete": false
+    },
+    "comfy_required_umt5_encoder_advertised": false,
+    "comfy_required_wan_vae_advertised": false
+  },
+  "D_state": "Offline, preserved by user instruction",
+  "changes_activated_in_this_audit": false,
+  "new_inference_jobs_submitted": 0,
+  "private_chat_or_credentials_in_report": false,
+  "required_followup": [
+    "Complete and hash-verify an appropriate Wan 2.2 bundle on C without reopening D.",
+    "Qualify VRAM/offloading and higher-resolution inference on the RTX 5070 12GB.",
+    "Route native TUI and flex duration calls to the verified quality profile; do not silently fall back to an unlabelled preview."
+  ]
+}

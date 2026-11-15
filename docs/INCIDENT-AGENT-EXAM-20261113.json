@@ -1,0 +1,258 @@
+{
+  "status": "verified_existing_engine",
+  "date": "2026-11-13",
+  "scope": "Native agent incident diagnosis and generated client SDK correctness; production model decision checks",
+  "synthetic_data_only": true,
+  "fixture_root": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-incident-agent-1nfvvbid",
+  "roles": {
+    "Codex": "Designed and ran isolated native exams, graded outputs, reviewed actual answers and saved reusable catalog.",
+    "OpenCode": "Pure plan-mode acceptance review of three frozen technical files; no Claude invoked."
+  },
+  "native_cases": {
+    "incident": {
+      "case": "incident",
+      "checks": {
+        "protected_files": true,
+        "report_exists": true,
+        "exact_fields": true,
+        "simulation_scope": true,
+        "root_cause": true,
+        "causal_evidence": true,
+        "no_wrong_oom": true,
+        "latest_readiness": true,
+        "stale_rejected": true,
+        "no_replay": true,
+        "timeline": true,
+        "unknowns": true,
+        "candidate": true,
+        "original_probe": true,
+        "candidate_probe": true,
+        "probes_read_only": true
+      },
+      "counts": {},
+      "passed": true,
+      "native_exit_code": 0,
+      "tool_count": 15,
+      "native_errors": 0,
+      "duration_seconds": 202.1
+    },
+    "client": {
+      "case": "client",
+      "checks": {
+        "protected_files": true,
+        "report_exists": true,
+        "public": true,
+        "held_out": true
+      },
+      "counts": {
+        "public": {
+          "tests": 13,
+          "pass": 13,
+          "fail": 0
+        },
+        "held_out": {
+          "tests": 25,
+          "pass": 25,
+          "fail": 0
+        }
+      },
+      "passed": true,
+      "native_exit_code": 0,
+      "tool_count": 21,
+      "native_errors": 0,
+      "duration_seconds": 304.5
+    }
+  },
+  "qa_review": [
+    {
+      "case": "incident",
+      "passed": true,
+      "finding": "Root cause matches timeout reload and correlated request completion after deadline. Timeline sorted by UTC. Old cached/liveness 200 rejected as readiness proof; retired-worker OOM excluded. Original and candidate probes actually ran without job replay. Unknown production recovery and artifact accessibility remain explicit.",
+      "observed_diagnosis": {
+        "status": "mitigation_verified_in_simulation",
+        "root_cause": {
+          "code": "UPSTREAM_DEADLINE_TOO_SHORT",
+          "evidence_ids": [
+            "e2",
+            "e3",
+            "e4",
+            "e5",
+            "e7"
+          ]
+        },
+        "production_changed": false,
+        "latest_observed_readiness": "degraded",
+        "stale_claim_rejected": true,
+        "irrelevant_oom_excluded": true,
+        "replayed_jobs": 0,
+        "candidate_timeout_ms": 1500,
+        "timeline": [
+          {
+            "evidence_id": "e1",
+            "utc": "2026-11-13T09:58:00.000Z"
+          },
+          {
+            "evidence_id": "e2",
+            "utc": "2026-11-13T10:00:00.000Z"
+          },
+          {
+            "evidence_id": "e3",
+            "utc": "2026-11-13T10:00:02.000Z"
+          },
+          {
+            "evidence_id": "e4",
+            "utc": "2026-11-13T10:00:02.051Z"
+          },
+          {
+            "evidence_id": "e5",
+            "utc": "2026-11-13T10:00:02.380Z"
+          },
+          {
+            "evidence_id": "e6",
+            "utc": "2026-11-13T10:00:05.000Z"
+          },
+          {
+            "evidence_id": "e7",
+            "utc": "2026-11-13T10:00:05.052Z"
+          },
+          {
+            "evidence_id": "e8",
+            "utc": "2026-11-13T10:00:10.000Z"
+          }
+        ],
+        "unknowns": [
+          "Readiness produksi setelah snapshot 2026-11-13T10:00:05.052Z belum diverifikasi.",
+          "Penerapan timeout 1500 ms dan efektivitasnya pada produksi belum diverifikasi; kandidat hanya diuji melalui simulator lokal.",
+          "Kesehatan produksi di bawah beban nyata serta aksesibilitas artefak fixture.png belum diverifikasi."
+        ]
+      },
+      "probes": [
+        {
+          "config": "config/service.json",
+          "http_status": 503,
+          "liveness": true,
+          "readiness": false,
+          "observed_latency_ms": 380,
+          "configured_timeout_ms": 50,
+          "side_effects": 0
+        },
+        {
+          "config": "candidate.json",
+          "http_status": 200,
+          "liveness": true,
+          "readiness": true,
+          "observed_latency_ms": 380,
+          "configured_timeout_ms": 1500,
+          "side_effects": 0
+        }
+      ]
+    },
+    {
+      "case": "client",
+      "passed": true,
+      "finding": "Actual final answer reports 13 local tests, unchanged original assertions, generic auth/payload errors, bounded GET retries and ambiguous POST outcome without replay. Code keeps audit records to fixed mechanical fields and isolates audit callback failure.",
+      "self_correction_observed": true,
+      "local_test_progression": [
+        "2 tests: 1 pass/1 fail",
+        "6 tests: 1 pass/5 fail",
+        "6 tests: 6 pass",
+        "9 tests: 9 pass",
+        "13 tests: 13 pass"
+      ]
+    }
+  ],
+  "verification": {
+    "incident_assertions": 16,
+    "client_independent_tests": 25,
+    "client_local_tests": 13,
+    "production_model_scenarios": [
+      {
+        "fixture": "stale_cache_and_liveness_are_not_readiness",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "mutation_bad_success_payload_reconcile",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "lookup_request"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "functional_check_before_restart",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "probe_readiness"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "simulation_success_not_production_recovery",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "review_followup_probes": {
+      "max_attempts_deadline_precedence": true,
+      "post_redirect_no_replay": true,
+      "retry_after_default_deadline": true
+    },
+    "public_health_http": 200,
+    "syntax_and_git_diff_checks": "passed",
+    "legacy_runtime_suite": "Not repeated this turn: no runtime implementation changed; focused native exams and actual API decisions verified the new cases."
+  },
+  "backend_state": {
+    "controller_sha256": "09a2b8993e1dc2107c552872883e5f9696da0088c0655b640739a7cfdfee4e7f",
+    "planner_sha256": "f89751d893167f1f06509d8c95bd02cf1ef283528678596a78aee9d724482d02",
+    "service": "active",
+    "runtime_changed": false,
+    "restart_performed": false,
+    "production_database_or_config_changed": false,
+    "client_artifact_installed_as_production_connector": false
+  },
+  "acceptance_review": {
+    "scope_compliant": true,
+    "findings": [
+      "Retry exhaustion versus unused next-delay budget precedence was not explicit.",
+      "POST 1xx/3xx fallback was not explicit.",
+      "Audit retry-event emission was asserted more specifically than the initial wording required.",
+      "A non-reproducing simulator baseline requires honest not_verified rather than an invented mitigation."
+    ],
+    "disposition": "After initial native run completed, clarified reusable harness contracts for future preparations. The frozen initial fixture/inputs, visible original tests, hidden test file, agent source and initial results were not modified. The actual client met the retry-event assertion; no failure was penalized for ambiguous text. Three independent follow-up probes confirmed the selected precedence, POST 302 no replay and default Retry-After deadline behavior.",
+    "new_branches_not_claimed": "No broad redirect/auth/provider compatibility or alternative healthy-baseline variant coverage."
+  },
+  "privacy": {
+    "user_sessions_reused": false,
+    "real_customer_data_used": false,
+    "credentials_printed_or_stored_in_git": false,
+    "raw_fixture_native_logs_in_git": false,
+    "global_permission_config_changed": false,
+    "user_processes_signalled": false
+  },
+  "limits": [
+    "Incident evidence and SDK adapter are synthetic; no actual service restart, database mutation, renderer request or vendor integration was attempted.",
+    "Simulator mitigation success does not establish production recovery.",
+    "Retry budgets cover attempts and sleeps; a hung adapter requires separate real cancellation.",
+    "Only named cases and four production model decisions were verified; no universal agent or security certification.",
+    "No automatic model training, binary/branding change, commit or GitHub push."
+  ]
+}

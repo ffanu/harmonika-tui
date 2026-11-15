@@ -1,0 +1,61 @@
+{
+  "release": "2026.11.12.1",
+  "verified_at": "2026-11-12T10:53:41.372330+00:00",
+  "status": "active",
+  "checks": {
+    "fresh_mcp_exit": true,
+    "tool_registered": true,
+    "memory_https_read": true,
+    "secret_command_blocked": true,
+    "blocked_marked_error": true,
+    "owner_modules_match": true,
+    "mirror_modules_match": true,
+    "native_binary_unchanged": true,
+    "production_hashes_match": true,
+    "production_health": true
+  },
+  "local_tests": {
+    "python_core_memory_firewall": 125,
+    "python_tui_clipboard_sessions_zimbra_mailjet": 133,
+    "node_context_path_guard_media": 50,
+    "total": 308,
+    "failed": 0,
+    "skipped": 0
+  },
+  "linux_staging": {
+    "python": 115,
+    "existing_actual_validator_tests": 3,
+    "guard_smoke_checks": 6,
+    "env_reference_compatibility": true
+  },
+  "live_https_memory_checks": 9,
+  "native_terminal_acceptance": {
+    "supported_launcher_exit": 0,
+    "isolated_data": true,
+    "project_memory_invoked": true,
+    "answer_matches_found_false": true,
+    "initial_direct_binary_attempt": "missing_launcher_environment_401_resolved_by_supported_launcher"
+  },
+  "mcp_tools_registered": 44,
+  "production_files_sha256": {
+    "api/planner-context.js": "fa07a67cfd741857defda7abe05b02f970d61ec0297a135d16485253e6dd53cf",
+    "api/secret-firewall.cjs": "545168ec36a1385067d35e68ae032f5b8c2c372b74f94c58a7c708aafede472e",
+    "api/internal-tool-planner.js": "1a4c8cc70f3cd662aecdecd396319f89603df98067f78a23a70c901620023250",
+    "core_engine/project_memory.py": "b07b7e06c3be0242a36e4daeaf5adb86e33179cbb6fb0859ebbb0709845b4a37",
+    "core_engine/registry.py": "53262312038b0d74b1dd542ed51b17269e790d22500419231000520b65f12a35"
+  },
+  "frontend_binary_changed": false,
+  "user_tui_restarted": false,
+  "automatic_chat_archival": false,
+  "raw_chat_in_report": false,
+  "agents": {
+    "codex": "context/firewall/schema/MCP/integration/activation",
+    "opencode": "initial project-memory wrapper and isolation tests",
+    "claude": false
+  },
+  "limits": [
+    "secret/PII detection is heuristic; connector permissions and sandboxing remain required",
+    "existing TUI processes load the new MCP extension when relaunched",
+    "protection applies to the internal decision planner and registered owner MCP; other provider transports were not comprehensively audited"
+  ]
+}

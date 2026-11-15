@@ -1,0 +1,425 @@
+{
+  "status": "verified_after_backend_fix",
+  "started_date": "2026-11-13",
+  "completed_at_utc": "2026-11-13T17:00:10.847064+00:00",
+  "scope": "Isolated native Harmonika UI/API/SQLite tenant application and SQLite backup/restore; real backend decision probes and guarded firewall activation",
+  "synthetic_only": true,
+  "fixture_root": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-fullflow-agent-xxwwg5yi",
+  "roles": {
+    "Codex": "Prepared native exams, reproduced and implemented backend fix, verified independent results and activated the reviewed candidate.",
+    "OpenCode": "Pure plan-mode read-only contract and firewall review; no Claude invoked."
+  },
+  "native_cases": {
+    "app_initial": {
+      "case": "app",
+      "checks": {
+        "protected_files": true,
+        "report_exists": false,
+        "public": true,
+        "held_out": true,
+        "browser": false
+      },
+      "counts": {
+        "public": {
+          "tests": 4,
+          "passed": true
+        },
+        "held_out": {
+          "tests": 16,
+          "passed": true
+        },
+        "browser": {
+          "checks": 4,
+          "out": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-fullflow-agent-xxwwg5yi/app/qa-ui-WTXNff",
+          "passed": false
+        }
+      },
+      "passed": false,
+      "native_exit_code": 1,
+      "tool_count": 25,
+      "native_errors": 1,
+      "duration_seconds": 379.5
+    },
+    "app_first_retest": {
+      "case": "app",
+      "checks": {
+        "protected_files": true,
+        "report_exists": false,
+        "public": true,
+        "held_out": true,
+        "browser": false
+      },
+      "counts": {
+        "public": {
+          "tests": 4,
+          "passed": true
+        },
+        "held_out": {
+          "tests": 16,
+          "passed": true
+        },
+        "browser": {
+          "checks": 4,
+          "out": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-fullflow-agent-xxwwg5yi/app/qa-ui-lCRF1V",
+          "passed": false
+        }
+      },
+      "passed": false,
+      "native_exit_code": 1,
+      "tool_count": 10,
+      "native_errors": 1,
+      "duration_seconds": 164.8
+    },
+    "app_final": {
+      "case": "app",
+      "checks": {
+        "protected_files": true,
+        "report_exists": true,
+        "public": true,
+        "held_out": true,
+        "browser": true
+      },
+      "counts": {
+        "public": {
+          "tests": 6,
+          "passed": true
+        },
+        "held_out": {
+          "tests": 16,
+          "passed": true
+        },
+        "browser": {
+          "checks": 12,
+          "out": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-fullflow-agent-xxwwg5yi/app/qa-ui-l0Jp63",
+          "passed": true
+        }
+      },
+      "passed": true,
+      "native_exit_code": 0,
+      "tool_count": 19,
+      "native_errors": 0,
+      "duration_seconds": 311.2
+    },
+    "backup": {
+      "case": "backup",
+      "checks": {
+        "protected_files": true,
+        "report_exists": true,
+        "public": true,
+        "held_out": true
+      },
+      "counts": {
+        "public": {
+          "tests": 7,
+          "passed": true
+        },
+        "held_out": {
+          "tests": 16,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "native_exit_code": 0,
+      "tool_count": 44,
+      "native_errors": 0,
+      "duration_seconds": 557.8
+    }
+  },
+  "qa_review": [
+    {
+      "case": "app",
+      "passed": true,
+      "observed_answer": "Reports six API tests and twelve supplied extended browser checks, explicitly says these are not held-out tests, points to actual screenshots and acknowledges fixture warnings.",
+      "independent_api_tests": 16,
+      "independent_browser_checks": 12,
+      "visual_review": "Codex inspected actual independent 1280x800 and 360x640 screenshots: controls visible, no horizontal overflow, hostile-looking title rendered literally.",
+      "original_tests_tools_readme_user_notes_preserved": true
+    },
+    {
+      "case": "backup",
+      "passed": true,
+      "observed_answer": "Reports seven tests, consistent committed WAL snapshot, exclusion of uncommitted rows, hash/integrity checks, explicit replace permission, sidecar/symlink refusal and atomic publication. Power-loss/race limitations remain explicit.",
+      "self_correction": "Agent reproduced WAL integrity failures, corrected connection closure and snapshot journal handling, then rechecked successfully.",
+      "independent_tests": 16,
+      "original_tests_contract_user_notes_preserved": true
+    }
+  ],
+  "backend_fix": {
+    "file": "backend/planner/secret-firewall.cjs",
+    "initial_observation": "Two app runs terminated with public 502 engine_error; contemporaneous mechanical backend events reported tool_secret_reference_required.",
+    "reproduction": "The baseline rejected source that concatenates the nonsecret Bearer scheme with a runtime variable/property reference. The first correction still rejected the template literal form.",
+    "diagnostic_limit": "Rejected model decision contents were not retained; exact rejected calls and the full public error-normalization path were not reconstructed. Independent synthetic repros establish the false-positive classes; this does not claim all engine_error causes are fixed.",
+    "implemented": "Recognize only Authorization colon with Bearer prefix concatenation or one template interpolation of an identifier/property/unquoted identifier index, followed by a complete-value delimiter. Preserve this nonsecret source in tool receipts too.",
+    "still_rejected": [
+      "Literal bearer credentials and known key formats",
+      "Credential values in structured objects",
+      "Literal suffixes including newline continuations",
+      "Function calls or quoted lookups in the special reference grammar",
+      "Secret-file paths, environment dumps and replay of redaction markers"
+    ],
+    "unit_tests": 98,
+    "linux_tests": 16,
+    "linux_planner_integration_tests": 10,
+    "linux_firewall_tests": 6,
+    "activation_guard_tests": 7,
+    "regression_results": "All passed; Linux integration used the actual staged planner with real AJV/firewall and stubbed generation, without executing client tools.",
+    "original_firewall_sha256": "3be15f8214f8e44e55feb158cca4f2c558fdb8751382f655ef284016f20591f6",
+    "final_firewall_sha256": "28ea9236e8f8ef6e2b6d4c7a9f9bd8fbd0c3e315271d7c5ad2613b48f8512fe4"
+  },
+  "activation": {
+    "first": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-auth-reference/20261113T164848Z",
+      "candidate_sha256": "6199e7768ac828f0a791ba6bf38b87bbe90b4eb896141ce80870a2eab20018a6",
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true,
+      "installed_sha256": "6199e7768ac828f0a791ba6bf38b87bbe90b4eb896141ce80870a2eab20018a6"
+    },
+    "final": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-auth-reference/20261113T165319Z",
+      "candidate_sha256": "28ea9236e8f8ef6e2b6d4c7a9f9bd8fbd0c3e315271d7c5ad2613b48f8512fe4",
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true,
+      "installed_sha256": "28ea9236e8f8ef6e2b6d4c7a9f9bd8fbd0c3e315271d7c5ad2613b48f8512fe4"
+    },
+    "restart_count": 2,
+    "service_restarted": "harmonika-ai",
+    "guards": "Two idle observations, baseline/candidate hash checks, private backup, atomic replacement, health check and rollback path; unrelated web/shared-core PIDs unchanged."
+  },
+  "production_model_checks": {
+    "after_first_fix": [
+      {
+        "fixture": "browser_capture_not_crud_proof",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "browser_test"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "hash_not_database_integrity",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "verify_integrity"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "committed_wal_requires_consistent_snapshot",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "consistent_sqlite_backup"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "foreign_tenant_result_is_failure",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "dynamic_auth_source_reference",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "write_source"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "after_final_fix": [
+      {
+        "fixture": "browser_capture_not_crud_proof",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "browser_test"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "hash_not_database_integrity",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "verify_integrity"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "committed_wal_requires_consistent_snapshot",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "consistent_sqlite_backup"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "foreign_tenant_result_is_failure",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "dynamic_auth_source_reference",
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "write_source"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "client_tools_executed": false,
+    "final_source_probe_form": "template literal",
+    "limits": "Decision probes test selected behavior only. They do not execute browser, backup or restore on production."
+  },
+  "backend_state": {
+    "service": "active",
+    "hashes": {
+      "agent-controller.cjs": "09a2b8993e1dc2107c552872883e5f9696da0088c0655b640739a7cfdfee4e7f",
+      "internal-tool-planner.js": "f89751d893167f1f06509d8c95bd02cf1ef283528678596a78aee9d724482d02",
+      "secret-firewall.cjs": "28ea9236e8f8ef6e2b6d4c7a9f9bd8fbd0c3e315271d7c5ad2613b48f8512fe4",
+      "debug-workflow.cjs": "4e6e654dae019500500370129be722ee2c146c2480501091224e7913f73f380c"
+    },
+    "public_health_http": 200,
+    "runtime_changed": true,
+    "production_customer_databases_changed": false,
+    "tui_binary_or_brand_changed": false
+  },
+  "acceptance_review": {
+    "timing": "OpenCode reviewed frozen contracts after native runs started. Examiner corrections were applied to independent grading before the initial results were finalized; native protected contracts/tools were not changed.",
+    "fairness_corrections": {
+      "changes": [
+        "Accept ValueError or BackupError for ambiguous manifest path traversal input",
+        "Remove unstated assertion that missing source leaves no new backup directory",
+        "Independent browser requires exact done toggle status and no img DOM injection"
+      ],
+      "native_protected_files_changed": false,
+      "review_after_native_started": true
+    },
+    "firewall_review": "OpenCode reviewed a snapshot with newline as a value delimiter. Codex had removed that delimiter and added a multiline regression before first activation; subsequent tests also pin dot-continuation, prefix scope and delimiter cases. Review had no file-write or shell action.",
+    "reusable_harness_fixes": "Future fixtures clarify manifest path error wording, require exact done state, verify no injected img element, and close owned Python pipes/HTTP responses. A separate cloned fixture passed six tests with ResourceWarning enabled and no ResourceWarning. Frozen native tools retain the original warning; it is disclosed rather than silently patched.",
+    "retest_evidence": "First failed retest manually archived before second retest. Reusable runner now allocates numbered retest names and refuses to overwrite an initial run."
+  },
+  "browser_artifacts": {
+    "directory": "docs/assets/exams/fullflow-20261113",
+    "method": "Owned headless Chromium 156.0.8078.4, loopback random-port server, viewport emulation; no user browser/profile",
+    "checks": [
+      {
+        "name": "alpha initial list",
+        "passed": true
+      },
+      {
+        "name": "browser create persists on refresh",
+        "passed": true
+      },
+      {
+        "name": "browser toggle",
+        "passed": true
+      },
+      {
+        "name": "bodyless delete UI",
+        "passed": true
+      },
+      {
+        "name": "no error after delete",
+        "passed": true
+      },
+      {
+        "name": "switch tenant isolation",
+        "passed": true
+      },
+      {
+        "name": "title rendered as text",
+        "passed": true
+      },
+      {
+        "name": "independent browser sessions",
+        "passed": true
+      },
+      {
+        "name": "browser data survives server restart",
+        "passed": true
+      },
+      {
+        "name": "mobile no horizontal overflow",
+        "passed": true
+      },
+      {
+        "name": "mobile composer controls visible",
+        "passed": true
+      },
+      {
+        "name": "no page errors",
+        "passed": true
+      }
+    ],
+    "files": {
+      "desktop.png": "9ccee5568c38e2cfa7c68c1483bb284022e8aa5aabab95a948408fefea10f6e0",
+      "mobile.png": "5fea9950e4c042f1d9ce1d339862d79d0e71afaed1863d94568149771af6ab6b",
+      "report.json": "ff301827b3d7c9e11528511db713fe2268cb69569ad4555d84c55093aa81a700"
+    }
+  },
+  "source_artifact_sha256": {
+    "app/src/service.py": "da307201ba7f995c1ef9f103566d288781d31b87af3a39b6219f036160c4956a",
+    "app/web/app.js": "e198c8453546e55de64763078fa30b37d2c19f0426261c9f94fcf61b78f77185",
+    "app/web/style.css": "7c53ef6b4c243627579f4d690f5c1881eb51f2b30780899cc70becdc02aee0b1",
+    "backup/src/snapshots.py": "119a9d5dce05328d73bf40cff8064df8c752a52abe1e610bfb8c0c5679a7e22f"
+  },
+  "privacy": {
+    "real_customer_data_used": false,
+    "user_sessions_attached_or_modified": false,
+    "credentials_printed_or_stored_in_git": false,
+    "raw_native_logs_in_git": false,
+    "model_training_performed": false,
+    "user_processes_signalled": false,
+    "git_commit_or_push": false
+  },
+  "limits": [
+    "App and backup code are synthetic exam artifacts; production billing/CS apps and real databases were not modified or certified.",
+    "Fixture bearer references are fake; production authentication/session architecture is outside this test.",
+    "Mobile uses browser viewport emulation, not physical device, IME or mobile OS testing.",
+    "No power-loss/process-crash, comprehensive hostile filesystem race, multi-writer load, universal XSS/security or full auth syntax certification.",
+    "Generic public policy/error normalization to engine_error remains outside this correction; exact rejected decisions were not logged.",
+    "No blanket credential whitelist, mutation replay, automatic model training or TUI binary/branding change."
+  ]
+}

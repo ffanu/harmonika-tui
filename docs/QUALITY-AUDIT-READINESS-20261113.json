@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-13",
+  "engine": "harmonika-quality-audit",
+  "collector_status": "active",
+  "production_api_capture": "active_verified_json_and_sse",
+  "consent": {
+    "basis": "operator_confirmed",
+    "current_keys": 14,
+    "valid_until_revoked": 14,
+    "new_keys": "mechanics_only_until_consent"
+  },
+  "storage": {
+    "engine": "SQLite WAL",
+    "encryption": "AES-256-GCM for redacted samples; independent HMAC identity key",
+    "directory_mode": "0700",
+    "database_mode": "0o600",
+    "retention_days": 30,
+    "max_traces": 100000,
+    "per_key_traces": 10000,
+    "max_live_database_bytes": 536870912
+  },
+  "capture": {
+    "question": "latest user turn only, opt-in encrypted sample",
+    "answer": "visible answer text, opt-in encrypted sample",
+    "steps": [
+      "model_requested",
+      "client_reported",
+      "server_executor",
+      "server_reported_job_status",
+      "server_reported_artifact_digest"
+    ],
+    "mechanics": [
+      "UTC timestamp",
+      "opaque key/session references",
+      "HTTP status",
+      "latency_ms",
+      "error category",
+      "reported token usage",
+      "stream completion",
+      "capture truncation"
+    ],
+    "excluded": [
+      "raw API authentication keys",
+      "system/developer prompts",
+      "hidden reasoning",
+      "raw tool arguments/stdout",
+      "binary media",
+      "prior chat history"
+    ]
+  },
+  "validation": {
+    "python_tests": 25,
+    "go_race_tests": 11,
+    "live_go_to_sqlite_roundtrip": 1,
+    "total_passed": 37,
+    "production_gateway_candidate_build": "passed",
+    "live_synthetic_records_purged": true,
+    "production_source_unchanged": false,
+    "original_gateway_pid_unchanged": false,
+    "new_collector_only_reloaded": false,
+    "explicit_gateway_restart_authorized": true,
+    "unrelated_service_pids_unchanged": true,
+    "physical_path_build_and_linked_symbol_verified": true,
+    "production_samples": {
+      "proof_count": 2,
+      "proofs": [
+        {
+          "trace_id": "4b7b3082d17104f0a4ad31c3c3705b8e",
+          "status": 200,
+          "complete": 1,
+          "capture_truncated": 0,
+          "content_saved": 1,
+          "stream": false,
+          "question_matched": true,
+          "answer_matched": true
+        },
+        {
+          "trace_id": "f84f83e5c5814df11357ad69bf4e5175",
+          "status": 200,
+          "complete": 1,
+          "capture_truncated": 0,
+          "content_saved": 1,
+          "stream": true,
+          "question_matched": true,
+          "answer_matched": true
+        }
+      ]
+    },
+    "production_api_requests": [
+      {
+        "stream": false,
+        "http_status": 200,
+        "answer_marker_matched": true,
+        "terminal_received": true,
+        "response_chars": 9,
+        "latency_ms": 7268,
+        "session_id": "quality-e2e-0d1da7d567664d908ed186ee758bc295-json"
+      },
+      {
+        "stream": true,
+        "http_status": 200,
+        "answer_marker_matched": true,
+        "terminal_received": true,
+        "response_chars": 9,
+        "latency_ms": 6603,
+        "session_id": "quality-e2e-0d1da7d567664d908ed186ee758bc295-sse"
+      }
+    ]
+  },
+  "candidate_binary_sha256": "a0c62a7ee8d3fc1b34cab1aabcf5574fbd459d01a9aff4a42063eea37fe1737a",
+  "installed_python_sha256": {
+    "store.py": "3521e6c76759108bfa91fa8a841fe116d5f388fedef7edbffeff2363818e5451",
+    "service.py": "8d516a0f6eefb5939eefceaf4f8412291bd0349e8e970db1f23f627bf67b1f89",
+    "redaction.py": "37cfd758aafb074a8b108327bde7360ae27a66c2fa433f00e6a3e833acc99d07",
+    "operator.py": "59ff11cc24d926450a9a93ac954246207a42b4a89d97e17ad571c35571ea71b4",
+    "consent_current.py": "6c4d4e9766496345746af99376c0dd8451e5e9e5e5dd0533251a80aec36006ff"
+  },
+  "improvement_workflow": [
+    "review mechanics and selected consented samples",
+    "write a technical finding",
+    "create synthetic regression",
+    "fix engine/skill",
+    "test and review actual outputs",
+    "activate reviewed change"
+  ],
+  "automatic_training": false,
+  "extra_llm_calls_for_logging": false,
+  "limitations": [
+    "Queue is bounded RAM; outage, crash or overload can leave gaps with mechanical counters",
+    "Automatic redaction cannot recognize every name/address or secret format",
+    "Content/sample limits are separate from and do not truncate the caller response",
+    "Reported artifacts and client tool outcomes are not independently verified execution"
+  ]
+}

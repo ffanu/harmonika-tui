@@ -24,7 +24,67 @@ The context guard uses the native v2 `http.request` hook and modifies only the t
 
 The OCR adapter also preserves overlapping O/0 and I/l/1 review in one identifier, without nesting markers or treating a raw OCR spelling as verified. This is a conservative selected-ASCII guard, not a confidence estimate or an authenticity check.
 
-The shared Linux asynchronous image queue did not advertise a verified vision route at audit time. The recovered Windows inspector and Mac native path were tested directly; enabling a separate Linux queue vision route requires its own validation and activation. Do not infer web readiness from native QA.
+The earlier Linux queue audit did not advertise a verified vision route. The 13 November bird fix adds an independently tested vision tunnel and a gate specifically to the Linux Node RTX-first image router; it does not establish that every web/provider/reference route uses that router. Do not infer Google-mode or all asynchronous queue readiness from native QA.
+
+## Bird anatomy delivery gate
+
+`image_generation.py` calls the commercial RTX gateway and `image_anatomy.py` checks natural bird counts against neutral Qwen3-VL 8B observations. The original two-headed macaw was rejected; the corrected real PNG passed a one-head, one-torso check on both Mac and Linux. Model observations can still be wrong: this is a narrow visible-criteria check, not a guarantee of all anatomy or design quality. Explicit fantasy, uncounted flocks and reference edits are outside this gate. Only a completed render proven defective permits one correction. Unknown submissions retain job IDs and cannot cause duplicate submissions; unavailable/uncertain inspection never publishes a candidate.
+
+Owner activation: `python3 scripts/activate-image-quality.py`. It preserves private constants and unrelated functions, compiles modules, backs up changed files privately and updates helpers on repeat runs. Existing MCP processes may retain the old function: a new owner native launch is the verified activation boundary; configuration reload alone is not proof that a cached MCP function changed.
+
+Linux files: `/opt/harmonika-ai/image-quality/{image_generation,image_anatomy,visual_media,media_tunnels}.py` and `/opt/harmonika-ai/lib/image-quality-router.cjs`. The wrapper uses `/usr/bin/python3` with the already-installed Pillow, private temporary candidates and the original PNG CRC/pixel validator before publication. `activate-server-image-quality.py` patches only the known factory under a source hash guard and preserves an operator backup. The Node service must load the updated factory before it serves this gate.
+
+The existing strict-key Linux SSH alias/tunnel key already permits Windows loopback 18188; `harmonika-image-quality-vision-tunnel.service` reuses that authorization and starts at boot. It does not alter Windows SSH rules or restart GPU services. Gateway port 18203 uses a dedicated `/etc/harmonika-ai/image-quality-gateway.token` copied through encrypted SSH stdin from the existing authorized connector; the legacy bridge token remains separate. Vision uses the existing `/etc/harmonika-ai/rtx-vision-worker.token`. All these files stay outside Git. Audit logger output contains only technical status, not prompts or image observations. Normal authorized artifact manifests retain their existing prompt field.
+
+```sh
+python3 -m unittest discover -s tests -p 'test_image*.py' -q
+node --test tests/image-quality-router.test.cjs
+```
+
+## Website and ERP mockup acceptance
+
+The ERP exam found cropped desktop content, overflow at 768px, tiny table text,
+low-contrast footer copy and month names split across lines. Harmonika created the
+HTML/CSS/JS and revised it through its native tools; Codex supplied independent
+browser/pixel checks and strengthened the shared QA engine. Mockup controls remain
+explicitly static; this does not implement an ERP backend.
+
+`skills/harmonika-browser-qa/scripts/qa_matrix.cjs` now checks six responsive profiles
+including 768px. It fixes the `headingCount`/`h1Count` mismatch, counts browser/request
+errors in the verdict and detects split single-word control/chart labels. Optional
+`frames` on the existing MCP tool (CLI `--frames JSON`) captures exact PNG pixels at
+scale 1 without mobile auto-shrink. `fit` checks document height; `requiredSelectors`
+check actual visible bounds and ancestor clipping. `ok` means the audit ran, while
+`verdict` decides whether its checks passed. Domain data and real pixels still need
+review; automated signals are not aesthetic or WCAG certification.
+
+`scripts/activate-mockup-quality.py` backs up and updates only the private QA adapter,
+its tool schema and helpers. It supports idempotent refresh and preserves unrelated
+MCP functions/credentials. A fresh native owner launch was used for the exam; older
+open MCP processes are not assumed refreshed. No binary, brand or user session is
+replaced. The visual skill contains the reusable acceptance workflow.
+
+Linux uses `/opt/harmonika-ai/visual-quality/qa_matrix.cjs`, an isolated copy of the
+already-installed Playwright-core 1.62.1 package (including its license) and the
+matching existing Chromium 151.0.7922.34 (revision 1234) selected in the private operator file
+`/etc/harmonika-ai/mockup-browser.json`. Browser jobs use CPU rendering flags on PC 1;
+there is no browser/model download or global GPU setting change. Linux compositor
+screenshots timed out even with verified DOM metrics, so its explicit operator mode
+uses Chromium screen-media PDF export followed by CPU Poppler rasterization. The
+result carries `captureMethod=chromium-screen-pdf-raster`; it is not relabeled as a
+compositor screenshot. Multi-page capture is rejected, fixed frames stay exact and
+normal full-page exports allow a 4px paper-rounding gutter. Inspect actual pixels and
+the returned method. [Playwright screen-media export](https://playwright.dev/docs/api/class-page#page-pdf)
+documents the rendering API used. Vision QA continues
+to use the Windows RTX worker. `activate-server-mockup-quality.py` adds a scoped,
+marked section from `MOCKUP-QUALITY.md` to the existing hot-read team instructions,
+preserving a private backup; the gateway service does not need restarting.
+
+```sh
+node --test tests/mockup-quality.test.cjs
+python3 -m unittest discover -s tests -p test_mockup_quality_activation.py -q
+node tests/skills_browser_test.cjs
+```
 
 ## Verification
 

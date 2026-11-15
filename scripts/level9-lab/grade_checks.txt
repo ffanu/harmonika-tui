@@ -1,0 +1,47 @@
+ if a.phase=='v3':
+  network=db['network']['tables']['calls'];audit=db['workflows']['tables']['coordinator_audit'];release=status['release'];current=[x for x in network if x['release']==release]
+  def case(suffix):return next(w for w in workflows.values() if w['key']==release+'-'+suffix)
+  def root_step(w):return next(s for s in steps if s['workflow_id']==w['id'] and s['name']=='prepare')
+  def tcp_fault(event,suffix):
+   w=case(suffix);s=root_step(w);faults=[x for x in current if x['event']==event and x['job_id']==s['child_id']];assert len(faults)==1;f=faults[0]
+   assert sum(x['kind']=='child_submit' and x['job_id']==s['child_id'] and x['status'] in [200,202] for x in mechanics)==1
+   assert any(x['kind']=='child_lookup' and x['job_id']==s['child_id'] and x['status']==200 for x in mechanics) if event=='ack_dropped' else True
+   return f
+  check('real_tcp_postcommit_ack_drop_reconciled',lambda:bool(tcp_fault('ack_dropped','ack')))
+  def partial():
+   f=tcp_fault('artifact_truncated','partial');return any(x['event']=='forward' and x['route']=='/artifacts/:id' and x['job_id']==f['job_id'] and x['status']==200 and x['id']>f['id'] for x in current)
+  check('real_truncated_http_body_reread',partial)
+  def stale():
+   w=case('stale');s=root_step(w);h=hashlib.sha256(w['id'].encode()).hexdigest();hold=tcp_fault('response_hold','stale');assert hold['coordinator_id']=='coordinator1'
+   released=next(x for x in current if x['event']=='response_released' and x['job_id']==s['child_id']);assert released['id']>hold['id'];assert not any(x['event']=='hold_timeout' for x in current)
+   rows=[x for x in audit if x['workflow_id']==w['id'] and x['task']=='prepare'];first=next(x for x in rows if x['event']=='claim' and x['coordinator_id']=='coordinator1');settle=next(x for x in rows if x['event']=='settle' and x['coordinator_id']=='coordinator2' and x['epoch']>first['epoch']);late=next(x for x in rows if x['event']=='stale_rejected' and x['coordinator_id']=='coordinator1' and x['epoch']==first['epoch']);assert first['id']<settle['id']<late['id']
+   assert any(x.get('kind')=='database_witness' and x.get('origin')=='agent' and x.get('release')==release and hold['at']<=x['at']<=released['at'] and any(t['id']==settle['id'] and t['workflow_id_sha256']==h for t in x['claim_trace']) for x in obs)
+   cid=status['roles']['coordinator1']['container_id'];ch=hashlib.sha256(cid.encode()).hexdigest();assert any(x.get('kind')=='cluster_status' and x.get('origin')=='agent' and hold['at']<=x['at']<=released['at'] and x.get('roles',{}).get('coordinator1',{}).get('running') is True and x['roles']['coordinator1']['container_sha256']==ch for x in obs)
+   assert not any(x['action']=='die' and hold['at']<=x['at']<=released['at'] for role in events['containers'] if role['container_sha256']==ch for x in role['events']);return True
+  check('physically_live_stale_coordinator_fenced_after_takeover',stale)
+  def epochs():
+   claims=[x for x in audit if x['event']=='claim'];assert claims and all(type(x['epoch']) is int and x['epoch']>0 for x in audit);assert {'coordinator1','coordinator2'}<=set(x['coordinator_id'] for x in claims)
+   by={}
+   for x in claims:by.setdefault((x['workflow_id'],x['task']),[]).append(x)
+   return all([x['epoch'] for x in sorted(rows,key=lambda x:x['id'])]==sorted(set(x['epoch'] for x in rows)) for rows in by.values())
+  check('two_coordinators_durable_integer_epochs',epochs)
+  def audit_schema():
+   return all(set(x)=={'id','coordinator_id','workflow_id','task','epoch','event'} and x['event'] in ['claim','settle','stale_rejected'] and x['workflow_id'] in workflows and x['coordinator_id'] in ['coordinator1','coordinator2'] for x in audit) and all(set(x)=={'id','event','coordinator_id','method','route','key_sha256','job_id','status','latency_ms','at','release'} for x in network) and not any(marker in json.dumps({'audit':audit,'network':network}) for marker in ['PRIVATE_DATA_CANARY','PRIVATE_ERROR_CANARY','Level9 checkpoint α'])
+  check('coordinator_and_tcp_logs_mechanics_only',audit_schema)
+  def partition():
+   w=case('partition');h=hashlib.sha256(w['id'].encode()).hexdigest();stop=next(x for x in obs if x.get('origin')=='agent' and x.get('kind')=='fault' and x.get('fault')=='partition-on' and x.get('release')==release);start=next(x for x in obs if x.get('origin')=='agent' and x.get('kind')=='fault' and x.get('fault')=='partition-off' and x.get('release')==release and x['at']>stop['at']);lo,hi=stop['at'],start['at'];assert any(x['event']=='partition_closed' and lo<=x['at']<=hi for x in current);assert any(x.get('origin')=='agent' and x.get('workflow_id_sha256')==h and lo<=x['at']<=hi and x.get('state') in ['queued','running','reconciling'] for x in obs)
+   probes=[x for x in obs if x.get('release')==release and lo<=x.get('at',0)<=hi and x.get('kind')=='http'];assert all(any(x.get('route')==route and x.get('status')==code for x in probes) for route,code in [('/healthz',200),('/readyz',503)]);return True
+  check('tcp_partition_nonterminal_readiness_and_recovery',partition)
+  def crash():
+   w=case('crash');s=root_step(w);f=next(x for x in mechanics if x['kind']=='coordinator_exit42' and x['job_id']==s['child_id'] and x.get('release')==release);assert sum(x['kind']=='child_submit' and x['job_id']==s['child_id'] and x['status'] in [200,202] for x in mechanics)==1;assert any(x['kind']=='child_lookup' and x['job_id']==s['child_id'] and x['status']==200 and x['id']>f['id'] for x in mechanics)
+   return any(role['role'] in ['coordinator1','coordinator2'] and role['release']==release and any(d['action']=='die' and d['exit_code']=='42' and any(s['action']=='start' and s['at']>=d['at'] for s in role['events']) for d in role['events']) for role in events['containers'])
+  check('coordinator_exit42_and_same_child_recovery',crash)
+  def pause_restart():
+   w=case('pause');h=hashlib.sha256(w['id'].encode()).hexdigest();ws=[x for x in obs if x.get('origin')=='agent' and x.get('release')==release and x.get('workflow_id_sha256')==h and x.get('paused') is True and x.get('task_states',{}).get('prepare')=='completed' and x.get('task_states',{}).get('publish')=='pending'];controls=[x for x in obs if x.get('origin')=='agent' and x.get('release')==release and x.get('kind')=='role_control' and set(x.get('roles',[]))=={'coordinator1','coordinator2'}]
+   return any(a['at']<=stop['at']<start['at']<=b['at'] for a in ws for b in ws for stop in controls if stop['action']=='stop' for start in controls if start['action']=='start')
+  check('pause_survives_both_coordinator_restarts',pause_restart)
+  def cancellation():
+   w=case('cancel');s=[s for s in steps if s['workflow_id']==w['id'] and s['child_id']];assert w['state']=='cancelled' and len(s)==1;es=[x['state'] for x in db['jobs']['tables']['events'] if x['job_id']==s[0]['child_id']];return 'running' in es and 'cancel_requested' in es and es.index('running')<es.index('cancel_requested')
+  check('running_child_cancel_suppresses_descendant',cancellation)
+  check('observed_load_latency_and_native_resource_snapshot',lambda:0<=burst['latency_ms']['p50']<=burst['latency_ms']['p95']<=burst['latency_ms']['max'] and any(x.get('kind')=='resource_snapshot' and x.get('origin')=='agent' and x.get('release')==release and len(x['roles'])==8 for x in obs))
+  result=json.loads((project/'RESULT.json').read_text());check('native_report_honest_scope',lambda:result.get('scope')=='isolated_dual_coordinator_tcp' and result.get('production_changed') is False and result.get('completed') is True and result.get('checkpoint_preserved') is True and (project/'HASIL.md').is_file())

@@ -26,6 +26,9 @@ terpisah dalam pengelolaan secret yang aman.
 - 12 tool lokal;19 adaptor workspace dan2chat hanya dijalankan gateway Go;
   6 dokumen lokal dan60 belum tersedia ditolak secara eksplisit.
 - Memory/workflow AES-GCM, TTL, kuota, idempotency dan recovery tombstone.
+- Mode curated `project_id` pada ID memory lama menerima keputusan teknis
+  eksplisit dengan consent, TTL dan isolasi token/proyek. Lihat
+  [konteks dan firewall](../../docs/CONTEXT-MEMORY-FIREWALL.md).
 - Log hanya HMAC actor, status dan durasi. Tidak mencatat prompt atau isi memory.
 
 Detail: [kontrak](../../docs/CORE-FOUNDATION.md),

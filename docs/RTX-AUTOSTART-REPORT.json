@@ -1,0 +1,325 @@
+{
+  "verified_at": "2026-11-12T13:02:58.329956+00:00",
+  "status": "active_image_pipeline_verified",
+  "scope": "Windows RTX startup/recovery and image.generate through existing Linux gateway",
+  "windows_reachable": true,
+  "root_cause": {
+    "gateway_comfy_task_limit_before": "PT72H",
+    "failure_restarts_before": 0,
+    "prior_task_result": "0x00041306",
+    "limit_consistent_with_termination_not_proof_of_shutdown": true,
+    "physical_gpu_was_online": true
+  },
+  "activation": {
+    "boot_without_login": true,
+    "system_task_principals": true,
+    "execution_limit": "PT0S",
+    "watchdog_seconds": 60,
+    "restart_count": 999,
+    "child_restart_backoff_seconds": [
+      5,
+      60
+    ],
+    "normal_users_can_modify_tasks": false,
+    "administrator_maintenance_supported": true,
+    "maintenance_enabled": false,
+    "backup_id": "durable-runtime-20261112T125955Z"
+  },
+  "qualification": {
+    "unique_checks": 75,
+    "failed": 0,
+    "native_powershell_checks": 64,
+    "python_profile_checks": 8,
+    "python_runtime_checks": 3,
+    "system_noninteractive_native_and_runtime_checks": 67,
+    "mac_runtime_repeat_not_double_counted": true,
+    "checks": [
+      "powershell_parse_Supervisor.ps1",
+      "powershell_parse_Watchdog.ps1",
+      "powershell_parse_Install-RTXAutostart.ps1",
+      "powershell_parse_Test-RTXAutostart.ps1",
+      "maintenance_precedes_enable",
+      "disabled_recovery",
+      "stopped_recovery",
+      "no_duplicate_running",
+      "no_duplicate_queued",
+      "existing_listener_observed",
+      "closed_listener_detected",
+      "mechanics_only_state",
+      "durable_child_runtime_present",
+      "comfy_static_memory_profile",
+      "text_encoder_not_forced_to_cpu",
+      "real_child_restarted_after_exit_7",
+      "restart_backoff_applied",
+      "clean_exit_recorded",
+      "child_output_not_logged",
+      "maintenance_does_not_spawn",
+      "real_watchdog_honors_maintenance",
+      "real_watchdog_reenables_disabled_task",
+      "real_watchdog_starts_task_as_system",
+      "HarmonikaGateway_system",
+      "HarmonikaGateway_no_login",
+      "HarmonikaGateway_unlimited",
+      "HarmonikaGateway_singleton",
+      "HarmonikaGateway_restarts",
+      "HarmonikaGateway_power_conditions",
+      "HarmonikaGateway_boot_trigger",
+      "HarmonikaComfy_system",
+      "HarmonikaComfy_no_login",
+      "HarmonikaComfy_unlimited",
+      "HarmonikaComfy_singleton",
+      "HarmonikaComfy_restarts",
+      "HarmonikaComfy_power_conditions",
+      "HarmonikaComfy_boot_trigger",
+      "HarmonikaFluxWorker_system",
+      "HarmonikaFluxWorker_no_login",
+      "HarmonikaFluxWorker_unlimited",
+      "HarmonikaFluxWorker_singleton",
+      "HarmonikaFluxWorker_restarts",
+      "HarmonikaFluxWorker_power_conditions",
+      "HarmonikaFluxWorker_boot_trigger",
+      "HarmonikaRTXImageWorkerAuto_system",
+      "HarmonikaRTXImageWorkerAuto_no_login",
+      "HarmonikaRTXImageWorkerAuto_unlimited",
+      "HarmonikaRTXImageWorkerAuto_singleton",
+      "HarmonikaRTXImageWorkerAuto_restarts",
+      "HarmonikaRTXImageWorkerAuto_power_conditions",
+      "HarmonikaRTXImageWorkerAuto_boot_trigger",
+      "HarmonikaRTXWatchdog_system",
+      "HarmonikaRTXWatchdog_no_login",
+      "HarmonikaRTXWatchdog_unlimited",
+      "HarmonikaRTXWatchdog_singleton",
+      "HarmonikaRTXWatchdog_restarts",
+      "HarmonikaRTXWatchdog_power_conditions",
+      "HarmonikaRTXWatchdog_boot_trigger",
+      "HarmonikaGateway_admin_system_acl",
+      "HarmonikaComfy_admin_system_acl",
+      "HarmonikaFluxWorker_admin_system_acl",
+      "HarmonikaRTXImageWorkerAuto_admin_system_acl",
+      "HarmonikaRTXWatchdog_admin_system_acl",
+      "watchdog_every_minute"
+    ],
+    "real_child_crash_recovery": true,
+    "real_disabled_task_recovery": true,
+    "maintenance_guard_pass": true,
+    "closed_parent_stdio_regression_pass_on_windows": true,
+    "gateway_patch_matches_deployment": true,
+    "physical_reboot_performed": false
+  },
+  "end_to_end_image": {
+    "ok": true,
+    "job_id": "job_09c9d848d1f94420a3d06713247e20c2",
+    "status": "completed",
+    "seconds": 27.45,
+    "artifact": {
+      "file_id": "file_0e583354b588481ea642ee1acff13b77",
+      "mime_type": "image/png",
+      "size_bytes": 3147861,
+      "sha256": "cebc23964b237c30a56493504c3a95d63c63e1e64c924301cbbbed7b2f5a7abb",
+      "width": 1024,
+      "height": 1024
+    },
+    "single_submission": true,
+    "raw_image_or_prompt_logged": false,
+    "decoded_dimensions": [
+      1024,
+      1024
+    ],
+    "decoded_mode": "RGB",
+    "full_png_decode_pass": true,
+    "minimum_2mib_pass": true
+  },
+  "backend_and_tui_probe": {
+    "ok": true,
+    "checked_at": 1794488519.4431732,
+    "backend": {
+      "status": "online",
+      "latency_ms": 121
+    },
+    "graphics": {
+      "status": "online"
+    },
+    "registry": {
+      "status": "ready",
+      "registered": 182
+    }
+  },
+  "tasks": [
+    {
+      "name": "HarmonikaGateway",
+      "last_result": 267009,
+      "boot": true,
+      "system": true,
+      "limit": "PT0S",
+      "state": "Running",
+      "enabled": true
+    },
+    {
+      "name": "HarmonikaComfy",
+      "last_result": 267009,
+      "boot": true,
+      "system": true,
+      "limit": "PT0S",
+      "state": "Running",
+      "enabled": true
+    },
+    {
+      "name": "HarmonikaFluxWorker",
+      "last_result": 267009,
+      "boot": true,
+      "system": true,
+      "limit": "PT0S",
+      "state": "Running",
+      "enabled": true
+    },
+    {
+      "name": "HarmonikaRTXImageWorkerAuto",
+      "last_result": 267009,
+      "boot": true,
+      "system": true,
+      "limit": "PT0S",
+      "state": "Running",
+      "enabled": true
+    },
+    {
+      "name": "HarmonikaRTXWatchdog",
+      "last_result": 0,
+      "boot": true,
+      "system": true,
+      "limit": "PT0S",
+      "state": "Ready",
+      "enabled": true
+    }
+  ],
+  "watchdog": {
+    "observed_timestamps": [
+      "2026-11-12T13:01:07.8756127Z",
+      "2026-11-12T13:02:07.9222371Z"
+    ],
+    "advanced_automatically": true,
+    "disposable_qualification_tasks_remaining": 0
+  },
+  "runtime": {
+    "states": [
+      {
+        "schema_version": 1,
+        "component": "Gateway",
+        "timestamp": "2026-11-12T12:59:58.1223693Z",
+        "status": "process_started",
+        "pid": 8436,
+        "launches": 1
+      },
+      {
+        "schema_version": 1,
+        "component": "Comfy",
+        "timestamp": "2026-11-12T12:59:58.1374881Z",
+        "status": "process_started",
+        "pid": 22972,
+        "launches": 1
+      }
+    ],
+    "processes": [
+      {
+        "durable_stdio": true,
+        "parent": 25964,
+        "pid": 8436,
+        "created": "2026-11-12T12:59:58.1178460Z",
+        "lowvram": false
+      },
+      {
+        "durable_stdio": true,
+        "parent": 8436,
+        "pid": 24544,
+        "created": "2026-11-12T12:59:58.1287100Z",
+        "lowvram": false
+      },
+      {
+        "durable_stdio": true,
+        "parent": 38964,
+        "pid": 22972,
+        "created": "2026-11-12T12:59:58.1328780Z",
+        "lowvram": false
+      },
+      {
+        "durable_stdio": true,
+        "parent": 22972,
+        "pid": 36300,
+        "created": "2026-11-12T12:59:58.1441120Z",
+        "lowvram": false
+      }
+    ],
+    "gateway_and_comfy_wrapped": true,
+    "comfy_dynamic_vram": false,
+    "comfy_lowvram_forced_cpu": false,
+    "model": "flux2-klein-4b",
+    "quality_preset_distilled_steps": 4,
+    "cpu_vae": true,
+    "listeners_loopback": [
+      18190,
+      18200
+    ]
+  },
+  "source_sha256": {
+    "ChildRuntime.py": "8236cdbc9460f22cea86300182106c263e344d6af395b0f4aa91275ba93500de",
+    "GatewayImageProfile.patch": "dbb7a3283f0b222f1cd07b8175363b1ac96a52ebd1b828cac3bcadc6a96ec00a",
+    "Install-RTXAutostart.ps1": "43f2f584ac7b8e5d31c1dceb68914465ffdadfd33239c35282ae4efb433fe230",
+    "Repair-ModelReferences.ps1": "0b9c18b03cef635debe1c8e63e1d70113ffc53dec56858dfb265cd808c8c335f",
+    "Supervisor.ps1": "7d78dbb19614049652bd3b40af19bfc79a40bbc873b46c9f5f5e14210adba84c",
+    "Test-RTXAutostart.ps1": "d91f881fb816e22f431dbede584fa7e654717c5a4d7db6b794d4c2bcd47ed51f",
+    "Watchdog.ps1": "38fa03938aed489f4d5dee8686b4d2058dabc02f95110f285d2508448028f301",
+    "image_profile.py": "9c2827701aadec3b58248d80fd43614e64f2224039456c56d64ec4d156380e5a"
+  },
+  "installed_scripts_sha256": {
+    "Supervisor.ps1": "7d78dbb19614049652bd3b40af19bfc79a40bbc873b46c9f5f5e14210adba84c",
+    "Watchdog.ps1": "38fa03938aed489f4d5dee8686b4d2058dabc02f95110f285d2508448028f301",
+    "ChildRuntime.py": "8236cdbc9460f22cea86300182106c263e344d6af395b0f4aa91275ba93500de"
+  },
+  "gateway_sha256": "07d6309c1946e9c85399a169b96403dc0843ad6f7b847dec6f735d58cf6428eb",
+  "image_profile_sha256": "9c2827701aadec3b58248d80fd43614e64f2224039456c56d64ec4d156380e5a",
+  "process_safety": {
+    "preexisting_user_processes_stopped": false,
+    "original_user_workers_still_present": [
+      12044,
+      12620
+    ],
+    "only_session_started_gateway_comfy_processes_replaced": true,
+    "other_jobs_interrupted": 0,
+    "automatic_gpu_job_replay": false,
+    "diagnostic_profiler_removed": true
+  },
+  "model_repair": {
+    "broken_encoder_vae_links_repaired": 6,
+    "klein_links_to_existing_ssd_copies": 2,
+    "ssd_copy_comparison": "file length and SHA256 first 64 KiB only; not full weight checksum",
+    "weights_downloaded": 0,
+    "weights_moved": 0,
+    "weights_copied": 0
+  },
+  "image_policy": {
+    "minimum_canvas_for_square_quality_presets": 1024,
+    "minimum_bytes": 2097152,
+    "lossless_reencoding_preserves_pixels": true,
+    "padding_added": false,
+    "bytes_are_not_visual_quality_metric": true,
+    "explicit_model_selections_preserved": true
+  },
+  "power": {
+    "active_ac_sleep_seconds": 0,
+    "active_ac_hibernate_seconds": 0,
+    "settings_changed": false
+  },
+  "privacy": {
+    "new_supervisor_state": "technical mechanics only, fixed file per component",
+    "application_stdout_stderr_persisted_by_supervisor": false,
+    "customer_data_or_credentials_in_report": false
+  },
+  "limits": [
+    "Administrator/SYSTEM retain control; recovery does not make Windows tasks impossible to disable.",
+    "Boot triggers and SYSTEM noninteractive launch were verified without a physical reboot.",
+    "Host power loss, disabled Task Scheduler, hardware or network failure cannot be defeated by an application watchdog.",
+    "Gateway in-memory remote job records may be lost on restart; ambiguous jobs require status reconciliation, never blind replay.",
+    "This end-to-end qualification covers image.generate; audio.tts currently reports engine_ready=false, and audio/video renders were not tested in this task.",
+    "Flux/image worker task future boot configuration uses SYSTEM; their original already-running user processes were preserved."
+  ],
+  "git_commit_or_push": false
+}

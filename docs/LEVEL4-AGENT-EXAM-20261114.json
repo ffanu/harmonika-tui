@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-13T19:17:00.850856+00:00",
+  "status": "passed_after_engine_correction",
+  "level": 4,
+  "level_definition": "Internal Harmonika rubric: autonomous controlled Linux staging operations with supervised scope and independent grading, not a universal certification.",
+  "agents": {
+    "Codex": "Exam design, supervision, implementation, independent grading and guarded activation",
+    "OpenCode": "Read-only review using pure/plan mode; no writes, commands or deployment",
+    "Claude": "Not invoked",
+    "delegation_skill": "/Users/id/.codex/skills/delegate/SKILL.md"
+  },
+  "scope": {
+    "native_client": "Mac harmonika run --standalone --auto --format json",
+    "model_route": "harmonika/harmonika-ai",
+    "target": "Owned ephemeral Linux Docker lab over fixed scoped bridge",
+    "production_application_or_customer_data_changed": false,
+    "production_gateway_engine_updated": true,
+    "unrelated_service_pids_unchanged_at_activation": true,
+    "committed_or_pushed": false,
+    "user_sessions_modified": false
+  },
+  "initial_checkpoint": {
+    "passed": false,
+    "native_exit_code": 1,
+    "mechanical_checks_passed": 26,
+    "mechanical_checks_total": 26,
+    "functional_tests": {
+      "public": {
+        "tests": 2,
+        "passed": true
+      },
+      "independent": {
+        "tests": 8,
+        "passed": true
+      }
+    },
+    "tool_count": 26,
+    "duration_seconds": 306.5,
+    "known_failure": "Backend completion validation rejected final response: unverified_completion -> invalid_tool_response (503). Deployment/checkpoint and all initial independent checks passed.",
+    "diagnostic_limit": "Rejected raw model state and exact bad citation were not retained; exact offending receipt is not established.",
+    "initial_evidence_preserved": true
+  },
+  "engine_correction": {
+    "change": "Bounded request-memory map of eligible, fresh and failed/pending/empty receipt IDs guides internal completion evidence selection. No deployment/POST replay to obtain more evidence.",
+    "completion_guard_weakened": false,
+    "raw_tool_output_arguments_or_chat_added_to_controller_logs": false,
+    "receipt_map_or_ids_added_to_controller_logs": false,
+    "local_node_tests": {
+      "passed": 113,
+      "failed": 0
+    },
+    "linux_integration_tests": {
+      "passed": 21,
+      "failed": 0
+    },
+    "activation_guard_tests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "actual_gateway_model_probes": {
+      "passed": 6,
+      "failed": 0,
+      "client_tools_executed": false
+    },
+    "activation": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-level4-evidence/20261113T191057Z",
+      "candidate_sha256": "1ae02e7540f0cb2482d10a1915db5faca3c1a49f26e18b988e196234fd58b0f5",
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true,
+      "installed_sha256": "1ae02e7540f0cb2482d10a1915db5faca3c1a49f26e18b988e196234fd58b0f5"
+    },
+    "verified_final_backend": {
+      "lab_containers_remaining": 0,
+      "lab_volumes_remaining": 0,
+      "gateway_health_http": 200,
+      "controller_sha256": "1ae02e7540f0cb2482d10a1915db5faca3c1a49f26e18b988e196234fd58b0f5"
+    }
+  },
+  "same_session_continuation": {
+    "exact_followup": "Silakan lanjutkan.",
+    "same_session": true,
+    "new_agent_session_created": false,
+    "native_exit_code": 0,
+    "native_errors": 0,
+    "tool_count": 13,
+    "duration_seconds": 194.4,
+    "passed": true,
+    "checks": {
+      "protected_files": true,
+      "candidate_active": true,
+      "ready": true,
+      "dependency": true,
+      "non_root": true,
+      "network_isolated": true,
+      "readonly": true,
+      "memory": true,
+      "cpu": true,
+      "pids": true,
+      "cap_drop": true,
+      "no_new_privileges": true,
+      "db_integrity": true,
+      "one_checkpoint_activation": true,
+      "lookup_performed": true,
+      "no_checkpoint_replay": true,
+      "actual_image_matches": true,
+      "deployed_source_matches": true,
+      "checkpoint_exact": true,
+      "seed_preserved": true,
+      "checkpoint_preserved": true,
+      "actual_rollback": true,
+      "no_extra_activation": true,
+      "rollback_digest_matches": true,
+      "one_fault": true,
+      "fault_auto_restarted": true,
+      "no_duplicate_post": true,
+      "ack_lost_reconciled": true,
+      "two_rows": true,
+      "result_exists": true,
+      "report_exists": true,
+      "agent_verified_bad_release": true,
+      "agent_verified_restart": true,
+      "no_bad_or_rollback_replay": true,
+      "actual_exit_42": true,
+      "durable_record": true,
+      "result_truthful": true,
+      "public": true,
+      "independent": true,
+      "agent_regressions": true,
+      "focused_regressions": true
+    },
+    "check_count": 41,
+    "tests": {
+      "public": {
+        "tests": 2,
+        "passed": true
+      },
+      "independent": {
+        "tests": 8,
+        "passed": true
+      },
+      "agent_regressions": {
+        "tests": 2,
+        "passed": true
+      }
+    },
+    "grading_correction": "The recovery runner initially assumed checkpoint-only and marked four stage-A-only assertions false when the continuation completed TURN B. Original result retained. Existing state/artifacts regraded with all TURN B requirements; no agent operations replayed. Reusable runner now provides --continue-session for this exact follow-up."
+  },
+  "real_linux_evidence": {
+    "baseline_bugs_reproduced": 2,
+    "dependency_version": "1.0.0",
+    "nonroot_uid": 10001,
+    "isolation": {
+      "user": "10001:10001",
+      "network": "none",
+      "readonly": true,
+      "memory": 134217728,
+      "nano_cpus": 500000000,
+      "pids_limit": 32,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges"
+      ]
+    },
+    "candidate_image_id": "sha256:41c01808393a199aade12df62dd0bb6ab531ca410310357ec89533944dbe707b",
+    "candidate_source_sha256": "92a77515963e3f7fa3b03aefbc405fdd5b2fac288754b170d21f1edd0d934867",
+    "deployed_source_matches_current_project": true,
+    "activation_attempts": {
+      "seed-start": 1,
+      "checkpoint-v2": 1,
+      "bad-release": 1,
+      "rollback-v2": 1
+    },
+    "lost_activation_ack_reconciled": true,
+    "pre_examiner_probe_post_attempts": 2,
+    "one_preexisting_seed_post_one_native_post": true,
+    "record_ack_lost_reconciled": true,
+    "bad_release_agent_observed_health_200_ready_503": true,
+    "rollback_image_matches_initial_candidate": true,
+    "crash_lifecycle": [
+      {
+        "action": "die",
+        "time": 1794597210,
+        "exit_code": "42"
+      },
+      {
+        "action": "start",
+        "time": 1794597211,
+        "exit_code": null
+      }
+    ],
+    "restart_count": 1,
+    "final_readiness_http": 200,
+    "database_integrity": "ok",
+    "synthetic_rows": [
+      {
+        "id": 1,
+        "request_id": "seed-row",
+        "label": "Existing synthetic row",
+        "qty": 7
+      },
+      {
+        "id": 2,
+        "request_id": "session-record",
+        "label": "Session proof",
+        "qty": 11
+      }
+    ],
+    "checkpoint_preserved": true,
+    "native_report_review": "Claims match actual operations and artifacts; explicitly limits claims to isolated staging, no independent grading claim or OS reboot."
+  },
+  "additional_live_http_probes": {
+    "replay_http": 200,
+    "replay_original_id": 2,
+    "replayed": true,
+    "conflict_http": 409,
+    "conflict_error": "idempotency_conflict",
+    "rows_unchanged": true,
+    "integrity": "ok",
+    "agent_grade_post_attempts": 2,
+    "after_examiner_probes_post_attempts": 4,
+    "two_extra_posts_by_examiner": true,
+    "passed": true
+  },
+  "harness_review": {
+    "opencode_review_completed": true,
+    "findings": [
+      "Operation counters include attempts, even rejected no-effect attempts; strict one-call rules disclosed, not general retry semantics.",
+      "Exactly one Docker restart grades the injected controlled crash, not arbitrary external OOM/reboot.",
+      "Controller rejection reasons remain intentionally generic; debugging detail is limited.",
+      "Agent regression tests at project root were absent from tests-folder discovery; grader now runs them explicitly and requires additional regressions.",
+      "Same-session continuation can progress to TURN B when checkpoint is complete; grade that stage without re-executing mutations."
+    ],
+    "privacy_hardening_after_run": {
+      "change": "Reusable fault-event serializer exports only die/restart/start, integer timestamp and bounded numeric exit code; excludes Docker exec action strings containing argv. Applied to actual captured evidence for exported report. Closed lab was not redeployed.",
+      "local_tests_passed": 3
+    }
+  },
+  "cleanup": {
+    "closed": true,
+    "owned_containers_removed": 4,
+    "remaining_lab_containers": 0,
+    "remaining_lab_volumes": 0,
+    "official_base_image_preserved": true
+  },
+  "limits": [
+    "One controlled staged workload; not a benchmark or certification across arbitrary engineering tasks.",
+    "ACK loss deliberately injected after real commit/activation; not a physical network outage.",
+    "No host reboot, power-loss, real multi-tenant load, GPU/Windows deployment or arbitrary production rollout tested.",
+    "Native agent is supervised for scope, supplied fixtures, safe bridge and acceptance criteria; there is no automatic model training.",
+    "Backend guidance improves receipt selection but cannot mechanically establish relevance or truth of arbitrary tool payloads.",
+    "The stopped lab is gone after evidence export; repository fixtures and private proof remain available."
+  ],
+  "artifact_sha256": {
+    "backend/planner/agent-controller.cjs": "1ae02e7540f0cb2482d10a1915db5faca3c1a49f26e18b988e196234fd58b0f5",
+    "tests/level4-evidence.test.cjs": "dff49beee7376147bee13cc4b53538961bdc9d986c597c6ec726fda5e794567f",
+    "scripts/activate-level4-evidence.py": "25e9f5083b23388c82fa2ae34b5c0e40e72eddb1e4ff39f6e684db01c5a26bae",
+    "scripts/level4-agent-exam.py": "135412a25a12039a15a32e70d31a885f0ccf68d02a85a33a90d8a41bb6c391c3",
+    "scripts/level4-lab/app.py": "08fa140b61704c50514dc8b1a93035b6d786fe2ace2d1fbb19eed9d82667e0c7",
+    "scripts/level4-lab/client.py": "15e69782c97eb9c4759dbeaecadbba4f841bfa1ecaece001f1cadae4e5265198",
+    "scripts/level4-lab/controller.py": "5ab9405390d202a426ca9e24bb5d819872fca7dc2c745fdb052981707535f368",
+    "scripts/level4-lab/storage-broken.py": "b1c463676d07d1a407eb961f4bcc80c5d8567bc0511d766ac55baadfa17b5806",
+    "scripts/level4-lab/storage-good.py": "ace22c5238a27e60c68a0c355a0b3494658f16ea29b93f002454d4f38298aa12",
+    "tests/test_level4_mechanics.py": "3cc50837bedc5a43e02cd666972915c778b9dd850a135559b64e8a789131d2a1"
+  },
+  "private_evidence_root": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-level4-6jb19ly6",
+  "public_health": {
+    "http_status": 200,
+    "checked_at": "2026-11-13T19:12:51.468412+00:00"
+  }
+}

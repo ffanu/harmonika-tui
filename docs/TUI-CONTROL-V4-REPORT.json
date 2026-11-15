@@ -1,0 +1,70 @@
+{
+  "version": "2026.11.12.4",
+  "status": "active_verified",
+  "root_cause": {
+    "component": "TUI plugin setup on home without active session",
+    "technical_error": "undefined is not an object (evaluating 'snapshot.observed')",
+    "cause": "Both missing session IDs compared equal before an undefined snapshot was dereferenced.",
+    "fix": "Require a snapshot object before selecting server session metadata."
+  },
+  "tests": {
+    "node_passed": 22,
+    "python_passed": 96,
+    "native_passed": 24,
+    "failed": 0,
+    "home_plugins_menu": "TUI control and server runtime listed; disable action available; no failed entry.",
+    "expanded_regression_coverage": [
+      "Home with no active session",
+      "Native /plugins inventory",
+      "F8/F9/F10 on home and existing session",
+      "Narrow and wide layouts",
+      "Existing retry classification and budget"
+    ]
+  },
+  "package": {
+    "verified": true,
+    "api": "harmonika-tui-plugin-v2",
+    "version": "2026.11.12.4",
+    "file_count": 8,
+    "total_bytes": 80480,
+    "binary_included": false,
+    "manifest_name": "plugin-release.json",
+    "package_size": 28519,
+    "package_sha256": "3dd14c766ec6c5e7b15bc6872ccf8fdda3d4b5faa3d3f3bed603d51608af0929",
+    "files": [
+      "README.md",
+      "helper/tui_config_audit.py",
+      "helper/tui_control.py",
+      "model.mjs",
+      "package.json",
+      "retry.mjs",
+      "runtime.mjs",
+      "tui.tsx"
+    ]
+  },
+  "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+  "implementation": "Codex",
+  "user_processes_signalled": false,
+  "git_commit_or_push": false,
+  "limitations": [
+    "Physical macOS validation only; Windows/Linux not physically tested.",
+    "No production model inference was required."
+  ],
+  "activated_at": "2026-11-12T15:16:51.169296+00:00",
+  "activation": {
+    "backup_id": "20261112T151601874931Z",
+    "post_install": {
+      "ok": true,
+      "version": "2026.11.12.4",
+      "server_failed_plugins": 0,
+      "runtime_active": true,
+      "installed_home_plugins_menu_passed": true,
+      "installed_native_checks": 9,
+      "owner_settings_preserved": true,
+      "native_binary_unchanged": true,
+      "user_processes_signalled": false,
+      "production_model_inference_calls": 0
+    },
+    "existing_tui_processes": "Open a new native TUI if the previous failed setup remains displayed; no user process was stopped."
+  }
+}

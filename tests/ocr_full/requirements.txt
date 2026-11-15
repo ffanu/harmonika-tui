@@ -1,0 +1,4 @@
+# Fixtures only; reuse the already-installed owner document runtime when available.
+Pillow
+reportlab
+pypdf

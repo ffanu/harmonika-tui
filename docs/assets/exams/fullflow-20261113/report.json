@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "alpha initial list",
+      "passed": true
+    },
+    {
+      "name": "browser create persists on refresh",
+      "passed": true
+    },
+    {
+      "name": "browser toggle",
+      "passed": true
+    },
+    {
+      "name": "bodyless delete UI",
+      "passed": true
+    },
+    {
+      "name": "no error after delete",
+      "passed": true
+    },
+    {
+      "name": "switch tenant isolation",
+      "passed": true
+    },
+    {
+      "name": "title rendered as text",
+      "passed": true
+    },
+    {
+      "name": "independent browser sessions",
+      "passed": true
+    },
+    {
+      "name": "browser data survives server restart",
+      "passed": true
+    },
+    {
+      "name": "mobile no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile composer controls visible",
+      "passed": true
+    },
+    {
+      "name": "no page errors",
+      "passed": true
+    }
+  ],
+  "artifacts": [
+    "desktop.png",
+    "mobile.png"
+  ],
+  "browser_owned": true,
+  "independent": true
+}

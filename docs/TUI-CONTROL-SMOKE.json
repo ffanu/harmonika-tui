@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "checks": {
+    "ascii_home_preserved": true,
+    "engine_real_status": true,
+    "explicit_memory_save": true,
+    "native_memory_read": true,
+    "narrow_54x20": true,
+    "cancel_delete_preserves_note": true,
+    "confirmed_clear": true,
+    "memory_not_found_after_clear": true,
+    "native_tool_steps_canonical_success": true,
+    "session_panel_narrow": true,
+    "native_stop_acknowledged": true,
+    "reconnect_no_resubmission": true,
+    "native_config_audit": true,
+    "no_plugin_runtime_error": true
+  },
+  "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+  "package_sha256": "8d20feedc26f2b361ddd7927409168df2dd9312655ec359999ad369aa1b57c5d",
+  "version": "2026.11.12.2",
+  "native_loaded_via_cli_json": true,
+  "isolated_data": true,
+  "synthetic_prompts_only": true,
+  "verified_at": "2026-11-12T11:59:07.382994+00:00",
+  "physical_platform": "macOS arm64",
+  "terminal_sizes": [
+    "120x38",
+    "54x20"
+  ],
+  "f2_binding_preserved": true
+}

@@ -1,0 +1,33 @@
+def observe_running(r):
+ wid=r.get('workflow_id');owner=r.get('owner','alpha');control=r.get('control')
+ if control not in [None,'pause','cancel']:raise ValueError('invalid_control')
+ if not isinstance(wid,str) or not re.fullmatch(r'[a-f0-9]{32}',wid) or owner not in ['alpha','beta']:raise ValueError('invalid_workflow')
+ code="""import json,sqlite3,time,urllib.request,urllib.error,re,sys
+from pathlib import Path
+from contextlib import closing
+r=json.load(sys.stdin);end=time.monotonic()+10;value={'observed':False,'reason':'sample_window_expired'}
+while time.monotonic()<end:
+ if not Path('/data/faults/hold-all').exists():value={'observed':False,'reason':'hold_not_active'};break
+ with closing(sqlite3.connect('file:/data/workflows.sqlite?mode=ro',uri=True,timeout=.15)) as c:
+  c.row_factory=sqlite3.Row;row=c.execute("SELECT s.child_id FROM steps s JOIN workflows w ON w.id=s.workflow_id WHERE w.id=? AND w.owner=? AND s.name='prepare'",(r['id'],r['owner'])).fetchone()
+ if row and row['child_id'] and re.fullmatch(r'[a-f0-9]{32}',row['child_id']):
+  q=urllib.request.Request('http://127.0.0.1:18081/jobs/'+row['child_id'],headers={'X-Lab-Owner':r['owner']})
+  with urllib.request.urlopen(q,timeout=1) as response:j=json.loads(response.read(8192))['job']
+  with closing(sqlite3.connect('file:/data/sink.sqlite?mode=ro',uri=True,timeout=.15)) as c:
+   authorized=c.execute("SELECT count(*) FROM calls WHERE job_id=? AND kind='authorize' AND fence=?",(j['id'],j['fence'])).fetchone()[0];effects=c.execute('SELECT count(*) FROM effects WHERE job_id=?',(j['id'],)).fetchone()[0]
+  sampled=time.time()
+  if j['state']=='running' and j['lease_until']>sampled and authorized and effects==0:
+   value={'observed':True,'job_id':j['id'],'worker_id':j['worker_id'],'fence':j['fence'],'state':'running','lease_until':j['lease_until'],'sampled_at':sampled,'hold_active':True,'sink_effect_rows':0};break
+ time.sleep(.02)
+print(json.dumps(value))
+"""
+ cid=S['roles']['api'];B.owned(cid);p=B.run(['docker','exec','-i',cid,'python','-c',code],input=json.dumps({'id':wid,'owner':owner}));value=json.loads(p.stdout)
+ if value.get('observed'):
+  worker=value['worker_id']
+  if worker not in ['worker1','worker2','worker3']:raise ValueError('invalid_observed_worker')
+  d=inspect_role(worker);value.update(worker_running=bool(d['State']['Running']),worker_container_sha256=hashlib.sha256(d['Id'].encode()).hexdigest(),worker_restart_count=d['RestartCount'])
+  if not value['worker_running']:value.update(observed=False,reason='worker_not_alive')
+ record({'kind':'running_witness','origin':r.get('origin','agent'),'release':S['release'],'workflow_id_sha256':hashlib.sha256(wid.encode()).hexdigest(),'at':time.time(),**value})
+ if value.get('observed') and control:
+  value['control']=control;value['control_response']=http({'method':'POST','path':'/workflows/'+wid+'/'+control,'owner':owner,'body':{},'origin':r.get('origin','agent')})
+ return value

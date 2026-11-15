@@ -1,0 +1,23 @@
+{
+  "easy": {
+    "source_file": "math.js",
+    "source": "'use strict';\nexports.add=(a,b)=>a-b;\n",
+    "test_file": "math.test.js",
+    "prompt": "Perbaiki bug add pada math.js. Baca source dan test, jalankan tes awal, perbaiki tanpa mengubah assertion test, jalankan node --test sampai lulus, lalu buat HASIL.md berisi perubahan dan hasil pengujian nyata.",
+    "test": "const {test}=require('node:test');const assert=require('node:assert/strict');const {add}=require('./math');test('addition',()=>{assert.equal(add(2,3),5);assert.equal(add(-3,2),-1);assert.equal(add(0,0),0)});\n"
+  },
+  "medium": {
+    "source_file": "slug.js",
+    "source": "'use strict';\nexports.slugify=s=>s.toLowerCase().replace(/ /g,'_');\n",
+    "test_file": "slug.test.js",
+    "prompt": "Perbaiki slugify di slug.js: lowercase ASCII, hapus diakritik Unicode, satu minus untuk pemisah, tanpa minus tepi, pertahankan angka, non-string TypeError. Baca source dan test, jalankan tes awal, perbaiki tanpa mengubah assertion, uji ulang sampai lulus dan buat HASIL.md.",
+    "test": "const {test}=require('node:test');const assert=require('node:assert/strict');const {slugify}=require('./slug');\nfor(const [a,b] of [[' Harmonika AI 2026! ','harmonika-ai-2026'],['Café déjà vu','cafe-deja-vu'],['one___two -- THREE','one-two-three'],['',''],['---',''],[' 123 ','123']])test(JSON.stringify(a),()=>assert.equal(slugify(a),b));\ntest('nonstring',()=>{assert.throws(()=>slugify(null),TypeError);assert.throws(()=>slugify(42),TypeError)});\n"
+  },
+  "hard": {
+    "source_file": "csv.js",
+    "source": "'use strict';\nexports.parseCsv=s=>s.split('\\n').map(row=>row.split(','));\n",
+    "test_file": "csv.test.js",
+    "prompt": "Perbaiki parseCsv di csv.js tanpa dependency. Lolos test quoted comma/newline, escaped double quote, CRLF, empty cells/lines, input kosong, invalid/unterminated quotes SyntaxError dan non-string TypeError. Jalankan tes awal, perbaiki implementasi, tes ulang, tanpa mengubah test. Buat HASIL.md dan selesaikan tugas.",
+    "test": "const {test}=require('node:test');const assert=require('node:assert/strict');const {parseCsv}=require('./csv');\ntest('plain',()=>assert.deepEqual(parseCsv('a,b\\nc,d'),[['a','b'],['c','d']]));\ntest('quotes',()=>assert.deepEqual(parseCsv('\"a,b\",\"c\"\"d\"\\n\"x\\ny\",z'),[['a,b','c\"d'],['x\\ny','z']]));\ntest('CRLF',()=>assert.deepEqual(parseCsv('a,b\\r\\nc,d\\r\\n'),[['a','b'],['c','d']]));\ntest('empty',()=>assert.deepEqual(parseCsv(''),[]));\ntest('empty cells',()=>assert.deepEqual(parseCsv('a,,b,'),[['a','','b','']]));\ntest('empty lines',()=>assert.deepEqual(parseCsv('a\\n\\nb'),[['a'],[''],['b']]));\ntest('unterminated',()=>assert.throws(()=>parseCsv('\"a,b'),SyntaxError));\ntest('bad quotes',()=>{assert.throws(()=>parseCsv('a\"b,c'),SyntaxError);assert.throws(()=>parseCsv('\"a\"x,b'),SyntaxError)});\ntest('types',()=>assert.throws(()=>parseCsv(null),TypeError));\n"
+  }
+}

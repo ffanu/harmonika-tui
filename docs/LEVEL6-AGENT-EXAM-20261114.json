@@ -1,0 +1,386 @@
+{
+  "exam": "Harmonika native agent Level 6",
+  "date": "2026-11-14",
+  "status": "passed_scoped_lab",
+  "scope": "isolated_linux_docker",
+  "qualification": "Operator supplies immutable transport, a synthetic external-effect connector, scoped deployment bridge and independent grading. Native Harmonika implements queue source and regression tests. This is a scoped examination, not universal autonomy certification or model training.",
+  "production_business_data_changed": false,
+  "planned_acceptance": [
+    "Atomic owner-scoped idempotent queue under simultaneous HTTP clients",
+    "Separate sink commits before actual exit42; Docker restart and lookup of same job before retry",
+    "Lost effect acknowledgement reconciled without duplicate effect",
+    "Queued cancellation versus a running cancellation request",
+    "Per-owner backpressure, bounded database contention and no partial event",
+    "Real HTTP SSE framing with owner isolation and reconnect cursor",
+    "Persistent admission drain, explicit resume and same native session continuation",
+    "Checkpoint, source/image digest, artifact bytes, protected user notes and SQLite WAL integrity"
+  ],
+  "actors": {
+    "Codex": "Contract, protected lab/harness, supervision, independent grading and backend fixes when justified",
+    "Harmonika": "Native isolated project implementation, local regression, deploy, operational drills and report",
+    "OpenCode": "Read-only harness review via delegate skill",
+    "Claude": "Not involved"
+  },
+  "results": {
+    "final_grade": {
+      "phase": "v2",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "active_source_image_matches": true,
+        "isolated_linux_runtime": true,
+        "actual_readiness": true,
+        "wal_integrity_both_databases": true,
+        "native_jobs_settled_before_examiner_writes": true,
+        "checkpoint_exact_release_identity": true,
+        "checkpoint_completed": true,
+        "checkpoint_artifact_exact": true,
+        "checkpoint_replay_same_id": true,
+        "activation_each_once": true,
+        "checkpoint_hash_preserved": true,
+        "native_crash_after_commit_reconciled": true,
+        "native_exit42_auto_restart": true,
+        "native_unknown_ack_reconciled": true,
+        "native_cancel_requested_then_actual_completion": true,
+        "native_cancelled_queue_has_no_effect": true,
+        "native_observed_real_error_states": true,
+        "native_scoped_manual_restart": true,
+        "native_sse_reconnect_cursor": true,
+        "six_real_simultaneous_http_submits": true,
+        "parallel_job_completes": true,
+        "foreign_owner_get_404": true,
+        "foreign_owner_cancel_404": true,
+        "foreign_owner_artifact_404": true,
+        "anonymous_rejected": true,
+        "conflict_not_replaced": true,
+        "invalid_payload_no_acceptance": true,
+        "invalid_sse_cursor": true,
+        "real_sse_wire_cursor_owner_and_schema": true,
+        "drain_admission": true,
+        "drain_replay_accepted": true,
+        "resume_admission": true,
+        "all_effects_match_completed_states": true,
+        "all_completed_artifacts_match_independent_sink": true,
+        "effect_ids_unique": true,
+        "technical_events_no_payload": true,
+        "logs_exclude_tested_payloads": true,
+        "native_final_report_scope": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "mac_queue_tests": {
+      "passed": 16,
+      "skipped": 0
+    },
+    "linux_image_queue_tests": {
+      "passed": 16,
+      "skipped": 0
+    },
+    "unique_queue_test_cases": 16,
+    "harness_guard_tests": 8,
+    "note": "Mac and Linux execute the same16 cases, not32 unique tests. Integration checks aggregate multiple live API operations."
+  },
+  "limits": [
+    "Two fixed synthetic owner identities are fixtures, not production authentication",
+    "Synthetic report bytes, no RTX/media generation or paid external provider",
+    "Sink uses a separate SQLite transaction/database in the lab, not a real third-party service",
+    "SSE transport serves a finite event page; not a continuous live stream or browser reconnect test",
+    "No host reboot, power-loss, physical device/IME or adversarial host sandbox certification",
+    "No other user session, customer data or business service is part of the lab",
+    "Native runs use --standalone with separate XDG data/state/cache; this does not certify the user's installed plugin configuration.",
+    "Candidate code is operator-supervised synthetic code; local direct tests are not an adversarial host sandbox.",
+    "The same16 engine cases run on two platforms; test executions are not counted as32 unique cases.",
+    "Fixture privacy checks cover known synthetic payloads and event/log schema; they are not a comprehensive DLP audit of unrelated services."
+  ],
+  "turn_a": {
+    "passed": true,
+    "independent_checks": 24,
+    "mac_queue_tests": {
+      "passed": 15,
+      "skipped": 1
+    },
+    "linux_image_queue_tests": {
+      "passed": 15,
+      "skipped": 1
+    },
+    "native": {
+      "label": "turn-a",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 44,
+      "duration_seconds": 494.4
+    },
+    "native_self_detected_and_fixed": "Missing sqlite_errorcode on Mac Python initially rethrew database lock; original assertion retained and rerun passed."
+  },
+  "backend_activation": {
+    "status": "active",
+    "backup": "/var/backups/harmonika-source-reference/20261114T023151Z",
+    "candidate_sha256": {
+      "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+      "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+      "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+      "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+      "long-decision.cjs": "fd6385acbbaaded6ae3775638efef2b0b1b6b7c831d035c836dd8c38702db6dc",
+      "internal-tool-planner.js": "a2ed4a4244b2753f1193ae3d81de0d19a70229c03bb4479334fcf14e14ff897d",
+      "debug-workflow.cjs": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9"
+    },
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true
+  },
+  "backend_checks": {
+    "local_regression_tests": 138,
+    "linux_integration_tests": 47,
+    "activation_guard_tests": 7,
+    "source_transport_canaries_passed": 5,
+    "decision_canaries": {
+      "passed": true,
+      "results": [
+        {
+          "case": "sqlite_platform_lock",
+          "passed": true,
+          "checks": {
+            "http200": true,
+            "one_declared_tool": true,
+            "correct_decision": true,
+            "no_internal_state": true
+          }
+        },
+        {
+          "case": "committed_effect_unknown",
+          "passed": true,
+          "checks": {
+            "http200": true,
+            "one_declared_tool": true,
+            "correct_decision": true,
+            "no_internal_state": true
+          }
+        },
+        {
+          "case": "finite_sse_scope",
+          "passed": true,
+          "checks": {
+            "http200": true,
+            "one_declared_tool": true,
+            "correct_decision": true,
+            "no_internal_state": true
+          }
+        }
+      ],
+      "client_tools_executed": false,
+      "scope": "synthetic_decision_only"
+    }
+  },
+  "grading_runs": [
+    {
+      "file": "v1-first-result.json",
+      "phase": "v1",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "active_source_image_matches": true,
+        "isolated_linux_runtime": true,
+        "actual_readiness": true,
+        "wal_integrity_both_databases": true,
+        "checkpoint_completed": true,
+        "checkpoint_artifact_exact": true,
+        "checkpoint_replay_same_id": true,
+        "activation_each_once": true,
+        "six_real_simultaneous_http_submits": true,
+        "parallel_job_completes": true,
+        "foreign_owner_get_404": true,
+        "foreign_owner_cancel_404": true,
+        "foreign_owner_artifact_404": true,
+        "anonymous_rejected": true,
+        "conflict_not_replaced": true,
+        "invalid_payload_no_acceptance": true,
+        "invalid_sse_cursor": true,
+        "real_sse_wire_cursor_owner_and_schema": true,
+        "all_effects_match_completed_states": true,
+        "effect_ids_unique": true,
+        "technical_events_no_payload": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    {
+      "file": "v2-first-result.json",
+      "phase": "v2",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "active_source_image_matches": true,
+        "isolated_linux_runtime": true,
+        "actual_readiness": true,
+        "wal_integrity_both_databases": true,
+        "native_jobs_settled_before_examiner_writes": true,
+        "checkpoint_exact_release_identity": true,
+        "checkpoint_completed": true,
+        "checkpoint_artifact_exact": true,
+        "checkpoint_replay_same_id": true,
+        "activation_each_once": true,
+        "checkpoint_hash_preserved": true,
+        "native_crash_after_commit_reconciled": true,
+        "native_exit42_auto_restart": true,
+        "native_unknown_ack_reconciled": true,
+        "native_cancel_requested_then_actual_completion": true,
+        "native_cancelled_queue_has_no_effect": true,
+        "native_observed_real_error_states": true,
+        "native_scoped_manual_restart": true,
+        "native_sse_reconnect_cursor": true,
+        "six_real_simultaneous_http_submits": true,
+        "parallel_job_completes": true,
+        "foreign_owner_get_404": true,
+        "foreign_owner_cancel_404": true,
+        "foreign_owner_artifact_404": true,
+        "anonymous_rejected": true,
+        "conflict_not_replaced": true,
+        "invalid_payload_no_acceptance": true,
+        "invalid_sse_cursor": true,
+        "real_sse_wire_cursor_owner_and_schema": true,
+        "drain_admission": true,
+        "drain_replay_accepted": true,
+        "resume_admission": true,
+        "all_effects_match_completed_states": true,
+        "all_completed_artifacts_match_independent_sink": true,
+        "effect_ids_unique": true,
+        "technical_events_no_payload": true,
+        "logs_exclude_tested_payloads": true,
+        "native_final_report_scope": true
+      },
+      "failures": [],
+      "errors": {}
+    }
+  ],
+  "native_runs": [
+    {
+      "label": "turn-a",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 44,
+      "duration_seconds": 494.4
+    },
+    {
+      "label": "turn-b",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 75,
+      "duration_seconds": 847.9
+    }
+  ],
+  "native_session_sha256": "51e9365881db4976049ee63993a444f8d9c9458270e1f55ea6e1e5dfac8d4f63",
+  "native_tool_counts": {
+    "read": 24,
+    "shell": 73,
+    "skill": 1,
+    "write": 7,
+    "edit": 14
+  },
+  "native_tool_errors": [],
+  "metadata_paths_outside_project": [],
+  "recovery_proofs": [
+    {
+      "fault": "crash-after-effect",
+      "job_id_sha256": "fe0e2e125d7e67d9c1f3497bbe02fc53afd3a2381b5fd7728e8b9ded84d17a88",
+      "execute_calls": 1,
+      "lookup_calls": 1,
+      "lookup_after_fault": true,
+      "effect_rows": 1
+    },
+    {
+      "fault": "unknown-ack",
+      "job_id_sha256": "c5331522206c95846c4f5a3cef998dab33ff64b287db207eef32cf6c5dd17553",
+      "execute_calls": 1,
+      "lookup_calls": 1,
+      "lookup_after_fault": true,
+      "effect_rows": 1
+    }
+  ],
+  "release_digests": {
+    "queue-v1": {
+      "image_id": "sha256:d121e5fe8a18f65a9f7f7d8aa47f794996ae467150f7159ddd2fcf8f2b6a3beb",
+      "source_sha256": "56ae0849ffb8335ddbe38987f0560379ec3f93ef48dcbf1196663dcf436aeab0"
+    },
+    "queue-v2": {
+      "image_id": "sha256:a210c8685497bf7b4d9406aab284f4ada5a4e031ffae7377471677261ea7cb23",
+      "source_sha256": "1860993ffff85c9fe7cf62a73e6188da82c2db5149dfcfe9edebaf2a22d2f8b5"
+    }
+  },
+  "checkpoint_preserved": true,
+  "cleanup": {
+    "closed": true,
+    "containers_removed": 3,
+    "remaining_owned_objects": {
+      "containers": 0,
+      "images": 0,
+      "volumes": 0
+    }
+  },
+  "backend_final_health": {
+    "health": {
+      "local": {
+        "http_status": 200,
+        "json": true
+      },
+      "public": {
+        "http_status": 200,
+        "json": true
+      }
+    },
+    "services": {
+      "harmonika-ai": "active",
+      "harmonika-web-chat-live": "active",
+      "harmonika-shared-core": "active"
+    },
+    "debug_workflow_sha256": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9",
+    "passed": true
+  },
+  "review_resolution": {
+    "reviewer": "OpenCode",
+    "p0_commit_claim": "not_reproduced; fault branches are outside context manager; eight harness tests pass including real exit42 then persisted receipt lookup",
+    "accepted": [
+      "lock fault refresh at next POST to remove agent/tool timing race",
+      "resume verifies recorded checkpoint hash before native execution"
+    ],
+    "remaining_limits": [
+      "native run waits without process signals; no forced deadline",
+      "partial provisioning recovery needs operator",
+      "SSE finite page, not continuous stream",
+      "raw db-audit only synthetic private lab data",
+      "candidate is not a hostile host sandbox"
+    ],
+    "test_command": "python3 -m unittest discover -s tests -p test_level6_harness.py -v",
+    "second_review": {
+      "p0_retracted_by_reviewer": true,
+      "accepted": [
+        "Tighten every sink effect to completed job and actual matching artifact",
+        "Skip SSE comment blocks and record missing frame fields/report files as failed evidence"
+      ],
+      "not_reproduced": [
+        "Checkpoint uses original checkpoint-report key prescribed in TURN A, not a new key"
+      ],
+      "clarified": [
+        "Native must finish all requested jobs before completion; pending jobs are a legitimate failed acceptance, now explicitly checked before examiner writes"
+      ]
+    }
+  },
+  "operator_assistance": [
+    "Codex supplied immutable HTTP transport, identity fixture, synthetic effect connector, deployment bridge and independent tests.",
+    "Codex supplied TURN B contract after passed TURN A, and activated generalized SQLite/worker guidance.",
+    "OpenCode reviewed the harness; findings were checked against source and real tests.",
+    "Native self-detected the initial Mac sqlite_errorcode bug and corrected source while retaining assertions."
+  ],
+  "evidence_files": {
+    "private": "Raw native logs, source and full synthetic database snapshots remain in the private exam root; they are not copied to the repository.",
+    "report": "docs/LEVEL6-AGENT-EXAM-20261114.json"
+  }
+}

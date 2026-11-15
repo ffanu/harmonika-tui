@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-13",
+  "status": "active_872k_profile_one_million_attempt_rejected",
+  "scope": [
+    "Linux internal tool planner",
+    "Mac owner primary/Pro TUI configuration and transport guard",
+    "legacy installer primary model metadata"
+  ],
+  "context_window_tokens": 872000,
+  "auto_compact_tokens": 780000,
+  "backend_model": "gpt-6.1-sol",
+  "previous_values": {
+    "legacy_tui_context_window": 16000,
+    "codex_catalog_default_context": 500000,
+    "planner_soft_chars": 180000,
+    "owner_transport_soft_chars": 150000
+  },
+  "runtime_catalog_evidence": {
+    "context_window": 500000,
+    "max_context_window": 872000,
+    "effective_context_window_percent": 95,
+    "supports_experimental_context": false
+  },
+  "vendor_api_documentation": {
+    "advertised_model_context_tokens": 1050000,
+    "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "different_from_current_cli_runtime_ceiling": true
+  },
+  "limits": {
+    "transport_soft_chars": 2800000,
+    "payload_utf8_bytes": 8388608,
+    "message_count": 4096,
+    "tui_output_default": 4096,
+    "tokens_characters_bytes_are_distinct": true,
+    "provider_admission_remains_authoritative": true
+  },
+  "validation": {
+    "context_and_firewall_regression_tests": 21,
+    "production_long_context": {
+      "http_status": 200,
+      "exact_three_positions": true,
+      "payload_bytes": 264618,
+      "record_count": 8000,
+      "elapsed_ms": 9178,
+      "session_id": "context-e2e-62652b438da2489aa7ea2610318fd73c",
+      "tool_calls": 0
+    },
+    "fixture_records": 8000,
+    "first_middle_last_exact": true,
+    "native_live_debug_config_context": {
+      "harmonika-ai": 872000,
+      "harmonika-ai-codex": 872000
+    },
+    "native_configuration_reloaded": true,
+    "new_guard_package_selected": true,
+    "full_872k_token_load_tested": false,
+    "full_1m_token_load_tested": false,
+    "production_audit_logging": {
+      "proofs": [
+        {
+          "trace_id": "b83e1ef017821329cd6b7e2758efabc3",
+          "status": 200,
+          "complete": 1,
+          "content_saved": 1,
+          "answer_matched": true,
+          "prior_bulk_fixture_not_copied_into_sample": true
+        }
+      ]
+    },
+    "one_million_token_input_attempted": true,
+    "one_million_token_input_accepted": false,
+    "highest_isolated_verified_provider_input_tokens": 807776,
+    "effective_runtime_context_window": 828400,
+    "one_million_exam_report": "docs/CONTEXT-1M-EXAM-20261113.json"
+  },
+  "activation": {
+    "active": true,
+    "context_window_tokens": 872000,
+    "auto_compact_tokens": 780000,
+    "backend_model": "gpt-6.1-sol",
+    "old_pid": "3898983",
+    "new_pid": "3933103",
+    "backup": "/var/backups/harmonika-context-capacity/20261113T073611Z",
+    "unrelated_service_pids_unchanged": true,
+    "candidate_sha256": {
+      "internal-tool-planner.js": "87c4b7303da3c05c9d6a12ca11aa3918c90f528e31744b26224288af40bbaf00",
+      "planner-context.js": "312989491405aa87d0823656816ad4d7b00b0983532860a2c762caa1218739fa",
+      "context-capacity.cjs": "ede6f86ffde7608b4e89c1f97912b0500fba5cd963ecd378c9b4feb946397baa",
+      "context-capacity.json": "ce678338d4bc0c0c006c6c7424c29a9fc47f976e75dd0f33be9d8ffa143f625e"
+    },
+    "restart_operator_authorized": true,
+    "idle_drain_verified": true
+  },
+  "owner_activation": {
+    "owner_config_validated": true,
+    "context_window_tokens": 872000,
+    "model_output_setting_preserved_or_4096": true,
+    "ascii_brand_binary_unchanged": true,
+    "existing_sessions_not_stopped": true,
+    "backup": "/Users/id/.config/harmonika-crush/backups/context-capacity-20261113-143857",
+    "guard_package": "/Users/id/.config/harmonika-crush/context-capacity-872k",
+    "configuration_paths": [
+      "/Users/id/.config/harmonika-crush/harmonika.json",
+      "/Users/id/.config/harmonika/harmonika.json",
+      "/Users/id/.config/harmonika/crush.json"
+    ]
+  },
+  "preserved": [
+    "ASCII and brand",
+    "native binary",
+    "permissions and MCP configuration",
+    "Google Mode",
+    "media/RTX models",
+    "CS provider routing",
+    "audit retention and sample limits"
+  ],
+  "limitations": [
+    "The current CLI runtime advertises 872000 max, while model API documentation advertises 1050000. No guaranteed 1M+ backend path was established.",
+    "Uji lanjutan memverifikasi 807776 input token pada probe model terisolasi dan 500K token lokal lewat domain produksi; input 1M ditolak. Jalur CLI produksi juga memiliki batas satu pesan 1048576 karakter.",
+    "Transport character budgets are not token counts; Unicode and schema overhead can reach provider limits earlier.",
+    "A larger window is capacity, not unlimited memory or model training."
+  ]
+}

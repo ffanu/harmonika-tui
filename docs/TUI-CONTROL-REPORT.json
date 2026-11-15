@@ -1,0 +1,89 @@
+{
+  "version": "2026.11.12.2",
+  "verified_at": "2026-11-12T12:00:08.530690+00:00",
+  "status": "active_for_new_native_processes",
+  "activation": {
+    "ok": true,
+    "version": "2026.11.12.2",
+    "backup_id": "20261112T115923455766Z",
+    "native_binary_unchanged": true,
+    "user_processes_signalled": false,
+    "automatic_update": false,
+    "legacy_permissions_preserved": true,
+    "package_verified": true,
+    "status": "configured_for_native_tui",
+    "package_sha256": "8d20feedc26f2b361ddd7927409168df2dd9312655ec359999ad369aa1b57c5d",
+    "existing_settings_preserved": true
+  },
+  "installed_native_acceptance": {
+    "ok": true,
+    "actual_owner_config": true,
+    "inline_plugin_override": false,
+    "isolated_session_data": true,
+    "all_four_native_panels": true,
+    "ascii_preserved": true,
+    "plugin_runtime_errors": 0,
+    "package_sha256": "8d20feedc26f2b361ddd7927409168df2dd9312655ec359999ad369aa1b57c5d",
+    "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "installed_files_sha256": {
+      "tui.tsx": "25c2c1e822e49bce7032aa252ea6c072441f37e93fcf341f078fc6214392ccc1",
+      "model.mjs": "adc9e6bc25d4bd06d74046640e3e4e153ff27d126018b2f202768c788d89b05d",
+      "helper/tui_control.py": "51aba4cdafdddd5964b032bfb0ede01f404f538107c2babe3afe27b665c9bc11",
+      "helper/tui_config_audit.py": "232ac40b3583805293529cb2debd5adb9e3e4caa15a62964ba5e1fec624fc05a"
+    }
+  },
+  "tests": {
+    "python": 271,
+    "node": 22,
+    "total": 293,
+    "failed": 0,
+    "skipped": 0,
+    "native_pty_cases": 14,
+    "native_pty_all_passed": true,
+    "signed_real_package_activation_rollback": true
+  },
+  "features": {
+    "backend_rtx_model_status": true,
+    "native_tool_step_monitor": true,
+    "authenticated_existing_job_control": true,
+    "explicit_curated_project_memory": true,
+    "metadata_only_reconnect": true,
+    "configuration_audit": true,
+    "ed25519_verified_package_and_guarded_rollback": true
+  },
+  "preserved": {
+    "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "ascii_theme_composer_f2": true,
+    "provider_model_mcp_permission_settings": true,
+    "user_sessions_not_restarted": true,
+    "no_other_processes_signalled": true,
+    "no_raw_chat_or_secrets_in_control_logs": true
+  },
+  "observed_gateway": {
+    "backend": "online",
+    "graphics": "timeout",
+    "registry": "scanning_or_ready",
+    "registered_in_discovery_namespace": 182,
+    "not_total_available_skills": true
+  },
+  "agents": {
+    "codex": "native UI, adapter, privacy, integration, final tests, signed activation",
+    "opencode": "initial config-audit/release utilities and tests",
+    "claude": false
+  },
+  "limits": [
+    "Physical native PTY validation is macOS only; Windows/Linux were not physically tested.",
+    "Existing TUI processes retain their loaded plugin until reopened; no user process was stopped.",
+    "Remote backend jobs are tracked by explicitly supplied IDs; no global jobs listing or output scraping.",
+    "Tool steps are observed from native events after plugin load, not reconstructed from private conversation content.",
+    "RTX timed out during status probes; this release does not claim the graphics worker is online.",
+    "Native engine may schedule its own retries; the reconnect action never resubmits work or changes provider."
+  ],
+  "git_commit_or_push": false,
+  "cleanup": {
+    "own_test_ptys_closed": true,
+    "synthetic_memory_notes_removed": true,
+    "worker_delivery_preserved": true
+  },
+  "rollback_current_configuration_matches_backup": true
+}

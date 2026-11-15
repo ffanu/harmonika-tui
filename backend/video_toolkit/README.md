@@ -17,6 +17,16 @@ GPU driver, browser profile or system Python.
   `C:\Users\Kraken\harmonika-video-toolkit-source`.
 - Large model snapshots:
   `D:\HarmonikaAI\video-toolkit`.
+- Wan 1.3B can use a verified NTFS runtime cache under
+  `C:\HarmonikaVideo\model-cache\<pinned-revision>` when USB/exFAT reads stall.
+  `stage_wangp_cache.py` copies 15 pinned files (about 13.3 GB), hashes
+  each before publication and writes a receipt after all pass. Explicit
+  `--download` recovers from the existing pinned sources when the vault cannot
+  be read. It never deletes vault data or changes the existing junction.
+  The runner prefers the verified cache and rejects partial/stale inventories;
+  rendering does not download models. Include the CLIP and both VAE variants
+  checked by upstream's offline preflight, even for text-to-video. Leave at
+  least 5 GiB of disk reserve.
 - Private temporary jobs: `C:\HarmonikaVideo\jobs` (NTFS access controls).
 - Models and sources are pinned in `models.json` / `sources.json` with SHA-256.
   No automatic updates or runtime model downloads.

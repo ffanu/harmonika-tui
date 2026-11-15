@@ -1,0 +1,302 @@
+{
+  "level": 12,
+  "status": "passed_scoped_assisted_lab",
+  "phase": "complete",
+  "completed_at": "2026-11-14T20:29:42.527930+00:00",
+  "scope": "synthetic_crm_cms_real_linux_deployment_revision_and_recovery",
+  "demo_url": "https://level12-17ce5924fb.asrafijm.com",
+  "roles": {
+    "harmonika": "native candidate: domain, business HTTP dispatch, frontend, tests and typed operations",
+    "codex": "operator, independent examiner, visual review and engine fixes",
+    "opencode": "read-only contract, harness and decision-recovery reviews",
+    "claude_used": false
+  },
+  "implementation": {
+    "domain": "customers, tasks, articles, role scope, CAS revisions, stable idempotency, exact CSV and public article projection",
+    "stack": "Python stdlib, SQLite WAL, vanilla JS, offline pinned AdminLTE/Bootstrap",
+    "authentication_http_runtime": "operator-supplied immutable fixtures; not claimed as unassisted candidate work",
+    "checkpoint_sha256": "83e31ffd3e7f6cda70d0251d7febc59ec59cebfea161fd6ead896757acd1451c",
+    "baseline_release": "v1-r2",
+    "baseline_source_sha256": "78ce3601cf88e6be12637e6a65c881d6364ea4bb1c2137c6685a8d979884d8db",
+    "final_release": "v2",
+    "final_source_sha256": "51acc5119f148aa5d953a1a074641bceaa06ede059782b0a85adee6f3b6afe13",
+    "reference_and_original_tests_preserved": true
+  },
+  "verification": {
+    "baseline_independent_domain_api_cases": 11,
+    "baseline_independent_browser_checks": 25,
+    "final_independent_domain_cases_mac": 13,
+    "final_independent_http_cases_linux": 3,
+    "final_independent_combined_cases": 16,
+    "final_independent_browser_checks": 29,
+    "native_browser_viewports": [
+      360,
+      768,
+      1280
+    ],
+    "native_final_browser_checks": 23,
+    "engine_local_node_cases": 161,
+    "engine_linux_integration_cases": 90,
+    "activation_guard_cases": 7,
+    "lab_helper_cases": 22,
+    "post_activation_source_canaries": 5,
+    "all_listed_suites_passed": true,
+    "overlapping_suite_counts_not_summed": true
+  },
+  "recovery": {
+    "schema_migration": "atomic1->2; failure-after-ALTER and real writer lock tested; unknown future schemas refused",
+    "legacy_request_fingerprint_preserved": true,
+    "lock": "health200; readiness and actual mutation503 sqlite_busy; same key retry201 then replay200 same ID",
+    "port": "actual fallback32783 with health/readiness HTTPS200 while preferred port held; holder released and17881 restored",
+    "configuration": "invalid fixture detected; explicit owned restart retained data/session",
+    "backup": {
+      "closed_sqlite_online_backup": true,
+      "writer_advanced_during_drill": true,
+      "snapshot_customers": 9,
+      "live_customers_at_clone_verification": 10,
+      "inactive_clone_customers": 9,
+      "hash_and_integrity_verified": true,
+      "live_database_overwritten": false,
+      "counts_are_drill_time_not_final_totals": true
+    },
+    "code_rollback": "fresh rollback-to-v1 operation activated sealed v1-r2 on existing schema2; old common-field write worked and segment422; fresh resume-v2 restored SAME immutable V2 with common edit and VIP rows/session retained",
+    "application_logs_mechanical_without_traceback_or_sensitive_markers": true,
+    "current_app_memory_bytes": 11472896,
+    "current_edge_memory_bytes": 10440704
+  },
+  "engine_activation": {
+    "status": "active",
+    "health_http": 200,
+    "candidate_sha256": {
+      "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+      "secret-firewall.cjs": "3e1dd076b3f107b9eb20d5e57ad9970cce8376f933ad857433df78add1387ab3",
+      "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+      "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+      "long-decision.cjs": "bed65da13ac0b24e51e253189266d45f5cfce969f2c5d663b3b0d097394519cb",
+      "internal-tool-planner.js": "b890b2e51402b91d52736452c720e4416e0bed51fed9b17cd3dd48bd4da88417",
+      "debug-workflow.cjs": "f44f231fb45b164896b668ff4c9fb0065267a1c109161567897c3298603be2db",
+      "decision-recovery.cjs": "25ebb8f6be29c95f44b89e310466a9d3ca5560a3ad487714a40cc001502f6eee"
+    },
+    "backup": "/var/backups/harmonika-source-reference/20261114T202526Z",
+    "source_canaries_passed": true,
+    "canaries": [
+      {
+        "fixture": "python_input_reference",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "python_request_cookie",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "html_form_reference",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "indented_python_method",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "empty_cookie_logout",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "unrelated_service_pids_unchanged_during_final_activation": true,
+    "backend_shared_by_existing_tui_and_web_tool_planner": true,
+    "local_tui_binary_replaced_by_this_exam": false
+  },
+  "corrections": [
+    {
+      "issue": "source firewall rejection appeared as generic gateway502",
+      "fix": "approved technical policy enums preserved with400/413, without upstream prose; actual native400 observed"
+    },
+    {
+      "issue": "UI-MAP login_password CSS selector classified as credential",
+      "fix": "strict bounded flat selector metadata recognition; literal secrets/unknown sensitive keys still rejected"
+    },
+    {
+      "issue": "decision exceeded256KiB output",
+      "fix": "one bounded regeneration only with actual close+unexecuted proof; shared240s budget, no client replay/signals"
+    },
+    {
+      "issue": "later JSON-format repair lost narrowed output schema",
+      "fix": "sticky output budget across repair attempts; OpenCode reproduction and failing Codex regression corrected"
+    },
+    {
+      "issue": "Edit->Delete->Create used deleted record ID and sent PATCH404",
+      "fix": "form record/revision/request identity reset; actual browser POST201 regression passed"
+    },
+    {
+      "issue": "dashboard omitted reference panels and mobile cells were crushed",
+      "fix": "real API-backed panels, working form/filters and readable internal table scrolling"
+    },
+    {
+      "issue": "numbered reader prefix confused Python indentation in edits",
+      "fix": "native corrected source and compile/tests; global guidance now distinguishes display prefix from actual indentation"
+    },
+    {
+      "issue": "port-holder fixture failed on TIME_WAIT",
+      "fix": "own socket regression failed then passed; scoped SO_REUSEADDR added with source-hash guard; no SO_REUSEPORT or foreign listener takeover"
+    },
+    {
+      "issue": "probe assumed holder wrapper and raced restarted TLS listener",
+      "fix": "native reconciled and restored; flat receipt fields and bounded read-only HTTPS readiness retries proved held-port success in c2"
+    },
+    {
+      "issue": "screenshots captured before dashboard completed",
+      "fix": "fixture and independent grader await form, metrics, tasks/articles; earlier screenshots preserved"
+    },
+    {
+      "issue": "examiner expected308 instead of actual configured301, wrong task selector, and assumed baseline VIP instead of original General",
+      "fix": "examiner calibrated against actual contract/data, retaining failed evidence; original baseline and distinct VIP records explicitly verified"
+    },
+    {
+      "issue": "final activation script referenced its own nonexistent result as baseline",
+      "fix": "preflight stopped before remote attempt; corrected to verified active overflow release hashes"
+    }
+  ],
+  "native_runs": [
+    {
+      "label": "a",
+      "started_at": 1794681536.565374,
+      "finished_at": 1794682014.0178208,
+      "exit_code": 0,
+      "same_session": true,
+      "tool_count": 36,
+      "native_errors": 0
+    },
+    {
+      "label": "b",
+      "started_at": 1794682032.816751,
+      "finished_at": 1794682376.455306,
+      "exit_code": 1,
+      "same_session": true,
+      "tool_count": 26,
+      "native_errors": 1
+    },
+    {
+      "label": "b1",
+      "started_at": 1794682423.078156,
+      "finished_at": 1794682477.4960341,
+      "exit_code": 1,
+      "same_session": true,
+      "tool_count": 3,
+      "native_errors": 1
+    },
+    {
+      "label": "b2",
+      "started_at": 1794682803.964801,
+      "finished_at": 1794682935.631837,
+      "exit_code": 1,
+      "same_session": true,
+      "tool_count": 5,
+      "native_errors": 1
+    },
+    {
+      "label": "b3",
+      "started_at": 1794683217.60456,
+      "finished_at": 1794683378.55445,
+      "exit_code": 1,
+      "same_session": true,
+      "tool_count": 9,
+      "native_errors": 1
+    },
+    {
+      "label": "b4",
+      "started_at": 1794683778.790049,
+      "finished_at": 1794684520.3807738,
+      "exit_code": 1,
+      "same_session": true,
+      "tool_count": 41,
+      "native_errors": 1
+    },
+    {
+      "label": "b5",
+      "started_at": 1794685174.660377,
+      "finished_at": 1794685642.638336,
+      "exit_code": 0,
+      "same_session": true,
+      "tool_count": 33,
+      "native_errors": 0
+    },
+    {
+      "label": "b6",
+      "started_at": 1794685649.435286,
+      "finished_at": 1794685997.502908,
+      "exit_code": 0,
+      "same_session": true,
+      "tool_count": 23,
+      "native_errors": 0
+    },
+    {
+      "label": "c",
+      "started_at": 1794686077.25471,
+      "finished_at": 1794687334.51454,
+      "exit_code": 0,
+      "same_session": true,
+      "tool_count": 63,
+      "native_errors": 0
+    },
+    {
+      "label": "c1",
+      "started_at": 1794687378.0204349,
+      "finished_at": 1794687645.7573729,
+      "exit_code": 0,
+      "same_session": true,
+      "tool_count": 13,
+      "native_errors": 0
+    },
+    {
+      "label": "c2",
+      "started_at": 1794687670.116353,
+      "finished_at": 1794687835.634476,
+      "exit_code": 0,
+      "same_session": true,
+      "tool_count": 7,
+      "native_errors": 0
+    }
+  ],
+  "boundaries": {
+    "dedicated_host_only_for_app_and_faults": true,
+    "dns_zone": "asrafijm.com",
+    "owned_dns_records_created": 1,
+    "existing_business_customer_data_used": false,
+    "billing_cs_provider_routing_changed": false,
+    "bgp_core_vyos_jkt_touched": false,
+    "host_ssh_firewall_routes_changed": false,
+    "central_harmonika_engine_and_gateway_code_updated_by_codex": true,
+    "native_production_changed_false_excludes_separate_operator_engine_updates": true,
+    "no_claude_invoked": true,
+    "git_commit_or_push_performed": false
+  },
+  "artifacts": {
+    "desktop_screenshot": "docs/assets/exams/level12/dashboard-1280.png",
+    "mobile_screenshot": "docs/assets/exams/level12/dashboard-360.png",
+    "application_source": "immutable releases on dedicated exam host; private local exam workspace retained",
+    "demo_access": "encrypted infrastructure vault: saved/harmonika-linux-exam -> level12_demo; credential values omitted",
+    "detailed_receipts": "private isolated exam workspace; native failures and c1 archive retained"
+  },
+  "limitations": [
+    "trusted scoped operator and supplied auth/HTTP runtime; not an unassisted or adversarial OS sandbox assessment",
+    "not model-weight training, enterprise CRM/IAM certification or a universal numerical autonomy rating",
+    "physical mobile IME, multi-host failover and actual host reboot were not tested",
+    "demo contains synthetic test records; not attached to billing, customer service or RTX",
+    "old pre-existing systemd-networkd-wait-online failure was outside the exam and not repaired",
+    "application remains for review; no automatic cleanup scheduled"
+  ]
+}

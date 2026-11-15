@@ -11,11 +11,14 @@ const path = require('node:path');
 const os = require('node:os');
 const net = require('node:net');
 const dns = require('node:dns').promises;
+const {execFile}=require('node:child_process');
+const execute=require('node:util').promisify(execFile);
 
 const MATRIX = [
   { name: 'desktop-1440', width: 1440, height: 900, mobile: false, locale: 'en-US', scheme: 'light' },
   { name: 'desktop-dark-1280', width: 1280, height: 800, mobile: false, locale: 'id-ID', scheme: 'dark' },
   { name: 'tablet-834', width: 834, height: 1112, mobile: true, locale: 'en-US', scheme: 'light' },
+  { name: 'tablet-768', width: 768, height: 1024, mobile: true, locale: 'id-ID', scheme: 'light' },
   { name: 'mobile-390', width: 390, height: 844, mobile: true, locale: 'id-ID', scheme: 'light' },
   { name: 'mobile-small-360', width: 360, height: 640, mobile: true, locale: 'id-ID', scheme: 'dark' },
 ];
@@ -35,6 +38,11 @@ function privateIP(raw) {
 
 function isLocal(host) {
   return ['localhost', '127.0.0.1', '[::1]', '::1'].includes(host.toLowerCase());
+}
+
+function reportURL(value) {
+  try { const url=new URL(value);return url.origin+url.pathname; }
+  catch { return 'invalid_url'; }
 }
 
 async function validateURL(value, allowLocal, lookup = dns.lookup) {
@@ -82,8 +90,8 @@ function argumentsFor(argv) {
   const result = {};
   for (let i = 0; i < argv.length; i += 2) {
     const key = argv[i];
-    if (!['--url', '--out'].includes(key) || !argv[i + 1] || result[key]) {
-      throw new Error('Usage: qa_matrix.cjs --url URL --out ABSOLUTE_EMPTY_DIRECTORY');
+    if (!['--url', '--out', '--frames'].includes(key) || !argv[i + 1] || result[key]) {
+      throw new Error('Usage: qa_matrix.cjs --url URL --out ABSOLUTE_EMPTY_DIRECTORY [--frames JSON]');
     }
     result[key] = argv[i + 1];
   }
@@ -91,13 +99,51 @@ function argumentsFor(argv) {
   return result;
 }
 
+function framesFor(raw) {
+  if (raw === undefined) return MATRIX;
+  if (typeof raw !== 'string' || Buffer.byteLength(raw) > 12000) throw Error('invalid_capture_frames');
+  let frames;try { frames=JSON.parse(raw); } catch { throw Error('invalid_capture_frames'); }
+  if (!Array.isArray(frames) || frames.length < 1 || frames.length > 8) throw Error('invalid_capture_frames');
+  const names=new Set();
+  return frames.map((frame) => {
+    if (!frame || typeof frame !== 'object' || Array.isArray(frame) ||
+        !/^[a-zA-Z0-9_-]{1,40}$/.test(frame.name || '') || names.has(frame.name) ||
+        !Number.isInteger(frame.width) || frame.width<320 || frame.width>4096 ||
+        !Number.isInteger(frame.height) || frame.height<320 || frame.height>16384 ||
+        frame.width*frame.height>16777216 ||
+        (frame.fit!==undefined && typeof frame.fit!=='boolean') ||
+        !Array.isArray(frame.requiredSelectors) || frame.requiredSelectors.length>30 ||
+        frame.requiredSelectors.some(s=>typeof s!=='string'||!s.length||s.length>160)) throw Error('invalid_capture_frames');
+    names.add(frame.name);
+    return {name:frame.name,width:frame.width,height:frame.height,mobile:frame.width<900,
+      locale:'id-ID',scheme:'light',captureFrame:true,fit:frame.fit===true,requiredSelectors:frame.requiredSelectors};
+  });
+}
+
+function browserConfig() {
+  const file='/etc/harmonika-ai/mockup-browser.json';
+  if(process.platform!=='linux'||!fs.existsSync(file))return {};
+  if(fs.statSync(file).size>4096)throw Error('invalid_browser_config');
+  const value=JSON.parse(fs.readFileSync(file,'utf8'));
+  if(!value||typeof value!=='object'||Array.isArray(value))throw Error('invalid_browser_config');
+  return value;
+}
+
 function loadPlaywright() {
   const override = process.env.HARMONIKA_PLAYWRIGHT_MODULE;
   if (override && !path.isAbsolute(override)) {
     throw new Error('HARMONIKA_PLAYWRIGHT_MODULE must be an absolute trusted module path');
   }
+  const configured=browserConfig().modulePath;
+  if(configured){
+    if(typeof configured!=='string'||!path.isAbsolute(configured))throw Error('invalid_browser_module');
+    const module=require(configured);
+    if(!module.chromium||typeof module.chromium.launch!=='function')throw Error('invalid_browser_module');
+    return module;
+  }
   const candidates = [override, 'playwright',
-    path.join(os.homedir(), '.config/harmonika-terminal/browser-runtime/node_modules/playwright')]
+    path.join(os.homedir(), '.config/harmonika-terminal/browser-runtime/node_modules/playwright'),
+    '/opt/harmonika-ai/seo-shared/browser/node_modules/playwright']
     .filter(Boolean);
   for (const candidate of candidates) {
     try {
@@ -108,11 +154,52 @@ function loadPlaywright() {
   throw new Error('Unsupported: Playwright runtime missing. Install it explicitly in the project.');
 }
 
-const PAGE_AUDIT = () => {
+function browserOptions() {
+  let executable=process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
+  if(!executable)executable=browserConfig().executablePath;
+  if(executable && (typeof executable!=='string'||!path.isAbsolute(executable)||!fs.existsSync(executable)||!fs.statSync(executable).isFile()))throw Error('invalid_browser_executable');
+  return {headless:true,timeout:20000,...(executable?{executablePath:executable}:{}),
+    ...(process.platform==='linux'?{args:['--disable-gpu','--disable-dev-shm-usage']}:{})};
+}
+
+async function capturePNG(page, device, audit, shot) {
+  const method=browserConfig().captureMethod || 'screenshot';
+  if(method==='screenshot'){
+    await page.screenshot({path:shot,fullPage:!device.captureFrame,timeout:15000});
+    return 'chromium-screenshot';
+  }
+  if(method!=='pdf-raster'||process.platform!=='linux')throw Error('unsupported_capture_method');
+  // Full-page exports allow a small paper-rounding gutter; fixed contracts remain exact.
+  const height=device.captureFrame?device.height:Math.ceil(Math.max(device.height,audit.documentHeight))+4;
+  const dpr=device.captureFrame?1:device.mobile?2:1;
+  if(height>16384||device.width*height*dpr*dpr>67108864)throw Error('capture_dimensions_exceeded');
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'harmonika-mockup-raster-'));fs.chmodSync(temporary,0o700);
+  try{
+    await page.emulateMedia({media:'screen'});
+    await page.addStyleTag({content:'*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}'});
+    const pdf=await page.pdf({width:device.width+'px',height:height+'px',printBackground:true,
+      margin:{top:0,right:0,bottom:0,left:0},preferCSSPageSize:false,scale:1,timeout:15000});
+    if(pdf.length>64*1024*1024)throw Error('capture_result_too_large');
+    const file=path.join(temporary,'frame.pdf');fs.writeFileSync(file,pdf,{mode:0o600});
+    const info=await execute('/usr/bin/pdfinfo',[file],{timeout:15000,maxBuffer:65536});
+    if(!/^Pages:\s+1\s*$/m.test(info.stdout))throw Error('pdf_capture_pagination_mismatch');
+    const prefix=path.join(temporary,'frame');
+    await execute('/usr/bin/pdftoppm',['-singlefile','-f','1','-png','-r',String(96*dpr),
+      '-scale-to-x',String(device.width*dpr),'-scale-to-y',String(height*dpr),file,prefix],{timeout:15000,maxBuffer:65536});
+    fs.copyFileSync(prefix+'.png',shot,fs.constants.COPYFILE_EXCL);fs.chmodSync(shot,0o600);
+    return 'chromium-screen-pdf-raster';
+  }finally{fs.rmSync(temporary,{recursive:true,force:true})}
+}
+
+const PAGE_AUDIT = (options = {}) => {
   const doc = document.scrollingElement || document.documentElement;
   const vw = window.innerWidth;
   const style = (el) => getComputedStyle(el);
   const rect = (el) => el.getBoundingClientRect();
+  const visible = (el) => {
+    const box=rect(el), computed=style(el);
+    return box.width>0 && box.height>0 && computed.visibility!=='hidden' && computed.display!=='none';
+  };
   const parseColor = (value) => {
     const match = value.match(/rgba?\(([^)]+)\)/);
     if (!match) return null;
@@ -148,6 +235,10 @@ const PAGE_AUDIT = () => {
   const wideElements = Array.from(document.querySelectorAll('body *')).filter((el) => {
     const box = rect(el);
     if (!box.width || box.right <= vw + 1) return false;
+    for(let parent=el.parentElement;parent;parent=parent.parentElement){
+      const s=style(parent),r=rect(parent);
+      if(/^(auto|scroll)$/.test(s.overflowX)&&parent.scrollWidth>parent.clientWidth&&r.left>=0&&r.right<=vw+1)return false;
+    }
     const position = style(el).position;
     return position !== 'fixed' && position !== 'sticky';
   });
@@ -164,6 +255,7 @@ const PAGE_AUDIT = () => {
     return !(el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.title);
   });
   const textNodes = Array.from(document.querySelectorAll('body *')).filter((el) => {
+    if (!visible(el)) return false;
     if (!el.textContent || !el.textContent.trim()) return false;
     const hasElementChild = Array.from(el.childNodes).some((n) => n.nodeType === 1);
     return !hasElementChild;
@@ -186,6 +278,16 @@ const PAGE_AUDIT = () => {
   }
   const ids = Array.from(document.querySelectorAll('[id]')).map((el) => el.id);
   const duplicates = Array.from(new Set(ids.filter((id, index) => ids.indexOf(id) !== index)));
+  const splitLabels=[];
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let textNode,scanned=0;
+  while((textNode=walker.nextNode())&&scanned++<1500){
+    const el=textNode.parentElement,word=textNode.textContent.trim();
+    if(!el||!visible(el)||!el.closest('nav,button,label,th,.bar,[data-chart-label]')||!/^\p{L}{3,24}$/u.test(word))continue;
+    const range=document.createRange();range.selectNodeContents(textNode);
+    const lines=new Set(Array.from(range.getClientRects()).filter(r=>r.width>0&&r.height>0).map(r=>Math.round(r.top)));
+    if(lines.size>1&&splitLabels.length<20)splitLabels.push({tag:el.tagName.toLowerCase(),lines:lines.size,characters:word.length});
+  }
   return {
     viewportWidth: vw,
     horizontalOverflowPx: overflowPx,
@@ -197,7 +299,27 @@ const PAGE_AUDIT = () => {
     lowContrast: lowContrast,
     tinyText: Array.from(new Set(tinyText)),
     duplicateIds: duplicates.slice(0, 8),
+    splitLabels,
+    h1Count: document.querySelectorAll('h1').length,
     headingCount: document.querySelectorAll('h1').length,
+    documentHeight: Math.max(doc.scrollHeight, document.body.scrollHeight),
+    viewportHeight: window.innerHeight,
+    requiredRegions: (options.requiredSelectors || []).map((selector) => {
+      let elements;try { elements=Array.from(document.querySelectorAll(selector)); }
+      catch { return {selector,count:0,insideFrame:false,error:'invalid_selector'}; }
+      const inside=elements.map(el=>{
+        const box=rect(el);
+        if(!visible(el)||box.left<-.5||box.top<-.5||box.right>vw+.5||box.bottom>innerHeight+.5)return false;
+        // Ancestor clipping can hide a region even while its own DOM box fits the frame.
+        for(let parent=el.parentElement;parent;parent=parent.parentElement){
+          const s=style(parent),r=rect(parent);
+          if(/^(hidden|clip|auto|scroll)$/.test(s.overflowX)&&(box.left<r.left-.5||box.right>r.right+.5))return false;
+          if(/^(hidden|clip|auto|scroll)$/.test(s.overflowY)&&(box.top<r.top-.5||box.bottom>r.bottom+.5))return false;
+        }
+        return true;
+      });
+      return {selector,count:elements.length,insideFrame:elements.length>0&&inside.every(Boolean)};
+    }),
     hasViewportMeta: !!document.querySelector('meta[name="viewport"]'),
     htmlLang: document.documentElement.getAttribute('lang') || '',
     title: document.title || '',
@@ -225,6 +347,14 @@ function checksFor(device, audit) {
   add('text-contrast', audit.lowContrast.length === 0,
     audit.lowContrast.length ? JSON.stringify(audit.lowContrast.slice(0, 5)) : null);
   add('readable-text-size', audit.tinyText.length === 0, audit.tinyText.join(', ') || null);
+  add('no-split-ui-labels', (audit.splitLabels || []).length===0,
+    audit.splitLabels?.length ? 'wrapped single-word control/chart labels='+audit.splitLabels.length : null);
+  if (device.captureFrame) {
+    if (device.fit) add('frame-content-fits',audit.documentHeight<=device.height+1,
+      'document='+audit.documentHeight+'px frame='+device.height+'px');
+    for(const region of audit.requiredRegions || []) add('frame-region:'+region.selector,
+      region.insideFrame,'matched='+region.count);
+  }
   if (device.mobile) {
     add('tap-target>=24px', audit.smallTapTargets === 0,
       audit.smallTapTargets ? audit.smallTapTargets + ' targets under 24px' : null);
@@ -234,13 +364,14 @@ function checksFor(device, audit) {
 
 async function main(argv) {
   const args = argumentsFor(argv);
+  const devices = framesFor(args['--frames']);
   const target = await validateURL(args['--url'], true);
   const allowLocal = isLocal(target.hostname);
   const out = safeOut(args['--out']);
   const playwright = loadPlaywright();
   fs.mkdirSync(out, { recursive: true });
   const report = {
-    url: target.href,
+    url: reportURL(target.href),
     engine: 'harmonika-qa-matrix',
     mode: 'emulated-devices-only',
     devices: [],
@@ -248,17 +379,20 @@ async function main(argv) {
       'Emulated Chromium only; no physical devices, Safari or Firefox were exercised.',
       'Automated checks cover layout and common a11y signals, not full WCAG conformance.',
       'No credentials are submitted; authenticated areas require a supplied session.',
+      ...(browserConfig().captureMethod==='pdf-raster'?['Images are Chromium screen-media PDF raster exports, not compositor screenshots. Inspect pixels; print fragmentation and dynamic surfaces may differ.']:[]),
     ],
   };
   let browser;
   try {
-    browser = await playwright.chromium.launch({ headless: true });
-    for (const device of MATRIX) {
+    browser = await playwright.chromium.launch(browserOptions());
+    report.browserVersion=browser.version();
+    for (const device of devices) {
       const context = await browser.newContext({
         viewport: { width: device.width, height: device.height },
-        isMobile: device.mobile,
+        // Fixed raster frames must not auto-shrink an over-wide mobile layout.
+        isMobile: device.captureFrame ? false : device.mobile,
         hasTouch: device.mobile,
-        deviceScaleFactor: device.mobile ? 2 : 1,
+        deviceScaleFactor: device.captureFrame ? 1 : device.mobile ? 2 : 1,
         locale: device.locale,
         colorScheme: device.scheme,
         serviceWorkers: 'block',
@@ -274,27 +408,36 @@ async function main(argv) {
           await validateURL(target, allowLocal);
           return route.continue();
         } catch (error) {
-          record.requestFailures.push({ url: route.request().url(), error: error.message });
+          record.requestFailures.push({ url: reportURL(route.request().url()), error: 'request_blocked' });
           return route.abort('blockedbyclient');
         }
       });
       const page = await context.newPage();
+      page.on('requestfailed', request => record.requestFailures.push({url:reportURL(request.url()),error:'request_failed'}));
       page.on('console', (msg) => { if (msg.type() === 'error') record.consoleErrors.push(msg.text().slice(0, 300)); });
       page.on('pageerror', (error) => record.consoleErrors.push('pageerror: ' + error.message.slice(0, 300)));
       try {
         const response = await page.goto(target.href, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.evaluate(() => document.fonts.ready);
         record.status = response ? response.status() : null;
-        const audit = await page.evaluate(PAGE_AUDIT);
+        const audit = await page.evaluate(PAGE_AUDIT,{requiredSelectors:device.requiredSelectors || []});
         record.audit = audit;
         record.checks = checksFor(device, audit);
         const shot = path.join(out, 'shot-' + device.name + '.png');
-        await page.screenshot({ path: shot, fullPage: true });
+        record.captureMethod=await capturePNG(page,device,audit,shot);
         record.screenshot = shot;
+        const png=fs.readFileSync(shot);
+        record.image={width:png.readUInt32BE(16),height:png.readUInt32BE(20)};
+        if(device.captureFrame)record.checks.push({id:'capture-pixels-exact',ok:record.image.width===device.width&&record.image.height===device.height});
       } catch (error) {
         record.error = error.message.slice(0, 300);
-        record.checks = [{ id: 'page-load', ok: false, detail: record.error }];
+        if(record.checks)record.checks.push({id:'capture-export',ok:false,detail:record.error});
+        else record.checks = [{ id: 'page-load', ok: false, detail: record.error }];
       }
       await context.close();
+      record.checks.push({id:'http-success',ok:record.status>=200&&record.status<400});
+      record.checks.push({id:'no-browser-errors',ok:record.consoleErrors.length===0});
+      record.checks.push({id:'no-request-failures',ok:record.requestFailures.length===0});
       record.failed = record.checks.filter((check) => !check.ok).map((check) => check.id);
       report.devices.push(record);
     }
@@ -319,10 +462,12 @@ async function main(argv) {
     devices: report.devices.length,
     devicesWithFailures: report.devicesWithFailures,
     checkTotals: totals,
+    captureMethods:Array.from(new Set(report.devices.map(d=>d.captureMethod).filter(Boolean))),
   }));
 }
 
-main(process.argv.slice(2)).catch((error) => {
+module.exports={MATRIX,framesFor,checksFor,PAGE_AUDIT,argumentsFor,validateURL,safeOut,browserOptions};
+if(require.main===module)main(process.argv.slice(2)).catch((error) => {
   process.stderr.write(JSON.stringify({ ok: false, error: error.message.slice(0, 300) }));
   process.exitCode = 1;
 });

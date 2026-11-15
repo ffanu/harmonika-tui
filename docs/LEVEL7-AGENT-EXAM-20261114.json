@@ -1,0 +1,976 @@
+{
+  "exam": "Harmonika native agent Level 7",
+  "date": "2026-11-14",
+  "status": "passed_scoped_lab",
+  "scope": "isolated_linux_multiworker",
+  "qualification": "Native Harmonika upgrades its Level6 queue. Operator supplies protected transports, a fenced idempotent effect service, scoped cluster controller and independent grading. This is not universal autonomy certification or model training.",
+  "production_business_data_changed": false,
+  "architecture": {
+    "api_containers": 1,
+    "worker_containers": 3,
+    "effect_service_containers": 1,
+    "effect_transport": "private HTTP over Unix socket across containers",
+    "runtime": "non-root, network none, readonly rootfs, private volume, CPU/RAM/PID limits"
+  },
+  "planned_acceptance": [
+    "100 barrier-synchronized requests,20 keys, two owners, global bounded admission and idempotency",
+    "Expired lease with old worker still alive; higher-fence takeover and rejection of late stale writes",
+    "Separate effect commit, real HTTP ACK loss, target-bound transient lookup failures and worker exit42 restart",
+    "Corrupt receipt and effect-service outage without false success or new submit",
+    "Lost submit ACK reconciled by same owner/request identity without repeated POST",
+    "Continuous chunked HTTP SSE opened before later writes, forced midframe loss, accepted cursor reconnect and owner isolation",
+    "Online WAL snapshot under actual writer lock, verified isolated clone and non-overwriting publication",
+    "Code rollback and restoration without rolling back authoritative DB/sink",
+    "Same native session, preserved checkpoint/user edits/source-image hashes and synthetic private evidence"
+  ],
+  "actors": {
+    "Codex": "Lab/harness, supervision, independent grading and backend fixes when justified",
+    "Harmonika": "Native implementation, regressions, deploy, fault diagnosis and evidence report",
+    "OpenCode": "Read-only review through delegate skill",
+    "Claude": "Not involved"
+  },
+  "results": {
+    "final_grade": {
+      "phase": "v2",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "five_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "deployed_source_and_all_role_images_match": true,
+        "actual_api_and_sink_readiness": true,
+        "both_databases_wal_integrity": true,
+        "native_accepted_work_settled": true,
+        "actual_100_barrier_requests": true,
+        "admission_bounded_and_duplicates_converged": true,
+        "burst_jobs_have_one_effect_each": true,
+        "all_effects_belong_to_completed_jobs": true,
+        "activation_each_once": true,
+        "checkpoint_identity_preserved": true,
+        "checkpoint_exact_artifact_bytes": true,
+        "checkpoint_replay_same_job": true,
+        "foreign_request_lookup_404": true,
+        "foreign_job_get_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "technical_events_no_payload": true,
+        "owner_isolated_event_cursor": true,
+        "checkpoint_hash_unchanged": true,
+        "fault_drills_match_current_core_sources": true,
+        "late_live_worker_rejected_by_sink_fence": true,
+        "old_worker_observed_running_during_drill": true,
+        "unknown_ack_same_job_no_execute_replay": true,
+        "two_real_lookup503_bound_to_target": true,
+        "crash_after_external_commit_reconciled": true,
+        "actual_worker_exit42_and_restart": true,
+        "bad_receipt_reconciled_from_sink": true,
+        "offline_observed_without_false_completion": true,
+        "lost_submit_reconciled_without_another_post": true,
+        "native_stream_passed_current_source": true,
+        "native_backup-drill_passed_current_source": true,
+        "actual_code_rollback_and_restore": true,
+        "native_report_matches_scope": true,
+        "independent_stream": true,
+        "independent_backup-drill": true,
+        "all_actual_artifacts_match_separate_sink": true,
+        "tested_payloads_absent_from_role_logs": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "mac_engine_tests": {
+      "passed": 21,
+      "skipped": 0
+    },
+    "linux_image_engine_tests": {
+      "passed": 21,
+      "skipped": 0
+    },
+    "unique_engine_test_cases": 21,
+    "completed_jobs": 51,
+    "effect_rows": 51,
+    "harness_guard_tests": 19,
+    "note": "Mac and Linux run the same21 cases, not42 unique tests.100 HTTP requests are not100 completed jobs."
+  },
+  "limits": [
+    "Synthetic fixed owners are not production IAM",
+    "Effect service supports idempotency and fencing; this does not prove exactly-once behavior for arbitrary external vendors",
+    "Unix HTTP across containers is real IPC, not cross-host TCP partition, GPU or RTX testing",
+    "Snapshot restore is a separate point-in-time clone, never an older active queue against newer sink effects",
+    "A bounded continuous SSE observation does not certify indefinite uptime",
+    "Standalone native run has isolated XDG state; user plugin configuration and adversarial host sandbox are separate",
+    "No customer data, financial services, host reboot or physical device is in the lab"
+  ],
+  "initial_native_run": {
+    "label": "turn-a",
+    "exit_code": 1,
+    "same_session": true,
+    "native_errors": 1,
+    "tool_count": 44,
+    "duration_seconds": 711.5
+  },
+  "initial_failure": {
+    "error_type": "tool_engine_timeout",
+    "decision_deadline_seconds": 180,
+    "client_tools_after_deadline": 0,
+    "source_and_session_preserved": true
+  },
+  "backend_upgrade": {
+    "activation": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-source-reference/20261114T043626Z",
+      "candidate_sha256": {
+        "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+        "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+        "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+        "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+        "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+        "internal-tool-planner.js": "9bbfe57553df66652f5b42d16de1bd4b15ba6e290963ea9aa1a6cd404416aff8",
+        "debug-workflow.cjs": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9",
+        "decision-recovery.cjs": "627763f75bee08d48782c577836720ec5c57706c9eae681a6f2bd4085e64308f"
+      },
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true
+    },
+    "behavior": "At most one retry of an unexecuted decision only after local protocol process close; admission slot/temp directory retained until close; no process signals, no client-tool replay.",
+    "local_regression_tests": 144,
+    "linux_staged_tests": 70,
+    "additional_linux_planner_integration_tests": 14,
+    "additional_note": "The14 tests overlap staged integration; the final additional case verifies eight held admission slots and idempotent release.",
+    "actual_source_canaries": 5,
+    "limits": "Timeout retry verified with controlled process events and real AJV/firewall integration; production user requests were not deliberately timed out."
+  },
+  "phase_a": {
+    "final_grade": {
+      "phase": "v1",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "five_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "deployed_source_and_all_role_images_match": true,
+        "actual_api_and_sink_readiness": true,
+        "both_databases_wal_integrity": true,
+        "native_accepted_work_settled": true,
+        "actual_100_barrier_requests": true,
+        "admission_bounded_and_duplicates_converged": true,
+        "burst_jobs_have_one_effect_each": true,
+        "all_effects_belong_to_completed_jobs": true,
+        "activation_each_once": true,
+        "checkpoint_identity_preserved": true,
+        "checkpoint_exact_artifact_bytes": true,
+        "checkpoint_replay_same_job": true,
+        "foreign_request_lookup_404": true,
+        "foreign_job_get_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "technical_events_no_payload": true,
+        "owner_isolated_event_cursor": true,
+        "all_actual_artifacts_match_separate_sink": true,
+        "tested_payloads_absent_from_role_logs": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "initial_grade_failed_on": [
+      "actual_100_barrier_requests"
+    ],
+    "correction": {
+      "component": "protected_api_transport",
+      "initial_burst_transport_failures": 36,
+      "initial_grade_failures": [
+        "actual_100_barrier_requests"
+      ],
+      "actual_runtime_default_backlog": 5,
+      "corrected_backlog": 256,
+      "before_server_sha256": "f28c14ab61040bf8444a1fd57c6967b12ee1e511b42738fbad08759b9792fc3c",
+      "after_server_sha256": "712e8e8067da00150b5a97158e5e95b4c20952ecc5b58dc1e6dc464ccd0d0526",
+      "protected_metadata_revised_by_operator": true,
+      "original_tests_unchanged": true
+    }
+  },
+  "phase_b_status": "passed_independent_and_cleaned",
+  "harness_guard_tests": 19,
+  "initial_v2_grade": {
+    "phase": "v2",
+    "passed": false,
+    "checks": {
+      "protected_files": true,
+      "independent_local_tests": false,
+      "independent_linux_image_tests": false,
+      "five_independent_containers_running": true,
+      "runtime_resource_and_network_isolation": true,
+      "deployed_source_and_all_role_images_match": true,
+      "actual_api_and_sink_readiness": true,
+      "both_databases_wal_integrity": true,
+      "native_accepted_work_settled": true,
+      "actual_100_barrier_requests": true,
+      "admission_bounded_and_duplicates_converged": true,
+      "burst_jobs_have_one_effect_each": true,
+      "all_effects_belong_to_completed_jobs": true,
+      "activation_each_once": true,
+      "checkpoint_identity_preserved": true,
+      "checkpoint_exact_artifact_bytes": true,
+      "checkpoint_replay_same_job": true,
+      "foreign_request_lookup_404": true,
+      "foreign_job_get_404": true,
+      "foreign_artifact_404": true,
+      "foreign_cancel_404": true,
+      "anonymous_rejected": true,
+      "technical_events_no_payload": true,
+      "owner_isolated_event_cursor": true,
+      "checkpoint_hash_unchanged": true,
+      "late_live_worker_rejected_by_sink_fence": true,
+      "old_worker_observed_running_during_drill": true,
+      "unknown_ack_same_job_no_execute_replay": true,
+      "two_real_lookup503_bound_to_target": true,
+      "crash_after_external_commit_reconciled": true,
+      "actual_worker_exit42_and_restart": false,
+      "bad_receipt_reconciled_from_sink": true,
+      "offline_observed_without_false_completion": true,
+      "lost_submit_reconciled_without_another_post": true,
+      "native_stream_passed_current_source": true,
+      "native_backup-drill_passed_current_source": true,
+      "actual_code_rollback_and_restore": true,
+      "native_report_matches_scope": true,
+      "independent_stream": true,
+      "independent_backup-drill": true,
+      "all_actual_artifacts_match_separate_sink": true,
+      "tested_payloads_absent_from_role_logs": true
+    },
+    "failures": [
+      "independent_local_tests",
+      "independent_linux_image_tests",
+      "actual_worker_exit42_and_restart"
+    ],
+    "errors": {}
+  },
+  "grading_runs": [
+    {
+      "file": "v1-corrected-result.json",
+      "phase": "v1",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "five_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "deployed_source_and_all_role_images_match": true,
+        "actual_api_and_sink_readiness": true,
+        "both_databases_wal_integrity": true,
+        "native_accepted_work_settled": true,
+        "actual_100_barrier_requests": true,
+        "admission_bounded_and_duplicates_converged": true,
+        "burst_jobs_have_one_effect_each": true,
+        "all_effects_belong_to_completed_jobs": true,
+        "activation_each_once": true,
+        "checkpoint_identity_preserved": true,
+        "checkpoint_exact_artifact_bytes": true,
+        "checkpoint_replay_same_job": true,
+        "foreign_request_lookup_404": true,
+        "foreign_job_get_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "technical_events_no_payload": true,
+        "owner_isolated_event_cursor": true,
+        "all_actual_artifacts_match_separate_sink": true,
+        "tested_payloads_absent_from_role_logs": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    {
+      "file": "v1-first-result.json",
+      "phase": "v1",
+      "passed": false,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "five_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "deployed_source_and_all_role_images_match": true,
+        "actual_api_and_sink_readiness": true,
+        "both_databases_wal_integrity": true,
+        "native_accepted_work_settled": true,
+        "actual_100_barrier_requests": false,
+        "admission_bounded_and_duplicates_converged": true,
+        "burst_jobs_have_one_effect_each": true,
+        "all_effects_belong_to_completed_jobs": true,
+        "activation_each_once": true,
+        "checkpoint_identity_preserved": true,
+        "checkpoint_exact_artifact_bytes": true,
+        "checkpoint_replay_same_job": true,
+        "foreign_request_lookup_404": true,
+        "foreign_job_get_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "technical_events_no_payload": true,
+        "owner_isolated_event_cursor": true,
+        "all_actual_artifacts_match_separate_sink": true,
+        "tested_payloads_absent_from_role_logs": true
+      },
+      "failures": [
+        "actual_100_barrier_requests"
+      ],
+      "errors": {}
+    },
+    {
+      "file": "v2-corrected-result.json",
+      "phase": "v2",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "five_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "deployed_source_and_all_role_images_match": true,
+        "actual_api_and_sink_readiness": true,
+        "both_databases_wal_integrity": true,
+        "native_accepted_work_settled": true,
+        "actual_100_barrier_requests": true,
+        "admission_bounded_and_duplicates_converged": true,
+        "burst_jobs_have_one_effect_each": true,
+        "all_effects_belong_to_completed_jobs": true,
+        "activation_each_once": true,
+        "checkpoint_identity_preserved": true,
+        "checkpoint_exact_artifact_bytes": true,
+        "checkpoint_replay_same_job": true,
+        "foreign_request_lookup_404": true,
+        "foreign_job_get_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "technical_events_no_payload": true,
+        "owner_isolated_event_cursor": true,
+        "checkpoint_hash_unchanged": true,
+        "fault_drills_match_current_core_sources": true,
+        "late_live_worker_rejected_by_sink_fence": true,
+        "old_worker_observed_running_during_drill": true,
+        "unknown_ack_same_job_no_execute_replay": true,
+        "two_real_lookup503_bound_to_target": true,
+        "crash_after_external_commit_reconciled": true,
+        "actual_worker_exit42_and_restart": true,
+        "bad_receipt_reconciled_from_sink": true,
+        "offline_observed_without_false_completion": true,
+        "lost_submit_reconciled_without_another_post": true,
+        "native_stream_passed_current_source": true,
+        "native_backup-drill_passed_current_source": true,
+        "actual_code_rollback_and_restore": true,
+        "native_report_matches_scope": true,
+        "independent_stream": true,
+        "independent_backup-drill": true,
+        "all_actual_artifacts_match_separate_sink": true,
+        "tested_payloads_absent_from_role_logs": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    {
+      "file": "v2-first-result.json",
+      "phase": "v2",
+      "passed": false,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": false,
+        "independent_linux_image_tests": false,
+        "five_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "deployed_source_and_all_role_images_match": true,
+        "actual_api_and_sink_readiness": true,
+        "both_databases_wal_integrity": true,
+        "native_accepted_work_settled": true,
+        "actual_100_barrier_requests": true,
+        "admission_bounded_and_duplicates_converged": true,
+        "burst_jobs_have_one_effect_each": true,
+        "all_effects_belong_to_completed_jobs": true,
+        "activation_each_once": true,
+        "checkpoint_identity_preserved": true,
+        "checkpoint_exact_artifact_bytes": true,
+        "checkpoint_replay_same_job": true,
+        "foreign_request_lookup_404": true,
+        "foreign_job_get_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "technical_events_no_payload": true,
+        "owner_isolated_event_cursor": true,
+        "checkpoint_hash_unchanged": true,
+        "late_live_worker_rejected_by_sink_fence": true,
+        "old_worker_observed_running_during_drill": true,
+        "unknown_ack_same_job_no_execute_replay": true,
+        "two_real_lookup503_bound_to_target": true,
+        "crash_after_external_commit_reconciled": true,
+        "actual_worker_exit42_and_restart": false,
+        "bad_receipt_reconciled_from_sink": true,
+        "offline_observed_without_false_completion": true,
+        "lost_submit_reconciled_without_another_post": true,
+        "native_stream_passed_current_source": true,
+        "native_backup-drill_passed_current_source": true,
+        "actual_code_rollback_and_restore": true,
+        "native_report_matches_scope": true,
+        "independent_stream": true,
+        "independent_backup-drill": true,
+        "all_actual_artifacts_match_separate_sink": true,
+        "tested_payloads_absent_from_role_logs": true
+      },
+      "failures": [
+        "independent_local_tests",
+        "independent_linux_image_tests",
+        "actual_worker_exit42_and_restart"
+      ],
+      "errors": {}
+    }
+  ],
+  "native_runs": [
+    {
+      "label": "turn-a-backlog",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 12,
+      "duration_seconds": 177.5
+    },
+    {
+      "label": "turn-a-recovery",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 21,
+      "duration_seconds": 260.8
+    },
+    {
+      "label": "turn-a",
+      "exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 44,
+      "duration_seconds": 711.5
+    },
+    {
+      "label": "turn-b",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 68,
+      "duration_seconds": 985.6
+    },
+    {
+      "label": "turn-b-sse-r1",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 22,
+      "duration_seconds": 356.3
+    }
+  ],
+  "native_session_sha256": "17039216fcf745d5157f5a78b3c60dc83134a608395be35bbdd57a2c4a3291a8",
+  "native_tool_counts": {
+    "read": 35,
+    "shell": 94,
+    "write": 13,
+    "skill": 1,
+    "edit": 24
+  },
+  "native_tool_errors": [],
+  "metadata_paths_outside_project": [],
+  "recovery_proofs": [
+    {
+      "fault": "crash-after-effect",
+      "job_id_sha256": "91ef54bb3396fabf803980f37091e3655634c264e0794df0d2ae2797546d2c74",
+      "execute_calls": 1,
+      "lookup_calls": 1,
+      "lookup_after_fault": true,
+      "effect_rows": 1
+    },
+    {
+      "fault": "unknown-ack",
+      "job_id_sha256": "28a2673a65c9b50d68003045483dc5da44be5463e3b6bc7a4bfe29b2a011b69b",
+      "execute_calls": 1,
+      "lookup_calls": 3,
+      "lookup_after_fault": true,
+      "effect_rows": 1
+    },
+    {
+      "fault": "bad-receipt",
+      "job_id_sha256": "637bdccbbcdf553d4495f0b81d56e73e742aedbee48715345adbaa80f60cb0f5",
+      "execute_calls": 1,
+      "lookup_calls": 1,
+      "lookup_after_fault": true,
+      "effect_rows": 1
+    }
+  ],
+  "burst_runs": {
+    "native": {
+      "request_count": 100,
+      "max_overlapping_clients": 100,
+      "unique_request_keys": 20,
+      "status_counts": {
+        "202": 16,
+        "200": 38,
+        "429": 10,
+        "0": 36
+      },
+      "idempotency_converged": true,
+      "per_owner_pending": {
+        "beta": 8,
+        "alpha": 8
+      },
+      "observed_worker_ids": [
+        "worker1",
+        "worker2",
+        "worker3"
+      ],
+      "proof_sha256": "b113f947e48d12db4c5979dc0fc510987b7bafda83d8c2043816b2f2e08b944c",
+      "distinct_accepted_jobs": 16
+    },
+    "native-r1": {
+      "request_count": 100,
+      "max_overlapping_clients": 100,
+      "unique_request_keys": 20,
+      "status_counts": {
+        "202": 16,
+        "200": 64,
+        "429": 20
+      },
+      "transport_error_counts": {},
+      "idempotency_converged": true,
+      "per_owner_pending": {
+        "alpha": 8,
+        "beta": 8
+      },
+      "observed_worker_ids": [
+        "worker1",
+        "worker2",
+        "worker3"
+      ],
+      "proof_sha256": "51bbede99ec85099746ca89933e12c95164ab7ee092a2f4f59c7f059c8c79f6c",
+      "release": "cluster-v1-r1",
+      "image_id": "sha256:b5c007529c0f102ec3bb7011108b32943f1065da89356046f4b1329675ee9aae",
+      "distinct_accepted_jobs": 16
+    }
+  },
+  "probe_runs": {
+    "stream": [
+      {
+        "origin": "agent",
+        "passed": true,
+        "image_id": "sha256:b7859a88895e08e2df09b85d1a6a5cdb08d41ff45f86e613ff1facdf78b4cf9b",
+        "stream_reader_sha256": "0a8845318ecefe64fdace79f8405c4dfbc6623290196597fbe2afe5987e644f0",
+        "probe_exit_code": 0,
+        "base_label": "native",
+        "attempt_label": "native-a1",
+        "checks": {
+          "chunked_live_headers": true,
+          "open_before_write": true,
+          "later_committed_event_on_existing_connection": true,
+          "forced_midframe_disconnect": true,
+          "accepted_cursor_saved": true,
+          "reconnect_with_cursor": true,
+          "no_replayed_accepted_event": true,
+          "completed_after_reconnect": true,
+          "foreign_owner_not_streamed": true,
+          "mechanical_event_schema": true,
+          "job_completed_alpha": true,
+          "job_completed_beta": true
+        }
+      },
+      {
+        "origin": "examiner",
+        "passed": true,
+        "image_id": "sha256:b7859a88895e08e2df09b85d1a6a5cdb08d41ff45f86e613ff1facdf78b4cf9b",
+        "stream_reader_sha256": "0a8845318ecefe64fdace79f8405c4dfbc6623290196597fbe2afe5987e644f0",
+        "probe_exit_code": 0,
+        "base_label": "examiner",
+        "attempt_label": "examiner-a1",
+        "checks": {
+          "chunked_live_headers": true,
+          "open_before_write": true,
+          "later_committed_event_on_existing_connection": true,
+          "forced_midframe_disconnect": true,
+          "accepted_cursor_saved": true,
+          "reconnect_with_cursor": true,
+          "no_replayed_accepted_event": true,
+          "completed_after_reconnect": true,
+          "foreign_owner_not_streamed": true,
+          "mechanical_event_schema": true,
+          "job_completed_alpha": true,
+          "job_completed_beta": true
+        }
+      },
+      {
+        "origin": "agent",
+        "passed": true,
+        "image_id": "sha256:d4bd64e0ce828ef500a33ed982fc1069194cd3df3fa83c2bdaf1f3359f51c4c9",
+        "stream_reader_sha256": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+        "probe_exit_code": 0,
+        "base_label": "native",
+        "attempt_label": "native-a2",
+        "checks": {
+          "chunked_live_headers": true,
+          "open_before_write": true,
+          "later_committed_event_on_existing_connection": true,
+          "forced_midframe_disconnect": true,
+          "accepted_cursor_saved": true,
+          "reconnect_with_cursor": true,
+          "no_replayed_accepted_event": true,
+          "completed_after_reconnect": true,
+          "foreign_owner_not_streamed": true,
+          "mechanical_event_schema": true,
+          "job_completed_alpha": true,
+          "job_completed_beta": true
+        }
+      },
+      {
+        "origin": "examiner",
+        "passed": true,
+        "image_id": "sha256:d4bd64e0ce828ef500a33ed982fc1069194cd3df3fa83c2bdaf1f3359f51c4c9",
+        "stream_reader_sha256": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+        "probe_exit_code": 0,
+        "base_label": "examiner",
+        "attempt_label": "examiner-a2",
+        "checks": {
+          "chunked_live_headers": true,
+          "open_before_write": true,
+          "later_committed_event_on_existing_connection": true,
+          "forced_midframe_disconnect": true,
+          "accepted_cursor_saved": true,
+          "reconnect_with_cursor": true,
+          "no_replayed_accepted_event": true,
+          "completed_after_reconnect": true,
+          "foreign_owner_not_streamed": true,
+          "mechanical_event_schema": true,
+          "job_completed_alpha": true,
+          "job_completed_beta": true
+        }
+      }
+    ],
+    "backup-drill": [
+      {
+        "origin": "agent",
+        "passed": true,
+        "image_id": "sha256:b7859a88895e08e2df09b85d1a6a5cdb08d41ff45f86e613ff1facdf78b4cf9b",
+        "storage_tools_sha256": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+        "probe_exit_code": 0,
+        "base_label": "native",
+        "attempt_label": "native-a1",
+        "checks": {
+          "wal_pages_exist_with_live_reader": true,
+          "backup_during_active_writer": true,
+          "actual_snapshot_hash": true,
+          "snapshot_0600_no_sidecars": true,
+          "restored_integrity_delete_mode": true,
+          "wal_only_marker_preserved": true,
+          "manifest_from_snapshot": true,
+          "restored_0600_hash_matches": true,
+          "wrong_hash_no_destination": true,
+          "corrupt_integrity_rejected": true,
+          "existing_destination_preserved": true,
+          "source_symlink_refused": true,
+          "destination_symlink_refused": true,
+          "authoritative_source_stays_wal": true,
+          "no_temp_sidecars": true
+        }
+      },
+      {
+        "origin": "examiner",
+        "passed": true,
+        "image_id": "sha256:b7859a88895e08e2df09b85d1a6a5cdb08d41ff45f86e613ff1facdf78b4cf9b",
+        "storage_tools_sha256": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+        "probe_exit_code": 0,
+        "base_label": "examiner",
+        "attempt_label": "examiner-a1",
+        "checks": {
+          "wal_pages_exist_with_live_reader": true,
+          "backup_during_active_writer": true,
+          "actual_snapshot_hash": true,
+          "snapshot_0600_no_sidecars": true,
+          "restored_integrity_delete_mode": true,
+          "wal_only_marker_preserved": true,
+          "manifest_from_snapshot": true,
+          "restored_0600_hash_matches": true,
+          "wrong_hash_no_destination": true,
+          "corrupt_integrity_rejected": true,
+          "existing_destination_preserved": true,
+          "source_symlink_refused": true,
+          "destination_symlink_refused": true,
+          "authoritative_source_stays_wal": true,
+          "no_temp_sidecars": true
+        }
+      },
+      {
+        "origin": "agent",
+        "passed": true,
+        "image_id": "sha256:d4bd64e0ce828ef500a33ed982fc1069194cd3df3fa83c2bdaf1f3359f51c4c9",
+        "storage_tools_sha256": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+        "probe_exit_code": 0,
+        "base_label": "native",
+        "attempt_label": "native-a2",
+        "checks": {
+          "wal_pages_exist_with_live_reader": true,
+          "backup_during_active_writer": true,
+          "actual_snapshot_hash": true,
+          "snapshot_0600_no_sidecars": true,
+          "restored_integrity_delete_mode": true,
+          "wal_only_marker_preserved": true,
+          "manifest_from_snapshot": true,
+          "restored_0600_hash_matches": true,
+          "wrong_hash_no_destination": true,
+          "corrupt_integrity_rejected": true,
+          "existing_destination_preserved": true,
+          "source_symlink_refused": true,
+          "destination_symlink_refused": true,
+          "authoritative_source_stays_wal": true,
+          "no_temp_sidecars": true
+        }
+      },
+      {
+        "origin": "examiner",
+        "passed": true,
+        "image_id": "sha256:d4bd64e0ce828ef500a33ed982fc1069194cd3df3fa83c2bdaf1f3359f51c4c9",
+        "storage_tools_sha256": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+        "probe_exit_code": 0,
+        "base_label": "examiner",
+        "attempt_label": "examiner-a2",
+        "checks": {
+          "wal_pages_exist_with_live_reader": true,
+          "backup_during_active_writer": true,
+          "actual_snapshot_hash": true,
+          "snapshot_0600_no_sidecars": true,
+          "restored_integrity_delete_mode": true,
+          "wal_only_marker_preserved": true,
+          "manifest_from_snapshot": true,
+          "restored_0600_hash_matches": true,
+          "wrong_hash_no_destination": true,
+          "corrupt_integrity_rejected": true,
+          "existing_destination_preserved": true,
+          "source_symlink_refused": true,
+          "destination_symlink_refused": true,
+          "authoritative_source_stays_wal": true,
+          "no_temp_sidecars": true
+        }
+      }
+    ]
+  },
+  "release_digests": {
+    "cluster-v1": {
+      "image_id": "sha256:d659fc1cf0dae65ce07998fbd15fe042a863d448804d6810d58029b4b047524d",
+      "source_sha256": "b501bfd36161804cd8ed99b11cb565cc1cceeffa60e0664fba1aa08acb70d76e"
+    },
+    "cluster-v1-r1": {
+      "image_id": "sha256:b5c007529c0f102ec3bb7011108b32943f1065da89356046f4b1329675ee9aae",
+      "source_sha256": "29a29122e84ed5000bf20f92c86ada739d3b6f366fb224f135091290a5dea52f"
+    },
+    "cluster-v2": {
+      "image_id": "sha256:b7859a88895e08e2df09b85d1a6a5cdb08d41ff45f86e613ff1facdf78b4cf9b",
+      "source_sha256": "229b0536aa44777cf7caf63f20aefd5cd7899d6f1a5dbdf417f18aa789d57125"
+    },
+    "cluster-v2-r1": {
+      "image_id": "sha256:d4bd64e0ce828ef500a33ed982fc1069194cd3df3fa83c2bdaf1f3359f51c4c9",
+      "source_sha256": "bbd61e47d4bd68eb15fa3f803b13dec28e18cff3804b8f8db09a12bc9f388e01"
+    }
+  },
+  "release_module_sha256": {
+    "cluster-v1": {
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "8e7930b9a94d006c20f13017f4f5b7a63d3baae69471eb22a5188a47a18ebfb9",
+      "storage_tools.py": "ddf4c06e107aaf23c587e299be64931bea4619a605f5191939e46ee3288453fb",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "server.py": "f28c14ab61040bf8444a1fd57c6967b12ee1e511b42738fbad08759b9792fc3c",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "Dockerfile": "2ea1f11777267b3c50cdba2a6e6ec49339516f0efc1c1f29cec27c7ebb9e9632",
+      "stream_reader.py": "a5eaa3e6fff0db45146f8bfd0d7ec16bd887ccbcb2c0df4fdf30efd71f87ddd7"
+    },
+    "cluster-v1-r1": {
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "8e7930b9a94d006c20f13017f4f5b7a63d3baae69471eb22a5188a47a18ebfb9",
+      "storage_tools.py": "ddf4c06e107aaf23c587e299be64931bea4619a605f5191939e46ee3288453fb",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "server.py": "712e8e8067da00150b5a97158e5e95b4c20952ecc5b58dc1e6dc464ccd0d0526",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "Dockerfile": "2ea1f11777267b3c50cdba2a6e6ec49339516f0efc1c1f29cec27c7ebb9e9632",
+      "stream_reader.py": "a5eaa3e6fff0db45146f8bfd0d7ec16bd887ccbcb2c0df4fdf30efd71f87ddd7"
+    },
+    "cluster-v2": {
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "8e7930b9a94d006c20f13017f4f5b7a63d3baae69471eb22a5188a47a18ebfb9",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "server.py": "712e8e8067da00150b5a97158e5e95b4c20952ecc5b58dc1e6dc464ccd0d0526",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "Dockerfile": "2ea1f11777267b3c50cdba2a6e6ec49339516f0efc1c1f29cec27c7ebb9e9632",
+      "stream_reader.py": "0a8845318ecefe64fdace79f8405c4dfbc6623290196597fbe2afe5987e644f0"
+    },
+    "cluster-v2-r1": {
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "8e7930b9a94d006c20f13017f4f5b7a63d3baae69471eb22a5188a47a18ebfb9",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "server.py": "712e8e8067da00150b5a97158e5e95b4c20952ecc5b58dc1e6dc464ccd0d0526",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "Dockerfile": "2ea1f11777267b3c50cdba2a6e6ec49339516f0efc1c1f29cec27c7ebb9e9632",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8"
+    }
+  },
+  "activation_attempts": {
+    "stage-v1": 1,
+    "stage-v1-r1": 1,
+    "stage-v2": 1,
+    "rollback-v1": 1,
+    "restore-v2": 1,
+    "stage-v2-r1": 1,
+    "rollback-v1-r1": 1,
+    "restore-v2-r1": 1
+  },
+  "checkpoint_preserved": true,
+  "docker_event_archive_provenance": [
+    {
+      "source": "previous_verified_native_controller_output",
+      "command": "python3 tools/ops.py events",
+      "output_sha256": "4042c5368b57906d35895b76428e8a7be71da346a74bbee71611947f9e878f71",
+      "native_timestamp_ms": 1794632215980,
+      "reason": "Docker daemon buffer evicted previously observed exit42; no fault replay or invented event."
+    }
+  ],
+  "harness_correction": {
+    "component": "protected_api_transport",
+    "initial_burst_transport_failures": 36,
+    "initial_grade_failures": [
+      "actual_100_barrier_requests"
+    ],
+    "actual_runtime_default_backlog": 5,
+    "corrected_backlog": 256,
+    "before_server_sha256": "f28c14ab61040bf8444a1fd57c6967b12ee1e511b42738fbad08759b9792fc3c",
+    "after_server_sha256": "712e8e8067da00150b5a97158e5e95b4c20952ecc5b58dc1e6dc464ccd0d0526",
+    "protected_metadata_revised_by_operator": true,
+    "original_tests_unchanged": true
+  },
+  "cleanup": {
+    "closed": true,
+    "containers_removed": 41,
+    "remaining_owned_objects": {
+      "containers": 0,
+      "images": 0,
+      "volumes": 0
+    }
+  },
+  "backend_final_health": {
+    "health": {
+      "local": {
+        "http_status": 200,
+        "json": true
+      },
+      "public": {
+        "http_status": 200,
+        "json": true
+      }
+    },
+    "services": {
+      "harmonika-ai": "active",
+      "harmonika-web-chat-live": "active",
+      "harmonika-shared-core": "active"
+    },
+    "source_sha256": {
+      "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+      "internal-tool-planner.js": "9bbfe57553df66652f5b42d16de1bd4b15ba6e290963ea9aa1a6cd404416aff8",
+      "decision-recovery.cjs": "627763f75bee08d48782c577836720ec5c57706c9eae681a6f2bd4085e64308f",
+      "debug-workflow.cjs": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9"
+    },
+    "debug_workflow_sha256": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9",
+    "passed": true
+  },
+  "review_resolution": {
+    "reviewer": "OpenCode",
+    "mode": "read_only",
+    "claude_involved": false,
+    "contract_review": {
+      "findings": 8,
+      "resolution": "Clarified shared owner capacity, incremental SSE validation, snapshot atomic publication/manifest source and safe clone; target-bound lookup faults and receipt-conflict classification corrected before native implementation."
+    },
+    "harness_review": [
+      {
+        "finding": "Image-test failures can abort grading without a result",
+        "confirmed": true,
+        "resolution": "Keep test-engine exit code in JSON while controller transport succeeds. Grader also records a failed grading_interrupted result on uncaught orchestration exceptions; never overwrite previous results."
+      },
+      {
+        "finding": "Examiner probes may count as native",
+        "confirmed": false,
+        "reason": "call(root,...) explicitly sends origin=examiner before invoking the controller. Added base_label=native filter as further protection."
+      },
+      {
+        "finding": "Tail-only log scan may miss earlier or replaced-container canaries",
+        "confirmed": true,
+        "resolution": "Scan full logs for every registered role_history container, return mechanical hashes/byte counts/canary flags, retain small native diagnostic tails. Grader requires complete history coverage."
+      },
+      {
+        "finding": "Polling can evict important fault/offline/rollback observations",
+        "confirmed": true,
+        "resolution": "Keep critical witnesses outside the512-entry polling buffer. A4096-witness budget fails explicitly rather than evicting proofs; tested with600 polling observations."
+      },
+      {
+        "finding": "Drop-submit fault consumed on non-success status",
+        "confirmed": true,
+        "resolution": "Retain armed flag through429/503; consume only after200/202. Regression proves503 then202 behavior and ACK_LOST exit75."
+      },
+      {
+        "finding": "Activation may mark success without readiness",
+        "confirmed": true,
+        "resolution": "Check final readyz after all role creation; failure returns structured exit70 without success request receipt. Native must inspect status before continuing."
+      },
+      {
+        "finding": "Fast completion can produce more than16 accepted burst jobs",
+        "confirmed": false,
+        "reason": "Contract mandates hold-all before burst, preventing external execution/completion until release.100 attempts use20 unique keys and global8 pending per owner;12-16 unique accepted remains required."
+      },
+      {
+        "finding": "100 clients share API cgroup resources",
+        "confirmed": true,
+        "resolution": "Scope explicitly remains100 simultaneous clients inside384MiB/PID384 fixture; ~200 client/server threads fit the cap. Actual corrected proof has100 valid responses/100 overlapping clients; initial36 failures were Python accept backlog5, calibrated256 without raising resource caps or weakening assertions. This does not establish higher sustained load."
+      }
+    ],
+    "controller_revision": {
+      "controller_sha256": "dd000575f085c29419aa7e19312196185c95b6ad0ac84016e888dfc45fcfa0b7",
+      "harness_guard_tests": 15,
+      "native_contract_changed": false,
+      "assertions_weakened": false
+    },
+    "criteria_weakened": false,
+    "private_review_outputs": "Stored outside repository in private exam root.",
+    "final_harness_guard_tests": 19,
+    "additional_grading_evidence_tests": "Missing configuration writes an explicit failed result; an existing result is never overwritten.",
+    "additional_corrections": {
+      "sse_default_event": "Original contract default-event detail clarified; existing malformed-frame test failed in both runtimes. Added valid default/message acceptance assertions; no assertions weakened.",
+      "docker_event_archive": "Recovered exact previous protected native controller events output with SHA256, matched all registered container hashes/roles/releases and restart_count. Added durable archive against daemon buffer eviction, with provenance.",
+      "revision_activation": "Fresh rollback-v1-r1/restore-v2-r1 keys allow verifying the corrected image without mutating original once-only receipts.",
+      "fault_source_binding": "Verified per-module SHA256 and full immutable context digest; final queue/connector/sink/worker/bootstrap must match the code used for the native mutation fault drills. Correcting only the SSE parser does not silently credit changed queue code."
+    }
+  },
+  "operator_assistance": [
+    "Codex supplied protected HTTP transport, fixed identity fixtures, fenced synthetic effect service, bounded deployment bridge and independent tests.",
+    "Codex supplied TURN B after passed corrected TURN A, reviewed failures, and activated the generalized planner timeout/admission fix.",
+    "The initial native decision timed out before any client tool execution; source/session were preserved. Later same-session turns used the corrected planner.",
+    "Initial100-client test failed36 connections. Operator calibrated protected Python HTTP backlog5 to256, preserved failed proof and immutable old image, and required a new image and full unchanged retest.",
+    "OpenCode performed read-only contract/harness review; Codex validated findings against source and actual tests.",
+    "Independent default-event malformed-frame checks failed in both runtimes. Codex clarified the original underspecified default/message event detail; Harmonika added regressions and corrected the parser in immutable v2-r1. Valid default/message acceptance was additionally tested; no original assertion was removed.",
+    "Docker daemon event retention lost the earlier exit42 after further deployments. Codex recovered the exact previously observed protected native controller output by SHA256, matched registered container/role/release identities and restart count, and added a durable event archive with provenance. No crash was replayed or event invented."
+  ],
+  "evidence_files": {
+    "private": "Raw native JSONL, implementation source, full synthetic database snapshots and fault/probe evidence remain in a private exam root, outside Git.",
+    "report": "docs/LEVEL7-AGENT-EXAM-20261114.json"
+  }
+}

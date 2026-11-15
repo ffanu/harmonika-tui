@@ -1,0 +1,284 @@
+{
+  "date": "2026-11-13",
+  "test": "synthetic context capacity through one million locally tokenized input tokens",
+  "conclusion": "one_million_not_supported_by_current_runtime",
+  "production_context_profile_tokens": 872000,
+  "effective_runtime_context_window": 828400,
+  "highest_verified_provider_input_tokens": 807776,
+  "highest_verified_provider_output_tokens": 79,
+  "verified_provider_retrieval_correct": 5,
+  "verified_provider_retrieval_total": 5,
+  "one_million_local_tokens_attempted": true,
+  "one_million_provider_input_tokens_verified": false,
+  "model": "gpt-6.1-sol",
+  "token_count_method": {
+    "local_fixture": "tiktoken 0.12.0 o200k_base, plain-text count",
+    "authoritative_accepted_usage": "app-server thread/tokenUsage/updated last.inputTokens",
+    "character_byte_and_token_counts_are_distinct": true
+  },
+  "cases": {
+    "production_500k_local": {
+      "synthetic_only": true,
+      "local_text_tokens": 500000,
+      "session_id": "context-load-e2e-91ab326b8ac44fdf9557a60bf2032af9",
+      "transport": "production-domain",
+      "payload_bytes": 935122,
+      "prompt_sha256": "53247904aae28f8e950928583df2e0c6fafb9f0e6b15bc9f311c14c632a827f4",
+      "attempts": 1,
+      "production_profile_modified": false,
+      "http_status": 200,
+      "needle_matches": {
+        "s0": true,
+        "s1": true,
+        "s2": true,
+        "s3": true,
+        "s4": true
+      },
+      "all_five_needles_correct": true,
+      "tool_calls_requested": 0,
+      "provider_usage_observed": {},
+      "elapsed_ms": 13759
+    },
+    "isolated_800k_local": {
+      "synthetic_only": true,
+      "transport": "app-server stdio",
+      "production_profile_modified": false,
+      "configured_context_tokens": 1050000,
+      "local_text_tokens": 800000,
+      "fixture_sha256": "27164b9955766690e96b0bb3eb6a7ebd770c0c1b3bf925bcb578a920d3a98ec9",
+      "ephemeral_thread": true,
+      "segmented_input_items": 8,
+      "segmented_turn_accepted": false,
+      "history_injection_accepted": true,
+      "turn_status": "completed",
+      "elapsed_ms": 16019,
+      "event_counts": {
+        "configWarning": 1,
+        "remoteControl/status/changed": 1,
+        "thread/started": 2,
+        "warning": 2,
+        "thread/status/changed": 2,
+        "turn/started": 1,
+        "account/updated": 1,
+        "item/started": 2,
+        "item/completed": 2,
+        "item/agentMessage/delta": 69,
+        "turn/moderationMetadata": 1,
+        "thread/tokenUsage/updated": 1,
+        "account/rateLimits/updated": 1,
+        "turn/completed": 1
+      },
+      "provider_usage_updates": [
+        {
+          "total": {
+            "totalTokens": 807855,
+            "inputTokens": 807776,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 79,
+            "reasoningOutputTokens": 0
+          },
+          "last": {
+            "totalTokens": 807855,
+            "inputTokens": 807776,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 79,
+            "reasoningOutputTokens": 0
+          },
+          "modelContextWindow": 828400
+        }
+      ],
+      "compaction_event_observed": false,
+      "needle_matches": {
+        "s0": true,
+        "s1": true,
+        "s2": true,
+        "s3": true,
+        "s4": true
+      },
+      "errors": [],
+      "all_five_needles_correct": true,
+      "one_million_provider_input_tokens_verified": false
+    },
+    "production_1m_local": {
+      "local_text_tokens": 1000000,
+      "session_id": "million-e2e-5cd983197dce484c8fd518b1f0eb3049",
+      "transport": "production-domain",
+      "payload_bytes": 1985859,
+      "http_status": 413,
+      "error_code": "invalid_tool_arguments",
+      "elapsed_ms": 2325
+    },
+    "isolated_cli_1m_local": {
+      "model": "gpt-6.1-sol",
+      "configured_context_tokens": 1050000,
+      "configured_auto_compact_tokens": 1040000,
+      "local_text_tokens": 1000000,
+      "prompt_sha256": "72b07774fa832c3c19973923ff4e7083d312667b55c66850b834220e96a96482",
+      "prompt_utf8_bytes": 1945309,
+      "exit_code": 1,
+      "elapsed_ms": 1786,
+      "events": {
+        "thread.started": 1
+      },
+      "provider_usage": [],
+      "error_signatures": [
+        "context_or_input_limit"
+      ],
+      "needle_matches": {
+        "s0": false,
+        "s1": false,
+        "s2": false,
+        "s3": false,
+        "s4": false
+      },
+      "all_five_needles_correct": false,
+      "max_observed_process_rss_kib": 315276,
+      "production_profile_modified": false,
+      "one_million_provider_input_tokens_verified": false,
+      "compaction_event_observed": false,
+      "error_mechanics": {
+        "invalid_prompt": false,
+        "input_maximum_length": true,
+        "explicit_context_window": false,
+        "explicit_length_units": [
+          "characters"
+        ],
+        "declared_lengths": [
+          1048576
+        ]
+      }
+    },
+    "isolated_appserver_1m_local": {
+      "synthetic_only": true,
+      "transport": "app-server stdio",
+      "production_profile_modified": false,
+      "configured_context_tokens": 1050000,
+      "local_text_tokens": 1000000,
+      "fixture_sha256": "72b07774fa832c3c19973923ff4e7083d312667b55c66850b834220e96a96482",
+      "ephemeral_thread": true,
+      "segmented_input_items": 10,
+      "segmented_turn_accepted": false,
+      "history_injection_accepted": true,
+      "turn_status": "failed",
+      "turn_error_type": "contextWindowExceeded",
+      "context_window_error": false,
+      "elapsed_ms": 4632,
+      "event_counts": {
+        "configWarning": 1,
+        "remoteControl/status/changed": 1,
+        "thread/started": 2,
+        "warning": 2,
+        "thread/status/changed": 2,
+        "turn/started": 1,
+        "account/updated": 1,
+        "item/started": 1,
+        "item/completed": 1,
+        "turn/moderationMetadata": 1,
+        "account/rateLimits/updated": 2,
+        "thread/tokenUsage/updated": 1,
+        "error": 1,
+        "turn/completed": 1
+      },
+      "provider_usage_updates": [
+        {
+          "total": {
+            "totalTokens": 828400,
+            "inputTokens": 0,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 0,
+            "reasoningOutputTokens": 0
+          },
+          "last": {
+            "totalTokens": 828400,
+            "inputTokens": 0,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 0,
+            "reasoningOutputTokens": 0
+          },
+          "modelContextWindow": 828400
+        }
+      ],
+      "compaction_event_observed": false,
+      "needle_matches": {
+        "s0": false,
+        "s1": false,
+        "s2": false,
+        "s3": false,
+        "s4": false
+      },
+      "errors": [],
+      "all_five_needles_correct": false,
+      "one_million_provider_input_tokens_verified": false
+    }
+  },
+  "findings": [
+    {
+      "id": "CLI_SINGLE_INPUT_CHARACTER_LIMIT",
+      "verified": true,
+      "characters": 1048576,
+      "one_million_fixture_chars": 1945309,
+      "effect": "CLI rejects the single prompt before starting a model turn; a token-context setting does not remove this character limit."
+    },
+    {
+      "id": "RUNTIME_EFFECTIVE_CONTEXT_LIMIT",
+      "verified": true,
+      "modelContextWindow": 828400,
+      "nominal_max_context": 872000,
+      "effective_percent": 95,
+      "observed_error_type": "contextWindowExceeded",
+      "effect": "The history API accepted the synthetic records, but the next model turn rejected the one-million-token context."
+    },
+    {
+      "id": "PRODUCTION_OVERSIZE_ERROR_DIAGNOSTIC",
+      "verified": true,
+      "http_status": 413,
+      "error_code": "invalid_tool_arguments",
+      "effect": "The production gateway rejects oversized decision context. Its compatibility error code does not clearly distinguish context size from invalid function arguments."
+    }
+  ],
+  "operational_state_after": {
+    "services": {
+      "harmonika-ai.service": {
+        "MainPID": "3933103",
+        "MemoryCurrent": "39084032",
+        "ActiveState": "active"
+      },
+      "harmonika-web-chat-live.service": {
+        "MainPID": "3925959",
+        "MemoryCurrent": "13504512",
+        "ActiveState": "active"
+      },
+      "harmonika-quality-audit.service": {
+        "MainPID": "3915322",
+        "MemoryCurrent": "27144192",
+        "ActiveState": "active"
+      }
+    },
+    "profile": {
+      "schema_version": 1,
+      "model": "gpt-6.1-sol",
+      "context_window_tokens": 872000,
+      "auto_compact_tokens": 780000,
+      "transport_soft_chars": 2800000,
+      "max_payload_bytes": 8388608
+    },
+    "profile_sha256": "ce678338d4bc0c0c006c6c7424c29a9fc47f976e75dd0f33be9d8ffa143f625e"
+  },
+  "production_profile_modified": false,
+  "service_restart_performed": false,
+  "user_sessions_read_or_changed": false,
+  "test_threads_ephemeral": true,
+  "raw_user_or_customer_data_used": false,
+  "raw_credentials_logged": false,
+  "new_regression_tests_passed": 21,
+  "limitations": [
+    "The 807776-token acceptance was an isolated probe using the installed backend model and documented app-server history API; it is not proof that the current CLI-based TUI route accepts the same payload.",
+    "The public 500K test uses a local text token count because the public response did not expose provider usage.",
+    "Rejected one-million-token probes reported no accepted input-token usage; tokenUsage.totalTokens=828400 on rejection must not be counted as successful processing.",
+    "No guaranteed 1M path or direct API provider migration was activated."
+  ]
+}

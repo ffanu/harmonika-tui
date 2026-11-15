@@ -19,6 +19,11 @@ Source server: `/opt/harmonika-ai/rtx-queue`. Endpoint ini **loopback privat**;
 tidak ditambahkan ke Nginx publik atau APK. Engine chat existing tidak direstart.
 Jalur generate lama tidak diganti otomatis oleh komponen antrean baru ini.
 
+Pemulihan Windows: [autostart dan watchdog](windows/README.md) menghilangkan
+batas task 72 jam, menjalankan komponen saat boot tanpa login, dan memulihkan
+proses yang berhenti. Kesiapan model diuji terpisah dari liveness HTTP.
+[Laporan aktivasi](../../docs/RTX-AUTOSTART-REPORT.json).
+
 Worker existing memakai mode `legacy`: generate nyata/CUDA aktif, sedangkan
 vision dan reference image belum tersedia pada worker itu. Mode `v1` untuk
 vision/reference sudah diimplementasikan dan diuji fixture; belum diklaim aktif

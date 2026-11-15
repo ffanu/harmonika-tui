@@ -1,0 +1,267 @@
+{
+  "status": "verified_after_lifecycle_fix",
+  "date": "2026-11-14",
+  "completed_at_utc": "2026-11-13T18:41:13.197842+00:00",
+  "scope": "Native Harmonika single-threaded queue and scripted SSE reconnect implementation exams; active backend lifecycle evidence guard correction",
+  "synthetic_data_only": true,
+  "fixture_root": "/var/folders/w1/t3nvdh4910qcf_g2ndzr3jm40000gn/T/harmonika-queue-agent-sygwy2v3",
+  "roles": {
+    "Codex": "Designed and ran isolated native exams, reproduced the lifecycle completion gap, implemented/tested/activated the correction, independently graded code and reviewed actual reports.",
+    "OpenCode": "Completed read-only pure plan-mode review of four frozen contract/acceptance files; identified coverage/specification gaps. No Claude invoked."
+  },
+  "native_cases": {
+    "queue": {
+      "case": "queue",
+      "checks": {
+        "protected_files": true,
+        "report_exists": true,
+        "public": true,
+        "held_out": true
+      },
+      "counts": {
+        "public": {
+          "tests": 9,
+          "passed": true
+        },
+        "held_out": {
+          "tests": 20,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "native_exit_code": 0,
+      "tool_count": 26,
+      "native_errors": 0,
+      "duration_seconds": 298.5
+    },
+    "stream": {
+      "case": "stream",
+      "checks": {
+        "protected_files": true,
+        "report_exists": true,
+        "public": true,
+        "held_out": true
+      },
+      "counts": {
+        "public": {
+          "tests": 11,
+          "passed": true
+        },
+        "held_out": {
+          "tests": 18,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "native_exit_code": 0,
+      "tool_count": 18,
+      "native_errors": 0,
+      "duration_seconds": 268.8
+    }
+  },
+  "qa_review": [
+    {
+      "case": "queue",
+      "passed": true,
+      "actual_answer_and_report": "Nine local tests, unchanged original tests and user edits. Reports virtual-clock round-robin/FIFO, capacity, per-tenant idempotency, lease fencing, cancellation, unknown retaining slot, deep-copy snapshots and mechanical audit. Explicitly disclaims physical workers/GPU, persistence, threading, network and production.",
+      "independent_tests": 20,
+      "root_source_review": "Unknown remains ACTIVE, stale ack is refused, reconcile is required to release uncertain capacity. Authoritative completion after cancellation request remains completed; audit contains only four mechanical fields.",
+      "review_followup_tests": 8
+    },
+    {
+      "case": "stream",
+      "passed": true,
+      "actual_answer_and_report": "Eleven local tests, strict incremental UTF-8, partial-frame buffering, accepted-cursor reconnect, duplicate/stale/foreign filtering and iterator closure. EOF not completed. Explicitly reports scripted iterators rather than live service QA; does not claim external acceptance tests.",
+      "independent_tests": 18,
+      "root_source_review": "Fresh decoder per connection, follower cursor independent of decoder id, terminal immutable, bounded reconnect, programmer exceptions propagated and generator closed on early terminal.",
+      "review_followup_tests": 8
+    }
+  ],
+  "backend_fix": {
+    "file": "backend/planner/job-lifecycle.cjs",
+    "reproduced_failure": "Cancellation-request, unknown/reconciling/busy and backpressure states were absent from the explicit receipt classifier. A phase=complete decision could cite such receipts as successful evidence.",
+    "baseline_tests": {
+      "total": 37,
+      "passed": 27,
+      "failed": 10,
+      "state_behavior_failures": 9,
+      "guidance_failure": 1
+    },
+    "after_fix_lifecycle_tests": {
+      "total": 37,
+      "passed": 37,
+      "failed": 0
+    },
+    "new_pending_states": [
+      "cancel_requested",
+      "cancelling",
+      "canceling",
+      "unknown",
+      "outcome_unknown",
+      "reconciling",
+      "busy"
+    ],
+    "new_unsuccessful_states": [
+      "queue_full",
+      "rate_limited"
+    ],
+    "guidance": "Reconcile existing job/worker before assuming cancellation or releasing uncertain physical resources. Respect backpressure budgets. Resume streams using the last accepted event cursor without creating another job.",
+    "classification_scope": "Only existing explicit top-level receipt state/status and recognized executor metadata; arbitrary source/log/nested application data are not scanned.",
+    "original_sha256": "b08db84b504ee95dc8bb3307e49c94bf46e9d7c99b9d46dc3f8bd16055bd1b50",
+    "installed_sha256": "a4a99aaa5e4831572465318e840ce7f266cd5f6b1a625c8bfac2692b252dd56f"
+  },
+  "verification": {
+    "local_backend_tests": 108,
+    "local_backend_passed": 108,
+    "linux_tests": {
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "skipped": 0
+    },
+    "linux_planner_integration_tests": 10,
+    "linux_firewall_tests": 6,
+    "activation_guard_tests": 7,
+    "native_queue_independent_tests": 20,
+    "native_stream_independent_tests": 18,
+    "actual_production_model_checks": [
+      {
+        "fixture": "cancel_request_is_not_terminal",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "job_status"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "expired_lease_unknown_requires_reconciliation",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "reconcile_job"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "backpressure_does_not_authorize_replay",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "reconnect_uses_accepted_cursor",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "resume_stream"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "terminal_cancellation_is_not_generated_artifact",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "queued_receipt_requires_existing_job_check",
+        "http_status": 200,
+        "passed": true,
+        "tool_names": [
+          "job_status"
+        ],
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "public_health_http": 200,
+    "syntax_and_diff_check": "passed",
+    "review_followup_tests": {
+      "queue": {
+        "tests": 8,
+        "passed": true
+      },
+      "stream": {
+        "tests": 8,
+        "passed": true
+      }
+    },
+    "independent_functional_tests_total": 54,
+    "future_fixture_preparation_and_original_hashes": "passed"
+  },
+  "activation": {
+    "status": "active",
+    "backup": "/var/backups/harmonika-job-state-v2/20261113T183220Z",
+    "candidate_sha256": "a4a99aaa5e4831572465318e840ce7f266cd5f6b1a625c8bfac2692b252dd56f",
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true,
+    "installed_sha256": "a4a99aaa5e4831572465318e840ce7f266cd5f6b1a625c8bfac2692b252dd56f"
+  },
+  "backend_state": {
+    "service": "active",
+    "hashes": {
+      "agent-controller.cjs": "09a2b8993e1dc2107c552872883e5f9696da0088c0655b640739a7cfdfee4e7f",
+      "internal-tool-planner.js": "f89751d893167f1f06509d8c95bd02cf1ef283528678596a78aee9d724482d02",
+      "job-lifecycle.cjs": "a4a99aaa5e4831572465318e840ce7f266cd5f6b1a625c8bfac2692b252dd56f",
+      "secret-firewall.cjs": "28ea9236e8f8ef6e2b6d4c7a9f9bd8fbd0c3e315271d7c5ad2613b48f8512fe4",
+      "debug-workflow.cjs": "4e6e654dae019500500370129be722ee2c146c2480501091224e7913f73f380c"
+    },
+    "public_health_http": 200,
+    "runtime_changed": true,
+    "restart_count": 1,
+    "service_restarted": "harmonika-ai",
+    "production_job_submission_or_cancellation": false,
+    "tui_binary_branding_or_permissions_changed": false,
+    "final_verified_at_utc": "2026-11-13T18:42:07.038440+00:00"
+  },
+  "acceptance_review": {
+    "status": "completed",
+    "frozen_files": 4,
+    "native_contracts_tests_or_results_changed_by_examiner": false,
+    "initial_review_timing": "Review dispatched before native runs; native execution began while final review was pending.",
+    "independent_grading": "Twenty queue and eighteen stream tests generated before native execution; protected files verified by SHA-256. No hidden tests sent to Harmonika.",
+    "findings": [
+      "Per-tenant occupancy with spare global slots was not independently distinguished from round-robin order.",
+      "Immediate expiry during full queue, audit privacy/omissions, method-wide clock validation and sequential lease freshness needed coverage.",
+      "Numeric cursor ordering, timeout/decode-error reconnects, iterator closure on errors and transition branches needed coverage.",
+      "Cancel snapshot return and several precedence/order rules needed explicit wording for future fixtures."
+    ],
+    "disposition": "Added eight independent follow-up tests per case after initial grading. All sixteen passed against unchanged Harmonika-generated source. Saved reusable probes and clarified contracts for future preparations only. Initial native contracts, hidden acceptance files, source and results were preserved.",
+    "numeric_ordering_note": "Original cursor ordering wording did not explicitly say numeric rather than lexical. Follow-up records the implemented numeric behavior; future contract now states it explicitly. No initial run was penalized on an ambiguous requirement."
+  },
+  "artifacts": {
+    "queue/src/fairqueue.py": "bc42a127f34cb7a5f10c9079e73af24f4ccd19bb2147bf0e24b2e3327b8fb3e7",
+    "stream/src/streaming.py": "c690210b3372e1a99dbeb4e1fd5b2f50e319325c564ca4d18c385a1580b92e22",
+    "queue/HASIL.md": "d83613ecc321e50c4c4ca77a1db6f22352d34acea49ab2d3259d63a81d02341f",
+    "stream/HASIL.md": "8cc079babec33cfe26753b51fabfa51da986bd014a58e1115c502b4a880d8bd2",
+    "grading/queue.py": "f08d60f3772dd1125f8c277627288079b5f17762682cc7e0f1caddb69280b7c3",
+    "grading/stream.py": "782a9b102df04db5aecf1a9981093b5776c59ef17f1aa829aad0d3234e5016e7",
+    "grading/queue-followup.py": "1f205788c2cada154d5766c226e5b20bd1daec6454a8cf39dc10cb636919aa41",
+    "grading/stream-followup.py": "702fcd488f5c0aaa895ef6e4798d2af5458572211f15cf22ec14982239a1dd20"
+  },
+  "privacy": {
+    "user_sessions_reused": false,
+    "real_customer_or_media_data_used": false,
+    "raw_native_logs_in_git": false,
+    "credentials_printed_or_stored_in_git": false,
+    "new_controller_logs_with_chat_tool_payloads": false,
+    "model_training_performed": false,
+    "user_processes_signalled": false,
+    "commit_or_push_performed": false
+  },
+  "limits": [
+    "Queue code is a single-threaded virtual-clock in-memory exam artifact, not a deployed production scheduler, durable broker or GPU worker fencing implementation.",
+    "Stream reconnect uses injected byte iterators, not real HTTP/SSE infrastructure or a load/soak test.",
+    "Production model probes inspect decisions only; selected client tools are not executed.",
+    "Lifecycle guard blocks inappropriate phase=complete evidence and supplies guidance; it is not a universal semantic validator or guarantee of correct free-form answers.",
+    "No real user jobs, GPU, financial/CS application, credentials, permissions, TUI binary or branding were changed."
+  ]
+}

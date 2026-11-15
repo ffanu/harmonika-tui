@@ -1,0 +1,168 @@
+{
+  "date": "2026-11-13",
+  "issue": "One requested bird rendered as two heads sharing one torso",
+  "root_cause": "PNG mechanics and byte-size checks did not enforce semantic subject count or anatomy before delivery",
+  "pipeline": [
+    "RTX local generation",
+    "Private candidate",
+    "Neutral RTX local 8B count/anatomy review",
+    "At most one correction after completed proven-bad render",
+    "Publish only on passed visible criteria"
+  ],
+  "tests": {
+    "python": 30,
+    "node": 4,
+    "total": 34,
+    "result": "passed",
+    "diff_check": "passed"
+  },
+  "real_evidence": {
+    "original.png.review.json": {
+      "status": "failed",
+      "scope": "subject_count_and_visible_anatomy",
+      "expected_heads": 1,
+      "observed_heads": 2,
+      "observed_torsos": 1,
+      "anatomy_issue": "fused_bodies",
+      "review_model": "qwen3-vl:8b-instruct",
+      "review_job_ids": [
+        "job_mcpc5d734546f88456d833c25dd97adc436"
+      ],
+      "reason": "bird_count_or_anatomy_mismatch"
+    },
+    "harmonika-high-quality-3a3311f3e6b3.png.review.json": {
+      "status": "passed",
+      "scope": "subject_count_and_visible_anatomy",
+      "expected_heads": 1,
+      "observed_heads": 1,
+      "observed_torsos": 1,
+      "anatomy_issue": "none",
+      "review_model": "qwen3-vl:8b-instruct",
+      "review_job_ids": [
+        "job_mcpf6b98a86c56747d09842cb59253b1f4c"
+      ],
+      "reason": "visible_criteria_checked"
+    },
+    "activation.json": {
+      "healthy": true,
+      "before": {
+        "harmonika-ai.service": {
+          "MainPID": "3933103",
+          "ActiveState": "active"
+        },
+        "harmonika-web-chat-live.service": {
+          "MainPID": "3925959",
+          "ActiveState": "active"
+        },
+        "harmonika-quality-audit.service": {
+          "MainPID": "3915322",
+          "ActiveState": "active"
+        }
+      },
+      "after": {
+        "harmonika-ai.service": {
+          "MainPID": "3962940",
+          "ActiveState": "active"
+        },
+        "harmonika-web-chat-live.service": {
+          "MainPID": "3925959",
+          "ActiveState": "active"
+        },
+        "harmonika-quality-audit.service": {
+          "MainPID": "3915322",
+          "ActiveState": "active"
+        }
+      },
+      "companion_pids_unchanged": true,
+      "gpu_idle_before_activation": true
+    },
+    "router_manifest": {
+      "model": "FLUX.2 Klein 4B",
+      "width": 2048,
+      "height": 2048,
+      "quality_gate": {
+        "status": "passed",
+        "scope": "subject_count_and_visible_anatomy",
+        "expected_heads": 1,
+        "observed_heads": 1,
+        "observed_torsos": 1,
+        "anatomy_issue": "none",
+        "review_model": "qwen3-vl:8b-instruct",
+        "review_job_ids": [
+          "job_mcpb864abb0934f4b968726f60a8e01234f"
+        ],
+        "reason": "visible_criteria_checked"
+      },
+      "generation_attempts": 1,
+      "quality_verification": "bird_count_and_visible_anatomy_checked"
+    },
+    "free_form_native_vision_probe": {
+      "visible_heads": 2,
+      "claimed_torsos": 2,
+      "torso_claim_matches_direct_pixel_review": false,
+      "decision_use": "Not used as approval; the enforced count gate rejects excess heads independently of torso claims"
+    }
+  },
+  "mac": {
+    "private_mcp_adapter_installed": true,
+    "fresh_mcp_delegate_verified": true,
+    "owner_helpers_hash_verified": true,
+    "skill_and_routing_installed": true,
+    "native_generation_exam": {
+      "status": "passed",
+      "session_id": "ses_e2bf5977fffeB12lchjY48xrFG",
+      "mode": "fresh owner native --standalone",
+      "tool": "harmonika.generate_image",
+      "quality_gate": {
+        "status": "passed",
+        "scope": "subject_count_and_visible_anatomy",
+        "expected_heads": 1,
+        "observed_heads": 1,
+        "observed_torsos": 1,
+        "anatomy_issue": "none",
+        "review_model": "qwen3-vl:8b-instruct",
+        "review_job_ids": [
+          "job_mcpacd840cf5084448f8cab6759f7d7558b"
+        ],
+        "reason": "visible_criteria_checked"
+      },
+      "job_ids": [
+        "gw_1e0a81f265b44a2f"
+      ],
+      "generation_attempts": 1,
+      "model": "FLUX.2 Klein 4B",
+      "file": "/Users/id/Downloads/harmonika-high-quality-f603a834ef18.png",
+      "bytes": 6881018,
+      "width": 2048,
+      "height": 2048,
+      "cli_exit_code": 0,
+      "final_answer_received": true
+    },
+    "existing_open_tui_mcp_refresh": "not_proven; configuration reload alone does not replace cached functions"
+  },
+  "artifacts": {
+    "original.png": {
+      "bytes": 6663678,
+      "sha256": "9f33fb4fa2e25124c01e9543fe00cb301677117efe148029b15c2f1268413618"
+    },
+    "linux-router-corrected.png": {
+      "bytes": 6764395,
+      "sha256": "310181c4a878129bdc00086267086ebb674ad608ebf6796a90db0b64665406f3"
+    },
+    "harmonika-high-quality-3a3311f3e6b3.png": {
+      "bytes": 7033875,
+      "sha256": "b018274b64bd078187b5dcc6854c35a180b0a50fb620d489215a59a29041dbb3"
+    },
+    "harmonika-high-quality-f603a834ef18.png": {
+      "bytes": 6881018,
+      "sha256": "7d4fc428c1accd8f135b44d113d247bc21ea3dc08f5b0f20d4e360983f87ffd6"
+    }
+  },
+  "limits": [
+    "Only the selected RTX high-profile owner adapter and Linux Node RTX-first router are covered; other web providers and reference edits are not certified",
+    "Explicit fantasy and uncounted flocks are excluded from this narrow count contract",
+    "VLM observations can be mistaken; passed is limited to visible requested criteria",
+    "No claim of perfect aesthetics, full anatomical accuracy or GitHub push"
+  ],
+  "privacy": "No raw prompts, image observations or credentials added to mechanical event logs; authorized artifacts and pre-existing normal artifact manifests retain their normal data"
+}

@@ -1,0 +1,1153 @@
+{
+  "exam": "Harmonika native agent Level 8",
+  "date": "2026-11-14",
+  "status": "passed_scoped_lab",
+  "scope": "isolated_durable_dag",
+  "qualification": "Native workflow orchestration over protected passed Level7 queue, real private Unix HTTP and three business databases. Synthetic lab, not general autonomy certification, model training, arbitrary vendor exactly-once or production disaster recovery.",
+  "production_business_data_changed": false,
+  "architecture": {
+    "api": 1,
+    "queue_workers": 3,
+    "effect_sink": 1,
+    "workflow_coordinator": 1,
+    "business_databases": [
+      "workflows.sqlite",
+      "jobs.sqlite",
+      "sink.sqlite"
+    ],
+    "technical_fault_database": "mechanics.sqlite",
+    "network": "none; private HTTP over Unix socket",
+    "limits": "non-root/read-only/CPU/RAM/PIDs; no production/customer/RTX target"
+  },
+  "actors": {
+    "Codex": "Contract/harness, independent grading, diagnosis and justified backend upgrades",
+    "OpenCode": "Read-only contract/harness review via delegate skill",
+    "Harmonika": "Native implementation and real scoped lab operations",
+    "Claude": "Not involved"
+  },
+  "acceptance": [
+    "Durable DAG dependency/content verification and global tenant admission",
+    "Stable child recovery after committed ACK loss and actual coordinator exit42 before workflow checkpoint",
+    "Cancellation and durable pause while physical child work may continue",
+    "Atomic v1-to-v2 migration failure/lock/retry with exact legacy state preservation",
+    "Priority scheduling before dispatch; old image code rollback on settled schema2 then restore",
+    "Same native session, original checkpoint/notes, source-image binding and mechanical private evidence"
+  ],
+  "results": {
+    "final_grade": {
+      "phase": "v2",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "six_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "sixty_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "authenticated_v1_snapshot_includes_original_checkpoint": true,
+        "lost_child_ack_reconciled_same_identity": true,
+        "two_lookup503_bound_to_lost_child": true,
+        "coordinator_crash_after_child_commit_recovered": true,
+        "actual_coordinator_exit42_restart_archived": true,
+        "corrupt_child_artifact_reread_without_resubmit": true,
+        "offline_parent_observed_without_false_success": true,
+        "pause_reconciles_root_blocks_descendant": true,
+        "coordinator_manual_restart_during_pause": true,
+        "both_queued_and_running_cancel_without_descendants": true,
+        "priority_applied_before_child_dispatch": true,
+        "native_migration_probe_current_source": true,
+        "independent_actual_snapshot_migration_probe": true,
+        "settled_v1_code_rollback_then_tested_v2_restore": true,
+        "native_report_honest_scope": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "mac_engine_tests": {
+      "passed": 22,
+      "skipped": 0
+    },
+    "linux_image_engine_tests": {
+      "passed": 22,
+      "skipped": 0
+    },
+    "unique_engine_test_cases": 22,
+    "harness_guard_tests": 16,
+    "completed_workflows": 24,
+    "cancelled_workflows": 2,
+    "child_jobs": 49,
+    "effect_rows": 49,
+    "note": "Mac/Linux run the same22 cases, not44 unique tests.60 initial attempts, quota fill/probes and completed workflows are distinct."
+  },
+  "limits": [
+    "Fixed synthetic owners are not production IAM",
+    "Idempotency/fencing supported by controlled child queue/sink",
+    "No cross-host TCP partition/GPU/physical device or payment/customer data",
+    "Inactive v1 clone migration is not a live production restore",
+    "Settled old-image compatibility is not a rolling mixed-version live migration",
+    "Raw native logs and full synthetic DB snapshots stay private, outside Git"
+  ],
+  "phase_a": {
+    "final_grade": {
+      "phase": "v1",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "six_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "sixty_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "fixture_correction": {
+      "reason": "Held-out mock used24-char identifiers, while the protected passed queue uses uuid4.hex32 and the native validator correctly enforces that protocol.",
+      "initial_grade_failures": 9,
+      "initial_mac_active_cases": 17,
+      "initial_linux_active_cases": 17,
+      "mock_identifier_chars_before": 24,
+      "mock_identifier_chars_after": 32,
+      "real_runtime_protocol_unchanged": true,
+      "native_source_unchanged": true,
+      "assertions_weakened": false,
+      "independent_sha256": "e8044b88527d95e408658da2fc56f1dec9615663a17b6882288b7a7406738000"
+    },
+    "operator_syntax_correction": {
+      "error_type": "SyntaxError",
+      "operator_caused": true,
+      "failed_grade_preserved": "v1-fixture-corrected-result.json",
+      "candidate_source_changed": false,
+      "production_changed": false,
+      "controller_compiled_before_install": true,
+      "authenticated_health_http": 200,
+      "controller_sha256": "1839e2970d3d5b98caa5905a099620ce8f8383b7ec322b95580a190fcf7e949f"
+    }
+  },
+  "phase_b_status": "passed_independent_and_cleaned",
+  "harness_guard_tests": 16,
+  "backend_upgrade": {
+    "status": "active",
+    "stage": "/root/harmonika-level8-lab/hl8-f2bee61b56aa/workflow-deadline-r1-stage",
+    "tests": {
+      "local-tests": 148,
+      "linux-tests": 76,
+      "activation-guards": 7
+    },
+    "installed_baseline_sha256": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9",
+    "candidate_debug_sha256": "41645ffdeff525713e195fdf551fe7deb6b4013f3fb375d73ceddb28167243a6",
+    "verification_did_not_restart": true,
+    "canary_script_sha256": "c0b5ddfbbc2d635869b9d5971dc1c76a8315672a9092e4dbc91f2901c74e7c46",
+    "additional_upgrade": "One monotonic240s request budget, per-attempt ceiling180s, propagated to long and CLI transport; preserves confirmed-close retry/admission. Terminal auth/history/schema/firewall errors retain original classification at expiry.",
+    "previous_activations": [
+      {
+        "status": "active",
+        "stage": "/root/harmonika-level8-lab/hl8-f2bee61b56aa/workflow-deadline-stage",
+        "tests": {
+          "local-tests": 147,
+          "linux-tests": 75,
+          "activation-guards": 7
+        },
+        "installed_baseline_sha256": "d6b8ae603e24fa9a752284dcd4fa3dc8423cfff7d9eea1b0f6f549b7f79b87a9",
+        "candidate_debug_sha256": "41645ffdeff525713e195fdf551fe7deb6b4013f3fb375d73ceddb28167243a6",
+        "verification_did_not_restart": true,
+        "canary_script_sha256": "c0b5ddfbbc2d635869b9d5971dc1c76a8315672a9092e4dbc91f2901c74e7c46",
+        "additional_upgrade": "One monotonic240s request budget, per-attempt ceiling180s, propagated to long and CLI transport; preserves confirmed-close retry/admission.",
+        "activation": {
+          "status": "active",
+          "backup": "/var/backups/harmonika-source-reference/20261114T063305Z",
+          "candidate_sha256": {
+            "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+            "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+            "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+            "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+            "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+            "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+            "debug-workflow.cjs": "41645ffdeff525713e195fdf551fe7deb6b4013f3fb375d73ceddb28167243a6",
+            "decision-recovery.cjs": "f6e0f50dfc1532175774aeffdbdd3a277fda32bd56bca5c20c70c934445d9be0"
+          },
+          "health_http": 200,
+          "unrelated_service_pids_unchanged": true
+        },
+        "source_canaries": [
+          {
+            "fixture": "python_input_reference",
+            "http_status": 200,
+            "error_code": null,
+            "source_matches": true,
+            "path_matches": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false,
+            "passed": true
+          },
+          {
+            "fixture": "python_request_cookie",
+            "http_status": 200,
+            "error_code": null,
+            "source_matches": true,
+            "path_matches": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false,
+            "passed": true
+          },
+          {
+            "fixture": "html_form_reference",
+            "http_status": 200,
+            "error_code": null,
+            "source_matches": true,
+            "path_matches": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false,
+            "passed": true
+          },
+          {
+            "fixture": "indented_python_method",
+            "http_status": 200,
+            "error_code": null,
+            "source_matches": true,
+            "path_matches": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false,
+            "passed": true
+          },
+          {
+            "fixture": "empty_cookie_logout",
+            "http_status": 200,
+            "error_code": null,
+            "source_matches": true,
+            "path_matches": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false,
+            "passed": true
+          }
+        ],
+        "workflow_canaries": [
+          {
+            "fixture": "child_submit_unknown_lookup_same_identity",
+            "http_status": 200,
+            "passed": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false
+          },
+          {
+            "fixture": "cancel_known_failed_plus_unknown_child",
+            "http_status": 200,
+            "passed": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false
+          },
+          {
+            "fixture": "migration_partial_failure_needs_state_verification",
+            "http_status": 200,
+            "passed": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false
+          },
+          {
+            "fixture": "paused_workflow_keeps_reconciling_existing_child",
+            "http_status": 200,
+            "passed": true,
+            "client_tools_executed": false,
+            "internal_state_exposed": false
+          }
+        ],
+        "scope": "Planner technical workflow guidance; exam application routes are isolated lab only.",
+        "client_tools_executed": false
+      }
+    ],
+    "activation": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-source-reference/20261114T065145Z",
+      "candidate_sha256": {
+        "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+        "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+        "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+        "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+        "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+        "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+        "debug-workflow.cjs": "41645ffdeff525713e195fdf551fe7deb6b4013f3fb375d73ceddb28167243a6",
+        "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4"
+      },
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true
+    },
+    "source_canaries": [
+      {
+        "fixture": "python_input_reference",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "python_request_cookie",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "html_form_reference",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "indented_python_method",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "empty_cookie_logout",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      }
+    ],
+    "workflow_canaries": [
+      {
+        "fixture": "child_submit_unknown_lookup_same_identity",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "cancel_known_failed_plus_unknown_child",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "migration_partial_failure_needs_state_verification",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "paused_workflow_keeps_reconciling_existing_child",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "scope": "Planner technical workflow guidance; exam application routes are isolated lab only.",
+    "client_tools_executed": false
+  },
+  "backend_transport_incident": {
+    "native_run": "turn-b",
+    "same_session": true,
+    "error_type": "provider.transport",
+    "error_signature": "Timed out waiting for response headers",
+    "interval_since_last_completed_step_ms": 300034,
+    "cause": "Each protocol generation allowed180000ms and a confirmed-close timeout retry could exceed client300000ms header wait.",
+    "correction": "One monotonic240000ms generation/retry budget; attempt ceiling180000ms; remaining timeout propagated to protocol and CLI. Confirmed-close proof, no signals and admission-until-close retained.",
+    "reproduction_tests": {
+      "before": {
+        "passed": 10,
+        "failed": 3
+      },
+      "intermediate": {
+        "passed": 12,
+        "failed": 1,
+        "cause": "New fake-clock test expected unavailable after total deadline; corrected expected error to timeout, retaining budget assertion."
+      },
+      "after": {
+        "passed": 13,
+        "failed": 0
+      }
+    },
+    "verification": "Monotonic fake-clock recovery cases plus real planner VM propagation and full Linux regression suite; no forced240-second live outage claimed.",
+    "initial_failure_preserved": true,
+    "source_sha256": {
+      "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4",
+      "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5"
+    },
+    "opencode_review": {
+      "status": "reviewed_read_only_exit0",
+      "findings": 5,
+      "resolution": [
+        {
+          "finding": 1,
+          "decision": "No force-release of unknown physical child; deliberate admission-until-close boundary, covered by existing held8-slot then-close integration test. Nonterminating provider can exhaust capacity; no universal liveness claim."
+        },
+        {
+          "finding": 2,
+          "decision": "Accepted; new failing regression reproduced terminal error masking, fixed preserving terminal classifications.14 recovery tests pass."
+        },
+        {
+          "finding": 3,
+          "decision": "Bounded2s grace deliberately returns terminal timeout without closed proof; later close releases resources but cannot justify retry before closure. Preserve conservative behavior."
+        },
+        {
+          "finding": 4,
+          "decision": "Short CLI lacks cancellable closed/unexecuted proof;60s terminal timeout and retained slot are intentional. Do not relax retry proof or send signals."
+        },
+        {
+          "finding": 5,
+          "decision": "Deadline tests explicitly use monotonic fake clocks and real planner VM transport propagation; report does not claim a forced240s live outage. Real9 canaries validate deployed request/output paths."
+        }
+      ]
+    },
+    "signals_sent": false,
+    "terminal_classification_regression": {
+      "before": {
+        "passed": 13,
+        "failed": 1
+      },
+      "after": {
+        "passed": 14,
+        "failed": 0
+      }
+    }
+  },
+  "grading_protocol_correction": {
+    "original_failed_report": "v2-first-result.json",
+    "original_evidence_sha256": "bda35ef37bd3b828ed379d213e576a05944878e2949239ecc3c04b190a6d8d4c",
+    "candidate_source_unchanged": true,
+    "image_unchanged": true,
+    "runtime_data_not_rewritten": true,
+    "faults_not_reset": true,
+    "corrections": [
+      {
+        "check": "no_duplicate_effects_or_unowned_jobs",
+        "cause": "Initial assertion counted attempted execute including stale-fence409 as committed effects, contrary to protected passed-Level7 sink protocol.",
+        "actual": {
+          "effect_rows": 49,
+          "unique_effect_jobs": 49,
+          "execute_attempts": 53,
+          "stale_rejections": 4
+        },
+        "replacement": "Require unique effects exactly matching completed owned jobs; per job exactly one successful execute at authorized stored effect fence; every other attempt must have its atomic adjacent matching stale_rejected record and different prior authorized fence. Duplicate successful calls/effect rows/orphans still fail."
+      },
+      {
+        "check": "offline_parent_observed_without_false_success",
+        "cause": "Native used typed status; controller issued actual HTTP health/readiness probes under controller origin after an agent cluster_status, while grader accepted only direct agent HTTP.",
+        "actual": {
+          "agent_cluster_status_at": 1794636853.2600117,
+          "health_http": 200,
+          "health_probe_at": 1794636853.5163438,
+          "ready_http": 503,
+          "ready_probe_at": 1794636853.771988,
+          "release": "workflow-v2"
+        },
+        "replacement": "Accept direct agent probes in the same offline window, or controller probe pair tied within2sec to an actual agent-origin status showing sink down/coordinator running, same release/window. No examiner-origin status or isolated unpaired probe accepted."
+      }
+    ],
+    "guard_tests": {
+      "before_passed": 14,
+      "before_failed": 2,
+      "after_passed": 16,
+      "after_failed": 0
+    },
+    "negative_controls": [
+      "duplicate effect row",
+      "duplicate successful execute",
+      "missing stale rejection",
+      "orphan effect",
+      "unpaired controller probe",
+      "wrong release/window",
+      "sink still running"
+    ],
+    "grader_sha256": "79fa616c2bbe1a2c6b63ffe5174b237759d18b6889ca35d1575ed91b18073e70",
+    "opencode_review": {
+      "exit_code": 0,
+      "read_only": true,
+      "findings": 0,
+      "review_sha256": "0e0955efcf7aa5aeb1051c71e055eb04767eb5adc8a43e403abc6fe4daa25bc3",
+      "basis": [
+        "Sink execute/stale_rejected adjacency is one SQL transaction.",
+        "Duplicate effect/accepted execute, missing rejection and orphan effects remain failures.",
+        "Controller health/readiness pair must follow actual agent status within2s and same offline window/release."
+      ]
+    }
+  },
+  "native_runs": [
+    {
+      "label": "turn-a",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 62,
+      "duration_seconds": 897.7
+    },
+    {
+      "label": "turn-b",
+      "exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 84,
+      "duration_seconds": 1585.2
+    },
+    {
+      "label": "turn-b-deadline-resume",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 12,
+      "duration_seconds": 356.5
+    }
+  ],
+  "native_session_sha256": "2664d5861e6d6c802b15775f93f2411808811c083ee15b0b24f65582e0f8ea5a",
+  "native_tool_counts": {
+    "read": 23,
+    "skill": 1,
+    "shell": 97,
+    "write": 13,
+    "edit": 24
+  },
+  "native_tool_errors": [],
+  "metadata_paths_outside_project": [],
+  "grading_runs": [
+    {
+      "file": "v1-first-result.json",
+      "phase": "v1",
+      "passed": false,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": false,
+        "independent_linux_image_tests": false,
+        "six_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "sixty_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [
+        "independent_local_tests",
+        "independent_linux_image_tests"
+      ],
+      "errors": {}
+    },
+    {
+      "file": "v1-fixture-corrected-result.json",
+      "phase": "v1",
+      "passed": false,
+      "checks": {},
+      "failures": [
+        "grading_interrupted"
+      ],
+      "errors": {
+        "grading_interrupted": "RuntimeError"
+      }
+    },
+    {
+      "file": "v1-corrected-result.json",
+      "phase": "v1",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "six_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "sixty_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    {
+      "file": "v2-first-result.json",
+      "phase": "v2",
+      "passed": false,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "six_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "sixty_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": false,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "authenticated_v1_snapshot_includes_original_checkpoint": true,
+        "lost_child_ack_reconciled_same_identity": true,
+        "two_lookup503_bound_to_lost_child": true,
+        "coordinator_crash_after_child_commit_recovered": true,
+        "actual_coordinator_exit42_restart_archived": true,
+        "corrupt_child_artifact_reread_without_resubmit": true,
+        "offline_parent_observed_without_false_success": false,
+        "pause_reconciles_root_blocks_descendant": true,
+        "coordinator_manual_restart_during_pause": true,
+        "both_queued_and_running_cancel_without_descendants": true,
+        "priority_applied_before_child_dispatch": true,
+        "native_migration_probe_current_source": true,
+        "independent_actual_snapshot_migration_probe": true,
+        "settled_v1_code_rollback_then_tested_v2_restore": true,
+        "native_report_honest_scope": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [
+        "no_duplicate_effects_or_unowned_jobs",
+        "offline_parent_observed_without_false_success"
+      ],
+      "errors": {}
+    },
+    {
+      "file": "v2-protocol-corrected-result.json",
+      "phase": "v2",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "six_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "sixty_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "authenticated_v1_snapshot_includes_original_checkpoint": true,
+        "lost_child_ack_reconciled_same_identity": true,
+        "two_lookup503_bound_to_lost_child": true,
+        "coordinator_crash_after_child_commit_recovered": true,
+        "actual_coordinator_exit42_restart_archived": true,
+        "corrupt_child_artifact_reread_without_resubmit": true,
+        "offline_parent_observed_without_false_success": true,
+        "pause_reconciles_root_blocks_descendant": true,
+        "coordinator_manual_restart_during_pause": true,
+        "both_queued_and_running_cancel_without_descendants": true,
+        "priority_applied_before_child_dispatch": true,
+        "native_migration_probe_current_source": true,
+        "independent_actual_snapshot_migration_probe": true,
+        "settled_v1_code_rollback_then_tested_v2_restore": true,
+        "native_report_honest_scope": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [],
+      "errors": {}
+    }
+  ],
+  "recovery_proofs": [
+    {
+      "fault": "child_submit_ack_lost",
+      "release": "workflow-v2",
+      "job_id_sha256": "09e224708b217382d2c3ab3636d92acd910f329cc0ecf330993efe7927db938b",
+      "accepted_child_post_count": 1,
+      "reconciled_after_fault": true,
+      "sink_effect_rows": 1
+    },
+    {
+      "fault": "coordinator_exit42",
+      "release": "workflow-v2",
+      "job_id_sha256": "42abbdc9d0636c4673192305eabbb24c2cf7f6cc9b93971d39490b504086ee99",
+      "accepted_child_post_count": 1,
+      "reconciled_after_fault": true,
+      "sink_effect_rows": 1
+    },
+    {
+      "fault": "child_artifact_corrupt",
+      "release": "workflow-v2",
+      "job_id_sha256": "e329641a73e6553affc847b513997405f8764f659b7becc2e3ca12ef771d731f",
+      "accepted_child_post_count": 1,
+      "reconciled_after_fault": true,
+      "sink_effect_rows": 1
+    }
+  ],
+  "burst_runs": {
+    "native": {
+      "request_count": 60,
+      "max_overlapping_clients": 60,
+      "status_counts": {
+        "202": 8,
+        "200": 31,
+        "429": 20,
+        "503": 1
+      },
+      "initial_distinct_accepted": 8,
+      "initial_per_owner": {
+        "beta": 4,
+        "alpha": 4
+      },
+      "fill_calls": [],
+      "quota_probe_status": {
+        "alpha": 429,
+        "beta": 429
+      },
+      "per_owner_accepted": {
+        "beta": 4,
+        "alpha": 4
+      },
+      "idempotency_converged": true,
+      "proof_sha256": "15f10599d083eb3f3e8402a6eea6a0357eb4bc9aab8ebffef20a510f540bb49b",
+      "release": "workflow-v1",
+      "image_id": "sha256:93121e683e344f63e8750854727392f6c3465feb6bd0c88590fdcd41004abaae",
+      "distinct_accepted_workflows": 8
+    },
+    "native-workflow-v2": {
+      "request_count": 60,
+      "max_overlapping_clients": 60,
+      "status_counts": {
+        "202": 8,
+        "200": 32,
+        "429": 20
+      },
+      "initial_distinct_accepted": 8,
+      "initial_per_owner": {
+        "alpha": 4,
+        "beta": 4
+      },
+      "fill_calls": [],
+      "quota_probe_status": {
+        "alpha": 429,
+        "beta": 429
+      },
+      "per_owner_accepted": {
+        "alpha": 4,
+        "beta": 4
+      },
+      "idempotency_converged": true,
+      "proof_sha256": "0597c792911dc97b0479171ca2d19f8e21c286cb92ababfc4129ddfb41d078fa",
+      "release": "workflow-v2",
+      "image_id": "sha256:2bad1e6bad3d8c0321b3873dc7b3d2dbe89f71501734e08e64ce5aab5d66ceb5",
+      "distinct_accepted_workflows": 8
+    }
+  },
+  "probe_runs": {
+    "migration-drill": [
+      {
+        "origin": "agent",
+        "base_label": "native",
+        "attempt_label": "native-a1",
+        "passed": true,
+        "probe_exit_code": 0,
+        "image_id": "sha256:2bad1e6bad3d8c0321b3873dc7b3d2dbe89f71501734e08e64ce5aab5d66ceb5",
+        "release": "workflow-v2",
+        "workflow_engine_sha256": "588b596d24c03956e28bb999bc6120f9fd3f9d0c868749f63d1e3708439643ea",
+        "checks": {
+          "immutable_v1_snapshot_hash": true,
+          "actual_v1_rows_present": true,
+          "injected_failure_raised": true,
+          "all_schema_data_version_rolled_back": true,
+          "v2_additive_columns": true,
+          "all_original_rows_steps_events_preserved": true,
+          "legacy_defaults": true,
+          "repeated_init_no_downgrade": true,
+          "real_writer_lock_bounded": true,
+          "lock_failure_no_partial_migration": true,
+          "retry_after_unlock_succeeds": true,
+          "authoritative_source_untouched": true
+        }
+      },
+      {
+        "origin": "examiner",
+        "base_label": "examiner",
+        "attempt_label": "examiner-a1",
+        "passed": true,
+        "probe_exit_code": 0,
+        "image_id": "sha256:2bad1e6bad3d8c0321b3873dc7b3d2dbe89f71501734e08e64ce5aab5d66ceb5",
+        "release": "workflow-v2",
+        "workflow_engine_sha256": "588b596d24c03956e28bb999bc6120f9fd3f9d0c868749f63d1e3708439643ea",
+        "checks": {
+          "immutable_v1_snapshot_hash": true,
+          "actual_v1_rows_present": true,
+          "injected_failure_raised": true,
+          "all_schema_data_version_rolled_back": true,
+          "v2_additive_columns": true,
+          "all_original_rows_steps_events_preserved": true,
+          "legacy_defaults": true,
+          "repeated_init_no_downgrade": true,
+          "real_writer_lock_bounded": true,
+          "lock_failure_no_partial_migration": true,
+          "retry_after_unlock_succeeds": true,
+          "authoritative_source_untouched": true
+        }
+      },
+      {
+        "origin": "examiner",
+        "base_label": "examiner",
+        "attempt_label": "examiner-a2",
+        "passed": true,
+        "probe_exit_code": 0,
+        "image_id": "sha256:2bad1e6bad3d8c0321b3873dc7b3d2dbe89f71501734e08e64ce5aab5d66ceb5",
+        "release": "workflow-v2",
+        "workflow_engine_sha256": "588b596d24c03956e28bb999bc6120f9fd3f9d0c868749f63d1e3708439643ea",
+        "checks": {
+          "immutable_v1_snapshot_hash": true,
+          "actual_v1_rows_present": true,
+          "injected_failure_raised": true,
+          "all_schema_data_version_rolled_back": true,
+          "v2_additive_columns": true,
+          "all_original_rows_steps_events_preserved": true,
+          "legacy_defaults": true,
+          "repeated_init_no_downgrade": true,
+          "real_writer_lock_bounded": true,
+          "lock_failure_no_partial_migration": true,
+          "retry_after_unlock_succeeds": true,
+          "authoritative_source_untouched": true
+        }
+      }
+    ]
+  },
+  "release_digests": {
+    "workflow-v1": {
+      "image_id": "sha256:93121e683e344f63e8750854727392f6c3465feb6bd0c88590fdcd41004abaae",
+      "source_sha256": "47d07363647bf4eb059aaabe81515169b11265f0d70d6b137e2cd8098789c01c"
+    },
+    "workflow-v2": {
+      "image_id": "sha256:2bad1e6bad3d8c0321b3873dc7b3d2dbe89f71501734e08e64ce5aab5d66ceb5",
+      "source_sha256": "5aa849410f6785ca5a3a56110d595f2c5dedd43940b7c970d012f41bdd2d7f10"
+    }
+  },
+  "release_module_sha256": {
+    "workflow-v1": {
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "Dockerfile": "d3b6c256996930baacf44c33e25e283a79d4b5d7d48513ff915fb6437ea3d096",
+      "workflow_adapter.py": "077124b782522fa6649b10a2b5da3d62f22029023d605947c76171dd8dbbe8d8",
+      "fault_store.py": "e5ef53c1b60bc79293962c3616b4ec3733177e95b953a1a04f10d85707d93c90",
+      "coordinator.py": "79e127198d5848fee61bd422cd5bb3fce01d835253be0ce1d2d8c7bd417e8e51",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "cbfde48de63d19f302b26a86dd31c02251ca2833a044993258bcf534ce81a503",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "workflow_engine.py": "47185925e64c848a20497c00351161f0e4d259a04ff80d39aa277c4094a7ab41",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "server.py": "2d1aa1fafaafa73cfad4681a718e57c1deec64e00410125b21d87827f943483e"
+    },
+    "workflow-v2": {
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "Dockerfile": "d3b6c256996930baacf44c33e25e283a79d4b5d7d48513ff915fb6437ea3d096",
+      "workflow_adapter.py": "077124b782522fa6649b10a2b5da3d62f22029023d605947c76171dd8dbbe8d8",
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "coordinator.py": "79e127198d5848fee61bd422cd5bb3fce01d835253be0ce1d2d8c7bd417e8e51",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "cbfde48de63d19f302b26a86dd31c02251ca2833a044993258bcf534ce81a503",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "workflow_engine.py": "588b596d24c03956e28bb999bc6120f9fd3f9d0c868749f63d1e3708439643ea",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "server.py": "2d1aa1fafaafa73cfad4681a718e57c1deec64e00410125b21d87827f943483e"
+    }
+  },
+  "activation_attempts": {
+    "stage-v1": 1,
+    "stage-v2": 1,
+    "rollback-v1": 1,
+    "restore-v2": 1
+  },
+  "original_checkpoint_preserved": true,
+  "v1_snapshot": {
+    "sha256": "b655abb9ea56bc2073a1fa2e27b31ef3c99a8b5d0c79f42bab453ca2dffbec39",
+    "bytes": 57344,
+    "schema": 1,
+    "origin": "examiner",
+    "authenticated": true,
+    "at": 1794636224.1412206,
+    "release": "workflow-v1",
+    "image_id": "sha256:93121e683e344f63e8750854727392f6c3465feb6bd0c88590fdcd41004abaae",
+    "checkpoint_id_sha256": "2224ce1939ce0d0955cfc7fd97d4e2dd3ca6825779cc2ccfd79c07d3cf90d637"
+  },
+  "contract_review_resolution": {
+    "reviewer": "OpenCode",
+    "mode": "read_only",
+    "claude_involved": false,
+    "resolved_before_native_start": true,
+    "findings": [
+      {
+        "issue": "failed child cancellation/capacity",
+        "resolution": "Authoritative failed child is terminal for cancellation. Unknown/reconciling retains slot until explicit cancellation resolves every reserved child; never exempt unknown outcomes from capacity."
+      },
+      {
+        "issue": "degraded workflow state ambiguity",
+        "resolution": "Offline parent retains running/reconciling/cancel_requested. Degraded is readiness503 vs liveness200, not another state."
+      },
+      {
+        "issue": "idempotency/capacity and priority0 identity",
+        "resolution": "Validate, then replay/conflict before admission. Optional absent priority remains original canonical payload; explicit0 is intentionally distinct."
+      },
+      {
+        "issue": "child queue backpressure",
+        "resolution": "429/503 retains stable dispatch identity with bounded per-tick call/backoff. Added an independent backpressure progress case."
+      },
+      {
+        "issue": "cancel precedence and retry bounds",
+        "resolution": "cancel_requested wins parent state while reconciliation continues; child.cancel bound added alongside other per-step I/O."
+      },
+      {
+        "issue": "pause routes and event semantics",
+        "resolution": "Typed bridge includes pause/resume routes. Terminal controls200 unchanged; parent event task=null, pause flag changes emit paused/resumed once."
+      },
+      {
+        "issue": "migration initialization/lock corner cases",
+        "resolution": "Fresh v2 goes through v1/v2 transaction, hook only on actual upgrade. Failure/lock rollback; repeated init never replays hook or downgrades."
+      },
+      {
+        "issue": "burst exact-count false negatives",
+        "resolution": "60 attempts remain unretried with valid HTTP required, initial6..8 accepted3..4 per owner. Separate bounded fill after authoritative404 of explicitly rejected503 keys, then8 accepted and two new capacity probes429. Extra calls are separately reported; no transport replay."
+      }
+    ]
+  },
+  "harness_review_resolution": {
+    "reviewer": "OpenCode",
+    "mode": "read_only",
+    "completed_findings": 3,
+    "partial_response": true,
+    "note": "The review ended after three substantive findings and an unfinished fourth heading; no additional findings are inferred.",
+    "claude_involved": false,
+    "findings": [
+      {
+        "finding": "Burst cache/evidence not bound to final release",
+        "confirmed": true,
+        "resolution": "Release-qualified cache/key labels, current release/image assertion, refreshed cache attribution, and mandatory new final-v2 native stress after all fault drills."
+      },
+      {
+        "finding": "One-shot faults not release-bound; legitimate re-tests impossible",
+        "confirmed": true,
+        "resolution": "Protected runtime LAB_RELEASE audit plus per-release one-shot spend/target namespaces. New activation removes armed flags only, preserves old receipts; re-arm and use fresh release-prefixed workflow keys. Grading uses final-release fault cases and preserves prior failed cases."
+      },
+      {
+        "finding": "Self-declared origin and snapshot timing insufficient",
+        "confirmed": true,
+        "resolution": "Private per-lab HMAC operator requests, examiner-only capture/test operations, actual settled v1 snapshot required to contain the verified completed checkpoint, authenticated origin/time/release/image/checkpoint-hash provenance. This is not a host-adversarial sandbox claim."
+      }
+    ],
+    "additional_operator_findings": [
+      {
+        "issue": "Mock24-character UUID mismatch",
+        "resolution": "Corrected mock to the actual32-character queue protocol; native validation and every assertion retained. Added protocol guard."
+      },
+      {
+        "issue": "Migration comparison and extra technical columns",
+        "resolution": "Compare every original column/value for all original rows; permit additive fields instead of comparing full tuple lengths after schema extension."
+      },
+      {
+        "issue": "Nested quoted SQL in capture controller draft",
+        "resolution": "One grading run interrupted; corrected to compiled multiline code with parameterized SQL before installation. No native source or production business data changed."
+      }
+    ],
+    "harness_guard_tests": 14,
+    "assertions_weakened": false,
+    "controller_sha256": "0544e5fc0a5beab29efc8e13c10cdb89967226a02886e9aa9f9d8b6ecdb1f71d",
+    "additional_acceptance_guards": [
+      "Fresh-v2 failed migration leaves schema0/no tables, while existing-v1 failure preserves all rows/columns/version.",
+      "Already-v2 init never calls migration hook; explicit priority0 remains distinct from absent priority.",
+      "Pause restart/offline liveness-readiness witnesses bind same current-release workflow and actual stop/start time window.",
+      "Running-child cancellation must contain durable running then cancel_requested queue events, not just queued cancellation."
+    ],
+    "final_controller_sha256": "be6bc2a08f439370255e9f647bf69107b771b512566ba7180d135ea48082565e"
+  },
+  "fixture_correction": {
+    "reason": "Held-out mock used24-char identifiers, while the protected passed queue uses uuid4.hex32 and the native validator correctly enforces that protocol.",
+    "initial_grade_failures": 9,
+    "initial_mac_active_cases": 17,
+    "initial_linux_active_cases": 17,
+    "mock_identifier_chars_before": 24,
+    "mock_identifier_chars_after": 32,
+    "real_runtime_protocol_unchanged": true,
+    "native_source_unchanged": true,
+    "assertions_weakened": false,
+    "independent_sha256": "e8044b88527d95e408658da2fc56f1dec9615663a17b6882288b7a7406738000"
+  },
+  "operator_syntax_correction": {
+    "error_type": "SyntaxError",
+    "operator_caused": true,
+    "failed_grade_preserved": "v1-fixture-corrected-result.json",
+    "candidate_source_changed": false,
+    "production_changed": false,
+    "controller_compiled_before_install": true,
+    "authenticated_health_http": 200,
+    "controller_sha256": "1839e2970d3d5b98caa5905a099620ce8f8383b7ec322b95580a190fcf7e949f"
+  },
+  "cleanup": {
+    "closed": true,
+    "containers_removed": 25,
+    "remaining_owned_objects": {
+      "containers": 0,
+      "images": 0,
+      "volumes": 0
+    }
+  },
+  "backend_final_health": {
+    "health": {
+      "local": {
+        "http_status": 200,
+        "json": true
+      },
+      "public": {
+        "http_status": 200,
+        "json": true
+      }
+    },
+    "services": {
+      "harmonika-ai": "active",
+      "harmonika-web-chat-live": "active",
+      "harmonika-shared-core": "active"
+    },
+    "source_sha256": {
+      "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+      "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+      "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4",
+      "debug-workflow.cjs": "41645ffdeff525713e195fdf551fe7deb6b4013f3fb375d73ceddb28167243a6"
+    },
+    "debug_workflow_sha256": "41645ffdeff525713e195fdf551fe7deb6b4013f3fb375d73ceddb28167243a6",
+    "passed": true
+  },
+  "operator_assistance": [
+    "Codex supplied protected passed-Level7 queue/transport/sink, workflow HTTP/child adapter, fault mechanics, deployment bridge and independent grading.",
+    "Codex supplied TURN B and immutable actual v1 snapshot after independently passed TURN A.",
+    "OpenCode reviewed contract/harness read-only; Codex checked findings against source and real tests.",
+    "Native implements workflow_engine.py/Dockerfile and its own regressions in an isolated session; this is assisted scoped testing, not model training or universal autonomy."
+  ],
+  "evidence_files": {
+    "private": "Raw native JSONL/source/full synthetic database snapshots remain in the private exam root, outside Git.",
+    "report": "docs/LEVEL8-AGENT-EXAM-20261114.json"
+  }
+}

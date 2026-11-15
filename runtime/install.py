@@ -89,7 +89,7 @@ def ensure_default_config(root=ROOT):
     dev_nm=m.device_name()
     if not cfg_file.exists():
         default_cfg={
-            'providers':{'harmonika':{'id':'harmonika','name':'Harmonika Ai','type':'openai-compat','base_url':'https://chat.harmonika.id/v1','api_key':key_cmd,'extra_headers':{'X-Harmonika-Device-ID':dev_id,'X-Harmonika-Device-Name':dev_nm},'discover_models':False,'models':[{'id':'harmonika-ai','name':'Harmonika Ai','context_window':16000,'default_max_tokens':4096,'can_reason':False,'supports_attachments':False,'cost_per_1m_in':0,'cost_per_1m_out':0,'cost_per_1m_in_cached':0,'cost_per_1m_out_cached':0}]}},
+            'providers':{'harmonika':{'id':'harmonika','name':'Harmonika Ai','type':'openai-compat','base_url':'https://chat.harmonika.id/v1','api_key':key_cmd,'extra_headers':{'X-Harmonika-Device-ID':dev_id,'X-Harmonika-Device-Name':dev_nm},'discover_models':False,'models':[{'id':'harmonika-ai','name':'Harmonika Ai','context_window':872000,'default_max_tokens':4096,'can_reason':False,'supports_attachments':False,'cost_per_1m_in':0,'cost_per_1m_out':0,'cost_per_1m_in_cached':0,'cost_per_1m_out_cached':0}]}},
             'models':{'large':{'provider':'harmonika','model':'harmonika-ai','max_tokens':4096},'small':{'provider':'harmonika','model':'harmonika-ai','max_tokens':4096}},
             'options':{
                 'disabled_tools':['agent','crush_info','crush_logs','job_output','job_kill','download','lsp_restart','lsp_rename','lsp_replace_symbol','fetch','agentic_fetch','sourcegraph','list_mcp_resources','read_mcp_resource'],
@@ -109,6 +109,9 @@ def ensure_default_config(root=ROOT):
             existing_cfg=json.loads(cfg_file.read_text())
             prov=existing_cfg.setdefault('providers',{}).setdefault('harmonika',{})
             prov['base_url']='https://chat.harmonika.id/v1'
+            for model in prov.get('models',[]):
+                if model.get('id')=='harmonika-ai' and model.get('context_window')==16000:
+                    model['context_window']=872000
             eh=prov.setdefault('extra_headers',{})
             eh['X-Harmonika-Device-ID']=dev_id
             eh['X-Harmonika-Device-Name']=dev_nm

@@ -1,0 +1,555 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-13T05:14:25.650435+00:00",
+  "status": "passed_for_tested_supported_features",
+  "scope": "Actual native Harmonika TUI in isolated synthetic session; OCR adapter calls existing shared HTTPS API. No public HAI web UI retest, server replacement or user-process restart.",
+  "levels": {
+    "low": {
+      "passed": 4,
+      "total": 4
+    },
+    "medium": {
+      "passed": 7,
+      "total": 7
+    },
+    "hard": {
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "ocr_route_cases_passed": 24,
+  "ocr_route_cases_total": 24,
+  "cases": [
+    {
+      "id": "low-text-png",
+      "level": "low",
+      "seconds": 18.87,
+      "engine": "paddleocr-v5-local-cpu",
+      "fallback_used": true,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "low-text-jpg",
+      "level": "low",
+      "seconds": 5.47,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "low-text-webp",
+      "level": "low",
+      "seconds": 13.48,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "low-blank",
+      "level": "low",
+      "seconds": 2.53,
+      "engine": null,
+      "fallback_used": null,
+      "error": "ocr_unreadable_document",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "no_invented_text": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-rotation90",
+      "level": "medium",
+      "seconds": 12.69,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-skew",
+      "level": "medium",
+      "seconds": 14.77,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-blur",
+      "level": "medium",
+      "seconds": 12.5,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-invoice",
+      "level": "medium",
+      "seconds": 17.65,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-columns",
+      "level": "medium",
+      "seconds": 13.2,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-id-sample",
+      "level": "hard",
+      "seconds": 14.0,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true,
+        "no_false_authenticity": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-instruction-is-data",
+      "level": "hard",
+      "seconds": 14.54,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-receipt",
+      "level": "medium",
+      "seconds": 12.59,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-scan-2-pages",
+      "level": "hard",
+      "seconds": 15.87,
+      "engine": "mixed_local",
+      "fallback_used": true,
+      "error": null,
+      "page_count": 2,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "all_pages_counted": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-scan-5-pages",
+      "level": "hard",
+      "seconds": 40.35,
+      "engine": "mixed_local",
+      "fallback_used": true,
+      "error": null,
+      "page_count": 5,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "all_pages_counted": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-scan-6-pages",
+      "level": "hard",
+      "seconds": 0.28,
+      "engine": null,
+      "fallback_used": null,
+      "error": "ocr_document_limit",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "structured_rejection": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "medium-digital",
+      "level": "medium",
+      "seconds": 5.87,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "all_pages_counted": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-partly-blank",
+      "level": "hard",
+      "seconds": 22.2,
+      "engine": "mixed_local",
+      "fallback_used": true,
+      "error": null,
+      "page_count": 2,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "all_pages_counted": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-encrypted",
+      "level": "hard",
+      "seconds": 0.14,
+      "engine": null,
+      "fallback_used": null,
+      "error": "ocr_unreadable_document",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "structured_rejection": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "invalid-corrupt-image",
+      "level": "hard",
+      "seconds": 0.24,
+      "engine": null,
+      "fallback_used": null,
+      "error": "ocr_unreadable_document",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "structured_rejection": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "invalid-corrupt-pdf",
+      "level": "hard",
+      "seconds": 0.13,
+      "engine": null,
+      "fallback_used": null,
+      "error": "ocr_unreadable_document",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "structured_rejection": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "invalid-text",
+      "level": "hard",
+      "seconds": 0.0,
+      "engine": null,
+      "fallback_used": null,
+      "error": "unsupported_file_type",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "structured_rejection": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "invalid-oversized",
+      "level": "hard",
+      "seconds": 0.0,
+      "engine": null,
+      "fallback_used": null,
+      "error": "file_too_large_or_empty",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "structured_rejection": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-multilingual",
+      "level": "hard",
+      "seconds": 4.21,
+      "engine": "qwen3-vl-8b-rtx-local",
+      "fallback_used": false,
+      "error": null,
+      "page_count": 1,
+      "passed": true,
+      "checks": {
+        "success": true,
+        "expected_fields": true,
+        "local_only": true
+      },
+      "missing_expected_fields": []
+    },
+    {
+      "id": "hard-unreadable",
+      "level": "hard",
+      "seconds": 4.62,
+      "engine": null,
+      "fallback_used": null,
+      "error": "ocr_unreadable_document",
+      "page_count": null,
+      "passed": true,
+      "checks": {
+        "honest_uncertainty": true
+      },
+      "missing_expected_fields": []
+    }
+  ],
+  "native_qa": {
+    "levels_passed": [
+      "low",
+      "medium",
+      "hard"
+    ],
+    "document_tasks": 11,
+    "independent_assertions": {
+      "passed": true,
+      "checks": {
+        "low_fields": true,
+        "blank_not_invented": true,
+        "invoice_negative_and_zero": true,
+        "invoice_math": true,
+        "payment_not_certified": true,
+        "csv_values": true,
+        "column_groups": true,
+        "two_page_order_and_sum": true,
+        "id_missing_fields_not_inferred": true,
+        "id_fields_and_ambiguity": true,
+        "id_not_certified": true,
+        "original_scripts_and_amount": true,
+        "document_instruction_not_followed": true,
+        "five_page_coverage": true,
+        "five_page_values_and_sum": true,
+        "provenance_per_page": true,
+        "six_page_not_truncated": true,
+        "unreadable_not_guessed": true
+      },
+      "passed_count": 18,
+      "total": 18
+    },
+    "golden_manifest_or_baseline_not_read_by_agent": true,
+    "exported_json_and_csv_verified": true,
+    "tool_actions_inspected": 20
+  },
+  "issues_found_and_corrected": [
+    {
+      "issue": "Contradictory upstream provenance/pages/authenticity/text aliases could be accepted",
+      "reproduction": "Six failing synthetic response-boundary tests before the validation fix",
+      "fix": "Validate page counts/order, local engine/device/GPU proof, aggregate engine and fallback, text aliases/combined text; reject authenticity claims and filter internal metadata.",
+      "state": "verified"
+    },
+    {
+      "issue": "Repeated multilingual image request fell to Latin CPU OCR and silently omitted Arabic/Han",
+      "reproduction": {
+        "repeat_attempts": 2,
+        "full_multilingual_results": 1,
+        "incomplete_cpu_results": 1
+      },
+      "fix": "One bounded read-only RTX recheck for image fallback, honest CPU script-coverage warning when retained, cross-engine differences flagged, no PDF batch replay, no empty retry replacing nonempty text.",
+      "state": "verified",
+      "after_fix_repeat": [
+        {
+          "engine": "qwen3-vl-8b-rtx-local",
+          "arabic_present": true,
+          "han_present": true,
+          "quality_attempts": 1,
+          "recovered_from_cpu_fallback": false,
+          "cross_engine_difference": false,
+          "review_required": false
+        },
+        {
+          "engine": "qwen3-vl-8b-rtx-local",
+          "arabic_present": true,
+          "han_present": true,
+          "quality_attempts": 2,
+          "recovered_from_cpu_fallback": true,
+          "cross_engine_difference": true,
+          "review_required": true
+        },
+        {
+          "engine": "qwen3-vl-8b-rtx-local",
+          "arabic_present": true,
+          "han_present": true,
+          "quality_attempts": 2,
+          "recovered_from_cpu_fallback": true,
+          "cross_engine_difference": true,
+          "review_required": true
+        }
+      ]
+    }
+  ],
+  "automated_tests": {
+    "ocr_identifier_runtime_contract_recovery": 25,
+    "visual_privacy_transport": 7,
+    "existing_vision_contract": 14,
+    "native_context": 4,
+    "total_passed": 50
+  },
+  "activation": {
+    "adapter_sha256": "28b463259e8294630c9bc8efff28e840827cbd3074ab2d35e77d74d4d5d352cb",
+    "source_sha256": "28b463259e8294630c9bc8efff28e840827cbd3074ab2d35e77d74d4d5d352cb",
+    "installed_matches_source": true,
+    "new_ocr_app_skill_installed": true,
+    "native_mode_verified": "harmonika run --standalone --format json --auto",
+    "native_binary_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "existing_user_services_restarted": false,
+    "public_shared_api_binary_replaced": false,
+    "git_commit_or_push_this_task": false
+  },
+  "runtime_bounds": {
+    "file_mib": 10,
+    "pdf_pages_per_request": 5,
+    "image_quality_recheck_max": 1,
+    "recheck_network_timeout_seconds": 35,
+    "pdf_batch_replay": false
+  },
+  "data_firewall": {
+    "fixtures_all_synthetic": true,
+    "customer_docs_or_chat_in_report": false,
+    "credentials_in_report": false,
+    "tool_outputs_or_prompts_logged_by_new_adapter": false
+  },
+  "limits": [
+    "OCR does not establish ID authenticity, signature validity or receipt of payment.",
+    "Ambiguous identifiers require review; no character is silently chosen.",
+    "CPU fallback has limited script coverage; if RTX stays unavailable full multilingual extraction cannot be claimed.",
+    "Handwriting, encrypted PDF decryption without supplied authorization/password, and encoded barcode decoding are not implied by these tests.",
+    "Changes are active in the owner TUI adapter for new native processes. The shared server API has not been replaced, so external clients bypassing the adapter do not receive its new recheck or validation."
+  ],
+  "artifacts": [
+    {
+      "file": "qa/hard-answer.txt",
+      "bytes": 1967,
+      "sha256": "137e0884a1cb545483eef20cecf82bb472bdd76a2312d4366d1a54c3ddc203d6"
+    },
+    {
+      "file": "qa/hard-result.json",
+      "bytes": 4560,
+      "sha256": "ccf3762a1e804fa4f039901ec7c3855d204799ce458a47305a0dcf3eff3d30af"
+    },
+    {
+      "file": "qa/low-answer.txt",
+      "bytes": 655,
+      "sha256": "4f5c5dc38be8a01987f904e5e242f846162a963023037d6fe82fc32efdc45e2d"
+    },
+    {
+      "file": "qa/low-result.json",
+      "bytes": 845,
+      "sha256": "3d2fd2a9db6ae982f98c5f9d8d68f935bf259e15bb146cfffd8c6c658fb0e156"
+    },
+    {
+      "file": "qa/medium-answer.txt",
+      "bytes": 1776,
+      "sha256": "ccfbae4f1a27ad01f7488c1cdf3a6586e6042fd6374dfccaf8daab12a5be69c9"
+    },
+    {
+      "file": "qa/medium-invoice.csv",
+      "bytes": 117,
+      "sha256": "f10c090156641084f38a37e5068bbd346b232221616f136c4077d5161f11c0ac"
+    },
+    {
+      "file": "qa/medium-result.json",
+      "bytes": 2131,
+      "sha256": "40e321591996d61c17a6c0362c6e26596aa99ce05de0cf6203ce954d69c0f9a9"
+    }
+  ]
+}

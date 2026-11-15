@@ -20,6 +20,13 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 ## Ruang kerja yang menyatu
 
+Kontrol native baru: **F8 pekerjaan**, **F9 memori proyek**, **F10 status engine**
+dan **Shift+F10 koneksi**. F8 menampilkan tahap pekerjaan; hook server membatasi
+retry error sementara dan menghentikan error akses/schema/secret. Panel mempertahankan ASCII, tema, F2 dan session store.
+Memori disimpan hanya setelah persetujuan; reconnect tidak mengirim ulang tugas.
+Pemasangan manual memakai paket Ed25519, verifikasi hash dan backup rollback;
+binary native tidak diganti. [Penggunaan dan batas pengujian](docs/TUI-CONTROL.md).
+
 | | Kemampuan | Yang tersedia |
 |---|---|---|
 | ⌨️ | **Coding & terminal** | Baca/edit file, membuat folder proyek, bash dengan persetujuan pengguna, dan diagnostik LSP. |
@@ -36,10 +43,12 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 |---|---|
 | `harmonika-ui` | Implementasi UI responsif, aksesibilitas, dan kesesuaian referensi. |
 | `harmonika-visual-design` | Foto RTX, mockup PNG desktop/mobile, tipografi presisi, dan pemeriksaan visual serta OCR. |
+| `harmonika-ocr` | Ekstraksi dokumen/tabel/PDF, cakupan halaman, perhitungan dan ekspor JSON/CSV dengan provenance serta ketidakpastian. |
 | `harmonika-debug` | Reproduksi bug, diagnosis berbasis bukti, serta pengujian regresi. |
 | `harmonika-debug-scanner` | Scanner backend dengan bukti teredaksi, probe target terdaftar, dan laporan PDF; readiness tiap fungsi dinyatakan jelas. |
 | `harmonika-browser-qa` | Bukti browser nyata pada viewport desktop dan mobile. |
 | `harmonika-shared-core` | Data terbatas, memory terenkripsi per token, workflow DAG dan adaptor workspace melalui API internal. |
+| `harmonika-project-context` | Catatan teknis proyek yang disetujui eksplisit, kompresi konteks tool dan penggunaan referensi secret privat. |
 | `harmonika-skill-index` | Discovery capability, analisis defensif, dan pemeriksaan HTML browser terisolasi. |
 | `harmonika-mobile-builder` | Analisis spec dan source kit Android/iOS; build/sign/store mengikuti readiness worker terpisah. |
 | `harmonika-web-builder` | Spesifikasi → arsitektur → source privat → QA sandbox → deployment target terdaftar. |
@@ -59,6 +68,10 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 | `harmonika-terminal-qa` | Uji reducer, keyboard, resize dan PTY terisolasi. |
 
 Helper baru memakai Python stdlib dan fixture sintetis; hasil self-test membuktikan helper, bukan perubahan pada event loop binary aplikasi. Skill memberi panduan dan implementasi referensi yang dapat dipakai saat mengerjakan source TUI.
+
+Generasi burung alami pada adaptor RTX high kini menahan hasil sebelum pemeriksaan jumlah kepala/tubuh selesai. Hasil cacat mendapat paling banyak satu koreksi; status tidak pasti tidak mengirim job duplikat. [Cakupan, aktivasi dan batas pemeriksaan](backend/visual_quality/README.md#bird-anatomy-delivery-gate).
+
+Ujian mockup ERP memperketat QA enam ukuran layar, kecocokan area penting dengan bingkai PNG, kontras, teks kecil dan label grafik terbelah. Hasil tetap disertai source yang dapat diedit serta metode render aktual. [Bukti ujian ERP](docs/ERP-MOCKUP-EXAM-20261113.json) · [Alur penerimaan mockup](backend/visual_quality/MOCKUP-QUALITY.md).
 
 [Filosofi arsitektur core mandiri](docs/ARCHITECTURE-PHILOSOPHY.md): mentor eksternal, interface internal, dan target worker media Windows RTX.
 
@@ -115,6 +128,110 @@ provider tetap diperiksa; OAuth Google diperlukan untuk data akun, dan screensho
 JS-disabled bukan audit SPA penuh. [Kontrak, batas, dan setup](docs/SEO.md).
 
 ## Engineering otomatis
+
+Alur agent native kini memakai controller tugas di backend: lanjutkan tindakan
+yang sudah diizinkan, periksa hasil tool, tangani kegagalan, dan selesaikan dengan
+bukti hasil. TUI menjalankan tool sesuai izin executor; backend memeriksa keputusan
+sebelum dikirim. Tiga ujian terminal nyata memperbaiki source yang sengaja rusak,
+mengulang tes hingga lulus, dan membuat laporan sendiri; 17 tes fungsi diverifikasi
+terpisah tanpa mengubah assertion. [Kontrak dan batas](backend/planner/AGENT-WORKFLOW.md)
+· [Bukti ujian](docs/AGENT-AUTONOMY-EXAM-20261113.json).
+
+Ujian lanjutan pagination, cache async dan antrean persisten lulus 63 tes penerimaan
+terpisah. Engine diperketat agar hasil gagal/kosong tidak menjadi bukti selesai,
+serta konteks lanjutan sopan tetap terjaga. [Bukti debugging dan aktivasi](docs/DEBUG-REPOSITORY-EXAM-20261113.json).
+
+Ujian agent berikutnya mencakup kecocokan laporan dengan CSV sumber, pengabaian
+instruksi palsu dalam data vendor, dan pemulihan job terputus pada sesi yang sama.
+[Bukti lifecycle job dan kelanjutan sesi](docs/AGENT-RESILIENCE-EXAM-20261113.json).
+
+[Ujian agent level tinggi](docs/HIGH-AGENT-EXAM-20261113.json) mencakup transaksi
+SQLite atomic, perubahan kebutuhan dalam sesi yang sama, pelestarian edit pengguna
+dan pengendalian pemeriksaan kosong yang bergantian.
+
+[Katalog ujian agent](docs/AGENT-EXAM-CATALOG.md) juga memuat audit insiden berbasis
+bukti, client API dengan retry terbatas dan pemeriksaan keputusan backend aktual.
+Runner tambahan menguji UI→API→SQLite, isolasi tenant dan pemulihan backup WAL;
+hasil awal, koreksi firewall referensi kode dan uji ulang dicatat terpisah.
+[Bukti alur lengkap](docs/FULLFLOW-AGENT-EXAM-20261113.json).
+Ujian antrean dan SSE memperketat penanganan permintaan batal, outcome unknown,
+backpressure serta cursor reconnect. [Bukti dan batas](docs/QUEUE-STREAM-AGENT-EXAM-20261114.json).
+
+Ujian Level 4 memakai deployment Linux Docker terisolasi, dependency offline,
+checkpoint pada sesi yang sama, rollback kode serta crash/restart dengan data SQLite
+yang dipertahankan. [Bukti, perbaikan engine dan batas](docs/LEVEL4-AGENT-EXAM-20261114.json).
+
+Ujian Level 5 lulus pada lab terkontrol setelah koreksi engine: aplikasi tiket,
+migrasi schema, concurrency, recovery ACK/lock dan pelestarian sesi/data diuji
+melalui 25 kasus API serta 20 pemeriksaan browser independen. Bug target sentuh
+link lampiran dikoreksi pada rilis immutable dan diuji ulang. Image v1 juga diuji
+pada DB v2, lalu lab dibersihkan; perbaikan planner/QA aktif di backend.
+[Bantuan operator, hasil awal dan batas](docs/LEVEL5-AGENT-EXAM-20261114.json).
+
+Ujian Level 6 lulus: antrean persisten memulihkan crash sesudah commit dan ACK
+hilang tanpa efek ganda, membedakan cancel request, serta mempertahankan drain
+melewati restart. Sebanyak 41 pemeriksaan integrasi dan 16 kasus engine pada
+masing-masing Mac/image Linux lulus. Panduan SQLite lintas platform aktif di
+backend; lab sudah dibersihkan. [Cakupan dan bukti](docs/LEVEL6-AGENT-EXAM-20261114.json).
+
+
+Ujian Level 7 lulus pada lab lima container: tiga worker dengan fencing,
+100 request paralel, recovery ACK/crash42, stream SSE live, snapshot WAL dan rollback
+kode. Sebanyak 43 pemeriksaan integrasi serta 21 kasus engine yang sama di Mac dan
+image Linux lulus setelah koreksi parser SSE; 51 job memiliki masing-masing satu
+efek dan artifact terverifikasi. Upgrade pemulihan timeout/admission planner aktif
+di backend. Kegagalan awal, kalibrasi harness dan bantuan operator dicatat dalam
+[laporan Level 7](docs/LEVEL7-AGENT-EXAM-20261114.json).
+
+Ujian Level 8 lulus 45 pemeriksaan integrasi dan 22 kasus engine yang sama pada
+Mac/image Linux: workflow DAG persisten, recovery child ACK/crash42, validasi
+artifact, pause/cancel, priority, migrasi atomic serta code rollback pada schema 2.
+Sebanyak 24 workflow selesai dan 2 dibatalkan; 49 child job memiliki 49 efek tersimpan.
+Bug timeout header ditemukan saat ujian: seluruh retry kini berbagi anggaran 240
+detik dan tetap mempertahankan error akses/validasi. Perbaikan timeout serta panduan
+planner aktif di backend setelah 148 tes lokal, 76 Linux dan 9 canary keputusan.
+Lab sudah dibersihkan. Aplikasi DAG ini tetap prototype ujian terisolasi; kegagalan
+awal, koreksi penilai dan bantuan operator dicatat pada
+[laporan Level 8](docs/LEVEL8-AGENT-EXAM-20261114.json).
+
+Ujian Level 9 lulus 45 pemeriksaan integrasi, 32 kasus engine pada Mac dan Linux,
+serta 19 pengaman alat uji. Dua coordinator diuji pada satu host melalui proxy TCP
+privat: takeover saat proses lama tetap hidup, ACK hilang, body terpotong,
+partition, crash, pause/cancel dan 200 attempt dengan kuota delapan workflow.
+Bug cancel pada parent paused diperbaiki; hasil gagal dan koreksi alat audit tetap
+dicatat. Cakupan ini adalah prototype lab dan panduan planner backend, bukan HA
+antarhost. [Bukti, bantuan operator dan batas Level 9](docs/LEVEL9-AGENT-EXAM-20261114.json).
+
+Ujian Level 10 lulus 34 pemeriksaan integrasi, 56 kasus engine yang sama pada
+Mac dan Linux, serta 14 pengaman alat uji. Cakupannya rolling upgrade/rollback kode,
+crash delapan proses, backup WAL dengan writer aktif, pemulihan clone nonaktif,
+kontrol pause/cancel baru, disk penuh dan lock nyata, serta isolasi tenant.
+Bug audit/kuota dan lock pembukaan store diperbaiki; koreksi penilai dan hasil gagal
+tetap dicatat. Panduan teknis aktif di backend setelah 148 tes lokal, 76 Linux,
+7 pemeriksaan aktivasi dan 13 canary keputusan. Ini prototype lab satu host dan
+panduan planner, bukan API recovery publik atau sertifikasi HA/power-loss.
+[Bukti dan batas Level 10](docs/LEVEL10-AGENT-EXAM-20261114.json).
+
+Ujian Level 11 menyelesaikan dua proyek native dengan sesi terpisah yang berjalan
+bersamaan: aplikasi tiket/job dan laporan CSV. Lulus 37 pemeriksaan integrasi,
+54 kasus engine yang sama pada Mac/Linux, 17 pemeriksaan browser dan dua regresi
+UI independen. Cakupannya isolasi owner/proyek, kuota, cancel, ACK hilang, restart
+nyata dan lock SQLite. Race refresh job, urutan daftar dan login/logout diperbaiki
+dalam prototype; pelajarannya masuk panduan planner backend yang aktif setelah
+148 tes lokal, 76 Linux, 7 guard aktivasi dan 13 canary. Ini ujian dengan coaching
+Codex dan review OpenCode, bukan sertifikasi otonomi atau API multiproyek baru.
+[Bukti dan batas Level 11](docs/LEVEL11-AGENT-EXAM-20261115.json).
+
+Ujian Level12 menyelesaikan CRM/CMS pada server Linux disposable dengan HTTPS
+nyata, referensi dashboard, role admin/staf dan SQLite WAL. Revisi schema1→2,
+writer lock, port sibuk, konfigurasi rusak, backup saat writer aktif, clone
+nonaktif serta rollback kode pada database terkini telah diverifikasi. Rilis
+akhir lulus 16 kasus domain/API dan 29 pemeriksaan browser independen; pembaruan
+planner aktif setelah 161 tes lokal, 90 integrasi Linux, 7 guard dan 5 canary.
+Bug form edit/hapus, layout mobile, error policy dan pemulihan output berantai
+dikoreksi; bantuan auth/HTTP dan koreksi alat uji dicatat jujur. Ini ujian lab
+berbantuan, bukan training model atau sertifikasi otonomi umum. Binary/brand TUI
+dipertahankan. [Hasil dan batas Level12](docs/LEVEL12-AGENT-EXAM-20261115.json).
 
 Code review, debug, testing strategy dan documentation menggunakan bukti kode/diff/log yang dikirim pengguna. Backend memilih workflow tanpa parameter skill manual. Worker statis tidak menjalankan kode, membaca repository privat, atau mengklaim test/coverage telah lulus. [Kontrak dan batas](docs/ENGINEERING.md). [Hasil verifikasi](docs/ENGINEERING-REPORT.json).
 
@@ -397,8 +514,22 @@ ketidakpastian O/0 serta I/l/1 pada kode. Mulai proses TUI baru untuk memuat
 pembaruan helper; runtime backend yang dipulihkan langsung berlaku pada API.
 [Pemulihan, pengujian dan batas OCR](backend/ocr_rtx/README.md).
 
+Uji OCR lengkap mencakup PNG/JPEG/WebP, rotasi/blur, invoice berdiskon, dua kolom,
+multibahasa, identitas contoh, halaman PDF dan input rusak. Respons divalidasi per
+halaman; fallback CPU memiliki batas cakupan aksara dan hasil berbeda ditandai
+untuk review. Gambar mendapat maksimal satu pemeriksaan ulang RTX; batch PDF tidak
+dikirim ulang. [Laporan ujian](docs/OCR-FULL-EXAM-20261113.json).
+
 ### Pemeriksaan visual dan desain lokal
 
 OCR RTX 8B, pemeriksaan layout dengan `analyze_image mode=vision`, serta ekspor mockup PNG desktop/mobile memakai alur QA terpisah. Profil gambar melaporkan model aktual; ukuran MB bukan penilaian kualitas. [Arsitektur, aktivasi privat dan batas pengujian](backend/visual_quality/README.md).
 
 Mockup panjang diperiksa dalam potongan bertumpang tindih tanpa mengecilkan piksel. QA membedakan kriteria yang terbukti, belum sesuai, dan tidak pasti, termasuk sudut produk. [Ujian mockup nyata 13 November 2026](docs/MOCKUP-EXAM-20261113.json).
+
+### Audit kualitas per API key
+
+Engine audit privat mencatat mekanika request dan sampel tanya-jawab terenkripsi berdasarkan persetujuan per key, dengan retensi 30 hari. Langkah tool dibedakan berdasarkan sumber buktinya; temuan menjadi kasus uji sebelum perbaikan diaktifkan. Collector dan capture trafik gateway aktif; request produksi JSON/SSE sudah dicocokkan dengan sampel SQLite terenkripsi. [Panduan operator](backend/quality_audit/README.md) · [Status pengujian](docs/QUALITY-AUDIT-READINESS-20261113.json).
+
+### Kapasitas konteks primary/Pro
+
+Profil Linux dan TUI Mac primary/Pro diselaraskan ke 872.000 token dengan compaction 780.000. Batas lama 16K berasal dari konfigurasi legacy. Uji domain produksi 500K token lokal lulus; probe model terisolasi memverifikasi 807.776 input token dan lima jawaban tepat. Percobaan 1M ditolak oleh jendela efektif runtime 828.400 token; CLI produksi juga memiliki batas satu pesan 1.048.576 karakter. [Kontrak dan batas](backend/planner/README.md) · [Bukti aktivasi](docs/CONTEXT-CAPACITY-20261113.json) · [Ujian 1M](docs/CONTEXT-1M-EXAM-20261113.json).

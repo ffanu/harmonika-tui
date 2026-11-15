@@ -58,4 +58,16 @@ class CoreHTTP(unittest.IsolatedAsyncioTestCase):
  async def test_queries_bounded(self):
   for path in ('/capabilities?url=http://localhost','/skills?limit=201','/skills/memory.get?actor=root'):
    self.assertEqual((await self.client.get(path,headers=self.h)).status,400)
+ async def test_curated_project_memory_public_service_boundary(self):
+  p={'project_id':'synthetic-a','consent':True,'key':'build','value':{'kind':'verified_command','text':'npm test'}}
+  r,v=await self.invoke('memory.set',p,key='project-set-0001');self.assertEqual(r.status,200)
+  _,v=await self.invoke('memory.get',{'project_id':'synthetic-a','key':'build'},key=None);self.assertTrue(v['data']['found'])
+  for project,actor in (('synthetic-b',1),('synthetic-a',2)):
+   _,v=await self.invoke('memory.get',{'project_id':project,'key':'build'},actor=actor,key=None);self.assertFalse(v['data']['found'])
+  r,_=await self.invoke('memory.set',{**p,'consent':False},key='project-set-0002');self.assertEqual(r.status,400)
+  r,v=await self.invoke('memory.set',{**p,'value':{'kind':'decision','text':'HARMONIKA_API_KEY=synthetic-private-value'}},key='project-set-0003');self.assertEqual(r.status,400);self.assertEqual(v['error']['code'],'sensitive_content_rejected')
+ async def test_project_schema_discovery_and_reserved_namespace(self):
+  r=await self.client.get('/skills/memory.set',headers=self.h);v=await r.json()
+  self.assertEqual(len(v['skill']['input_schema']['oneOf']),2)
+  r,v=await self.invoke('memory.get',{'scope':'p:reserved','key':'build'},key=None);self.assertEqual(r.status,403);self.assertEqual(v['error']['code'],'project_scope_reserved')
 if __name__=='__main__':unittest.main()

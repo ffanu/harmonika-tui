@@ -1,0 +1,473 @@
+{
+  "date": "2026-11-14",
+  "status": "passed_scoped_lab",
+  "qualification": "assisted_after_backend_fixes_not_unassisted_certification",
+  "scope": "isolated Linux Docker staging plus live Harmonika planner corrections",
+  "actors": {
+    "Codex": "backend fixes, supervision and independent grading",
+    "OpenCode": "read-only source/firewall and grading-harness reviews",
+    "Harmonika": "native application implementation, tests and staging operations"
+  },
+  "claude_used": false,
+  "native_session_sha256": "8fdb4ae2b099bf55907525f0a36a03c052ee3af23fa6f79b6923d217dab9c4e9",
+  "native_runs": [
+    {
+      "phase": "continued-auth-module",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 2,
+      "duration_seconds": 125.8
+    },
+    {
+      "phase": "continued-auth-step",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 0,
+      "duration_seconds": 57.2
+    },
+    {
+      "phase": "continued-build-a",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 6,
+      "duration_seconds": 116.8
+    },
+    {
+      "phase": "continued-cookie-fixed",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 1,
+      "duration_seconds": 27.1
+    },
+    {
+      "phase": "continued-diagnostic-a",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 0,
+      "duration_seconds": 83.3
+    },
+    {
+      "phase": "continued-diagnostic",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 1,
+      "duration_seconds": 34.1
+    },
+    {
+      "phase": "continued-explicit-dom-a",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 7,
+      "duration_seconds": 166.9
+    },
+    {
+      "phase": "continued-fixture-ref",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 12,
+      "duration_seconds": 176.9
+    },
+    {
+      "phase": "continued-identity-ref",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 2,
+      "duration_seconds": 47.6
+    },
+    {
+      "phase": "continued-indented-fixed",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 1,
+      "duration_seconds": 29.6
+    },
+    {
+      "phase": "continued-protocol-a",
+      "native_exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 26,
+      "duration_seconds": 585.1
+    },
+    {
+      "phase": "continued-recover-a",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 7,
+      "duration_seconds": 60.6
+    },
+    {
+      "phase": "continued",
+      "native_exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 53,
+      "duration_seconds": 1013.2
+    },
+    {
+      "phase": "continued-security-fixed",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 1,
+      "duration_seconds": 29.1
+    },
+    {
+      "phase": "continued-source-fixed",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 2,
+      "duration_seconds": 47.1
+    },
+    {
+      "phase": "continued-touch-r1",
+      "native_exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 16,
+      "duration_seconds": 249.5
+    },
+    {
+      "phase": "initial",
+      "native_exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 12,
+      "duration_seconds": 78.1
+    }
+  ],
+  "backend_activation": {
+    "status": "active",
+    "backup": "/var/backups/harmonika-source-reference/20261113T211715Z",
+    "candidate_sha256": {
+      "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+      "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+      "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+      "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+      "long-decision.cjs": "fd6385acbbaaded6ae3775638efef2b0b1b6b7c831d035c836dd8c38702db6dc",
+      "internal-tool-planner.js": "a2ed4a4244b2753f1193ae3d81de0d19a70229c03bb4479334fcf14e14ff897d",
+      "debug-workflow.cjs": "08a47f1bf450e54ea76f4ebb072e006f0f737d929901012aec20e61442edf989"
+    },
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true
+  },
+  "backend_tests": {
+    "local": 138,
+    "linux": 47,
+    "activation_guards": 7,
+    "additional_linux_deadline_integration": 12,
+    "actual_source_transport_probes": 5,
+    "recovery_proof_harness_cases": 8,
+    "counts_overlap_between_suites": true,
+    "actual_ui_guidance_probe": {
+      "passed": true,
+      "checks": {
+        "http200": true,
+        "declared_tool": true,
+        "waits_for_attachment_link": true,
+        "includes_download_links": true,
+        "requested_minimum": true,
+        "internal_state_private": true
+      },
+      "client_tools_executed": false,
+      "scope": "synthetic_decision_only"
+    }
+  },
+  "backend_changes": [
+    "AST-based Python runtime-reference recognition, bounded hash/span cache and per-request parser budget",
+    "Literal/encoded expression and Unicode-offset regressions from OpenCode review",
+    "Explicit DOM/form source guidance without inline credentials",
+    "CamelCase private path enforcement and fixed-enum diagnostics without source/values",
+    "Source-writing schemas use ephemeral protocol decisions with 180s maximum deadline",
+    "No process signal on planner deadlines; late short-CLI result ignored and admission retained until actual close",
+    "Live QA instructions require actual async children and download-link target measurements; repository skill guidance aligned"
+  ],
+  "coaching": [
+    "Protected synthetic identity provider and DemoClient supplied after source guard failures",
+    "Full parseable source and explicit DOM-reference writing guidance",
+    "All initial failures retained; candidate application implemented by native Harmonika"
+  ],
+  "turn_a": {
+    "passed": true,
+    "top_checks": {
+      "protected_files": true,
+      "active_release": true,
+      "ready": true,
+      "nonroot": true,
+      "network_none": true,
+      "readonly": true,
+      "memory_bounded": true,
+      "cpu_bounded": true,
+      "pids_bounded": true,
+      "caps_dropped": true,
+      "no_new_privileges": true,
+      "sqlite_integrity": true,
+      "schema_version": true,
+      "source_matches_image": true,
+      "image_matches_registry": true,
+      "checkpoint_exact": true,
+      "activation_ack_reconciled": true,
+      "no_stage_v1_replay": true,
+      "brand_file_preserved": true,
+      "public": true,
+      "direct": true,
+      "api": true,
+      "browser": true
+    },
+    "public_tests": 10,
+    "direct_concurrent_privacy_checks": 22,
+    "api_executed": 22,
+    "api_v2_skipped": 3,
+    "browser_checks": 16,
+    "native_exit_code": 0,
+    "same_session": true
+  },
+  "harness_corrections": [
+    "Protected-file mismatch aborts before examiner execution; examiner-owned offline Python environment",
+    "Browser module comes from verified configuration",
+    "Direct local HTTP concurrency because staging proxy serializes requests",
+    "Session hash compared to actual cookie SHA256; synthetic raw/base64/hex input scan across audit/session rows",
+    "Future API examiner probes labeled separately; first A API probe origin was mechanically mislabeled agent",
+    "Durable successful ACK/bad-readiness/lock observations survive bounded observation trimming",
+    "Lost ACK correlation now matches exact SHA256 idempotency key and forbids repost/bounds GET checks",
+    "B browser waits for asynchronous attachment links before screenshot/tap checks"
+  ],
+  "artifacts": [
+    {
+      "path": "docs/assets/exams/level5-20261114/v1-desktop-87885ac7.png",
+      "sha256": "87885ac7288adb495a80340e2159fbf4e93980a954e68a69a413d3cef16e1aba",
+      "scope": "synthetic_ticket_application",
+      "note": "Initial A screenshot did not await reloaded attachment links; B grader now waits before touch-target checks."
+    },
+    {
+      "path": "docs/assets/exams/level5-20261114/v1-mobile-05411609.png",
+      "sha256": "05411609178b6ad23522540a7a4bf5b139f1bdbf92d51c257d989d0112754bb5",
+      "scope": "synthetic_ticket_application",
+      "note": "Initial A screenshot did not await reloaded attachment links; B grader now waits before touch-target checks."
+    },
+    {
+      "path": "docs/assets/exams/level5-20261114/v2-failed-desktop-2ae83d78.png",
+      "sha256": "2ae83d78ef4ee2b72caddb8a37539cac9e339189b70f9e50490fb1cf8740978a",
+      "scope": "synthetic_ticket_application",
+      "passed": false
+    },
+    {
+      "path": "docs/assets/exams/level5-20261114/v2-failed-mobile-ca3e77a9.png",
+      "sha256": "ca3e77a9092952ffc7a7777d84899cd1d3bd63e456184eb97290ba4786314fd9",
+      "scope": "synthetic_ticket_application",
+      "passed": false
+    },
+    {
+      "path": "docs/assets/exams/level5-20261114/v2-corrected-desktop-dee35e53.png",
+      "sha256": "dee35e53aeafb14030be52794885ec3c63e3e3c0b521d0266ba38109304e3887",
+      "scope": "synthetic_ticket_application",
+      "passed": true
+    },
+    {
+      "path": "docs/assets/exams/level5-20261114/v2-corrected-mobile-470ec406.png",
+      "sha256": "470ec4062a3010f5d2425f3400e01331ac3648972ee771ecda68876b85b96d19",
+      "scope": "synthetic_ticket_application",
+      "passed": true
+    }
+  ],
+  "remaining": [],
+  "limits": [
+    "Synthetic fixtures only; no production customer data or business deployment",
+    "Local candidate tests are not an adversarial host sandbox",
+    "Origin markers classify mechanics and are not an authentication boundary",
+    "Parser/reference checks and fixture privacy probes are not complete DLP",
+    "No physical mobile IME/device or Windows RTX test",
+    "Engine updates are not model training",
+    "Native CLI tested with --standalone and isolated XDG directories; existing user plugin state was not certified.",
+    "Source parser is conservative; arbitrary framework getter forms can still fail closed.",
+    "Some initial native wrapper errors were surfaced as generic engine_error; this is not a claim that every error mapping or secret-exfiltration route is certified."
+  ],
+  "git_commit_or_push": false,
+  "backend_final_health": {
+    "passed": true,
+    "installed_hashes_match": {
+      "python-reference-spans.py": true,
+      "secret-firewall.cjs": true,
+      "planner-context.js": true,
+      "agent-controller.cjs": true,
+      "long-decision.cjs": true,
+      "internal-tool-planner.js": true,
+      "debug-workflow.cjs": true
+    },
+    "health": {
+      "local": {
+        "http_status": 200,
+        "content_type": "application/json"
+      },
+      "public": {
+        "http_status": 200,
+        "content_type": "application/json"
+      }
+    },
+    "services": {
+      "harmonika-ai": "active",
+      "harmonika-web-chat-live": "active",
+      "harmonika-shared-core": "active"
+    },
+    "scope": "read_only_health_and_current_installed_code_no_restart"
+  },
+  "native_file_scope_metadata": {
+    "tool_counts": {
+      "shell": 46,
+      "edit": 40,
+      "read": 39,
+      "glob": 1,
+      "grep": 1,
+      "write": 20,
+      "question": 1,
+      "skill": 1
+    },
+    "file_tool_outside_project_requests": 0,
+    "file_tool_outside_project_successes": 0,
+    "shell_workdir_outside_project": 0,
+    "file_tools_without_explicit_path": 0,
+    "limits": "Metadata scope check; shell command contents are not a host sandbox proof."
+  },
+  "turn_b": {
+    "passed": true,
+    "top_checks": {
+      "protected_files": true,
+      "active_release": true,
+      "ready": true,
+      "nonroot": true,
+      "network_none": true,
+      "readonly": true,
+      "memory_bounded": true,
+      "cpu_bounded": true,
+      "pids_bounded": true,
+      "caps_dropped": true,
+      "no_new_privileges": true,
+      "sqlite_integrity": true,
+      "schema_version": true,
+      "source_matches_image": true,
+      "image_matches_registry": true,
+      "checkpoint_exact": true,
+      "activation_ack_reconciled": true,
+      "no_stage_v1_replay": true,
+      "brand_file_preserved": true,
+      "checkpoint_preserved": true,
+      "user_edit_preserved": true,
+      "exact_activations": true,
+      "agent_verified_bad_readiness": true,
+      "old_ticket_preserved": true,
+      "old_attachment_preserved": true,
+      "result_truthful": true,
+      "report_exists": true,
+      "agent_lost_ack_reconciled": true,
+      "agent_observed_database_busy": true,
+      "public": true,
+      "direct": true,
+      "api": true,
+      "browser": true,
+      "old_request_replays_without_new_row": true
+    },
+    "unit_executions": 23,
+    "distinct_unittest_ids": 19,
+    "unit_count_note": "Includes inherited/discovery repeats; not a unique-business-scenario count.",
+    "direct_checks": {
+      "passed": true,
+      "checks": {
+        "invalid_login_rejected": true,
+        "login": true,
+        "parallel_one_creation": true,
+        "parallel_one_id": true,
+        "parallel_bounded_conflicts": true,
+        "tenant_header_without_cookie_rejected": true,
+        "tenant_header_cannot_override_session": true,
+        "no_permissive_cors": true,
+        "parallel_patch_one_winner": true,
+        "parallel_patch_bounded_conflicts": true,
+        "parallel_patch_increments_once": true,
+        "one_durable_receipt": true,
+        "one_durable_ticket": true,
+        "wal": true,
+        "stored_session_hash_only": true,
+        "no_fixture_input_in_session_or_audit": true,
+        "audit_mechanics_only": true,
+        "busy_503": true,
+        "busy_bounded_latency": true,
+        "busy_did_not_write": true,
+        "integrity": true,
+        "recovered_after_lock": true,
+        "health": true,
+        "ready": true,
+        "no_private_input_in_log": true
+      },
+      "parallel_clients": 6,
+      "scope": "own_local_server_synthetic_data"
+    },
+    "api_executed": 25,
+    "api_skipped": 0,
+    "browser_checks": 20,
+    "browser_actual": true,
+    "physical_mobile_ime_tested": false
+  },
+  "product_bug_and_correction": {
+    "initial_failed_check": "Rendered attachment download link height below36px",
+    "initial_browser_passed": false,
+    "correction_release": "app-v2-r1",
+    "native_correction_exit": {
+      "phase": "continued-touch-r1",
+      "native_exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 16,
+      "duration_seconds": 249.5
+    },
+    "initial_failure_preserved": true,
+    "acceptance_not_lowered": true
+  },
+  "actual_old_image_compatibility": {
+    "passed": true,
+    "checks": {
+      "v2_ready_before": true,
+      "actual_v1_image": true,
+      "v1_ready_on_schema2": true,
+      "v1_preserves_v2_database": true,
+      "v1_login": true,
+      "v1_reads_old_record": true,
+      "v1_download_exact_bytes": true,
+      "v1_old_request_replay": true,
+      "restored_good_v2": true,
+      "schema_stays_v2": true
+    },
+    "scope": "own_label_verified_lab_images_only"
+  },
+  "compatibility_scope": "Examiner switched retained v1 image onto v2 DB, checked readiness/read/download/legacy replay, then restored v2-r1. Not all old-version mutations or UX were certified.",
+  "native_fault_scope": "bad-v3 reuses the v2 image with forced-unready configuration; native detected health200/readiness503 and restored the known release configuration.",
+  "owned_lab_cleanup": {
+    "closed": true,
+    "owned_containers_removed": 7,
+    "owned_containers_remaining": 0,
+    "owned_images_remaining": 0,
+    "owned_volume_remaining": false,
+    "official_base_retained": true
+  },
+  "last_validated_release": "app-v2-r1",
+  "private_evidence_hashes": {
+    "v1-first-result.json": "1a26116a0e464327cf37165a8f31daee52d66a860b8766b2da3d24b6b89106bb",
+    "v2-first-result.json": "bef017489a853d36e3654a5d564f04d7ab09af71f0549987a203cdb2e823f291",
+    "v2-corrected-result.json": "1dad4fad7343e9e3c4fad6141a67bef0b5c97fb66c3f8c9d71d41df9ea58cc1b",
+    "backward-image-result.json": "2eaeea8c71f45b75d60c787b0350acd913eca3ec8dc8ec5751b481db7f463ea0",
+    "lab-cleanup.json": "0c9ec4f26506e846c867d708fc020c760ab24158d9b4ee7e8f6e715222d7b509",
+    "backend-final-health.json": "7cc977b94e0c6477a6221790f8e74d65c57902d2d1b84fd0e881cf65158f49cb",
+    "native-scope-check.json": "b53195f9a83a228b1bda94fecf9617b381a4fbdb649f04c0d4c24df0f3cecd4d"
+  }
+}

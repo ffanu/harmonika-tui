@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "model": "gpt-6.1-sol",
+  "context_window_tokens": 872000,
+  "auto_compact_tokens": 780000,
+  "transport_soft_chars": 2800000,
+  "max_payload_bytes": 8388608
+}

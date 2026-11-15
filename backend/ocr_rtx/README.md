@@ -63,3 +63,38 @@ stateless and does not automatically become model training. Input/document text
 and customer data must not enter runtime watchdog/error reports.
 
 Focused checks: `python3 -m unittest discover -s tests -p 'test_ocr_*.py' -q`.
+
+## Full low/medium/hard regression
+
+The owner adapter now validates page numbering/count, page engines/devices and GPU
+verification, aggregate engine/fallback consistency, and text aliases before
+exposing a result. OCR responses claiming document authenticity are rejected;
+unknown internal page metadata is not returned. These are TUI adapter boundary
+checks; the shared server API was not replaced or restarted.
+
+A repeated multilingual image test found that a transient CPU fallback could
+return success with Arabic/Han omitted. For image fallback only, the adapter now
+performs at most one read-only RTX recheck with a 35-second network deadline.
+A verified RTX result is selected when available; differing transcriptions are
+flagged for review. Otherwise the original validated CPU result is retained with
+limited-script coverage and review warnings. PDF batches are not replayed.
+
+`tests/ocr_full` generates only synthetic data and exercises real API calls.
+The generator requires Pillow, ReportLab and pypdf; the optional multilingual
+fixture uses the installed Playwright runtime (no network fetch). Do not use
+customer documents or keys in fixtures/reports. The suite also covers corrupted,
+encrypted, oversized and blank inputs, page limits, discounts/zeros, columns,
+rotation, blur and actual native structured-file exports.
+
+```sh
+python3 -m unittest discover -s tests -p 'test_ocr*.py' -q
+python3 tests/ocr_full/generate_fixtures.py /absolute/exam/fixtures
+node tests/ocr_full/add_language_fixture.cjs /absolute/exam/fixtures
+python3 tests/ocr_full/run_matrix.py /absolute/exam/fixtures /absolute/exam/results
+```
+
+Run the generator with the existing document-runtime Python when those packages
+are provisioned there. Native QA uses an isolated session database and compares
+actual answers/files with fixture ground truth. Runtime tests remain bounded to
+the supported features; handwriting, encoded barcode decoding and arbitrary
+unreadable source recovery are not implied by a successful text OCR exam.

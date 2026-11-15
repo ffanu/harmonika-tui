@@ -1,0 +1,108 @@
+{
+  "status": "active_verified",
+  "date": "2026-11-13",
+  "issue": {
+    "observed_client_error": "invalid_tool_arguments",
+    "actual_backend_error": "tool_input_too_large",
+    "observed_envelope_chars": 1035623,
+    "cause": "Full conversation envelope plus decision instructions exceeded the CLI single-message ceiling. Size errors were mapped to invalid_tool_arguments."
+  },
+  "change": {
+    "short_transport": "CLI exec",
+    "long_transport": "app-server ephemeral history injection",
+    "threshold_utf8_bytes": 900000,
+    "fragment_max_utf16_units": 160000,
+    "lossless_history": true,
+    "model_capacity_unchanged": true,
+    "context_error": {
+      "http_status": 413,
+      "code": "context_length_exceeded"
+    },
+    "client_tool_replay": false,
+    "private_user_history_replayed_in_tests": false,
+    "unexpected_tool_requests": "rejected",
+    "model_fallback": false,
+    "timeout": "interrupt own protocol turn and close stdin; no process signals"
+  },
+  "verification": {
+    "local_unit_and_regression": {
+      "passed": 37,
+      "failed": 0
+    },
+    "linux_candidate_integration": {
+      "passed": 9,
+      "failed": 0
+    },
+    "production_api_smoke": [
+      {
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "payload_chars": 1365078,
+        "tool_count": 0,
+        "needle_matches": {
+          "a": true,
+          "b": true,
+          "c": true,
+          "d": true,
+          "e": true
+        },
+        "passed": true,
+        "stream": false,
+        "duration_ms": 6800,
+        "client_commands_executed": false,
+        "user_history_replayed": false
+      },
+      {
+        "synthetic_only": true,
+        "transport": "production_http",
+        "http_status": 200,
+        "payload_chars": 1365077,
+        "tool_count": 0,
+        "needle_matches": {
+          "a": true,
+          "b": true,
+          "c": true,
+          "d": true,
+          "e": true
+        },
+        "passed": true,
+        "stream": true,
+        "sse_done": true,
+        "duration_ms": 6571,
+        "client_commands_executed": false,
+        "user_history_replayed": false
+      }
+    ],
+    "oversized_admission": {
+      "passed": true,
+      "http_status": 413,
+      "code": "context_length_exceeded"
+    },
+    "public_health_http": 200,
+    "not_a_one_million_token_test": true,
+    "patch_idempotency": "passed",
+    "git_diff_check": "passed"
+  },
+  "activation": {
+    "status": "active_verified",
+    "backup": "/var/backups/harmonika-long-decision/20261113T130616Z",
+    "old_backend_pid": 4083562,
+    "new_backend_pid": 4115763,
+    "services_restarted": [
+      "harmonika-ai"
+    ],
+    "unrelated_service_pids_unchanged": true,
+    "health_http": 200,
+    "files": {
+      "internal-tool-planner.js": "715def6191e0f6cbaebdb8a3bc8d4fdfbd4b7b0b33f1f2b963ca44ba5016c5d5",
+      "long-decision.cjs": "f39f0c0446b32d61afaeee200a2791734b202378b21634eaa18ea1100cce575e"
+    },
+    "user_cline_process_modified": false,
+    "verified_at": "2026-11-13T13:07:49.513527+00:00"
+  },
+  "references": [
+    "https://developers.openai.com/codex/app-server/",
+    "Runtime codex app-server --help and previously verified context-appserver-exam.py"
+  ]
+}

@@ -17,6 +17,21 @@ customer, APK/iOS, and public API contracts are unchanged.
   `generate`, `status`, and `download`. Three existing media utilities are grouped
   under `media` to keep total native + MCP definitions within the gateway limit. Existing sessions are not terminated.
 
+## Native v2 terminal
+
+The native owner configuration uses the Python `harmonika` MCP for image,
+OCR, networking and Studio editing. That inventory does not itself include video
+generation. `scripts/activate-native-video.py` restores the existing signed
+`current/tools/video-mcp.cjs` adapter as the separate `harmonika_video` MCP, with
+atomic config backup and a native video skill/instruction. The old MCP/provider,
+binary, branding and running user sessions are preserved. Discover video across
+namespaces; `video_studio` is an editor, not a text-to-video generator.
+
+Use capabilities → one submission → status on the same request/job → verified
+download. Respect the polling interval. A historical qualification or a live
+broker endpoint alone does not prove a new render passed. Native recovery uses
+the private Windows `HarmonikaVideoToolkit` task and existing Linux tunnel.
+
 ## Contract and restrictions
 
 Submit once with a stable 32-hex `request_id`. The response is an asynchronous

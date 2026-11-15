@@ -4,7 +4,14 @@ description: Discover exact Harmonika backend capabilities, audit consolidated i
 ---
 
 Use automatically when a task concerns system capability/readiness, defensive
-source/header/binary analysis, or a source-index gap. First call
+source/header/binary analysis, or a source-index gap. Discover the currently
+advertised tools across all namespaces first. Native v2 does not expose the
+legacy `harmonika catalog` command; do not run it there. Video creation uses
+the advertised `video` tool (owner native namespace `harmonika_video`), while
+`video_studio` only edits existing files. Inspect capability/readiness using the
+actual tool schema. A miss in one namespace is not proof of a missing engine.
+
+Only when CLI help explicitly advertises the legacy catalog interface, call
 `harmonika catalog capabilities`, then `harmonika catalog list --status available`.
 Inspect the selected exact ID's schema with `harmonika catalog inspect ID`.
 Send JSON stdin via `harmonika catalog invoke ID`; never put key/password in argv.

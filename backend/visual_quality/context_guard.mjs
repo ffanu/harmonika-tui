@@ -1,6 +1,7 @@
 import window from './context_window.cjs';
 import {writeFile,rename} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
+import {readFileSync} from 'node:fs';
 export default {
  id:'harmonika.visual-context-guard',
  async setup(ctx){
@@ -9,7 +10,12 @@ export default {
    if(request.method!=='POST'||!request.headers.get('content-type')?.includes('application/json'))return;
    const raw=await request.clone().text();if(raw.length>8*1024*1024)return;
    let value;try{value=JSON.parse(raw)}catch{return}
-   const projected=window.project(value);
+   // A local operator profile is separate from any user request or conversation.
+   let maxChars;
+   try{const profile=JSON.parse(readFileSync(new URL('./context-capacity.json',import.meta.url),'utf8'));
+    if(profile.schema_version===1&&profile.context_window_tokens===872000&&profile.transport_soft_chars===2800000)maxChars=profile.transport_soft_chars;
+   }catch{}
+   const projected=window.project(value,{maxChars});
    // Mechanics only, no message text, prompt, image, key, session ID or raw exception.
    try{
     const messages=value.messages??[];let latest=messages.findLastIndex(m=>m.role==='user');

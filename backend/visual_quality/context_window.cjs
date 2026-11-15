@@ -18,11 +18,12 @@ function latestRequest(messages){
 function excerpt(text,keep=1200){
  return text.slice(0,keep)+'\n[Earlier tool output abbreviated for transport. sha256='+hash(text)+'. Omitted text is NOT execution evidence; reread the original file/result before acting.]\n'+text.slice(-keep);
 }
-function project(input){
+function project(input,options={}){
+ const budget=Number.isSafeInteger(options.maxChars)&&options.maxChars>=BUDGET&&options.maxChars<=8*1024*1024?options.maxChars:BUDGET;
  if(!input||!Array.isArray(input.messages)||size(input)>8*1024*1024)return input;
  // Never clip declarations, instructions, current user requests or tool arguments.
  const data=JSON.parse(JSON.stringify(input));let latest=latestRequest(data.messages);
- if(size(data)<=BUDGET)return input;
+ if(size(data)<=budget)return input;
  // Old binary attachments are references, not text decision context. Keep user text intact.
  for(let i=0;i<latest;i++){
   const m=data.messages[i];
@@ -32,11 +33,11 @@ function project(input){
   const m=data.messages[i];
   if(m.role==='tool'&&typeof m.content==='string'&&m.content.length>3000)m.content=excerpt(m.content);
  }
- if(size(data)<=BUDGET)return data;
+ if(size(data)<=budget)return data;
  // Historical turns remain visible as user requirements and a factual omission marker.
  // Drop complete call/result groups, never isolated tool messages or the current turn.
  let start=0;
- while(start<latest&&size(data)>BUDGET){
+ while(start<latest&&size(data)>budget){
   let first=start;
   while(first<latest&&['system','developer'].includes(data.messages[first].role))first++;
   let end=first+1;
@@ -51,11 +52,11 @@ function project(input){
   latest-=group.length-replacement.length;start=first+replacement.length;
  }
  // Keep all current tool results if they fit. Large reads may otherwise fill one entire turn.
- if(size(data)>BUDGET){
+ if(size(data)>budget){
   const toolIndexes=data.messages.map((m,i)=>m.role==='tool'?i:-1).filter(i=>i>=latest);
   for(const i of toolIndexes.slice(0,-2)){
    const m=data.messages[i];if(typeof m.content==='string'&&m.content.length>8000)m.content=excerpt(m.content,2000);
-   if(size(data)<=BUDGET)break;
+   if(size(data)<=budget)break;
   }
  }
  // Mandatory media may exceed the soft target. Preserve it, but do not undo

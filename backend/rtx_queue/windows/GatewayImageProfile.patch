@@ -1,0 +1,42 @@
+--- gateway.py
++++ gateway.py
+@@ -240,18 +240,21 @@
+     if skill == "image.generate":
+         from image_routing import wf_klein, choose_workflow
+         requested = inp.get("engine", "auto")
+-        if requested == "fluxhd":
+-            requested = "flux"  # Existing Linux bridge quality preset.
+-        if not isinstance(requested, str) or requested not in {"auto", "flux", "qwen2512", "klein"}:
+-            raise Err("unsupported_image_engine", 400)
+-        preferred = pick_image_engine(inp["prompt"])[0] if requested == "auto" else requested
++        from image_profile import resolve_profile, quality_canvas, ensure_png_minimum_bytes
++        quality_requested = requested == "fluxhd"
++        try:
++            profile = resolve_profile(requested, inp.get("steps", 4), lambda: pick_image_engine(inp["prompt"])[0])
++        except ValueError as error:
++            raise Err(str(error), 400) from None
++        requested, preferred = profile["requested"], profile["preferred"]
+         width = inp.get("width", 1088 if preferred == "qwen2512" else 1024)
+         height = inp.get("height", 1600 if preferred == "qwen2512" else 1024)
++        width, height = quality_canvas("fluxhd" if quality_requested else requested, width, height)
+         seed = inp.get("seed")
+         if seed is None:
+             seed = secrets.randbits(48)
+         workflows = {
+-            "klein": wf_klein(inp["prompt"], width, height, inp.get("steps", 4), seed),
++            "klein": wf_klein(inp["prompt"], width, height, profile["klein_steps"], seed),
+             "flux": wf_flux(inp["prompt"], width, height, inp.get("steps", 24), seed),
+             "qwen2512": wf_qwen2512(inp["prompt"], width, height, seed),
+         }
+@@ -260,6 +263,11 @@
+         if wf is None:
+             raise Err("image_model_unavailable", 503)
+         out = await comfy_run(wf)
++        if quality_requested:
++            try:
++                out["bytes"] = ensure_png_minimum_bytes(OUT / out["file"])
++            except ValueError as error:
++                raise Err(str(error), 422) from None
+         out["engine"] = {"klein":"flux2-klein-4b", "flux":"flux1-dev", "qwen2512":"qwen-image-2512"}[engine]
+         return out
+ 

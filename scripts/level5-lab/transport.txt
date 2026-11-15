@@ -1,0 +1,13 @@
+import sys,json,base64,urllib.request,urllib.error,time
+r=json.load(sys.stdin);data=base64.b64decode(r['body_b64']) if r.get('body_b64') is not None else None
+headers=r.get('headers',{})
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+ def redirect_request(self,*a,**k):return None
+req=urllib.request.Request('http://127.0.0.1:18081'+r['path'],data=data,headers=headers,method=r['method'])
+started=time.monotonic()
+try:response=urllib.request.build_opener(NoRedirect).open(req,timeout=8)
+except urllib.error.HTTPError as e:response=e
+with response:
+ body=response.read(2097153)
+ if len(body)>2097152:raise ValueError('response_too_large')
+ print(json.dumps({'http_status':response.status,'headers':{k:v for k,v in response.headers.items() if k.lower() in ['content-type','set-cookie','cache-control','content-disposition','x-content-type-options','retry-after']},'body_b64':base64.b64encode(body).decode(),'latency_ms':round((time.monotonic()-started)*1000)}))

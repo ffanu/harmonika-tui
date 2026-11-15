@@ -1,0 +1,106 @@
+{
+  "status": "active_verified",
+  "date": "2026-11-13",
+  "scope": "Internal Harmonika function-calling planner used by Cline",
+  "observations": {
+    "client_command_succeeded": true,
+    "presence_check_result": false,
+    "presence_check_is_transport_failure": false,
+    "backend_error_code": "invalid_tool_response",
+    "existing_error_subtype_available": false,
+    "diagnostic_limit": "Existing logs merge result-file, JSON parse and decision contract failures. The exact rejected output was not retained or reconstructed from private conversations.",
+    "instruction_contract_mismatch": "The original prompt asks for argument objects while the output schema requires JSON-encoded strings.",
+    "existing_recovery": "Only tool_engine_unavailable is retried; invalid decision format terminates the turn."
+  },
+  "changes": [
+    "Align initial instructions with JSON-encoded argument strings.",
+    "Constrain output cardinality and function names using tool_choice and parallel_tool_calls.",
+    "Allow one internal format correction before returning any client call.",
+    "Bound connection retries and correction to three generations in total.",
+    "Do not retry schema, secret, history, authentication or timeout errors as format failures.",
+    "Log fixed technical reason codes without prompts, raw output, arguments or credential values.",
+    "Apply private-reference checks to Cline command arrays and nested file descriptors."
+  ],
+  "verification": {
+    "local_unit_and_regression_tests": {
+      "passed": 29,
+      "failed": 0
+    },
+    "linux_staged_planner_integration_tests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "real_model_synthetic_probes": [
+      {
+        "fixture": "missing_reference",
+        "http_status": 200,
+        "tool_count": 0,
+        "has_text": true,
+        "finish_reason": "stop"
+      },
+      {
+        "fixture": "required_tool",
+        "http_status": 200,
+        "tool_count": 1,
+        "finish_reason": "tool_calls"
+      }
+    ],
+    "client_commands_executed_by_probes": false,
+    "private_user_history_replayed": false,
+    "syntax_check": "passed",
+    "git_diff_check": "passed",
+    "patch_anchor_guard_and_idempotency": "passed",
+    "production_api_smoke": {
+      "synthetic_only": true,
+      "results": [
+        {
+          "fixture": "missing_reference",
+          "passed": true,
+          "http_status": 200,
+          "tool_count": 0,
+          "has_text": true,
+          "duration_ms": 5737,
+          "client_commands_executed": false
+        },
+        {
+          "fixture": "sse_tool_decision",
+          "passed": true,
+          "http_status": 200,
+          "tool_count": 1,
+          "sse_done": true,
+          "duration_ms": 5701,
+          "client_commands_executed": false
+        }
+      ]
+    }
+  },
+  "activation": {
+    "private_server_stage": "/root/harmonika-decision-recovery-20261113T113709Z",
+    "production_files_modified": true,
+    "services_restarted": [
+      "harmonika-ai"
+    ],
+    "user_cline_process_modified": false,
+    "requires": null,
+    "files": {
+      "internal-tool-planner.js": {
+        "baseline_sha256": "87c4b7303da3c05c9d6a12ca11aa3918c90f528e31744b26224288af40bbaf00",
+        "candidate_sha256": "da5461ac2b02bd22fe12b467505ca7e35e7dfbb3f39a7ee30a813d029c512835"
+      },
+      "decision-recovery.cjs": {
+        "baseline_sha256": null,
+        "candidate_sha256": "c8c5814bc82010df5a8eccfc960df2f309f52d0281d96892d10d0d1f1e1fb8ba"
+      },
+      "secret-firewall.cjs": {
+        "baseline_sha256": "545168ec36a1385067d35e68ae032f5b8c2c372b74f94c58a7c708aafede472e",
+        "candidate_sha256": "3be15f8214f8e44e55feb158cca4f2c558fdb8751382f655ef284016f20591f6"
+      }
+    },
+    "status": "active_verified",
+    "verified_at": "2026-11-13T11:43:13.842738+00:00",
+    "backup": "/var/backups/harmonika-decision-recovery/20261113T114215Z",
+    "unrelated_service_pids_unchanged": true,
+    "public_health_http": 200
+  },
+  "follow_up_report": "docs/CLINE-LONG-CONTEXT-FIX-20261113.json"
+}

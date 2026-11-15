@@ -1,11 +1,17 @@
 """Private in-house adapter to pinned WanGP. Not enabled as a paid/public API.
 WanGP Community License2.0 is preserved in its source; model = Wan1.3B Apache2.
 """
-import json,math,os,sys,traceback,hashlib,subprocess,shutil
+import json,math,os,sys,traceback,hashlib,subprocess,shutil,importlib.util
 from pathlib import Path
 ROOT=Path(r'D:\HarmonikaAI\video-toolkit');APP=Path(r'C:\HarmonikaVideo\wangp\app');CONTROL=Path(__file__).resolve().parent
 os.environ.update(HF_HOME=str(ROOT/'models'),HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',DO_NOT_TRACK='1',OMP_NUM_THREADS='4',MKL_NUM_THREADS='4')
 JOBS=Path(r'C:\HarmonikaVideo\jobs')
+def checkpoint_paths():
+ spec=importlib.util.spec_from_file_location('wangp_model_cache',CONTROL/'stage_wangp_cache.py')
+ if spec is None or spec.loader is None:raise RuntimeError('model_cache_adapter_missing')
+ module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ # Preserve the existing vault on older installations; a staged cache must verify.
+ return [str(module.ready_cache())] if module.CACHE.exists() else [str(APP/'ckpts')]
 def run(job):
  import torch,psutil,av
  assert psutil.virtual_memory().available>=12*1024**3,'system_memory_low'
@@ -16,7 +22,7 @@ def run(job):
  assert isinstance(prompt,str) and 0<len(prompt.encode())<=8000 and type(seconds) is int and 1<=seconds<=10 and type(steps) is int and 8<=steps<=50
  config=CONTROL/'wgp_config.json'
  values=json.loads(config.read_text()) if config.exists() else {}
- values.update(transformer_quantization='bf16',text_encoder_quantization='int8',attention_mode='sdpa',profile=4,compile='disabled',vae_precision='16',checkpoints_paths=[str(APP/'ckpts')],save_queue_if_crash=0,metadata_type='none')
+ values.update(transformer_quantization='bf16',text_encoder_quantization='int8',attention_mode='sdpa',profile=4,compile='disabled',vae_precision='16',checkpoints_paths=checkpoint_paths(),save_queue_if_crash=0,metadata_type='none')
  temp=config.with_suffix('.tmp');temp.write_text(json.dumps(values));os.replace(temp,config)
  session=WanGPSession(root=APP,config_path=config,output_dir=job/'native',cli_args=['--offline','--attention','sdpa','--profile','4'],console_output=False,console_isatty=False)
  settings=session.get_default_settings('t2v_1.3B')
@@ -45,4 +51,4 @@ if __name__=='__main__':
  try:run(job)
  except Exception as exc:
   frames=traceback.extract_tb(exc.__traceback__);last=frames[-1] if frames else None
-  (job/'result.json').write_text(json.dumps({'status':'failed','error_type':type(exc).__name__,'function':last.name if last else None,'line':last.lineno if last else None,'missing_module':getattr(exc,'name',None) if isinstance(exc,ModuleNotFoundError) else None}));raise SystemExit(1)
+  (job/'result.json').write_text(json.dumps({'status':'failed','error_type':type(exc).__name__,'source':Path(last.filename).name if last else None,'function':last.name if last else None,'line':last.lineno if last else None,'missing_module':getattr(exc,'name',None) if isinstance(exc,ImportError) else None}));raise SystemExit(1)

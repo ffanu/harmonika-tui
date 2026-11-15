@@ -1,0 +1,209 @@
+{
+  "verified_at": "2026-11-12T14:34:54.215278+00:00",
+  "status": "crm_application_verified_backend_workflow_active",
+  "session_id": "ses_e2fe5cebeffeTIdMYXxjltGwbB",
+  "application_root": "/Users/id/Downloads/harmonika-ujian-crm-20261112/app",
+  "scope": "Supervised fullstack CRM construction by Harmonika terminal; Codex observes, supplies independent tests and updates backend workflow",
+  "stack": [
+    "Node.js 22",
+    "Express 5",
+    "SQLite WAL",
+    "React 19",
+    "TypeScript",
+    "Vite 7.3.8"
+  ],
+  "features": [
+    "cookie login/logout",
+    "admin/sales/viewer roles",
+    "customer CRUD/search/pagination",
+    "deal pipeline with persisted stages",
+    "tasks with persisted done state",
+    "database-derived dashboard",
+    "responsive layout and loading/error/empty states"
+  ],
+  "findings": [
+    {
+      "issue": "bodyless DELETE rejected with HTTP 415",
+      "correction": "Harmonika changed middleware; empty DELETE and foreign-origin/RBAC regression cases pass",
+      "corrected_by": "Harmonika"
+    },
+    {
+      "issue": "large frontend tool decision exceeded 60 second deadline and repeated without output",
+      "correction": "backend hot-read FULLSTACK guide now requests one write/edit of <=2000 code characters per response; frontend built successfully in small modules",
+      "corrected_by": "Codex workflow update; Harmonika implementation"
+    },
+    {
+      "issue": "generated test source with inline credential fields rejected by existing secret firewall",
+      "correction": "preserve firewall; use environment references and Codex-authored independent test suite; Harmonika ran the suite successfully",
+      "limit": "source-generation firewall remains strict; no claim that all source-expression false positives or client retry classification were fixed"
+    },
+    {
+      "issue": "dependency audit found one high-severity Vite finding",
+      "correction": "Harmonika upgraded Vite 7.1.3 to 7.3.8; subsequent audit zero findings",
+      "corrected_by": "Harmonika"
+    }
+  ],
+  "qualification": {
+    "unique_checks": 116,
+    "failed": 0,
+    "engine_regression_checks": 17,
+    "api_checks": 52,
+    "node_integration_test_count": 1,
+    "node_integration_test_contains_api_checks": 52,
+    "duplicate_npm_test_repeats_not_counted_again": true,
+    "persistence_checks": 7,
+    "browser_checks": 37,
+    "delivery_entrypoint_checks": 3,
+    "build_pass": true,
+    "npm_audit_vulnerabilities": 0,
+    "viewports": [
+      360,
+      390,
+      768,
+      1440
+    ],
+    "javascript_runtime_errors": [],
+    "csp_errors": [],
+    "expected_synthetic_503_recovery": true,
+    "visual_screenshots_reviewed": [
+      "dashboard-1440.png",
+      "pipeline-390.png"
+    ],
+    "manual_real_phone_keyboard_test": false
+  },
+  "attribution": {
+    "application_code": "Harmonika through actual terminal tools",
+    "backend_workflow_patch_and_independent_verification": "Codex",
+    "independent_self_contained_http_test_suite": "Codex",
+    "application_build_and_npm_test_execution": "Harmonika and independent Codex checks",
+    "claude_invoked": false,
+    "opencode_subagent_invoked": false
+  },
+  "activation": {
+    "active": true,
+    "hot_read": true,
+    "service_restarted": false,
+    "service_pid_unchanged": true,
+    "sha256": "7ad86bc431c0815b68ecce41028380f3a70b4558c54894d148785ef19068643c",
+    "bytes": 11986,
+    "backup": "/var/backups/harmonika-fullstack-exam/20261112T142329Z",
+    "secret_firewall_unchanged": true
+  },
+  "engine_files": [
+    "backend/planner/fullstack-workflow.cjs",
+    "tests/fullstack-workflow.test.cjs",
+    "backend/planner/README.md"
+  ],
+  "engine_source_sha256": "c5a4c8896ac636ba8507074b8e8438915434cb748da3c443d3ffe9fa4f0ac6cb",
+  "application_source_sha256": {
+    "index.html": "e4ee122e60114a32385f0883a37e2297e88c539861a99037038119e28337a806",
+    "package-lock.json": "6f522a96bfde49722b5bdbeb9a0128ab705da99560199108457c17a962242b2a",
+    "package.json": "129f62297be54799e0d13ce2c7435def5961da62b46b69535093326762e2fec7",
+    "tsconfig.json": "d16dc856244c5bdf87fc266e9c866f5ce04edc7499df6c827c8c3dec7fc887cb",
+    "tests/http.test.js": "0f9144281b8f1e28698a8e21c63c6a9d79b5069d734f59aa46a1dc23665f64c0",
+    "tests/api-probe.mjs": "a397840998e309923996543a8a8e5ba669fc9ec648e92de897a2ac25c6ca689c",
+    "server/db.js": "b9e64b99513b7c7510a76fd62429c7affee216b676983f9779975b964d9496ee",
+    "server/index.js": "c9407bfdc65a152a4505da0773bb8b206de5fc7984a25ff031015987c9c3ba79",
+    "server/seed.js": "30bc312e920d08f0868ee909edf1eff70f063152e0fc77ca42c6195550f608c5",
+    "server/app.js": "5b0360afbf1620b01548362a9a43b8eb2fc841646607452d871e5e2e82b0bda1",
+    "docs/CODEX-VERIFICATION.json": "5c05267c15fa58e35fd9939a6c4ee2018ccc4784c86f4361c2d806d147c72d5a",
+    "docs/BROWSER-TEST-RESULT.json": "923c41cd0f162f572a91420a88fcfa72ea027db848c2f0c6a3c0c3cfdef8bbe9",
+    "docs/API-TEST-RESULT.json": "2e82903d30acaf28b8ec0e19fd3b38f0a1240be5f6854fd761c9258de35068e3",
+    "docs/PERSISTENCE-TEST-RESULT.json": "6cd7ac2d26956484b3643a4fe4e9548abd77121da80a36b5ea50bca81b9f60dc",
+    "docs/QA-RESULT.json": "cd6af70b416dc8aa182cc99f476c1c1cd0b89383387c506c8a567a9b673a422c",
+    "src/App.tsx": "9504cd5e1778f7978891efb76c2bf785e78cfe2eb8e536f19c068581bda5f2ff",
+    "src/main.tsx": "51bde58be52d429950c35aa7f26582aee66aaab19157290307db4feed5d0c02c",
+    "src/Deals.tsx": "5c3073041018f32788f04ba85a0fe6f4f4226e4bf2bc4aaaef75e0bffeaa317b",
+    "src/Login.tsx": "e4b62c3bf4f9886486fcdc13497c81a99671f9d225106eb775de4ae0a7b73c32",
+    "src/Dashboard.tsx": "12b9c50e353a4c19522910c912097721b22e2c1361e4a4bc5f785e2352626aec",
+    "src/styles.css": "4f328c633b50c6c1296475070d0d3070f94f657b3c9dc61b909f124b390b560e",
+    "src/DealForm.tsx": "9dbf11f94f2301b09dd7daaad61342fdba5b0f3c9405726c9a6189b69306594e",
+    "src/Tasks.tsx": "e0a774ceee8a050f6bb2d7603ebca024710ed05a461b633ef3725dd3dedc2121",
+    "src/api.ts": "95f37bf23e89027beacb65a4bc6ac782a5b4f20a96de5d3727f2b833867710e7",
+    "src/CustomerSelect.tsx": "a199613c8fc97fc658536c00a9450b9f72d783e1a9d27bd8194d6caaec6bd18c",
+    "src/ListControls.tsx": "833fc77c33277df0d23c7fa2a30c35a7b24bd41bba9ca736b0949827bf455ceb",
+    "src/DealCard.tsx": "45db26dcb13b384b0251ffe4747c703ed4ae67d36cde6a5ba23f038ba1aec25e",
+    "src/useList.ts": "2bee96559e0f5f855e7d48e4c86fcc10c0f48b59e6ad17b671ff6893a2ab04bd",
+    "src/TaskForm.tsx": "bea7bb7f1a52ff89580b07adf1534b53951a8de893ed9d658da8b5b14ad73478",
+    "src/CustomerForm.tsx": "f465ff1bbfd82db323a0371863c899e66e3555ee57336352e68a60c2d995c867",
+    "src/Customers.tsx": "8d9993c5b370d58c8f0f47be7b48ac6867add5cb0b6b3fa7d8f616a1f06f4102"
+  },
+  "terminal_observations": {
+    "baseline": {
+      "events": 39,
+      "completed_tool_calls": 17,
+      "tool_errors": 0,
+      "tool_names": {
+        "read": 4,
+        "shell": 4,
+        "write": 9
+      }
+    },
+    "followup": {
+      "events": 18,
+      "completed_tool_calls": 3,
+      "tool_errors": 1,
+      "tool_names": {
+        "read": 3,
+        "edit": 1
+      }
+    },
+    "followup2": {
+      "events": 76,
+      "completed_tool_calls": 18,
+      "tool_errors": 0,
+      "tool_names": {
+        "write": 16,
+        "read": 1,
+        "shell": 1
+      }
+    },
+    "finalize": {
+      "events": 25,
+      "completed_tool_calls": 7,
+      "tool_errors": 0,
+      "tool_names": {
+        "shell": 3,
+        "write": 3,
+        "read": 1
+      }
+    }
+  },
+  "privacy": {
+    "synthetic_data_only": true,
+    "isolated_session_database": true,
+    "production_customer_records_accessed": false,
+    "credentials_or_raw_transcripts_in_backend_report": false,
+    "transcripts_private_to_local_exam_directory": true
+  },
+  "process_safety": {
+    "production_services_restarted": false,
+    "preexisting_user_terminals_stopped": false,
+    "only_owned_exam_clis_interrupted": true,
+    "only_owned_fixture_servers_restarted": true,
+    "port_3000_used": false,
+    "public_deployment": false
+  },
+  "limits": [
+    "Supervised success; this does not establish fully autonomous construction of arbitrary fullstack applications.",
+    "The backend update is a hot-read decision workflow, not a new model or automatic training.",
+    "Existing secret firewall validation can reject some generated test source; the supervised test suite avoids embedding real credentials.",
+    "Chromium viewport emulation was tested; native mobile keyboard interaction was not.",
+    "Application uses synthetic development accounts and loopback binding; public production deployment was not performed."
+  ],
+  "evidence_files": {
+    "api": "/Users/id/Downloads/harmonika-ujian-crm-20261112/evidence/api-exam.json",
+    "browser": "/Users/id/Downloads/harmonika-ujian-crm-20261112/evidence/browser-exam.json",
+    "persistence": "/Users/id/Downloads/harmonika-ujian-crm-20261112/evidence/persistence-exam.json",
+    "entrypoint": "/Users/id/Downloads/harmonika-ujian-crm-20261112/evidence/delivery-entrypoint.json"
+  },
+  "git_commit_or_push": false,
+  "final_verified_at": "2026-11-12T14:35:31.946187+00:00",
+  "backend_live_final": {
+    "sha256": "7ad86bc431c0815b68ecce41028380f3a70b4558c54894d148785ef19068643c",
+    "bytes": 11986,
+    "guide_version": "REMOTE ENGINEERING WORKFLOW v2026-11-12.2"
+  },
+  "harmonika_read_independent_reports_and_corrected_qa": true,
+  "own_exam_final_turns_exit_zero": true
+}

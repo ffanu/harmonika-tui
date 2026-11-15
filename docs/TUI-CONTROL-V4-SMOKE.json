@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "version": "2026.11.12.4",
+  "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+  "package_sha256": "3dd14c766ec6c5e7b15bc6872ccf8fdda3d4b5faa3d3f3bed603d51608af0929",
+  "verified_at": "2026-11-12T15:15:58.241801+00:00",
+  "physical_platform": "macOS arm64",
+  "terminal_sizes": [
+    "120x38",
+    "54x20"
+  ],
+  "isolated_data": true,
+  "synthetic_prompts_only": true,
+  "production_inference_calls": 0,
+  "checks": {
+    "invalid_tool_arguments": true,
+    "tool_secret_reference_required": true,
+    "invalid_tools": true,
+    "insufficient_quota": true,
+    "tool_engine_unavailable": true,
+    "tool_engine_timeout": true,
+    "workflow": true,
+    "marker_tool_registered": true,
+    "native_home_no_session_no_failed_plugin": true,
+    "home_plugins_control_active": true,
+    "native_home_engine_panel": true,
+    "f8_home_unobserved_phases": true,
+    "home_f8_narrow_54x20": true,
+    "home_f10_narrow": true,
+    "home_f9_narrow": true,
+    "home_no_plugin_runtime_error": true,
+    "home_f2_binding_preserved": true,
+    "native_session_render": true,
+    "f8_native_rpc_phases": true,
+    "f8_narrow_54x20": true,
+    "f10_narrow": true,
+    "f9_narrow": true,
+    "no_plugin_runtime_error": true,
+    "f2_binding_preserved": true
+  },
+  "checks_passed": 24
+}

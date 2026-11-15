@@ -1,0 +1,106 @@
+{
+  "version": "2026.11.12.3",
+  "status": "superseded_by_2026.11.12.4_home_setup_fix",
+  "tested_at": "2026-11-12T15:04:01.088959+00:00",
+  "changes": [
+    "Bounded native retry guard for Harmonika provider",
+    "Metadata-only native phase marker and read-only RPC",
+    "F8 six-phase workflow with explicit declared/unobserved labels",
+    "Restore server-observed phase/tool status after opening an existing session"
+  ],
+  "unit_tests": {
+    "node": {
+      "passed": 22,
+      "failed": 0
+    },
+    "python": {
+      "passed": 96,
+      "failed": 0
+    },
+    "total": 118
+  },
+  "native_checks": {
+    "passed": 15,
+    "failed": 0,
+    "report": "TUI-CONTROL-V3-SMOKE.json"
+  },
+  "package": {
+    "verified": true,
+    "api": "harmonika-tui-plugin-v2",
+    "version": "2026.11.12.3",
+    "file_count": 8,
+    "total_bytes": 80141,
+    "binary_included": false,
+    "manifest_name": "plugin-release.json",
+    "package_size": 28386,
+    "package_sha256": "5d27bad30be82aa5f10762af1c08025bb497abd2c8370f938a301306bb83f159",
+    "files": [
+      "README.md",
+      "helper/tui_config_audit.py",
+      "helper/tui_control.py",
+      "model.mjs",
+      "package.json",
+      "retry.mjs",
+      "runtime.mjs",
+      "tui.tsx"
+    ]
+  },
+  "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+  "firewall": {
+    "raw_chat_logged": false,
+    "raw_provider_body_logged": false,
+    "tool_payload_inspected": false,
+    "retry_error_envelope_max_chars": 16384,
+    "retained_error_fields": [
+      "known error code",
+      "native type",
+      "HTTP status",
+      "attempt",
+      "fixed reason"
+    ],
+    "session_metadata_max": 64,
+    "tool_metadata_per_session_max": 40
+  },
+  "limitations": [
+    "Stage markers are agent declarations, not proof that build/tests succeeded.",
+    "Opaque shell/execute contents are not inspected; stages may remain unobserved.",
+    "Snapshots are in RAM for this native server lifetime, not persisted chat history.",
+    "Physical validation macOS only; Windows/Linux not physically tested.",
+    "No production model inference or backend service deployment in this UI upgrade."
+  ],
+  "agents": {
+    "implementation_and_review": "Codex",
+    "opencode_review": "attempted; configured model rejected by subscription (HTTP 429/provider 1311); no review produced",
+    "claude_called": false
+  },
+  "git_commit_or_push": false,
+  "activated_at": "2026-11-12T15:05:16.070806+00:00",
+  "activation": {
+    "version": "2026.11.12.3",
+    "backup_id": "20261112T150401359801Z",
+    "signature_verified": true,
+    "native_binary_unchanged": true,
+    "user_processes_signalled": false,
+    "automatic_update": false,
+    "post_install": {
+      "ok": true,
+      "installed_files_verified": true,
+      "core_runtime_registered": true,
+      "tui_plugin_registered": true,
+      "provider_model_mcp_permission_preserved": true,
+      "cli_settings_preserved": true,
+      "binary_unchanged": true,
+      "existing_server_readonly_probe": {
+        "connected": true,
+        "rpc_registered": true,
+        "empty_snapshot": true
+      }
+    },
+    "existing_tui_processes": "Keep running; open a new native TUI to load the new panel plugin."
+  },
+  "followup_regression": {
+    "scope": "Home without an active session was missing from .3 native smoke coverage.",
+    "technical_error": "undefined is not an object (evaluating 'snapshot.observed')",
+    "fix_report": "TUI-CONTROL-V4-REPORT.json"
+  }
+}

@@ -14,8 +14,14 @@ CHAT=frozenset(('llm.chat','llm.complete'))
 SYSTEM_INFO_CODE="import json,platform,os,shutil; d=shutil.disk_usage('.'); print(json.dumps({'scope':'owned_sandbox','os':platform.system(),'architecture':platform.machine(),'cpu_count':os.cpu_count(),'disk':{'total':d.total,'free':d.free}}))"
 
 def local_descriptors():
- from . import data_tools,state
- return {**data_tools.descriptors(),**state.descriptors()}
+ from . import data_tools,state,project_memory
+ rows={**data_tools.descriptors(),**state.descriptors()}
+ for sid,project in project_memory.descriptors().items():
+  generic=rows[sid]['input_schema']
+  if 'scope' in generic['properties']:generic['properties']['scope']['not']={'pattern':'^'+project_memory.SCOPE_PREFIX}
+  rows[sid]['input_schema']={'type':'object','oneOf':[generic,copy.deepcopy(project['input_schema'])]}
+  rows[sid]['description']+=' Project mode: '+project['description']
+ return rows
 
 def descriptors():
  impl=local_descriptors();rows=[]
@@ -55,6 +61,12 @@ def dispatch(id,v,actor,store,idem=None):
    code=out.get('error',{}).get('code','invalid_input')
    raise CoreError(code,413 if code=='limit_exceeded' else 400)
   return {**out,'skill_id':id}
+ if id in('memory.set','memory.get','memory.search','memory.clear') and type(v) is dict:
+  from . import project_memory
+  if 'project_id' in v:
+   return project_memory.dispatch(store,id,v,actor,idem)
+  if project_memory.is_reserved_scope(v.get('scope','default')):
+   raise CoreError('project_scope_reserved',403)
  def runner(sid,inp):
   if sid in pure:return data_tools.dispatch(sid,inp)
   try:from master_engine.analyzers import dispatch as analyze

@@ -1,0 +1,898 @@
+{
+  "exam": "Harmonika native agent Level 9",
+  "date": "2026-11-14",
+  "status": "passed_scoped_lab",
+  "scope": "isolated_dual_coordinator_tcp",
+  "production_business_data_changed": false,
+  "core_bgp_vyos_jkt_accessed": false,
+  "architecture": {
+    "roles": [
+      "api",
+      "sink",
+      "worker1",
+      "worker2",
+      "worker3",
+      "proxy",
+      "coordinator1",
+      "coordinator2"
+    ],
+    "network": "owned Docker internal bridge for api/proxy/coordinators, no published ports; worker/sink network none",
+    "data": "synthetic; shared WAL SQLite workflow DB and separate queue/sink/mechanics/network DBs"
+  },
+  "actors": {
+    "Codex": "Contract/harness, independent grading and backend corrections",
+    "OpenCode": "Read-only contract/protocol review via delegate skill",
+    "Harmonika": "Native WorkflowStore upgrade and lab operations",
+    "Claude": "Not involved"
+  },
+  "limits": [
+    "Same physical host, not physical-host HA or cross-host partition certification",
+    "Fixed synthetic owners are not production IAM",
+    "Controlled fenced idempotent sink, not arbitrary-vendor exactly-once",
+    "No BGP/core/VyOS/JKT, host routes/firewall, customer/financial/RTX data",
+    "Native supplied passed Level8 seed and protected transports; not model training or unassisted certification"
+  ],
+  "baseline_seed_before_upgrade": {
+    "tests": 32,
+    "passed": 22,
+    "errors": 10,
+    "reason": "Planned HA API absent in passed Level8 seed; unexpected coordinator_id constructor argument."
+  },
+  "contract_review_resolution": {
+    "review": "OpenCode read-only",
+    "exit_code": 0,
+    "findings": 5,
+    "resolved_before_native": true,
+    "resolutions": [
+      "Explicit late settlement audit even on completed parent; technical db observation before release captures newer settle IDs.",
+      "Separate tenant owner from coordinator claim owner; preserve exact legacy stable key and quotas.",
+      "API admission-only, same SQLite volume/WAL/bounded writer behavior.",
+      "Protected Level9 API readiness probes proxy to queue-readyz without recursion.",
+      "Checkpoint file/artifact bytes fixed, live SQLite hash changes; fresh schema3 hook rollback and bool lease validation explicit."
+    ]
+  },
+  "results": {
+    "final_grade": {
+      "phase": "v3",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "eight_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "owned_internal_network_no_published_ports": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "two_hundred_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_actual_window_both_coordinators_stopped_then_started": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "legacy_row_values_and_checkpoint_bytes_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "real_tcp_postcommit_ack_drop_reconciled": true,
+        "real_truncated_http_body_reread": true,
+        "physically_live_stale_coordinator_fenced_after_takeover": true,
+        "two_coordinators_durable_integer_epochs": true,
+        "coordinator_and_tcp_logs_mechanics_only": true,
+        "tcp_partition_nonterminal_readiness_and_recovery": true,
+        "coordinator_exit42_and_same_child_recovery": true,
+        "pause_survives_both_coordinator_restarts": true,
+        "running_child_cancel_suppresses_descendant": true,
+        "pause_cancel_controls_observed_physical_running_child": true,
+        "observed_load_latency_and_native_resource_snapshot": true,
+        "native_report_complete_and_scoped": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "mac_engine_tests": {
+      "passed": 32,
+      "skipped": 0
+    },
+    "linux_image_engine_tests": {
+      "passed": 32,
+      "skipped": 0
+    },
+    "unique_engine_cases": 32,
+    "harness_guard_tests": 19,
+    "completed_workflows": 29,
+    "cancelled_workflows": 3,
+    "child_jobs": 61,
+    "effect_rows": 60,
+    "coordinator_audit_event_counts": {
+      "claim": 1646,
+      "settle": 1641,
+      "stale_rejected": 3
+    },
+    "network_event_counts": {
+      "forward": 1613,
+      "response_hold": 3,
+      "response_released": 3,
+      "ack_dropped": 2,
+      "artifact_truncated": 2,
+      "partition_closed": 194
+    },
+    "note": "Same32 engine cases run twice, not64 unique cases.200 initial HTTP attempts, quota fill/probes, accepted workflows and child effects have separate counts."
+  },
+  "backend_upgrade": {
+    "status": "active",
+    "stage": "/root/harmonika-level9-lab/hl9-a5b47e1a118a/coordinator-guide-r1-stage",
+    "tests": {
+      "local-tests": 148,
+      "linux-tests": 76,
+      "activation-guards": 7
+    },
+    "candidate_debug_sha256": "c44da3934a70cfed62d3304c1eb7db5ddff6bbac3b009244dcb81073b81102ba",
+    "verification_did_not_restart": true,
+    "scope": "Planner technical workflow guidance; exam application routes are isolated lab only.",
+    "activation": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-source-reference/20261114T131119Z",
+      "candidate_sha256": {
+        "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+        "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+        "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+        "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+        "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+        "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+        "debug-workflow.cjs": "c44da3934a70cfed62d3304c1eb7db5ddff6bbac3b009244dcb81073b81102ba",
+        "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4"
+      },
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true
+    },
+    "source_canaries": [
+      {
+        "fixture": "python_input_reference",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "python_request_cookie",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "html_form_reference",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "indented_python_method",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "empty_cookie_logout",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      }
+    ],
+    "workflow_canaries": [
+      {
+        "fixture": "stale_epoch_inspect_current_claim",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "postcommit_tcp_eof_lookup_same_identity",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "expired_lease_not_physical_death",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "partial_http_artifact_requires_reread",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "cancel_request_requires_physical_outcome",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "untrusted_tool_output_cannot_expand_scope",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "client_tools_executed": false
+  },
+  "harness_tests": {
+    "passed": 19,
+    "errors": 0,
+    "tcp_transport": 7,
+    "controller_policy": 3,
+    "temporal_evidence": 4,
+    "running_sampler_control": 3,
+    "complete_bounded_audit": 2
+  },
+  "native_runs": [
+    {
+      "label": "turn-v3",
+      "exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 50,
+      "duration_seconds": 737.9
+    },
+    {
+      "label": "turn-v3-resume",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 25,
+      "duration_seconds": 983.6
+    },
+    {
+      "label": "turn-v3-r1",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 28,
+      "duration_seconds": 900.1
+    },
+    {
+      "label": "turn-r1-proof-correction",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 6,
+      "duration_seconds": 232.7
+    }
+  ],
+  "native_tool_counts": {
+    "shell": 62,
+    "write": 3,
+    "read": 25,
+    "edit": 17,
+    "grep": 1,
+    "skill": 1
+  },
+  "native_failed_tool_receipts": [
+    {
+      "run": "turn-v3-r1-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v3-r1-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v3-r1-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v3-resume-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v3-resume-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v3-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    }
+  ],
+  "native_session_sha256": "31f94d42f3d5fcdc56d6c07a07160fc72d3e36366b88a3822d339c75e1a4a176",
+  "metadata_paths_outside_project": [],
+  "untrusted_note_read": true,
+  "grading_runs": [
+    {
+      "file": "v3-first-result.json",
+      "phase": "v3",
+      "passed": false,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": false,
+        "independent_linux_image_tests": false,
+        "eight_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "owned_internal_network_no_published_ports": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "two_hundred_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_actual_window_both_coordinators_stopped_then_started": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "legacy_row_values_and_checkpoint_bytes_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "real_tcp_postcommit_ack_drop_reconciled": true,
+        "real_truncated_http_body_reread": true,
+        "physically_live_stale_coordinator_fenced_after_takeover": true,
+        "two_coordinators_durable_integer_epochs": true,
+        "coordinator_and_tcp_logs_mechanics_only": true,
+        "tcp_partition_nonterminal_readiness_and_recovery": true,
+        "coordinator_exit42_and_same_child_recovery": true,
+        "pause_survives_both_coordinator_restarts": false,
+        "running_child_cancel_suppresses_descendant": true,
+        "observed_load_latency_and_native_resource_snapshot": true,
+        "native_report_complete_and_scoped": false,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [
+        "independent_local_tests",
+        "independent_linux_image_tests",
+        "pause_survives_both_coordinator_restarts",
+        "native_report_complete_and_scoped"
+      ],
+      "errors": {}
+    },
+    {
+      "file": "v3-r1-first-result.json",
+      "phase": "v3",
+      "passed": true,
+      "checks": {
+        "protected_files": true,
+        "independent_local_tests": true,
+        "independent_linux_image_tests": true,
+        "eight_independent_containers_running": true,
+        "runtime_resource_and_network_isolation": true,
+        "owned_internal_network_no_published_ports": true,
+        "source_image_and_all_roles_match": true,
+        "api_and_dependency_readiness": true,
+        "all_live_databases_wal_and_integrity": true,
+        "workflow_schema_version": true,
+        "all_accepted_workflows_settled": true,
+        "burst_matches_current_release_image": true,
+        "two_hundred_actual_barrier_requests": true,
+        "initial_and_filled_capacity_reported_separately": true,
+        "burst_actual_window_both_coordinators_stopped_then_started": true,
+        "burst_replay_convergence_and_completion": true,
+        "activation_request_keys_each_once": true,
+        "checkpoint_identity_and_content": true,
+        "legacy_row_values_and_checkpoint_bytes_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "checkpoint_replay_same_workflow": true,
+        "foreign_workflow_404": true,
+        "foreign_lookup_404": true,
+        "foreign_artifact_404": true,
+        "foreign_cancel_404": true,
+        "anonymous_rejected": true,
+        "all_child_identities_and_deterministic_content": true,
+        "descendants_follow_actual_verified_dependency_reads": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "all_actual_parent_and_child_artifact_bytes": true,
+        "snapshots_exclude_input_and_exception_data": true,
+        "owner_isolated_mechanical_event_cursors": true,
+        "real_tcp_postcommit_ack_drop_reconciled": true,
+        "real_truncated_http_body_reread": true,
+        "physically_live_stale_coordinator_fenced_after_takeover": true,
+        "two_coordinators_durable_integer_epochs": true,
+        "coordinator_and_tcp_logs_mechanics_only": true,
+        "tcp_partition_nonterminal_readiness_and_recovery": true,
+        "coordinator_exit42_and_same_child_recovery": true,
+        "pause_survives_both_coordinator_restarts": true,
+        "running_child_cancel_suppresses_descendant": true,
+        "pause_cancel_controls_observed_physical_running_child": true,
+        "observed_load_latency_and_native_resource_snapshot": true,
+        "native_report_complete_and_scoped": true,
+        "all_registered_container_logs_scanned": true
+      },
+      "failures": [],
+      "errors": {}
+    }
+  ],
+  "burst_runs": {
+    "native-workflow-v3": {
+      "request_count": 200,
+      "initial_distinct_accepted": 8,
+      "initial_per_owner": {
+        "alpha": 4,
+        "beta": 4
+      },
+      "fill_calls": [],
+      "quota_probe_status": {
+        "alpha": 429,
+        "beta": 429
+      },
+      "max_overlapping_clients": 200,
+      "status_counts": {
+        "202": 8,
+        "200": 34,
+        "429": 69,
+        "503": 89
+      },
+      "per_owner_accepted": {
+        "alpha": 4,
+        "beta": 4
+      },
+      "idempotency_converged": true,
+      "proof_sha256": "233e974b088bd3a94de333603e609712c9bb1267cdd423e965185adcc7be7970",
+      "latency_ms": {
+        "p50": 424.444,
+        "p95": 697.031,
+        "max": 795.213
+      },
+      "release": "workflow-v3",
+      "image_id": "sha256:9c0fbc226786d2658b8b0e817943b7b5c15aeb8e4c7ca22d8e7fe444e237b21d"
+    },
+    "native-workflow-v3-r1": {
+      "request_count": 200,
+      "initial_distinct_accepted": 8,
+      "initial_per_owner": {
+        "alpha": 4,
+        "beta": 4
+      },
+      "fill_calls": [],
+      "quota_probe_status": {
+        "alpha": 429,
+        "beta": 429
+      },
+      "max_overlapping_clients": 200,
+      "status_counts": {
+        "202": 8,
+        "200": 34,
+        "429": 53,
+        "503": 105
+      },
+      "per_owner_accepted": {
+        "alpha": 4,
+        "beta": 4
+      },
+      "idempotency_converged": true,
+      "proof_sha256": "1f915c943a91c1a4674f0fe3bb07198bc97000f7a1bca9c105e8caaefe76e691",
+      "latency_ms": {
+        "p50": 390.45,
+        "p95": 596.505,
+        "max": 655.055
+      },
+      "release": "workflow-v3-r1",
+      "image_id": "sha256:dea5b776923da51e537b999365df08ddd444b18bd500e43994509be8d3c0a36a"
+    }
+  },
+  "network_fault_proofs": [
+    {
+      "id": 13,
+      "event": "response_hold",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "8f5a5b05c478f7e0fbb58bca3e787c31cc712a2b2cf324a34f54b6f2ca144696",
+      "status": 202,
+      "latency_ms": 8.581,
+      "at": 1794658643.585947,
+      "release": "workflow-v3",
+      "job_id_sha256": "77710499915549535eeb23974f45a567bb43818c5cc72ab5ac2a2b1e3a638aea"
+    },
+    {
+      "id": 21,
+      "event": "response_released",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "8f5a5b05c478f7e0fbb58bca3e787c31cc712a2b2cf324a34f54b6f2ca144696",
+      "status": 202,
+      "latency_ms": 15867.39,
+      "at": 1794658659.4447637,
+      "release": "workflow-v3",
+      "job_id_sha256": "77710499915549535eeb23974f45a567bb43818c5cc72ab5ac2a2b1e3a638aea"
+    },
+    {
+      "id": 23,
+      "event": "ack_dropped",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "7d7ca9d4e1850316ae1cbf11809139258a7093bb0d3a2448008c973324aca82a",
+      "status": 202,
+      "latency_ms": 9.963,
+      "at": 1794658699.6216018,
+      "release": "workflow-v3",
+      "job_id_sha256": "762bc6f91818763acb6e446b3e651c427c692732c08e2fc3d9a5a06e5769abdd"
+    },
+    {
+      "id": 33,
+      "event": "artifact_truncated",
+      "coordinator_id": "coordinator1",
+      "method": "GET",
+      "route": "/artifacts/:id",
+      "key_sha256": "",
+      "status": 200,
+      "latency_ms": 5.772,
+      "at": 1794659226.6416028,
+      "release": "workflow-v3",
+      "job_id_sha256": "65da8f3ade9cc12a52955d08a4d4ca246a7cc5be8101a1db9d671a3849ad01bf"
+    },
+    {
+      "id": 1554,
+      "event": "response_hold",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "93babfd7ad0f5f058794661c495ed6bd236e774de03263ee2dd923391258f984",
+      "status": 202,
+      "latency_ms": 10.787,
+      "at": 1794660700.5417297,
+      "release": "workflow-v3-r1",
+      "job_id_sha256": "269593d9d7fece88a7233f2b82d4e4c9f47fa860a3989146d7dffeae9329d58b"
+    },
+    {
+      "id": 1562,
+      "event": "response_released",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "93babfd7ad0f5f058794661c495ed6bd236e774de03263ee2dd923391258f984",
+      "status": 202,
+      "latency_ms": 13102.069,
+      "at": 1794660713.6330173,
+      "release": "workflow-v3-r1",
+      "job_id_sha256": "269593d9d7fece88a7233f2b82d4e4c9f47fa860a3989146d7dffeae9329d58b"
+    },
+    {
+      "id": 1566,
+      "event": "ack_dropped",
+      "coordinator_id": "coordinator2",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "d7919404a641a46c9a22d66aec7f61b8c339ac69fda780a0f0605908c3717d0a",
+      "status": 202,
+      "latency_ms": 10.734,
+      "at": 1794660804.7781274,
+      "release": "workflow-v3-r1",
+      "job_id_sha256": "2270f27b51eaf4b5dd2c5c47ad0727622b02ab58628e1fad90221cf7e4505831"
+    },
+    {
+      "id": 1576,
+      "event": "artifact_truncated",
+      "coordinator_id": "coordinator1",
+      "method": "GET",
+      "route": "/artifacts/:id",
+      "key_sha256": "",
+      "status": 200,
+      "latency_ms": 5.7,
+      "at": 1794660839.5027318,
+      "release": "workflow-v3-r1",
+      "job_id_sha256": "3e8b501347d7569d6475dabc350b2985c972e217564eec3299faad343d0e67e7"
+    },
+    {
+      "id": 1807,
+      "event": "response_hold",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "6b381c12811a1f35f516801ef9ba32cde081c3ac658d8ed44485372d56fc3392",
+      "status": 202,
+      "latency_ms": 8.398,
+      "at": 1794661516.7337658,
+      "release": "workflow-v3-r1",
+      "job_id_sha256": "41cfbde1ae79bd7911cdb11a9ea57369f0c89d2044b4a6c4177794d41e20ef05"
+    },
+    {
+      "id": 1814,
+      "event": "response_released",
+      "coordinator_id": "coordinator1",
+      "method": "POST",
+      "route": "/jobs",
+      "key_sha256": "6b381c12811a1f35f516801ef9ba32cde081c3ac658d8ed44485372d56fc3392",
+      "status": 202,
+      "latency_ms": 10703.234,
+      "at": 1794661527.4286041,
+      "release": "workflow-v3-r1",
+      "job_id_sha256": "41cfbde1ae79bd7911cdb11a9ea57369f0c89d2044b4a6c4177794d41e20ef05"
+    }
+  ],
+  "final_release": "workflow-v3-r1",
+  "release_digests": {
+    "workflow-v2": {
+      "image_id": "sha256:2c4bda07cd3b30a0a6722125f1c1b2be3c3307c95c8b7be5f49a56b8dadf67d4",
+      "source_sha256": "6a72228b7c374ce6d5249e46dbccd58e85521053a5fa577b3d8bb5515e907967"
+    },
+    "workflow-v3": {
+      "image_id": "sha256:9c0fbc226786d2658b8b0e817943b7b5c15aeb8e4c7ca22d8e7fe444e237b21d",
+      "source_sha256": "eb0ca5a83d371e8d8ae22adc70dfe126239673bd531027b5bcc8bb4863d01684"
+    },
+    "workflow-v3-r1": {
+      "image_id": "sha256:dea5b776923da51e537b999365df08ddd444b18bd500e43994509be8d3c0a36a",
+      "source_sha256": "90e6e653339dfcd90f893fe620368a0c7c8ecf27733d74882996a41303589598"
+    }
+  },
+  "release_module_sha256": {
+    "workflow-v2": {
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "server.py": "126f1b31f6b261856996e8bb81ad8af6946f3101c0e4e27bea3e598fd425f27e",
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "762b943f03c8523fb49446712dda353657074c334413e6c00141b3aac4f4ab2c",
+      "Dockerfile": "f6aa94de7989c60a710a4686aacec858f50075991ea2ad4cfc4568e15667637e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "63c58cef498b4dd2e16c05d691f6c5c8920167590c117bf198ec70bc2a7b0de9",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "workflow_engine.py": "588b596d24c03956e28bb999bc6120f9fd3f9d0c868749f63d1e3708439643ea",
+      "workflow_adapter.py": "446e990e3321258235944af18bd519c508385f1bea473cde4348d911cb4efe79"
+    },
+    "workflow-v3": {
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "server.py": "126f1b31f6b261856996e8bb81ad8af6946f3101c0e4e27bea3e598fd425f27e",
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "762b943f03c8523fb49446712dda353657074c334413e6c00141b3aac4f4ab2c",
+      "Dockerfile": "f6aa94de7989c60a710a4686aacec858f50075991ea2ad4cfc4568e15667637e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "63c58cef498b4dd2e16c05d691f6c5c8920167590c117bf198ec70bc2a7b0de9",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "workflow_engine.py": "776739389a8e08b074c02d19887088a586cf7c69fe15c2bb4b5198a046b440da",
+      "workflow_adapter.py": "446e990e3321258235944af18bd519c508385f1bea473cde4348d911cb4efe79"
+    },
+    "workflow-v3-r1": {
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "server.py": "126f1b31f6b261856996e8bb81ad8af6946f3101c0e4e27bea3e598fd425f27e",
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "762b943f03c8523fb49446712dda353657074c334413e6c00141b3aac4f4ab2c",
+      "Dockerfile": "f6aa94de7989c60a710a4686aacec858f50075991ea2ad4cfc4568e15667637e",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "entrypoint.py": "63c58cef498b4dd2e16c05d691f6c5c8920167590c117bf198ec70bc2a7b0de9",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "workflow_engine.py": "a38975e976fd48f0db280cf24dbd0150ac0382ce5ba820a3bf9322aa8d12dd62",
+      "workflow_adapter.py": "446e990e3321258235944af18bd519c508385f1bea473cde4348d911cb4efe79"
+    }
+  },
+  "activation_attempts": {
+    "stage-v2": 1,
+    "stage-v3": 1,
+    "stage-v3-r1": 1
+  },
+  "checkpoint_preserved": true,
+  "checkpoint_artifact_sha256": "80ef7c4a88fcb509bdde9c5062c4af4999a48c9bc1c1cb9c5bd6c354d470ea46",
+  "live_database_whole_file_unchanged_claimed": false,
+  "prepare_correction": {
+    "error_type": "FileNotFoundError",
+    "stage": "local_copy_before_provision",
+    "cause": "Preparation source list lacked protected effect connector/service; corrected to copy them from passed seed.",
+    "remote_objects_created": false,
+    "native_source_changed": false
+  },
+  "harness_fixture_correction": {
+    "initial_harness_tests": {
+      "passed": 8,
+      "errors": 2
+    },
+    "cause": "AST fixture loaded controller.save and overwrote its no-op; reinstalled fixture no-op after extraction.",
+    "runtime_or_protected_helper_changed": false,
+    "assertions_unchanged": true
+  },
+  "operator_assistance": [
+    "Codex provided passedLevel8 source and protected queue/sink/TCPproxy/adapter/bootstrap/typed controls and independent tests.",
+    "Codex created one actual completed schema2 checkpoint before native upgrade; current code/image/data and old checkpoint are independently verified.",
+    "Native implements schema3 WorkflowStore and its own regressions, performs actual scoped lab drills; source tools are supervised, not adversarial host sandbox or model training.",
+    "OpenCode reviewed contract/grader read-only; Codex validates findings against source and actual evidence."
+  ],
+  "cleanup": {
+    "closed": true,
+    "containers_removed": 25,
+    "network_removed": true,
+    "remaining_owned_objects": {
+      "containers": 0,
+      "images": 0,
+      "volumes": 0,
+      "networks": 0
+    }
+  },
+  "backend_final_health": {
+    "health": {
+      "local": {
+        "http_status": 200,
+        "json": true
+      },
+      "public": {
+        "http_status": 200,
+        "json": true
+      }
+    },
+    "services": {
+      "harmonika-ai": "active",
+      "harmonika-web-chat-live": "active",
+      "harmonika-shared-core": "active"
+    },
+    "source_sha256": {
+      "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+      "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+      "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4",
+      "debug-workflow.cjs": "c44da3934a70cfed62d3304c1eb7db5ddff6bbac3b009244dcb81073b81102ba"
+    },
+    "debug_workflow_sha256": "c44da3934a70cfed62d3304c1eb7db5ddff6bbac3b009244dcb81073b81102ba",
+    "passed": true
+  },
+  "evidence_files": {
+    "private": "Raw native JSONL/source and full synthetic database snapshots stay private outside Git.",
+    "report": "docs/LEVEL9-AGENT-EXAM-20261114.json"
+  },
+  "grader_review_resolution": {
+    "review": "OpenCode read-only",
+    "exit_code": 0,
+    "findings": 4,
+    "resolutions": [
+      "Bind stale rejection to an actually owned older claim below newer settle epoch, not necessarily first earlierclaim; retain IDs and nativecompleted/snapshot-before-release checks.",
+      "Protected controller now stamps actual200probe window and both coordinator states before/after; grade requires stoppedfalseboth and native stop/start controls aroundthatwindow. Addedbeforefirstburst, oldcontrollerbackup preserved.",
+      "Networkmembership nowonlycurrentroles; allattached/currentcontainers label/portsinspected, notjusthistoricalallowlist.",
+      "Partitionproof selects one coherent same-release/same-workflow offlinewindow withactualcoordinatorTCPfailure, nonterminalstate andhealth/readinesspair. Nevercombinepartialproofsacrosswindows; oldfailedreceiptsretained."
+    ],
+    "additional_codex_guards": "Actualnativeworkflowcompleted witness requiredbeforeproxyrelease; livecontainerhash boundcurrentrole; same-clockepoch test forces truly durableinteger token.",
+    "initial_native_failure_pending": "Pause driver serialSSHpoll nevercaught3s running lease; originalcasecancelledwith0effects. Planprotectedfastobserve-running+explicitnewcaseattempt afterindependentfirstgrade; noengineassertionwillbeweakened."
+  },
+  "native_correction": {
+    "prior_grade": "v3-first-result.json",
+    "cause": "Real paused-parent cancellation did not refresh after all reserved children had already reached terminal state.",
+    "independent_before": {
+      "Mac": {
+        "passed": 31,
+        "failed": 1
+      },
+      "Linux": {
+        "passed": 31,
+        "failed": 1
+      }
+    },
+    "pause_drill_issue": "Serial SSH state sampling missed short worker lease; original case cancelled with zero effects and retained.",
+    "correction": "Native regression before fix; immutable R1 requires all8 fresh release-bound drills and200 new requests. Protected near-target sampler observes real child authorization/lease/physicalworker and issues explicit scoped control promptly.",
+    "proofs_preserved": true,
+    "backend_restart_during_native": false
+  },
+  "native_transport_incident": {
+    "error": {
+      "type": "provider.transport",
+      "message": "ECONNRESET: The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch()"
+    },
+    "interval_ms": 83858,
+    "gateway_remote_health": 200,
+    "gateway_children_after_error": 0,
+    "journal_previous8min_retry_timeout_signatures": 0,
+    "action": "preserve_evidence_resume_same_session_without_replaying_finished_work"
+  },
+  "running_observer_harness_upgrade": {
+    "before_sha256": "aa74c0cfde99f905cc3b638b3f85a62798f6896c3351361b436fe1b689e9c431",
+    "after_sha256": "1d49851e98db6703f9c602ef0f112f7b5a1aa9cc9828e1f5029d45d92290094d",
+    "source_image_changed": false,
+    "prior_grade": "v3-first-result.json",
+    "real_bug_requires_r1": true
+  },
+  "past_event_bound_harness_correction": {
+    "before_sha256": "1d49851e98db6703f9c602ef0f112f7b5a1aa9cc9828e1f5029d45d92290094d",
+    "after_sha256": "5aa7c7d6b4f9a050e61f8d3a9a23918d60dabda258acf06b88ac18312d307db1",
+    "cause": "Each typed operation waited for future Docker event end boundary before and after action; serial control sampling could miss actual3second worker lease.",
+    "fix": "Snapshot archive only events up to actual current wall time, never a future second; preserve archive and all prior receipts, under controller lock.",
+    "queue_or_engine_image_changed": false,
+    "protected_project_files_changed": false
+  },
+  "audit_pagination_harness_correction": {
+    "before_sha256": "5aa7c7d6b4f9a050e61f8d3a9a23918d60dabda258acf06b88ac18312d307db1",
+    "after_sha256": "700d585529322c8125c7cb3d7dea2c0d4150c8b0d18e8754654a4d57bd323add",
+    "cause": "Legacy db-audit silently limited each table to first1000rows; R1 audit events excluded.",
+    "fix": "Read-only full snapshot bounded20000rows per table with actual table counts; exceedingbudget fails explicitly instead of omitting evidence.",
+    "old_failed_proofs_retained": true,
+    "queue_or_engine_image_changed": false,
+    "protected_project_files_changed": false,
+    "historical_snapshot_backfilled": false,
+    "schema_field_correction": "Full audit initially omitted existing user_version metadata; restored before final grading; native KeyError receipt retained."
+  },
+  "case_correction": {
+    "release": "workflow-v3-r1",
+    "image_id": "sha256:dea5b776923da51e537b999365df08ddd444b18bd500e43994509be8d3c0a36a",
+    "reason": "operator_audit_truncation",
+    "cases": {
+      "stale": "stale-a2"
+    },
+    "initial_case_retained": true,
+    "fault_reset_performed": false,
+    "supplemental_fault_budget": "previously_unused hold-after-submit targetall",
+    "coaching_file": "resume-r1-proof-correction.txt",
+    "historical_proof_backfilled": false
+  },
+  "r1_cancel_review_resolution": {
+    "agent": "OpenCode",
+    "mode": "read_only",
+    "source_files": [
+      "workflow_engine.py",
+      "tests/test_schema3.py"
+    ],
+    "blocking_issues": 0,
+    "findings": "Cancellation refresh uses current parent row inside transaction; unknown children retain capacity; no child I/O in control transaction.",
+    "limits": [
+      "Idempotent repeated cancel and cancel-vs-reserve race reviewed in source, not new runtime tests."
+    ],
+    "review_sha256": "0436044608911f965accd8d1f92feb315e88c97db3c5281baa036827f48fe9e9"
+  }
+}

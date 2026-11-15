@@ -1,0 +1,128 @@
+{
+  "audit_date": "2026-11-12",
+  "status": "activated_and_real_text_to_video_exam_passed",
+  "scope": "owner_native_terminal_text_to_video",
+  "requested_session_id": "ses_e2fa80b1bffeek9dIcPlT3siSm",
+  "root_causes": [
+    "Native owner MCP exposed Studio editing without generation; discovery searched only the older namespace.",
+    "Native skill index referenced an unsupported legacy catalog command.",
+    "Windows private AV broker had no active listener or boot task.",
+    "SYSTEM worker could not locate Git until its own environment was set explicitly.",
+    "Model memory pinning blocked on a full external exFAT volume; runtime models now use verified NTFS cache."
+  ],
+  "changes": {
+    "native_mcp": "harmonika_video",
+    "skill": "harmonika-video",
+    "windows_task": "HarmonikaVideoToolkit",
+    "system_boot_trigger": true,
+    "execution_limit": "PT0S",
+    "restart_count": 999,
+    "cache_files": 15,
+    "cache_bytes": 13304662283,
+    "pinned_revision": "a4c0cc35033229072cb6d5a92952c3d51716837f",
+    "original_model_vault_preserved": true,
+    "runtime_downloads": false,
+    "poll_guidance": "Same request/job; respect poll_after_seconds; stop after three checks if no wait tool."
+  },
+  "verification": {
+    "automated_tests": {
+      "video_routing_python": 21,
+      "video_routing_node": 11,
+      "video_toolkit_python": 31,
+      "flex_video_python": 8,
+      "native_config_preservation_python": 2,
+      "total_passed": 73
+    },
+    "system_preflight": {
+      "git_available": true,
+      "ffmpeg_available": true,
+      "wangp_default_keys": 121
+    },
+    "native_main_mcp_connected": true,
+    "native_video_mcp_connected": true,
+    "render_job_id": "65e6be12b3aad2dd824b5d484049e466",
+    "request_id": "44b1fbdcd9899e10531cd4c8a9f0694b",
+    "render_status": "completed",
+    "artifact_verified": true,
+    "deployed_source_hash_match": {
+      "stage_wangp_cache.py": true,
+      "wangp_runner.py": true,
+      "Install-VideoToolkitAutostart.ps1": true
+    },
+    "artifact": {
+      "artifact": "/Users/id/Downloads/harmonika-ai/video/harmonika-video-65e6be12b3aad2dd824b5d484049e466.mp4",
+      "bytes": 910791,
+      "mode": "0o600",
+      "sha256": "7591ae61e84985b07de92cc2ef64c335409d5bfcb485c467e97025c99b1c77f5",
+      "sha256_match": true,
+      "full_decode_passed": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 480,
+            "height": 272,
+            "r_frame_rate": "16/1",
+            "nb_read_frames": "160"
+          }
+        ],
+        "format": {
+          "duration": "10.000000"
+        }
+      }
+    },
+    "render": {
+      "status": "completed",
+      "width": 480,
+      "height": 272,
+      "duration_seconds": 10.0,
+      "frames": 160,
+      "audio": false,
+      "steps": 20,
+      "private_in_house_only": true,
+      "public_route_enabled": false,
+      "sha256": "7591ae61e84985b07de92cc2ef64c335409d5bfcb485c467e97025c99b1c77f5",
+      "bytes": 910791,
+      "broker_state": "completed",
+      "latency_seconds": 210.03,
+      "error_type": null,
+      "private_inputs_cleaned": true
+    },
+    "native_model_submitted_job": true,
+    "native_model_downloaded_artifact": true,
+    "representative_frames_inspected": [
+      0,
+      79,
+      159
+    ],
+    "visual_review": {
+      "rainbow_corruption_seen": false,
+      "quality": "low_resolution_preview",
+      "landmark_fidelity": "Generated city/mosque geometry is approximate; not verified as an accurate depiction of Makkah."
+    }
+  },
+  "corrections_during_exam": [
+    "An overlong backend instruction file caused an engine_error and was restored byte-for-byte; guidance is now a separate native instruction.",
+    "The initial eight-file SSD cache was insufficient for upstream offline preflight; the final verified inventory includes all 15 pinned files."
+  ],
+  "preserved": {
+    "binary_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "signed_video_adapter_sha256": "db31bf846ddd1e313383dc2780874ddce44736e30af634173817bd34806e45a8",
+    "user_sessions_modified": false,
+    "existing_user_processes_signalled": false,
+    "main_linux_gateway_restarted": false,
+    "billing_or_cs_modified": false,
+    "private_payloads_in_report": false,
+    "secrets_in_report": false,
+    "prompts_or_chat_in_sqlite_audit": false
+  },
+  "updated_at": "2026-11-12T16:07:00.607200+00:00",
+  "limitations": [
+    "Real qualification covers the ten-second silent Wan 1.3B text-to-video preview, not every duration, image animation or speech workflow.",
+    "The external model vault remains full; original files were preserved.",
+    "Runtime cache receipt checks pinned inventory; initial staging verifies full file hashes."
+  ]
+}

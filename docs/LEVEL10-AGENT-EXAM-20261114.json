@@ -1,0 +1,1323 @@
+{
+  "exam": "Harmonika native agent Level10",
+  "date": "2026-11-14",
+  "status": "passed_scoped_lab",
+  "scope": "isolated_recovery_rolling",
+  "production_business_data_changed": false,
+  "core_bgp_vyos_jkt_accessed": false,
+  "actors": {
+    "Codex": "Protected contract/harness, independent grading and backend technical guidance",
+    "OpenCode": "Read-only contract and grader review via delegate skill",
+    "Harmonika": "Native WorkflowStore/RecoveryManager implementation and registered lab drills",
+    "Claude": "Not involved"
+  },
+  "limits": [
+    "Same physical host; not host HA, power-loss certification, production IAM or arbitrary-vendor exactly-once.",
+    "Fixture bearer credentials exist only in owned lab volume; no customer accounts/data or real secrets in model/logs.",
+    "Stale restore goes only to inactive clone; queue/sink never rolled back or active DB replaced.",
+    "No core/BGP/VyOS/JKT, host routes/firewall, RTX, financial/CS/user services or process signals.",
+    "Assisted source and controlled transport exercise, not model training or unassisted universal autonomy."
+  ],
+  "baseline_before_upgrade": {
+    "engine_cases": 54,
+    "passed": 32,
+    "planned_unimplemented_errors": 22,
+    "legacy_v3_on_schema4_preflight": [
+      "Mac source",
+      "actual Linux baseline image"
+    ]
+  },
+  "contract_review_resolution": {
+    "review": "OpenCode read-only",
+    "exit_code": 0,
+    "findings": 10,
+    "resolved_before_provision": true,
+    "resolutions": [
+      "New protected Level10 adapter journals submit/control, probes journal readiness and resolves private bearer identity.",
+      "Recovery SQLite identity uses hosting api network child client.",
+      "Legacy schema4 preflight required before native; guarded rollback only known additive schema4.",
+      "Control intent/applied and journal barrier prevent pre-backup intent gaps.",
+      "Clone persists ORIGINAL control watermark; recheck at reconcile.",
+      "Unknown intents remain conservative until explicit same-key retry resolves; rejected not falsely accepted.",
+      "WAL, integrity, time/size caps, no-overwrite publish+fsync.",
+      "Global snapshot private operator scope not tenant download.",
+      "Bound tick selection and distinguish scheduling budget/in-flight transport/no SLA."
+    ],
+    "raw_review_sha256": "73bffdcf9fc85176d65ce1cee84a22cb794052f622f551f98ae5e3539c75d899"
+  },
+  "harness_tests": {
+    "passed": 14,
+    "errors": 0
+  },
+  "backend_upgrade": {
+    "status": "active",
+    "stage": "/root/harmonika-level10-lab/hl10-cc628215383a/recovery-guide-r2-stage",
+    "tests": {
+      "local-tests": 148,
+      "linux-tests": 76,
+      "activation-guards": 7
+    },
+    "candidate_debug_sha256": "8ed79d9e4c2992e0e5fda7bc3a1510121ff3eb625af8de7e5af5abc5c8c2d73f",
+    "verification_did_not_restart": true,
+    "scope": "Planner technical workflow guidance; recovery application and auth fixtures are isolated lab only.",
+    "canary_cases": 13,
+    "activation": {
+      "status": "active",
+      "backup": "/var/backups/harmonika-source-reference/20261114T153134Z",
+      "candidate_sha256": {
+        "python-reference-spans.py": "63952c7a083114bff76178a32211227eec0cc204ca929e670a00bb140e5b9679",
+        "secret-firewall.cjs": "0f102b5cf4af2dc010e8e4fc8c93465b24a8340cb1ed493b6d4e90546f65dbce",
+        "planner-context.js": "0655cf649d4d659457f847ab30b989e1c89d21858fa2eb987d895fb9a3707dcd",
+        "agent-controller.cjs": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+        "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+        "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+        "debug-workflow.cjs": "8ed79d9e4c2992e0e5fda7bc3a1510121ff3eb625af8de7e5af5abc5c8c2d73f",
+        "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4"
+      },
+      "health_http": 200,
+      "unrelated_service_pids_unchanged": true
+    },
+    "source_canaries": [
+      {
+        "fixture": "python_input_reference",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "python_request_cookie",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "html_form_reference",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "indented_python_method",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      },
+      {
+        "fixture": "empty_cookie_logout",
+        "http_status": 200,
+        "error_code": null,
+        "source_matches": true,
+        "path_matches": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false,
+        "passed": true
+      }
+    ],
+    "workflow_canaries": [
+      {
+        "fixture": "authoritative_quota_rejection_preserves_reserved_identity",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "audit_table_is_not_event_evidence",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "old_checkpoint_reconcile_original_identity",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "unapplied_control_before_snapshot_is_unsafe",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "code_rollback_requires_schema_compatibility",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "storage_incident_owned_fixture_only",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "unknown_admission_not_accepted",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      },
+      {
+        "fixture": "untrusted_manifest_path_cannot_authorize_restore",
+        "http_status": 200,
+        "passed": true,
+        "client_tools_executed": false,
+        "internal_state_exposed": false
+      }
+    ],
+    "client_tools_executed": false
+  },
+  "results": {
+    "final_grade": {
+      "phase": "v4",
+      "release": "recovery-v4-r2",
+      "passed": true,
+      "checks": {
+        "protected_project_files": true,
+        "protected_harness_14_guards": true,
+        "independent_mac_56_cases": true,
+        "independent_linux_image_56_cases": true,
+        "eight_registered_running_roles": true,
+        "current_api_and_both_coordinators_image": true,
+        "current_image_matches_all_source_files": true,
+        "runtime_resource_and_isolation_caps": true,
+        "owned_internal_network_no_host_ports": true,
+        "all_live_databases_integrity_wal_complete_audit": true,
+        "workflow_additive_schema4": true,
+        "all_accepted_live_workflows_settled": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "journal_accepted_bindings_and_stable_identity": true,
+        "prior_observed_completion_payloads_and_journal_identities_preserved": true,
+        "actual_live_parent_child_artifact_bytes": true,
+        "original_checkpoint_and_legacy_row_values_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "rolling_old_coordinator_claims_on_schema4": true,
+        "code_rollback_without_database_rollback": true,
+        "upgrade_once_and_other_rolling_requests_idempotent": true,
+        "all_eight_actual_main_process_exit42_and_same_workflow_recovery": true,
+        "actual_online_backup_with_live_uncommitted_writer": true,
+        "inactive_stale_clone_recovers_original_ids_without_new_child_posts_or_effects": true,
+        "newer_control_blocks_unsafe_stale_restore": true,
+        "actual_bounded_tmpfs_sqlite_full_and_recovered_same_key_retry": true,
+        "real_live_journal_lock_readiness_and_same_key_recovery": true,
+        "actual_bearer_tenant_isolation_and_header_forgery_rejected": true,
+        "actual_bad_backup_fixture_restores_fail_closed": true,
+        "recovery_audit_mechanics_only": true,
+        "actual_native_eight_role_resource_snapshot": true,
+        "native_report_complete_and_honestly_scoped": true,
+        "all_registered_history_logs_scanned_no_canaries": true,
+        "actual_fixture_keys_absent_from_all_main_logs": true
+      },
+      "failures": [],
+      "errors": {}
+    },
+    "unique_engine_cases": 56,
+    "mac_engine_tests": {
+      "passed": 56,
+      "skipped": 0
+    },
+    "linux_image_engine_tests": {
+      "passed": 56,
+      "skipped": 0
+    },
+    "harness_guard_tests": 14,
+    "completed_workflows": 11,
+    "cancelled_workflows": 1,
+    "child_jobs": 22,
+    "committed_effects": 22,
+    "journal_states": {
+      "accepted": 11
+    },
+    "recovery_audit_events": {
+      "admission_accepted": 10
+    },
+    "note": "The same56 cases run on2platforms, not112unique cases. Process crash is not power loss; code rollback is not data rollback."
+  },
+  "native_correction": {
+    "initial_engine_tests": {
+      "Mac": {
+        "passed": 53,
+        "failed": 1,
+        "total": 54
+      },
+      "Linux": {
+        "passed": 53,
+        "failed": 1,
+        "total": 54
+      }
+    },
+    "new_quota_regression_added": {
+      "total": 55,
+      "passed": 53,
+      "failed": 2
+    },
+    "failures": [
+      "Audit table empty, not WAL",
+      "Authoritative quota429 kept as unknown intent",
+      "Protected adapter nonASCII bearer raisedTypeError"
+    ],
+    "same_session_resume_required": true,
+    "revision": "recovery-v4-r1",
+    "all_previous_data_and_results_retained": true
+  },
+  "harness_auth_correction": {
+    "cause": "NonASCII str constant-time comparison raisedTypeError instead of401.",
+    "fix": "Reject nonASCII invalid bearer before comparison, preserve scoped identity and duplicate-header rejection.",
+    "protected_before": {
+      "fixture_auth.py": "306e0b2df4c510b0f630482dddaf196571b9996cf71f5a0e44319bf8a2d43752",
+      "crash_guard.py": "fabe8205f376f33cb30f07089d0ec26abebc371184b9d16be2fad483bccc9372"
+    },
+    "protected_after": {
+      "fixture_auth.py": "0a91b6ac5fedea43ea1f559eef8fd2b49ac6d7c23ee36fdcc526b10032bfc9f4",
+      "crash_guard.py": "7c87a326e71eb9b482fe18499c8d6017c345923e3af4b210f633ea8e6430281a"
+    },
+    "immutable_old_image_changed": false,
+    "requires_all_new_release_drills": true,
+    "crash_guard_fix": "Close SQLite explicitly and skip repeat generation DB writes after durable spent row.",
+    "harness_initial_failure_preserved": "harness-nonascii-before.txt",
+    "operator_updated_protected_metadata": true
+  },
+  "native_transport_incident": {
+    "label": "turn-v4",
+    "error_type": "provider.transport",
+    "signature": "ECONNRESET",
+    "exit_code": 1,
+    "same_session_resume": true,
+    "backend_restart": false
+  },
+  "native_runs": [
+    {
+      "label": "turn-v4",
+      "exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 81,
+      "duration_seconds": 1492.8
+    },
+    {
+      "label": "turn-v4-r1",
+      "exit_code": 1,
+      "same_session": true,
+      "native_errors": 1,
+      "tool_count": 41,
+      "duration_seconds": 789.9
+    },
+    {
+      "label": "turn-v4-r2",
+      "exit_code": 0,
+      "same_session": true,
+      "native_errors": 0,
+      "tool_count": 56,
+      "duration_seconds": 1141.3
+    }
+  ],
+  "native_tool_counts": {
+    "read": 27,
+    "shell": 96,
+    "write": 12,
+    "edit": 40,
+    "glob": 1,
+    "skill": 1,
+    "grep": 1
+  },
+  "native_failed_tool_receipts": [
+    {
+      "run": "turn-v4-r1-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v4-r2-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v4-r2-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v4-r2-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v4-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v4-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    },
+    {
+      "run": "turn-v4-native.jsonl",
+      "tool": "shell",
+      "status": "completed",
+      "exit_code": 1
+    }
+  ],
+  "native_session_sha256": "db108cd57f4b0e2fabcc0aef73739e09708e57fe7a0ac5d7bc1a158f5f60b163",
+  "metadata_paths_outside_project": [],
+  "untrusted_note_read": true,
+  "grading_runs": [
+    {
+      "file": "v4-before-r1-result.json",
+      "phase": "v4",
+      "assessment": "engine_only_before_adapter_correction",
+      "passed": false,
+      "checks": {
+        "local_54_cases": false,
+        "linux_54_cases": false,
+        "harness_auth_nonascii": false,
+        "all_drills_completed": false
+      },
+      "failures": [
+        "adapter_auth_nonascii",
+        "native_transport_interrupted_before_remaining_drills"
+      ],
+      "errors": {}
+    },
+    {
+      "file": "v4-r1-partial-before-snapshot-fix-result.json",
+      "phase": "v4",
+      "release": "recovery-v4-r1",
+      "passed": false,
+      "checks": {
+        "protected_project_files": true,
+        "protected_harness_13_guards": true,
+        "independent_mac_55_cases": true,
+        "independent_linux_image_55_cases": true,
+        "eight_registered_running_roles": true,
+        "current_api_and_both_coordinators_image": true,
+        "current_image_matches_all_source_files": true,
+        "runtime_resource_and_isolation_caps": true,
+        "owned_internal_network_no_host_ports": true,
+        "all_live_databases_integrity_wal_complete_audit": true,
+        "workflow_additive_schema4": true,
+        "all_accepted_live_workflows_settled": false,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "journal_accepted_bindings_and_stable_identity": true,
+        "prior_observed_completion_payloads_and_journal_identities_preserved": true,
+        "actual_live_parent_child_artifact_bytes": true,
+        "original_checkpoint_and_legacy_row_values_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "rolling_old_coordinator_claims_on_schema4": false,
+        "code_rollback_without_database_rollback": false,
+        "upgrade_once_and_other_rolling_requests_idempotent": true,
+        "all_eight_actual_main_process_exit42_and_same_workflow_recovery": false,
+        "actual_online_backup_with_live_uncommitted_writer": false,
+        "inactive_stale_clone_recovers_original_ids_without_new_child_posts_or_effects": false,
+        "newer_control_blocks_unsafe_stale_restore": false,
+        "actual_bounded_tmpfs_sqlite_full_and_recovered_same_key_retry": false,
+        "real_live_journal_lock_readiness_and_same_key_recovery": false,
+        "actual_bearer_tenant_isolation_and_header_forgery_rejected": false,
+        "actual_bad_backup_fixture_restores_fail_closed": false,
+        "recovery_audit_mechanics_only": true,
+        "actual_native_eight_role_resource_snapshot": false,
+        "native_report_complete_and_honestly_scoped": false,
+        "all_registered_history_logs_scanned_no_canaries": true,
+        "actual_fixture_keys_absent_from_all_main_logs": true
+      },
+      "failures": [
+        "all_accepted_live_workflows_settled",
+        "rolling_old_coordinator_claims_on_schema4",
+        "code_rollback_without_database_rollback",
+        "all_eight_actual_main_process_exit42_and_same_workflow_recovery",
+        "actual_online_backup_with_live_uncommitted_writer",
+        "inactive_stale_clone_recovers_original_ids_without_new_child_posts_or_effects",
+        "newer_control_blocks_unsafe_stale_restore",
+        "actual_bounded_tmpfs_sqlite_full_and_recovered_same_key_retry",
+        "real_live_journal_lock_readiness_and_same_key_recovery",
+        "actual_bearer_tenant_isolation_and_header_forgery_rejected",
+        "actual_bad_backup_fixture_restores_fail_closed",
+        "actual_native_eight_role_resource_snapshot",
+        "native_report_complete_and_honestly_scoped"
+      ],
+      "errors": {
+        "rolling_old_coordinator_claims_on_schema4": "AssertionError",
+        "code_rollback_without_database_rollback": "StopIteration",
+        "all_eight_actual_main_process_exit42_and_same_workflow_recovery": "AssertionError",
+        "actual_bounded_tmpfs_sqlite_full_and_recovered_same_key_retry": "KeyError",
+        "actual_bearer_tenant_isolation_and_header_forgery_rejected": "AssertionError",
+        "actual_bad_backup_fixture_restores_fail_closed": "AssertionError"
+      }
+    },
+    {
+      "file": "v4-r2-final-first-result.json",
+      "phase": "v4",
+      "release": "recovery-v4-r2",
+      "passed": false,
+      "checks": {
+        "protected_project_files": true,
+        "protected_harness_13_guards": true,
+        "independent_mac_56_cases": true,
+        "independent_linux_image_56_cases": true,
+        "eight_registered_running_roles": true,
+        "current_api_and_both_coordinators_image": true,
+        "current_image_matches_all_source_files": true,
+        "runtime_resource_and_isolation_caps": true,
+        "owned_internal_network_no_host_ports": true,
+        "all_live_databases_integrity_wal_complete_audit": true,
+        "workflow_additive_schema4": true,
+        "all_accepted_live_workflows_settled": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "journal_accepted_bindings_and_stable_identity": true,
+        "prior_observed_completion_payloads_and_journal_identities_preserved": true,
+        "actual_live_parent_child_artifact_bytes": true,
+        "original_checkpoint_and_legacy_row_values_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "rolling_old_coordinator_claims_on_schema4": true,
+        "code_rollback_without_database_rollback": true,
+        "upgrade_once_and_other_rolling_requests_idempotent": true,
+        "all_eight_actual_main_process_exit42_and_same_workflow_recovery": true,
+        "actual_online_backup_with_live_uncommitted_writer": false,
+        "inactive_stale_clone_recovers_original_ids_without_new_child_posts_or_effects": true,
+        "newer_control_blocks_unsafe_stale_restore": true,
+        "actual_bounded_tmpfs_sqlite_full_and_recovered_same_key_retry": true,
+        "real_live_journal_lock_readiness_and_same_key_recovery": false,
+        "actual_bearer_tenant_isolation_and_header_forgery_rejected": true,
+        "actual_bad_backup_fixture_restores_fail_closed": true,
+        "recovery_audit_mechanics_only": true,
+        "actual_native_eight_role_resource_snapshot": true,
+        "native_report_complete_and_honestly_scoped": true,
+        "all_registered_history_logs_scanned_no_canaries": true,
+        "actual_fixture_keys_absent_from_all_main_logs": true
+      },
+      "failures": [
+        "actual_online_backup_with_live_uncommitted_writer",
+        "real_live_journal_lock_readiness_and_same_key_recovery"
+      ],
+      "errors": {}
+    },
+    {
+      "file": "v4-r2-final-proof-format-result.json",
+      "phase": "v4",
+      "release": "recovery-v4-r2",
+      "passed": true,
+      "checks": {
+        "protected_project_files": true,
+        "protected_harness_14_guards": true,
+        "independent_mac_56_cases": true,
+        "independent_linux_image_56_cases": true,
+        "eight_registered_running_roles": true,
+        "current_api_and_both_coordinators_image": true,
+        "current_image_matches_all_source_files": true,
+        "runtime_resource_and_isolation_caps": true,
+        "owned_internal_network_no_host_ports": true,
+        "all_live_databases_integrity_wal_complete_audit": true,
+        "workflow_additive_schema4": true,
+        "all_accepted_live_workflows_settled": true,
+        "no_duplicate_effects_or_unowned_jobs": true,
+        "journal_accepted_bindings_and_stable_identity": true,
+        "prior_observed_completion_payloads_and_journal_identities_preserved": true,
+        "actual_live_parent_child_artifact_bytes": true,
+        "original_checkpoint_and_legacy_row_values_preserved": true,
+        "checkpoint_file_unchanged": true,
+        "rolling_old_coordinator_claims_on_schema4": true,
+        "code_rollback_without_database_rollback": true,
+        "upgrade_once_and_other_rolling_requests_idempotent": true,
+        "all_eight_actual_main_process_exit42_and_same_workflow_recovery": true,
+        "actual_online_backup_with_live_uncommitted_writer": true,
+        "inactive_stale_clone_recovers_original_ids_without_new_child_posts_or_effects": true,
+        "newer_control_blocks_unsafe_stale_restore": true,
+        "actual_bounded_tmpfs_sqlite_full_and_recovered_same_key_retry": true,
+        "real_live_journal_lock_readiness_and_same_key_recovery": true,
+        "actual_bearer_tenant_isolation_and_header_forgery_rejected": true,
+        "actual_bad_backup_fixture_restores_fail_closed": true,
+        "recovery_audit_mechanics_only": true,
+        "actual_native_eight_role_resource_snapshot": true,
+        "native_report_complete_and_honestly_scoped": true,
+        "all_registered_history_logs_scanned_no_canaries": true,
+        "actual_fixture_keys_absent_from_all_main_logs": true
+      },
+      "failures": [],
+      "errors": {}
+    }
+  ],
+  "final_release": "recovery-v4-r2",
+  "release_digests": {
+    "recovery-v3": {
+      "image_id": "sha256:6f664480446d107917260a7f128c16ebf2147f6b15710e5fb74c1ecafdb785ae",
+      "source_sha256": "25683de08c40c3c742485bcabd4b5dc94ed4a45a8593bffc2f50fdc0c1f45d67"
+    },
+    "recovery-v4": {
+      "image_id": "sha256:850e1dea876c5136194fa067fbb1a7db3e88714b872d72a01f2f9a24a2ac58fa",
+      "source_sha256": "50c22fc2d07e010d5122040b145d822a81558021597eb1c0938c5f366e20a3c3"
+    },
+    "recovery-v4-r1": {
+      "image_id": "sha256:3d4bfc2e7b60735bd977708ef47b70f9853840e527238eecf83902242f277dc9",
+      "source_sha256": "db66a7b242b5076ae490ce8163c64b3b38f5dba2f84000ef389c15263142eb48"
+    },
+    "recovery-v4-r2": {
+      "image_id": "sha256:7d0d3acd2dd75dd153461bb4722bc00396ca4a0457056758e84301afe5440bc6",
+      "source_sha256": "129c245711170ee19f65ee184360100f234de00903b1b023ceed16b21f333657"
+    }
+  },
+  "release_module_sha256": {
+    "recovery-v3": {
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "3db3d7192c45aa637da978158777a27127b1481ea9f906078fb43082fc7cb13d",
+      "entrypoint.py": "a4246a578a5527c9b43d307f1538cd7c4d073c445ce93b18c1594b5d62757285",
+      "recovery_engine.py": "440453a09d0cd9f68f11c48ea6c62f3ad06f40fae3a0b6eb822444436adf6a2d",
+      "server.py": "82fc466b38ef0f67a9a5312e7ceb72038a8e549a3e18e100cb4dcfd3440f3a29",
+      "storage_probe.py": "1b9f2b83160b74794f9cc94f45af64ec274b76c369c4a537bf9e46871ea7cdbd",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "fixture_auth.py": "306e0b2df4c510b0f630482dddaf196571b9996cf71f5a0e44319bf8a2d43752",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "workflow_engine.py": "a38975e976fd48f0db280cf24dbd0150ac0382ce5ba820a3bf9322aa8d12dd62",
+      "Dockerfile": "4910b1932676111e26c487eb06423b3d935bd2b871c4c524a0f5dc0ea3332695",
+      "holder.py": "0950d75e61b83fd567bf6c7043b404aa255cca49340d68248ba1bb9e2436ef0c",
+      "workflow_adapter.py": "f8b73a3c046ee8c4a94c9e7c5b4e4815729ca46d9713cc3212bd95ae21f39a83",
+      "recovery_rpc.py": "dc606c214a03c396f8a7d319712402a1b2ad355154d9ae777bc5310420a3e029",
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "crash_guard.py": "fabe8205f376f33cb30f07089d0ec26abebc371184b9d16be2fad483bccc9372"
+    },
+    "recovery-v4": {
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "3db3d7192c45aa637da978158777a27127b1481ea9f906078fb43082fc7cb13d",
+      "entrypoint.py": "a4246a578a5527c9b43d307f1538cd7c4d073c445ce93b18c1594b5d62757285",
+      "recovery_engine.py": "70218306c8c0b1a95095149ce519277fc8cebf723d9e1b3d5851bceb2d0acdd2",
+      "server.py": "82fc466b38ef0f67a9a5312e7ceb72038a8e549a3e18e100cb4dcfd3440f3a29",
+      "storage_probe.py": "1b9f2b83160b74794f9cc94f45af64ec274b76c369c4a537bf9e46871ea7cdbd",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "fixture_auth.py": "306e0b2df4c510b0f630482dddaf196571b9996cf71f5a0e44319bf8a2d43752",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "workflow_engine.py": "9a5f495acffc69f428a182ff6aa66297ab4e8e0191f11709040bffc92218ffcc",
+      "Dockerfile": "4910b1932676111e26c487eb06423b3d935bd2b871c4c524a0f5dc0ea3332695",
+      "holder.py": "0950d75e61b83fd567bf6c7043b404aa255cca49340d68248ba1bb9e2436ef0c",
+      "workflow_adapter.py": "f8b73a3c046ee8c4a94c9e7c5b4e4815729ca46d9713cc3212bd95ae21f39a83",
+      "recovery_rpc.py": "dc606c214a03c396f8a7d319712402a1b2ad355154d9ae777bc5310420a3e029",
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "crash_guard.py": "fabe8205f376f33cb30f07089d0ec26abebc371184b9d16be2fad483bccc9372"
+    },
+    "recovery-v4-r1": {
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "3db3d7192c45aa637da978158777a27127b1481ea9f906078fb43082fc7cb13d",
+      "entrypoint.py": "a4246a578a5527c9b43d307f1538cd7c4d073c445ce93b18c1594b5d62757285",
+      "recovery_engine.py": "6c8153f16429554c70596ba751a0982e773831860dcb547b8bade70a052d09d3",
+      "server.py": "82fc466b38ef0f67a9a5312e7ceb72038a8e549a3e18e100cb4dcfd3440f3a29",
+      "storage_probe.py": "1b9f2b83160b74794f9cc94f45af64ec274b76c369c4a537bf9e46871ea7cdbd",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "fixture_auth.py": "0a91b6ac5fedea43ea1f559eef8fd2b49ac6d7c23ee36fdcc526b10032bfc9f4",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "workflow_engine.py": "9a5f495acffc69f428a182ff6aa66297ab4e8e0191f11709040bffc92218ffcc",
+      "Dockerfile": "4910b1932676111e26c487eb06423b3d935bd2b871c4c524a0f5dc0ea3332695",
+      "holder.py": "0950d75e61b83fd567bf6c7043b404aa255cca49340d68248ba1bb9e2436ef0c",
+      "workflow_adapter.py": "f8b73a3c046ee8c4a94c9e7c5b4e4815729ca46d9713cc3212bd95ae21f39a83",
+      "recovery_rpc.py": "dc606c214a03c396f8a7d319712402a1b2ad355154d9ae777bc5310420a3e029",
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "crash_guard.py": "7c87a326e71eb9b482fe18499c8d6017c345923e3af4b210f633ea8e6430281a"
+    },
+    "recovery-v4-r2": {
+      "coordinator.py": "3f8bc72579bd547c604586f1b7b401b8ad9ee3790b93c16e9c117c137dd55656",
+      "proxy.py": "3db3d7192c45aa637da978158777a27127b1481ea9f906078fb43082fc7cb13d",
+      "entrypoint.py": "a4246a578a5527c9b43d307f1538cd7c4d073c445ce93b18c1594b5d62757285",
+      "recovery_engine.py": "6c8153f16429554c70596ba751a0982e773831860dcb547b8bade70a052d09d3",
+      "server.py": "82fc466b38ef0f67a9a5312e7ceb72038a8e549a3e18e100cb4dcfd3440f3a29",
+      "storage_probe.py": "1b9f2b83160b74794f9cc94f45af64ec274b76c369c4a537bf9e46871ea7cdbd",
+      "engine.py": "3930752893c33a6d88f036239b5e10241ffe2acb502ced53ec0ad5f6f1411e82",
+      "fixture_auth.py": "0a91b6ac5fedea43ea1f559eef8fd2b49ac6d7c23ee36fdcc526b10032bfc9f4",
+      "storage_tools.py": "1774418189a50bd1c7efc31581a24826bf3ff7a3ad789b7cfa78f262091d28b6",
+      "effect_connector.py": "26e2b2aa0ffecbad2272af37453a65b34514560ea6937dfa6e8ba621ae7ba872",
+      "effect_service.py": "92d28eafa0ee746a4a9f80c91422899ae446e61d66c492007e004ea166968546",
+      "stream_reader.py": "f4bb0a121ff11825bf447382316cb1a6ccb87f1d22555098dfb5ccfa68b25ac8",
+      "workflow_engine.py": "f2acc2381dc4ffa11415081bb097edb838b427ede4614730452749db25c0ea70",
+      "Dockerfile": "4910b1932676111e26c487eb06423b3d935bd2b871c4c524a0f5dc0ea3332695",
+      "holder.py": "0950d75e61b83fd567bf6c7043b404aa255cca49340d68248ba1bb9e2436ef0c",
+      "workflow_adapter.py": "f8b73a3c046ee8c4a94c9e7c5b4e4815729ca46d9713cc3212bd95ae21f39a83",
+      "recovery_rpc.py": "dc606c214a03c396f8a7d319712402a1b2ad355154d9ae777bc5310420a3e029",
+      "fault_store.py": "d67a2669e1ff21f6c7df6c6a8ecaeaa35f0869d780e515404ac666256f1af57a",
+      "worker.py": "d3b755852e5931a6b5aa4a3b4bd0fade57c0a3fb6a2a908840046a3f8f3c9c0e",
+      "crash_guard.py": "7c87a326e71eb9b482fe18499c8d6017c345923e3af4b210f633ea8e6430281a"
+    }
+  },
+  "rolling_attempts": {
+    "stage-v4": 1,
+    "roll-v4": 1,
+    "prepare-v4-r1": 1,
+    "stage-v4-r1": 1,
+    "roll-v4-r1": 1,
+    "prepare-v4-r2": 1,
+    "stage-v4-r2": 1,
+    "roll-v4-r2": 1,
+    "rollback-v4-r2": 1,
+    "return-v4-r2": 1
+  },
+  "rolling_requests": {
+    "stage-v4": {
+      "operation": "upgrade",
+      "release": "recovery-v4",
+      "request": "stage-v4",
+      "roles_replaced": [
+        "api",
+        "coordinator2"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator1": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 8
+    },
+    "roll-v4": {
+      "operation": "roll",
+      "release": "recovery-v4",
+      "request": "roll-v4",
+      "roles_replaced": [
+        "coordinator1"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator2": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 16
+    },
+    "prepare-v4-r1": {
+      "operation": "legacy-first",
+      "release": "recovery-v4-r1",
+      "request": "prepare-v4-r1",
+      "roles_replaced": [
+        "coordinator1"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator2": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 16
+    },
+    "stage-v4-r1": {
+      "operation": "upgrade",
+      "release": "recovery-v4-r1",
+      "request": "stage-v4-r1",
+      "roles_replaced": [
+        "api",
+        "coordinator2"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator1": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 16
+    },
+    "roll-v4-r1": {
+      "operation": "roll",
+      "release": "recovery-v4-r1",
+      "request": "roll-v4-r1",
+      "roles_replaced": [
+        "coordinator1"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator2": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 32
+    },
+    "prepare-v4-r2": {
+      "operation": "legacy-first",
+      "release": "recovery-v4-r2",
+      "request": "prepare-v4-r2",
+      "roles_replaced": [
+        "coordinator1"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator2": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 1266
+    },
+    "stage-v4-r2": {
+      "operation": "upgrade",
+      "release": "recovery-v4-r2",
+      "request": "stage-v4-r2",
+      "roles_replaced": [
+        "api",
+        "coordinator2"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator1": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 1266
+    },
+    "roll-v4-r2": {
+      "operation": "roll",
+      "release": "recovery-v4-r2",
+      "request": "roll-v4-r2",
+      "roles_replaced": [
+        "coordinator1"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator2": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 1274
+    },
+    "rollback-v4-r2": {
+      "operation": "rollback",
+      "release": "recovery-v4-r2",
+      "request": "rollback-v4-r2",
+      "roles_replaced": [
+        "coordinator2"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator1": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 1998
+    },
+    "return-v4-r2": {
+      "operation": "restore-current",
+      "release": "recovery-v4-r2",
+      "request": "return-v4-r2",
+      "roles_replaced": [
+        "coordinator2"
+      ],
+      "unchanged_roles": {
+        "sink": true,
+        "api": true,
+        "worker1": true,
+        "worker2": true,
+        "worker3": true,
+        "proxy": true,
+        "coordinator1": true
+      },
+      "database_restore_performed": false,
+      "audit_floor": 2006
+    }
+  },
+  "crash_generation": {
+    "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+    "release": "recovery-v4-r2",
+    "before_roles": {
+      "sink": "97f29b740fc67e149d21854e424d95c85b1ae5fb4c498ebd14528def82d79138",
+      "api": "d440368a7e2a07c8d7c3bdd65abf6f336f3bc6a2f4cf70128e2a080e34b54caa",
+      "worker1": "2fa85293b9de10290ff76276a1c09b8752ddc157fc0fd5a0194007c623824ca6",
+      "worker2": "509f0ee54deefc9be57ad1f60ae4030eba444454211baf43b20c38ce249eca05",
+      "worker3": "32fb8d534e0f25554878d9430c7d92b5c51fb577fbeb5dcbdef65291719b6f97",
+      "proxy": "86db2533dcc8a63871dcb0b41be441899389d8d75f563792b391d20acc018924",
+      "coordinator1": "27b5453e70ecc2bf54e97d20ca04e152f85a0c831b3870cf2d0665d94bac4337",
+      "coordinator2": "6a435700fcdbcaceb84056388c90c4c1c64a8f40fdab26d378ba54fc2f8956fc"
+    },
+    "at": 1794669221.5370514
+  },
+  "crash_receipts": [
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "api",
+      "release": "stage-v4-r1",
+      "at": 1794668355.5480976
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "worker3",
+      "release": "recovery-v3",
+      "at": 1794668355.5489187
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "sink",
+      "release": "recovery-v3",
+      "at": 1794668355.5504918
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "worker1",
+      "release": "recovery-v3",
+      "at": 1794668355.5522144
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "coordinator2",
+      "release": "stage-v4-r1",
+      "at": 1794668355.5558248
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "coordinator1",
+      "release": "roll-v4-r1",
+      "at": 1794668355.574177
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "proxy",
+      "release": "recovery-v3",
+      "at": 1794668355.5804894
+    },
+    {
+      "generation": "13c78000a60f464ce0a0aeccf1b55d40",
+      "role": "worker2",
+      "release": "recovery-v3",
+      "at": 1794668355.5835648
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "api",
+      "release": "stage-v4-r2",
+      "at": 1794669221.6923947
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "coordinator2",
+      "release": "stage-v4-r2",
+      "at": 1794669221.7006598
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "worker3",
+      "release": "recovery-v3",
+      "at": 1794669221.7115555
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "worker1",
+      "release": "recovery-v3",
+      "at": 1794669221.712799
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "worker2",
+      "release": "recovery-v3",
+      "at": 1794669221.71872
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "proxy",
+      "release": "recovery-v3",
+      "at": 1794669221.7203546
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "sink",
+      "release": "recovery-v3",
+      "at": 1794669221.7284408
+    },
+    {
+      "generation": "4040fbef2fa2874e021fe1a4e152e5af",
+      "role": "coordinator1",
+      "release": "roll-v4-r2",
+      "at": 1794669221.7320511
+    }
+  ],
+  "storage_probes": {
+    "recovery-v4-r2": {
+      "sqlite_error_code": 13,
+      "tmpfs_bytes": 2097152,
+      "free_bytes_before": 1933312,
+      "free_bytes_at_failure": 0,
+      "failure_status": 507,
+      "failure_error": "recovery_storage_full",
+      "exception_escaped": false,
+      "recovered_status": 202,
+      "recovered_workflow_id": "35926a66997c4cc9aaca0742c0e73bea",
+      "live_data_modified": false,
+      "fixture_only": true
+    }
+  },
+  "recovery_proofs": [
+    {
+      "operation": "snapshot",
+      "label": "r2-case-c",
+      "clone_label": null,
+      "owner": "alpha",
+      "status": 201,
+      "release": "recovery-v4-r2",
+      "at": 1794669334.6542706,
+      "snapshot_witness": {
+        "manifest_sha256": "4292f494449e76a636eb2877bbf5634030f7d7bcc0d5f38d31b9c525f0e319d7",
+        "database_sha256": "40cf5a9f59feeba748fd54b31e5fe6057f70aa5887238086bfd1756a656aa18a",
+        "database_bytes": 200704,
+        "integrity": "ok",
+        "user_version": 4,
+        "online_backup_probe": 1,
+        "workflow_rows": 7
+      },
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-c",
+      "clone_label": "r2-case-c-clone",
+      "owner": "alpha",
+      "status": 201,
+      "release": "recovery-v4-r2",
+      "at": 1794669403.8567097,
+      "snapshot_witness": null,
+      "effect_witness": null
+    },
+    {
+      "operation": "reconcile",
+      "label": null,
+      "clone_label": "r2-case-c-clone",
+      "owner": "alpha",
+      "status": 200,
+      "release": "recovery-v4-r2",
+      "at": 1794669422.0970027,
+      "snapshot_witness": null,
+      "effect_witness": {
+        "before": {
+          "child_posts": 18,
+          "child_lookups": 2,
+          "effects": 18
+        },
+        "after": {
+          "child_posts": 18,
+          "child_lookups": 6,
+          "effects": 18
+        }
+      }
+    },
+    {
+      "operation": "snapshot",
+      "label": "r2-case-d",
+      "clone_label": null,
+      "owner": "alpha",
+      "status": 201,
+      "release": "recovery-v4-r2",
+      "at": 1794669507.3820143,
+      "snapshot_witness": {
+        "manifest_sha256": "17841d70927ff8f54d0b131fc67dcae0056371a9f640b3e5cb012a5d9c8ef758",
+        "database_sha256": "289e797846eb4e6cdcb3aa7cb4eaa3fc52723fa535f504831999fc0abed480a6",
+        "database_bytes": 208896,
+        "integrity": "ok",
+        "user_version": 4,
+        "online_backup_probe": 2,
+        "workflow_rows": 9
+      },
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-d",
+      "clone_label": "r2-case-d-refused",
+      "owner": "alpha",
+      "status": 409,
+      "release": "recovery-v4-r2",
+      "at": 1794669521.118713,
+      "snapshot_witness": null,
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-c-bad-hash",
+      "clone_label": "r2-g-bad-hash",
+      "owner": "alpha",
+      "status": 409,
+      "release": "recovery-v4-r2",
+      "at": 1794669818.3057663,
+      "snapshot_witness": null,
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-c-bad-path",
+      "clone_label": "r2-g-bad-path",
+      "owner": "alpha",
+      "status": 409,
+      "release": "recovery-v4-r2",
+      "at": 1794669819.5452611,
+      "snapshot_witness": null,
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-c-bad-owner",
+      "clone_label": "r2-g-bad-owner",
+      "owner": "alpha",
+      "status": 404,
+      "release": "recovery-v4-r2",
+      "at": 1794669820.806317,
+      "snapshot_witness": null,
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-c-bad-schema",
+      "clone_label": "r2-g-bad-schema",
+      "owner": "alpha",
+      "status": 409,
+      "release": "recovery-v4-r2",
+      "at": 1794669822.080701,
+      "snapshot_witness": null,
+      "effect_witness": null
+    },
+    {
+      "operation": "restore",
+      "label": "r2-case-c-bad-link",
+      "clone_label": "r2-g-bad-link",
+      "owner": "alpha",
+      "status": 409,
+      "release": "recovery-v4-r2",
+      "at": 1794669823.3271074,
+      "snapshot_witness": null,
+      "effect_witness": null
+    }
+  ],
+  "checkpoint_preserved": true,
+  "checkpoint_artifact_sha256": "7455b30c7e4c0a89b65a1b81593b980a04260e67a04703813b1851fdbe750513",
+  "live_database_whole_file_unchanged_claimed": false,
+  "prepare_correction": {
+    "cause": "Init dropped DAC privileges and changed volume owner before writing fixture credential file.",
+    "fix": "Write private fixture file before CHOWN on fresh provision; current newly owned volume initialized by a registered nonroot helper.",
+    "failed_init_and_private_log_preserved": true,
+    "unrelated_objects_touched": false
+  },
+  "operator_assistance": [
+    "Codex supplied passedLevel9 source, fixed transports/auth/role crash guards, probes and independent tests.",
+    "Codex created one actual completed schema3 checkpoint and verified legacy code on known additive schema4 before native upgrade.",
+    "Native implements WorkflowStore schema4 and RecoveryManager plus its own regressions and actual scoped lab operations; no private examiner access.",
+    "OpenCode reviewed contract/grader read-only; Codex validates changes against runtime and preserved evidence."
+  ],
+  "cleanup": {
+    "closed": true,
+    "containers_removed": 23,
+    "network_removed": true,
+    "remaining_owned_objects": {
+      "containers": 0,
+      "images": 0,
+      "volumes": 0,
+      "networks": 0
+    }
+  },
+  "backend_final_health": {
+    "health": {
+      "local": {
+        "http_status": 200,
+        "json": true
+      },
+      "public": {
+        "http_status": 200,
+        "json": true
+      }
+    },
+    "services": {
+      "harmonika-ai": "active",
+      "harmonika-web-chat-live": "active",
+      "harmonika-shared-core": "active"
+    },
+    "source_sha256": {
+      "long-decision.cjs": "bdee0da9c4c38aa7c79f6f293f29b8976d7edaee1988c8ff06df81967b308a85",
+      "internal-tool-planner.js": "abc9eb50adbf773a3fc591ddd66f38b8820629cfa1340e39cd95bbab30b876f5",
+      "decision-recovery.cjs": "7b2e0187631b8cde2c9bc3608fb5f3e60f71c504a80345d21beeb9180fc4dbe4",
+      "debug-workflow.cjs": "8ed79d9e4c2992e0e5fda7bc3a1510121ff3eb625af8de7e5af5abc5c8c2d73f"
+    },
+    "debug_workflow_sha256": "8ed79d9e4c2992e0e5fda7bc3a1510121ff3eb625af8de7e5af5abc5c8c2d73f",
+    "passed": true
+  },
+  "evidence_files": {
+    "private": "Raw native JSONL, fixture journal and full synthetic database snapshots remain private outside Git.",
+    "report": "docs/LEVEL10-AGENT-EXAM-20261114.json"
+  },
+  "grader_review_resolution": {
+    "review": "OpenCode read-only",
+    "exit_code": 0,
+    "findings": 12,
+    "resolved_before_candidate_grading": true,
+    "resolutions": [
+      "Real stale-control refusal bound to a successful nonfixture snapshot and actual newer applied pause/cancel for same live cancelled workflow.",
+      "Bad manifest fixtures require structural errors, not a newer-control error.",
+      "Crash requires actual reconciling workflow and partition-before-submit TCP closure.",
+      "Crash status binds exact8current CID hashes from generation, not a status from another release.",
+      "Exact8role name set pinned; baseline/checkpoint required in protectedhashmap.",
+      "Reconcile receipt captures at_start; clone coverage excludes later arrivals.",
+      "Preflight captures complete relevant target-role trace above rolling-start floor instead of truncatinglast256.",
+      "Protected fixtureAuth deliberately emits403 on forgedowner; actualadapterpolicychecked, not an arbitraryengine interpretation.",
+      "Checkpoint fetch owner explicitalpha; Dockerexitcode normalized.",
+      "Cached rolling replay has separate hitcounter and release/request identityconflictcheck; exactlyone noncachedupgrade required."
+    ],
+    "controller_before_sha256": "06f6a5c06f122a8a6cfe6f47dd68d5429d0a8f59de630a5568e1cfa1dfb7d03f",
+    "controller_after_sha256": "58622f482661b7de001962fe2bd0740a2db9f19b231f9254ce59829ddc3dbc80"
+  },
+  "proof_witness_harness_upgrade": {
+    "reason": "Attach actual snapshot byte/probe proof, clone probe counter, effect/POST counters around reconciliation and hashed HTTP request identity to protected receipts.",
+    "queue_or_image_changed": false,
+    "project_protected_files_changed": false,
+    "before_controller_sha256": "cfaad3df768b00bffbd93b83a3ef7790e21aa287dd5f87012c082a8e0e0c1b84",
+    "after_controller_sha256": "628c06767de59cf49ded124ebf530a4c1da11a363e1e266c9ca89b770c4d8f9f",
+    "before_cluster_sha256": "8b93ab5f2b2f9372148ddc34079f9b7cf232f9b9eadeff0f7d141284539416b7",
+    "after_cluster_sha256": "58068033a7b81b0b1f8b7446baebc4bb124d6021b8a7bad50dd8d17107c97d7e"
+  },
+  "rolling_proof_harness_upgrade": {
+    "purpose": "Read-only audit floor before version switches and controller preflight bound to native roll request, before replacing the old process.",
+    "old_controller_sha256": "a8d132cc8a18ad2599ee6fb0b10b423be360aea8969e114498cc865d55ab4090",
+    "new_controller_sha256": "b01ef9ea9c1721261e38c89fc7eb746a8b6a57dfcc9d51ce897fb8b78d06a404",
+    "project_or_images_changed": false,
+    "examiner_probes_counted_as_native": false
+  },
+  "examiner_enum_clarification": {
+    "reason": "Safe structured enum database_busy is not the raw exception database is locked; fixture now tests exact raw exception text. Storage probe accepts bounded technical enum instead of an unstated enum-name whitelist.",
+    "changed_before_candidate_grading": true,
+    "candidate_source_unchanged": true,
+    "heldout_cases": 54
+  },
+  "grading_correction": {
+    "initial_grade": "v4-r1-partial-before-snapshot-fix-result.json",
+    "rolling_defect": "Grader included intentional legacy process replacement after successful preflight in the uptime interval.",
+    "correction": "Require exact legacy CID/image claim/settle and no die before proof; intentional stop after valid proof is allowed.",
+    "negative_guards": "Wrong parent/CID/epoch, dead/late/old proof and die-before-proof still fail; die-after-proof succeeds.",
+    "guards_passed": 13,
+    "new_rpc_constructor_case": 56,
+    "new_regression_initial_failed": true,
+    "actual_initial_grade_not_overwritten": true
+  },
+  "harness_auth_failure": {
+    "source": "scripts/level10-lab/fixture_auth.py",
+    "behavior": "hmac.compare_digest on nonASCII bearer string raisesTypeError instead of401.",
+    "before_log": "harness-nonascii-before.txt",
+    "before_guards": {
+      "tests": 13,
+      "passed": 12,
+      "errors": 1
+    },
+    "source_fix_pending_after_native_end": true,
+    "requires_new_image_and_full_drills": true
+  },
+  "native_r1_transport_incident": {
+    "label": "turn-v4-r1",
+    "exit_code": 1,
+    "same_session": true,
+    "native_errors": 1,
+    "tool_count": 41,
+    "duration_seconds": 789.9,
+    "error_type": "provider.internal",
+    "signature": "tool_engine_timeout",
+    "http_status": 503,
+    "same_session_resume": true,
+    "backend_restart": false
+  },
+  "rpc_open_correction": {
+    "observed_runtime_status": 502,
+    "signature": "recovery_runtime_failed",
+    "initial_release": "recovery-v4-r1",
+    "cause": "New RPC store initialization requested BEGIN IMMEDIATE on initialized schema4 while the actual WAL writer held its write transaction.",
+    "new_independent_case": 56,
+    "before_total": 56,
+    "before_passed": 55,
+    "before_errors": 1,
+    "baseline_sha256": "bb0753d2eac83d23d46242d35f582870ba0e510c670c1d6eaee211dd1787e6ca",
+    "failed_runtime_evidence_preserved": true,
+    "new_immutable_release_required": "recovery-v4-r2",
+    "additional_native_regression": "Closed backup clone DELETE journal still requires normal WAL initialization.",
+    "source_or_database_rollback": false
+  },
+  "auth_probe_upgrade": {
+    "before": "58622f482661b7de001962fe2bd0740a2db9f19b231f9254ce59829ddc3dbc80",
+    "after": "08d70c2eec029cf079acdd893f2f06e8cd1af4f40f6a0e834fa15cb0ba38da30"
+  },
+  "r2_examiner_staging": {
+    "controller.py": {
+      "before": "08d70c2eec029cf079acdd893f2f06e8cd1af4f40f6a0e834fa15cb0ba38da30",
+      "after": "e07a83544b2ed62b46287fd7acf225fa6a850dd4c49e163404c2048161b5f21f"
+    },
+    "independent.py": {
+      "before": "931ff2cf61ec9edd228b9b0ca73d5f7802583dfe3051a1305503656473c42551",
+      "after": "4340ee28a408295f9e4d07b59046749605d601787bbf3967841758bc6ec6551a"
+    }
+  },
+  "probe_label_correction": {
+    "first_grade": "v4-r2-final-first-result.json",
+    "first_evidence_sha256": "9c90f52735d6a5edf9a2378eaa8294a1e283ac5ee8cd904e512734dcd633206a",
+    "cause": "Holder kind overwrote protected event envelope kind through trailing dict unpack; actual writer/lock timestamps and states remained in original observations.",
+    "controller_fix": "Write protected envelope fields after holder fields.",
+    "grader_fix": "Read both validated canonical and actual legacy holder record formats in memory, preserve original timestamp/owner/release/state and reject wrong origin/probe/kind/action/alive or chronology.",
+    "existing_ledger_rewritten": false,
+    "native_operations_repeated": false,
+    "runtime_image_or_source_changed": false,
+    "guards_passed": 14,
+    "controller_digests": {
+      "before": "e07a83544b2ed62b46287fd7acf225fa6a850dd4c49e163404c2048161b5f21f",
+      "after": "137d26d569085df4a6c069f8d91d5ea99c91ebfc7c9a1ce89e9c07ebebc9a970"
+    }
+  }
+}
