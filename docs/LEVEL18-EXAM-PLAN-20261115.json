@@ -1,0 +1,76 @@
+{
+  "level": 18,
+  "name": "Pemulihan status tidak dikenal dan receipt parsial",
+  "required_passed": 12,
+  "scope": "isolated synthetic workspaces; only main planner activation",
+  "acceptance": [
+    "Unknown/missing/retrying operation states remain uncertain; success:true or unrelated read does not resolve them.",
+    "Partial/truncated execution receipts cannot verify completion, including positive test counts and terminal job labels.",
+    "Whole-file write with partial acknowledgement is reconciled by exact matching full readback without resubmission when no async operation reference exists.",
+    "Preserve scope, revision, protected assertions, Data Firewall and ordinary synchronous Cline compatibility."
+  ],
+  "privacy": "technical hashes, enums and counts only; no user chat, customer data or credentials",
+  "activation": "same-source full regression + 12 model missions + 3 native Cline regressions; idle/CAS/backup, only harmonika-ai restart",
+  "missions": [
+    {
+      "id": "P01",
+      "case": "arithmetic",
+      "receipt_fault": "read_partial"
+    },
+    {
+      "id": "P02",
+      "case": "chained_faults",
+      "receipt_fault": "read_partial"
+    },
+    {
+      "id": "P03",
+      "case": "normalization",
+      "receipt_fault": "read_partial"
+    },
+    {
+      "id": "P04",
+      "case": "nested_config",
+      "receipt_fault": "read_partial"
+    },
+    {
+      "id": "P05",
+      "case": "new_function",
+      "receipt_fault": "write_partial"
+    },
+    {
+      "id": "P06",
+      "case": "resume_compaction",
+      "receipt_fault": "read_partial"
+    },
+    {
+      "id": "U01",
+      "case": "arithmetic",
+      "receipt_fault": "test_partial"
+    },
+    {
+      "id": "U02",
+      "case": "chained_faults",
+      "receipt_fault": "test_partial"
+    },
+    {
+      "id": "U03",
+      "case": "normalization",
+      "receipt_fault": "test_partial"
+    },
+    {
+      "id": "U04",
+      "case": "nested_config",
+      "receipt_fault": "test_partial"
+    },
+    {
+      "id": "U05",
+      "case": "lost_ack",
+      "receipt_fault": "unknown_job_state"
+    },
+    {
+      "id": "U06",
+      "case": "cancel_ack",
+      "receipt_fault": "partial_cancel"
+    }
+  ]
+}

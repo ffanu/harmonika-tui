@@ -1,0 +1,26 @@
+{
+  "status": "baseline_only",
+  "recorded_at": "2026-11-15T04:05:43.197257+00:00",
+  "probe_observed_at": "2026-11-15T04:04:20.283Z",
+  "source_sha256": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+  "deployed_file_sha256": "a711a47bb9679b478b4fe0d78b499b76714cae0c547e2ddd16a1115c9fc8573d",
+  "deployed_hash_read_via": "SSH strict host-key verification, read-only hash of registered backend file",
+  "synthetic": true,
+  "live_model_tested": false,
+  "client_tools_executed": false,
+  "production_changed": false,
+  "probes": [
+    {
+      "name": "answer_without_execution",
+      "validator_accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "name": "read_receipt_used_for_test_deploy_claim",
+      "validator_accepted": true,
+      "rejection_reason": null
+    }
+  ],
+  "interpretation": "The controller check entry point admits these deliberately unsupported synthetic decisions. The deployed file hash matches the tested module. Other validation layers and actual model behavior have not been tested by these probes; this is not a full end-to-end finding or a passing Level13 result.",
+  "reproduce": "node scripts/level13-evidence-baseline.cjs"
+}

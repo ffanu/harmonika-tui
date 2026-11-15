@@ -426,3 +426,321 @@ tetap terkini; backup SQLite online ditutup, diperiksa, lalu dipulihkan ke clone
 nonaktif. Verifikasi migrasi, session, fingerprint dan data terpisah dari health.
 Hasil akhir dan batas bantuan mengikuti laporan Level12; ini bukan training model
 atau sertifikasi bahwa semua tugas engineering akan otomatis berhasil.
+
+
+### Level13: hasil terikat pemeriksaan operator
+
+`agent-controller.cjs` tetap mengembalikan content/tool_calls standar kepada TUI
+atau adapter web; task_state dan ledger tidak menjadi kartu JSON di chat.
+`proof-contract.cjs` menyediakan jalur action terdaftar dengan HMAC-SHA256.
+Backend membaca `/etc/harmonika-ai/evidence-issuer.key` (hex32byte,0600) serta
+`/var/lib/harmonika-ai/proof-contracts/<id32hex>.json` (direktori0700,berkas0600).
+Hanya operator/verifier tepercaya yang menerbitkan kontrak. Tidak ada endpoint
+publik untuk menandatangani data yang dikirim model/klien.
+
+Envelope berisi string `payload` dan `mac` HMAC atas byte payload. Payload versi1
+memuat id, task_hash dari user anchor tanpa marker `[HarmonikaProof:<id>]`,
+issued_at/expires_at milidetik, owner/project/target/attempt/revision opaque,
+required (maks8 jenis) dan checks (maks64). Check berisi binding yang sama,
+sequence naik, at, provenance, outcome, call_id, result_sha256 dan facts teknis.
+Hash receipt adalah SHA256 atas JSON.stringify(message.content), sesuai observe.
+Verifier harus memeriksa state aktual secara independen sebelum menandatangani;
+signature membuktikan issuer, bukan membuat fakta yang salah menjadi benar.
+Kontrak maksimal1jam, hasil cek maksimal5menit, tanpa timestamp masa depan.
+Ganti ledger secara atomik; jangan menyimpan prompt, chat, output mentah, PII
+atau secret di sana. Task hash dan referensi opaque cukup untuk binding.
+
+Jenis cek: read, tests, artifact, job, liveness, deploy, migration, document, vision.
+Status hilang/gagal/parsial, revisi/target berbeda, count tes0, pending job,
+checksum tidak cocok atau provenance model/client tidak memenuhi kewajiban.
+Ringkasan action terdaftar berasal dari jenis cek valid; semua kewajiban wajib
+terpenuhi sebelum complete. Expiry/revocation dicek kembali setelah inference,
+meskipun panduan awal sempat melihat bukti sukses. Tidak ada replay mutasi.
+
+Jalur terdaftar ini bersifat opt-in operator; adapter client-owned tool yang lama
+belum menjadi trusted executor dan tidak mendapat attestation otomatis. Owner
+binding ada di kontrak, bukan implementasi autentikasi tenant publik. Guard
+legacy yang konservatif dan panduan hasil berbukti tetap membantu sesi biasa,
+namun bukan pemeriksaan semantik menyeluruh semua parafrasa/pengetahuan.
+Backend memerlukan Node18+ dan filesystem POSIX; worker Windows RTX tidak
+menjalankan modul verifier ini. Uji reproduksi: `node --test tests/proof-contract.test.cjs` dan
+`python3 -m unittest discover -s tests -p test_level13_activation.py -v`.
+
+## Level14: bukti dari coding workspace backend
+
+`/v1/coding/workspaces/{id}/agent` menerima profil verifikasi dan menerbitkan
+kontrak dari actor gateway serta workspace runtime. Status selesai hanya meliputi
+pemeriksaan profil yang terbukti. Lihat [kontrak Level14](../../docs/LEVEL14-EVIDENCE.md)
+dan [laporan aktual](../../docs/LEVEL14-AGENT-EXAM-20261115.json).
+
+Ini tidak menaikkan receipt tools lokal TUI menjadi bukti backend dan tidak
+mengubah jalur marker opt-in Level13. Model tidak punya alat approval. Saat
+respons terputus setelah efek tersimpan, rekonsiliasi memakai body/key yang sama;
+jangan submit mutasi baru. Profil tes dibatasi Python/unittest yang didukung,
+terpisah dari eksekusi biasa yang tetap memerlukan persetujuan.
+
+## Respons interaktif Cline
+
+Planner mengenali kapabilitas `read_files`, `run_commands`, dan `editor` dari
+definisi function bertipe object yang unik; tools tambahan tetap diperbolehkan.
+Ini hanya kelas latensi, bukan identitas klien atau izin baru. Batas pemilihan
+keputusan adalah 60 detik per percobaan dan 90 detik total. Kelas umum tetap
+180/240 detik. Batas ini tidak memotong durasi eksekusi perintah oleh klien dan
+tidak mengurangi kapasitas konteks atau menghapus bukti. Regenerasi timeout tetap
+memerlukan bukti transport tertutup serta keputusan belum dieksekusi.
+
+Gabungkan bacaan/status independen lewat array tool yang tersedia sesuai schema;
+mutasi berurutan dan verifikasi setelah edit tetap dipisahkan. Progres memuat
+temuan baru dan langkah berikutnya secara singkat. Tidak ada filter otomatis
+yang menghapus pesan peringatan, blocker atau isi jawaban. SSE tetap mengirim
+keputusan hanya sesudah validasi; efek ketik kosmetik dilewati untuk tool call
+yang siap dijalankan. Ini bukan token streaming model sebelum validasi.
+
+Envelope array `run_commands` yang dikenal (`query`, `result`, `success`) kini
+memeriksa status proses eksplisit per entri. `success:true` transport tidak
+mengalahkan exit code gagal. Teks output tanpa metadata exit harus dianalisis
+dan diverifikasi, bukan disertifikasi sukses atau gagal lewat kata kunci umum.
+Array dokumen/source dari tool lain tidak dianggap metadata proses.
+
+Uji: `tests/interactive-responsiveness.test.cjs`, integration planner dengan AJV
+backend, dan `scripts/cline-responsive-canary.cjs` di staging privat. Canary
+memakai workspace sementara dan test asli terlindungi; tidak mengeksekusi tugas
+atau memutar ulang histori pengguna. Aktivasi memakai baseline hash aktual,
+canary pada source yang sama, idle guard, backup dan rollback CAS.
+
+## Inisiatif dalam tugas yang diizinkan
+
+`requestMode` mengenali perintah kerja langsung dari user anchor asli secara
+konservatif. Perintah yang dikenali sebagai `tool_action`, dengan function tools
+tersedia dan tidak dibatasi `tool_choice=none`, tidak boleh diakhiri lewat
+`phase=answer` berupa janji, tawaran atau sekadar pengakuan. Gunakan langkah
+discover/execute/verify, complete berbukti, atau blocked/waiting yang nyata.
+Koreksi keputusan tetap dibatasi satu kali; backend tidak mengeksekusi atau
+mengulang mutasi klien. Guard bukti dan firewall dipertahankan.
+
+Panduan meminta agent menemukan file/config/tes yang relevan, memperbaiki cacat
+yang ditemukan dan memeriksa hasilnya tanpa meminta user menyebut setiap langkah.
+Pertanyaan biasa, penulisan prosa, permintaan rencana dan pembatalan tetap normal.
+Ini klasifikasi pola perintah yang terbatas, bukan pemahaman semantik universal.
+Inisiatif tidak memperluas target, izin deploy, pengiriman pesan atau tindakan
+destruktif. Batas spesifik seperti larangan deploy tidak menghapus izin perbaikan
+lokal yang sudah diberikan. Sesi tanpa kontrak operator tetap client_reported.
+
+## Level15: arah tugas, pemulihan dan kesegaran bukti
+
+`task-continuity.cjs` menyusun observasi mekanis per tugas dari receipt caller:
+operasi tertunda/ambigu, referensi job/request/key yang di-hash, write dan hasil
+tes terakhir, serta jumlah bacaan/status yang tidak berubah. Ringkasan tidak
+menyimpan chat, source, argumen atau data pelanggan. Ini bukan database lintas
+sesi baru; caller harus tetap menyediakan konteks yang diperlukan. Pemadatan
+internal mempertahankan observasi dan fakta intent lewat WeakMap request yang
+diteruskan melalui `bindPrepared`, termasuk tujuan asli pada wrapper Cline.
+
+Status completed harus mengonfirmasi identitas pada hasilnya sendiri. ID yang
+hanya ada di argumen permintaan, ID asing, atau bacaan lain yang berhasil tidak
+menyelesaikan operasi lama. Job ID, operation ID, request ID dan idempotency key
+memiliki namespace berbeda. Mutasi ambigu tidak boleh diulang dengan key baru;
+diagnosis shell yang diketahui hanya membaca tetap tersedia dalam batas izin.
+Tiga bacaan/status identik dibatasi meskipun diselingi bacaan lain.
+
+Untuk koreksi/build yang dikenali, setiap berkas yang ditulis membutuhkan
+readback yang sesuai atau pemeriksaan baru. Permintaan tes membutuhkan jumlah
+tes positif dan hasil lulus yang dilaporkan executor; build-only, exit0 tanpa
+jumlah, nol tes, atau tes sebelum edit terakhir tidak memenuhi syarat tersebut.
+Format TAP/unittest diparsing hanya pada output executor tes yang dikenali,
+bukan pada source atau dokumen. Ini tetap laporan klien pada jalur legacy;
+kontrak operator memberi pemeriksaan independen yang lebih kuat.
+
+Cline dapat memendekkan `query` tampilan perintah panjang sementara argumen
+tool tetap lengkap. Korelasi receipt menerima format pemendekan tersebut hanya
+jika prefix dan jumlah karakter yang dihilangkan cocok dengan tepat satu
+perintah asli. Format salah atau kecocokan ambigu tidak menjadi bukti tes.
+Jika jumlah tes belum terbaca, agent diarahkan menjalankan perintah tes singkat
+tersendiri, tanpa mengulang edit atau submit untuk memperoleh receipt baru.
+
+Kontrak HMAC boleh menambahkan `allowed_tools` berupa daftar nama function
+teknis yang unik. Pembatas ini mempersempit deklarasi klien dan tidak memberikan
+izin baru. Enum output dibatasi pada irisan tool tersebut; pemilihan tool di luar
+scope ditolak dengan `tool_scope_denied`/HTTP403. Field policy dari caller tanpa
+kontrak tidak dipercaya. Policy malformed adalah kontrak invalid dan terminal.
+Pembatas nama tool tidak menggantikan authorization actor/path pada executor.
+
+Ujian 18 misi memakai model aktual, executor fixture terbatas, assertion asli
+terlindungi, proses pemeriksa terpisah dan bukti HMAC per tugas/revisi. Mutator
+SQLite memakai record sungguhan dan proses baru untuk rekonsiliasi; cancel diuji
+dengan worker fixture milik ujian yang berhenti melalui flag, tanpa signal.
+Fault ACL tulis/payload dan respons asing diinjeksi secara eksplisit. Verifier
+fungsi fixture bersifat terbatas dan bukan sandbox umum untuk kode bermusuhan.
+Canary Cline asli dilaporkan terpisah dari misi backend. Rencana lengkap ada di
+`docs/LEVEL15-EXAM-PLAN-20261115.json`. Aktivasi memerlukan 18/18 misi pada hash
+source yang sama, idle guard, backup prior-absence dan rollback CAS.
+
+## Level16: pemulihan hasil batch per perintah
+
+Array `run_commands` membutuhkan satu envelope executor yang cocok untuk setiap
+perintah asli, tanpa hasil asing, duplikat, atau envelope rusak. Prefix dan jumlah
+karakter query Cline yang dipendekkan tetap harus cocok unik. Hasil hilang tidak
+dianggap sebagai perintah yang belum dijalankan: statusnya tidak pasti sehingga
+batch mutasi tidak boleh diulang untuk mendapatkan receipt baru.
+
+Status dan identitas operasi dibaca per anak dari field envelope/metadata yang
+dikenal. Hasil saudara yang berhasil tidak menghapus operasi queued/unknown atau
+ack pembatalan. Rekonsiliasi memerlukan status dengan identitas asli yang cocok;
+bila identitas tidak tersedia, hasil jujur adalah blocker. Isi string `result`
+yang menyerupai JSON tidak otomatis menjadi status, dan array source dari tool
+baca tetap data. Catatan turunan menyimpan hash, enum dan jumlah dalam RAM saja.
+
+Tes dalam batch mesti memiliki hasil lengkap dan jumlah positif pada seluruh
+perintah tes yang diminta. Metadata gagal tetap gagal walaupun output memuat TAP
+lulus. Perintah non-test yang berhasil pada batch gagal sebagian dilindungi dari
+replay verbatim dalam tugas yang sama; ulang hanya pemeriksaan yang gagal.
+Ini guard konservatif receipt klien, bukan pembuktian idempotensi shell atau
+otorisasi baru. Perintah sah yang memang perlu diulang memerlukan konteks/izin
+tugas yang jelas; jangan mengubah ejaan perintah untuk melewati guard.
+
+Jumlah bacaan identik dihitung per anak sehingga mengganti urutan atau saudara
+batch tidak mereset batas. Diagnosis baca yang dikenali tetap tersedia dalam
+izin executor. Pengaman tidak menaikkan receipt klien menjadi HMAC independen.
+Misi batch membedakan efek awal yang disiapkan operator, fault receipt yang
+diinjeksi, keputusan model aktual dan readback independen. Rencana ujian ada di
+`docs/LEVEL16-EXAM-PLAN-20261115.json`.
+
+## Level17: cakupan proyek dan revisi pada verifikasi
+
+`verification-scope.cjs` menyimpan hash identitas yang disebut secara eksplisit
+oleh interface tool: owner, project/workspace, target, attempt dan revisi.
+Kontradiksi antarscope tidak boleh menjadi bukti selesai maupun menyelesaikan
+operasi job lama walaupun job ID sama. Informasi scope tambahan pada status
+pending dipertahankan saat rekonsiliasi. Field ini tetap receipt klien dan
+tidak menerbitkan attestation atau hak akses baru.
+
+Perintah tes dengan `cd <path> && ...` yang statis dan cwd executor dipetakan
+secara leksikal ke berkas yang ditulis. Folder saudara dengan prefix mirip tidak
+cocok. Path absolut/relatif dengan cwd eksplisit, dot segments, drive Windows
+dan UNC dinormalisasi tanpa mengakses filesystem. Setiap target tulis memiliki
+kewajiban verifikasi sendiri; nama relatif sama di proyek berbeda tidak boleh
+saling menimpa. Revisi baru untuk target yang sama menggantikan revisi lamanya.
+
+Scope kosong pada klien lama tetap memakai mekanika `client_reported`; ini
+bukan pembuktian cakupan semantik tes. Cwd/ref yang ambigu, pindah folder lagi
+di tengah shell, atau flag pemilihan workspace yang belum dipahami memerlukan
+receipt tes yang lebih jelas. Root filesystem bukan cakupan proyek yang sah.
+Normalisasi bukan resolusi symlink, autentikasi tenant atau sandbox. Nama file
+Windows dipertahankan case-nya; uji leksikal bukan uji terminal Windows fisik.
+
+`source_revision` dinormalisasi sebagai revision. Write dapat mengonsumsi revisi
+lama dan mengembalikan revisi baru. Read/test yang dipatok ke ref/commit lama
+tanpa revisi write yang cocok tidak memverifikasi perubahan baru. Untuk tool
+write seluruh berkas dengan `content`, hash readback penuh yang berbeda juga
+tidak membuktikan berkas hasilnya benar. Jangan menganggap `editor.new_text`
+sebagai isi penuh berkas karena interface editor dapat berupa penggantian bagian.
+
+Argumen `target` pada tool tes adalah path entry point, sedangkan metadata
+executor `target` adalah identitas target; jangan membandingkan kedua namespace
+tersebut sebagai ID yang sama. `target_id` eksplisit tetap dapat dibandingkan.
+Metadata `revision_scope=workspace` menyatakan revisi gabungan workspace, dengan
+project/workspace ID yang eksplisit. Write berikutnya pada workspace sama
+memajukan revisi verifikasi berkas-berkas yang sudah ditulis. Tanpa penanda itu,
+revisi satu file tidak boleh diwariskan dari write file lain.
+
+Misi Level17 menginjeksi satu respons dengan metadata scope yang salah pada
+pemeriksaan aktual; pemeriksa independen tidak menandatangani respons tersebut.
+Model harus mengambil pemeriksaan baru yang cocok. Riwayat customer tidak
+dipakai dan metadata scope mentah tidak ditambahkan ke log. Rencana:
+`docs/LEVEL17-EXAM-PLAN-20261115.json`.
+
+## Level18: status operasi dan hasil yang belum lengkap
+
+`receipt-outcome.cjs` membaca field mekanika pada envelope executor yang dikenal.
+Status operasi hilang/tidak dikenal serta retrying mempertahankan ketidakpastian
+di continuity. Status asing dinormalisasi menjadi unknown; isinya tidak disalin
+ke log. Bacaan lain yang berhasil tidak menyelesaikan operasi, dan mengganti
+idempotency key bukan cara mengizinkan submit ulang. Identitas dan scope asli
+tetap diperlukan untuk rekonsiliasi.
+
+Penanda partial, truncated, is_truncated, output_limited atau complete=false
+menghalangi pemakaian receipt sebagai bukti selesai. Tes dengan jumlah positif
+yang keluarannya terpotong belum membuktikan lulus. Tes boleh diperiksa ulang
+setelah exit worker diketahui; bila hasil worker belum pasti, lakukan lookup
+operasi asli. Acknowledgement cancel yang belum lengkap bukan bukti worker mati.
+
+Untuk interface whole-file write yang menyebut content, planner menyimpan hash
+isi yang diminta. Tanpa job/request/idempotency reference async, bacaan ulang
+penuh pada file, scope, revisi dan hash yang cocok dapat menyelesaikan ack write
+yang hilang tanpa menulis ulang. Hash tidak tersedia, bacaan terpotong, file lain,
+atau isi berbeda tidak cocok. Jalur ini tidak berlaku bagi patch, editor parsial
+atau mutasi shell opaque. Verifikasi setelah write tetap diperlukan; tes sebelum
+write belum mencakup perubahan baru. Penyimpanan editor yang diakui lengkap tetap
+didukung tanpa mengarang klaim tes atau deployment.
+
+Envelope Cline sinkron query/result/success tanpa state tetap kompatibel;
+request_id trace saja tidak dijadikan job async. String source, JSON dokumen dan
+array bacaan bukan state executor. Validator transport tetap menolak pasangan
+tool call/result yang hilang sebelum memanggil model. Pengaman receipt ini tidak
+menerbitkan attestation baru, tidak menambah otorisasi atau database lintas sesi.
+
+Ujian memakai source aktual pada workspace sintetis. Operator sengaja memotong
+satu receipt per misi, menahan bukti untuk receipt tersebut, lalu memeriksa hasil
+nyata secara independen. Rekonsiliasi job menggunakan satu efek SQLite operator;
+cancel memakai worker ujian milik runner yang berhenti melalui flag. Tiga ujian
+Cline native dilaporkan terpisah. Rencana: `docs/LEVEL18-EXAM-PLAN-20261115.json`.
+
+## Inisiatif pada perintah sehari-hari
+
+Perintah cek, audit, periksa, telusuri dan temukan pada target teknis dikenali
+sebagai pekerjaan yang memerlukan tool. Prefix sopan seperti mohon dan permintaan
+menulis lalu menyimpan berkas didukung. Pertanyaan, puisi/prosa, rencana saja dan
+larangan eksekusi tetap dijawab sesuai maksudnya. Pengenalan intent ini terbatas
+pada pola yang diuji, tidak mencakup seluruh urutan kata atau memberi izin baru.
+
+Pada jalur legacy, klaim tes lulus harus mengutip receipt tes aktual dengan jumlah
+positif yang berkorelasi; keluaran pwd, ls atau shell umum tidak cukup. Klaim bug
+sudah diperbaiki perlu bukti perubahan atau tes aktual, dengan kewajiban scope dan
+verifikasi setelah write yang tetap berlaku. Ini pengaman mekanika dan frasa yang
+dikenal; receipt klien serta semantik bahasa tidak otomatis menjadi attestation.
+
+Audit read-only dapat selesai dengan temuan gagal. Pada jalur legacy, phase answer
+dibolehkan sesudah receipt tes gagal yang lengkap dan berkorelasi dengan jumlah
+aktual positif, tanpa write atau operasi pending/unresolved. evidence_call_ids
+menunjuk temuan tersebut, bukan bukti tes lulus. Phase complete serta kontrak
+operator HMAC tetap mengikuti gerbang sukses aslinya. Tanpa receipt aktual,
+promise-only answer tetap ditolak. Pemisahan ini memperbaiki invalid_tool_response
+yang ditemukan lewat ujian audit asli tanpa mengubah assertion atau izin executor.
+
+Runner `scripts/initiative-command-native.py` menguji enam perintah dengan Cline
+asli, workspace/XDG privat dan lock native milik suite. Audit read-only harus
+mempertahankan hash semua berkas; status billing paid yang bertentangan dengan
+provider pending harus dilaporkan sebagai belum terverifikasi. Ujian discovery
+memuat arsip pengecoh serta komentar vendor berinstruksi palsu; assertion asli
+dan source aktif diperiksa independen. Provider reference sementara dihapus
+setelah klien keluar. Jangan memakai session ID pengguna untuk menjalankan ujian.
+
+Prompt dikirim lewat argv dan stdin klien diisolasi dengan DEVNULL. Cline dapat
+menambahkan stdin sebagai konteks; heredoc skrip operator yang diwariskan bukan
+bagian dari perintah ujian. Runner memeriksa effective user request dan menolak
+kontaminasi peluncur. Hasil sebelum koreksi harness disimpan sebagai riwayat
+pengembangan dan tidak dipakai dalam skor enam sesi akhir yang bersih.
+
+Rencana dan batas: `docs/INITIATIVE-COMMAND-EXAM-PLAN-20261115.json`. Bukti tes
+regresi, source aktif, perubahan terbatas dan pemeriksaan jawaban disimpan dalam
+laporan suite setelah seluruh gerbang lulus; tidak ada klaim training model atau
+persentase kecerdasan universal.
+
+## Laporan diagnostik dan invalid_tool_response
+
+Perintah menjalankan tes lalu melaporkan hasil tanpa perubahan dapat menghasilkan
+kegagalan atau nol tes. Phase answer pada jalur legacy menerima temuan lengkap
+tersebut dengan referensi receipt yang berkorelasi. Error node --check atau npm
+check/lint/typecheck yang dikenal juga dapat dilaporkan. Jangan menebak exit worker
+yang tidak diberikan klien; diagnostic_output hanya menandai adanya keluaran,
+bukan bukti sukses, otorisasi baru atau perubahan klasifikasi mutasi executor.
+
+Phase complete, klaim tes lulus, scope, hasil parsial/pending/unknown, korelasi
+batch serta kontrak HMAC operator tetap mengikuti gerbang aslinya. Kata perbaiki
+sesudah periksa/audit masih merupakan pekerjaan yang wajib dikerjakan; larangan
+mengubah file lain tidak membatalkannya. Recovery membedakan laporan hasil negatif
+dari persyaratan jumlah tes positif untuk membuktikan keberhasilan.
+
+Tiga pemicu native dan uji ulangnya disimpan oleh
+scripts/invalid-tool-response-native.py; semua fixture read-only, stdin DEVNULL,
+sesi baru dan file terlindungi. Rencana: docs/INVALID-TOOL-RESPONSE-HUNT-PLAN-20261115.json.

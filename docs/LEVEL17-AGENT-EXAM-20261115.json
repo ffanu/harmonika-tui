@@ -1,0 +1,1430 @@
+{
+  "level": 17,
+  "name": "Scope target, proyek, revisi dan attempt pada bukti verifikasi",
+  "status": "active_verified",
+  "verified_at": "2026-11-15T10:53:24.337517+00:00",
+  "meaning": "Internal bounded acceptance suite, not a general intelligence rank or model training.",
+  "roles": {
+    "Codex": "implementation, grading, testing and activation",
+    "OpenCode": "read-only review",
+    "Claude": "not involved"
+  },
+  "implemented": [
+    "Explicit contradictory owner/project/workspace/target/attempt/revision cannot verify a write.",
+    "Static test cwd must lexically contain the edited target; sibling prefixes and traversal do not match.",
+    "Separate project obligations for identical relative paths; newer revisions of the same normalized target supersede older writes.",
+    "Matching job ID under foreign explicit scope cannot resolve unknown operations; pending scope enrichment is preserved.",
+    "Pinned historical read/ref and mismatching full-file readback do not establish current write verification.",
+    "Cline clipped queries, POSIX/Windows lexical paths and unknown legacy scope retain documented compatibility.",
+    "Test entry paths are separate from executor target IDs; explicit workspace revisions advance across files, file revisions remain per target."
+  ],
+  "baseline": {
+    "synthetic_checker_only": true,
+    "live_model_called": false,
+    "before_unsafe_completion_categories_accepted": 9,
+    "after_installed_engine_rejected": 9
+  },
+  "tests": {
+    "local-tests": {
+      "tests": 300,
+      "pass": 300,
+      "fail": 0,
+      "skipped": 0,
+      "original_log_sha256": "e21d5b891e59c48ccdb8a3dfcbee270fdbf52198bb237d3d89ffe87b58ee4ce8"
+    },
+    "linux-tests": {
+      "tests": 319,
+      "pass": 319,
+      "fail": 0,
+      "skipped": 0,
+      "original_log_sha256": "b63266041bce70cf4e04ace86b6632b1114f8dc2e20ae1870ec410ee1e104142"
+    },
+    "activation_guards": {
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "original_log_sha256": "0490208e5a254f2f2e6e0f70f7a5ee55157accf27688d6887c0492cc0a5b37e0"
+    },
+    "mac_linux_counts_overlap_do_not_add": true
+  },
+  "backend_exam": {
+    "level": 17,
+    "synthetic_only": true,
+    "production": false,
+    "model_decisions": true,
+    "independent_operator_proof": true,
+    "passed": true,
+    "passed_count": 12,
+    "total": 12,
+    "rows": [
+      {
+        "id": "R01",
+        "case": "arithmetic",
+        "scope_fault": "revision",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 68761,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7508,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5858,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6080,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 9203,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7045,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 9751,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6819,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7138,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 9107,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R02",
+        "case": "chained_faults",
+        "scope_fault": "revision",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 81988,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5921,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5829,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7626,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7566,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6728,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 10063,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7336,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8813,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 5692,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 9011,
+            "tool_count": 1
+          },
+          {
+            "turn": 10,
+            "status": 200,
+            "latency_ms": 7141,
+            "tool_count": 0
+          }
+        ],
+        "edits": 2,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R03",
+        "case": "normalization",
+        "scope_fault": "attempt",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 67973,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6926,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6734,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7489,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 8430,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7079,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7688,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6497,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8247,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 8624,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R04",
+        "case": "nested_config",
+        "scope_fault": "target",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 72781,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5322,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6277,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 5911,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6167,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8053,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 6327,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7299,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 9138,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 10767,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 7262,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R05",
+        "case": "lost_ack",
+        "scope_fault": "owner",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 35631,
+        "verified": [
+          "job",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6916,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7219,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6427,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7381,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7612,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 1,
+        "total_submit_effects": 1,
+        "lookup_calls": 2,
+        "committed_effects": 1,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R06",
+        "case": "cancel_ack",
+        "scope_fault": "owner",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 36498,
+        "verified": [
+          "read"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6079,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6563,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 8653,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 8692,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6510,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0,
+        "worker_physically_stopped": true
+      },
+      {
+        "id": "S01",
+        "case": "arithmetic",
+        "scope_fault": "project",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 65977,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6019,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7245,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7170,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6554,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 10097,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8070,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6912,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 6811,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 6839,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "S02",
+        "case": "chained_faults",
+        "scope_fault": "project",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 90247,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7337,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 8222,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 8488,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7694,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6649,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7569,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 9389,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8384,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 6988,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 8917,
+            "tool_count": 1
+          },
+          {
+            "turn": 10,
+            "status": 200,
+            "latency_ms": 10351,
+            "tool_count": 0
+          }
+        ],
+        "edits": 2,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "S03",
+        "case": "normalization",
+        "scope_fault": "project",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 64464,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7801,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6992,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7535,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6234,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6661,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 6979,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7048,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7291,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 7666,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "S04",
+        "case": "nested_config",
+        "scope_fault": "workspace",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 64670,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7119,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6141,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6908,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 8778,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7015,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7583,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6724,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 6823,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 7330,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "S05",
+        "case": "new_function",
+        "scope_fault": "project",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 67469,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5391,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6819,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6948,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 9433,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 9262,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7459,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 5949,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7592,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 8363,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "S06",
+        "case": "resume_compaction",
+        "scope_fault": "project",
+        "scope_faults": 1,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 73818,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6947,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5610,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7421,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7177,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8658,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7291,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7224,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7190,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 7648,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 8400,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 1,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      }
+    ],
+    "source_sha256": {
+      "agent-controller.cjs": "97ec2e42abe43dd35af874a0ac82ecfc01f343daa24b179340f18db1b4af06d3",
+      "task-continuity.cjs": "bf5b339ce45768024b1deadd4a9ec7e8365d3ed62f0de06ef586bbf3cb58f641",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473",
+      "decision-recovery.cjs": "afeff8cb94cfdee60b74d14e50895feaeb2d7192372c5e5412b704c93ae875c2",
+      "verification-scope.cjs": "4c2145add38eff918d98a9db71783d6c7120e964f71593d84030fe8a64acb167"
+    }
+  },
+  "operator_proof": {
+    "historical_attestations_verified": 12,
+    "source_workspace_revisions_match": true,
+    "issuer_key_exported": false,
+    "not_new_authorization": true
+  },
+  "native_cline_regressions": {
+    "planned": 3,
+    "passed": 3,
+    "results": [
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "arithmetic",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "duration_ms": 58635,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": true,
+        "expected_tests": 2,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 2,
+          "run_commands": 2,
+          "editor": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "chained",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "duration_ms": 67417,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": false,
+        "expected_tests": 3,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 1,
+          "run_commands": 2,
+          "search_codebase": 1,
+          "editor": 2
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "tool_fallback",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "duration_ms": 56459,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": true,
+        "expected_tests": 2,
+        "expected_tests_passed": true,
+        "used_direct_node_test": true,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 2,
+          "run_commands": 2,
+          "editor": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true
+      }
+    ],
+    "existing_user_sessions_or_settings_changed": false
+  },
+  "http_postcheck": {
+    "actual_loopback_http": true,
+    "tools_executed": false,
+    "signed_scope": true,
+    "denied_scope": [
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      }
+    ],
+    "subsequent_valid_status": 200,
+    "subsequent_valid_text": true,
+    "unauthenticated_status": 403,
+    "passed": true
+  },
+  "activation": {
+    "status": "active_verified",
+    "candidate_sha256": {
+      "verification-scope.cjs": "4c2145add38eff918d98a9db71783d6c7120e964f71593d84030fe8a64acb167",
+      "task-continuity.cjs": "bf5b339ce45768024b1deadd4a9ec7e8365d3ed62f0de06ef586bbf3cb58f641",
+      "decision-recovery.cjs": "afeff8cb94cfdee60b74d14e50895feaeb2d7192372c5e5412b704c93ae875c2",
+      "agent-controller.cjs": "97ec2e42abe43dd35af874a0ac82ecfc01f343daa24b179340f18db1b4af06d3",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "backup": "/var/backups/harmonika-level17/20261115T104927Z",
+    "prior_absent": [
+      "verification-scope.cjs"
+    ],
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true,
+    "verified_at": "2026-11-15T10:53:24.337517+00:00",
+    "source_sha256": {
+      "verification-scope.cjs": "4c2145add38eff918d98a9db71783d6c7120e964f71593d84030fe8a64acb167",
+      "task-continuity.cjs": "bf5b339ce45768024b1deadd4a9ec7e8365d3ed62f0de06ef586bbf3cb58f641",
+      "decision-recovery.cjs": "afeff8cb94cfdee60b74d14e50895feaeb2d7192372c5e5412b704c93ae875c2",
+      "agent-controller.cjs": "97ec2e42abe43dd35af874a0ac82ecfc01f343daa24b179340f18db1b4af06d3",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "service_pids": {
+      "harmonika-ai": 1931581,
+      "harmonika-web-chat-live": 1431266,
+      "harmonika-shared-core": 3895945,
+      "harmonika-coding-runtime": 1719961
+    },
+    "backend_passed": 12,
+    "native_cli_passed": 3
+  },
+  "scope": {
+    "only_service_restarted": "harmonika-ai",
+    "bgp_core_vyos_billing_cs_rtx_modified": false,
+    "tui_brand_or_binary_changed": false,
+    "github_commit_or_push": false,
+    "live_customer_history_replayed": false,
+    "tests_use_isolated_synthetic_workspaces": true
+  },
+  "exam_provenance": [
+    "S01-S06 and R01-R04 run actual protected Node tests and a separate bounded function verifier. One passing execution response has deliberately altered scope metadata; no independent operator proof is issued for it. A new matching check is required.",
+    "R05 begins with one actual operator-seeded SQLite commit and lost acknowledgement. The first terminal lookup has altered owner metadata; model reconciles the original operation again without a duplicate submit.",
+    "R06 begins with one actual operator-seeded cancellation of an owned worker. First physical-exit response has altered owner metadata and cannot settle the original scope; a matching fresh check is required.",
+    "Cross-cwd, relative collisions, pinned refs, content hashes and Windows normalization are synthetic checker regressions, not a physical Windows terminal exam. Native Cline regressions are three separate real client runs."
+  ],
+  "exam_incidents": {
+    "initial_invalid_plan": {
+      "executed_missions": 12,
+      "loaded_plan_level": 16,
+      "not_a_valid_level17_capability_grade": true,
+      "used_for_activation": false,
+      "correction": "Fix uppercase plan filename; validate level, mission IDs and scope faults before any model dispatch.",
+      "new_guard_rejection": {
+        "rejected": true,
+        "reason": "level17_plan_mismatch",
+        "exit_code": 1,
+        "no_model_decision_events": true,
+        "guard_precedes_dispatch": true
+      }
+    },
+    "first_valid_scoped_run": {
+      "passed": 2,
+      "total": 12,
+      "used_for_activation": false,
+      "engine_corrections": [
+        "Separate test target entry path from executor target ID.",
+        "Advance explicit workspace revisions across edited files without treating file revisions as workspace revisions."
+      ]
+    },
+    "development_regression": {
+      "case": "UNC parent normalization",
+      "initial": "26/27 focused tests passed",
+      "fixed": true,
+      "provenance": "initial terminal tool output; no regenerated historical failure log"
+    }
+  },
+  "unchanged_staging_dependency_sha256": {
+    "remote-workflow.cjs": "d6ccb0957ce8a37993cc1774f773f64ec4772704f383dd88a1eea5635b3161ae",
+    "remote-workflow.txt": "3b24664a8dbb8048197f3df911c39693190fdf2a622c1557688a7088313015d0"
+  },
+  "review": {
+    "reviewer": "OpenCode",
+    "read_only": true,
+    "claude_involved": false,
+    "original_review_sha256": "ee35e8f4ac5e4a3b7e44f2db53081f1e59c1248d76b09378f8b55525185c5f7d",
+    "findings_addressed": [
+      "cross-project cwd test cannot verify current writes",
+      "pinned historical readback and content mismatch",
+      "foreign owner/project job settlement",
+      "relative path collision across projects"
+    ]
+  },
+  "recorded_response_regression": {
+    "synthetic_recording": true,
+    "tools_reexecuted": false,
+    "completion_accepted_after_target_namespace_fix": true,
+    "provenance": "client_reported_checker_replay_not_new_authorization"
+  },
+  "privacy": {
+    "evidence": "mechanical enums, counts and hashes only; no raw user chat, customer data or credentials",
+    "raw_synthetic_transcripts_published": false,
+    "temporary_native_provider_references_removed": true
+  },
+  "limits": [
+    "Legacy tool scopes and receipts remain client_reported; matching client fields cannot issue independent attestation or tenant authorization.",
+    "Unknown legacy scope keeps compatibility. Scope is not inferred from arbitrary prose and absent metadata cannot establish independently verified target coverage.",
+    "Path matching is lexical without filesystem/symlink resolution, semantic coverage proof or a hostile-code sandbox; Windows tests are not a physical Windows exam.",
+    "Only static known cd/cwd forms are supported. Ambiguous roots or workspace selection need a clearer receipt.",
+    "Continuity remains current-task history in RAM, not new durable cross-session storage or model training.",
+    "Activation uses idle checks and CAS backups; it is not an atomic external admission fence.",
+    "Passing these bounded fixtures is not a universal intelligence certification or guarantee for every future task."
+  ],
+  "evidence": {
+    "private_directory": "/Users/id/.local/state/harmonika-exams/level17-20261115",
+    "manifest": [
+      {
+        "file": "level17-candidate.json",
+        "sha256": "5c9f27d39e2ff6ab30f1623b59705e1c75f52cf6b77b037348591bd815c29673"
+      },
+      {
+        "file": "level17-attestations.json",
+        "sha256": "dae993d99b38a34cd1e75c694d58f6711ef43febde4754123d57d1232fda0d23"
+      },
+      {
+        "file": "activation.json",
+        "sha256": "8fb30cece9cbacc49b25df65fc3f92ff48a9a3f7570ad85ba1af8dc9188b1e2f"
+      },
+      {
+        "file": "level17-http-canary.json",
+        "sha256": "32e08627dede0e72ad5d9c6b7b274ba341d8590f5d051735700a421bb1217acd"
+      },
+      {
+        "file": "verification.json",
+        "sha256": "298a62c9bde44f354daf9552ac3ec9f7b85aa7e6a2578b909ca06ee187219f8b"
+      },
+      {
+        "file": "expected-baseline.json",
+        "sha256": "3c858fddb51ae738b308dd3b8cd58db99898c1ee9ad49c98185682bfd85a6941"
+      },
+      {
+        "file": "stage-dependencies.json",
+        "sha256": "6028fd9a74fe903d995f8fe89d7bcc3ce90a8ba21e936f27d43cd874deb07433"
+      },
+      {
+        "file": "installed_state.json",
+        "sha256": "03922f792b92efaaaaad1c202990314c60e38811f584357ca37e4141c0c00d8d"
+      },
+      {
+        "file": "level17-release-verification.json",
+        "sha256": "77d4fc86652017ba7ba83f3c9799efce33f0d28107ad3bf67830d31de044e74a"
+      },
+      {
+        "file": "baseline-before.json",
+        "sha256": "12f0b021469910df9a4a3204866b839c3afe9d2c62881a895d1e3d79c7e6735e"
+      },
+      {
+        "file": "baseline-after-installed.json",
+        "sha256": "ce22c6add86231aba5e720c5b8ea3b7919aec30a5a6c845efccd8f0ceb01d0c4"
+      },
+      {
+        "file": "test-summaries.json",
+        "sha256": "0c1d85dd594a6f2722e2686b84f5be49bcbf21402d5a70a2f9fed9f8308d9ab7"
+      },
+      {
+        "file": "review-dispositions.json",
+        "sha256": "bb22fa787ebc7ce26c9a41c44b7a6b47717cf39e0aeb16a252007fb06eb5db33"
+      },
+      {
+        "file": "invalid-plan-attempt.json",
+        "sha256": "9e38169bf5a5987af9c29c7483b4cea5d5875e9fe58a7f5972f7ea90dd92dfdb"
+      },
+      {
+        "file": "plan-guard-rejection.json",
+        "sha256": "fe9cd8b7f320fde8378d3e69eb0635ce892d56ca90b6ebc649f211a702921107"
+      },
+      {
+        "file": "scoped-failed-attempt.json",
+        "sha256": "c04996ea47fe0609067d81ade40c2e27cfa4b8dc5f85a4f0566bf4c852827e75"
+      },
+      {
+        "file": "recorded-response-regression.json",
+        "sha256": "45b6c574c9c68db6ec642c4cc9c813ceed9ef786003bd9262c8430f63c2a8f52"
+      }
+    ]
+  }
+}

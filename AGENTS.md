@@ -335,3 +335,154 @@
 - Fault hanya unit/holder milik lab; sertifikat diuji dengan trust/hostname normal.
   Panduan engine baru diaktifkan setelah verifikasi independen, dengan baseline
   hash aktual dan rollback. Jangan mengklaim training model atau sertifikasi umum.
+
+## Ujian Level13
+- Bedakan receipt `client_reported` dari pemeriksaan operator independen. History,
+  file JSON `passed:true`, phase model dan narasi handoff tidak menerbitkan bukti.
+- `proof-contract.cjs` memakai kontrak operator HMAC pada backend Linux/macOS,
+  direktori privat0700/berkas0600; jangan mengirim kunci issuer ke klien/model.
+  Marker task hanya referensi opaque. Ini bukan autentikasi tenant/IAM publik.
+- Bukti terikat task, owner/proyek/target, attempt, revisi, urutan dan TTL; tes perlu
+  jumlah aktual >0/awaited, artifact perlu readback byte/hash, deploy perlu probe
+  fungsional serta identitas rilis/TLS. HTTP200 saja hanya liveness.
+- Gunakan satu `isFollowup` untuk task anchor dan receipt window. Pemadatan konteks
+  mempertahankan anchor dalam WeakMap request, bukan field JSON yang diklaim klien.
+  Baca ulang bukti pada gate akhir agar revocation/expiry tidak memakai snapshot lama.
+- Kontrak action terdaftar tidak boleh selesai lewat phase answer. Ringkasan akhir
+  dirender dari jenis pemeriksaan terverifikasi; Q&A/plan-only biasa tetap normal.
+  Sesi tanpa kontrak tetap memakai receipt klien dan guard konservatif, bukan bukti
+  server atau jaminan bebas halusinasi. Jangan menaikkan klaim jaminan tersebut.
+- Kontrak invalid/expired adalah error terminal yang perlu refresh operator, bukan
+  alasan retry model berulang atau replay mutasi. Log hanya enum/jumlah/latency.
+- Runner native memakai workspace/XDG baru, native.lock dan assertion terlindungi;
+  Linux khusus ujian memverifikasi lost ACK tepat1commit, checksum, state setelah
+  proses baru dan migrasi. Jangan menyentuh layanan demo Level12 atau host lain.
+- Aktivasi memerlukan hash baseline aktual, canary model pada source yang sama,
+  guard idle, backup/rollback yang mencatat file sebelumnya tidak ada. Rollback
+  tidak boleh menimpa perubahan operator lain. Jangan mengubah binary/brand TUI.
+
+## Ujian Level14: workspace backend
+- `action_evidence.py` menerbitkan kontrak dari actor gateway dan workspace runtime,
+  bukan narasi/marker/receipt klien. Profil default observed_steps belum selesai.
+- Approval job tetap terpisah. Rerun verifier hanya dari eksekusi asli yang disetujui
+  pada revisi sama; pending/interrupted/timeout tidak membuktikan worker berhenti.
+- Assertion awal immutable; count0, skipped, stale, revisi/owner/proyek berbeda
+  atau framework palsu tidak meluluskan tes. Bounded Python bukan jaminan VM umum.
+- Verifier memuat stdlib tepercaya sebelum source. Tolak shadow berupa berkas
+  maupun paket dan transient monkeypatch. Jangan menaruh kunci issuer di snapshot.
+- Log bukti hanya mekanika/hash; jangan cache raw chat, source atau isi bacaan.
+  Payload operasional workspace bukan log bukti dan tidak boleh disebut dataset.
+- Sembilan misi native backend berbeda dari canary TUI lokal. Pertahankan kegagalan
+  awal, perubahan fixture dan provenance operator. Jangan mengaku local client
+  terverifikasi backend atau seluruh persyaratan bisnis terbukti dari hash artifact.
+- Aktivasi hanya coding runtime dengan source CAS, fence admission, backup,
+  idle check dan rollback; jangan restart gateway/billing/core atau sesi pengguna.
+- Instalasi apt pada lab Ubuntu bersama wajib memakai `NEEDRESTART_MODE=l` dan
+  memeriksa unit/PID sebelum-sesudah. Jangan mengizinkan needrestart otomatis
+  me-restart unit lain. Utamakan dependensi/image yang sudah tersedia. Insiden
+  bootstrap Level14 pada demo Level12 tetap dicatat; jangan klaim PID tetap sama.
+
+## Inisiatif planner
+- Untuk perintah kerja langsung yang dikenali `requestMode`, phase answer bukan
+  pengganti tindakan, hasil berbukti atau blocker yang nyata. Pertanyaan, prosa,
+  plan-only, pembatalan dan `tool_choice=none` tetap memiliki jalur normal.
+- Inisiatif mencakup pencarian file relevan, koreksi dan verifikasi dalam scope
+  yang sudah diizinkan; tidak memperluas izin deploy, target atau Data Firewall.
+- Uji native inisiatif memakai satu prompt hasil akhir tanpa nama file/urutan
+  langkah, workspace/state terpisah dan assertion asli terlindungi. Jangan resume
+  tugas pengguna untuk pengujian atau menyimpan credential di argv/laporan.
+
+## Level15
+- Gunakan bukti task-local yang dipertahankan saat pemadatan internal. Jangan
+  mengklaim WeakMap sebagai penyimpanan lintas sesi atau memercayai checkpoint
+  yang dikirim klien sebagai attestation.
+- Job/request/key berada di namespace berbeda; hasil terminal harus menyebut
+  identitas yang cocok, bukan hanya menggemakan argumen query. Read unrelated
+  tidak menghapus ketidakpastian dan key baru tidak membolehkan replay mutasi.
+- Tes mesti positif, current dan relevan setelah edit. Build-only, exit0 tanpa
+  jumlah dan tes lama tidak menjadi bukti tes baru. Legacy tetap client_reported.
+- Scope `allowed_tools` hanya dipercaya dari kontrak operator HMAC dan hanya
+  mempersempit function yang dideklarasikan; path/actor tetap tugas executor.
+- Pisahkan kegagalan evaluator dari bug engine. Simpan kegagalan awal, jelaskan
+  koreksi fixture/policy dan ulang seluruh 18 misi pada hash kandidat yang sama.
+- Worker pembatalan ujian ditutup melalui flag miliknya dan exit aktual, tanpa
+  mematikan sesi/proses lain. Canary CLI dan misi function-calling bukan klaim
+  setara atau sertifikasi universal; jangan mencampur hitungan lulus keduanya.
+
+## Level16
+- Korelasikan setiap anak batch executor sekali terhadap perintah asli. Hasil
+  hilang/asing/duplikat/rusak bukan sukses maupun izin replay mutasi.
+- Rekonsiliasi pending/unknown per identitas anak. Jangan menggabungkan identitas
+  saudara atau memercayai teks JSON source sebagai status executor.
+- Perintah mutasi yang berhasil dalam batch gagal tidak diulang bersama tes;
+  guard konservatif ini tidak menggantikan idempotensi/authorization executor.
+- Pertahankan pemisahan hasil model, efek awal operator, injeksi fault receipt,
+  pemeriksaan independen dan tes CLI. Jangan mengaku tugas dipersistenkan ke DB
+  baru atau receipt lokal sudah tersertifikasi server.
+- Aktivasi hanya source yang lulus seluruh 12 misi dan regresi, dengan baseline
+  hash, idle guard, backup/CAS rollback. Jangan sentuh BGP/core atau sesi pengguna.
+
+## Level17
+- Verifikasi harus cocok dengan target tulis, scope eksplisit dan revisi/attempt.
+  Scope caller hanya mempersempit pemeriksaan; jangan mengaku sebagai otorisasi.
+- Cwd tes leksikal di proyek lain tidak memverifikasi write ini. Nama relatif
+  sama di dua proyek adalah dua kewajiban; revisi baru pada target sama mengganti
+  yang lama. Root filesystem/flag workspace ambigu bukan bukti cakupan proyek.
+- Cocokkan scope pada rekonsiliasi job selain job ID; pertahankan informasi
+  tambahan dari status pending. Jangan mencetak identitas mentah atau isi tool.
+- Bedakan tes normalisasi Windows/UNC dari terminal Windows fisik. Scope legacy
+  tidak diketahui tetap client_reported; tidak menggantikan kontrak HMAC.
+- Injeksi metadata scope salah harus dicatat sebagai fault evaluator di atas
+  pemeriksaan aktual. Jangan menerbitkan bukti operator untuk receipt yang salah.
+- Deploy dependency verification-scope sebelum konsumennya. Aktifkan hanya
+  setelah 12 misi, regresi, pemeriksaan hash dan canary; backup/CAS rollback tetap.
+
+## Level18
+- Status operasi hilang, tidak dikenal atau retrying tetap tidak pasti. Sukses
+  bacaan lain tidak menyelesaikannya; gunakan identitas operasi asli tanpa replay.
+- Receipt dengan partial/truncated/output_limited atau complete=false bukan bukti
+  selesai, termasuk ringkasan tes positif dan status terminal job. Ulang tes hanya
+  jika exit worker sudah diketahui; selain itu rekonsiliasi operasi asli dahulu.
+- Whole-file write tanpa referensi async dapat direkonsiliasi lewat readback penuh
+  target, scope/revisi dan hash isi yang sama. Patch/editor atau shell opaque tidak
+  boleh memakai asumsi ekuivalensi ini. Write yang belum pasti tetap perlu verifikasi.
+- Envelope Cline sinkron query/result/success tetap didukung. Request ID trace
+  saja tidak otomatis berarti job async; string source bukan metadata executor.
+- Riwayat tool yang kehilangan pasangan result tetap ditolak oleh validator
+  transport. Jangan menggantinya dengan receipt sukses buatan atau izin replay.
+- Uji 12 misi fault receipt dan tiga klien native terisolasi pada hash source yang
+  sama. Jangan mengubah scope, assertion, firewall atau sesi pengguna agar lulus.
+
+## Ujian inisiatif dalam perintah
+- Kata cek/periksa/audit/telusuri dengan target teknis perlu tindakan baca yang
+  tersedia; larangan mengubah/deploy tetap membatasi executor. Classifier intent
+  tidak memberi izin baru dan bukan parser bahasa alami yang lengkap.
+- Klaim tes lulus memerlukan receipt tes berkorelasi dengan jumlah positif;
+  pwd/ls, exit0 umum dan teks source menyerupai TAP tidak menjadi bukti tes.
+- Klaim perbaikan berhasil tidak dapat ditopang bacaan atau shell umum saja.
+  Verifikasi setelah write dan scope/revisi tetap wajib pada tugas koreksi.
+- Ujian perintah memakai satu prompt hasil akhir, tanpa coaching/nama file;
+  pisahkan perbaikan, audit read-only dan data bertentangan. Jangan mewajibkan
+  perubahan ketika pengguna hanya meminta audit atau bukti belum cukup.
+- Pertahankan blocker jujur untuk akses/target/izin yang belum tersedia. Keaslian
+  blocker dan kebenaran semantik tidak terbukti dari receipt legacy semata.
+- Audit read-only legacy boleh menjawab temuan tes gagal lewat phase answer
+  setelah ada receipt lengkap, jumlah aktual positif dan referensi temuan yang
+  cocok, tanpa write atau operasi belum pasti. Ini bukan sukses tes/perbaikan;
+  phase complete dan kontrak operator tetap memerlukan bukti sukses aslinya.
+- Runner CLI wajib memakai stdin=DEVNULL bila prompt dikirim lewat argv. Cline
+  dapat menambahkan stdin sebagai konteks, termasuk skrip operator peluncur.
+  Verifikasi effective user request dan ulang ujian bersih jika terkontaminasi;
+  jangan mengubah setting/sesi pengguna atau mencampur skor sebelum/sesudahnya.
+- Ujian binary Harmonika terpasang wajib memakai server standalone, profil/XDG
+  privat dan child PWD yang sama dengan cwd workspace terisolasi. Launcher dapat
+  memilih PWD sebelum process.cwd(); periksa path tool aktual sebelum menilai.
+  Kegagalan isolasi runner dikeluarkan dari skor dan disimpan sebagai insiden.
+- Audit semantik memerlukan peninjauan isi jawaban dan sumber, bukan pencocokan
+  kata kunci saja. Pisahkan hasil mekanis, review Codex dan kontrol buatan operator;
+  ujian sintetis satu sampel tidak membuktikan peringkat/kecerdasan universal.
+- Laporan read-only legacy juga dapat memakai ringkasan tes lengkap berjumlah
+  nol atau error diagnostik node --check/npm check/lint/typecheck yang berkorelasi.
+  Ini temuan yang diterima dari klien, bukan bukti worker berhenti atau tes lulus.
+  Pertahankan maksud perbaikan walau muncul sesudah kata audit/periksa. Jangan
+  memakai jalur laporan untuk menghapus pekerjaan koreksi yang diminta pengguna.

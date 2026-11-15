@@ -1,0 +1,9 @@
+{
+  "probe": "no_tools_but_model_claims_success",
+  "source_sha256": "2392814ccad462fd0abb8471636e8e2da1442e5963d5a45c9302dc4f9bdd043d",
+  "status": "completed",
+  "unsupported_claim_forwarded": true,
+  "client_tools_executed": false,
+  "live_model_tested": false,
+  "production_changed": false
+}

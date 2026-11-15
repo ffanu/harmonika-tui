@@ -1,0 +1,93 @@
+{
+  "recorded_at_utc": "20261115T140115Z",
+  "purpose": "Pre-commit verification of Harmonika autonomous agent engine, tests and documentation",
+  "repository": "git@github.com:ffanu/harmonika-tui.git",
+  "branch": "main",
+  "verified": {
+    "mac_planner": {
+      "tests": 336,
+      "passed": 336,
+      "failed": 0,
+      "skipped": 0
+    },
+    "linux_planner_with_integration": {
+      "tests": 355,
+      "passed": 355,
+      "failed": 0,
+      "skipped": 0
+    },
+    "mac_coding_runtime": {
+      "tests": 203,
+      "failed": 0,
+      "skipped": 10,
+      "passed": 193
+    },
+    "mac_activation_guard_suites": {
+      "tests": 47,
+      "failed": 0
+    },
+    "linux_verification_http_activation": {
+      "python": "3.12.3",
+      "tests": 68,
+      "failed": 0,
+      "skipped": 0
+    },
+    "linux_coding_agent": {
+      "python": "3.12.3",
+      "tests": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    "syntax_validation": {
+      "python_files": 50,
+      "cjs_files": 35,
+      "js_files": 1,
+      "json_files": 22,
+      "failed": 0
+    },
+    "prior_installed_terminal_exam": {
+      "passed_missions": 3,
+      "report": "HARD-AGENT-EXAM-20261115.json"
+    }
+  },
+  "initial_environment_issues_preserved": {
+    "mac_level14": "System Python 3.9 lacks required asyncio.timeout; rerun under supported Linux Python 3.12 passed without changing assertions",
+    "first_linux_stage": "Missing activation helper in disposable upload; original log preserved, added original helper and reran all 68 tests successfully"
+  },
+  "security_review": {
+    "credential_pattern_matches": 0,
+    "private_logs_and_profiles_not_included": true,
+    "only_source_tests_scripts_and_sanitized_reports": true
+  },
+  "planner_sha256": {
+    "receipt-outcome.cjs": "00da86dded05d4844c40e8d5897395d7c424cd7801db9e45320e267aba07319c",
+    "verification-scope.cjs": "1b123305a46a7bb293d1520cf8bcead93e773788a59d6cc4e8defb72b962779b",
+    "task-continuity.cjs": "6f3d3d8fce4948ca4afa215c121b201c6e7f64d11e248e31af0c3435ded39ab4",
+    "decision-recovery.cjs": "17179beebbc8a6e0cce1b672f8e8aa180825000fcdfa7cfe1aef52d4f8b27062",
+    "agent-controller.cjs": "1ec5066985ceaecf9385c342cf45879134cc97e92d905987c90d5ae76f582770",
+    "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+  },
+  "planner_matches_last_verified_release": true,
+  "production_restart_performed": false,
+  "private_verification_directory": "/Users/id/.local/state/harmonika/exams/github-publish-20261115T140115Z",
+  "log_sha256": {
+    "test_level15_activation.py.txt": "b5985bb5d4095da848c1e4e38b9358c2d452a471f0f3fb2fd143db7544944125",
+    "planner-tests.txt": "c14cd0f165ef43afdae1c78d45113243627549bf7755f0b4ccab71f34d605dfb",
+    "test_level13_activation.py.txt": "0aa0b6c928b3ab69f284f984466d979b4b14f170ea185d39a4ae812d6df1eaf6",
+    "test_level16_activation.py.txt": "55c443882838af1a647fbd8c514e974fa1fc55b0f5546ea5d7e5f0d11fdd0998",
+    "test_level17_activation.py.txt": "8aed598952aeef4e742c2d551da0fd3d722cfc8a7f83f6389c2d60f7c9030dc7",
+    "test_level14_all.py.txt": "cea6b16612b9e0eba2bdd1daae0835578a09f467594ddc3e624d08ff5a94792e",
+    "test_cline_responsive_activation.py.txt": "74202dc09a3347400de94f86db7081b0c92ff6270bca74570c143aa53888e576",
+    "linux-level14.txt": "45b23c7748fb29a9f4547b1283e7f3fc240a708645e404f25584530dd0e13648",
+    "test_coding_all.py.txt": "c7abda6d25fd504201e1c6848df7d85ec18155d322925660bdf4aeff23778e04",
+    "linux-planner.txt": "be6ca2bf6c80518cca933a84ad1f8d69f22844ed42d8351b3a425c2e53b199cd",
+    "linux-coding-agent.txt": "b6a161abed43b9a0dba9259cd451b39b20b10425ac13cc14786554c0e6fac7f1",
+    "linux-level14-incomplete-stage.txt": "89098fa2660176f8696b1045a9c4ba4e4077633eb6faf285ee815e8afd9e59ef",
+    "test_level18_activation.py.txt": "75fba743710fa8701bf5b43b3a05777218c0adb981f5677e7360b6f3b6247ae8"
+  },
+  "limits": [
+    "Mac skipped tests are reported separately, not counted as passed",
+    "Platform suites overlap and must not be summed as unique tests",
+    "No new deployment or binary rebuild in this publication"
+  ]
+}

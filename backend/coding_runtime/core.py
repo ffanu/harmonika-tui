@@ -92,6 +92,8 @@ class Runtime:
         self.phase2_enabled=(os.environ.get('HARMONIKA_CODING_PHASE2_ENABLED','false').lower()=='true') if phase2_enabled is None else bool(phase2_enabled)
         self.debug_adapter=debug_adapter;self.debug=None
         self.store=Store(self.root/'state.sqlite');self.sandbox=sandbox;self.files_class=files_class;self.redact=redact
+        from .action_evidence import ActionEvidence
+        self.evidence=ActionEvidence(self)
         self.locks={};self.tasks={};self.protected=set();self.slots=asyncio.Semaphore(2);self.file_slots=asyncio.Semaphore(2);self._caps_lock=asyncio.Lock();self._caps=None;self._caps_at=0
     def enabled_skills(self):return SKILLS if self.phase2_enabled else BASE_SKILLS
     def lock(self,wid):return self.locks.setdefault(wid,asyncio.Lock())
@@ -146,10 +148,11 @@ class Runtime:
             d.execute("DELETE FROM jobs WHERE created<? AND state NOT IN ('queued','running','approval_required')",(now-86400,))
             d.execute("DELETE FROM turns WHERE created<? AND state!='running'",(now-86400,))
         await self.store.run(clean)
-    async def agent_turn(self,a,wid,key,messages,run):
+        await self.evidence.prune()
+    async def agent_turn(self,a,wid,key,messages,run,verification=None):
         await self.workspace(a,wid)
         if type(key) is not str or not re.fullmatch(r'[A-Za-z0-9_-]{1,128}',key):raise CodingError('idempotency_required')
-        digest=fingerprint({'workspace':wid,'messages':messages})
+        digest=fingerprint({'workspace':wid,'messages':messages,**({'verification':verification} if verification is not None else {})})
         def reserve(d):
             d.execute('BEGIN IMMEDIATE')
             old=d.execute('SELECT * FROM turns WHERE actor=? AND idem=?',(a,key)).fetchone()
@@ -172,10 +175,24 @@ class Runtime:
                 cached['steps']=[({'skill_id':latest['skill_id'],**latest} if item.get('id')==latest['id'] else item) for item in cached.get('steps',[])]
                 if latest['status']!='approval_required':
                     cached['status']=latest['status'];cached['text']='Status job terbaru: '+latest['status']+'. Periksa hasil job sebelum melanjutkan.'
+            if not cached.get('proof',{}).get('task_id'):
+                linked=await self.store.run(lambda d:d.execute('SELECT task FROM action_turns WHERE actor=? AND workspace=? AND turn_key=?',(a,wid,key)).fetchone())
+                if linked:cached['proof']={'task_id':linked['task']}
+            if cached.get('proof',{}).get('task_id'):
+                proof=await self.evidence.assess(a,wid,cached['proof']['task_id'],execute_checks=False)
+                cached.update(proof=proof,text=await self.evidence.reply(a,wid,proof),status=proof['status'])
             return cached
         try:
             result=await run()
-            await self.store.run(lambda d:d.execute("UPDATE turns SET state='completed',result=? WHERE actor=? AND idem=?",(json.dumps(result,ensure_ascii=False),a,key)))
+            persisted=json.loads(json.dumps(result,ensure_ascii=False))
+            for step in persisted.get('steps',[]):
+                raw=step.get('result') or {};step['result']={'mechanics_only':True,**{k:raw[k] for k in ('exit_code','workspace_updated','code_executed','result_workspace_version') if k in raw}}
+                step.pop('preview',None)
+            if persisted.get('job'):
+                persisted['job'].pop('preview',None);persisted['job'].pop('result',None)
+            if result.get('status')=='answered':persisted['text']='Jawaban sebelumnya sudah dikirim; isi percakapan tidak disimpan pada cache tugas.';persisted['text_not_persisted']=True
+            if result.get('proof',{}).get('profile')=='read':persisted['text']=self.evidence.render(result['proof']);persisted['read_result_not_persisted']=True
+            await self.store.run(lambda d:d.execute("UPDATE turns SET state='completed',result=? WHERE actor=? AND idem=?",(json.dumps(persisted,ensure_ascii=False),a,key)))
             return result
         except BaseException:
             await self.store.run(lambda d:d.execute("UPDATE turns SET state='interrupted' WHERE actor=? AND idem=?",(a,key)))
@@ -196,8 +213,8 @@ class Runtime:
             available=(x['id'] in FILE_SKILLS or ready) and (x['id'] not in PHASE2_SKILLS or phase2_ready)
             if x['id'] in DEBUG_SKILLS:available=available and debug_ready
             entries.append(dict(x,readiness={'status':'available' if available else 'unavailable','reason':None if available else 'phase2_dependency_unavailable' if x['id'] in PHASE2_SKILLS else 'sandbox_unavailable'}))
-        return {'schema_version':1,'ready':ready,'skills':entries,'sandbox':c,'features':{'phase2':phase2_ready,'debug_sessions':debug_ready},
-          'limits':{'workspace_bytes':16*1024*1024,'file_bytes':512*1024,'files':256,'workspaces_per_token':3,'executions_per_hour':30,'operations_per_minute':120,'active_per_token':1,'active_global':2,'job_seconds_max':120,'agent_steps':8,'debug_session_seconds_max':300,'debug_idle_seconds':60,'debug_active_global':1},
+        return {'schema_version':1,'ready':ready,'skills':entries,'sandbox':c,'features':{'phase2':phase2_ready,'debug_sessions':debug_ready,'action_evidence':True,'verification_profiles':['observed_steps','read','artifact','tests','migration','conversation','plan_only'],'independent_test_verifier':'bounded_python_unittest','local_client_receipts_trusted':False},
+          'limits':{'workspace_bytes':16*1024*1024,'file_bytes':512*1024,'files':256,'workspaces_per_token':3,'executions_per_hour':30,'operations_per_minute':120,'active_per_token':1,'active_global':2,'admitted_global':4,'job_seconds_max':120,'agent_steps':8,'debug_session_seconds_max':300,'debug_idle_seconds':60,'debug_active_global':1},
           'offline_packages':{'python':{'humanize':['4.12.2']},'node':{'decimal.js':['10.5.0']}} if phase2_ready else {},
           'permissions':{'workspace_only':True,'execution_approval_required':True,'git_readonly_approval_required':False,'git_commit_approval_required':True,'network':False,'host_shell':False,'host_filesystem':False}}
     async def job(self,a,jid):
@@ -430,6 +447,7 @@ class Runtime:
                     if exported is not None and exported!=snap and not updated:result['changes_discarded']=True
                     final=await self.job(a,jid);state='stopped' if final['cancel'] else result.get('status','failed')
                     if state not in ('completed','failed','timeout','stopped'):state='failed'
+                    result['result_workspace_version']=(await self.workspace(a,j['workspace']))['version']
                     await self.finish(jid,state,result)
         except asyncio.TimeoutError:
             await self.sandbox.stop(jid);await self.finish(jid,'timeout',error='execution_timeout')

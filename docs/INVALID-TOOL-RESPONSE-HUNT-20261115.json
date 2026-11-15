@@ -1,0 +1,1695 @@
+{
+  "name": "Perbaikan invalid_tool_response pada laporan diagnostik sah",
+  "status": "active_verified",
+  "verified_at": "2026-11-15T12:48:16.732019+00:00",
+  "roles": {
+    "Codex": "native reproduction, implementation, grading and activation",
+    "OpenCode": "read-only review",
+    "Claude": "not involved"
+  },
+  "genuine_native_failures": [
+    {
+      "case": "failed_test_report",
+      "result": {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "failed_test_report",
+        "prompt": "Jalankan tes proyek ini dan laporkan hasilnya. Jangan ubah file apa pun.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 90062,
+        "client_exit": 1,
+        "independent_test_exit": 1,
+        "two_tests_passed": false,
+        "expected_tests": 2,
+        "expected_tests_passed": false,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 1
+        },
+        "session_statuses": [
+          "failed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": false,
+        "read_only_files_unchanged": true,
+        "executed_test": true,
+        "both_records_inspected": false,
+        "contradiction_reported": false,
+        "negative_outcome_reported": false,
+        "zero_count_reported": false,
+        "affirmative_unsupported_success_claim": false,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      "error": "invalid_tool_response",
+      "original_stdout_sha256": "d9b8f78ac495fe3f1024c3b320ab3a6a962b0735ce054a2b04cacbcc77f83943"
+    },
+    {
+      "case": "syntax_report",
+      "result": {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "syntax_report",
+        "prompt": "Periksa sintaks proyek ini dan laporkan error yang ditemukan. Jangan ubah file apa pun.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 106530,
+        "client_exit": 1,
+        "independent_test_exit": 1,
+        "two_tests_passed": false,
+        "expected_tests": 0,
+        "expected_tests_passed": false,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 1
+        },
+        "session_statuses": [
+          "failed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": false,
+        "read_only_files_unchanged": true,
+        "executed_test": false,
+        "both_records_inspected": false,
+        "contradiction_reported": false,
+        "negative_outcome_reported": false,
+        "zero_count_reported": false,
+        "affirmative_unsupported_success_claim": false,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      "error": "invalid_tool_response",
+      "original_stdout_sha256": "6fa6770813a2a4699bb561073c36ab59ba67647b721b3501b802c67671e6ee5c"
+    },
+    {
+      "case": "zero_tests_report",
+      "result": {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "zero_tests_report",
+        "prompt": "Jalankan tes proyek ini dan laporkan jumlah tes yang ditemukan. Jangan ubah file apa pun.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 87746,
+        "client_exit": 1,
+        "independent_test_exit": 0,
+        "two_tests_passed": false,
+        "expected_tests": 0,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 1
+        },
+        "session_statuses": [
+          "failed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": false,
+        "read_only_files_unchanged": true,
+        "executed_test": true,
+        "both_records_inspected": false,
+        "contradiction_reported": false,
+        "negative_outcome_reported": false,
+        "zero_count_reported": false,
+        "affirmative_unsupported_success_claim": false,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      "error": "invalid_tool_response",
+      "original_stdout_sha256": "492a184e123043cd86dc15ee30dbc2e6ac808708bab679f47d390ae42c0e0563"
+    }
+  ],
+  "native_after": {
+    "planned": 5,
+    "passed": 5,
+    "results": [
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "failed_test_report",
+        "prompt": "Jalankan tes proyek ini dan laporkan hasilnya. Jangan ubah file apa pun.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 34108,
+        "client_exit": 0,
+        "independent_test_exit": 1,
+        "two_tests_passed": false,
+        "expected_tests": 2,
+        "expected_tests_passed": false,
+        "used_direct_node_test": true,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "read_only_files_unchanged": true,
+        "executed_test": true,
+        "both_records_inspected": false,
+        "contradiction_reported": false,
+        "negative_outcome_reported": true,
+        "zero_count_reported": true,
+        "executed_syntax": false,
+        "affirmative_unsupported_success_claim": false,
+        "read_only_tree_unchanged": true,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "syntax_report",
+        "prompt": "Periksa sintaks proyek ini dan laporkan error yang ditemukan. Jangan ubah file apa pun.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 38948,
+        "client_exit": 0,
+        "independent_test_exit": 1,
+        "two_tests_passed": false,
+        "expected_tests": 0,
+        "expected_tests_passed": false,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 2
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "read_only_files_unchanged": true,
+        "executed_test": false,
+        "both_records_inspected": false,
+        "contradiction_reported": false,
+        "negative_outcome_reported": true,
+        "zero_count_reported": true,
+        "executed_syntax": true,
+        "affirmative_unsupported_success_claim": false,
+        "read_only_tree_unchanged": true,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "zero_tests_report",
+        "prompt": "Jalankan tes proyek ini dan laporkan jumlah tes yang ditemukan. Jangan ubah file apa pun.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 39562,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": false,
+        "expected_tests": 0,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "read_only_files_unchanged": true,
+        "executed_test": true,
+        "both_records_inspected": false,
+        "contradiction_reported": false,
+        "negative_outcome_reported": true,
+        "zero_count_reported": true,
+        "executed_syntax": false,
+        "affirmative_unsupported_success_claim": false,
+        "read_only_tree_unchanged": true,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "arithmetic",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 57586,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": true,
+        "expected_tests": 2,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 2,
+          "run_commands": 2,
+          "editor": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "audit_read_only",
+        "prompt": "Audit kenapa perhitungan total di proyek ini salah. Jangan ubah file apa pun; buktikan dengan pemeriksaan yang tersedia.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "stdin_isolated": true,
+        "duration_ms": 37862,
+        "client_exit": 0,
+        "independent_test_exit": 1,
+        "two_tests_passed": false,
+        "expected_tests": 2,
+        "expected_tests_passed": false,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "run_commands": 2,
+          "read_files": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "read_only_files_unchanged": true,
+        "executed_test": true,
+        "observed_quantity_defect_reported": true,
+        "failure_or_unfixed_reported": true,
+        "affirmative_unsupported_success_claim": false,
+        "read_only_tree_unchanged": true,
+        "effective_request_contains_initial_prompt": true,
+        "inherited_launcher_detected": false
+      }
+    ],
+    "answers_reviewed": {
+      "all_accepted": true,
+      "synthetic_only": true,
+      "cases": {
+        "failed_test_report": {
+          "accepted": true,
+          "reviewer": "Codex",
+          "response_sha256": "95c40f8d260d9cc76b1e574460417b4d7e86b1b2bdb7ebb2169cd9b8b6268d1a",
+          "finding": "Actual test-only execution reports 2 tests, 1 pass/1 failure and 32 versus expected 64. Final answer reports the failed check without claiming repair; source/test files and file set unchanged."
+        },
+        "syntax_report": {
+          "accepted": true,
+          "reviewer": "Codex",
+          "response_sha256": "588d19ff2900bb13155692a6fb46b0c31c3412dbc0093293b4920caf49ce75f2",
+          "finding": "Actual npm run check invokes node --check on broken.cjs; both fixture and independent check yield SyntaxError at end of input. Final source/line statement matches unchanged file."
+        },
+        "zero_tests_report": {
+          "accepted": true,
+          "reviewer": "Codex",
+          "response_sha256": "193b5bd27664dce916db26b36fd4eabb6e937f98cca7deca228805f193226402",
+          "finding": "Actual npm test discovers 0 tests and 0 suites. Final answer explicitly says this is not evidence that tests passed, notes absent process exit metadata, and leaves original file set unchanged."
+        },
+        "arithmetic": {
+          "accepted": true,
+          "reviewer": "Codex",
+          "response_sha256": "ad55329ccc10f5945212a4196cff747a3bb8651315fc52dfb25a6e66df84519c",
+          "finding": "Actual code now multiplies price by qty; independent original 2-test suite passes with assertions unchanged. Final answer reports 2 passes and correctly distinguishes absent executor exit-code metadata."
+        },
+        "audit_read_only": {
+          "accepted": true,
+          "reviewer": "Codex",
+          "response_sha256": "ed70964d5fe16abac594452a6b81caa84f07139f1556c25ead7807a908a53901",
+          "finding": "Actual source ignores qty. Final answer accurately reports 32 versus 64 and 2 tests/1 failure; user requested diagnosis only, and original files/file set remain unchanged."
+        }
+      }
+    }
+  },
+  "root_cause": "The controller required successful-completion evidence for terminal phases even when the authorized outcome was an honest read-only report of failed checks or zero tests. The audit answer exception excluded reporting verbs and syntax-check receipts; recovery repeated the positive-count requirement.",
+  "changes": [
+    "Allow legacy phase=answer for correlated complete findings in explicit read-only reporting tasks.",
+    "Recognize failed node --check/npm check diagnostics as observed findings without treating them as test success, worker termination or mutation authorization.",
+    "Report a complete zero-test summary honestly; never fabricate tests or claim passing checks from zero counts.",
+    "Recovery instructions distinguish reporting findings from proving successful completion.",
+    "Repair intent anywhere in the command is preserved; negative repair wording and supported read-only phrases are handled separately."
+  ],
+  "preserved": [
+    "partial/pending/unknown operation and batch correlation protections",
+    "positive-test and post-write verification gates",
+    "operator-signed proof requirements",
+    "Data Firewall and executor authorization"
+  ],
+  "guard_before_after": {
+    "legitimate_reports_rejected_before": 3,
+    "accepted_by_installed_engine": 3,
+    "synthetic_checker_only": true,
+    "model_called": false,
+    "tools_executed": false
+  },
+  "tests": {
+    "local-tests": {
+      "tests": 336,
+      "pass": 336,
+      "fail": 0,
+      "skipped": 0,
+      "log_sha256": "26df0d2eae04f1b4f6f88999433bd729d4c2b352a54bb8b41b88da6a1208fd17"
+    },
+    "linux-tests": {
+      "tests": 355,
+      "pass": 355,
+      "fail": 0,
+      "skipped": 0,
+      "log_sha256": "875bf67dee82a44c9fbd1c88736aef8991358684a3078fc7c5d2d5cb142591e4"
+    },
+    "activation_guards": {
+      "passed": 9,
+      "failed": 0,
+      "log_sha256": "75fba743710fa8701bf5b43b3a05777218c0adb981f5677e7360b6f3b6247ae8"
+    },
+    "mac_linux_counts_overlap_do_not_add": true
+  },
+  "same_source_model_regressions": {
+    "level": 18,
+    "synthetic_only": true,
+    "production": false,
+    "model_decisions": true,
+    "independent_operator_proof": true,
+    "passed": true,
+    "passed_count": 12,
+    "total": 12,
+    "rows": [
+      {
+        "id": "P01",
+        "case": "arithmetic",
+        "receipt_fault": "read_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 54582,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5525,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5290,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7087,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 5241,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 5738,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 6756,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7052,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 5746,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 5982,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "P02",
+        "case": "chained_faults",
+        "receipt_fault": "read_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 75440,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5687,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5058,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6505,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 5681,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7065,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7332,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7795,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7682,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 7231,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 8582,
+            "tool_count": 1
+          },
+          {
+            "turn": 10,
+            "status": 200,
+            "latency_ms": 6638,
+            "tool_count": 0
+          }
+        ],
+        "edits": 2,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "P03",
+        "case": "normalization",
+        "receipt_fault": "read_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 62161,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5001,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5457,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 5040,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7798,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7245,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 9697,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7154,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8593,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 6005,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "P04",
+        "case": "nested_config",
+        "receipt_fault": "read_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 56056,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6401,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5665,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6112,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 5365,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6974,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8006,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6472,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 5502,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 5394,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "P05",
+        "case": "new_function",
+        "receipt_fault": "write_partial",
+        "receipt_faults": 1,
+        "write_calls": 1,
+        "write_replays": 0,
+        "write_readbacks": 1,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 59787,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6647,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6061,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7244,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7656,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6906,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7673,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 4998,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 5240,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 7192,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "P06",
+        "case": "resume_compaction",
+        "receipt_fault": "read_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 66420,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5383,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6009,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 8395,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7077,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 5480,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 5291,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 8090,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8321,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 6549,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 5654,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 1,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "U01",
+        "case": "arithmetic",
+        "receipt_fault": "test_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 63645,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 4720,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5901,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6984,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 10707,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8205,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7443,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6536,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 6982,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 5913,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "U02",
+        "case": "chained_faults",
+        "receipt_fault": "test_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 77503,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6224,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5974,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6295,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7827,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7124,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 9057,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6380,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 6668,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 6542,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 8743,
+            "tool_count": 1
+          },
+          {
+            "turn": 10,
+            "status": 200,
+            "latency_ms": 6411,
+            "tool_count": 0
+          }
+        ],
+        "edits": 2,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "U03",
+        "case": "normalization",
+        "receipt_fault": "test_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 57017,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5519,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 4819,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6520,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6167,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6689,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7049,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7068,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 6600,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 6330,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "U04",
+        "case": "nested_config",
+        "receipt_fault": "test_partial",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": false,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 60610,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 5585,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5866,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6830,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6584,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8560,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 5534,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 5472,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 9928,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 5990,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 3,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "U05",
+        "case": "lost_ack",
+        "receipt_fault": "unknown_job_state",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": true,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 34045,
+        "verified": [
+          "job",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7615,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7079,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6730,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6536,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6015,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 1,
+        "total_submit_effects": 1,
+        "lookup_calls": 2,
+        "committed_effects": 1,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "U06",
+        "case": "cancel_ack",
+        "receipt_fault": "partial_cancel",
+        "receipt_faults": 1,
+        "write_calls": 0,
+        "write_replays": 0,
+        "write_readbacks": 0,
+        "seeded_unknown_state": true,
+        "batch_fault": null,
+        "seeded_actual_failed_test": false,
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 28884,
+        "verified": [
+          "read"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6783,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7793,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 8470,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 5835,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0,
+        "worker_physically_stopped": true
+      }
+    ],
+    "source_sha256": {
+      "agent-controller.cjs": "1ec5066985ceaecf9385c342cf45879134cc97e92d905987c90d5ae76f582770",
+      "task-continuity.cjs": "6f3d3d8fce4948ca4afa215c121b201c6e7f64d11e248e31af0c3435ded39ab4",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473",
+      "decision-recovery.cjs": "17179beebbc8a6e0cce1b672f8e8aa180825000fcdfa7cfe1aef52d4f8b27062",
+      "verification-scope.cjs": "1b123305a46a7bb293d1520cf8bcead93e773788a59d6cc4e8defb72b962779b",
+      "receipt-outcome.cjs": "00da86dded05d4844c40e8d5897395d7c424cd7801db9e45320e267aba07319c"
+    }
+  },
+  "http_postcheck": {
+    "actual_loopback_http": true,
+    "tools_executed": false,
+    "signed_scope": true,
+    "denied_scope": [
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      }
+    ],
+    "subsequent_valid_status": 200,
+    "subsequent_valid_text": true,
+    "missing_result_status": 400,
+    "missing_result_code": "invalid_tool_history",
+    "unauthenticated_status": 403,
+    "passed": true
+  },
+  "activation": {
+    "status": "active_verified",
+    "candidate_sha256": {
+      "receipt-outcome.cjs": "00da86dded05d4844c40e8d5897395d7c424cd7801db9e45320e267aba07319c",
+      "verification-scope.cjs": "1b123305a46a7bb293d1520cf8bcead93e773788a59d6cc4e8defb72b962779b",
+      "task-continuity.cjs": "6f3d3d8fce4948ca4afa215c121b201c6e7f64d11e248e31af0c3435ded39ab4",
+      "decision-recovery.cjs": "17179beebbc8a6e0cce1b672f8e8aa180825000fcdfa7cfe1aef52d4f8b27062",
+      "agent-controller.cjs": "1ec5066985ceaecf9385c342cf45879134cc97e92d905987c90d5ae76f582770",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "backup": "/var/backups/harmonika-level18/20261115T124504Z",
+    "prior_absent": [],
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true,
+    "verified_at": "2026-11-15T12:48:16.732019+00:00",
+    "source_sha256": {
+      "receipt-outcome.cjs": "00da86dded05d4844c40e8d5897395d7c424cd7801db9e45320e267aba07319c",
+      "verification-scope.cjs": "1b123305a46a7bb293d1520cf8bcead93e773788a59d6cc4e8defb72b962779b",
+      "task-continuity.cjs": "6f3d3d8fce4948ca4afa215c121b201c6e7f64d11e248e31af0c3435ded39ab4",
+      "decision-recovery.cjs": "17179beebbc8a6e0cce1b672f8e8aa180825000fcdfa7cfe1aef52d4f8b27062",
+      "agent-controller.cjs": "1ec5066985ceaecf9385c342cf45879134cc97e92d905987c90d5ae76f582770",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "service_pids": {
+      "harmonika-ai": 2061021,
+      "harmonika-web-chat-live": 1431266,
+      "harmonika-shared-core": 3895945,
+      "harmonika-coding-runtime": 1719961
+    },
+    "native_postchecks_passed": 5,
+    "regression_missions_passed": 12
+  },
+  "review": {
+    "reviewer": "OpenCode",
+    "read_only": true,
+    "claude_involved": false,
+    "log_sha256": "1caf055b47c85cb552be7a5d3db6866239ad447713107162ee7fa8063dd27d18",
+    "findings_addressed": [
+      "report verb/readonly phrase gaps",
+      "non-test syntax-check findings",
+      "zero-test summary reporting",
+      "repair request cannot be erased by read-only-report exception"
+    ],
+    "boundary": "Non-test reporting restricted to recognized node/npm diagnostics, not arbitrary failed commands."
+  },
+  "scope": {
+    "only_service_restarted": "harmonika-ai",
+    "bgp_core_vyos_billing_cs_rtx_modified": false,
+    "existing_user_sessions_or_settings_changed": false,
+    "github_commit_or_push": false,
+    "synthetic_fixtures_only": true
+  },
+  "privacy": {
+    "raw_customer_data_or_user_history_used": false,
+    "raw_synthetic_transcripts_published": false,
+    "temporary_provider_references_removed": true,
+    "evidence": "mechanical counts/enums/hashes only"
+  },
+  "limits": [
+    "Fix verified for these reproducible diagnostic/reporting cases; not a guarantee against every future invalid_tool_response.",
+    "Legacy receipts remain client_reported; observed diagnostic errors do not prove process termination or issue independent attestation.",
+    "Command/intent classification is bounded and does not authorize shell operations or parse every natural-language phrasing.",
+    "Native fixtures rely on trusted local clients and protected-file hashes, not a hostile-code sandbox.",
+    "Model weights and cross-session databases were not trained or changed."
+  ],
+  "evidence": {
+    "private_directory": "/Users/id/.local/state/harmonika-exams/invalid-tool-response-20261115",
+    "manifest": [
+      {
+        "file": "level18-candidate.json",
+        "sha256": "a9a917eb57df35553f1e252ca139ea40a156ecf3c70407d84b1473d65f8d32b9"
+      },
+      {
+        "file": "level18-attestations.json",
+        "sha256": "60de5cb45d93928f36c0356d22481002a94081bde4000bac7526755eb8e39f88"
+      },
+      {
+        "file": "activation.json",
+        "sha256": "6bb6eee8810d48bce90946b0205948afef68621d7cf6e509c3a631c753c46497"
+      },
+      {
+        "file": "level18-http-canary.json",
+        "sha256": "9a77f07c4b3f1ddffc3d4ec402667b92234c5e300fc3d2a24d45f224340ebc47"
+      },
+      {
+        "file": "verification.json",
+        "sha256": "c0b171ce20d93ff663c93d58dfe2cd1e96f7ce636121f36eb6ff8bf6ad0fde6e"
+      },
+      {
+        "file": "expected-baseline.json",
+        "sha256": "00e68bc75419d0267bf9dbc9437bc0533c37e1dab3aee1aff7e5f6148cbefa52"
+      },
+      {
+        "file": "release.json",
+        "sha256": "d8088d2c61f0826023e42c5da37643a67306b50a8f652e45d9361051347b440a"
+      },
+      {
+        "file": "native-before.json",
+        "sha256": "3d861e5a38c074464b6f5658b91fd8f4a8c09b51a125f2b8dea335bcb5928a44"
+      },
+      {
+        "file": "native-after.json",
+        "sha256": "4a6a7e16f862683925aa4606b4dc3fb23c603aac1b275027d6dd45e2953ff635"
+      },
+      {
+        "file": "answer-review.json",
+        "sha256": "790a5ac40d90edc503d5205ad3a33d39efb454560f061d321d0471523617ca1c"
+      },
+      {
+        "file": "before-guard.json",
+        "sha256": "4abedf9a831e6b26aecaaa080585a2880ead08c3ebbe3f31529c5c29491b9807"
+      },
+      {
+        "file": "installed-guard.json",
+        "sha256": "7187dc8f5e040e9c54bda1fbf02a14f5049153e0621164153088af32ce37ae9a"
+      },
+      {
+        "file": "tests.json",
+        "sha256": "afc0964dfc6933672552162350ac3d817b3132992c8c75d41a46f00e6924f28b"
+      },
+      {
+        "file": "local-tests.txt",
+        "sha256": "26df0d2eae04f1b4f6f88999433bd729d4c2b352a54bb8b41b88da6a1208fd17"
+      },
+      {
+        "file": "linux-tests.txt",
+        "sha256": "875bf67dee82a44c9fbd1c88736aef8991358684a3078fc7c5d2d5cb142591e4"
+      },
+      {
+        "file": "activation-guards.txt",
+        "sha256": "75fba743710fa8701bf5b43b3a05777218c0adb981f5677e7360b6f3b6247ae8"
+      },
+      {
+        "file": "before-failed_test_report-stdout.jsonl",
+        "sha256": "d9b8f78ac495fe3f1024c3b320ab3a6a962b0735ce054a2b04cacbcc77f83943"
+      },
+      {
+        "file": "before-syntax_report-stdout.jsonl",
+        "sha256": "6fa6770813a2a4699bb561073c36ab59ba67647b721b3501b802c67671e6ee5c"
+      },
+      {
+        "file": "before-zero_tests_report-stdout.jsonl",
+        "sha256": "492a184e123043cd86dc15ee30dbc2e6ac808708bab679f47d390ae42c0e0563"
+      },
+      {
+        "file": "after-failed_test_report-stdout.jsonl",
+        "sha256": "4acaf4f26b6d3cc1a2403dd1a0f643478bba70677333a7657f8b241ef45c3f46"
+      },
+      {
+        "file": "after-syntax_report-stdout.jsonl",
+        "sha256": "f023f30a34cd848a702a97ab8e6e4c5ee2c5bef07c794e7e2b1e1c2a230c0a8a"
+      },
+      {
+        "file": "after-zero_tests_report-stdout.jsonl",
+        "sha256": "d731bff480343c798ac41356ce9a7b0fb3f4b5932d1051cab7605b49fc3a2090"
+      }
+    ]
+  }
+}

@@ -15,7 +15,7 @@ function protocolFixture(value){
   return {...value,task_state:{phase:value.tool_calls?.length?'execute':'answer',remaining:value.tool_calls?.length?['verify actual result']:[],evidence_call_ids:[],next_step:''}};
 }
 async function run(outputs, options = {}) {
-  const logs = [], schemas = [], prompts = [], longCalls = [], response = {chunks:[],status:null};
+  const logs = [], schemas = [], prompts = [], longCalls = [], timers = [], response = {chunks:[],status:null};
   let spawns = 0, signals = 0, clock = 0;
   const realRequire = createRequire(base);
   const processStub = {spawn(_bin, argv) {
@@ -44,17 +44,26 @@ async function run(outputs, options = {}) {
       return options.deadlineProbe?{...recovery,chooseDecision:(plan,data,log)=>recovery.chooseDecision(plan,data,log,async ms=>{clock+=ms;},{now:()=>clock})}:recovery;
     }
     if (name === './secret-firewall.cjs') return require('../backend/planner/secret-firewall.cjs');
-    if (name === './agent-controller.cjs') return require('../backend/planner/agent-controller.cjs');
+    if (name === './agent-controller.cjs') {
+      const controller=require('../backend/planner/agent-controller.cjs');
+      return options.scopeAdmissionProbe?{...controller,extendSchema(schema,data){if(options.rejectScope)throw Error('tool_scope_denied');return controller.extendSchema(schema,data);}}:controller;
+    }
     if (name === './long-decision.cjs') {
       const transport = require('../backend/planner/long-decision.cjs');
       return options.longOutput === undefined ? transport : {...transport,async run(input){longCalls.push(input);if(options.longHold)throw Error('tool_engine_timeout');input.onClose?.();if(options.longOutputLimitOnce&&longCalls.length===1)throw Object.assign(Error('tool_engine_output_limit'),{decisionUnexecuted:true,transportClosed:true});if(options.longMalformedAfterOverflow&&longCalls.length===2)return 'broken';if(options.longTimeoutOnce&&longCalls.length===1){if(options.deadlineProbe)clock=180400;throw Object.assign(Error('tool_engine_timeout'),{decisionUnexecuted:true,transportClosed:true});}return JSON.stringify(protocolFixture(options.longOutput));}};
     }
     return realRequire(name);
-  }, console:{log:line => logs.push(JSON.parse(line)),warn:line => logs.push(JSON.parse(line))},setTimeout:options.hangShort?((fn,ms,...args)=>setTimeout(fn,ms===60000?5:ms,...args)):setTimeout,clearTimeout,Buffer,process:{kill(){signals++;throw Error('unexpected_signal');}}};
+  }, console:{log:line => logs.push(JSON.parse(line)),warn:line => logs.push(JSON.parse(line))},setTimeout:(fn,ms,...args)=>{timers.push(ms);return setTimeout(fn,options.hangShort&&ms===60000?5:ms,...args);},clearTimeout,Buffer,process:{kill(){signals++;throw Error('unexpected_signal');}}};
   vm.runInNewContext(fs.readFileSync(candidate,'utf8'), scope, {filename:base});
   const req = {headers:{'x-harmonika-agent-secret':'synthetic-agent-secret'},socket:{remoteAddress:'127.0.0.1'}};
   const res = {writeHead(status){response.status=status;},write(text){response.chunks.push(text);},end(text){if(text)response.chunks.push(text);}};
   const data = {messages:[{role:'user',content:'Synthetic fixture: check a private reference without exposing secrets.'}], tools,parallel_tool_calls:false,stream:false,...options};
+  if(options.scopeAdmissionProbe){
+    const statuses=[];
+    for(let i=0;i<12;i++){await module.exports.handle(req,res,data);statuses.push(response.status);}
+    options.rejectScope=false;response.chunks=[];await module.exports.handle(req,res,data);
+    return {statuses,status:response.status,spawns};
+  }
   if(options.admissionProbe){
     async function invoke(){let status,body='';await module.exports.handle(req,{writeHead(s){status=s;},write(s){body+=s;},end(s){if(s)body+=s;}},data);return {status,json:JSON.parse(body)};}
     const initial=await Promise.all(Array.from({length:8},()=>invoke()));
@@ -66,9 +75,13 @@ async function run(outputs, options = {}) {
   }
   await module.exports.handle(req, res, data);
   const body = response.chunks.join('');
-  return {status:response.status,body,json:data.stream?null:JSON.parse(body),logs,schemas,prompts,spawns,longCalls,signals};
+  return {status:response.status,body,json:data.stream?null:JSON.parse(body),logs,schemas,prompts,spawns,longCalls,signals,timers};
 }
 const call = command => ({name:'run_commands',arguments:JSON.stringify({commands:[command]})});
+test('repeated scope/schema rejections do not consume model admission slots', {skip:!candidate},async()=>{
+ const out=await run([{content:'A valid next answer.',tool_calls:[]}],{scopeAdmissionProbe:true,rejectScope:true});
+ assert.deepEqual(out.statuses,Array(12).fill(403));assert.equal(out.status,200);assert.equal(out.spawns,1);
+});
 test('real planner repairs invalid outer JSON and emits one valid completion', {skip:!candidate}, async () => {
   const out = await run(['broken', {content:'Reference is missing; configure it privately.',tool_calls:[]}]);
   assert.equal(out.status,200);assert.equal(out.spawns,2);
@@ -123,6 +136,23 @@ test('SSE starts only after a valid decision and contains a single repaired call
   const frames=out.body.split('\n\n').filter(x => x.startsWith('data: {')).map(x => JSON.parse(x.slice(6)));
   assert.equal(frames.filter(x => x.choices[0].delta.tool_calls).length,1);
   assert.match(out.body,/data: \[DONE\]/);
+});
+test('validated SSE tool progress has no cosmetic typing delay before client execution', {skip:!candidate}, async()=>{
+ const content='Synthetic current finding. '.repeat(45);
+ const out=await run([{content,tool_calls:[call('printf fixture')]}],{stream:true});
+ assert.equal(out.status,200);assert.ok(!out.timers.some(ms=>[12,16,22].includes(ms)));
+ const frames=out.body.split('\n\n').filter(x=>x.startsWith('data: {')).map(x=>JSON.parse(x.slice(6)));
+ assert.equal(frames.map(x=>x.choices[0].delta.content||'').join(''),content);
+ assert.equal(frames.filter(x=>x.choices[0].delta.tool_calls).length,1);
+ assert.ok(out.body.includes('data: [DONE]'));
+});
+test('interactive source-writer protocol uses the 60s decision cap without removing evidence', {skip:!candidate}, async()=>{
+ const tools=['read_files','run_commands','editor'].map(name=>({type:'function',function:{name,parameters:{type:'object',properties:{}}}}));
+ const messages=[{role:'user',content:'Jelaskan fungsi DNS tanpa eksekusi. '+('synthetic evidence '.repeat(70000))}];
+ const out=await run([],{tools,messages,longOutput:{content:'DNS menerjemahkan nama domain.',tool_calls:[]}});
+ assert.equal(out.status,200);assert.equal(out.longCalls.length,1);assert.equal(out.longCalls[0].timeoutMs,60000);
+ assert.deepEqual(JSON.parse(out.longCalls[0].payload).messages,messages);
+ assert.ok(out.logs.some(e=>e.event==='internal_tool_budget'&&e.request_ms===90000));
 });
 test('large intact client call/result history routes before spawning CLI exec', {skip:!candidate}, async () => {
   const evidence='synthetic evidence '.repeat(65000);

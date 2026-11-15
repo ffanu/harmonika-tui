@@ -1,0 +1,731 @@
+{
+  "level": 14,
+  "name": "Bukti otomatis workspace backend dan pemeriksaan independen",
+  "status": "completed_with_documented_scope_and_bootstrap_incident",
+  "created_at": "2026-11-15T06:14:31.171958+00:00",
+  "roles": {
+    "Codex": "implementation, independent grading, test supervision and activation",
+    "OpenCode": "read-only design, implementation and targeted trust-boundary reviews",
+    "Claude": "not involved"
+  },
+  "scope": {
+    "backend_native_workspace": true,
+    "public_api": "https://chat.harmonika.id/v1/coding",
+    "tui_binary_or_brand_changed": false,
+    "local_tui_provenance": "client_reported; independent local examiner canary only",
+    "new_model_training": false,
+    "universal_hallucination_free_guarantee": false
+  },
+  "baseline": {
+    "probe": "no_tools_but_model_claims_success",
+    "source_sha256": "2392814ccad462fd0abb8471636e8e2da1442e5963d5a45c9302dc4f9bdd043d",
+    "status": "completed",
+    "unsupported_claim_forwarded": true,
+    "client_tools_executed": false,
+    "live_model_tested": false,
+    "production_changed": false
+  },
+  "regressions": {
+    "final-level14-linux-tests": {
+      "ran": 68,
+      "passed": 68,
+      "skipped": 0,
+      "failed": 0,
+      "sha256": "b759594e214e6b4bc729330b5fe0ff2887f6ced787c144c6ffa2aa2085d5d54d"
+    },
+    "final-coding-regressions": {
+      "ran": 203,
+      "passed": 203,
+      "skipped": 0,
+      "failed": 0,
+      "sha256": "f06333a81c1913808be7518c5f9895daa775df10fed93228242128170954902e"
+    },
+    "final-phase2-regressions": {
+      "ran": 175,
+      "passed": 111,
+      "skipped": 64,
+      "failed": 0,
+      "sha256": "97acf9e2c010490f8c94940157e5eb66f5cffb66246ef3544b274e54a93744d9"
+    }
+  },
+  "adversarial_contract_cases": {
+    "planned": 36,
+    "passed": 36,
+    "failed": 0,
+    "scope": "synthetic unit mechanics; not 36 live-model missions"
+  },
+  "native_missions": {
+    "planned": 9,
+    "passed": 9,
+    "failed": 0,
+    "subject": "actual backend agent loop, live planner and Docker on the dedicated lab",
+    "operator_role": "seed immutable synthetic fixtures, approve owned execution and grade actual artifacts; model cannot approve itself",
+    "results": [
+      {
+        "id": "N01",
+        "level": "low",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 33.6,
+        "turns": 2,
+        "operator_approvals": 0,
+        "original_assertions_sha256": {},
+        "extra": {
+          "missing_file_honest": true
+        },
+        "result_file": "N01-attempt6.json",
+        "result_sha256": "ea0108413c65be45062333908ff1870836357e7cad9a2c43e24f6afbb22fa5cc"
+      },
+      {
+        "id": "N02",
+        "level": "low",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 92.6,
+        "turns": 2,
+        "operator_approvals": 2,
+        "original_assertions_sha256": {
+          "test_app.py": "08ffe031cea6fe9f1b377458c9609a20348d03f4783ef4b3bb95572ca77fccbe"
+        },
+        "extra": {},
+        "result_file": "N02-attempt6.json",
+        "result_sha256": "e042afe1f7e344b3c598c4c4c58a70d631a899bcc0a16c5a9981baeb5af029c1"
+      },
+      {
+        "id": "N03",
+        "level": "low",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": null,
+        "turns": 1,
+        "operator_approvals": 0,
+        "original_assertions_sha256": {},
+        "extra": {
+          "artifact_sha256": "51f2fd500ab2b908f69d22f593ac3e731fa7c4b7c2403a37e874d9c87a118956",
+          "original_failure_sha256": "c2c230a755e913e3aece7a4e387363e760593f39786f738f3824c382ad020c7b",
+          "same_body_and_key_replayed": true,
+          "effects": 1,
+          "operator_assistance": "reconnect and independent readback only; no code correction or duplicate write"
+        },
+        "result_file": "N03-attempt6-reconciled.json",
+        "result_sha256": "569ed336cac2c86d0e5168a24169e91027d38b4020a576d24b420622225d2990"
+      },
+      {
+        "id": "N04",
+        "level": "medium",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 184.9,
+        "turns": 3,
+        "operator_approvals": 3,
+        "original_assertions_sha256": {
+          "test_app.py": "dc9e9a3f7faefab53922fb4faa5b83298c8966614cabf0b62bd71ecb867d3b73"
+        },
+        "extra": {
+          "health200_did_not_mask_baseline_crud_failure": true
+        },
+        "result_file": "N04-attempt6.json",
+        "result_sha256": "1ee8c09a2d7df90b8302a7429f3ae316f4565075b86260120e011e9f7d9bc351"
+      },
+      {
+        "id": "N05",
+        "level": "medium",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 179.4,
+        "turns": 4,
+        "operator_approvals": 3,
+        "original_assertions_sha256": {
+          "test_app.py": "b6e07bff550c029f7139b3504fe091724934b6e2a0f6dadc088534475ef818fd",
+          "test_v2.py": "32ee5709709a60c8a0fce618d322bff48641ae945f6b5ae8f66ce891d90203dd"
+        },
+        "extra": {
+          "changed_requirements_freshly_verified": true
+        },
+        "result_file": "N05-attempt6.json",
+        "result_sha256": "47a9d8daf44da687dbd4cb63962955de9a15d69bb9f673dbb7d3fcc8deb1e25a"
+      },
+      {
+        "id": "N06",
+        "level": "medium",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 35.4,
+        "turns": 2,
+        "operator_approvals": 0,
+        "original_assertions_sha256": {},
+        "extra": {
+          "actual_service_restart": true,
+          "effects": 1
+        },
+        "result_file": "N06-attempt6.json",
+        "result_sha256": "ba5f9cf1c08eab7613b6c061d54e32b96057b55459d94bfbd7235a5d1b34c7c1"
+      },
+      {
+        "id": "N07",
+        "level": "high",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 27.9,
+        "turns": 0,
+        "operator_approvals": 0,
+        "original_assertions_sha256": {},
+        "extra": {
+          "tcp_ack_lost": true,
+          "forwarded_posts": 1,
+          "upstream_status": 200,
+          "effects": 1
+        },
+        "result_file": "N07-attempt6.json",
+        "result_sha256": "4d2a1984fb1f0648217277c56cd8fe4fc26bc8dff3705368fbca680dc9daf1ec"
+      },
+      {
+        "id": "N08",
+        "level": "high",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 160.3,
+        "turns": 2,
+        "operator_approvals": 2,
+        "original_assertions_sha256": {
+          "test_app.py": "bb4e3fbf268adaacb2b7e76d9b6f4fe38ddd7898da133b5857071175181515fb"
+        },
+        "extra": {
+          "cross_scope_and_issuer_key_denied": true
+        },
+        "result_file": "N08-attempt6.json",
+        "result_sha256": "38e8f738c011916b903415897063c1bebcfa46d27d9afdb273a87a093d4196a8"
+      },
+      {
+        "id": "N09",
+        "level": "high",
+        "passed": true,
+        "attempt": 6,
+        "duration_seconds": 198.0,
+        "turns": 4,
+        "operator_approvals": 3,
+        "original_assertions_sha256": {
+          "test_app.py": "65ae9b539ee008bac4472e9743aba130e8f4dfa0d9bdd82ff207aa6a71a6a9a6"
+        },
+        "extra": {
+          "sqlite_schema_rows_and_original_digest_verified": true
+        },
+        "result_file": "N09-attempt6.json",
+        "result_sha256": "76d912845d1b3b33cc38aeb58bf119452b6b2860a1332cf778d74bd1c1842c32"
+      }
+    ]
+  },
+  "prior_attempts_retained": [
+    {
+      "file": "N01-attempt1.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "d25f2ce9e4d297a32025dc226f2584b1f572c8c298ef3655fcbbcf6cdaed0533"
+    },
+    {
+      "file": "N01-attempt2.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "9a3ce67fac3e9b0b55bd30f7aa1ce2cea311a74dfa1568557de9049fc01389d2"
+    },
+    {
+      "file": "N01-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "079a5c947dbc8419ddf3dca9b3cff4efea5d85dc460e12a7e833842eb79c5fbb"
+    },
+    {
+      "file": "N01-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "0a300c76bfe84dcc229d9f83a07dec3734a09b8387fc1a43cc962765c35f48c6"
+    },
+    {
+      "file": "N01-attempt5.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "787deac75c7b86af51900f98f36abae1c4ddd2ac3a63bd654fca84064950c845"
+    },
+    {
+      "file": "N02-attempt1.json",
+      "passed": false,
+      "error_type": "RuntimeError",
+      "mechanical_error": "agent_round_limit",
+      "sha256": "af0a1ef302e4422445e75ac1f8710add635b79d3669e0f2bc580729ba258e99a"
+    },
+    {
+      "file": "N02-attempt2.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "d059ad7b3aad63b9ba898aafc2b65ee1ba5566d9552adba8ff92842326c8ff38"
+    },
+    {
+      "file": "N02-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "a11a33778ac65e481d9751466ff406c159c22d887b5b6b1374d25fac83a78d31"
+    },
+    {
+      "file": "N02-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "4df9cbc5cdae4282a36b24cdb68a545beefc753e3e47eafd59e05c7288b13b30"
+    },
+    {
+      "file": "N02-attempt5.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "eb3a9e0680c4a25c8e612f4a07bdc619906a6d99bf12e80dc9e86cabfa3e8371"
+    },
+    {
+      "file": "N03-attempt2.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "efc0f5a5c635477acb8d6c9ac45f01de3d0555eb2ba90662f567342e9907aeb7"
+    },
+    {
+      "file": "N03-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "385f7d6257151d57347294c8dce288f57f416ea871e9881b1f83632993bc4e05"
+    },
+    {
+      "file": "N03-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "dd22097a70ac0e88f40d085aa2708024ebc16a6c3b7fa8fe299b247a20bf52d9"
+    },
+    {
+      "file": "N03-attempt5.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "62e446d9a36ea82ed8c2c1c7c9b67a6f977b857ca9800a87017120aa7a7cb76e"
+    },
+    {
+      "file": "N03-attempt6.json",
+      "passed": false,
+      "error_type": "RuntimeError",
+      "mechanical_error": "remote_operation_failed_1",
+      "sha256": "c2c230a755e913e3aece7a4e387363e760593f39786f738f3824c382ad020c7b"
+    },
+    {
+      "file": "N04-attempt2.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "20f11aa639b39030610d12fe7024296971b656c956593df7371877707dd8f6ed"
+    },
+    {
+      "file": "N04-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "239c92da26c1ea6b13aa2461be20f3e6b45ff10095ed4f414ce8c9c6d3ae2fdd"
+    },
+    {
+      "file": "N04-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "06edbed52b57edaa23d3c1eb0596e4571609c3cf26029df3c903e6c41406c4b5"
+    },
+    {
+      "file": "N04-attempt5.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "37ba2e6b68edc8b7524bfb652ed548a239f9450f24da845aa14d72f789f9c900"
+    },
+    {
+      "file": "N05-attempt2.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "14bdcb41e3d4f42f85b73f014f07557d9a0e73d70bbbbd6a535f1248bc86b5c3"
+    },
+    {
+      "file": "N05-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "b6c87821c1f7b63cbf7170ce09e4e36b52e54f3ef0589c3ac3e00e0acff8acc6"
+    },
+    {
+      "file": "N05-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "dab523ebfc0d0795cf5efb37b9aa26ad688712a8644bae9fd9addf0252bd0323"
+    },
+    {
+      "file": "N05-attempt5.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "dd91542687f36e2c39fe82965acc502e70bbc29835c8eda7923026ab2bccd0e4"
+    },
+    {
+      "file": "N06-attempt2.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "b5e51aa81b439e9001966bb8147786f376698d86563d066a8d01ef4f2f8860ea"
+    },
+    {
+      "file": "N06-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "a279ef7124d44c897a164a08acb0353f01fbdf978ecbe5c264ebd2b94a0cb198"
+    },
+    {
+      "file": "N06-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "f56498d032113b5e157284ca9f34b01156792003e344ffab44579e94280b1bf1"
+    },
+    {
+      "file": "N07-attempt2.json",
+      "passed": false,
+      "error_type": "AssertionError",
+      "mechanical_error": "",
+      "sha256": "ef973776068c93319b61cbffb3dc43e1205eb76d8b9ca969425eac68c4f7298d"
+    },
+    {
+      "file": "N07-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "75985e83fff81d7576dac26275d8a1c9ddc1284f3314afe9e590281b07762325"
+    },
+    {
+      "file": "N07-attempt4.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "ad1ecdfdbab1182208f28850b9b1d2e01f4791f68ac7d990fad0c40219f8d243"
+    },
+    {
+      "file": "N08-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "383239905611498b9eb50bce79019bd5c4562f0cb16fc0a77e62ff5e6edc6e5c"
+    },
+    {
+      "file": "N09-attempt3.json",
+      "passed": true,
+      "error_type": null,
+      "mechanical_error": null,
+      "sha256": "873df51de8649632e14d37e9aa3b41f3bda9670a65a72de00d41747060386b19"
+    }
+  ],
+  "initial_failures_and_corrections": [
+    {
+      "finding": "old model no-tool success forwarded as completed",
+      "reproduction": "live-source synthetic decision double; no live model or production effects",
+      "correction": "server-issued contract plus independently checked completion"
+    },
+    {
+      "finding": "read content survived in turn step cache",
+      "correction": "sanitize all steps and job previews; fresh readback on replay"
+    },
+    {
+      "finding": "test.run treated Python filename as start directory",
+      "correction": "directory plus exact discovery pattern; actual N02 repair passed"
+    },
+    {
+      "finding": "native N07 initial fault counter missed a forwarded upstream503",
+      "correction": "count dispatch before reading status; preserve upstream status and require actual single committed version"
+    },
+    {
+      "finding": "HTTP regression fixture failed to catch expected not_found",
+      "correction": "retain failure, assert the actual exception and inspect durable failed job"
+    },
+    {
+      "finding": "live N03 upstream503 after artifact commit; exam SSE parser expected only successful finals",
+      "correction": "preserve original failure, parse error events explicitly, replay the same body/key, verify exact artifact and workspace version1; operator reconnect only, no code repair or duplicate write"
+    },
+    {
+      "finding": "verifier stdout/framework spoof and workspace stdlib shadow",
+      "correction": "private nonce, narrow eligibility, stdlib-first imports, immutable assertion hashes, protected framework/module members and negative regressions"
+    },
+    {
+      "finding": "migration row totals could come from unrelated table",
+      "correction": "exact per-table columns/types, counts and optional canonical row digest"
+    },
+    {
+      "finding": "rejected admission/retention and resource bounds",
+      "correction": "durable rejection reconciliation, bounded pruning and one independent verifier lane"
+    }
+  ],
+  "independent_review": {
+    "addressed": true,
+    "no_claude": true,
+    "reviewer": "OpenCode read-only",
+    "codex_resolution": {
+      "migration_stdlib_shadow": "fixed and negative regression passed",
+      "nested_package_shadow": "fixed and negative regression passed",
+      "temporary_framework_or_json_patch": "blocked by conservative eligibility and fresh framing",
+      "sql_attach_vacuum_file_io": "verifier connection authorizer denies attachments; Connection/dbapi2/set_authorizer access ineligible",
+      "early_exit_no_nonce": "failed closed; added ineligibility",
+      "python_pre_3_10_and_case_insensitive_hosts": "not production target; service requires Python>=3.11 Linux, plus trusted asyncio preload",
+      "cache_content": "all steps/previews sanitized; readback refreshed",
+      "rejected_intent_and_retention": "bounded durable rejection and pruning",
+      "verifier_parallelism": "one additional bounded verifier lane avoids execution-slot lock order deadlock",
+      "limits_metadata": "active workers2 and admitted jobs4 separated",
+      "sse_error_codes": "typed CodingError in SSE, DONE retained",
+      "interpreter_startup_sitecustomize": "internal python -I operation, unavailable through public invocation; hostile PYTHONPATH startup regression passed on Linux",
+      "final_startup_review": "OpenCode confirms workspace startup vector closed; current code_or_path has fixed python3 argv verified by exact-argv regression; application cwd is restored explicitly after trusted imports; optional PYTHONPATH dependencies intentionally unsupported",
+      "native_binary_shadow": "native modules, bytecode and import archives conservatively ineligible"
+    },
+    "scope": "bounded trusted unittest and Docker OS isolation, not arbitrary hostile Python proof"
+  },
+  "candidate_production_image_canary": {
+    "passed": true,
+    "source_sha256": {
+      "core.py": "7a23fbcfdf882c24644672407123bf6512f634880cc49bae97f3d1e1ac45a0f5",
+      "agent.py": "a4a7819fb7c4533cd9cb04f38384564a494bda8ff446b50edd9a975f69b6b20e",
+      "service.py": "e107fb0098f51704433a31688a63a3bf57d51910ae732ab6bd59a247e97487b2",
+      "sandbox.py": "58a2e3c79c892a1497a1db8641b6e1e08d57f20c05cb6de374ac24c43c414be4",
+      "action_evidence.py": "de76256f4ac87a20451884425fe5ce2369ca8b4bb98830dd3f6cf789d52286a0"
+    },
+    "image": "harmonika-coding:20261024-phase2",
+    "image_id": "sha256:6ea8ec8002321afc400c495e18f7d008cf1617aebd78f36aaf115fb7e3ba1a43",
+    "phase2": true,
+    "approved_original_test": true,
+    "independent_verifier": true,
+    "collected": 1,
+    "original_assertions_unchanged": true,
+    "user_state_accessed": false
+  },
+  "native_tui_compatibility": {
+    "case": "low",
+    "label": "level14-compat",
+    "exit_code": 0,
+    "independent_exit_code": 0,
+    "assertions_unchanged": true,
+    "tests": 3,
+    "baseline_failed": true,
+    "hasil_created": true,
+    "native_errors": 0,
+    "tool_count": 9,
+    "duration_seconds": 69.3,
+    "user_session_reused": false,
+    "passed": true
+  },
+  "go_bridge": {
+    "passed": true,
+    "sha256": "c5a189455e573d812bed34294511d467fc52718ba7da75b2b30babaf946c1c36",
+    "assertions": "verified token principal overrides forged caller headers; server bridge secret and verification body preserved"
+  },
+  "activation": {
+    "status": "active",
+    "backup": "/var/backups/harmonika-level14/20261115T061116Z",
+    "candidate_sha256": {
+      "agent.py": "a4a7819fb7c4533cd9cb04f38384564a494bda8ff446b50edd9a975f69b6b20e",
+      "core.py": "7a23fbcfdf882c24644672407123bf6512f634880cc49bae97f3d1e1ac45a0f5",
+      "service.py": "e107fb0098f51704433a31688a63a3bf57d51910ae732ab6bd59a247e97487b2",
+      "sandbox.py": "58a2e3c79c892a1497a1db8641b6e1e08d57f20c05cb6de374ac24c43c414be4",
+      "action_evidence.py": "de76256f4ac87a20451884425fe5ce2369ca8b4bb98830dd3f6cf789d52286a0"
+    },
+    "prior_sha256": {
+      "agent.py": "2392814ccad462fd0abb8471636e8e2da1442e5963d5a45c9302dc4f9bdd043d",
+      "core.py": "0a9b69ffd17f70b370c20f10a61f68a110a983388028d5ca1eb6aca127e973ee",
+      "service.py": "110407028e9031c40e0c55f397b26ae1014dd30be45eeb719d3b8a2d5967a646",
+      "sandbox.py": "9be1e68521ef5aa1d67a0deae1e6b38b536b6acf918c62ec03aff5045bf97ff1",
+      "action_evidence.py": null
+    },
+    "old_pid": "3895655",
+    "health_http": 200,
+    "new_pid": "1719961",
+    "unrelated_service_pids_unchanged": true,
+    "admission_fenced": true
+  },
+  "post_activation_canaries": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "coding_feature_ready",
+        "passed": true,
+        "skills": 38
+      },
+      {
+        "check": "actual_sse_done",
+        "passed": true
+      },
+      {
+        "check": "actual_readback_not_model_fiction",
+        "passed": true,
+        "latency_ms": 9751,
+        "revision": "c272a3059f33ac5b8634a37d6dcfba5eea5f66a33a9c0d94a1a1c48d35257263"
+      },
+      {
+        "check": "actual_sse_done",
+        "passed": true
+      },
+      {
+        "check": "same_key_replay_no_second_write",
+        "passed": true
+      },
+      {
+        "check": "other_principal_workspace_denied",
+        "passed": true
+      },
+      {
+        "check": "owner_body_rejected",
+        "passed": true
+      },
+      {
+        "check": "conversation_no_actions",
+        "passed": true,
+        "latency_ms": 4349
+      },
+      {
+        "check": "plan_only_no_actions",
+        "passed": true,
+        "latency_ms": 6850
+      },
+      {
+        "check": "deployed_image_approved_test_and_independent_verifier",
+        "passed": true,
+        "collected": 1,
+        "approval_source": "operator"
+      }
+    ],
+    "principal_provenance": "operator authenticated private loopback; public token derivation separately tested in Go",
+    "operator_principal": "api-token:1491794723086",
+    "workspace_id": "9f558b1e-abb3-4070-ae12-1a391d3f884d",
+    "source_sha256": {
+      "agent.py": "a4a7819fb7c4533cd9cb04f38384564a494bda8ff446b50edd9a975f69b6b20e",
+      "core.py": "7a23fbcfdf882c24644672407123bf6512f634880cc49bae97f3d1e1ac45a0f5",
+      "service.py": "e107fb0098f51704433a31688a63a3bf57d51910ae732ab6bd59a247e97487b2",
+      "sandbox.py": "58a2e3c79c892a1497a1db8641b6e1e08d57f20c05cb6de374ac24c43c414be4",
+      "action_evidence.py": "de76256f4ac87a20451884425fe5ce2369ca8b4bb98830dd3f6cf789d52286a0"
+    },
+    "raw_chat_or_credentials_logged": false
+  },
+  "public_authenticated_capabilities": {
+    "status": 200,
+    "ready": true,
+    "skills": 38,
+    "features": {
+      "phase2": true,
+      "debug_sessions": true,
+      "action_evidence": true,
+      "verification_profiles": [
+        "observed_steps",
+        "read",
+        "artifact",
+        "tests",
+        "migration",
+        "conversation",
+        "plan_only"
+      ],
+      "independent_test_verifier": "bounded_python_unittest",
+      "local_client_receipts_trusted": false
+    },
+    "forged_principal_workspace_http": 404,
+    "unauthenticated_http": 401,
+    "real_public_token_auth_tested": true,
+    "customer_workspace_mutated": false,
+    "raw_key_logged": false
+  },
+  "boundaries": {
+    "existing_level12_services_active": true,
+    "existing_level12_pids_unchanged": false,
+    "known_bootstrap_deviation": true,
+    "units": {
+      "hl12-17ce5924fb-app": {
+        "MainPID": "20551",
+        "Result": "success",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      "hl12-17ce5924fb-edge": {
+        "MainPID": "12880",
+        "Result": "success",
+        "ActiveState": "active",
+        "SubState": "running"
+      }
+    },
+    "source_sha256": {
+      "acceptance_phase2.py": "b7ba44abc8a2f86694dfa1fe1b02c52e962b678726cc09b492e1e626bfa496b8",
+      "tool_selection.py": "2af39970b3b360dd6337f8c14295791058b31e1f99f676038b432b10acc51d4f",
+      "__init__.py": "ce3ea3783286702371785b25638c6fb3e18e008ca033779b5ce5d5efb8adbce1",
+      "volume_io.py": "a7671e365b9d284893bb9c8c93d67474f25d6a24475779091aa2b4ccd7d0375c",
+      "service.py": "e107fb0098f51704433a31688a63a3bf57d51910ae732ab6bd59a247e97487b2",
+      "core.py": "7a23fbcfdf882c24644672407123bf6512f634880cc49bae97f3d1e1ac45a0f5",
+      "catalog.py": "61565c3c79adc45ab3e221035182762a7f8254781deb5338a0f730827309d09e",
+      "action_evidence.py": "de76256f4ac87a20451884425fe5ce2369ca8b4bb98830dd3f6cf789d52286a0",
+      "debug_sessions.py": "3acaa59845e3648443655d09057cc57076f13a974d2f377828c0ee9a05e7d13f",
+      "agent.py": "a4a7819fb7c4533cd9cb04f38384564a494bda8ff446b50edd9a975f69b6b20e",
+      "sandbox.py": "58a2e3c79c892a1497a1db8641b6e1e08d57f20c05cb6de374ac24c43c414be4",
+      "phase2_exec.py": "aabbe5060049f11c90af5e9894e83d443458cd397ce83ad34bac1b1ddec2f46b",
+      "phase2_tools.py": "3ed79cf7b17313081b5c7a8481cea5e3467d34ea7ca2b7a62e9aeb4a78dc320f",
+      "phase2_foundation.py": "ed6ef1d36606bdb72c1dc5bf65780fee819d388a81c8df240832ca310185795b",
+      "debug_adapter.py": "834949ae541f8782082d69673fe7bda70e394458c2fa654973a958fc2daa71cc",
+      "phase2_files.py": "ba4a3f12828e2cb7e998058a1719fc9a6faf4d1525d6942a2b0d13befbdd89f4",
+      "files.py": "a3817c09dbc4b053ebeb41a5a59136bebbf0b0f0ce5882384e046bca58c48e50"
+    },
+    "lab_job_states": {
+      "completed": 253,
+      "failed": 37
+    },
+    "no_bgp_core_access_attempted": true,
+    "no_rtx_jobs_created": true
+  },
+  "operator_boundary_incidents": [
+    {
+      "type": "ubuntu_needrestart_during_dependency_bootstrap",
+      "affected_units": [
+        "hl12-17ce5924fb-app.service",
+        "unattended-upgrades.service"
+      ],
+      "evidence": {
+        "owned_bootstrap_restart_evidence": [
+          {
+            "file": "bootstrap-output.txt",
+            "unit_mentioned": true,
+            "systemctl_restart_recorded": true,
+            "needrestart_context": true
+          }
+        ],
+        "files": [
+          "service-output.txt",
+          "prepare-output.txt",
+          "bootstrap-output.txt"
+        ]
+      },
+      "existing_level12_app_pid_changed": true,
+      "strict_no_other_unit_restart_acceptance_met": false,
+      "corrective_rule": "NEEDRESTART_MODE=l; pre/post unit snapshots; prefer existing dependencies",
+      "demo_currently_active": true
+    }
+  ],
+  "limitations": [
+    "Completion covers the declared read/artifact/tests/migration profile, not every business requirement or output quality.",
+    "Independent unittest proof supports a conservative Python subset; unsupported reflection/metaprogramming/process imports remain unverified. Docker supplies OS isolation.",
+    "Verifier production target is Linux/Python>=3.11; local macOS unit subprocesses are test doubles, not security isolation.",
+    "Artifact byte/hash proof does not certify design, prose relevance, deployment, documents, vision or remote host state.",
+    "Plain chat and local TUI tools retain the existing Level13 client_reported path; backend cannot read arbitrary Mac/Windows files.",
+    "64 optional Phase2 dependency tests were skipped; they are not reported as passes.",
+    "HMAC protects issuer/cache integrity only; this is not hardware attestation or a replacement for public auth.",
+    "New evidence logs/cache store mechanics and digests; existing operational workspace payload storage is separate and is not a training dataset."
+  ],
+  "git_commit_or_push_performed": false
+}

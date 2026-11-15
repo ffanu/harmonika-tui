@@ -1,0 +1,249 @@
+{
+  "date": "2026-11-15",
+  "status": "active_verified",
+  "scope": "Harmonika internal client-tool planner used by Cline; no existing user task replayed",
+  "audit": {
+    "source": "latest Cline session and fixed-enum backend journal entries",
+    "session_message_count": 1031,
+    "observed_large_request_chars": 1326921,
+    "observed_timeout_ms": 240146,
+    "last_client_finish": "aborted",
+    "latest_finish_is_not_new_crash": true,
+    "completion_rejection": "unverified_completion; guard preserved",
+    "legacy_client_receipts_are_not_backend_attestation": true
+  },
+  "changes": [
+    "60s per decision attempt / 90s request budget for uniquely declared read_files, run_commands and editor object functions; general budget unchanged",
+    "Independent read-only checks can be batched using declared tool arrays; progress guidance avoids repeated unchanged cautions",
+    "Validated SSE tool calls no longer wait for cosmetic typing",
+    "Known Cline run_commands array envelopes honor explicit nonzero process exits despite transport success:true",
+    "Explicit editor writes may support saved-file claims, but never establish tests or deployment success"
+  ],
+  "verification": {
+    "linux_tests_passed": 235,
+    "linux_tests_failed": 0,
+    "local_tests_passed": 217,
+    "activation_guard_tests_passed": 8,
+    "test_counts_overlap_between_platforms": true,
+    "candidate": {
+      "synthetic_only": true,
+      "production": false,
+      "rows": [
+        {
+          "name": "autonomous_fixture_read_edit_test",
+          "passed": true,
+          "batched_first_read": true,
+          "completed": true,
+          "edits": 1,
+          "independent_test_passed": true,
+          "original_tests_unchanged": true,
+          "steps": [
+            {
+              "turn": 0,
+              "status": 200,
+              "latency_ms": 6974,
+              "tool_count": 1
+            },
+            {
+              "turn": 1,
+              "status": 200,
+              "latency_ms": 7663,
+              "tool_count": 1
+            },
+            {
+              "turn": 2,
+              "status": 200,
+              "latency_ms": 7899,
+              "tool_count": 1
+            },
+            {
+              "turn": 3,
+              "status": 200,
+              "latency_ms": 7984,
+              "tool_count": 1
+            },
+            {
+              "turn": 4,
+              "status": 200,
+              "latency_ms": 6803,
+              "tool_count": 0
+            }
+          ]
+        },
+        {
+          "name": "transport_success_is_not_snapshot_success",
+          "passed": true,
+          "status": 200,
+          "latency_ms": 6384
+        },
+        {
+          "name": "large_context_retained",
+          "input_chars": 1360154,
+          "passed": true,
+          "status": 200,
+          "latency_ms": 5772
+        }
+      ],
+      "source_sha256": {
+        "internal-tool-planner.js": "0a04865ca9e9e2957d596dce8d56230a035d4aba749c2e50e4a7f6d330807ec4",
+        "decision-recovery.cjs": "dc704f3b7eee8591c27c0fc9c2439b82e5e58c8b7966d0422be37d6cdc926b03",
+        "agent-controller.cjs": "0e2a6ffce7ecf2af086dc3461c48936320a378dee09399605f39df60bdcbf85e"
+      },
+      "passed": true
+    },
+    "active_backend": {
+      "synthetic_only": true,
+      "production": true,
+      "rows": [
+        {
+          "name": "autonomous_fixture_read_edit_test",
+          "passed": true,
+          "batched_first_read": true,
+          "completed": true,
+          "edits": 1,
+          "independent_test_passed": true,
+          "original_tests_unchanged": true,
+          "steps": [
+            {
+              "turn": 0,
+              "status": 200,
+              "latency_ms": 6585,
+              "tool_count": 1
+            },
+            {
+              "turn": 1,
+              "status": 200,
+              "latency_ms": 10286,
+              "tool_count": 1
+            },
+            {
+              "turn": 2,
+              "status": 200,
+              "latency_ms": 7311,
+              "tool_count": 1
+            },
+            {
+              "turn": 3,
+              "status": 200,
+              "latency_ms": 6451,
+              "tool_count": 1
+            },
+            {
+              "turn": 4,
+              "status": 200,
+              "latency_ms": 6973,
+              "tool_count": 0
+            }
+          ]
+        },
+        {
+          "name": "transport_success_is_not_snapshot_success",
+          "passed": true,
+          "status": 200,
+          "latency_ms": 6497
+        },
+        {
+          "name": "large_context_retained",
+          "input_chars": 1360154,
+          "passed": true,
+          "status": 200,
+          "latency_ms": 6571
+        }
+      ],
+      "source_sha256": {
+        "internal-tool-planner.js": "0a04865ca9e9e2957d596dce8d56230a035d4aba749c2e50e4a7f6d330807ec4",
+        "decision-recovery.cjs": "dc704f3b7eee8591c27c0fc9c2439b82e5e58c8b7966d0422be37d6cdc926b03",
+        "agent-controller.cjs": "0e2a6ffce7ecf2af086dc3461c48936320a378dee09399605f39df60bdcbf85e"
+      },
+      "passed": true
+    },
+    "native_cline": {
+      "exit_code": 0,
+      "duration_ms": 48571,
+      "independent_test_exit": 0,
+      "one_test_passed": true,
+      "protected_files_unchanged": true,
+      "stdout_bytes": 38869,
+      "stderr_bytes": 0,
+      "isolated_state": true,
+      "existing_user_sessions_changed": false,
+      "tool_counts": {
+        "read_files": 2,
+        "run_commands": 2,
+        "editor": 1
+      },
+      "assistant_response_gaps_ms": [
+        11366,
+        12299,
+        6804,
+        7470,
+        9708
+      ],
+      "synthetic_only": true
+    },
+    "public_endpoint": {
+      "status": 200,
+      "latency_ms": 5426,
+      "tool_count": 1,
+      "correct_function": true,
+      "batched_read": true,
+      "internal_state_exposed": false,
+      "passed": true
+    }
+  },
+  "activation": {
+    "status": "active_verified",
+    "candidate_sha256": {
+      "agent-controller.cjs": "0e2a6ffce7ecf2af086dc3461c48936320a378dee09399605f39df60bdcbf85e",
+      "decision-recovery.cjs": "dc704f3b7eee8591c27c0fc9c2439b82e5e58c8b7966d0422be37d6cdc926b03",
+      "internal-tool-planner.js": "0a04865ca9e9e2957d596dce8d56230a035d4aba749c2e50e4a7f6d330807ec4"
+    },
+    "backup": "/var/backups/harmonika-cline-responsive/20261115T064346Z",
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true
+  },
+  "review": {
+    "implementation": "Codex",
+    "read_only_review": "OpenCode",
+    "claude_used": false,
+    "disposition": [
+      "Editor receipt false positive corrected with outcome-specific guard",
+      "Activation helper pinned by SHA256 before Python import",
+      "Rollback restores owned candidate files individually and preserves concurrent operator changes",
+      "Terminal auth/schema/firewall errors remain terminal; malformed decision deadline behavior retained",
+      "No deterministic prose deletion; current warnings and final answers preserved"
+    ]
+  },
+  "initial_failures_preserved": [
+    {
+      "stage": "Linux test staging",
+      "cause": "two workflow helper modules absent from test package; existing helpers then staged; no production code change required"
+    },
+    {
+      "stage": "synthetic snapshot grader",
+      "cause": "negative phrase bukan snapshot berhasil was incorrectly matched as an affirmative success; grader corrected to handle negation; original failure retained privately"
+    }
+  ],
+  "limits": [
+    "Synthetic timing is not a guarantee for the original large private project conversation",
+    "Context retention check covers 1360154 characters, not one million tokens",
+    "Model decision latency cap is separate from client command execution duration",
+    "Legacy Cline output without explicit exit metadata still requires inspection and relevant verification",
+    "No model fine-tuning, no changes to Cline binary or existing user settings/history"
+  ],
+  "privacy": {
+    "raw_user_chat_in_report": false,
+    "raw_tool_arguments_from_user_session": false,
+    "secrets_in_report": false
+  },
+  "evidence": {
+    "private_directory": "/Users/id/.local/state/harmonika-exams/cline-responsiveness-20261115",
+    "artifact_sha256": {
+      "candidate.json": "0cd7f4d96ca69b5cf1e60eb748f66d7d0fa6d35678e88d393366817773315451",
+      "live.json": "8ef4fa6af4924e36cf95d74ff4131a94f5ce14496e4355627a9de33c5d654b05",
+      "native-cline.json": "e6f0cb904631a39289632657ed5ffa48d270eef9bff2dd199aa259acdc92192b",
+      "public.json": "1706bb3b6652a08a8effeabfaeba1ec53ad3050a99e40a54117e7753937eb4bb",
+      "activation.json": "dba88c003290697955f21ed130e5d4a8ff8a0293fbc47706410aefe87ce4a95f"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "level": 17,
+  "name": "Scope bukti: target, proyek, revisi dan attempt",
+  "scope": "isolated synthetic workspaces; only main planner activation",
+  "required_passed": 12,
+  "planned_native_cline_cases": 3,
+  "acceptance": [
+    "Passing tests in a different explicit working directory cannot verify edited files.",
+    "Explicit project/owner/target/attempt/revision contradictions never provide completion evidence.",
+    "A matching job ID with foreign explicit scope cannot resolve the original unknown operation.",
+    "Normalize static lexical paths across POSIX/Windows without filesystem access; never equate lexical scope with authorization or attestation.",
+    "Known legacy clients without scope keep client_reported provenance; HMAC checks stay independent."
+  ],
+  "privacy": "hash/enum/count mechanics only; no chat, credentials or customer data in reports",
+  "activation": "same source hashes as tests and 12 live model missions, idle guard, backup and CAS rollback; only harmonika-ai restart",
+  "missions": [
+    {
+      "id": "S01",
+      "case": "arithmetic",
+      "scope_fault": "project"
+    },
+    {
+      "id": "S02",
+      "case": "chained_faults",
+      "scope_fault": "project"
+    },
+    {
+      "id": "S03",
+      "case": "normalization",
+      "scope_fault": "project"
+    },
+    {
+      "id": "S04",
+      "case": "nested_config",
+      "scope_fault": "workspace"
+    },
+    {
+      "id": "S05",
+      "case": "new_function",
+      "scope_fault": "project"
+    },
+    {
+      "id": "S06",
+      "case": "resume_compaction",
+      "scope_fault": "project"
+    },
+    {
+      "id": "R01",
+      "case": "arithmetic",
+      "scope_fault": "revision"
+    },
+    {
+      "id": "R02",
+      "case": "chained_faults",
+      "scope_fault": "revision"
+    },
+    {
+      "id": "R03",
+      "case": "normalization",
+      "scope_fault": "attempt"
+    },
+    {
+      "id": "R04",
+      "case": "nested_config",
+      "scope_fault": "target"
+    },
+    {
+      "id": "R05",
+      "case": "lost_ack",
+      "scope_fault": "owner"
+    },
+    {
+      "id": "R06",
+      "case": "cancel_ack",
+      "scope_fault": "owner"
+    }
+  ]
+}

@@ -108,19 +108,19 @@ def make_app(runtime,secret,decide=None):
         return res
     async def agent(req):
         if decide is None:raise CodingError('planner_unavailable',503)
-        data=await body(req,('messages','stream'));wid=req.match_info['wid'];a=req['actor']
+        data=await body(req,('messages','stream','verification'));wid=req.match_info['wid'];a=req['actor']
         if type(data.get('stream',False)) is not bool:raise CodingError('invalid_stream')
         if not re.fullmatch(r'[A-Za-z0-9_-]{1,128}',req.headers.get('Idempotency-Key','')):raise CodingError('idempotency_required')
         if type(data.get('messages')) is not list or not 1<=len(data['messages'])<=40:raise CodingError('invalid_messages')
         if not data.get('stream'):
-            result=await runtime.agent_turn(a,wid,req.headers.get('Idempotency-Key'),data.get('messages'),lambda:run_agent(runtime,a,wid,data.get('messages'),decide,turn_key=req.headers.get('Idempotency-Key')))
+            result=await runtime.agent_turn(a,wid,req.headers.get('Idempotency-Key'),data.get('messages'),lambda:run_agent(runtime,a,wid,data.get('messages'),decide,turn_key=req.headers.get('Idempotency-Key'),verification=data.get('verification')),verification=data.get('verification'))
             return web.json_response(result)
         # Headers are sent immediately; event data never claims token streaming.
         await runtime.workspace(a,wid)
         res=web.StreamResponse(headers={'Content-Type':'text/event-stream','Cache-Control':'no-store','X-Accel-Buffering':'no'});await res.prepare(req)
         async def emit(value):await res.write(('data: '+json.dumps(value,ensure_ascii=False)+'\n\n').encode())
         async def agent_request():
-            result=await runtime.agent_turn(a,wid,req.headers.get('Idempotency-Key'),data.get('messages'),lambda:run_agent(runtime,a,wid,data.get('messages'),decide,emit,turn_key=req.headers.get('Idempotency-Key')))
+            result=await runtime.agent_turn(a,wid,req.headers.get('Idempotency-Key'),data.get('messages'),lambda:run_agent(runtime,a,wid,data.get('messages'),decide,emit,turn_key=req.headers.get('Idempotency-Key'),verification=data.get('verification')),verification=data.get('verification'))
             if result.get('replayed'):await emit({'type':'response.completed','data':result})
             return result
         task=asyncio.create_task(agent_request())
@@ -131,6 +131,9 @@ def make_app(runtime,secret,decide=None):
             await task;await res.write(b'data: [DONE]\n\n')
         except (ConnectionResetError,asyncio.CancelledError):
             task.cancel();await asyncio.gather(task,return_exceptions=True)
+        except CodingError as e:
+            await emit({'type':'error','data':{'code':e.code,'http_status':e.status}})
+            await res.write(b'data: [DONE]\n\n')
         except Exception:
             await res.write(b'data: {"type":"error","data":{"code":"agent_failed"}}\n\ndata: [DONE]\n\n')
         return res

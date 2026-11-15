@@ -1,0 +1,85 @@
+{
+  "level": 16,
+  "name": "Pemulihan batch tool dan cakupan hasil per perintah",
+  "scope": "synthetic isolated workspaces; main planner only",
+  "acceptance": [
+    "Every declared run_commands child must correlate once; missing/foreign/duplicate receipt is not success.",
+    "Track pending/unknown child operation identity even when sibling succeeded.",
+    "Reconcile original identities; no replacement-key or mixed-batch mutation replay.",
+    "Allow bounded read-only diagnosis and independent work within existing authorization.",
+    "Preserve positive-count and revision checks, protected assertions, Data Firewall and native Cline compatibility."
+  ],
+  "planned_live_model_missions": 12,
+  "planned_native_cline_cases": 3,
+  "evaluation": "actual provider decisions; protected fixtures and independent operator proofs; controlled injected receipt faults distinguished from engine failures",
+  "no_claims": [
+    "universal intelligence rank",
+    "new model training",
+    "new cross-session storage",
+    "public tenant IAM from markers"
+  ],
+  "activation": "exact source hashes, tests, idle guard, backups, CAS rollback, only harmonika-ai restart",
+  "privacy": "technical hashes/counts only; no credentials or user history",
+  "missions": [
+    {
+      "id": "B01",
+      "case": "lost_ack",
+      "batch": "flat"
+    },
+    {
+      "id": "B02",
+      "case": "busy_job",
+      "batch": "flat"
+    },
+    {
+      "id": "B03",
+      "case": "foreign_job",
+      "batch": "metadata"
+    },
+    {
+      "id": "B04",
+      "case": "cancel_ack",
+      "batch": "flat"
+    },
+    {
+      "id": "B05",
+      "case": "cancel_ack",
+      "batch": "metadata"
+    },
+    {
+      "id": "B06",
+      "case": "cancel_ack",
+      "batch": "unknown"
+    },
+    {
+      "id": "D01",
+      "case": "chained_faults"
+    },
+    {
+      "id": "D02",
+      "case": "chained_faults",
+      "seed_tests": true
+    },
+    {
+      "id": "D03",
+      "case": "normalization",
+      "seed_tests": true
+    },
+    {
+      "id": "D04",
+      "case": "nested_config",
+      "seed_tests": true
+    },
+    {
+      "id": "D05",
+      "case": "new_function",
+      "seed_tests": true
+    },
+    {
+      "id": "D06",
+      "case": "resume_compaction",
+      "seed_tests": true
+    }
+  ],
+  "required_passed": 12
+}

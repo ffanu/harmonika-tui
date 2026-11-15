@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "recorded_at_utc": "20261115T131124Z",
+  "subject": "Actual installed branded Harmonika terminal, standalone fresh sessions through chat.harmonika.id",
+  "overall_passed": true,
+  "graded_missions": 3,
+  "passed_missions": 3,
+  "operator_followups": 0,
+  "assessment": "Observed initiative in these synthetic local tasks; not a universal level or intelligence percentage",
+  "plan_sha256": "f8f53327d303b4b84cdab862c845b5e70b2ed018168a0cb5ffcd97a2d4f21050",
+  "cases": {
+    "calibration": {
+      "passed": true,
+      "duration_ms": 121072,
+      "independent_tests_passed": 2,
+      "trace": {
+        "tool_calls": 10,
+        "manual_followups": 0,
+        "observed_paths_within_workspace": true,
+        "tool_counts": {
+          "edit": 1,
+          "read": 6,
+          "shell": 3
+        }
+      },
+      "observations": [
+        "located relevant files",
+        "reproduced failing test",
+        "edited quantity calculation",
+        "reran tests",
+        "added own boundary checks"
+      ]
+    },
+    "service_recovery": {
+      "passed": true,
+      "duration_ms": 250954,
+      "seeded_faults": 5,
+      "initial_public_pass": 2,
+      "initial_public_fail": 6,
+      "public_tests_passed": 8,
+      "independent_heldout_tests_passed": 4,
+      "agent_authored_extra_tests_passed": 3,
+      "extra_tests_not_counted_as_independent": true,
+      "positive_tests_after_last_edit_verified": true,
+      "protected_inputs_unchanged": true,
+      "unexpected_files": 0,
+      "trace": {
+        "tool_calls": 23,
+        "manual_followups": 0,
+        "observed_paths_within_workspace": true,
+        "tool_counts": {
+          "edit": 7,
+          "read": 11,
+          "shell": 5
+        }
+      },
+      "observations": [
+        "used active entry from config instead of obsolete archive",
+        "selected built-in node:test without installing unavailable runner",
+        "fixed totals, pagination, empty DELETE, reopen persistence and event idempotency",
+        "identified null-item validation beyond public tests",
+        "noticed and corrected own parenthesis edit before syntax verification",
+        "reran public suite after final mutation",
+        "reported actual test counts and local verification limit"
+      ]
+    },
+    "evidence_audit": {
+      "passed": true,
+      "duration_ms": 64741,
+      "rubric": {
+        "A_pending_with_no_settlement_not_asserted_paid_or_failed": true,
+        "B_signed_settled_exact_payment_supported": true,
+        "B_duplicate_event_counted_once": true,
+        "B_stale_billing_not_silently_mutated": true,
+        "C_amount_short_by_1000_identified": true,
+        "C_unsigned_topup_excluded": true,
+        "cache_not_treated_as_receipt": true,
+        "snapshot_time_and_live_state_limit_disclosed": true,
+        "source_attribution_matches_files_read": true,
+        "read_only_scope_preserved": true
+      },
+      "protected_inputs_unchanged": true,
+      "file_tree_unchanged": true,
+      "trace": {
+        "tool_calls": 6,
+        "manual_followups": 0,
+        "observed_paths_within_workspace": true,
+        "tool_counts": {
+          "read": 6
+        }
+      },
+      "mechanical_result_requires_separate_semantic_review": true,
+      "original_raw_result_preserved": true
+    }
+  },
+  "transport_errors": {
+    "calibration-clean": [],
+    "service_recovery": [],
+    "evidence_audit": []
+  },
+  "runner_incident": {
+    "excluded_from_grade": true,
+    "cause": "inherited PWD selected operator repository instead of disposable cwd",
+    "corrected": "child PWD aligned to resolved fixture cwd",
+    "known_write_tools_observed": false,
+    "released_engine_source_unchanged": true,
+    "only_owned_test_client_interrupted": true,
+    "incident_sha256": "898335ed3e90ec9a90c25e709a5eb633cb8c998138d0fd1acea4a43047bf2a91"
+  },
+  "operator_oracle_control": {
+    "not_model_score": true,
+    "seeded_tests_failed_first": true,
+    "control_public_passed": 8,
+    "control_independent_passed": 4
+  },
+  "backend": {
+    "source_sha256": {
+      "receipt-outcome.cjs": "00da86dded05d4844c40e8d5897395d7c424cd7801db9e45320e267aba07319c",
+      "verification-scope.cjs": "1b123305a46a7bb293d1520cf8bcead93e773788a59d6cc4e8defb72b962779b",
+      "task-continuity.cjs": "6f3d3d8fce4948ca4afa215c121b201c6e7f64d11e248e31af0c3435ded39ab4",
+      "decision-recovery.cjs": "17179beebbc8a6e0cce1b672f8e8aa180825000fcdfa7cfe1aef52d4f8b27062",
+      "agent-controller.cjs": "1ec5066985ceaecf9385c342cf45879134cc97e92d905987c90d5ae76f582770",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "unit_state": "MainPID=2061021\nActiveState=active",
+    "health_status": 200,
+    "restart_performed": false
+  },
+  "released_backend_source_unchanged": true,
+  "backend_or_tui_restart_performed": false,
+  "review": {
+    "reviewer": "OpenCode",
+    "model": "zai-coding-plan/glm-5.3",
+    "claude_involved": false,
+    "read_only_no_tool_calls": true,
+    "sha256": "63359a0a18a3f634a8f2004ea48f097362578deecf459a2bb25cec27e0248962",
+    "applied": [
+      "semantic grading separate from mechanical integrity",
+      "report fixed single-sample limitations",
+      "separate oracle and extra model tests from independent score",
+      "document cwd incident and isolation correction"
+    ],
+    "limits_retained": [
+      "No OS sandbox or read-only mount claim; scope checked through actual tool trace and pre/post hashes",
+      "Fixed single fixture per mission; no multi-seed reliability estimate",
+      "Cache-correct positive payment CASE-B already prevents blanket unpaid answer"
+    ]
+  },
+  "harness_verification": {
+    "python_compilation_passed": true,
+    "seeded_failure_and_operator_control_passed": true
+  },
+  "private_evidence_directory": "/Users/id/.local/state/harmonika/exams/hard-agent-20261115T131124Z",
+  "artifacts_sha256": {
+    "calibration-clean": {
+      "input-plan.json": "3e9fd1d891921a3aeea265cf5b754824389ce9afa8028a2838c2cddf540184ef",
+      "stdout.jsonl": "c92e45b305565a5de61befa9352ae98d0f0997fd71d362f4f25e96572edee8ff",
+      "result.json": "f4320abc6ca3a56025dcd4e43deb21eda213137163bfc7ba56478908602a8eed",
+      "final-response-private.json": "33a9d6c9ca5a729a1fc8ef0c8593bbef89841d999f7466332ee115d268136fc0"
+    },
+    "service_recovery": {
+      "input-plan.json": "7c62ff2ec361b22c4b5efa9b4ec250c4ecf50193be0105799a19d8c4b40bb091",
+      "stdout.jsonl": "26282c54f8edc2f34c24ffda5460bb087ef857d9d95debaf701cc4f93f0a0cad",
+      "result.json": "c085ec5735714ea3853ae25ca279d27cd43fbf3699d7dba2022ac6d7eded9fba",
+      "final-response-private.json": "850981cb9a2a052eac6fd1e6c6c4b11856581d7b8a03411907ac96ca4138edbd"
+    },
+    "evidence_audit": {
+      "input-plan.json": "491ea4ad2101c9415cd119183e430b3c1ad3a45bd4f0f20636a6c2815ff05ca1",
+      "stdout.jsonl": "c45f666d175370525927187db72340fc02d13a82be5781882fe13b362ca8dbcc",
+      "result.json": "e4a71c40d8d53da25e8f1ae7ab039aa3c31f5b1cf890b88954769e0a10fa2709",
+      "final-response-private.json": "2a23c7cfefc6b8318e1fb36f07f017cf7e552c12fa3b5410e021c9a8f2d39520"
+    }
+  },
+  "limitations": [
+    "No proof of general parity with Codex/OpenCode or universally hardest benchmark",
+    "Legacy local tool receipts remain client-reported; independent tests are local operator observations, not backend HMAC attestations",
+    "No SSH/production/browser/RTX tasks tested in this suite",
+    "No runtime engine fix or restart needed from these three results; changes are exam tooling and documentation only"
+  ]
+}

@@ -51,7 +51,7 @@ Prefix: `https://chat.harmonika.id/v1/coding`.
 | GET/POST | /workspaces | Daftar sendiri/buat workspace dengan permissions eksplisit |
 | GET | /workspaces/{id} | Metadata dan versi workspace |
 | POST | /workspaces/{id}/invoke | `{skill_id,input}`; Idempotency-Key wajib untuk write/exec/Git |
-| POST | /workspaces/{id}/agent | `{messages,stream}`; skill dipilih otomatis |
+| POST | /workspaces/{id}/agent | `{messages,stream,verification?}`; skill dipilih otomatis; lihat [kontrak bukti](LEVEL14-EVIDENCE.md) |
 | GET | /jobs/{id} | Recovery status/result/input_hash |
 | GET | /jobs/{id}/events | JSON atau SSE dengan Accept:text/event-stream |
 | POST | /jobs/{id}/approve | `{decision:"approve",input_hash:"..."}` |

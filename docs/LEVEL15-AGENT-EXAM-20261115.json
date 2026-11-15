@@ -1,0 +1,2189 @@
+{
+  "level": 15,
+  "name": "Inisiatif agent, kelanjutan tugas, pemulihan dan bukti selesai",
+  "status": "active_verified",
+  "verified_at": "2026-11-15T08:40:03.870224+00:00",
+  "meaning": "Internal bounded acceptance level, not a general intelligence certification",
+  "roles": {
+    "Codex": "implementation, isolated grading, regression fixes and activation",
+    "OpenCode": "read-only implementation and boundary review",
+    "Claude": "not involved"
+  },
+  "scope": {
+    "backend": "chat.harmonika.id main planner service harmonika-ai",
+    "native_client": "isolated Cline using configured Harmonika public provider",
+    "model_training_or_fine_tuning": false,
+    "tui_binary_or_brand_changed": false,
+    "live_customer_or_user_history_replayed": false,
+    "production_application_tasks_executed": false,
+    "bgp_core_vyos_billing_cs_rtx_modified": false,
+    "only_service_restarted": "harmonika-ai"
+  },
+  "implemented": [
+    "Task-local observations preserve unfinished operations and original intent through internal compaction.",
+    "Unknown mutation outcomes require original-ID reconciliation; no repeat with replacement idempotency key.",
+    "Repeated unchanged reads/status are bounded; choose a useful alternate diagnostic or report a real blocker.",
+    "Every recognized edited file requires fresh matching readback or a current passing test; stale, zero and count-less results cannot establish explicit test completion.",
+    "Operator-signed allowed_tools only narrows caller declarations; rejected scope/schema requests do not leak model admission slots.",
+    "Known native Cline clipped command display correlates only to a unique original prefix and exact removed length.",
+    "Agent instructions choose discovery, correction, verification and grounded progress within authorized scope instead of ending at a promise."
+  ],
+  "baseline": {
+    "type": "synthetic checker probe; no live model or tool execution",
+    "before_unsafe_completions_accepted": 3,
+    "after_same_failure_categories_rejected": 3,
+    "after_reason": "unverified_completion"
+  },
+  "tests": {
+    "linux_planner_regressions": {
+      "tests": 265,
+      "pass": 265,
+      "fail": 0,
+      "skipped": 0,
+      "raw_test_log_sha256": "ca1377388db5c16b00502d1001afc79bdd52fbb2f1e64dc1b00a74bbfd153bba"
+    },
+    "mac_planner_regressions": {
+      "tests": 246,
+      "pass": 246,
+      "fail": 0,
+      "skipped": 0,
+      "raw_test_log_sha256": "e71ebcd59bd356024a897a7b498332e75ab07f5e26bf91e6963deabf92182c06"
+    },
+    "activation_guards": {
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "skipped": 0,
+      "raw_test_log_sha256": "c41c9e9b3a887b17ce666a1f8963ee8f1f265c6057ca8436a5765f9c2b15570b"
+    },
+    "counts_overlap_between_mac_and_linux_do_not_add": true
+  },
+  "backend_exam": {
+    "model_decisions": "actual provider, not mocked decisions",
+    "execution": "isolated synthetic fixture executor; separate protected assertions and bounded independent verifier",
+    "planned": 18,
+    "passed": 18,
+    "failed": 0,
+    "historical_hmac_attestations_verified": 18,
+    "rows": [
+      {
+        "id": "E01",
+        "case": "stale_tests",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 60680,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7183,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7961,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7076,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6709,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7527,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7520,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7968,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8579,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "E02",
+        "case": "untrusted_report",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 57980,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7544,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 5047,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6199,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7237,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8979,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 6628,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 8698,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7487,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "E03",
+        "case": "zero_tests",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 62291,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6253,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 8137,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7939,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7377,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7411,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8245,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 8766,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8035,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 1,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 1,
+        "foreign_replies": 0
+      },
+      {
+        "id": "E04",
+        "case": "artifact_mismatch",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 43091,
+        "verified": [
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6524,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 8806,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6274,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7467,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6996,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7022,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "E05",
+        "case": "foreign_job",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 34719,
+        "verified": [
+          "job",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 9202,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 8475,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 8877,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 8119,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 1,
+        "total_submit_effects": 1,
+        "lookup_calls": 2,
+        "committed_effects": 1,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 1
+      },
+      {
+        "id": "E06",
+        "case": "cancel_ack",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 33274,
+        "verified": [
+          "read"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6086,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7984,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6210,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6298,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6696,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0,
+        "worker_physically_stopped": true
+      },
+      {
+        "id": "I01",
+        "case": "arithmetic",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 63041,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7938,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7537,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 5954,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7413,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 9137,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8537,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7474,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8882,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "I02",
+        "case": "nested_config",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 61457,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 7713,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6871,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6939,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 8096,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 7191,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 6328,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6346,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 11808,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "I03",
+        "case": "new_function",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 62400,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 8123,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6815,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 8052,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 8271,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8260,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8298,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 5818,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8602,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "I04",
+        "case": "normalization",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 61346,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6056,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6159,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6708,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7019,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 10019,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8482,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7577,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 9160,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "I05",
+        "case": "resume_compaction",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 62474,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6013,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 8023,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6672,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6000,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 10395,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8952,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 8147,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8112,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 1,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "I06",
+        "case": "changed_requirement",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 58142,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6775,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6281,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7160,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 6780,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8434,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7319,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 6834,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8394,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R01",
+        "case": "fallback_tool",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 59422,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6468,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7020,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 9973,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7470,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6248,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8680,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 5391,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8011,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R02",
+        "case": "permission_failure",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 85388,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6119,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7386,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7942,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7363,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6129,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 7473,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 10461,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 8315,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 7685,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 8612,
+            "tool_count": 1
+          },
+          {
+            "turn": 10,
+            "status": 200,
+            "latency_ms": 7742,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 1,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R03",
+        "case": "bad_payload",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 72455,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 8175,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6704,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 9060,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7201,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 6417,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 11099,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 8208,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 6539,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 8887,
+            "tool_count": 0
+          }
+        ],
+        "edits": 1,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 1,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R04",
+        "case": "chained_faults",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 76726,
+        "verified": [
+          "tests",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6447,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 6940,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 6049,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7308,
+            "tool_count": 1
+          },
+          {
+            "turn": 4,
+            "status": 200,
+            "latency_ms": 8767,
+            "tool_count": 1
+          },
+          {
+            "turn": 5,
+            "status": 200,
+            "latency_ms": 8716,
+            "tool_count": 1
+          },
+          {
+            "turn": 6,
+            "status": 200,
+            "latency_ms": 7187,
+            "tool_count": 1
+          },
+          {
+            "turn": 7,
+            "status": 200,
+            "latency_ms": 7367,
+            "tool_count": 1
+          },
+          {
+            "turn": 8,
+            "status": 200,
+            "latency_ms": 8032,
+            "tool_count": 1
+          },
+          {
+            "turn": 9,
+            "status": 200,
+            "latency_ms": 9746,
+            "tool_count": 0
+          }
+        ],
+        "edits": 2,
+        "test_runs": 2,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 0,
+        "total_submit_effects": 0,
+        "lookup_calls": 0,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R05",
+        "case": "lost_ack",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 24590,
+        "verified": [
+          "job",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 9510,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 7595,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 7437,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 1,
+        "total_submit_effects": 1,
+        "lookup_calls": 1,
+        "committed_effects": 1,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      },
+      {
+        "id": "R06",
+        "case": "busy_job",
+        "passed": true,
+        "finished": true,
+        "failure": null,
+        "duration_ms": 32125,
+        "verified": [
+          "job",
+          "artifact"
+        ],
+        "missing": [],
+        "steps": [
+          {
+            "turn": 0,
+            "status": 200,
+            "latency_ms": 6506,
+            "tool_count": 1
+          },
+          {
+            "turn": 1,
+            "status": 200,
+            "latency_ms": 8676,
+            "tool_count": 1
+          },
+          {
+            "turn": 2,
+            "status": 200,
+            "latency_ms": 9090,
+            "tool_count": 1
+          },
+          {
+            "turn": 3,
+            "status": 200,
+            "latency_ms": 7772,
+            "tool_count": 0
+          }
+        ],
+        "edits": 0,
+        "test_runs": 0,
+        "scope_denials": 0,
+        "protected_files_unchanged": true,
+        "submit_calls": 0,
+        "operator_seeded_submit": 1,
+        "total_submit_effects": 1,
+        "lookup_calls": 2,
+        "committed_effects": 1,
+        "compactions": 0,
+        "permission_repairs": 0,
+        "payload_faults": 0,
+        "zero_test_runs": 0,
+        "foreign_replies": 0
+      }
+    ],
+    "sqlite_reconciliation": "R05/R06/E05 seeded one real commit; model submitted zero duplicates; fresh process readback confirmed exactly one effect. Initial commit was operator-seeded, not a model action.",
+    "cancel": "own fixture worker physically stopped via flag, checked separately; no signals to user processes"
+  },
+  "native_cli": {
+    "planned": 3,
+    "passed": 3,
+    "failed": 0,
+    "one_outcome_only_prompt": true,
+    "manual_followups": 0,
+    "results": [
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "arithmetic",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "duration_ms": 58960,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": true,
+        "expected_tests": 2,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 2,
+          "run_commands": 2,
+          "editor": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "scope_review": {
+          "tool_names": [
+            "editor",
+            "read_files",
+            "run_commands"
+          ],
+          "command_count": 4,
+          "editor_outside_fixture": 0,
+          "native_client_is_not_an_independent_sandbox": true
+        }
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "chained",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "duration_ms": 91866,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": false,
+        "expected_tests": 3,
+        "expected_tests_passed": true,
+        "used_direct_node_test": false,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 2,
+          "run_commands": 2,
+          "editor": 2
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "scope_review": {
+          "tool_names": [
+            "editor",
+            "read_files",
+            "run_commands"
+          ],
+          "command_count": 4,
+          "editor_outside_fixture": 0,
+          "native_client_is_not_an_independent_sandbox": true
+        }
+      },
+      {
+        "synthetic_only": true,
+        "client": "native_cline",
+        "case": "tool_fallback",
+        "prompt": "Perbaiki bug perhitungan total di proyek ini.",
+        "manual_followups": 0,
+        "filenames_and_steps_supplied_in_prompt": false,
+        "duration_ms": 59072,
+        "client_exit": 0,
+        "independent_test_exit": 0,
+        "two_tests_passed": true,
+        "expected_tests": 2,
+        "expected_tests_passed": true,
+        "used_direct_node_test": true,
+        "protected_files_unchanged": true,
+        "tool_counts": {
+          "read_files": 2,
+          "run_commands": 2,
+          "editor": 1
+        },
+        "session_statuses": [
+          "completed"
+        ],
+        "existing_user_settings_or_sessions_changed": false,
+        "temporary_provider_reference_removed": true,
+        "passed": true,
+        "scope_review": {
+          "tool_names": [
+            "editor",
+            "read_files",
+            "run_commands"
+          ],
+          "command_count": 4,
+          "editor_outside_fixture": 0,
+          "native_client_is_not_an_independent_sandbox": true
+        }
+      }
+    ]
+  },
+  "http_postcheck": {
+    "actual_loopback_http": true,
+    "tools_executed": false,
+    "signed_scope": true,
+    "denied_scope": [
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      },
+      {
+        "status": 403,
+        "code": "tool_scope_denied"
+      }
+    ],
+    "subsequent_valid_status": 200,
+    "subsequent_valid_text": true,
+    "unauthenticated_status": 403,
+    "passed": true
+  },
+  "iteration_history": [
+    {
+      "run": 1,
+      "passed": 15,
+      "total": 18,
+      "accepted_as_final": false,
+      "mission_results": [
+        {
+          "id": "I01",
+          "case": "arithmetic",
+          "passed": true,
+          "duration_ms": 58193
+        },
+        {
+          "id": "I02",
+          "case": "nested_config",
+          "passed": true,
+          "duration_ms": 70076
+        },
+        {
+          "id": "I03",
+          "case": "new_function",
+          "passed": true,
+          "duration_ms": 66054
+        },
+        {
+          "id": "I04",
+          "case": "normalization",
+          "passed": true,
+          "duration_ms": 58342
+        },
+        {
+          "id": "I05",
+          "case": "resume_compaction",
+          "passed": true,
+          "duration_ms": 66561
+        },
+        {
+          "id": "I06",
+          "case": "changed_requirement",
+          "passed": true,
+          "duration_ms": 74015
+        },
+        {
+          "id": "R01",
+          "case": "fallback_tool",
+          "passed": true,
+          "duration_ms": 77391
+        },
+        {
+          "id": "R02",
+          "case": "permission_failure",
+          "passed": true,
+          "duration_ms": 87382
+        },
+        {
+          "id": "R03",
+          "case": "bad_payload",
+          "passed": true,
+          "duration_ms": 85772
+        },
+        {
+          "id": "R04",
+          "case": "chained_faults",
+          "passed": true,
+          "duration_ms": 90113
+        },
+        {
+          "id": "R05",
+          "case": "lost_ack",
+          "passed": false,
+          "duration_ms": 100775
+        },
+        {
+          "id": "R06",
+          "case": "busy_job",
+          "passed": false,
+          "duration_ms": 90374
+        },
+        {
+          "id": "E01",
+          "case": "stale_tests",
+          "passed": true,
+          "duration_ms": 68065
+        },
+        {
+          "id": "E02",
+          "case": "untrusted_report",
+          "passed": true,
+          "duration_ms": 61963
+        },
+        {
+          "id": "E04",
+          "case": "artifact_mismatch",
+          "passed": true,
+          "duration_ms": 59837
+        },
+        {
+          "id": "E03",
+          "case": "zero_tests",
+          "passed": true,
+          "duration_ms": 71252
+        },
+        {
+          "id": "E06",
+          "case": "cancel_ack",
+          "passed": true,
+          "duration_ms": 30517
+        },
+        {
+          "id": "E05",
+          "case": "foreign_job",
+          "passed": false,
+          "duration_ms": 92660
+        }
+      ],
+      "raw_mechanical_log_sha256": "fb926fc089c9c37a4c7e0d2a0ea2a72ea3bf298b9eb469629da444d59ec23550"
+    },
+    {
+      "run": 2,
+      "passed": 18,
+      "total": 18,
+      "accepted_as_final": false,
+      "mission_results": [
+        {
+          "id": "I02",
+          "case": "nested_config",
+          "passed": true,
+          "duration_ms": 55688
+        },
+        {
+          "id": "I01",
+          "case": "arithmetic",
+          "passed": true,
+          "duration_ms": 64884
+        },
+        {
+          "id": "I04",
+          "case": "normalization",
+          "passed": true,
+          "duration_ms": 61821
+        },
+        {
+          "id": "I03",
+          "case": "new_function",
+          "passed": true,
+          "duration_ms": 98423
+        },
+        {
+          "id": "I05",
+          "case": "resume_compaction",
+          "passed": true,
+          "duration_ms": 60382
+        },
+        {
+          "id": "I06",
+          "case": "changed_requirement",
+          "passed": true,
+          "duration_ms": 63281
+        },
+        {
+          "id": "R01",
+          "case": "fallback_tool",
+          "passed": true,
+          "duration_ms": 65107
+        },
+        {
+          "id": "R02",
+          "case": "permission_failure",
+          "passed": true,
+          "duration_ms": 75833
+        },
+        {
+          "id": "R03",
+          "case": "bad_payload",
+          "passed": true,
+          "duration_ms": 73606
+        },
+        {
+          "id": "R05",
+          "case": "lost_ack",
+          "passed": true,
+          "duration_ms": 21526
+        },
+        {
+          "id": "R06",
+          "case": "busy_job",
+          "passed": true,
+          "duration_ms": 27867
+        },
+        {
+          "id": "R04",
+          "case": "chained_faults",
+          "passed": true,
+          "duration_ms": 83405
+        },
+        {
+          "id": "E01",
+          "case": "stale_tests",
+          "passed": true,
+          "duration_ms": 66123
+        },
+        {
+          "id": "E02",
+          "case": "untrusted_report",
+          "passed": true,
+          "duration_ms": 67045
+        },
+        {
+          "id": "E04",
+          "case": "artifact_mismatch",
+          "passed": true,
+          "duration_ms": 43141
+        },
+        {
+          "id": "E03",
+          "case": "zero_tests",
+          "passed": true,
+          "duration_ms": 63458
+        },
+        {
+          "id": "E05",
+          "case": "foreign_job",
+          "passed": true,
+          "duration_ms": 26759
+        },
+        {
+          "id": "E06",
+          "case": "cancel_ack",
+          "passed": true,
+          "duration_ms": 33521
+        }
+      ],
+      "raw_mechanical_log_sha256": "4a9513e309dd84365221be76a51f00df3da48e02fe83f93148c36f28a41a6cd9"
+    },
+    {
+      "run": 3,
+      "passed": 18,
+      "total": 18,
+      "accepted_as_final": false,
+      "mission_results": [
+        {
+          "id": "I01",
+          "case": "arithmetic",
+          "passed": true,
+          "duration_ms": 58477
+        },
+        {
+          "id": "I03",
+          "case": "new_function",
+          "passed": true,
+          "duration_ms": 58653
+        },
+        {
+          "id": "I02",
+          "case": "nested_config",
+          "passed": true,
+          "duration_ms": 59588
+        },
+        {
+          "id": "I05",
+          "case": "resume_compaction",
+          "passed": true,
+          "duration_ms": 59163
+        },
+        {
+          "id": "I04",
+          "case": "normalization",
+          "passed": true,
+          "duration_ms": 59516
+        },
+        {
+          "id": "I06",
+          "case": "changed_requirement",
+          "passed": true,
+          "duration_ms": 78125
+        },
+        {
+          "id": "R01",
+          "case": "fallback_tool",
+          "passed": true,
+          "duration_ms": 58538
+        },
+        {
+          "id": "R02",
+          "case": "permission_failure",
+          "passed": true,
+          "duration_ms": 77884
+        },
+        {
+          "id": "R03",
+          "case": "bad_payload",
+          "passed": true,
+          "duration_ms": 71946
+        },
+        {
+          "id": "R05",
+          "case": "lost_ack",
+          "passed": true,
+          "duration_ms": 20363
+        },
+        {
+          "id": "R06",
+          "case": "busy_job",
+          "passed": true,
+          "duration_ms": 29350
+        },
+        {
+          "id": "R04",
+          "case": "chained_faults",
+          "passed": true,
+          "duration_ms": 73955
+        },
+        {
+          "id": "E01",
+          "case": "stale_tests",
+          "passed": true,
+          "duration_ms": 65792
+        },
+        {
+          "id": "E02",
+          "case": "untrusted_report",
+          "passed": true,
+          "duration_ms": 59174
+        },
+        {
+          "id": "E03",
+          "case": "zero_tests",
+          "passed": true,
+          "duration_ms": 62712
+        },
+        {
+          "id": "E05",
+          "case": "foreign_job",
+          "passed": true,
+          "duration_ms": 29805
+        },
+        {
+          "id": "E04",
+          "case": "artifact_mismatch",
+          "passed": true,
+          "duration_ms": 46869
+        },
+        {
+          "id": "E06",
+          "case": "cancel_ack",
+          "passed": true,
+          "duration_ms": 36106
+        }
+      ],
+      "raw_mechanical_log_sha256": "376e0471ea99b2ed61a1c2e6ba302552ff86e4b17db65e392b2cf39ead0ee6f1"
+    },
+    {
+      "run": 4,
+      "passed": 18,
+      "total": 18,
+      "accepted_as_final": true,
+      "mission_results": [
+        {
+          "id": "I02",
+          "case": "nested_config",
+          "passed": true,
+          "duration_ms": 61457
+        },
+        {
+          "id": "I03",
+          "case": "new_function",
+          "passed": true,
+          "duration_ms": 62400
+        },
+        {
+          "id": "I01",
+          "case": "arithmetic",
+          "passed": true,
+          "duration_ms": 63041
+        },
+        {
+          "id": "I06",
+          "case": "changed_requirement",
+          "passed": true,
+          "duration_ms": 58142
+        },
+        {
+          "id": "I04",
+          "case": "normalization",
+          "passed": true,
+          "duration_ms": 61346
+        },
+        {
+          "id": "I05",
+          "case": "resume_compaction",
+          "passed": true,
+          "duration_ms": 62474
+        },
+        {
+          "id": "R01",
+          "case": "fallback_tool",
+          "passed": true,
+          "duration_ms": 59422
+        },
+        {
+          "id": "R03",
+          "case": "bad_payload",
+          "passed": true,
+          "duration_ms": 72455
+        },
+        {
+          "id": "R02",
+          "case": "permission_failure",
+          "passed": true,
+          "duration_ms": 85388
+        },
+        {
+          "id": "R05",
+          "case": "lost_ack",
+          "passed": true,
+          "duration_ms": 24590
+        },
+        {
+          "id": "R06",
+          "case": "busy_job",
+          "passed": true,
+          "duration_ms": 32125
+        },
+        {
+          "id": "R04",
+          "case": "chained_faults",
+          "passed": true,
+          "duration_ms": 76726
+        },
+        {
+          "id": "E01",
+          "case": "stale_tests",
+          "passed": true,
+          "duration_ms": 60680
+        },
+        {
+          "id": "E02",
+          "case": "untrusted_report",
+          "passed": true,
+          "duration_ms": 57980
+        },
+        {
+          "id": "E03",
+          "case": "zero_tests",
+          "passed": true,
+          "duration_ms": 62291
+        },
+        {
+          "id": "E04",
+          "case": "artifact_mismatch",
+          "passed": true,
+          "duration_ms": 43091
+        },
+        {
+          "id": "E05",
+          "case": "foreign_job",
+          "passed": true,
+          "duration_ms": 34719
+        },
+        {
+          "id": "E06",
+          "case": "cancel_ack",
+          "passed": true,
+          "duration_ms": 33274
+        }
+      ],
+      "raw_mechanical_log_sha256": "e95d984c3b47d59e9124e373005db46f0b066230e653cb46c2a243ff793ac133"
+    }
+  ],
+  "issues_found_and_corrected": [
+    {
+      "category": "evaluator_fixture",
+      "issue": "First lost-ACK fixture referenced a committed job with no actual seeded DB record.",
+      "correction": "Seed real SQLite commit and record readback/effect count; preserve first failure."
+    },
+    {
+      "category": "fixture_and_agent_scope",
+      "issue": "Job fixtures contained unrelated broken application code; agent pursued irrelevant work.",
+      "correction": "Restrict job fixtures to task-relevant data and enforce operator-signed tool scope."
+    },
+    {
+      "category": "backend_admission",
+      "issue": "New schema/scope rejection could retain an active slot before spawning model.",
+      "correction": "Validate before admission; regression sends 12 rejections then a valid request; release setup failures."
+    },
+    {
+      "category": "native_protocol",
+      "issue": "Initial native fallback fixed code and passed tests, but long Cline display queries lost receipt correlation and CLI returned invalid_tool_response.",
+      "correction": "Rollback verified healthy; add unique prefix/length binder regression; rerun all 18 missions and three native cases before accepting release."
+    },
+    {
+      "category": "audit_helper",
+      "issue": "HTTP helper callback syntax and attestation target hash length initially blocked postchecks.",
+      "correction": "Correct helpers, preserve initial failures and rerun against actual state."
+    }
+  ],
+  "activation": {
+    "status": "active_verified",
+    "candidate_sha256": {
+      "agent-controller.cjs": "93d715bcf5ed6e74122a88559ea85e88f46be1354c9769674502c81089c79623",
+      "task-continuity.cjs": "441ae2c29c4f9a5a46bdfac571bb1007640518cfb8495e4251fef98448409f4c",
+      "decision-recovery.cjs": "afeff8cb94cfdee60b74d14e50895feaeb2d7192372c5e5412b704c93ae875c2",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "backup": "/var/backups/harmonika-level15/20261115T083551Z",
+    "prior_absent": [
+      "task-continuity.cjs"
+    ],
+    "health_http": 200,
+    "unrelated_service_pids_unchanged": true,
+    "final_verification_file": "level15-release-verification.json",
+    "source_sha256": {
+      "agent-controller.cjs": "93d715bcf5ed6e74122a88559ea85e88f46be1354c9769674502c81089c79623",
+      "task-continuity.cjs": "441ae2c29c4f9a5a46bdfac571bb1007640518cfb8495e4251fef98448409f4c",
+      "decision-recovery.cjs": "afeff8cb94cfdee60b74d14e50895feaeb2d7192372c5e5412b704c93ae875c2",
+      "internal-tool-planner.js": "0002755604001f1ff5f74b23da57cc6367a7d60620e968e3094dd5c706272473"
+    },
+    "service_pids": {
+      "harmonika-ai": 1844196,
+      "harmonika-web-chat-live": 1431266,
+      "harmonika-shared-core": 3895945,
+      "harmonika-coding-runtime": 1719961
+    },
+    "source_local_exam_and_installed_match": true,
+    "native_postchecks_passed": true,
+    "initial_native_failure_triggered_safe_rollback": true
+  },
+  "review": {
+    "reviewer": "OpenCode",
+    "mode": "read_only",
+    "claude_involved": false,
+    "raw_review_sha256": "3f7f35b330d7235b0acd18d3199ebcb7ebf78f092a30518d2b74939e18b1da3d",
+    "dispositions": [
+      {
+        "finding": "build-only or count-less receipts could satisfy test requirement",
+        "resolution": "exclude build from test executors; require correlated positive count and passing result"
+      },
+      {
+        "finding": "terminal lookup could borrow job ID from input args",
+        "resolution": "require original identity confirmed by result body; conflicting IDs fail"
+      },
+      {
+        "finding": "failed test could be masked by later read and polite request prefix",
+        "resolution": "latest explicit failed test blocks completion independent of cited later reads"
+      },
+      {
+        "finding": "writes could reset unrelated unchanged poll bound",
+        "resolution": "no global poll reset after writes"
+      },
+      {
+        "finding": "compaction state depends on prepared request identity",
+        "resolution": "document in-memory WeakMap lifetime; caller must retain history, no cross-session database claim"
+      },
+      {
+        "finding": "ambiguous operations conservatively block same mutator",
+        "resolution": "retain conservative guard; allow known read-only diagnostic and status reconciliation"
+      }
+    ]
+  },
+  "privacy": {
+    "reports": "technical mechanics, enum/counts and hashes only",
+    "raw_user_chat_customer_data_credentials_in_reports": false,
+    "issuer_key_exported": false,
+    "temporary_native_provider_references_removed": true,
+    "raw_synthetic_recordings_published_to_repository": false
+  },
+  "limits": [
+    "Legacy TUI tool receipts remain client_reported, not independent server attestations.",
+    "Continuity is request/history-derived memory, not a newly persistent cross-session database; rebuilt external requests need adequate history.",
+    "Intent classification is conservative pattern recognition, not universal semantic understanding.",
+    "The fixture verifier and native-client instructions are not a general hostile-code sandbox.",
+    "HMAC marker contracts are operator proof, not public tenant IAM; executor authorization remains required.",
+    "Idle-guarded activation is not an atomic external-admission fence.",
+    "Passing these isolated cases does not guarantee every future task succeeds or that hallucinations are impossible."
+  ],
+  "evidence": {
+    "private_directory": "/Users/id/.local/state/harmonika-exams/level15-20261115",
+    "manifest": [
+      {
+        "file": "level15-candidate.json",
+        "sha256": "ed28f87a7edd3b0ee255a97ed879c20c8537ec9082b5092d507891e960b5876c"
+      },
+      {
+        "file": "level15-attestations.json",
+        "sha256": "d0233fa9ac30a59d39655905fc78cbba685501d707576b4f6a88324a2bb90111"
+      },
+      {
+        "file": "activation.json",
+        "sha256": "73e57ea35618f55709e2eab0a1e03cea79689ff2f8932a4215026c1183dcf280"
+      },
+      {
+        "file": "level15-http-canary.json",
+        "sha256": "32e08627dede0e72ad5d9c6b7b274ba341d8590f5d051735700a421bb1217acd"
+      },
+      {
+        "file": "verification.json",
+        "sha256": "1a5d642ae43de41ea032c3cadaa49edc158ec9923cd345b71f7214c2e46dd71a"
+      },
+      {
+        "file": "expected-baseline.json",
+        "sha256": "8dac35750cacfc558fc4f5a97b6d2f3ac9c83355586b1612edba8e4d5d740f69"
+      },
+      {
+        "file": "level15-release-verification.json",
+        "sha256": "461567e335a60edb51f45895125ead22ca66b1b7e2fa962b67f6d80e838e1fb3"
+      },
+      {
+        "file": "baseline.json",
+        "sha256": "c5cb02528e0db4b216ca3da4779eb5f8f08665cbbd3c7ead4d57a9de49831ea7"
+      },
+      {
+        "file": "verified-baseline-after.json",
+        "sha256": "a9f6fac1717bd6963466c852a5e810f5e5e2b641c897f9793d7cc918144516aa"
+      },
+      {
+        "file": "native-query-correlation-regression.json",
+        "sha256": "ff4e7a5421662f2d1c16ebbf7e7e053a458ef0835f08efa9c0c5e6242be87cbe"
+      },
+      {
+        "file": "test-summaries.json",
+        "sha256": "fb81280844d905709844e1295f6ebbec00a2d670ed39fa6320289f024100b1a2"
+      },
+      {
+        "file": "exam-attempt-history.json",
+        "sha256": "65cc61e8f1abe7cfecbb855e213b0c50cc9ec39152328ee33e1ee45eac34bcea"
+      },
+      {
+        "file": "pre-correlation-native-cli-results.json",
+        "sha256": "1276062f8e4da0ba013ba081440017eb4b7ed51406fc02978463e92b8d1bd25b"
+      },
+      {
+        "file": "review-dispositions.json",
+        "sha256": "f44944b5689d58a35144dc348be699fd369384ace0c244b85ea01be811539bde"
+      }
+    ],
+    "signing_keys_or_raw_transcripts_in_manifest": false
+  },
+  "github_commit_or_push_performed": false
+}

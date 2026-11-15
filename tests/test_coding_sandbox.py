@@ -192,6 +192,16 @@ class PlanDispatchTests(unittest.TestCase):
         self.assertEqual(sb.build_plan('test.run', {'runner': 'npm_test', 'filter': 'api'}).steps,
                          [['npm', 'test', '--', 'api']])
 
+    def test_unittest_file_uses_bounded_discovery_pattern(self):
+        for path, start, pattern in [('test_app.py', '.', 'test_app.py'),
+                                     ('tests/test_app.py', 'tests', 'test_app.py')]:
+            plan = sb.build_plan('test.run', {'runner': 'python_unittest', 'path': path, 'filter': 'Original'})
+            self.assertEqual(plan.steps, [['python3', '-m', 'unittest', 'discover', '-s', start,
+                                         '-t', '/workspace', '-p', pattern, '-k', 'Original']])
+    def test_internal_verifier_isolated_before_python_startup(self):
+        self.assertEqual(sb.build_plan('_internal.verify_python', {'code': 'print(42)'}).steps,
+                         [['python3', '-I', '-c', 'print(42)']])
+
     def test_test_run_timeout_obeyed(self):
         self.assertEqual(sb.build_plan('test.run', {'runner': 'python_unittest'}).step_timeout, 120.0)
         self.assertEqual(sb.build_plan('test.run', {'runner': 'python_unittest',

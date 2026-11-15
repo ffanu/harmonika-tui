@@ -249,9 +249,14 @@ def build_plan(skill_id: Any, args: Any) -> _Plan:
         cmd = command()
         timeout = timeout_number(SKILL_TIMEOUT_DEFAULT)
         return _Plan([['/bin/sh', '-lc', cmd]], timeout, timeout + OVERALL_MARGIN_SECONDS)
-    if skill_id == 'exec.python':
+    if skill_id in ('exec.python', '_internal.verify_python'):
         timeout = timeout_number(SKILL_TIMEOUT_DEFAULT)
-        return _Plan([code_or_path('exec.python')], timeout, timeout + OVERALL_MARGIN_SECONDS)
+        cmd = code_or_path('exec.python')
+        # Issuer-only operation, absent from the public catalog/schema. -I must
+        # apply at interpreter startup, before workspace sitecustomize can run.
+        if skill_id == '_internal.verify_python':
+            cmd.insert(1, '-I')
+        return _Plan([cmd], timeout, timeout + OVERALL_MARGIN_SECONDS)
     if skill_id == 'exec.node':
         timeout = timeout_number(SKILL_TIMEOUT_DEFAULT)
         return _Plan([code_or_path('exec.node')], timeout, timeout + OVERALL_MARGIN_SECONDS)
@@ -264,7 +269,14 @@ def build_plan(skill_id: Any, args: Any) -> _Plan:
         if filt is not None:
             filt = _check_plain(filt, 'filter', 256)
         if runner == 'python_unittest':
-            cmd = ['python3', '-m', 'unittest', 'discover', '-s', path, '-t', '/workspace']
+            # Named files are discovery patterns, never start directories.
+            start, pattern = path, None
+            if path.endswith('.py'):
+                start, _, pattern = path.rpartition('/')
+                start = start or '.'
+            cmd = ['python3', '-m', 'unittest', 'discover', '-s', start, '-t', '/workspace']
+            if pattern:
+                cmd += ['-p', pattern]
             if filt:
                 cmd += ['-k', filt]
         elif runner == 'node_test':

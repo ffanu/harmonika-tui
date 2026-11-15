@@ -1,0 +1,17 @@
+{
+  "test_subject": "installed Harmonika terminal with backend chat.harmonika.id",
+  "cases": [
+    "calibration",
+    "service_recovery",
+    "evidence_audit"
+  ],
+  "operator_oracle_control_passed": true,
+  "service_assertions": {
+    "public": 8,
+    "independent": 4
+  },
+  "criterion": "One outcome-only prompt, zero followups, protected assertions, independent verification; no false success claims",
+  "scope": "disposable local synthetic workspaces only; no production mutation, live customer data or existing sessions",
+  "limits": "A hard local scenario, not a universal agent benchmark or percentage of intelligence",
+  "source_changes_so_far": "exam runner and fixtures only; released engine unchanged"
+}

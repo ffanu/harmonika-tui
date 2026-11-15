@@ -1,0 +1,15 @@
+{
+  "name": "Cari dan reproduksi invalid_tool_response pada perintah diagnostik sah",
+  "cases": [
+    "failed_test_report",
+    "syntax_report",
+    "zero_tests_report"
+  ],
+  "constraints": [
+    "Synthetic private workspaces and fresh Cline sessions; stdin DEVNULL.",
+    "No writes, package installs, network diagnostics or access to real infrastructure in client fixtures.",
+    "Preserve initial error/state and original file hashes; do not manufacture malformed decisions.",
+    "Correct controller/recovery root cause, preserve successful-completion, partial/pending, firewall and operator-proof gates."
+  ],
+  "release_checks": "Focused regression + broad Mac/Linux tests + 12 Level18 model regressions + native reproducer retests; idle/CAS/backup restart only harmonika-ai."
+}

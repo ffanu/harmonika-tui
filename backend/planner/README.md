@@ -1,5 +1,29 @@
 # Panduan keputusan dan konteks engine
 
+## Ujian inisiatif pada perintah singkat
+
+Suite memakai Cline asli melalui provider Harmonika yang sudah dikonfigurasi,
+workspace sintetis privat dan satu perintah hasil akhir tanpa arahan susulan.
+Contohnya: “Cek kenapa total pesanan keliru, lalu bereskan”, audit tanpa perubahan,
+dan pemeriksaan status pembayaran yang memiliki bukti bertentangan.
+
+Jalankan dari root repo dengan direktori privat baru untuk setiap kasus:
+
+```sh
+python3 scripts/initiative-command-native.py --root <direktori-privat-baru> --case audit_read_only
+```
+
+Pilihan kasus: `arithmetic`, `chained`, `tool_fallback`, `discovery_decoy`,
+`audit_read_only`, dan `conflicting_evidence`. Tambahkan `--prepare-only` untuk
+memeriksa fixture tanpa mengakses provider atau memanggil model. Stdin klien
+diisolasi agar skrip operator tidak menjadi konteks tambahan. Jangan gunakan
+session ID atau direktori proyek pengguna untuk ujian ini.
+
+[Hasil, insiden awal dan versi aktif](../../docs/INITIATIVE-COMMAND-EXAM-20261115.json)
+memisahkan temuan audit gagal yang benar, klaim keberhasilan tes, pemeriksaan
+independen dan batas kemampuan yang diuji. Ini pembaruan workflow engine,
+bukan training bobot model atau ukuran kecerdasan universal.
+
 ## Controller tugas otonom
 
 `agent-controller.cjs` memeriksa kelanjutan pekerjaan, checklist, referensi hasil,
