@@ -18,7 +18,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 [![Status rilis](https://img.shields.io/badge/status-rilis-blue?style=flat-square)](docs/STATUS.md)
 
 ![Engine](https://img.shields.io/badge/context-872.000%20token-8ec07c?style=flat-square)
-![Skills](https://img.shields.io/badge/skills-24%20resmi-fabd2f?style=flat-square)
+![Skills](https://img.shields.io/badge/skills-25%20resmi-fabd2f?style=flat-square)
 ![Update](https://img.shields.io/badge/update-Ed25519%20signed-83a598?style=flat-square)
 ![Key](https://img.shields.io/badge/lisensi-1%20key%201%20perangkat-d3869b?style=flat-square)
 
@@ -98,7 +98,7 @@ Untuk alur kerja panjang: `F2` metrik · `F3` kejadian teredaksi · `F4` file/ko
 | 🔑 | **Kontrol key** | validasi ke server, entitlement, penyimpanan privat |
 | 🛡️ | **Update terkendali** | signature Ed25519, checksum SHA-256, preflight, rollback — tanpa auto-update |
 
-**Skill resmi** (24): `harmonika-ui` · `visual-design` (RTX + OCR) · `debug` · `debug-scanner` · `browser-qa` · `shared-core` · `skill-index` · `mobile-builder` · `web-builder` · `legal` · `coding` (38 operasi) · `engineering` · `seo` · `documents` · `erp` · `ssh` · `git` · `release` · `tui-dev` · `async-concurrency` · `ai-integration` · `state-persistence` · `terminal-qa` · `delegate`
+**Skill resmi** (25): `harmonika-ui` · `visual-design` (RTX + OCR) · `debug` · `debug-scanner` · `browser-qa` · `shared-core` · `skill-index` · `mobile-builder` · `web-builder` · `legal` · `coding` (38 operasi) · `engineering` · `seo` · `documents` · `erp` · `ssh` · `git` · `release` · `tui-dev` · `async-concurrency` · `ai-integration` · `state-persistence` · `terminal-qa` · `delegate` · `cf`
 
 > 📖 Detail tiap skill: [docs/SHARED-SKILLS.md](docs/SHARED-SKILLS.md) · [docs/MASTER-SKILLS.md](docs/MASTER-SKILLS.md)
 
