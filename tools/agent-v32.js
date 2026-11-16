@@ -282,6 +282,349 @@ function defaultVerification(cwd) {
       ? "python3 -m unittest discover"
       : "node --test";
 }
+
+// ── Activity narration layer (Codex-style bullets) ─────────────────────
+const NARR_TTY = () => process.stdout.isTTY && !process.env.NO_COLOR;
+const C = () => {
+  if (!NARR_TTY())
+    return { b: "", dim: "", o: "", g: "", r: "", m: "", rs: "" };
+  return {
+    b: "\x1b[1m",
+    dim: "\x1b[2m",
+    o: "\x1b[38;2;255;123;0m", // harmonika primary
+    g: "\x1b[32m",
+    r: "\x1b[31m",
+    m: "\x1b[38;5;244m",
+    rs: "\x1b[0m",
+  };
+};
+const trunc = (s, n = 100) => {
+  const t = String(s ?? "").replace(/\s+/g, " ").trim();
+  return t.length > n ? t.slice(0, n - 1) + "…" : t;
+};
+function previewLines(output) {
+  const raw = String(output ?? "");
+  const lines = raw.split("\n").filter((l) => l.trim());
+  if (!lines.length) return ["(no output)"];
+  return lines.slice(0, 3).map((l) => trunc(l, 100));
+}
+function diffSummary(prev, next) {
+  const a = prev ? prev.split("\n") : [];
+  const b = next.split("\n");
+  const setA = new Map();
+  for (const l of a) setA.set(l, (setA.get(l) || 0) + 1);
+  const setB = new Map();
+  for (const l of b) setB.set(l, (setB.get(l) || 0) + 1);
+  let added = 0,
+    removed = 0;
+  for (const [l, n] of setB) added += Math.max(0, n - (setA.get(l) || 0));
+  for (const [l, n] of setA) removed += Math.max(0, n - (setB.get(l) || 0));
+  const plus = b.find((l) => (setA.get(l) || 0) < (setB.get(l) || 0) && l.trim());
+  const minus = a.find((l) => (setB.get(l) || 0) < (setA.get(l) || 0) && l.trim());
+  return {
+    added,
+    removed,
+    plus: plus ? trunc(plus, 80) : null,
+    minus: minus ? trunc(minus, 80) : null,
+    isNew: !prev,
+  };
+}
+function parseOutputField(output, key) {
+  const m = String(output || "").match(new RegExp(key + ":\\s*(.{1,120})"));
+  return m ? m[1].trim() : "";
+}
+function narrDetail(name, args, result, cwd) {
+  const out = result.output || "";
+  const d = {};
+  const rp = (p) =>
+    cwd && typeof p === "string" && p.startsWith(cwd + path.sep)
+      ? p.slice(cwd.length + 1)
+      : p;
+  try {
+    switch (name) {
+      case "bash":
+        d.command = args.command;
+        break;
+      case "read":
+        d.path = rp(args.path);
+        d.bytes = out.length;
+        break;
+      case "list":
+        d.path = rp(args.path);
+        try {
+          d.count = JSON.parse(out).length;
+        } catch {}
+        break;
+      case "write":
+        Object.assign(d, result._diff || {});
+        d.path = rp(args.path);
+        break;
+      case "web_read": {
+        d.url = args.url;
+        d.title = parseOutputField(out, "title");
+        const len = parseOutputField(out, "length");
+        d.chars = len ? Number(len.replace(/\D/g, "")) || null : null;
+        break;
+      }
+      case "kb_store":
+        d.id = Number((out.match(/id=(\d+)/) || [])[1]) || null;
+        d.tags = Array.isArray(args.tags) ? args.tags : [];
+        break;
+      case "kb_search":
+        d.query = args.query;
+        d.matches = [];
+        for (const m of out.matchAll(/\[id=(\d+) score=([\d.]+)[^\]]*\] (.*)/g)) {
+          if (d.matches.length < 2)
+            d.matches.push({ id: m[1], score: m[2], text: trunc(m[3], 60) });
+        }
+        break;
+      case "file_parse":
+        d.file = rp(args.path);
+        d.kind = parseOutputField(out, "kind");
+        d.meta = parseOutputField(out, "meta");
+        break;
+      case "transcribe":
+        d.file = rp(args.path);
+        d.language = parseOutputField(out, "language");
+        d.duration = parseOutputField(out, "duration").replace(/\n.*/s, "");
+        break;
+      case "image_generate":
+        d.file = (out.match(/image saved: (\S+)/) || [])[1] || null;
+        d.info = (out.match(/\((.*)\)/) || [])[1] || "";
+        break;
+      case "video_generate":
+        d.job = result.job_id || null;
+        d.kb = (out.match(/size=(\d+)KB/) || [])[1] || null;
+        break;
+      case "repo_read":
+        d.repo = parseOutputField(out, "repo");
+        d.stats = parseOutputField(out, "stats");
+        d.lang = parseOutputField(out, "languages");
+        break;
+      case "safety_check":
+        d.safe = parseOutputField(out, "safe");
+        d.risk = parseOutputField(out, "risk");
+        break;
+      case "batch_run": {
+        const m = out.match(/batch (\d+)\/(\d+) completed/);
+        d.ok = m ? Number(m[1]) : 0;
+        d.total = m ? Number(m[2]) : 0;
+        d.items = String(args.commands || [])
+          .split(",")
+          .slice(0, 3)
+          .map((c) => trunc(c, 40));
+        break;
+      }
+      case "ssh_exec":
+        d.command = args.command;
+        d.alias = "remote";
+        break;
+      case "check":
+        d.service = args.service;
+        d.kind = args.kind;
+        break;
+      case "delegate":
+        d.job = result.job_id || null;
+        break;
+      case "delegate_status":
+        d.job = args.job_id || args.request_id || null;
+        break;
+    }
+  } catch {}
+  return d;
+}
+function narrToolLine(name, args, detail, status, error) {
+  const c = C();
+  name = TOOL_ALIASES[name] || name;
+  const bullet = status === "failed" ? c.r + "✗" : c.o + "•";
+  let head = "";
+  switch (name) {
+    case "bash":
+      head = "Ran `" + trunc(detail.command, 70) + "`";
+      break;
+    case "read":
+      head = "Read file " + detail.path;
+      break;
+    case "list":
+      head =
+        "Listed " + detail.path + (detail.count != null ? ` (${detail.count} entries)` : "");
+      break;
+    case "write":
+      if (detail.isNew)
+        head = "Wrote " + detail.path + " (new · " + detail.added + " lines)";
+      else
+        head =
+          "Edited " +
+          detail.path +
+          ` (+${detail.added} -${detail.removed})`;
+      break;
+    case "verify":
+      head = "Ran verification";
+      break;
+    case "web_read":
+      head = "Browsing the web";
+      break;
+    case "kb_store":
+      head = "Stored knowledge #" + (detail.id ?? "?") +
+        (detail.tags?.length ? " (tags: " + detail.tags.join(", ") + ")" : "");
+      break;
+    case "kb_search":
+      head = 'Searched the knowledge base for "' + trunc(detail.query, 50) + '"';
+      break;
+    case "file_parse":
+      head = "Parsed " + detail.file + (detail.kind ? " (" + detail.kind + ")" : "");
+      break;
+    case "transcribe":
+      head =
+        "Transcribed " + detail.file +
+        " (" + [detail.language, detail.duration ? detail.duration + "s" : null]
+          .filter(Boolean)
+          .join(" · ") + ")";
+      break;
+    case "image_generate":
+      head = "Created image " + (detail.file || "") + (detail.info ? " (" + detail.info + ")" : "");
+      break;
+    case "video_generate":
+      head = "Generated video — job " + (detail.job || "?");
+      break;
+    case "repo_read":
+      head = "Read repo " + detail.repo;
+      break;
+    case "safety_check":
+      head = "Checked content safety (" + detail.safe + " · risk " + detail.risk + ")";
+      break;
+    case "batch_run":
+      head = `Ran batch: ${detail.ok}/${detail.total} completed`;
+      break;
+    case "ssh_exec":
+      head = "Ran ssh: `" + trunc(detail.command, 60) + "`";
+      break;
+    case "check":
+      head = "Checked " + detail.service + " (" + detail.kind + ")";
+      break;
+    case "delegate":
+      head = "Delegated subtask " + String(detail.job || "").slice(0, 8);
+      break;
+    case "delegate_status":
+      head = "Checked delegated job " + String(detail.job || "").slice(0, 8);
+      break;
+    default:
+      head = name;
+  }
+  return { head, bullet };
+}
+function narrateToolEvent(e) {
+  const c = C();
+  e = { ...e, tool: TOOL_ALIASES[e.tool] || e.tool };
+  const { head, bullet } = narrToolLine(
+    e.tool,
+    e.args || {},
+    e.detail || {},
+    e.status,
+    e.error,
+  );
+  const lines = [`${bullet}${c.rs} ${head}${e.status === "failed" && e.error ? c.r + " — " + e.error + c.rs : ""}`];
+  const d = e.detail || {};
+  const sub = [];
+  const pushSub = (t) => sub.push(c.m + "  └ " + t + c.rs);
+  switch (e.tool) {
+    case "bash":
+    case "ssh_exec":
+      for (const l of previewLines(e.output)) pushSub(l);
+      break;
+    case "write":
+      if (!d.isNew && d.plus) {
+        lines.push(c.g + "  + " + d.plus + c.rs);
+        lines.push(c.m + "   ⋮" + c.rs);
+        if (d.minus) lines.push(c.r + "  - " + d.minus + c.rs);
+      }
+      break;
+    case "web_read":
+      if (d.url) {
+        let host = "";
+        try { host = new URL(d.url).host; } catch {}
+        pushSub(
+          host + (d.title ? ' — "' + trunc(d.title, 40) + '"' : "") +
+          (d.chars ? " · " + d.chars.toLocaleString() + " chars" : ""),
+        );
+      }
+      break;
+    case "kb_search":
+      for (const m of d.matches || []) pushSub(`#${m.id} ${m.score} ${m.text}`);
+      break;
+    case "file_parse":
+      if (e.output) pushSub(trunc(e.output.split("\n")[3] || "", 90));
+      break;
+    case "transcribe":
+      if (e.output) {
+        const t = e.output.split("\n").slice(2).join(" ");
+        pushSub(trunc(t, 90));
+      }
+      break;
+    case "video_generate":
+      pushSub(
+        "done" + (d.kb ? " · " + d.kb + "KB" : "") +
+        (d.job ? " · /api/tools/video/file/" + d.job : ""),
+      );
+      break;
+    case "repo_read":
+      pushSub(trunc((d.lang || "") + " · " + (d.stats || ""), 90));
+      break;
+    case "batch_run":
+      for (const it of d.items || []) pushSub(it);
+      break;
+    case "check":
+      if (e.output) pushSub(trunc(e.output, 80));
+      break;
+  }
+  return [...lines, ...sub];
+}
+function makeEmitter(format) {
+  if (format === "json")
+    return (e) => {
+      if (e.event === "progress") console.log(clean(e.text));
+      else console.log(JSON.stringify(e));
+    };
+  const narrate = (e) => {
+    const c = C();
+    if (e.event === "session")
+      console.log(
+        c.b + "Started session " + String(e.session_id).slice(0, 8) + c.rs +
+        (e.task ? c.dim + " (task: " + trunc(e.task, 70) + ")" + c.rs : ""),
+      );
+    else if (e.event === "thinking")
+      console.log(c.dim + "◦ " + trunc(e.text, 110) + c.rs);
+    else if (e.event === "progress") {
+      if (e.final) return; // final report dicetak oleh main()
+      console.log(c.dim + "  … " + clean(e.text) + c.rs);
+    }
+    else if (e.event === "tool") {
+      for (const l of narrateToolEvent(e)) console.log(l);
+    }
+  };
+  if (format === "both")
+    return (e) => {
+      narrate(e);
+      process.stderr.write(
+        JSON.stringify({ ...e, ts: e.ts || Date.now() }) + "\n",
+      );
+    };
+  return narrate;
+}
+function exitedLine(result, startedMs) {
+  const c = C();
+  const dur =
+    startedMs ? Math.round((Date.now() - startedMs) / 1000) + "s" : "";
+  const parts = [
+    result.status,
+    (result.operations ?? 0) + " operations",
+    dur,
+  ].filter(Boolean);
+  const icon = result.success ? c.g + "✔" : c.r + "✗";
+  return icon + c.rs + " Exited — " + parts.join(" · ");
+}
+// ── end narration layer ────────────────────────────────────────────────
+
 class Agent {
   constructor(options = {}) {
     this.options = options;
@@ -467,6 +810,7 @@ class Agent {
     }
     this.persist();
     let result;
+    const t0 = Date.now();
     try {
       if (name === "list") {
         const f = safePath(this.cwd, args.path);
@@ -491,6 +835,9 @@ class Agent {
         if (args.content.length > 512 * 1024) throw Error("write_limit");
         const f = safePath(this.cwd, args.path);
         fs.mkdirSync(path.dirname(f), { recursive: true });
+        const prev = fs.existsSync(f)
+          ? fs.readFileSync(f, "utf8")
+          : null;
         fs.writeFileSync(f, args.content, { mode: 0o600 });
         this.state.verification = null;
         result = {
@@ -498,6 +845,7 @@ class Agent {
           exit_code: 0,
           output: "written",
           hash: this.store.digest(fs.readFileSync(f)),
+          _diff: diffSummary(prev || "", args.content),
         };
         step.artifact = this.store.digest(path.relative(this.cwd, f));
         step.hash = result.hash;
@@ -994,6 +1342,8 @@ class Agent {
       this.store.memory(step.error || "execution_failed");
     }
     this.persist();
+    result.detail = narrDetail(TOOL_ALIASES[name] || name, args, result, this.cwd);
+    result.took_ms = Date.now() - t0;
     return {
       ...result,
       output: clean(result.output || ""),
@@ -1045,7 +1395,12 @@ class Agent {
         };
       }
       this.persist();
-      this.emit({ event: "session", session_id: id, resumed: !!resume });
+      this.emit({
+        event: "session",
+        session_id: id,
+        resumed: !!resume,
+        task: task.slice(0, 120),
+      });
       let completionRepairs = 0;
       const messages = [
         {
@@ -1084,9 +1439,11 @@ class Agent {
         if (!msg || typeof msg !== "object")
           return this.result("blocked", "Respons gateway tidak valid.");
         if (!msg.tool_calls?.length) {
+          if (msg.content && msg.content.trim())
+            this.emit({ event: "thinking", text: msg.content });
           const final = this.complete(msg.content || "");
           if (final.success || completionRepairs++ >= 2) {
-            this.emit({ event: "progress", text: final.report });
+            this.emit({ event: "progress", text: final.report, final: true });
             return final;
           }
           this.state.status = "running";
@@ -1128,9 +1485,10 @@ class Agent {
         });
         for (const call of msg.tool_calls) {
           let result;
+          let callArgs = {};
           try {
-            const args = JSON.parse(call.function.arguments);
-            result = await this.tool(call.function.name, args);
+            callArgs = JSON.parse(call.function.arguments);
+            result = await this.tool(call.function.name, callArgs);
           } catch (e) {
             result = {
               status: "failed",
@@ -1140,6 +1498,13 @@ class Agent {
                 : "invalid_tool_arguments",
               output: "",
             };
+            try {
+              result.detail = narrDetail(
+                TOOL_ALIASES[call.function.name] || call.function.name,
+                callArgs,
+                result,
+              );
+            } catch {}
             this.state.verification = null;
             if (this.state.steps.length >= 128)
               return this.result(
@@ -1157,7 +1522,7 @@ class Agent {
             this.persist();
           }
           if (result.final) {
-            this.emit({ event: "progress", text: result.final.report });
+            this.emit({ event: "progress", text: result.final.report, final: true });
             return result.final;
           }
           this.emit({
@@ -1165,6 +1530,13 @@ class Agent {
             tool: call.function.name,
             status: result.status,
             exit_code: result.exit_code ?? null,
+            error: result.error || null,
+            detail: result.detail || undefined,
+            output:
+              result.output && result.output.length <= 600
+                ? result.output
+                : undefined,
+            duration_ms: result.took_ms,
           });
           messages.push({
             role: "tool",
@@ -1208,7 +1580,11 @@ function parse(argv) {
       if (!argv[i + 1]) throw Error("missing_option");
       options[names[a]] = argv[++i];
     } else if (a === "--json") options.json = true;
-    else if (a === "--verify-remote") options.verifyRemote = true;
+    else if (a === "--format") {
+      if (!argv[i + 1] || !["default", "json", "both"].includes(argv[i + 1]))
+        throw Error("invalid_format");
+      options.format = argv[++i];
+    } else if (a === "--verify-remote") options.verifyRemote = true;
     else if (a.startsWith("--")) throw Error("unknown_option");
     else task.push(a);
   }
@@ -1250,25 +1626,48 @@ function key() {
 async function main() {
   if (process.argv[2] === "--help") {
     console.log(
-      "harmonika agent-v32 [--cwd DIR] [--verify COMMAND] [--verification tests|artifact|inspection|command] [--resume SESSION] [--ssh-alias ALIAS --verify-remote] TASK",
+      "harmonika agent-v32 [--cwd DIR] [--verify COMMAND] [--verification tests|artifact|inspection|command] [--resume SESSION] [--ssh-alias ALIAS --verify-remote] [--format default|json|both] TASK\n\n--format default : activity narration (Codex-style bullets; default saat TTY)\n--format json    : JSONL events (default saat non-TTY / pipe)\n--format both    : narration di stdout + JSONL di stderr",
     );
     return;
   }
   const { options, task } = parse(process.argv.slice(2));
+  const format =
+    options.format ||
+    (options.json ? "json" : process.stdout.isTTY ? "default" : "json");
   const k = key();
+  const startedMs = Date.now();
   const agent = new Agent({
     ...options,
     key: k,
+    emit: makeEmitter(format),
     url: "https://chat.harmonika.id/v1/chat/completions",
     skillsUrl: "https://chat.harmonika.id/v1/skills/invoke",
   });
   const result = await agent.run(task, options);
-  console.log(
-    JSON.stringify({
-      ...result,
-      report: options.json ? result.report : undefined,
-    }),
-  );
+  if (format === "json") {
+    console.log(
+      JSON.stringify({
+        ...result,
+        report: options.json ? result.report : undefined,
+      }),
+    );
+  } else {
+    if (result.report && result.report.trim())
+      console.log(clean(result.report));
+    console.log(exitedLine(result, startedMs));
+    if (format === "both")
+      process.stderr.write(
+        JSON.stringify({
+          event: "result",
+          session_id: result.session_id,
+          status: result.status,
+          success: result.success,
+          operations: result.operations,
+          duration_ms: Date.now() - startedMs,
+          ts: Date.now(),
+        }) + "\n",
+      );
+  }
   process.exitCode = result.success
     ? 0
     : result.status === "outcome_unknown"
