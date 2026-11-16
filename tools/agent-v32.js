@@ -174,6 +174,16 @@ const definition = (name, properties, required = []) => ({
         "Generate a short video (6s, 480x720) from a text prompt using CogVideoX-2b on the RTX GPU. Takes several minutes; the client polls until done. Read-only (no local writes).",
       batch_run:
         "Run multiple local workspace shell commands in parallel (bounded). Each command obeys the same safety rules as bash. Returns all outputs.",
+      file_parse:
+        "Parse one workspace document (pdf/docx/xlsx/pptx/txt/csv/json/md) into text via the Harmonika file parser. Read-only.",
+      transcribe:
+        "Transcribe one workspace audio/video file to text via faster-whisper on the RTX GPU. Optional ISO language hint (e.g. id, en). Read-only.",
+      image_generate:
+        "Generate one PNG image from a text prompt via sd-turbo on the RTX GPU (a few seconds) and save it into the workspace. Writes one image file.",
+      repo_read:
+        "Read one public GitHub repository structure (tree, languages, README, key files) via the Harmonika ZRead service. Read-only.",
+      safety_check:
+        "Check one text against the Harmonika content safety heuristics. Returns safety verdict and flags. Read-only.",
       finish:
         "Propose final answer. The client independently checks completion.",
     }[name],
@@ -204,6 +214,11 @@ const INTERNAL_TOOLS = [
     { commands: { type: "array", items: string } },
     ["commands"],
   ),
+  definition("file_parse", { path: string }, ["path"]),
+  definition("transcribe", { path: string, language: string }, ["path"]),
+  definition("image_generate", { prompt: string, filename: string }, ["prompt"]),
+  definition("repo_read", { url: string }, ["url"]),
+  definition("safety_check", { text: string }, ["text"]),
   definition(
     "check",
     { service: string, kind: { type: "string", enum: ["systemd", "docker"] } },
@@ -429,7 +444,7 @@ class Agent {
           "queued",
         ].includes(s.status),
       ) &&
-      !["read", "list", "check", "delegate_status", "web_read", "kb_search", "video_generate"].includes(name)
+      !["read", "list", "check", "delegate_status", "web_read", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(name)
     )
       throw Error("operation_reconciliation_required");
     if (
@@ -598,6 +613,136 @@ class Agent {
             " -o video.mp4",
           job_id: jobId,
         };
+      } else if (name === "file_parse") {
+        const f = safePath(this.cwd, args.path);
+        const stat = fs.statSync(f);
+        if (stat.size > 12 * 1024 * 1024) throw Error("file_too_large");
+        const b64 = fs.readFileSync(f).toString("base64");
+        const data = await gateway.toolsPost(
+          "https://chat.harmonika.id/api/tools/fileparser/parse",
+          { filename: path.basename(f), content_b64: b64 },
+          { key: this.options.key, timeout: 120000 },
+        );
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "kind: " +
+            data.kind +
+            " length: " +
+            (data.length || 0) +
+            " meta: " +
+            JSON.stringify(data.meta || {}) +
+            "\n\n" +
+            String(data.text || "").slice(0, 30000),
+        };
+      } else if (name === "transcribe") {
+        const f = safePath(this.cwd, args.path);
+        const stat = fs.statSync(f);
+        if (stat.size > 25 * 1024 * 1024) throw Error("file_too_large");
+        const b64 = fs.readFileSync(f).toString("base64");
+        const payload = {
+          filename: path.basename(f),
+          content_b64: b64,
+        };
+        if (args.language && /^[a-z]{2}(-[A-Za-z]{2,4})?$/.test(args.language))
+          payload.language = args.language;
+        const data = await gateway.toolsPost(
+          "https://chat.harmonika.id/api/tools/asr/transcribe",
+          payload,
+          { key: this.options.key, timeout: 300000 },
+        );
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "language: " +
+            data.language +
+            " duration: " +
+            data.duration +
+            "s\n\n" +
+            String(data.text || "").slice(0, 30000),
+        };
+      } else if (name === "image_generate") {
+        if (!args.prompt || args.prompt.length > 1500)
+          throw Error("invalid_prompt");
+        const data = await gateway.toolsPost(
+          "https://chat.harmonika.id/api/tools/imagegen/generate",
+          { prompt: args.prompt },
+          { key: this.options.key, timeout: 240000 },
+        );
+        if (!data.ok) throw Error(data.error || "image_generation_failed");
+        const slug =
+          (args.filename || args.prompt)
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .slice(0, 40) || "image";
+        const out = path.join(this.cwd, slug + ".png");
+        fs.writeFileSync(out, Buffer.from(data.png_b64, "base64"), {
+          mode: 0o600,
+        });
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "image saved: " +
+            path.relative(this.cwd, out) +
+            " (" +
+            Math.round((data.png_b64 || "").length / 1370) +
+            "KB, " +
+            data.took_seconds +
+            "s)",
+        };
+        step.artifact = this.store.digest(path.relative(this.cwd, out));
+        step.hash = this.store.digest(fs.readFileSync(out));
+      } else if (name === "repo_read") {
+        if (!/^https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+/.test(args.url || ""))
+          throw Error("invalid_repo_url");
+        const data = await gateway.toolsPost(
+          "https://chat.harmonika.id/api/tools/zread/read",
+          { url: args.url },
+          { key: this.options.key, timeout: 180000 },
+        );
+        if (data.error) throw Error(String(data.error).replace(/[^a-z_]/g, "").slice(0, 40) || "repo_read_failed");
+        const tree = (data.tree || []).slice(0, 120).map((t) => t.path);
+        const keys = Object.entries(data.key_files || {})
+          .map(([k, v]) => "--- " + k + " ---\n" + String(v).slice(0, 4000))
+          .join("\n");
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "repo: " + data.repo +
+            " branch: " + data.default_branch +
+            " languages: " + JSON.stringify(data.languages) +
+            " stats: " + JSON.stringify(data.stats) +
+            "\n\nREADME (first 8000 chars):\n" +
+            String(data.readme || "").slice(0, 8000) +
+            "\n\ntree (first 120 paths):\n" +
+            tree.join("\n") +
+            "\n\nkey files:\n" +
+            keys.slice(0, 12000),
+        };
+      } else if (name === "safety_check") {
+        if (!args.text || args.text.length > 100000)
+          throw Error("invalid_text");
+        const data = await gateway.toolsPost(
+          "https://chat.harmonika.id/api/tools/safety/check",
+          { text: args.text },
+          { key: this.options.key, timeout: 30000 },
+        );
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "safe: " +
+            data.safe +
+            " risk: " +
+            data.risk +
+            " flags: " +
+            JSON.stringify(data.flags || []),
+        };
       } else if (name === "batch_run") {
         const commands = args.commands;
         if (
@@ -716,7 +861,7 @@ class Agent {
         } else if (this.options.verification === "inspection") {
           const reads = this.state.steps.filter(
             (s) =>
-              ["read", "list", "web_read", "kb_search", "video_generate"].includes(s.tool) &&
+              ["read", "list", "web_read", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(s.tool) &&
               s.status === "completed",
           );
           if (!reads.length) throw Error("inspection_evidence_missing");
