@@ -1,5 +1,18 @@
 # Harmonika Terminal
 
+## Verified v3.2 entrypoint
+- `tools/agent-v32.js` uses `agent-state.cjs` and `agent-http.cjs`; install as an
+  explicit `harmonika agent-v32` entrypoint, preserving the default native UI.
+- Completion requires fresh positive verification; model prose, tool count,
+  zero/skipped tests and exhausted steps are never success evidence.
+- Persist intent before effects. Lost ACK/resume uses the original job/request;
+  unknown effects block replay. Checkpoints/memory contain mechanics and HMACs,
+  never task text, chat, commands, customer data or credentials.
+- `backend/agent_delegate` overlays the public Go gateway, not the Node planner.
+  Keep ownership/quota checks, two unresolved-worker slots, 24-hour terminal
+  retention and conservative orphan handling. Test race conditions and actual
+  deployed API semantics before reporting activation. Never auto-prune Docker.
+
 ## Controller tugas otonom (13 November 2026)
 - `backend/planner/agent-controller.cjs` menjaga kontrak internal `task_state`;
   klien tetap menerima content/tool_calls normal. Jangan tampilkan state internal
