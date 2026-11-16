@@ -184,12 +184,22 @@ const definition = (name, properties, required = []) => ({
         "Parse one workspace document (pdf/docx/xlsx/pptx/txt/csv/json/md) into text via the Harmonika file parser. Read-only.",
       transcribe:
         "Transcribe one workspace audio/video file to text via faster-whisper on the RTX GPU. Optional ISO language hint (e.g. id, en). Read-only.",
+      vision:
+        "Analyze one workspace image (png/jpg) with Qwen3-VL-8B on the RTX GPU. Ask a question about the image. Read-only.",
       image_generate:
         "Generate one PNG image from a text prompt via sd-turbo on the RTX GPU (a few seconds) and save it into the workspace. Writes one image file.",
       repo_read:
         "Read one public GitHub repository structure (tree, languages, README, key files) via the Harmonika ZRead service. Read-only.",
       safety_check:
         "Check one text against the Harmonika content safety heuristics. Returns safety verdict and flags. Read-only.",
+      git_status:
+        "Show git working tree status (branch + changed files). Read-only.",
+      git_diff:
+        "Show git diff (optionally one path; staged+unstaged). Read-only.",
+      git_commit:
+        "Stage explicit files (or all with all=true) and create one commit with a concise message.",
+      todo_write:
+        "Update the session task plan (todo list). Pass the full list each time: [{content, status: pending|in_progress|completed}]. Plan multi-step tasks before starting.",
       finish:
         "Propose final answer. The client independently checks completion.",
     }[name],
@@ -247,6 +257,7 @@ const INTERNAL_TOOLS = [
   ),
   definition("file_parse", { path: string }, ["path"]),
   definition("transcribe", { path: string, language: string }, ["path"]),
+  definition("vision", { path: string, question: string }, ["path"]),
   definition("image_generate", { prompt: string, filename: string }, ["prompt"]),
   definition("repo_read", { url: string }, ["url"]),
   definition("safety_check", { text: string }, ["text"]),
@@ -254,6 +265,29 @@ const INTERNAL_TOOLS = [
     "check",
     { service: string, kind: { type: "string", enum: ["systemd", "docker"] } },
     ["service", "kind"],
+  ),
+  definition("git_status", {}, []),
+  definition("git_diff", { path: string }, []),
+  definition(
+    "git_commit",
+    { message: string, files: { type: "array", items: string }, all: { type: "boolean" } },
+    ["message"],
+  ),
+  definition(
+    "todo_write",
+    {
+      todos: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            content: { type: "string" },
+            status: { type: "string", enum: ["pending", "in_progress", "completed"] },
+          },
+        },
+      },
+    },
+    ["todos"],
   ),
   definition("finish", { report: string }, ["report"]),
 ];
@@ -453,6 +487,22 @@ function narrDetail(name, args, result, cwd) {
         d.language = parseOutputField(out, "language");
         d.duration = parseOutputField(out, "duration").replace(/\n.*/s, "");
         break;
+      case "todo_write":
+        d.done = (out.match(/todos: (\d+)\/(\d+)/) || []).slice(1).map(Number);
+        break;
+      case "git_status":
+      case "git_diff":
+        d.path = rp(args.path);
+        d.summary = trunc(out.split("\n")[0], 60);
+        break;
+      case "git_commit":
+        d.message = args.message;
+        d.commit = trunc(out.split("\n").find((l) => /^\[\w+ /.test(l)) || "", 80);
+        break;
+      case "vision":
+        d.path = rp(args.path);
+        d.took = parseOutputField(out, "took");
+        break;
       case "image_generate":
         d.file = (out.match(/image saved: (\S+)/) || [])[1] || null;
         d.info = (out.match(/\((.*)\)/) || [])[1] || "";
@@ -558,6 +608,22 @@ function narrToolLine(name, args, detail, status, error) {
           .filter(Boolean)
           .join(" · ") + ")";
       break;
+    case "todo_write":
+      head = "Todo: " +
+        (detail.done ? detail.done[0] + "/" + detail.done[1] + " done" : "updated");
+      break;
+    case "git_status":
+      head = "Git status" + (detail.summary ? ": " + detail.summary : "");
+      break;
+    case "git_diff":
+      head = "Git diff" + (detail.path ? " " + detail.path : "");
+      break;
+    case "git_commit":
+      head = "Committed: " + trunc(detail.message, 60) + (detail.commit ? " " + detail.commit : "");
+      break;
+    case "vision":
+      head = "Analyzed image " + detail.path + (detail.took ? " (" + detail.took + ")" : "");
+      break;
     case "image_generate":
       head = "Created image " + (detail.file || "") + (detail.info ? " (" + detail.info + ")" : "");
       break;
@@ -647,6 +713,16 @@ function narrateToolEvent(e) {
         pushSub(trunc(t, 90));
       }
       break;
+    case "vision":
+      if (e.output) {
+        const t = e.output.split("\n").slice(2).join(" ");
+        pushSub(trunc(t, 90));
+      }
+      break;
+    case "git_status":
+    case "git_diff":
+      for (const l of previewLines(e.output).slice(0, 3)) pushSub(l);
+      break;
     case "video_generate":
       pushSub(
         "done" + (d.kb ? " · " + d.kb + "KB" : "") +
@@ -709,6 +785,28 @@ function exitedLine(result, startedMs) {
   const icon = result.success ? c.g + "✔" : c.r + "✗";
   return icon + c.rs + " Exited — " + parts.join(" · ");
 }
+function sandboxWrap(command, cwd) {
+  const osMod = require("os");
+  const esc = cwd.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const prof =
+    "(version 1)\n" +
+    "(allow default)\n" +
+    "(deny file-write*)\n" +
+    '(allow file-write* (regex #"^' + esc + '"))\n' +
+    '(allow file-write* (subpath "/private/var/folders"))\n' +
+    '(allow file-write* (literal "/dev/null"))\n';
+  const profPath = path.join(osMod.tmpdir(), "harmonika-sb-" + crypto.randomUUID() + ".sb");
+  fs.writeFileSync(profPath, prof, { mode: 0o600 });
+  return (
+    'sandbox-exec -f ' +
+    JSON.stringify(profPath) +
+    " /bin/zsh -c " +
+    JSON.stringify(command) +
+    "; rc=$?; rm -f " +
+    JSON.stringify(profPath) +
+    "; exit $rc"
+  );
+}
 // ── end narration layer ────────────────────────────────────────────────
 
 class Agent {
@@ -725,10 +823,13 @@ class Agent {
     this.exec =
       options.execute ||
       ((c) =>
-        execute(c, {
-          cwd: this.cwd,
-          timeout: options.commandTimeoutMs || 90000,
-        }));
+        execute(
+          options.sandbox ? sandboxWrap(c, this.cwd) : c,
+          {
+            cwd: this.cwd,
+            timeout: options.commandTimeoutMs || 90000,
+          },
+        ));
     this.delegation = options.delegation || new gateway.Delegation(options);
     this.emit =
       options.emit ||
@@ -873,7 +974,7 @@ class Agent {
           "queued",
         ].includes(s.status),
       ) &&
-      !["read", "list", "check", "delegate_status", "web_read", "web_search", "grep", "glob", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(name)
+      !["read", "list", "check", "delegate_status", "web_read", "web_search", "grep", "glob", "vision", "git_status", "git_diff", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(name)
     )
       throw Error("operation_reconciliation_required");
     if (
@@ -898,7 +999,67 @@ class Agent {
     let result;
     const t0 = Date.now();
     try {
-      if (name === "list") {
+      if (name === "git_status" || name === "git_diff") {
+        const out = await this.exec(
+          name === "git_status"
+            ? "git status --porcelain=v1 -b"
+            : "git diff --stat && git diff" +
+              (args.path ? " -- " + JSON.stringify(args.path) : ""),
+        );
+        result = {
+          status: out.status,
+          exit_code: out.exit_code,
+          output: String(out.output || "").slice(0, 30000) || "(clean)",
+        };
+      } else if (name === "git_commit") {
+        if (!args.message || args.message.length > 500 || /[\n\r]/.test(args.message))
+          throw Error("invalid_message");
+        const quote = (x) => "'" + x.replace(/'/g, "'\"'\"'") + "'";
+        let addCmd;
+        if (args.all) addCmd = "git add -A";
+        else if (Array.isArray(args.files) && args.files.length)
+          addCmd =
+            "git add -- " +
+            args.files
+              .filter((f) => typeof f === "string" && f.length < 300)
+              .slice(0, 50)
+              .map((f) => JSON.stringify(f))
+              .join(" ");
+        else addCmd = "git add -u";
+        result = await this.exec(
+          addCmd + " && git commit -m " + quote(args.message) + " --no-verify",
+        );
+        this.state.verification = null;
+      } else if (name === "todo_write") {
+        const todos = args.todos;
+        if (
+          !Array.isArray(todos) ||
+          todos.length > 32 ||
+          todos.some(
+            (t) =>
+              !t ||
+              typeof t.content !== "string" ||
+              !["pending", "in_progress", "completed"].includes(t.status),
+          )
+        )
+          throw Error("invalid_todos");
+        this.state.todos = todos.map((t) => ({
+          content: t.content.slice(0, 200),
+          status: t.status,
+        }));
+        this.persist();
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "todos: " +
+            todos.filter((t) => t.status === "completed").length +
+            "/" +
+            todos.length +
+            " completed\n" +
+            todos.map((t) => "- [" + t.status + "] " + t.content).join("\n"),
+        };
+      } else if (name === "list") {
         const f = safePath(this.cwd, args.path);
         const entries = fs
           .readdirSync(f, { withFileTypes: true })
@@ -1267,6 +1428,47 @@ class Agent {
             "\n\n" +
             String(data.text || "").slice(0, 30000),
         };
+      } else if (name === "vision") {
+        const f = safePath(this.cwd, args.path);
+        const stat = fs.statSync(f);
+        if (stat.size > 12 * 1024 * 1024) throw Error("file_too_large");
+        if (!/\.(png|jpe?g|webp|gif|bmp)$/i.test(f)) throw Error("invalid_image");
+        const b64 = fs.readFileSync(f).toString("base64");
+        const visionBody = {
+          model: "qwen3-vl:8b-instruct",
+          prompt:
+            (args.question || "Describe this image and transcribe any visible text.") +
+            "\nAnswer concisely.",
+          images: [b64],
+          stream: false,
+          options: { num_ctx: 4096 },
+        };
+        const visionOpts = { key: this.options.key, timeout: 300000 };
+        let data;
+        try {
+          data = await gateway.toolsPost(
+            process.env.HARMONIKA_VISION_URL ||
+              "http://127.0.0.1:11435/api/generate",
+            visionBody,
+            visionOpts,
+          );
+        } catch (e) {
+          if (!/^gateway_/.test(e.message)) throw e;
+          data = await gateway.toolsPost(
+            "https://chat.harmonika.id/api/tools/vlm/generate",
+            visionBody,
+            visionOpts,
+          );
+        }
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "took: " +
+            (data.total_duration ? Math.round(data.total_duration / 1e9) + "s" : "?") +
+            "\n\n" +
+            String(data.response || "").slice(0, 30000),
+        };
       } else if (name === "transcribe") {
         const f = safePath(this.cwd, args.path);
         const stat = fs.statSync(f);
@@ -1492,7 +1694,7 @@ class Agent {
         } else if (this.options.verification === "inspection") {
           const reads = this.state.steps.filter(
             (s) =>
-              ["read", "list", "grep", "glob", "web_read", "web_search", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(s.tool) &&
+              ["read", "list", "grep", "glob", "vision", "git_status", "git_diff", "web_read", "web_search", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(s.tool) &&
               s.status === "completed",
           );
           if (!reads.length) throw Error("inspection_evidence_missing");
@@ -1633,11 +1835,13 @@ class Agent {
       exit_code: result.exit_code ?? null,
     };
   }
-  async run(task, { resume, maxTurns = 30 } = {}) {
+  async run(task, { resume, maxTurns = 30, followUp = false } = {}) {
     if (typeof task !== "string" || !task.trim() || task.length > 30000)
       throw Error("task_required");
     if (clean(task) !== task) throw Error("secret_reference_required");
-    const id = resume || crypto.randomUUID();
+    if (followUp && (!this.state || !this._messages))
+      throw Error("session_not_started");
+    const id = followUp ? this.state.id : resume || crypto.randomUUID();
     this.store.lock(id);
     try {
       const policy = this.store.digest({
@@ -1647,7 +1851,11 @@ class Agent {
         verifyRemote: !!this.options.verifyRemote,
         url: this.options.url || null,
       });
-      if (resume) {
+      if (followUp) {
+        this.state.status = "running";
+        this.persist();
+        this._messages.push({ role: "user", content: task });
+      } else if (resume) {
         this.state = this.store.load(id);
         if (
           this.state.workspace !== this.store.digest(this.cwd) ||
@@ -1685,7 +1893,13 @@ class Agent {
         task: task.slice(0, 120),
       });
       let completionRepairs = 0;
-      const messages = [
+      const priorMessages = followUp ? this._messages : null;
+      if (priorMessages) priorMessages.splice(
+        0,
+        priorMessages.length,
+        ...priorMessages.filter((m) => m.role !== "user" || true),
+      );
+      const messages = priorMessages || [
         {
           role: "system",
           content:
@@ -1698,6 +1912,7 @@ class Agent {
         },
         { role: "user", content: task },
       ];
+      this._messages = messages;
       for (let turn = 0; turn < maxTurns; turn++) {
         let choice;
         try {
@@ -1860,6 +2075,13 @@ function parse(argv) {
       if (!argv[i + 1]) throw Error("missing_option");
       options[names[a]] = argv[++i];
     } else if (a === "--json") options.json = true;
+    else if (a === "--interactive" || a === "-i") options.interactive = true;
+    else if (a === "--sandbox") options.sandbox = true;
+    else if (a === "--model") {
+      if (!argv[i + 1] || !/^[a-z0-9._-]{1,60}$/i.test(argv[i + 1]))
+        throw Error("invalid_model");
+      options.model = argv[++i];
+    }
     else if (a === "--format") {
       if (!argv[i + 1] || !["default", "json", "both"].includes(argv[i + 1]))
         throw Error("invalid_format");
@@ -1923,6 +2145,67 @@ async function main() {
     url: "https://chat.harmonika.id/v1/chat/completions",
     skillsUrl: "https://chat.harmonika.id/v1/skills/invoke",
   });
+  if (options.interactive) {
+    const rl = require("readline");
+    const rli = rl.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      prompt: format === "json" ? "" : "harmonika> ",
+    });
+    let started = false;
+    let busy = false;
+    let closing = false;
+    const ask = () => {
+      if (format !== "json" && !closing) rli.prompt();
+    };
+    rli.on("line", (line) => {
+      const t = line.trim();
+      if (!t) return ask();
+      if (["exit", "quit", "/q", "exit()"].includes(t.toLowerCase())) {
+        closing = true;
+        if (!busy && !pending.length) rli.close();
+        return;
+      }
+      pending.push(t);
+      if (!busy) processQueue();
+    });
+    const pending = [];
+    const processQueue = () => {
+      if (!pending.length) {
+        if (closing) rli.close();
+        else ask();
+        return;
+      }
+      const t = pending.shift();
+      busy = true;
+      (async () => {
+        try {
+          const res = started
+            ? await agent.run(t, { ...options, followUp: true })
+            : await agent.run(t, options);
+          started = true;
+          if (format !== "json" && res.report && res.report.trim())
+            console.log(clean(res.report).slice(0, 4000));
+          if (format !== "json") console.log("—");
+        } catch (e) {
+          console.error("ERR:", e.message);
+        }
+        busy = false;
+        processQueue();
+      })();
+    };
+    rli.on("close", () => {
+      closing = true;
+      if (!busy) process.exit(0);
+    });
+    if (!task && format !== "json") {
+      console.log(
+        "Harmonika agent v3.2 interactive — ketik task, 'exit' untuk keluar.",
+      );
+    }
+    ask();
+    return;
+  }
   const result = await agent.run(task, options);
   if (format === "json") {
     console.log(

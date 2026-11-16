@@ -65,6 +65,11 @@ while IFS= read -r item; do
     node "$AGENT" --cwd "$WORK" --verification inspection "$TASK" 2>&1
   ) > "$REPORT" 2>&1
   echo "$(date -u +%FT%TZ) done: $NAME -> $REPORT" >> "$LOG"
+  # macOS notification (best-effort)
+  if command -v osascript >/dev/null 2>&1; then
+    STATUS=$(grep -oE '✔ Exited — [a-z]+' "$REPORT" | head -1 | grep -oE '[a-z]+$' || echo done)
+    osascript -e "display notification \"scheduled: $NAME ($STATUS)\" with title \"Harmonika Agent\"" >/dev/null 2>&1 || true
+  fi
 done < <(python3 -c 'import json; [print(json.dumps(x)) for x in json.load(open("'"$WORK"'/due.json"))]' 2>/dev/null)
 
 echo "$(date -u +%FT%TZ) run end" >> "$LOG"

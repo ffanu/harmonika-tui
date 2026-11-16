@@ -85,7 +85,7 @@ async function model(messages, tools, options) {
     try {
       out = await (options.request || request)(
         options.url,
-        { model: "harmonika-ai", messages, tools, stream: false },
+        { model: options.model || "harmonika-ai", messages, tools, stream: false },
         { ...options, timeout: Math.min(60000, remaining) },
       );
     } catch (e) {
@@ -275,11 +275,13 @@ async function toolsGet(path, { key, timeout = 30000 } = {}) {
 
 async function toolsPost(path, body, { key, timeout = 30000 } = {}) {
   const u = new URL(path);
-  if (u.protocol !== "https:")
+  const isLocal = u.protocol === "http:" && u.hostname === "127.0.0.1";
+  if (u.protocol !== "https:" && !isLocal)
     return Promise.reject(Error("gateway_url_denied"));
+  const lib = isLocal ? http : https;
   return new Promise((resolve, reject) => {
     const payload = JSON.stringify(body);
-    const req = https.request(
+    const req = lib.request(
       u,
       {
         method: "POST",

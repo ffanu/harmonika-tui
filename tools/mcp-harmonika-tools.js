@@ -56,7 +56,33 @@ function request(method, p, body) {
   });
 }
 
+const http = require("http");
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function localPost(url, body) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify(body);
+    const req = http.request(
+      url,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json", "content-length": Buffer.byteLength(payload) },
+      },
+      (res) => {
+        let raw = "";
+        res.on("data", (b) => (raw += b));
+        res.on("end", () => {
+          if (res.statusCode !== 200) return reject(Error("local_" + res.statusCode));
+          try { resolve(JSON.parse(raw)); } catch { reject(Error("invalid_response")); }
+        });
+      },
+    );
+    req.setTimeout(300000, () => req.destroy(Error("timeout")));
+    req.on("error", (e) => reject(e));
+    req.write(payload);
+    req.end();
+  });
+}
 
 const TOOLS = [
   {
@@ -155,6 +181,26 @@ const TOOLS = [
         fetch: "/api/tools/video/file/" + sub.job,
       };
     },
+  },
+  {
+    name: "vision",
+    description: "Analyze an image (base64) with Qwen3-VL-8B on the RTX GPU. Ask a question about the image",
+    inputSchema: {
+      type: "object",
+      properties: { image_b64: { type: "string" }, question: { type: "string" } },
+      required: ["image_b64"],
+    },
+    run: (a) =>
+      localPost(
+        process.env.HARMONIKA_VISION_URL || "http://127.0.0.1:11435/api/generate",
+        {
+          model: "qwen3-vl:8b-instruct",
+          prompt: (a.question || "Describe this image and transcribe any visible text.") + "\nAnswer concisely.",
+          images: [a.image_b64],
+          stream: false,
+          options: { num_ctx: 4096 },
+        },
+      ),
   },
   {
     name: "repo_read",
