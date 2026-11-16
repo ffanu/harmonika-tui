@@ -166,6 +166,8 @@ const definition = (name, properties, required = []) => ({
         "Read an explicitly named systemd unit or Docker container on the configured SSH target.",
       web_read:
         "Fetch one public URL and return cleaned text (title + body) via the Harmonika web reader service. Read-only.",
+      web_search:
+        "Search the web (DuckDuckGo) and return top results with titles, URLs and snippets. Read-only.",
       kb_store:
         "Save one knowledge entry (text) into the Harmonika knowledge base for later semantic retrieval. Optional tags array.",
       kb_search:
@@ -206,6 +208,7 @@ const INTERNAL_TOOLS = [
   definition("delegate_status", { job_id: string, request_id: string }),
   definition("ssh_exec", { command: string }, ["command"]),
   definition("web_read", { url: string }, ["url"]),
+  definition("web_search", { query: string }, ["query"]),
   definition("kb_store", { text: string, tags: { type: "array", items: string } }, ["text"]),
   definition("kb_search", { query: string }, ["query"]),
   definition("video_generate", { prompt: string }, ["prompt"]),
@@ -359,6 +362,10 @@ function narrDetail(name, args, result, cwd) {
         Object.assign(d, result._diff || {});
         d.path = rp(args.path);
         break;
+      case "web_search":
+        d.query = args.query;
+        d.count = Number((out.match(/results: (\d+)/) || [])[1]) || 0;
+        break;
       case "web_read": {
         d.url = args.url;
         d.title = parseOutputField(out, "title");
@@ -461,6 +468,9 @@ function narrToolLine(name, args, detail, status, error) {
     case "verify":
       head = "Ran verification";
       break;
+    case "web_search":
+      head = 'Searched the web for "' + trunc(detail.query, 50) + '"';
+      break;
     case "web_read":
       head = "Browsing the web";
       break;
@@ -538,6 +548,10 @@ function narrateToolEvent(e) {
         lines.push(c.m + "   ⋮" + c.rs);
         if (d.minus) lines.push(c.r + "  - " + d.minus + c.rs);
       }
+      break;
+    case "web_search":
+      for (const l of previewLines(e.output).slice(0, 3))
+        pushSub(trunc(l.replace(/^- /, "").split("\n")[0].trim(), 90));
       break;
     case "web_read":
       if (d.url) {
@@ -787,7 +801,7 @@ class Agent {
           "queued",
         ].includes(s.status),
       ) &&
-      !["read", "list", "check", "delegate_status", "web_read", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(name)
+      !["read", "list", "check", "delegate_status", "web_read", "web_search", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(name)
     )
       throw Error("operation_reconciliation_required");
     if (
@@ -849,6 +863,26 @@ class Agent {
         };
         step.artifact = this.store.digest(path.relative(this.cwd, f));
         step.hash = result.hash;
+      } else if (name === "web_search") {
+        if (!args.query || args.query.length > 400)
+          throw Error("invalid_query");
+        const data = await gateway.toolsGet(
+          "https://chat.harmonika.id/api/tools/webreader/search?q=" +
+            encodeURIComponent(args.query),
+          { key: this.options.key, timeout: 30000 },
+        );
+        const rs = data.results || [];
+        result = {
+          status: "completed",
+          exit_code: 0,
+          output:
+            "results: " +
+            rs.length +
+            "\n" +
+            rs
+              .map((r) => "- " + r.title + "\n  " + r.url + "\n  " + r.snippet)
+              .join("\n"),
+        };
       } else if (name === "web_read") {
         if (!/^https:\/\/[^\s]+$/.test(args.url || ""))
           throw Error("invalid_url");
@@ -1209,7 +1243,7 @@ class Agent {
         } else if (this.options.verification === "inspection") {
           const reads = this.state.steps.filter(
             (s) =>
-              ["read", "list", "web_read", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(s.tool) &&
+              ["read", "list", "web_read", "web_search", "kb_search", "video_generate", "file_parse", "transcribe", "repo_read", "safety_check"].includes(s.tool) &&
               s.status === "completed",
           );
           if (!reads.length) throw Error("inspection_evidence_missing");
@@ -1532,10 +1566,7 @@ class Agent {
             exit_code: result.exit_code ?? null,
             error: result.error || null,
             detail: result.detail || undefined,
-            output:
-              result.output && result.output.length <= 600
-                ? result.output
-                : undefined,
+            output: result.output ? result.output.slice(0, 300) : undefined,
             duration_ms: result.took_ms,
           });
           messages.push({

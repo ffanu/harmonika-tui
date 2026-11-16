@@ -13,6 +13,46 @@ class ReaderHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"ok": True, "service": "harmonika-webreader"}).encode())
             return
         
+        if parsed.path == "/search":
+            params = parse_qs(parsed.query)
+            q = params.get("q", [""])[0]
+            if not q or len(q) > 400:
+                self._json({"error": "invalid query"}, 400)
+                return
+            try:
+                import subprocess as _sp
+                from urllib.parse import quote as _q
+                out = _sp.run(
+                    ["curl", "-s", "--max-time", "15", "-A",
+                     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+                     "-H", "Accept: text/html",
+                     "https://html.duckduckgo.com/html/?q=" + _q(q)],
+                    capture_output=True, timeout=20)
+                body = out.stdout.decode("utf-8", errors="replace")
+                results = []
+                for m in re.finditer(
+                    r'<a[^>]+class="result__a"[^>]+href="([^"]+)"[^>]*>(.*?)</a>', body, re.S):
+                    url, title = m.group(1), re.sub(r"<[^>]+>", "", m.group(2)).strip()
+                    if url.startswith("//duckduckgo.com/l/?uddg=") or "/l/?uddg=" in url:
+                        try:
+                            from urllib.parse import unquote as _uq
+                            url = _uq(url.split("uddg=")[1].split("&")[0])
+                        except Exception:
+                            pass
+                    snippet = ""
+                    tail = body[m.end():m.end() + 2000]
+                    sm = re.search(r'<a[^>]+class="result__snippet"[^>]*>(.*?)</a>', tail, re.S)
+                    if sm:
+                        snippet = re.sub(r"<[^>]+>", "", sm.group(1)).strip()
+                    if title and url.startswith("http"):
+                        results.append({"title": title[:200], "url": url, "snippet": snippet[:300]})
+                    if len(results) >= 8:
+                        break
+                self._json({"query": q, "results": results})
+            except Exception as e:
+                self._json({"error": f"search_failed: {e}"}, 502)
+            return
+
         if parsed.path == "/read":
             params = parse_qs(parsed.query)
             url = params.get("url", [""])[0]
@@ -71,5 +111,5 @@ class ReaderHandler(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
-print("WebReader on 127.0.0.1:17895")
-HTTPServer(("127.0.0.1", 17895), ReaderHandler).serve_forever()
+print("WebReader on 127.0.0.1:17896")
+HTTPServer(("127.0.0.1", 17896), ReaderHandler).serve_forever()
