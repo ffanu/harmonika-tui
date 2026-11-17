@@ -28,21 +28,32 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 ## 🚀 Instalasi Cepat
 
-> **Prasyarat:** Python 3 · Node.js · Git
+**Prasyarat:** Python **3.9+**, Node.js **18+**, Git, dan koneksi HTTPS.
+Paket rilis membawa SDK MCP dan validator konfigurasi; **npm tidak diperlukan saat instalasi**.
 
-**macOS / Linux** — ✅ terverifikasi di Mac Apple Silicon:
+| Sistem | Arsitektur binary tersedia |
+|---|---|
+| macOS | Apple Silicon (arm64), Intel (x64) |
+| Linux | x64, arm64 |
+| Windows 10/11 | x64 |
+
+Matrix [pengujian installer](https://github.com/ffanu/harmonika-tui/actions/workflows/installer-platforms.yml)
+menjalankan bootstrap, verifikasi signature/checksum, binary asli dan MCP pada lima target tersebut.
+Platform lain ditolak dengan diagnostik; tabel ini bukan klaim mendukung seluruh OS/arsitektur.
+
+**macOS / Linux:**
 
 ```sh
 curl -fsSL https://chat.harmonika.id/assets/harmonika-terminal/install.sh | sh
 ```
 
-**Windows 10/11** (PowerShell) — ⚙️ eksperimental, belum diverifikasi penuh:
+**Windows (PowerShell):**
 
 ```powershell
 irm https://chat.harmonika.id/assets/harmonika-terminal/install.ps1 | iex
 ```
 
-**Atau manual dari repo ini:**
+**Manual dari source:**
 
 ```sh
 git clone https://github.com/ffanu/harmonika-tui.git
@@ -50,20 +61,30 @@ cd harmonika-tui
 python3 runtime/install.py
 ```
 
-Setelah instalasi, jalankan `harmonika` — kotak aktivasi API Key muncul otomatis saat pertama kali (key tidak pernah dimasukkan lewat argumen shell; disimpan dengan permission `0600`).
-
-**Butuh API Key?**
-- 🤖 **Telegram: [@hmsapi_bot](https://t.me/hmsapi_bot)** — jalur utama (sesuai prompt installer)
-- 📱 WhatsApp: `085771378237`
-
-**Cek sehat setelah instalasi:**
+Buka `harmonika` setelah instalasi. Jika `~/.local/bin` belum ada di PATH macOS/Linux:
 
 ```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+Aktivasi lisensi memakai prompt privat, tanpa key pada argumen proses:
+
+```sh
+harmonika activate
 harmonika doctor
 harmonika network status
 ```
 
-> ⚠️ **Kejujuran rilis:** installer publik dan distribusi binary masih disiapkan — lihat [Status rilis](docs/STATUS.md). Instalasi di atas telah diuji pada Mac pemilik; Windows/Linux belum diverifikasi penuh. Jangan membagikan credential instalasi pemilik.
+Instalasi melalui pipe atau `HARMONIKA_NONINTERACTIVE=1` selesai tanpa meminta key;
+aktivasi dilakukan saat membuka terminal atau dengan `harmonika activate`.
+Key diperoleh dari [@hmsapi_bot](https://t.me/hmsapi_bot); kebijakan 1 key = 1 perangkat tetap berlaku.
+
+`mcp_preflight_failed` pada paket lama bisa disebabkan SDK tidak terpasang ketika npm tidak tersedia.
+Installer baru memakai bundle bertanda tangan dan tetap menolak signature, checksum, atau protokol yang rusak.
+Komponen SSH lokal di macOS/Linux membutuhkan Python venv/pip; kegagalan komponen opsional ini
+terlihat di `doctor` dan tidak menggagalkan core terminal. `HARMONIKA_INSTALL_SSH=1` mewajibkan
+komponen SSH; `HARMONIKA_INSTALL_SSH=0` melewatinya. Browser/dokumen memiliki dependensi fitur terpisah.
+Instalasi Windows memakai folder pengguna dan tidak mengubah Defender atau System32.
 
 ---
 

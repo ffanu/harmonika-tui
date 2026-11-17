@@ -1,5 +1,5 @@
 'use strict';
-const path=require('node:path'),os=require('node:os');
+const path=require('node:path'),os=require('node:os'),fs=require('node:fs');
 const home=os.homedir();
 const config=process.env.HARMONIKA_CONFIG_DIR||path.join(home,'.config/harmonika');
 const tools=process.env.HARMONIKA_TOOLS_HOME||path.join(config,'harmonika-tools');
@@ -11,4 +11,8 @@ const downloadFolders=Object.freeze({
   document:path.join(downloads,'document'),
   zip:path.join(downloads,'zip'),
 });
-module.exports={home,config,tools,terminal,downloads,downloadFolders,sdk:path.join(tools,'node_modules/@modelcontextprotocol/sdk/dist/cjs')};
+// Vendored-first: dependencies shipped inside the package work without npm
+// on any OS; the shared harmonika-tools dir remains the fallback/upgrade path.
+const vendoredSdk=path.join(__dirname,'vendor/sdk');
+const sharedSdk=path.join(tools,'node_modules/@modelcontextprotocol/sdk/dist/cjs');
+module.exports={home,config,tools,terminal,downloads,downloadFolders,sdk:fs.existsSync(vendoredSdk)?vendoredSdk:sharedSdk};

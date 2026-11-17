@@ -73,7 +73,12 @@ def build(release):
     shutil.copy2(SOURCE/'UPSTREAM-LICENSE.md',tools/'UPSTREAM-LICENSE.md')
     shutil.copy2(SOURCE/'runtime/ssh-requirements.lock',tools/'ssh-requirements.lock')
     shutil.copy2(SOURCE/'docs/SSH-CONNECTOR-SPEC.txt',tools/'docs/SSH-CONNECTOR-SPEC.txt')
+    spec=importlib.util.spec_from_file_location('runtime_dependencies',SOURCE/'runtime/bundle-dependencies.py')
+    dependencies=importlib.util.module_from_spec(spec);spec.loader.exec_module(dependencies)
+    dependencies.bundle(tools/'vendor')
     files={str(p.relative_to(destination)):{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+    if len(files)+1>512 or sum((destination/n).stat().st_size for n in files)>20*1024*1024:
+        raise ValueError('release_exceeds_installer_limits')
     notes_env=os.environ.get('HARMONIKA_RELEASE_NOTES','')
     release_notes=[n.strip() for n in notes_env.split('|') if n.strip()] if notes_env else [
         'Auto-Update Standby interaktif [Y] Yes / [N] No / [L] Later dengan Changelog',
@@ -81,7 +86,7 @@ def build(release):
         'Perintah harmonika zip untuk auto-bundle proyek ke Downloads/harmonika-ai/zip'
     ]
     manifest={'release':release,'product':'Harmonika Terminal','upstream_version':'0.98.1','platform':'darwin-arm64',
-      'binary_sha256':sha(BINARY),'files':files,'automatic_update':False,'binary_included':False,'release_notes':release_notes}
+      'files':files,'automatic_update':False,'binary_included':False,'release_notes':release_notes}
     platform_manifest=os.environ.get('HARMONIKA_PLATFORM_MANIFEST')
     if platform_manifest:
         # Public cross-platform releases bind their hashes to both signatures:
@@ -93,7 +98,10 @@ def build(release):
         required={'darwin-arm64','darwin-x64','linux-x64','linux-arm64','windows-x64'}
         if not isinstance(entries,dict) or set(entries)!=required:raise ValueError('incomplete_platform_catalog')
         manifest['binary_hashes']={key:verifier.expected_binary_sha({'binary_sha256':entries[key].get('sha256')}) for key in sorted(required)}
-        if manifest['binary_hashes']['darwin-arm64']!=manifest['binary_sha256']:raise ValueError('platform_catalog_mismatch')
+        manifest['binary_sha256']=manifest['binary_hashes']['darwin-arm64']
+        manifest['platform']='multi-platform'
+    else:
+        manifest['binary_sha256']=sha(BINARY)
     (destination/'release.json').write_bytes(sign(manifest))
     package=SOURCE/'dist'/('harmonika-terminal-'+release+'.zip')
     with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED) as archive:

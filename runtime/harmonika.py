@@ -23,6 +23,12 @@ from uuid import uuid4
 
 ROOT = Path(os.environ.get('HARMONIKA_TERMINAL_HOME', str(Path.home()/'.config/harmonika-terminal')))
 
+def config_directory():
+    return Path(os.environ.get('HARMONIKA_GLOBAL_CONFIG') or os.environ.get('HARMONIKA_CONFIG_DIR') or str(Path.home()/'.config/harmonika'))
+
+def data_directory():
+    return Path(os.environ.get('HARMONIKA_GLOBAL_DATA') or str(Path.home()/'.local/share/harmonika'))
+
 def _find_node():
     env_node = os.environ.get('HARMONIKA_NODE')
     if env_node and Path(env_node).is_file():
@@ -179,7 +185,7 @@ def preflight(directory,manifest):
     result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,timeout=10)
     if result.returncode or 'v0.98.1' not in result.stdout:raise ValueError('binary_preflight_failed')
     for name in manifest['files']:
-        if name.endswith('.cjs'):
+        if name.endswith(('.cjs','.js')):
             result=subprocess.run([NODE,'--check',str(directory/name)],capture_output=True,timeout=10)
             if result.returncode:raise ValueError('javascript_preflight_failed:'+name)
     python_files=[str(directory/name) for name in manifest['files'] if name.endswith('.py')]
@@ -198,10 +204,10 @@ def preflight(directory,manifest):
         except (ValueError,KeyError,TypeError):raise ValueError('documents_preflight_failed') from None
     # Launch the real MCP protocol without invoking providers or user sessions.
     check=subprocess.run([NODE,str(directory/'tools/protocol-check.cjs'),str(directory/'tools/mcp-server.cjs')],capture_output=True,text=True,timeout=20)
-    if check.returncode:raise ValueError('mcp_preflight_failed')
+    if check.returncode:raise ValueError('mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
     if (directory/'tools/ssh-mcp.cjs').is_file():
         check=subprocess.run([NODE,str(directory/'tools/ssh-protocol-check.cjs'),str(directory/'tools/ssh-mcp.cjs')],capture_output=True,text=True,timeout=20)
-        if check.returncode:raise ValueError('ssh_mcp_preflight_failed')
+        if check.returncode:raise ValueError('ssh_mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
 
 @contextmanager
 def installation_lock(root):
@@ -296,7 +302,7 @@ def check_update(root=ROOT):
 def doctor(root=ROOT):
     directory,manifest=active(root)
     preflight(directory,manifest)
-    config=read_json(Path.home()/'.config/harmonika/harmonika.json')
+    config=read_json(config_directory()/'harmonika.json')
     assert config['options']['disable_provider_auto_update'] is True,'provider_auto_update_must_be_disabled'
     assert not config['permissions'].get('allowed_tools'),'global_auto_approvals_detected'
     assert 'harmonika' in config.get('mcp',{}),'mcp_missing'
@@ -306,7 +312,11 @@ def doctor(root=ROOT):
     browser=subprocess.run([NODE,'-e',"const fs=require('fs'),p=require(process.argv[1]);process.stdout.write(JSON.stringify({chromium:fs.existsSync(p.chromium.executablePath())}));",str(root/'browser-runtime/node_modules/playwright')],capture_output=True,text=True,timeout=10)
     browser_features=json.loads(browser.stdout) if browser.returncode==0 else {}
     ssh_runtime=root/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
-    ssh_features={'configured':'harmonika-ssh' in config.get('mcp',{}),'runtime_available':ssh_runtime.is_file(),'platform_supported':os.name=='posix','tools':7 if (directory/'tools/remote_connector.py').is_file() else (4 if (directory/'tools/ssh-mcp.cjs').is_file() else 0)}
+    ssh_available=False
+    if ssh_runtime.is_file():
+        try:ssh_available=subprocess.run([str(ssh_runtime),'-I','-c','import paramiko'],capture_output=True,timeout=10).returncode==0
+        except (OSError,subprocess.SubprocessError):pass
+    ssh_features={'configured':'harmonika-ssh' in config.get('mcp',{}),'runtime_available':ssh_available,'platform_supported':os.name=='posix','tools':7 if (directory/'tools/remote_connector.py').is_file() else (4 if (directory/'tools/ssh-mcp.cjs').is_file() else 0)}
     return {'ok':True,'release':manifest['release'],'upstream':'0.98.1','binary_verified':True,
         'runtime_verified':True,'mcp_protocol':'ok','skills':len(list((directory/'skills').glob('*/SKILL.md'))),
         'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,'ssh':ssh_features,
@@ -421,7 +431,7 @@ def switch_theme(args,cfg_dir=None,data_dir=None):
 
 def ensure_harmonika_downloads(cfg_dir=None):
     cdir=Path(cfg_dir) if cfg_dir else (Path.home()/'.config/harmonika')
-    dl_root=Path.home()/'Downloads'/'harmonika-ai'
+    dl_root=Path(os.environ.get('HARMONIKA_DOWNLOADS_DIR') or str(Path.home()/'Downloads'/'harmonika-ai'))
     subfolders=('gambar','document','zip')
     access_dir=cdir/'project-access'
     try:
@@ -748,6 +758,10 @@ def main():
         args=[arg for arg in args if arg!='--no-workbench'];workbench_enabled=False
     ensure_harmonika_downloads(os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     if args==['doctor']:result=doctor()
+    elif args==['activate']:
+        directory,manifest=active();verify_files(directory,manifest)
+        run_exec([sys.executable,'-I',str(directory/'tools/license.py'),'activate'])
+        return
     elif args in (['status'],['status','--json']):
         res=show_status(ROOT,as_json=('--json' in args))
         if '--json' not in args:return

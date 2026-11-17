@@ -13,7 +13,7 @@ import uuid
 from uuid import uuid4
 
 ENDPOINT='https://chat.harmonika.id/v1/public-ai/capabilities'
-CONFIG=Path.home()/'.config/harmonika'
+CONFIG=Path(os.environ.get('HARMONIKA_GLOBAL_CONFIG') or os.environ.get('HARMONIKA_CONFIG_DIR') or str(Path.home()/'.config/harmonika'))
 OWNER_WHATSAPP='085771378237'
 
 for _stream in (sys.stdout, sys.stderr):

@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import stat
+import shlex
 import urllib.request
 from uuid import uuid4
 import zipfile
@@ -41,26 +42,31 @@ def ensure_public_key(root=ROOT):
     return pub
 
 def ensure_dependencies(root=ROOT):
-    tools_dir=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(Path.home()/'.config/harmonika/harmonika-tools')))
+    tools_dir=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(m.config_directory()/'harmonika-tools')))
     if not (tools_dir/'node_modules/@modelcontextprotocol/sdk').exists() or not (tools_dir/'node_modules/ajv').exists():
         npm=shutil.which('npm.cmd' if os.name=='nt' else 'npm') or shutil.which('npm') or str(Path.home()/'.local/node/bin/npm')
         if Path(npm).exists() or shutil.which('npm'):
             tools_dir.mkdir(parents=True,exist_ok=True)
-            pkg={'name':'harmonika-tools','private':True,'dependencies':{'@modelcontextprotocol/sdk':'^1.0.0','ajv':'^8.17.1'}}
+            pkg={'name':'harmonika-tools','private':True,'dependencies':{'@modelcontextprotocol/sdk':'1.32.1','ajv':'^8.17.1'}}
             (tools_dir/'package.json').write_text(json.dumps(pkg,indent=2))
             subprocess.run([npm,'install','--no-audit','--no-fund'],cwd=str(tools_dir),check=True,timeout=180,shell=(os.name=='nt'))
+        else:
+            raise ValueError('legacy_package_requires_npm: jalankan ulang installer terbaru yang membawa dependensi MCP')
 
 def ensure_ssh_dependencies(directory,root=ROOT):
     lock=directory/'tools/ssh-requirements.lock'
     if not lock.is_file():return False
     runtime=root/'ssh-runtime'
     python=runtime/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+    if python.is_file():
+        probe=subprocess.run([str(python),'-I','-c','import paramiko'],capture_output=True,timeout=10)
+        if probe.returncode==0:return True
     if not python.is_file():subprocess.run([sys.executable,'-m','venv',str(runtime)],check=True,timeout=120)
     subprocess.run([str(python),'-m','pip','install','--disable-pip-version-check','-r',str(lock)],check=True,timeout=240)
     return True
 
 def ensure_default_config(root=ROOT):
-    cfg_dir=Path.home()/'.config/harmonika'
+    cfg_dir=m.config_directory()
     cfg_dir.mkdir(parents=True,exist_ok=True)
     themes_dir=cfg_dir/'themes'
     themes_dir.mkdir(parents=True,exist_ok=True)
@@ -79,12 +85,12 @@ def ensure_default_config(root=ROOT):
         'ansi_bright_blue':'#79c0ff','ansi_bright_magenta':'#e2c5ff','ansi_bright_cyan':'#56d4dd','ansi_bright_white':'#ffffff'
     }
     (themes_dir/'harmonika-dark.json').write_text(json.dumps(orange_dark_theme,indent=2)+'\n')
-    share_dir=Path.home()/'.local/share/harmonika'
+    share_dir=m.data_directory()
     share_dir.mkdir(parents=True,exist_ok=True)
     (share_dir/'crush.json').write_text('{"options":{"tui":{"transparent":false,"active_theme":"harmonika-dark"}}}\n')
     cfg_file=cfg_dir/'harmonika.json'
     key_file=cfg_dir/'harmonika-api-key'
-    key_cmd=f'$(cat {key_file})' if os.name!='nt' else '$HARMONIKA_API_KEY'
+    key_cmd='$(cat '+shlex.quote(str(key_file))+')' if os.name!='nt' else '$HARMONIKA_API_KEY'
     dev_id=m.device_id(cfg_dir)
     dev_nm=m.device_name()
     if not cfg_file.exists():
@@ -151,7 +157,7 @@ def fetch_remote_bootstrap(root=ROOT):
 def atomic_text(file,text,mode=0o600):
     pending=file.with_name(file.name+'.next-'+uuid4().hex)
     try:
-        with open(pending,'x') as out:out.write(text)
+        with open(pending,'x',encoding='utf-8') as out:out.write(text)
         os.chmod(pending,mode);os.replace(pending,file)
     finally:
         if pending.exists():pending.unlink()
@@ -189,26 +195,22 @@ def _prepare(package,stage):
         shutil.copy2(BINARY,stage/bname);os.chmod(stage/bname,0o755)
         if os.name=='nt':
             (stage/'binary.sha256').write_text(m.digest(stage/bname))
+        if (stage/'tools/mcp-server.cjs').is_file() and not (stage/'tools/vendor/sdk/client/index.js').is_file():
+            m.verify_files(stage,manifest)
+            ensure_dependencies(ROOT)
         m.preflight(stage,manifest)
 
 def write_windows_wrappers(root=ROOT):
     node_path=m._find_node()
     (root/'node.path').write_text(node_path)
-    bin_dir=Path.home()/'.local/bin'
+    bin_dir=Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))
     bin_dir.mkdir(parents=True,exist_ok=True)
     cmd_wrapper=(
-        '@echo off\r\n'
+        '@echo off\r\n@chcp 65001 >nul\r\n'
         f'set "HARMONIKA_NODE={node_path}"\r\n'
         f'"{sys.executable}" -I "{root}\\launcher.py" %*\r\n'
     )
     atomic_text(bin_dir/'harmonika.cmd',cmd_wrapper,0o755)
-    # If running as Administrator on Windows, also place harmonika.cmd in C:\Windows\System32 so it works immediately without PATH changes
-    sys32=Path(os.environ.get('SystemRoot',r'C:\Windows'))/'System32'
-    if sys32.is_dir():
-        try:
-            atomic_text(sys32/'harmonika.cmd',cmd_wrapper,0o755)
-        except Exception:
-            pass
 
 def _needs_binary_rebrand(selected):
     try:
@@ -222,6 +224,11 @@ def _needs_binary_rebrand(selected):
 
 def main(package=None):
     global BINARY
+    if sys.version_info < (3,9):raise ValueError('python_3_9_or_newer_required')
+    detect_platform()
+    version=subprocess.run([m.NODE,'-p','process.versions.node.split(".")[0]'],capture_output=True,text=True,timeout=10)
+    if version.returncode or not version.stdout.strip().isdigit() or int(version.stdout.strip())<18:
+        raise ValueError('node_18_or_newer_required')
     has_active=False
     selected_dir=None
     try:
@@ -262,15 +269,15 @@ def main(package=None):
     downloaded_bin=downloaded_pkg=None
     try:
         if not package:
-            ensure_dependencies(ROOT)
-            ensure_default_config(ROOT)
             downloaded_bin,downloaded_pkg=fetch_remote_bootstrap(ROOT)
             BINARY=downloaded_bin
             package=str(downloaded_pkg)
             if detect_platform()!='darwin-arm64':
                 os.environ['HARMONIKA_SKIP_BINARY_SHA_CHECK']='1'
         stage,manifest=prepare(package)
-        try:activate(stage,manifest)
+        try:
+            ensure_default_config(ROOT)
+            activate(stage,manifest)
         finally:
             if stage.exists():shutil.rmtree(stage)
     finally:
@@ -279,7 +286,7 @@ def main(package=None):
 
 def activate(stage,manifest):
     release=manifest['release']
-    configfile=Path.home()/'.config/harmonika/harmonika.json'
+    configfile=m.config_directory()/'harmonika.json'
     if configfile.exists():configfile=configfile.resolve()
     config=json.loads(configfile.read_text())
     config['options']['disable_provider_auto_update']=True
@@ -306,11 +313,17 @@ def activate(stage,manifest):
     # Validate proposed configuration on stdin before touching live files/pointers.
     schema=SOURCE/'runtime/harmonika-schema.json'
     js="const fs=require('fs'),{Ajv2020}=require(process.argv[2]);const v=new Ajv2020({strict:false,validateFormats:false}).compile(JSON.parse(fs.readFileSync(process.argv[1])));if(!v(JSON.parse(fs.readFileSync(0,'utf8'))))process.exit(1);"
-    if os.name == 'posix' and (stage/'tools/ssh-mcp.cjs').is_file():
-        ensure_ssh_dependencies(stage)
-        config.setdefault('mcp',{})['harmonika-ssh']={'type':'stdio','command':str(m.NODE),'args':[str(ROOT/'current/tools/ssh-mcp.cjs')],'timeout':190}
+    if os.name == 'posix' and (stage/'tools/ssh-mcp.cjs').is_file() and os.environ.get('HARMONIKA_INSTALL_SSH','auto')!='0':
+        try:
+            if ensure_ssh_dependencies(stage):
+                config.setdefault('mcp',{})['harmonika-ssh']={'type':'stdio','command':str(m.NODE),'args':[str(ROOT/'current/tools/ssh-mcp.cjs')],'timeout':190}
+        except (OSError,subprocess.SubprocessError):
+            if os.environ.get('HARMONIKA_INSTALL_SSH')=='1':raise
+            print('note: SSH opsional belum terpasang; Python venv/pip diperlukan. Core terminal tetap dapat dipasang.',file=sys.stderr)
     encoded=json.dumps(config,indent=2)+'\n'
-    dependency=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(Path.home()/'.config/harmonika/harmonika-tools')))/'node_modules/ajv/dist/2020'
+    dependency=stage/'tools/vendor/ajv2020.cjs'
+    if not dependency.is_file():
+        dependency=Path(os.environ.get('HARMONIKA_TOOLS_HOME',str(m.config_directory()/'harmonika-tools')))/'node_modules/ajv/dist/2020'
     checked=subprocess.run([m.NODE,'-e',js,str(schema),str(dependency)],input=encoded.encode(),capture_output=True,timeout=15)
     if checked.returncode:
         raise ValueError('config_validation_failed_live_install_untouched')
@@ -327,17 +340,25 @@ def activate(stage,manifest):
     if not (ROOT/'config-before.json').exists():
         shutil.copy2(configfile,ROOT/'config-before.json');os.chmod(ROOT/'config-before.json',0o600)
     atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
+    atomic_text(ROOT/'node.path',str(m.NODE))
     m.switch(release,ROOT)
     atomic_text(configfile,encoded)
     atomic_text(configfile.parent/'crush.json',encoded)
     if os.name == 'nt':
         write_windows_wrappers(ROOT)
     else:
-        wrapper=f'#!/bin/sh\nexec "{sys.executable}" -I "$HOME/.config/harmonika-terminal/launcher.py" "$@"\n'
-        for file in [Path.home()/'.local/bin/harmonika',Path.home()/'.local/node/bin/harmonika']:
+        wrapper='#!/bin/sh\nexec '+shlex.quote(sys.executable)+' -I '+shlex.quote(str(ROOT/'launcher.py'))+' "$@"\n'
+        locations=[Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))/'harmonika']
+        if not os.environ.get('HARMONIKA_BIN_DIR'):locations.append(Path.home()/'.local/node/bin/harmonika')
+        for file in locations:
             file.parent.mkdir(parents=True,exist_ok=True)
             # Replace the symlink itself atomically, never the npm target or live binary.
             atomic_text(file,wrapper,0o755)
     print(json.dumps(m.doctor(),indent=2))
 
-if __name__=='__main__':main(sys.argv[1] if len(sys.argv)>1 else None)
+if __name__=='__main__':
+    try:main(sys.argv[1] if len(sys.argv)>1 else None)
+    except (ValueError,OSError,subprocess.SubprocessError) as e:
+        message=str(e) if isinstance(e,ValueError) else type(e).__name__
+        print('Instalasi Harmonika gagal: '+message,file=sys.stderr)
+        raise SystemExit(1)
