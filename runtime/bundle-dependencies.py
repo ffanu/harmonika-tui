@@ -60,6 +60,9 @@ for(const dir of [...used].sort()){
  }
 }
 fs.writeFileSync(path.join(out,'THIRD-PARTY-NOTICES.txt'),notices.join('\n\n')+'\n');
+// Release the native esbuild service before Python removes its temporary
+// dependency tree. Windows otherwise retains a lock on esbuild.exe.
+esbuild.stop();
 """
     subprocess.run([node, '-e', script, str(dependency_root), str(destination.resolve()), json.dumps(ENTRIES)],
                    check=True, timeout=180)
