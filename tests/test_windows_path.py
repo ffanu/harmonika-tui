@@ -110,6 +110,21 @@ class WindowsPath(unittest.TestCase):
             result=self.configure();self.assertFalse(result['path_persisted']);self.assertEqual(result['status'],'degraded')
         self.store=Store('fixture',7);result=self.configure();self.assertFalse(result['path_persisted']);self.assertEqual(self.store.writes,[])
 
+    def test_canonical_name_expansion_does_not_require_identical_spelling(self):
+        canonical=self.root/'Long Canonical Profile'/'.local/bin';canonical.mkdir(parents=True)
+        (canonical/'harmonika.cmd').write_text('@echo fixture',encoding='utf-8')
+        real_resolve=Path.resolve
+        def resolve(path,*args,**kwargs):
+            return canonical if path==self.bin else real_resolve(path,*args,**kwargs)
+        with patch.object(Path,'resolve',resolve):
+            self.assertEqual(m._canonical_bindir(self.bin),canonical)
+
+    def test_reparse_ancestor_refused_before_canonical_resolution(self):
+        actual=m._linklike
+        with patch.object(m,'_linklike',side_effect=lambda path:path==self.bin.parent or actual(path)):
+            result=self.configure()
+        self.assertFalse(result['path_persisted']);self.assertEqual(self.store.writes,[])
+
     def test_merge_uses_semicolon_not_posix_path_separator(self):
         raw='C:\\Tools;%PRIVATE_ROOT%\\bin;https://example.invalid'
         self.assertEqual(m.merge_user_path(raw,self.bin,self.env),str(self.bin)+';'+raw)

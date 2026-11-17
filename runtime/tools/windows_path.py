@@ -84,11 +84,15 @@ def _canonical_bindir(bindir):
     path = Path(bindir)
     if not path.is_absolute() or '..' in path.parts or any(ch in str(path) for ch in '\x00\r\n;"'):
         raise ValueError('invalid_command_directory')
-    if not path.is_dir() or _linklike(path) or not _regular(path/'harmonika.cmd'):
+    if not path.is_dir() or any(_linklike(parent) for parent in (path,*path.parents)) or not _regular(path/'harmonika.cmd'):
         raise ValueError('command_wrapper_missing_or_unsafe')
-    if os.path.normcase(str(path.resolve(strict=True))) != os.path.normcase(str(path)):
-        raise ValueError('command_directory_not_canonical')
-    return path
+    # Windows resolves legitimate DOS 8.3 profile/temp names to their long name.
+    # Reject links/reparse points before resolution, rather than rejecting that
+    # normal spelling expansion. Dispatch only to the returned canonical file.
+    canonical=path.resolve(strict=True)
+    if not canonical.is_dir() or not _regular(canonical/'harmonika.cmd'):
+        raise ValueError('command_wrapper_missing_or_unsafe')
+    return canonical
 
 
 def _shim(wrapper):
