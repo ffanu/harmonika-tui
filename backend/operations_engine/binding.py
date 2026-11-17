@@ -10,7 +10,7 @@ def invoke(principal,sid,value):
  if type(principal) is not str or not PRINCIPAL.fullmatch(principal):return {'ok':False,'error':{'code':'access_denied'}}
  try:
   token=private_path('/etc/harmonika-operations/master.token').read_text().strip()
-  request=urllib.request.Request('http://127.0.0.1:18230/invoke',data=json.dumps({'skill_id':sid,'input':value}).encode(),headers={'Content-Type':'application/json','X-Harmonika-Operations-Secret':token,'X-Harmonika-Principal':principal},method='POST')
+  request=urllib.request.Request('http://127.0.0.1:18280/invoke',data=json.dumps({'skill_id':sid,'input':value}).encode(),headers={'Content-Type':'application/json','X-Harmonika-Operations-Secret':token,'X-Harmonika-Principal':principal},method='POST')
   try:
    with urllib.request.build_opener(urllib.request.ProxyHandler({}),NoRedirect()).open(request,timeout=42) as response:raw=response.read(262145)
   except urllib.error.HTTPError as error:raw=error.read(262145)

@@ -62,6 +62,17 @@ class CoreTests(unittest.TestCase):
   with sqlite3.connect(t.path) as c:
    self.assertEqual(c.execute('PRAGMA journal_mode').fetchone()[0],'wal');blob=json.dumps(c.execute('SELECT * FROM events').fetchall())
   for secret in ['PRIVATE_SENTINEL','api-token:1','api-token:2']:self.assertNotIn(secret,blob)
+ def test_truncated_postgres_plan_is_explicitly_partial(self):
+  children=[{'Node Type':'Seq Scan','Plan Rows':1} for _ in range(128)]
+  with patch('backend.operations_engine.database.postgres',side_effect=[{'read_only':True},[{'Plan':{'Node Type':'Append','Plans':children}}]]):
+   result=audit({'databases':{'pg':{'type':'postgres','queries':{'one':'SELECT 1'}}}},{'database':'pg','query':'one'})
+  self.assertEqual(result['status'],'partial');self.assertFalse(result['schema']['query_plan_complete']);self.assertEqual(len(result['schema']['query_plan']),128)
+ def test_missing_artifact_is_structured_not_found(self):
+  from backend.operations_engine.artifacts import read
+  from backend.operations_engine.common import private_path
+  root=private_path(self.root/'artifacts',directory=True,create=True)
+  with self.assertRaises(OpsError) as raised:read({'artifacts_root':str(root)},{'artifact_id':'browser_'+'a'*32+'/trace.zip'})
+  self.assertEqual(raised.exception.status,404)
  def test_public_descriptors_match_packaged_catalog(self):
   source=Path(__file__).resolve().parents[2]/'runtime/tools/operations_catalog.json'
   self.assertEqual(json.loads(source.read_text())['skills'],descriptors())

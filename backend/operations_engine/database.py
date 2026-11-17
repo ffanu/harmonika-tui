@@ -35,10 +35,10 @@ def audit(config,payload):
   require(value.get('read_only') is True,'database_not_read_only',502)
   if query:
    raw=postgres(target,'EXPLAIN (FORMAT JSON) '+query);nodes=[];pending=[raw[0]['Plan']]
-   while pending:
+   while pending and len(nodes)<128:
     p=pending.pop();nodes.append({'node_type':p.get('Node Type'),'estimated_rows':p.get('Plan Rows'),'uses_index':'Index' in p.get('Node Type','')});pending.extend(p.get('Plans',[]))
-   value['query_plan']=nodes[:128]
-  return {'status':'completed','engine':'postgres','read_only':True,'schema':value,'rows_returned':0,'execution_scope':'registered_database'}
+   value['query_plan']=nodes;value['query_plan_complete']=not pending
+  return {'status':'partial' if query and pending else 'completed','engine':'postgres','read_only':True,'schema':value,'rows_returned':0,'execution_scope':'registered_database'}
  require(target.get('type')=='sqlite','unsupported_database',503)
  p=Path(target.get('path','')).absolute();require(p.is_file() and not any(x.is_symlink() for x in [p,*p.parents]),'unsafe_database_path')
  require(p.stat().st_nlink==1 and p.stat().st_size<=2*1024**3,'database_too_large')
@@ -63,6 +63,9 @@ def audit(config,payload):
     schema.append({'table':name,'columns_total':len(columns),'columns_truncated':len(columns)>128,'columns':[{'name':x[1],'type':x[2],'not_null':bool(x[3]),'primary_key':bool(x[5])} for x in columns[:128]],'index_count':len(indexes)})
    healthy=c.execute('PRAGMA quick_check(1)').fetchone()==('ok',)
    result={'status':'partial' if partial else 'completed','schema_complete':not partial,'engine':'sqlite','read_only':True,'integrity_ok':healthy,'schema':schema,'rows_returned':0,'execution_scope':'registered_database'}
-   if query:result['query_plan']=[{'step':r[0],'parent':r[1],'detail':r[3][:256]} for r in c.execute('EXPLAIN QUERY PLAN '+query).fetchmany(129)][:128]
+   if query:
+    plan=c.execute('EXPLAIN QUERY PLAN '+query).fetchmany(129);result['query_plan_complete']=len(plan)<=128
+    result['query_plan']=[{'step':r[0],'parent':r[1],'detail':r[3][:256]} for r in plan[:128]]
+    if not result['query_plan_complete']:result['status']='partial'
    return result
  except sqlite3.Error:raise OpsError('database_audit_failed',502) from None

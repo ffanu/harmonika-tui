@@ -53,7 +53,7 @@ def main():
  parser=argparse.ArgumentParser();parser.add_argument('--config',required=True);args=parser.parse_args()
  cfg=load_private(args.config);key=private_path(cfg['state_key_file']).read_bytes();token=private_path(cfg['token_file']).read_text().strip()
  if not 32<=len(token)<=256:raise OpsError('invalid_service_token',503)
- server=Server(('127.0.0.1',int(cfg.get('port',18230))),Handler);server.engine=Engine(cfg,key);server.token=token;server.slots=threading.BoundedSemaphore(2)
+ server=Server(('127.0.0.1',int(cfg.get('port',18280))),Handler);server.engine=Engine(cfg,key);server.token=token;server.slots=threading.BoundedSemaphore(2)
  from .retention import prune
  def maintain():
   while True:

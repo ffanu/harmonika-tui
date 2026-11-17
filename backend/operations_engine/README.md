@@ -63,7 +63,7 @@ failed health or rollback are not successful task completion.
 ## Runtime and privacy
 
 `python3 -m operations_engine.service --config /etc/harmonika-operations/config.json`
-listens only on `127.0.0.1:18230`. Config, transport/state keys and database service
+listens only on `127.0.0.1:18280`. Config, transport/state keys and database service
 files are private operator files, never package contents or process arguments.
 Run as the dedicated unprivileged `harmonika_ops` service user. Source, executables
 and browser binaries are root-owned; project/state/artifact directories are scoped.

@@ -26,6 +26,15 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 ---
 
+## Tools operasi backend
+
+`harmonika ops catalog` menampilkan tools diagnosis, selftest, scanner Semgrep/Trivy,
+pengujian browser, audit database baca saja, pemulihan job, deployment/rollback,
+dan pemakaian lisensi. TUI memakai tool MCP `engine_operations` melalui gateway
+Harmonika yang sama. Proyek, konektor database dan target deployment harus
+didaftarkan serta diberi hak akses di backend terlebih dahulu.
+[Lingkup, penggunaan dan batasan](backend/operations_engine/README.md).
+
 ## 🚀 Instalasi Cepat
 
 **Prasyarat:** Python **3.9+**, Node.js **18+**, Git, dan koneksi HTTPS.
