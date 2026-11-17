@@ -78,6 +78,13 @@ paste, serta pemilihan Python ketika kandidat awal gagal. Alur konsol Windows
 dan instalasi lengkap diuji di CI;
 [hasil pengujian](docs/WINDOWS-LICENSE-INSTALLER-AUDIT-20261118.json).
 
+Tunggu pesan **Instalasi selesai** sebelum menutup jendela. Lisensi yang sudah
+terverifikasi belum berarti penyiapan runtime telah selesai. Installer memakai
+lokasi profil Python untuk launcher, menyimpan PATH pengguna dan menyiapkan
+launcher kompatibilitas pada folder pengguna yang sudah ada di PATH agar tab
+Windows Terminal dengan lingkungan lama tetap dapat menemukan `harmonika`.
+Tidak mengubah PATH sistem, profil PowerShell atau file aplikasi lain.
+
 **Manual dari source:**
 
 ```sh

@@ -306,7 +306,7 @@ assert sys.stdin.isatty(), 'PowerShell lost native console stdin'
 key=input('SYNTHETIC_PS5_KEY: ')
 pathlib.Path(os.environ['FIXTURE_RECEIPT']).write_text(json.dumps({'key':key,'isatty':True}),encoding='utf-8')
 ''', encoding='utf-8')
-            (upstream/'runtime/install.py').write_text("import os,pathlib\npathlib.Path(os.environ['FIXTURE_INSTALLED']).write_text('installed',encoding='utf-8')\n", encoding='utf-8')
+            (upstream/'runtime/install.py').write_text("import os,pathlib\npathlib.Path(os.environ['FIXTURE_INSTALLED']).write_text('installed',encoding='utf-8')\nbin_dir=pathlib.Path(os.environ['HARMONIKA_BIN_DIR']);bin_dir.mkdir(parents=True,exist_ok=True)\n(bin_dir/'harmonika.cmd').write_text('@echo off\\r\\necho Harmonika fixture version\\r\\nexit /b 0\\r\\n',encoding='utf-8')\n", encoding='utf-8')
             env = isolated_env(root)
             env.update(HARMONIKA_SOURCE_DIR=str(source), FIXTURE_RECEIPT=str(receipt), FIXTURE_INSTALLED=str(root/'installed'))
             def git(*args):

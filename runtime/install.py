@@ -244,12 +244,26 @@ def write_windows_wrappers(root=ROOT):
     (root/'node.path').write_text(node_path, encoding='utf-8')
     bin_dir=Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))
     bin_dir.mkdir(parents=True,exist_ok=True)
+    literal=lambda value:str(value).replace('%','%%')
     cmd_wrapper=(
-        '@echo off\r\n@chcp 65001 >nul\r\n'
-        f'set "HARMONIKA_NODE={node_path}"\r\n'
-        f'"{sys.executable}" -I "{root}\\launcher.py" %*\r\n'
+        '@echo off\r\nsetlocal DisableDelayedExpansion\r\n@chcp 65001 >nul\r\n'
+        f'set "HARMONIKA_NODE={literal(node_path)}"\r\n'
+        f'"{literal(sys.executable)}" -I "{literal(root)}\\launcher.py" %*\r\n'
     )
     atomic_text(bin_dir/'harmonika.cmd',cmd_wrapper,0o755)
+
+def register_windows_command(root=ROOT):
+    # Isolated/custom installs opt in explicitly; CI must never write HKCU PATH.
+    if os.name!='nt' or (os.environ.get('HARMONIKA_BIN_DIR') and os.environ.get('HARMONIKA_PERSIST_PATH')!='1'):
+        return {'status':'isolated_install'}
+    script=SOURCE/'runtime/tools/windows_path.py'
+    spec=importlib.util.spec_from_file_location('harmonika_windows_path',script)
+    integration=importlib.util.module_from_spec(spec);spec.loader.exec_module(integration)
+    bin_dir=Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))
+    result=integration.configure_windows_command(bin_dir)
+    atomic_text(root/'windows-path-status.json',json.dumps(result,sort_keys=True)+'\n',0o600)
+    if not result.get('path_persisted'):raise ValueError('windows_user_path_registration_failed')
+    return result
 
 
 # Root Linux shells commonly omit ~/.local/bin. Keep the private wrapper and
@@ -319,7 +333,9 @@ def main(package=None):
             raise ValueError('already_installed_use_manual_update')
         ensure_default_config(ROOT)
         atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text(encoding='utf-8'))
-        if os.name=='nt':write_windows_wrappers(ROOT)
+        if os.name=='nt':
+            write_windows_wrappers(ROOT)
+            register_windows_command(ROOT)
         else:write_posix_wrappers(ROOT)
         try:
             chk=m.check_update(ROOT)
@@ -450,6 +466,7 @@ def activate(stage,manifest):
     atomic_text(configfile.parent/'crush.json',encoded)
     if os.name == 'nt':
         write_windows_wrappers(ROOT)
+        register_windows_command(ROOT)
     else:
         write_posix_wrappers(ROOT)
     print(json.dumps(m.doctor(),indent=2))

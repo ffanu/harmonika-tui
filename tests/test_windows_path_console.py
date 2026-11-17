@@ -74,7 +74,7 @@ class WindowsPathConsoleTests(unittest.TestCase):
         with patch.dict(os.environ, env, clear=True):
             installer = load_module('fixture_windows_installer', SOURCE/'runtime/install.py')
             installer.write_windows_wrappers(root=terminal)
-        helper = load_module('fixture_windows_path', SOURCE/'runtime/windows_path.py')
+        helper = load_module('fixture_windows_path', SOURCE/'runtime/tools/windows_path.py')
         return env, bindir, alias, helper, system
 
     def run_shell(self, command, env):

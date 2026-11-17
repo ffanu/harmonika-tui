@@ -193,7 +193,7 @@ def interactive_tui_box(config=CONFIG):
             continue
         try:
             res = activate(entered, config=config)
-            sys.stderr.write(f"\n  {green}✔ Lisensi berhasil diverifikasi & dikunci untuk perangkat ini! Membuka Harmonika TUI...{reset}\n\n")
+            sys.stderr.write(f"\n  {green}✔ Lisensi berhasil diverifikasi & dikunci untuk perangkat ini.{reset}\n\n")
             return res
         except LicenseError as err:
             code = str(err)

@@ -2,6 +2,7 @@
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Write-Host '=== Harmonika Terminal Installer (Windows x64) ===' -ForegroundColor Cyan
+$HarmonikaOriginalPath = $env:Path
 
 $ExtraPaths = @("$HOME\.local\bin", "$env:ProgramFiles\nodejs", "${env:ProgramFiles(x86)}\nodejs", "$env:LOCALAPPDATA\Programs\nodejs", "$env:APPDATA\npm", "$env:ProgramFiles\Git\cmd", "$env:LOCALAPPDATA\Programs\Git\cmd")
 if (Test-Path "$env:LOCALAPPDATA\Programs\Python") {
@@ -40,7 +41,13 @@ $GitCmd = Get-Command git -CommandType Application -ErrorAction SilentlyContinue
 if (-not $GitCmd) { throw 'Git diperlukan.' }
 $env:HARMONIKA_NODE = $NodeCmd.Source
 $InstallSrc = if ($env:HARMONIKA_SOURCE_DIR) { $env:HARMONIKA_SOURCE_DIR } else { Join-Path $HOME '.local\share\harmonika-tui-src' }
-$BinDir = if ($env:HARMONIKA_BIN_DIR) { $env:HARMONIKA_BIN_DIR } else { Join-Path $HOME '.local\bin' }
+# Ask the same Python that creates the launcher; PowerShell HOME and Python's
+# user profile need not point at the same directory.
+$BinDir = if ($env:HARMONIKA_BIN_DIR) { $env:HARMONIKA_BIN_DIR } else {
+    $HarmonikaPythonHome = & $PyCmd.Source @PyArgs -c 'from pathlib import Path; print(Path.home())'
+    if ($LASTEXITCODE -ne 0 -or -not $HarmonikaPythonHome) { throw 'Lokasi launcher Python tidak dapat ditentukan.' }
+    Join-Path ([string]($HarmonikaPythonHome | Select-Object -Last 1)) '.local\bin'
+}
 $ConfigDir = if ($env:HARMONIKA_GLOBAL_CONFIG) { $env:HARMONIKA_GLOBAL_CONFIG } else { Join-Path $HOME '.config\harmonika' }
 if (Test-Path (Join-Path $InstallSrc '.git')) {
     & $GitCmd.Source -C $InstallSrc pull --ff-only
@@ -56,20 +63,31 @@ if ($Interactive) {
     Write-Host 'Tempel lisensi dengan Ctrl+V atau Shift+Insert, lalu Enter. Key akan terlihat saat dimasukkan.'
     & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\license.py') ensure
     if ($LASTEXITCODE -ne 0) { throw 'Aktivasi lisensi belum selesai.' }
+    Write-Host "Lisensi aktif. Tunggu penyiapan runtime sampai pesan 'Instalasi selesai'."
 }
-& $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\install.py')
-if ($LASTEXITCODE -ne 0) { throw 'Instalasi Harmonika gagal; lihat diagnostik di atas.' }
+$HarmonikaSavedOriginalPath = [Environment]::GetEnvironmentVariable('HARMONIKA_ORIGINAL_PATH', 'Process')
+try {
+    $env:HARMONIKA_ORIGINAL_PATH = $HarmonikaOriginalPath
+    & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\install.py')
+    $HarmonikaInstallExit = $LASTEXITCODE
+} finally {
+    [Environment]::SetEnvironmentVariable('HARMONIKA_ORIGINAL_PATH', $HarmonikaSavedOriginalPath, 'Process')
+}
+if ($HarmonikaInstallExit -ne 0) { throw 'Instalasi Harmonika gagal; lihat diagnostik di atas.' }
 # Per-user PATH only. Do not alter Defender settings, System32 or shell profiles.
+# The Python installer persists raw HKCU PATH and adds a managed compatibility
+# launcher for an already-open Windows Terminal. Refresh this shell as well.
 $env:Path = "$BinDir;$env:Path"
-if (-not $env:HARMONIKA_BIN_DIR) {
-    $UserPath = [Environment]::GetEnvironmentVariable('Path', 'User')
-    if (($UserPath -split ';') -notcontains $BinDir) {
-        [Environment]::SetEnvironmentVariable('Path', "$BinDir;$UserPath", 'User')
-    }
-}
+$Launcher = Join-Path $BinDir 'harmonika.cmd'
+if (-not (Test-Path -LiteralPath $Launcher -PathType Leaf)) { throw "Launcher belum terpasang: $Launcher. Jalankan ulang installer sampai selesai." }
+$HarmonikaCommand = Get-Command harmonika -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+if (-not $HarmonikaCommand) { throw 'Launcher ada tetapi belum ditemukan lewat PATH. Jalankan ulang installer.' }
+& $Launcher --version
+if ($LASTEXITCODE -ne 0) { throw 'Launcher belum dapat dijalankan; instalasi belum selesai.' }
 $KeyFile = Join-Path $ConfigDir 'harmonika-api-key'
+Write-Host 'Instalasi selesai. Perintah harmonika sudah tersedia.' -ForegroundColor Green
+Write-Host "Lokasi launcher: $Launcher"
 if ($Interactive -and $env:HARMONIKA_LAUNCH_AFTER_INSTALL -ne '0') {
-    & (Join-Path $BinDir 'harmonika.cmd')
+    & $Launcher
     if ($LASTEXITCODE -ne 0) { throw 'Terminal belum berhasil dibuka; jalankan harmonika doctor.' }
 }
-Write-Host 'Instalasi selesai. Jalankan harmonika, atau harmonika activate untuk aktivasi lisensi.' -ForegroundColor Green
