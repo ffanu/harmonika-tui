@@ -39,12 +39,13 @@ def load_module(name, file):
 
 @unittest.skipUnless(sys.platform == 'win32', 'actual Windows command discovery required')
 class WindowsPathConsoleTests(unittest.TestCase):
-    def fixture(self, root):
+    def fixture(self, root, *, special_literal_percent=True):
         system = Path(os.environ.get('SystemRoot', 'C:/Windows'))/'System32'
         alias = root/'local app Ω'/'Microsoft/WindowsApps'
         alias.mkdir(parents=True)
         # Real percent variable syntax would expose recursive CALL expansion.
-        terminal = root/'profil Ω %HARMONIKA_PATH_SENTINEL% & !literal!'/'terminal'
+        profile = 'profil Ω %HARMONIKA_PATH_SENTINEL% & !literal!' if special_literal_percent else 'profil utilisateur Ω espace'
+        terminal = root/profile/'terminal'
         terminal.mkdir(parents=True)
         bindir = terminal.parent/'canonical bin'
         bindir.mkdir()
@@ -116,8 +117,19 @@ class WindowsPathConsoleTests(unittest.TestCase):
             self.assertEqual(self.powershell(system, expression, stale), MARKER)
             self.assertEqual(self.cmd(system, 'harmonika --version', stale), MARKER)
             self.assertEqual(self.cmd(system, 'harmonika --version', stale, delayed=True), MARKER)
-            current = dict(stale, PATH=str(bindir) + os.pathsep + stale['PATH'])
+
+    def test_current_path_canonical_lookup_with_unicode_and_spaces(self):
+        # PowerShell 5 dispatches .cmd through CMD. A canonical filename with
+        # literal %VARNAME% can be expanded before the wrapper starts, so this
+        # test claims canonical discovery for normal Unicode/spaces profiles.
+        # The hard literal-percent case remains required through the managed
+        # alias in the stale-PATH and argument tests above/below.
+        with tempfile.TemporaryDirectory(prefix='harmonika canonical Ω ') as temp:
+            env, bindir, alias, helper, system = self.fixture(Path(temp), special_literal_percent=False)
+            current = dict(env, PATH=str(bindir) + os.pathsep + env['PATH'])
+            expression = "$ErrorActionPreference='Stop'; harmonika --version; if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}"
             self.assertEqual(self.powershell(system, expression, current), MARKER)
+            self.assertEqual(self.cmd(system, 'harmonika --version', current), MARKER)
 
     def test_managed_shim_does_not_reparse_arguments_with_call(self):
         with tempfile.TemporaryDirectory(prefix='harmonika arguments Ω ') as temp:
