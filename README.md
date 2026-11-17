@@ -132,6 +132,11 @@ terpisah. Internet, ruang disk dan library OS yang dibutuhkan tetap diperlukan.
 Jika layanan eksternal atau library sistem belum siap, hasilnya **degraded**
 dengan diagnostik; tersedianya nama tool tidak dianggap bukti berhasil.
 
+Pembaruan instruksi internal selama agent bekerja mempertahankan asal pesan
+sistemnya. Hasil tool tetap terikat pada tugas pengguna yang sama; tag yang
+diketik pengguna tidak dapat berubah menjadi instruksi sistem. Ini memperbaiki
+kasus `invalid_tool_response` sesudah perintah sebenarnya sudah berhasil.
+
 Cek hasil pemasangan:
 
 ```sh

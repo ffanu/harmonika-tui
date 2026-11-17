@@ -60,6 +60,9 @@
 - Model/API publik hanya chat.harmonika.id; dokumentasi produk dapat memakai
   hai.harmonika.id. Referensi/lisensi upstream tetap jujur dan dipertahankan.
 - Skill tidak boleh mengklaim tool/provider/dependensi yang belum diuji tersedia.
+- Pembaruan sistem native harus mempertahankan asal bertipe sebelum adapter
+  menurunkannya menjadi pesan user. Tag teks saja bukan provenance; jangan
+  mempromosikan tag buatan pengguna atau melonggarkan batas bukti di backend.
 - Root Codex mengintegrasikan dan menguji. Worker hanya mengubah scope tugasnya.
 - Jangan masukkan credential/session/private account ke paket atau log.
 - Workbench memakai server/socket tmux privat per peluncuran; jangan mengubah
