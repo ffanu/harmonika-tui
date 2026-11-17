@@ -1,3 +1,4 @@
+import {nativeSystemUpdates} from './native_system_updates.mjs';
 import window from './context_window.cjs';
 import {open,mkdir,rename,lstat,unlink} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
@@ -52,18 +53,26 @@ export async function recordMechanics(state,env=process.env) {
 export default {
  id:'harmonika.visual-context-guard',
  async setup(ctx){
-  const hook=await ctx.session.hook('http.request',async event=>{
+  const updates=nativeSystemUpdates(),hooks=[];
+  const cleanup=()=>{for(const hook of hooks)try{hook.dispose();}catch{}updates.dispose();};
+  try {
+  hooks.push(await ctx.session.hook('context',event=>{updates.register(event);},{providerID:'harmonika'}));
+  hooks.push(await ctx.session.hook('http.response',event=>{updates.release(event);},{providerID:'harmonika'}));
+  hooks.push(await ctx.session.hook('http.request',async event=>{
    const request=event.request;
    if(request.method!=='POST'||!request.headers.get('content-type')?.includes('application/json'))return;
    const raw=await request.clone().text();if(raw.length>MAX_CHARS)return;
    let value;try{value=JSON.parse(raw)}catch{return}
    if(!value||!Array.isArray(value.messages)||value.messages.some(m=>!m||typeof m!=='object'||Array.isArray(m)))return;
-   const projected=window.project(value,{maxChars:capacityProfile()?.transport_soft_chars});
-   try{await recordMechanics(projectionMechanics(value,projected,raw.length));}catch{}
+   const restored=updates.promote(value,event);
+   const projected=window.project(restored.value,{maxChars:capacityProfile()?.transport_soft_chars});
+   try{await recordMechanics({...projectionMechanics(value,projected,raw.length),native_system_updates:restored.count??0});}catch{}
    if(projected===value)return;
    const headers=new Headers(request.headers);headers.delete('content-length');
    event.request=new Request(request,{headers,body:JSON.stringify(projected)});
-  },{providerID:'harmonika'});
-  return ()=>hook.dispose();
+   restored.bind(event.request);
+  },{providerID:'harmonika'}));
+  return cleanup;
+  } catch(error) {cleanup();throw error;}
  }
 };

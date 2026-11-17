@@ -31,9 +31,9 @@ test('metadata excludes raw content and unknown role names; signed plugin files 
  } finally {await fs.rm(directory,{recursive:true,force:true})}
 });
 test('guard scopes HTTP hook to Harmonika and disposes it without a network call',async()=>{
- let callback,disposed=false;
- const cleanup=await guard.default.setup({session:{hook:async(name,handler,options)=>{assert.equal(name,'http.request');assert.deepEqual(options,{providerID:'harmonika'});callback=handler;return {dispose:()=>{disposed=true}}}}});
+ const callbacks=new Map();let disposed=0;
+ const cleanup=await guard.default.setup({session:{hook:async(name,handler,options)=>{assert.ok(['context','http.request','http.response'].includes(name));assert.deepEqual(options,{providerID:'harmonika'});callbacks.set(name,handler);return {dispose:()=>{disposed++}}}}});
  const event={request:new Request('https://example.invalid',{method:'POST',headers:{'Content-Type':'application/json'},body:'{"not_messages":"PRIVATE_SENTINEL"}'})};
- const original=event.request;await callback(event);assert.equal(event.request,original);
- cleanup();assert.equal(disposed,true);
+ const original=event.request;await callbacks.get('http.request')(event);assert.equal(event.request,original);
+ cleanup();assert.equal(disposed,3);
 });
