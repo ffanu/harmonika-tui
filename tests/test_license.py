@@ -29,7 +29,8 @@ class License(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             result=m.activate(KEY,Path(directory),lambda key:m.summary(data(unlimited=True)))
             file=Path(directory)/'harmonika-api-key'
-            self.assertEqual(stat.S_IMODE(file.stat().st_mode),0o600)
+            # Windows stat does not represent POSIX mode bits / NTFS ACLs.
+            if os.name == 'posix':self.assertEqual(stat.S_IMODE(file.stat().st_mode),0o600)
             self.assertEqual(file.read_text().strip(),KEY);self.assertNotIn(KEY,json.dumps(result))
     def test_failed_permission_does_not_replace_existing_key(self):
         with tempfile.TemporaryDirectory() as directory:
