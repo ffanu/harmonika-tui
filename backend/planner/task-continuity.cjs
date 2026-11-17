@@ -10,6 +10,7 @@ const readNames=new Set(['read_file','read_files','code.read','fs.read','fixture
 const statusNames=new Set(['get_job','job.status','job_status','read_status','fixture.status','fixture.lookup','fixture.cancel_status']);
 const submitNames=new Set(['submit_job','job.submit','exec.background','image.generate','video.generate','fixture.submit','fixture.cancel']);
 const testNames=new Set(['run_tests','test.run','test.single','fixture.test']);
+const nativeShellNames=new Set(['shell','bash']);
 const ambiguous=new Set(['unknown','outcome_unknown','reconciling','retrying','cancel_requested','cancelling','canceling','timeout','timed_out']);
 const terminal=new Set(['completed','succeeded','success','cancelled','canceled','failed','rejected','aborted']);
 const executionFailures=new Set(['failed','failure','error','errored','rejected','aborted','timeout','timed_out']);
@@ -37,7 +38,33 @@ function paths(value){
  return values.flatMap(v=>typeof v==='string'?[sha(v)]:typeof v?.path==='string'?[sha(v.path)]:[]);
 }
 function strippedCommand(value){return value.trim().replace(/^cd\s+(?:\/d\s+)?(?:"[^"\n]+"|'[^'\n]+'|[^\s;&|<>`]+)\s*&&\s*/,'');}
-function isTestCommand(value){return typeof value==='string'&&/^(?:node\s+--test\b|npm\s+(?:test\b|run\s+test\b)|python(?:3)?\s+-m\s+(?:pytest|unittest)\b|pytest\b|go\s+test\b|cargo\s+test\b)/.test(strippedCommand(value));}
+function isTestCommand(value){return typeof value==='string'&&/^(?:node(?:\.exe)?\s+--test\b|npm(?:\.cmd|\.exe)?\s+(?:test\b|run\s+test\b)|python(?:3)?(?:\.exe)?\s+-m\s+(?:pytest|unittest)\b|py(?:\.exe)?(?:\s+-3(?:\.\d+)?)?\s+-m\s+(?:pytest|unittest)\b|pytest(?:\.exe)?\b|go(?:\.exe)?\s+test\b|cargo(?:\.exe)?\s+test\b)/i.test(strippedCommand(value));}
+function nativeTestCommand(value){return isTestCommand(value)&&!/[;&|<>$`\r\n]/.test(strippedCommand(value));}
+function commandsFor(name,args){return name==='run_commands'&&Array.isArray(args?.commands)?args.commands:nativeShellNames.has(name)&&typeof args?.command==='string'?[args.command]:[];}
+function nativeMetrics(args,body){
+ // Only this known executor's structured envelope can supply process mechanics.
+ // Bare TAP/source strings never imply that a process exited successfully.
+ if(!body||!nativeTestCommand(args?.command))return {count:null,passed:false,failed:false};
+ const sources=[body,body.metadata,body.metadata?.metadata].filter(v=>v&&typeof v==='object'&&!Array.isArray(v));
+ const exits=sources.flatMap(v=>['exit_code','exitCode','exit_status','exit'].filter(k=>Object.hasOwn(v,k)).map(k=>v[k]));
+ const integer=v=>typeof v==='number'&&Number.isInteger(v)&&v>=-255&&v<=255?v:typeof v==='string'&&/^-?\d{1,3}$/.test(v)?Number(v):null;
+ const invalidExit=exits.some(v=>integer(v)===null),failedExit=exits.some(v=>integer(v)!==null&&integer(v)!==0);
+ const mechanicalFailure=sources.some(v=>v.ok===false||v.success===false||v.isError===true||typeof v.failed==='number'&&v.failed>0||v.timeout===true||v.killed===true||typeof v.signal==='string'&&v.signal.length>0);
+ const incomplete=sources.some(v=>v.partial===true||v.truncated===true||v.is_truncated===true||v.output_limited===true||v.complete===false||[v.status,v.state].some(s=>typeof s==='string'&&!['completed','succeeded','success'].includes(s.trim().toLowerCase())));
+ const explicitZero=exits.length>0&&!invalidExit&&!failedExit&&!incomplete;
+ const metricSources=sources.filter(v=>Object.hasOwn(v,'collected')||Object.hasOwn(v,'tests_collected')||Object.hasOwn(v,'test_count'));
+ if(metricSources.length){
+  const values=metricSources.map(v=>({count:v.collected??v.tests_collected??v.test_count,passed:v.passed??v.tests_passed,failed:v.failed}));
+  const first=values[0],consistent=values.every(v=>Number.isInteger(v.count)&&v.count>=0&&v.count===first.count&&Number.isInteger(v.passed)&&v.passed===v.count&&(v.failed===undefined||v.failed===0));
+  return {count:Number.isInteger(first.count)&&first.count>=0?first.count:null,passed:explicitZero&&!mechanicalFailure&&consistent&&first.count>0,failed:failedExit||mechanicalFailure};
+ }
+ const output=typeof body.stdout==='string'?body.stdout:typeof body.output==='string'?body.output:null;
+ if(output===null)return {count:null,passed:false,failed:failedExit||mechanicalFailure};
+ // Reuse the existing known-test summary parser only after its explicit native
+ // process exit is present. This is client_reported, never signed attestation.
+ const parsed=executorMetrics('fixture.test',args,{exit_code:0,output},JSON.stringify({exit_code:0,output}));
+ return {...parsed,passed:parsed.passed&&explicitZero&&!mechanicalFailure,failed:parsed.failed||failedExit||mechanicalFailure};
+}
 function isDiagnosticCommand(value){if(typeof value!=='string')return false;const command=strippedCommand(value);return !/[;&|<>$`\n]/.test(command)&&/^(?:node\s+--check\s+|npm\s+run\s+(?:check|lint|typecheck)\b)/.test(command);}
 function originalCommand(query,commands){
  if(typeof query!=='string'||!Array.isArray(commands))return null;
@@ -81,14 +108,15 @@ function inspect(name,args,content,{received=content!==null&&content!==undefined
  const requested=refs(args);let references=requested,confirmedReferences=refs(null),correlation_conflict=false;
  for(const source of sources){const returned=refs(source);for(const kind of referenceKinds)if(requested[kind].length&&returned[kind].length&&!requested[kind].some(v=>returned[kind].includes(v)))correlation_conflict=true;references=merge(references,returned);confirmedReferences=merge(confirmedReferences,returned);}
  const write=writeNames.has(name),read=readNames.has(name),status=statusNames.has(name);
- const commandTest=name==='run_commands'&&Array.isArray(args?.commands)&&args.commands.some(isTestCommand);
- const readOnlyCommand=name==='run_commands'&&args?.commands?.length>0&&args.commands.every(value=>{if(typeof value!=='string')return false;const command=strippedCommand(value);return !/[;&|<>$`\n]/.test(command)&&/^(?:pwd\b|ls\b|stat\b|ps\b|git\s+(?:status|diff)\b|systemctl\s+(?:show|status|is-active)\b)/.test(command);});
+ const native=nativeShellNames.has(name),commands=commandsFor(name,args);
+ const commandTest=commands.some(native?nativeTestCommand:isTestCommand);
+ const readOnlyCommand=(name==='run_commands'||native)&&commands.length>0&&commands.every(value=>{if(typeof value!=='string')return false;const command=strippedCommand(value);return !/[;&|<>$`\n]/.test(command)&&/^(?:pwd\b|ls\b|stat\b|ps\b|git\s+(?:status|diff)\b|systemctl\s+(?:show|status|is-active)\b)/.test(command);});
  const test=testNames.has(name)||commandTest;
- const metrics=test?executorMetrics(name,args,body,content):{count:null,passed:false,failed:false};
- const scope=verificationScope.inspect(name,args,body,{write,read,test,status,operation:submitNames.has(name)||name==='run_commands'});
- const outcome=receiptOutcome.inspect(body,{received,write,read:read||readOnlyCommand,test,status,operation:submitNames.has(name),execution:name==='run_commands'});
+ const metrics=test?(native?nativeMetrics(args,body):executorMetrics(name,args,body,content)):{count:null,passed:false,failed:false};
+ const scope=verificationScope.inspect(native?'run_commands':name,native?{...args,commands}:args,body,{write,read,test,status,operation:submitNames.has(name)||name==='run_commands'||native&&!test});
+ const outcome=receiptOutcome.inspect(body,{received,write,read:read||readOnlyCommand,test,status,operation:submitNames.has(name),execution:name==='run_commands'||native});
  const diagnostic=name==='run_commands'&&args?.commands?.length>0&&args.commands.every(isDiagnosticCommand);
- const details={write,read:read||readOnlyCommand,status,test,diagnostic,diagnostic_output:diagnostic&&sources.some(v=>['result','stdout','stderr','output'].some(k=>typeof v[k]==='string'&&v[k].trim())),mutating:write||submitNames.has(name)||name==='run_commands'&&!readOnlyCommand,
+ const details={write,read:read||readOnlyCommand,status,test,diagnostic,diagnostic_output:diagnostic&&sources.some(v=>['result','stdout','stderr','output'].some(k=>typeof v[k]==='string'&&v[k].trim())),mutating:write||submitNames.has(name)||(name==='run_commands'||native)&&!readOnlyCommand,
   references,confirmedReferences,state:outcome.unknown_state||outcome.missing_state?'unknown':state,pending:pending.has(state)||outcome.uncertain,ambiguous:ambiguous.has(state)||outcome.uncertain,terminal:terminal.has(state),
   receipt_incomplete:outcome.partial,operation_receipt:outcome.uncertain,
   scope,scope_conflict:scope.conflict||scope.invalid,paths:write||read?paths(args):[],test_count:metrics.count,test_passed:metrics.passed&&!scope.invalid&&!scope.conflict&&!scope.ambiguous&&!outcome.partial&&!outcome.uncertain,test_failed:metrics.failed,correlation_conflict,
