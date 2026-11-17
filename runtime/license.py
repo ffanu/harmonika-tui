@@ -134,6 +134,22 @@ def ensure_terminal_license(config=CONFIG,checker=check):
     if not sys.stdin.isatty():raise LicenseError('license_key_required_before_terminal')
     return interactive_tui_box(config)
 
+def read_license_key(prompt):
+    """Use Windows cooked console input so terminal paste is visible and editable.
+
+    getpass uses character-by-character console input on Windows, bypassing
+    normal line editing/paste. Callers still require a real interactive TTY;
+    entered keys never become process arguments or activation result fields.
+    """
+    if sys.platform == 'win32':
+        return input(prompt).strip()
+    entered = getpass.getpass(prompt).strip()
+    if not entered:
+        sys.stderr.write('  Jika paste tersembunyi tidak terbaca, tempel di sini lalu Enter: ')
+        sys.stderr.flush()
+        entered = input().strip()
+    return entered
+
 def interactive_tui_box(config=CONFIG):
     if not sys.stdin.isatty():
         raise LicenseError('activation_requires_private_terminal_prompt')
@@ -162,16 +178,12 @@ def interactive_tui_box(config=CONFIG):
 {orange}  ╰──────────────────────────────────────────────────────────────────────╯{reset}
 """
     sys.stderr.write(box + "\n")
+    if sys.platform == 'win32':
+        sys.stderr.write(f"  {dim}Tempel API Key dengan Ctrl+V atau Shift+Insert, lalu Enter. Key terlihat saat dimasukkan.{reset}\n")
+        sys.stderr.flush()
     while True:
         try:
-            if os.name == 'nt':
-                entered = getpass.getpass(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}").strip()
-            else:
-                entered = getpass.getpass(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}").strip()
-                if not entered:
-                    sys.stderr.write(f"  {dim}(Jika paste tersembunyi tidak terbaca, tempel di sini lalu Enter): {reset}")
-                    sys.stderr.flush()
-                    entered = sys.stdin.readline().strip()
+            entered = read_license_key(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}")
         except (KeyboardInterrupt, EOFError):
             sys.stderr.write(f"\n  {dim}Aktivasi dibatalkan.{reset}\n")
             sys.exit(1)

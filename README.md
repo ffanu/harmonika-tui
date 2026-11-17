@@ -29,6 +29,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 ## 🚀 Instalasi Cepat
 
 **Prasyarat:** Python **3.9+**, Node.js **18+**, Git, dan koneksi HTTPS.
+Pada Windows gunakan Python **64-bit**.
 Paket rilis membawa SDK MCP dan validator konfigurasi; **npm tidak diperlukan saat instalasi**.
 
 | Sistem | Arsitektur binary tersedia |
@@ -53,9 +54,10 @@ Atau langsung dari source GitHub:
 curl -fsSL https://raw.githubusercontent.com/ffanu/harmonika-tui/main/scripts/install.sh | sh
 ```
 
-Pada terminal interaktif, installer meminta lisensi Harmonika melalui prompt
-privat, memverifikasinya, memasang provider Harmonika, lalu membuka TUI agent.
-API key tidak ditampilkan atau dikirim melalui argumen proses. Instalasi memakai
+Pada terminal interaktif, installer meminta lisensi Harmonika, memverifikasinya,
+memasang provider Harmonika, lalu membuka TUI agent. Pada Windows, key terlihat
+saat diketik/ditempel dengan **Ctrl+V** atau **Shift+Insert**, lalu tekan Enter.
+Pada macOS/Linux, prompt tetap tersembunyi. API key tidak dikirim melalui argumen proses. Instalasi memakai
 server privat agar daftar provider tidak tertahan pada background server lama;
 sesi yang sudah berjalan tidak dihentikan. Nama, logo dan tampilan TUI tetap.
 
@@ -63,6 +65,12 @@ sesi yang sudah berjalan tidak dihentikan. Nama, logo dan tampilan TUI tetap.
 
 ```powershell
 irm https://chat.harmonika.id/assets/harmonika-terminal/install.ps1 | iex
+```
+
+Atau langsung dari source GitHub:
+
+```powershell
+irm https://raw.githubusercontent.com/ffanu/harmonika-tui/main/scripts/install.ps1 | iex
 ```
 
 **Manual dari source:**

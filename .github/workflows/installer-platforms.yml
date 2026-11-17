@@ -14,6 +14,7 @@ on:
       - 'tests/test_installer_portability.py'
       - 'tests/test_license.py'
       - 'tests/test_installer_onboarding.py'
+      - 'tests/test_windows_license_console.py'
       - 'tests/test_installer_agent_parity.py'
       - 'tests/test_feature_setup.py'
       - 'tests/test_portable_owner_mcp.py'
@@ -33,6 +34,7 @@ on:
       - 'tests/test_installer_portability.py'
       - 'tests/test_license.py'
       - 'tests/test_installer_onboarding.py'
+      - 'tests/test_windows_license_console.py'
       - 'tests/test_installer_agent_parity.py'
       - 'tests/test_feature_setup.py'
       - 'tests/test_portable_owner_mcp.py'
@@ -96,6 +98,10 @@ jobs:
         run: |
           python -m unittest discover -s tests -p test_license.py
           python -m unittest discover -s tests -p test_installer_onboarding.py
+      - name: Verify Windows console paste and PowerShell onboarding
+        if: runner.os == 'Windows'
+        shell: bash
+        run: python -m unittest discover -s tests -p test_windows_license_console.py -v
       - name: Verify portable agent and plugin regressions
         shell: bash
         run: |

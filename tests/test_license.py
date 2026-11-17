@@ -99,4 +99,35 @@ class TerminalLicenseGate(unittest.TestCase):
             with self.assertRaisesRegex(m.LicenseError,'key_not_enabled_for_terminal_coding'):
                 m.ensure_terminal_license(Path(temp),lambda key:m.summary(data(False)))
 
+class VisibleWindowsLicenseInput(unittest.TestCase):
+    def test_windows_paste_uses_visible_line_input_instead_of_getpass(self):
+        with patch.object(m.sys,'platform','win32'), patch('builtins.input',return_value='  '+KEY+'  ') as read, patch.object(m.getpass,'getpass',side_effect=AssertionError('hidden input must not run')):
+            self.assertEqual(m.read_license_key('KEY: '),KEY)
+        read.assert_called_once_with('KEY: ')
+
+    def test_visible_paste_is_normalized_then_validated_and_not_returned(self):
+        with tempfile.TemporaryDirectory() as temp, patch.object(m.sys,'platform','win32'), patch.object(m.sys.stdin,'isatty',return_value=True), patch('builtins.input',return_value='Bearer '+KEY), patch.object(m.sys,'stderr',io.StringIO()) as screen:
+            # Exercise real validation/storage with a synthetic capability response.
+            original=m.activate
+            with patch.object(m,'activate',side_effect=lambda key,config:original(key,config,lambda checked:m.summary(data()))):
+                result=m.interactive_tui_box(Path(temp))
+            self.assertTrue(result['saved']);self.assertNotIn(KEY,json.dumps(result))
+            self.assertEqual((Path(temp)/'harmonika-api-key').read_text().strip(),KEY)
+            self.assertIn('Ctrl+V',screen.getvalue());self.assertIn('Key terlihat',screen.getvalue())
+
+    def test_windows_eof_cancels_instead_of_repeating_empty_prompt(self):
+        with patch.object(m.sys,'platform','win32'), patch.object(m.sys.stdin,'isatty',return_value=True), patch('builtins.input',side_effect=EOFError), patch.object(m.sys,'stderr',io.StringIO()), patch.object(m,'activate') as activate:
+            with self.assertRaises(SystemExit) as stopped:m.interactive_tui_box()
+            self.assertEqual(stopped.exception.code,1);activate.assert_not_called()
+
+    def test_redirected_input_never_reads_or_echoes_key(self):
+        with patch.object(m.sys.stdin,'isatty',return_value=False), patch('builtins.input') as read:
+            with self.assertRaisesRegex(m.LicenseError,'activation_requires_private_terminal_prompt'):m.interactive_tui_box()
+            read.assert_not_called()
+
+    def test_posix_retains_hidden_prompt(self):
+        with patch.object(m.sys,'platform','linux'), patch.object(m.getpass,'getpass',return_value=KEY) as hidden, patch('builtins.input') as visible:
+            self.assertEqual(m.read_license_key('KEY: '),KEY)
+            hidden.assert_called_once_with('KEY: ');visible.assert_not_called()
+
 if __name__=='__main__':unittest.main()

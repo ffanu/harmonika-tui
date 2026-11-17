@@ -202,12 +202,35 @@ def isolated_env(root):
                HARMONIKA_GLOBAL_DATA=str(root/'data'), HARMONIKA_TERMINAL_HOME=str(root/'terminal'),
                HARMONIKA_BIN_DIR=str(root/'bin'), HARMONIKA_DOWNLOADS_DIR=str(root/'downloads'),
                HARMONIKA_TOOLS_HOME=str(root/'tools'), HARMONIKA_LAUNCH_AFTER_INSTALL='0',
-               HARMONIKA_NONINTERACTIVE='0', PYTHONUTF8='1', PYTHONIOENCODING='utf-8')
+               HARMONIKA_NONINTERACTIVE='0', PYTHONUTF8='1', PYTHONIOENCODING='utf-8',
+               GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL=os.devnull, GIT_TERMINAL_PROMPT='0')
     return env
 
 
 @unittest.skipUnless(sys.platform == 'win32', 'native Windows ConPTY required')
 class WindowsLicenseConsoleTests(unittest.TestCase):
+    def test_powershell5_python_probe_continues_after_native_stderr(self):
+        powershell = Path(os.environ.get('SystemRoot', 'C:/Windows'))/'System32/WindowsPowerShell/v1.0/powershell.exe'
+        with tempfile.TemporaryDirectory(prefix='harmonika probe ') as temp:
+            root=Path(temp)
+            broken=root/'broken-python.cmd'
+            broken.write_text('@echo off\r\necho SYNTHETIC_PYTHON_PROBE_ERROR 1>&2\r\nexit /b 37\r\n',encoding='ascii')
+            quote=lambda value:"'"+str(value).replace("'","''")+"'"
+            expression="""$ErrorActionPreference='Stop';$tokens=$null;$errors=$null;
+$ast=[Management.Automation.Language.Parser]::ParseFile(SCRIPT,[ref]$tokens,[ref]$errors);
+if($errors.Count){throw 'fixture_parse_failed'}
+$definition=$ast.Find({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst] -and $n.Name -eq 'Test-HarmonikaPython'},$true);
+if(-not $definition){throw 'python_probe_missing'}
+Invoke-Expression $definition.Extent.Text;
+if(Test-HarmonikaPython -Executable BROKEN -Prefix @()){throw 'broken_probe_accepted'}
+if(-not (Test-HarmonikaPython -Executable PYTHON -Prefix @())){throw 'healthy_fallback_rejected'}
+if($ErrorActionPreference -ne 'Stop'){throw 'caller_error_policy_changed'}
+Write-Output 'PROBE_OK';
+""".replace('SCRIPT',quote(SOURCE/'scripts/install.ps1')).replace('BROKEN',quote(broken)).replace('PYTHON',quote(sys.executable))
+            run=subprocess.run([str(powershell),'-NoLogo','-NoProfile','-Command',expression],cwd=root,env=isolated_env(root),stdin=subprocess.DEVNULL,capture_output=True,text=True,timeout=30)
+            self.assertEqual(run.returncode,0,'PowerShell Python fallback probe failed')
+            self.assertIn('PROBE_OK',run.stdout)
+
     def fixture(self, root):
         child = root/'console child.py'
         child.write_text('''import importlib.util,json,pathlib,sys

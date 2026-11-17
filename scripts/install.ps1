@@ -12,15 +12,26 @@ foreach ($dir in $ExtraPaths) {
 }
 $PyCmd = $null
 $PyArgs = @()
+# PowerShell 5 can turn a native stderr diagnostic into a terminating error
+# under Stop. A broken Python candidate must not prevent trying python3/py.
+function Test-HarmonikaPython {
+    param([string]$Executable, [string[]]$Prefix)
+    $ErrorActionPreference = 'Continue'
+    try {
+        & $Executable @Prefix -c 'import sys; sys.exit(0 if sys.version_info >= (3,9) and sys.maxsize > 2**32 else 1)' 1>$null 2>$null
+        return ($LASTEXITCODE -eq 0)
+    } catch {
+        return $false
+    }
+}
 foreach ($name in @('python', 'python3', 'py')) {
     $candidate = Get-Command $name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
     if (-not $candidate) { continue }
     $prefix = @()
     if ($name -eq 'py') { $prefix = @('-3') }
-    & $candidate.Source @prefix -c 'import sys; sys.exit(0 if sys.version_info >= (3,9) else 1)' 2>$null
-    if ($LASTEXITCODE -eq 0) { $PyCmd = $candidate; $PyArgs = $prefix; break }
+    if (Test-HarmonikaPython -Executable $candidate.Source -Prefix $prefix) { $PyCmd = $candidate; $PyArgs = $prefix; break }
 }
-if (-not $PyCmd) { throw 'Python 3.9 atau lebih baru diperlukan. Instal Python lalu jalankan ulang.' }
+if (-not $PyCmd) { throw 'Python 64-bit versi 3.9 atau lebih baru diperlukan. Instal Python 64-bit lalu jalankan ulang PowerShell.' }
 $NodeCmd = Get-Command node -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
 if (-not $NodeCmd) { throw 'Node.js 18 atau lebih baru diperlukan.' }
 & $NodeCmd.Source -e 'if(parseInt(process.versions.node,10)<18)process.exit(1)'
@@ -42,6 +53,7 @@ if (Test-Path (Join-Path $InstallSrc '.git')) {
 }
 $Interactive = $env:HARMONIKA_NONINTERACTIVE -ne '1' -and -not [Console]::IsInputRedirected
 if ($Interactive) {
+    Write-Host 'Tempel lisensi dengan Ctrl+V atau Shift+Insert, lalu Enter. Key akan terlihat saat dimasukkan.'
     & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\license.py') ensure
     if ($LASTEXITCODE -ne 0) { throw 'Aktivasi lisensi belum selesai.' }
 }
