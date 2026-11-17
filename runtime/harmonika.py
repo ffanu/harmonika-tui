@@ -894,20 +894,21 @@ def main():
         data_dir=os.environ.get('HARMONIKA_GLOBAL_DATA',str(Path.home()/'.local/share/harmonika'))
         dl_root=ensure_harmonika_downloads(cfg_dir)
         key_file=Path(cfg_dir)/'harmonika-api-key'
-        if not args and sys.stdin.isatty() and not key_file.is_file():
+        metadata={'--help','-h','--version','version','dirs','logs','schema','completion','models','debug','mcp'}
+        needs_license=not (args and (args[0] in metadata or any(a in args for a in ('--help','-h','--version'))))
+        if needs_license:
             lic_script=directory/'tools/license.py'
             if not lic_script.exists():lic_script=Path(__file__).resolve().parent/'license.py'
-            if lic_script.exists():
-                res=subprocess.run([sys.executable,'-I',str(lic_script),'activate'])
-                if res.returncode!=0 or not key_file.is_file():
-                    sys.exit(res.returncode or 1)
+            if not lic_script.is_file():raise ValueError('license_runtime_missing')
+            res=subprocess.run([sys.executable,'-I',str(lic_script),'ensure'])
+            if res.returncode!=0:sys.exit(res.returncode)
         if not args and sys.stdin.isatty() and sys.stdout.isatty():
             upd=prompt_startup_update(ROOT,force_output=False)
             if upd and upd.get('updated'):
                 directory,manifest=active()
                 verify_files(directory,manifest)
-        api_key_val=''
-        if key_file.is_file():
+        api_key_val=os.environ.get('HARMONIKA_API_KEY','').strip()
+        if not api_key_val and key_file.is_file():
             try:api_key_val=key_file.read_text(encoding='utf-8').strip()
             except Exception:pass
         dev_id=device_id(cfg_dir)
@@ -959,6 +960,7 @@ def main():
             HARMONIKA_GLOBAL_CONFIG=cfg_dir,
             CRUSH_GLOBAL_CONFIG=cfg_dir,
             OPENCODE_CONFIG_DIR=cfg_dir,
+            OPENCODE_CONFIG=str(Path(cfg_dir)/'opencode.json'),
             HARMONIKA_OPENCODE_CONFIG_DIR=cfg_dir,
             HARMONIKA_GLOBAL_DATA=data_dir,
             CRUSH_GLOBAL_DATA=data_dir,

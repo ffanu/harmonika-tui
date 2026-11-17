@@ -21,15 +21,37 @@ else
   git clone https://github.com/ffanu/harmonika-tui.git "$INSTALL_SRC"
 fi
 
+INTERACTIVE=0
+if [ "${HARMONIKA_NONINTERACTIVE:-0}" != 1 ] && [ -t 1 ]; then
+  if [ -t 0 ] || ( : </dev/tty ) 2>/dev/null; then
+    INTERACTIVE=1
+  fi
+fi
+
+# curl | sh owns stdin, but a real terminal remains available on /dev/tty.
+# Validate privately before installing/entering the agent. Never read a key
+# from the downloaded script stream or pass one in process arguments.
+if [ "$INTERACTIVE" = 1 ]; then
+  if [ -t 0 ]; then
+    python3 "$INSTALL_SRC/runtime/license.py" ensure
+  else
+    python3 "$INSTALL_SRC/runtime/license.py" ensure </dev/tty
+  fi
+fi
+
 python3 "$INSTALL_SRC/runtime/install.py"
 
-if [ "${HARMONIKA_NONINTERACTIVE:-0}" != 1 ] && [ -t 0 ] && [ ! -f "${HARMONIKA_GLOBAL_CONFIG:-$HOME/.config/harmonika}/harmonika-api-key" ]; then
-  echo ""
-  echo "Silakan masukkan API Key Harmonika Anda (dari Bot Telegram @hmsapi_bot):"
-  python3 "$INSTALL_SRC/runtime/license.py" activate
-fi
 if [ ! -f "${HARMONIKA_GLOBAL_CONFIG:-$HOME/.config/harmonika}/harmonika-api-key" ]; then
   echo "Aktivasi lisensi dapat dilakukan setelah instalasi: harmonika activate"
+fi
+
+if [ "$INTERACTIVE" = 1 ] && [ "${HARMONIKA_LAUNCH_AFTER_INSTALL:-1}" != 0 ]; then
+  echo "Membuka Harmonika Ai Terminal..."
+  if [ -t 0 ]; then
+    exec "${HARMONIKA_BIN_DIR:-$HOME/.local/bin}/harmonika"
+  else
+    exec "${HARMONIKA_BIN_DIR:-$HOME/.local/bin}/harmonika" </dev/tty
+  fi
 fi
 
 echo ""

@@ -1,11 +1,13 @@
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import stat
 import tempfile
 import unittest
 from urllib.error import HTTPError
+from unittest.mock import patch
 
 spec=importlib.util.spec_from_file_location('license_client',Path(__file__).resolve().parent.parent/'runtime/license.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 KEY='hai_fixture_'+('a'*32)
@@ -50,5 +52,50 @@ class License(unittest.TestCase):
         for value in ['','hai_short','invalid\r\nAuthorization: no']:
             with self.assertRaises(m.LicenseError):m.validate_key(value)
         with self.assertRaisesRegex(m.LicenseError,'invalid_license_response'):m.summary({'ok':True})
+
+class TerminalLicenseGate(unittest.TestCase):
+    def test_saved_license_checked_without_prompt(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': ''}):
+            root=Path(temp);(root/'harmonika-api-key').write_text(KEY)
+            with patch.object(m,'interactive_tui_box') as prompt:
+                result=m.ensure_terminal_license(root,lambda key:m.summary(data()))
+            self.assertTrue(result['coding']);prompt.assert_not_called()
+
+    def test_environment_key_has_precedence(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': KEY}):
+            root=Path(temp);(root/'harmonika-api-key').write_text('old-invalid')
+            checked=[]
+            m.ensure_terminal_license(root,lambda key:checked.append(key) or m.summary(data()))
+            self.assertEqual(checked,[KEY])
+
+    def test_missing_key_without_tty_blocks_agent(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': ''}), patch.object(m.sys.stdin,'isatty',return_value=False), patch.object(m,'interactive_tui_box') as prompt:
+            with self.assertRaisesRegex(m.LicenseError,'license_key_required_before_terminal'):
+                m.ensure_terminal_license(Path(temp))
+            prompt.assert_not_called()
+
+    def test_missing_key_with_tty_prompts_privately(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': ''}), patch.object(m.sys.stdin,'isatty',return_value=True), patch.object(m,'interactive_tui_box',return_value={'saved':True}) as prompt:
+            self.assertTrue(m.ensure_terminal_license(Path(temp))['saved'])
+            prompt.assert_called_once_with(Path(temp))
+
+    def test_revoked_key_blocks_without_tty_and_reprompts_with_tty(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': KEY}), patch.object(m.sys.stdin,'isatty') as tty, patch.object(m,'interactive_tui_box',return_value={'saved':True}) as prompt:
+            def revoked(key):raise m.LicenseError('invalid_or_revoked_license')
+            tty.return_value=False
+            with self.assertRaisesRegex(m.LicenseError,'invalid_or_revoked_license'):m.ensure_terminal_license(Path(temp),revoked)
+            prompt.assert_not_called();tty.return_value=True
+            with patch.object(m.sys,'stderr',io.StringIO()):self.assertTrue(m.ensure_terminal_license(Path(temp),revoked)['saved'])
+
+    def test_outage_does_not_open_agent_or_request_replacement_key(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': KEY}), patch.object(m.sys.stdin,'isatty',return_value=True), patch.object(m,'interactive_tui_box') as prompt:
+            def outage(key):raise m.LicenseError('license_service_unavailable')
+            with self.assertRaisesRegex(m.LicenseError,'license_service_unavailable'):m.ensure_terminal_license(Path(temp),outage)
+            prompt.assert_not_called()
+
+    def test_chat_only_key_cannot_open_terminal_agent(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'HARMONIKA_API_KEY': KEY}), patch.object(m.sys.stdin,'isatty',return_value=False):
+            with self.assertRaisesRegex(m.LicenseError,'key_not_enabled_for_terminal_coding'):
+                m.ensure_terminal_license(Path(temp),lambda key:m.summary(data(False)))
 
 if __name__=='__main__':unittest.main()

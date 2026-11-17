@@ -12,6 +12,8 @@ on:
       - 'tests/test_releases.py'
       - 'tests/test_platform_release_integrity.py'
       - 'tests/test_installer_portability.py'
+      - 'tests/test_license.py'
+      - 'tests/test_installer_onboarding.py'
       - '.github/workflows/installer-platforms.yml'
   pull_request:
     paths:
@@ -24,6 +26,8 @@ on:
       - 'tests/test_releases.py'
       - 'tests/test_platform_release_integrity.py'
       - 'tests/test_installer_portability.py'
+      - 'tests/test_license.py'
+      - 'tests/test_installer_onboarding.py'
       - '.github/workflows/installer-platforms.yml'
   workflow_dispatch:
 
@@ -77,6 +81,11 @@ jobs:
           python -m unittest discover -s tests -p test_releases.py
           python -m unittest discover -s tests -p test_platform_release_integrity.py
           python -m unittest discover -s tests -p test_installer_portability.py
+      - name: Verify license gate and piped onboarding
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -p test_license.py
+          python -m unittest discover -s tests -p test_installer_onboarding.py
       - name: Build current source and install without npm
         shell: bash
         run: python tests/installer_platform_smoke.py --work-root "$RUNNER_TEMP" --expected-platform "${{ matrix.platform }}" --output "installer-smoke-${{ matrix.platform }}-node${{ matrix.node }}.json"

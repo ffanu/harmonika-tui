@@ -102,4 +102,20 @@ class InstallerPortability(unittest.TestCase):
             self.assertEqual(run.returncode,0);self.assertEqual(run.stdout,'synthetic-marker')
             self.assertFalse((root/'UNEXPECTED').exists())
 
+    def test_modern_provider_has_device_headers_and_private_server_policy(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);cfg=root/'config';cfg.mkdir()
+            (cfg/'service-stable.json').write_text(json.dumps({'port':19500,'disabled':False}))
+            env={'HARMONIKA_GLOBAL_CONFIG':str(cfg),'HARMONIKA_CONFIG_DIR':str(cfg),'HARMONIKA_GLOBAL_DATA':str(root/'share'),'HARMONIKA_DOWNLOADS_DIR':str(root/'downloads')}
+            with patch.dict(os.environ,env):installer.ensure_default_config(root/'terminal')
+            modern=json.loads((cfg/'opencode.json').read_text())
+            self.assertEqual(modern['enabled_providers'],['harmonika'])
+            self.assertEqual(modern['model'],'harmonika/harmonika-ai-codex')
+            provider=modern['provider']['harmonika']
+            self.assertEqual(provider['options']['apiKey'],'{env:HARMONIKA_API_KEY}')
+            self.assertEqual(provider['options']['headers']['X-Harmonika-Device-ID'],(cfg/'device-id').read_text().strip())
+            service=json.loads((cfg/'service-stable.json').read_text())
+            self.assertEqual(service,{'port':19500,'disabled':True})
+            if os.name=='posix':self.assertEqual((cfg/'service-stable.json').stat().st_mode & 0o777,0o600)
+
 if __name__=='__main__':unittest.main()

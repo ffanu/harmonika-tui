@@ -113,6 +113,27 @@ def activate(key,config=CONFIG,checker=check):
         if pending.exists():pending.unlink()
     return {**result,'saved':True}
 
+def ensure_terminal_license(config=CONFIG,checker=check):
+    """Validate before agent startup; only an actual private TTY may request a key."""
+    config=Path(config)
+    target=config/'harmonika-api-key'
+    if config.is_symlink() or target.is_symlink():raise LicenseError('unsafe_key_file')
+    key=os.environ.get('HARMONIKA_API_KEY','').strip()
+    if not key and target.is_file():
+        key=target.read_text(encoding='utf-8').strip()
+    if key:
+        try:
+            result=checker(validate_key(key))
+            if not result.get('coding'):raise LicenseError('key_not_enabled_for_terminal_coding')
+            return result
+        except LicenseError as err:
+            if str(err) not in ('invalid_key_format','invalid_or_revoked_license','device_already_bound','key_not_enabled_for_terminal_coding'):
+                raise
+            if not sys.stdin.isatty():raise
+            sys.stderr.write('Lisensi Harmonika perlu diaktifkan kembali. Masukkan key yang valid.\n')
+    if not sys.stdin.isatty():raise LicenseError('license_key_required_before_terminal')
+    return interactive_tui_box(config)
+
 def interactive_tui_box(config=CONFIG):
     if not sys.stdin.isatty():
         raise LicenseError('activation_requires_private_terminal_prompt')
@@ -174,7 +195,10 @@ def interactive_tui_box(config=CONFIG):
                 sys.stderr.write(f"\n  {red}✖ API Key tidak valid atau gagal diverifikasi ({code}).{reset}\n  {amber}📞 Hubungi WhatsApp {OWNER_WHATSAPP} untuk meminta API Key aktif.{reset}\n\n")
 
 def main(args):
-    if args==['check']:
+    if args==['ensure']:
+        ensure_terminal_license(CONFIG)
+        return  # Never print JSON/key material in the TUI onboarding path.
+    elif args==['check']:
         file=CONFIG/'harmonika-api-key'
         if not file.is_file() or file.is_symlink():raise LicenseError('license_key_not_configured')
         result=check(file.read_text(encoding='utf-8').strip())

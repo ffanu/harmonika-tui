@@ -47,6 +47,18 @@ Platform lain ditolak dengan diagnostik; tabel ini bukan klaim mendukung seluruh
 curl -fsSL https://chat.harmonika.id/assets/harmonika-terminal/install.sh | sh
 ```
 
+Atau langsung dari source GitHub:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ffanu/harmonika-tui/main/scripts/install.sh | sh
+```
+
+Pada terminal interaktif, installer meminta lisensi Harmonika melalui prompt
+privat, memverifikasinya, memasang provider Harmonika, lalu membuka TUI agent.
+API key tidak ditampilkan atau dikirim melalui argumen proses. Instalasi memakai
+server privat agar daftar provider tidak tertahan pada background server lama;
+sesi yang sudah berjalan tidak dihentikan. Nama, logo dan tampilan TUI tetap.
+
 **Windows (PowerShell):**
 
 ```powershell
@@ -75,8 +87,11 @@ harmonika doctor
 harmonika network status
 ```
 
-Instalasi melalui pipe atau `HARMONIKA_NONINTERACTIVE=1` selesai tanpa meminta key;
+`curl | sh` menggunakan `/dev/tty` untuk prompt lisensi yang privat. Tanpa TTY
+atau dengan `HARMONIKA_NONINTERACTIVE=1`, installer hanya memasang aplikasi;
 aktivasi dilakukan saat membuka terminal atau dengan `harmonika activate`.
+Agent tidak dimulai sebelum lisensi terverifikasi. Gunakan
+`HARMONIKA_LAUNCH_AFTER_INSTALL=0` jika tidak ingin TUI dibuka otomatis.
 Key diperoleh dari [@hmsapi_bot](https://t.me/hmsapi_bot); kebijakan 1 key = 1 perangkat tetap berlaku.
 
 `mcp_preflight_failed` pada paket lama bisa disebabkan SDK tidak terpasang ketika npm tidak tersedia.

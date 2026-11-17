@@ -146,10 +146,21 @@ def ensure_default_config(root=ROOT):
     engine_cfg.setdefault('share','disabled')
     engine_cfg.setdefault('snapshots',True)
     engine_cfg['provider']=dict(engine_cfg.get('provider') or {})
-    engine_cfg['provider']['harmonika']={'npm':'@ai-sdk/openai-compatible','options':{'baseURL':'https://chat.harmonika.id/v1','apiKey':'{env:HARMONIKA_API_KEY}'},'models':engine_models}
+    engine_cfg['provider']['harmonika']={'name':'Harmonika Ai','npm':'@ai-sdk/openai-compatible','options':{'baseURL':'https://chat.harmonika.id/v1','apiKey':'{env:HARMONIKA_API_KEY}','headers':{'X-Harmonika-Device-ID':dev_id,'X-Harmonika-Device-Name':dev_nm}},'models':engine_models}
     engine_cfg['mcp']={'harmonika':{'type':'local','command':[m.NODE,str(root/'current/tools/mcp-server.cjs')],'enabled':True}}
     engine_cfg.setdefault('permission',{'read':'allow','edit':'allow','glob':'allow','grep':'allow','list':'allow','bash':'allow','task':'allow','todowrite':'allow','question':'allow','webfetch':'allow','websearch':'allow','lsp':'allow','skill':'allow','external_directory':{'*':'allow'}})
     engine_cfg_file.write_text(json.dumps(engine_cfg,indent=2)+'\n', encoding='utf-8')
+    # A previously started shared server can retain upstream providers even
+    # after a correct config is installed. Use the engine's supported private
+    # server policy; never stop or reconfigure an existing user's daemon.
+    service_file=cfg_dir/'service-stable.json'
+    if service_file.exists():
+        try:service=json.loads(service_file.read_text(encoding='utf-8'))
+        except (ValueError,OSError):raise ValueError('invalid_service_configuration')
+        if not isinstance(service,dict):raise ValueError('invalid_service_configuration')
+    else:service={}
+    service['disabled']=True
+    atomic_text(service_file,json.dumps(service,indent=2)+'\n')
     crush_alias=cfg_dir/'crush.json'
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
     m.ensure_themes(cfg_dir,share_dir)
