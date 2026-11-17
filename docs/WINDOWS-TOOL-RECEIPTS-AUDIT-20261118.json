@@ -1,0 +1,254 @@
+{
+  "verified_at": "2026-11-17T19:50:06.031688+00:00",
+  "reported_error": "invalid_tool_response",
+  "production_rejection_category": "unverified_completion",
+  "user_windows_session_specific_root_cause_verified": false,
+  "reproduced_bugs": [
+    "Windows executable test forms were not recognized",
+    "Native shell test receipts were not classified",
+    "Native provider lowering discarded shell process metadata"
+  ],
+  "backend_tests": {
+    "staged": true,
+    "live_files_changed": false,
+    "services_restarted": false,
+    "exit_code": 0,
+    "summary": [
+      "# tests 136",
+      "# pass 136",
+      "# fail 0",
+      "# skipped 0"
+    ],
+    "candidate_sha256": {
+      "agent-controller.cjs": "b5b17f76e5c174649c378d46e4a3d6cc5d21aae0147ca85a3ba6c3f5c449acf9",
+      "task-continuity.cjs": "a4bf1f46c412324abf93ebdc60c8cba616a4c310a121a242fe0d97635c7fb97b",
+      "decision-recovery.cjs": "0a866ef11aedb9c71afdf06678c4eafb47380c03d45811a5c1452714e0930b96"
+    }
+  },
+  "activation": {
+    "active": true,
+    "service_restarted": "harmonika-ai.service",
+    "idle_guard_passed": true,
+    "health_http": 200,
+    "other_service_pids_unchanged": true,
+    "gateway_pid_changed": true,
+    "installed_sha256": {
+      "agent-controller.cjs": "b5b17f76e5c174649c378d46e4a3d6cc5d21aae0147ca85a3ba6c3f5c449acf9",
+      "task-continuity.cjs": "a4bf1f46c412324abf93ebdc60c8cba616a4c310a121a242fe0d97635c7fb97b",
+      "decision-recovery.cjs": "0a866ef11aedb9c71afdf06678c4eafb47380c03d45811a5c1452714e0930b96"
+    },
+    "backup": "/var/backups/harmonika-windows-receipts/20261117T194240Z",
+    "raw_chat_logged": false
+  },
+  "live_canary": {
+    "actual_loopback_http": true,
+    "windows_receipt_fixture": true,
+    "client_reported_not_windows_execution": true,
+    "status": 200,
+    "nonempty_final": true,
+    "no_unrequested_tools": true,
+    "internal_task_state_exposed": false,
+    "error_code": null,
+    "latency_ms": 6918,
+    "passed": true
+  },
+  "original_native_canary": {
+    "passed": false,
+    "native_exit_code": 0,
+    "provider_called": false,
+    "shell_result_received": true,
+    "process_exit_metadata_received": false
+  },
+  "privacy": {
+    "raw_customer_chat_read": false,
+    "raw_tool_output_logged": false,
+    "credentials_logged": false
+  },
+  "scope": {
+    "network_core_changed": false,
+    "user_terminal_sessions_stopped": false
+  },
+  "release": "2026.11.18.3",
+  "runtime_source_commit": "923ca62d816740c2299170a8f8ab3a29df30a9b0",
+  "package": {
+    "release": "2026.11.18.3",
+    "source_commit": "923ca62d816740c2299170a8f8ab3a29df30a9b0",
+    "signature_verified": true,
+    "signed_file_count": 224,
+    "all_file_hashes_verified": true,
+    "new_receipt_bridge_matches_source": true,
+    "zip_sha256": "b2b1a9e5d6e6b49dc22139fdd114b39de423b515144030fc4a4eeeb7cb084d64",
+    "zip_size_bytes": 1602250,
+    "public_key_pin_verified": true,
+    "catalog_verified": true,
+    "native_binary_version": "1.0.2",
+    "new_binary_generated": false
+  },
+  "native_mac_loopback": {
+    "passed": true,
+    "native_exit_code": 0,
+    "latency_seconds": 0.51,
+    "requests": [
+      {
+        "has_result": false,
+        "declared_shell": false
+      },
+      {
+        "has_result": false,
+        "declared_shell": true
+      },
+      {
+        "has_result": true,
+        "declared_shell": true,
+        "exit_code": 0,
+        "status": "completed",
+        "truncated": false,
+        "output_has_two_tests": true
+      }
+    ],
+    "native_error_count": 0,
+    "real_provider_called": false,
+    "isolated_session": true
+  },
+  "client_regressions": {
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ci": {
+    "run_id": 44161885362,
+    "url": "https://github.com/ffanu/harmonika-tui/actions/runs/44161885362",
+    "status": "five_jobs_passed_mac_intel_still_in_progress",
+    "jobs": [
+      {
+        "id": 134317585043,
+        "name": "darwin-arm64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134317585454,
+        "name": "linux-x64 / Node 18",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134317585466,
+        "name": "darwin-x64 / Node 22",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 134317585505,
+        "name": "linux-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134317585570,
+        "name": "linux-arm64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134317585587,
+        "name": "windows-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "windows": [
+      {
+        "passed": true,
+        "platform": "windows-x64",
+        "duration_seconds": 105.94,
+        "native_tool_receipts": {
+          "isolated_session": true,
+          "latency_seconds": 3.02,
+          "native_error_count": 0,
+          "native_exit_code": 0,
+          "passed": true,
+          "real_provider_called": false,
+          "requests": [
+            {
+              "declared_shell": false,
+              "has_result": false
+            },
+            {
+              "declared_shell": true,
+              "has_result": false
+            },
+            {
+              "declared_shell": true,
+              "exit_code": 0,
+              "has_result": true,
+              "output_has_two_tests": true,
+              "status": "completed",
+              "truncated": false
+            }
+          ]
+        },
+        "skill_count": 36,
+        "native_plugins_load": true,
+        "installed_wrapper_works": true,
+        "tampered_content_refused": true,
+        "invalid_signature_refused": true
+      }
+    ],
+    "linux": [
+      {
+        "passed": true,
+        "platform": "linux-x64",
+        "duration_seconds": 58.89,
+        "native_tool_receipts": {
+          "isolated_session": true,
+          "latency_seconds": 1.33,
+          "native_error_count": 0,
+          "native_exit_code": 0,
+          "passed": true,
+          "real_provider_called": false,
+          "requests": [
+            {
+              "declared_shell": true,
+              "has_result": false
+            },
+            {
+              "declared_shell": false,
+              "has_result": false
+            },
+            {
+              "declared_shell": true,
+              "exit_code": 0,
+              "has_result": true,
+              "output_has_two_tests": true,
+              "status": "completed",
+              "truncated": false
+            }
+          ]
+        },
+        "skill_count": 36
+      }
+    ],
+    "tested_source_commit": "923ca62d816740c2299170a8f8ab3a29df30a9b0",
+    "all_jobs_passed": false
+  },
+  "public_release_active": true,
+  "public_verification": {
+    "published": true,
+    "release": "2026.11.18.3",
+    "catalog_signature_verified": true,
+    "public_package_all_file_hashes_verified": true,
+    "signed_file_count": 224,
+    "package_sha256": "b2b1a9e5d6e6b49dc22139fdd114b39de423b515144030fc4a4eeeb7cb084d64",
+    "stable_sha256": "f46639e119c6b3008083b5ad8967f13749d4cdb13c14ac64cb29c26eed1e931d",
+    "github_and_public_installer_match_source": true,
+    "installer_sha256": "2e71a5f41b1559af0c841cd72dac4d12453c27ce0a704a1f40f8f3feb2079db2"
+  },
+  "limits": [
+    "Original Windows user session and prompt were not supplied; reproduced defects match the observed unverified_completion category but that exact user task is unconfirmed.",
+    "Windows execution was verified on an isolated GitHub Windows runner, not by remote access to the user computer.",
+    "Real backend canary used client-reported Windows-shaped receipts; native runner canaries executed actual local tests using a mock loopback model.",
+    "No background updater enabled; existing users rerun the installer and open a new TUI process.",
+    "No completion proof gates weakened; incomplete, failing, pending, stale or wrong-scope checks still refuse success."
+  ]
+}

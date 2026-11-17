@@ -2,6 +2,25 @@
 
 Status terbaru dicatat di awal; entri berikut menyimpan hasil audit historis.
 
+
+## Receipt tool dan tes Windows — 18 November 2026
+
+- Runtime signed `2026.11.18.3` sudah diterbitkan; 224 berkas diverifikasi terhadap
+  manifest Ed25519 dan installer publik cocok dengan GitHub. Binary tetap `1.0.2`.
+- Hook native meneruskan metadata shell yang semula hilang dalam adapter HTTP.
+  RAM terbatas menyimpan hash serta mekanika, tanpa mengubah tampilan/riwayat TUI.
+- Backend mengenali `shell`/`bash`, `node.exe`, `npm.cmd` dan `py -3`; exit 0,
+  jumlah tes positif, hasil lengkap serta scope/revisi tetap wajib.
+- 136 regresi backend lulus tanpa skip pada server staging; gateway diaktifkan
+  dengan izin restart eksplisit, guard idle, backup dan pengecekan hash.
+  Canary HTTP aktual berhasil dan layanan lain mempertahankan PID.
+- Windows CI lulus instalasi baru, 36 skill, launcher, plugin dan canary binary:
+  dua tes dieksekusi nyata, exit 0/status completed/truncated false terkirim.
+  Linux dan Mac ARM juga lulus; status matriks penuh disimpan dalam audit.
+- Detail serta batas pembuktian: `WINDOWS-TOOL-RECEIPTS-AUDIT-20261118.json`.
+  Sesi Windows asli belum diberikan; perangkat pengguna perlu menjalankan ulang
+  installer agar proses TUI berikutnya memakai plugin baru.
+
 ## Perintah Windows setelah PowerShell dibuka ulang — 18 November 2026
 
 - Runtime signed `2026.11.18.2`; installer GitHub dan aset publik diverifikasi

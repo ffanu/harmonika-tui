@@ -63,6 +63,13 @@
 - Pembaruan sistem native harus mempertahankan asal bertipe sebelum adapter
   menurunkannya menjadi pesan user. Tag teks saja bukan provenance; jangan
   mempromosikan tag buatan pengguna atau melonggarkan batas bukti di backend.
+- Receipt shell memakai metadata dari hook native `execute.after`, dicocokkan
+  dengan sesi, ID panggilan, nama, argumen dan hash hasil sebelum dikirim. Registry
+  RAM berbatas hanya menyimpan hash dan mekanika; tampilan/riwayat asli tetap.
+  Bentuk perintah Windows `.exe`/`.cmd` tidak menghapus syarat exit 0, jumlah tes
+  positif, hasil lengkap dan scope/revisi yang cocok. TAP mentah bukan bukti exit.
+  Regresi: `native-tool-receipts`, `native-test-receipts`, serta canary binary
+  loopback dalam `tests/native_receipt_smoke.py`; jangan memakai akun pengguna.
 - Root Codex mengintegrasikan dan menguji. Worker hanya mengubah scope tugasnya.
 - Jangan masukkan credential/session/private account ke paket atau log.
 - Workbench memakai server/socket tmux privat per peluncuran; jangan mengubah
