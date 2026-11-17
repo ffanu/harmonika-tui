@@ -52,6 +52,7 @@ def create_app(runtime=None, secret=None, token_file=None):
         last_success = getattr(runtime.provider, "last_successful_inference_at", None)
         return output({"ok": True, "service": "harmonika-translation", "schema_version": 1,
                        "mode": "harmonika_text_inference", "inference_verified": last_success is not None,
+                       "active_requests": runtime.active_requests,
                        "last_successful_inference_at": last_success,
                        "inference_verification": "successful_response_since_startup",
                        "language_quality_qualified": False,

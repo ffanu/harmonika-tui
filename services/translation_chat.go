@@ -52,7 +52,7 @@ func translationChatCandidate(r *http.Request, input publicAIChatCompletionReque
 		return "", "", false
 	}
 	client := strings.ToLower(strings.TrimSpace(r.Header.Get("X-Harmonika-Client")))
-	if client == "customer-agent" || client == "cs" || client == "pro-cs" || strings.HasPrefix(client, "website-cs-") {
+	if client == "internal-agent" || client == "customer-agent" || client == "cs" || client == "pro-cs" || strings.HasPrefix(client, "website-cs-") {
 		return "", "", false
 	}
 	for _, message := range input.Messages {
@@ -153,6 +153,9 @@ func serveTranslationChat(gateway *translationWorkerGateway, w http.ResponseWrit
 		"source": result.Source, "target": result.Target, "detected_language": result.DetectedLanguage,
 		"needs_review": *result.NeedsReview, "quality": result.Quality,
 	}
+	if *result.NeedsReview {
+		result.Text += "\n\nCatatan: terjemahan ini perlu ditinjau, terutama dialek dan tingkat tutur."
+	}
 	var nonce [16]byte
 	if _, err := rand.Read(nonce[:]); err != nil {
 		translationChatFailure(w, 503, "translation_unavailable")
@@ -163,6 +166,7 @@ func serveTranslationChat(gateway *translationWorkerGateway, w http.ResponseWrit
 	model := "harmonika-translation"
 	w.Header().Set("Cache-Control", "no-store")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
+	w.Header().Set("X-Harmonika-Translation", "v1")
 	if !input.Stream {
 		jsonOut(w, http.StatusOK, map[string]any{
 			"id": id, "object": "chat.completion", "created": created, "model": model,

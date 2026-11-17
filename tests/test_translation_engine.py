@@ -84,6 +84,13 @@ class TranslationTests(unittest.IsolatedAsyncioTestCase):
         same = await runtime.invoke("translation.translate", {"text": "Sugeng enjing", "source": "jv", "target": "jv"})
         self.assertTrue(same["needs_review"])
 
+    async def test_unchanged_model_text_is_not_claimed_as_translated(self):
+        result = await self.runtime(answer("Selamat pagi", "id", False)).invoke(
+            "translation.translate", {"text": "Selamat pagi", "source": "id", "target": "en"})
+        self.assertFalse(result["translated"])
+        self.assertTrue(result["needs_review"])
+        self.assertEqual(result["review_reasons"], ["output_matches_source"])
+
     async def test_target_alias_preserves_regional_register_preference(self):
         calls = []
         async def fake(payload, timeout):
@@ -374,6 +381,7 @@ class TranslationHTTPTests(AioHTTPTestCase if AioHTTPTestCase else unittest.Isol
         response = await self.client.get("/health", headers=self.headers())
         health = await response.json()
         self.assertFalse(health["inference_verified"])
+        self.assertEqual(health["active_requests"], 0)
         self.assertIsNone(health["last_successful_inference_at"])
         await self.client.post("/translate", json={"text": "halo", "source": "id", "target": "id"}, headers=self.headers())
         self.assertFalse((await (await self.client.get("/health", headers=self.headers())).json())["inference_verified"])

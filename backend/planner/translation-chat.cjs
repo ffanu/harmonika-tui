@@ -6,6 +6,7 @@ const {randomUUID} = require('node:crypto');
 const CS = new Set(['internal-agent','customer-agent','website-cs-autoreply','website-cs-preview']);
 function parseIntent(data) {
   if (!data || (data.tools && (!Array.isArray(data.tools) || data.tools.length)) ||
+      data.legal || data.telco || data.workspace_id || data.images?.length || data.attachment_ids?.length ||
       (data.tool_choice && data.tool_choice !== 'none' && data.tool_choice !== 'auto') ||
       !Array.isArray(data.messages) || data.messages.some(m => m.role === 'tool' || m.tool_calls?.length)) return null;
   const last = data.messages.at(-1);
@@ -48,9 +49,9 @@ function create({post=privatePost}={}) {
   return {async handle(req,res,data){
     if(CS.has(String(req.headers['x-harmonika-client']||'').toLowerCase()))return false;
     const input=parseIntent(data);if(!input)return false;
-    res.setHeader('X-Harmonika-Translation','v1');
     try{
       const out=await post(input);
+      res.setHeader('X-Harmonika-Translation','v1');
       const text=out.text+(out.needs_review?'\n\nCatatan: terjemahan ini perlu ditinjau, terutama dialek dan tingkat tutur.':'');
       const meta={source:out.source,target:out.target,needs_review:out.needs_review,quality:out.quality};
       const base={id:'translation-'+randomUUID(),created:Math.floor(Date.now()/1000),model:'harmonika-ai'};

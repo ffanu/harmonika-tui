@@ -294,6 +294,7 @@ class Runtime:
         self.catalog, self.provider = catalog, provider or Inference()
         self.timeout, self.audit = timeout, audit
         self.gate = asyncio.Semaphore(concurrency)
+        self.active_requests = 0
 
     def validate_text(self, value):
         require(type(value) is str and bool(value.strip()), "text_required")
@@ -421,9 +422,11 @@ class Runtime:
         require(len(text.encode("utf-8")) <= MAX_OUTPUT_BYTES, "translation_output_limit", 502)
         preservation(value["text"], text)
         detected = next(iter(detections)) if len(detections) == 1 else None
+        changed = text != value["text"]
         return {"ok": True, "text": text, "source": source, "target": target,
-                "detected_language": detected, "needs_review": bool(review or len(detections) != 1),
-                "quality": "model_self_estimated", "translated": True,
+                "detected_language": detected, "needs_review": bool(review or len(detections) != 1 or not changed),
+                "quality": "model_self_estimated", "translated": changed,
+                "review_reasons": [] if changed else ["output_matches_source"],
                 "chunks": sum(translatable for _, translatable in segment_list)}
 
     async def run(self, skill, value, deadline):
@@ -454,6 +457,7 @@ class Runtime:
             require(not self.gate.locked(), "translation_busy", 429)
             await self.gate.acquire()
             acquired = True
+            self.active_requests += 1
             result = await asyncio.wait_for(self.run(skill, value, started + self.timeout), timeout=self.timeout)
             require(len(encoded(result)) <= MAX_OUTPUT_BYTES, "translation_output_limit", 502)
             return result
@@ -468,6 +472,7 @@ class Runtime:
             raise
         finally:
             if acquired:
+                self.active_requests -= 1
                 self.gate.release()
             if self.audit and skill in SKILLS:
                 try:

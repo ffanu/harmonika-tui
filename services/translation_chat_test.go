@@ -66,6 +66,9 @@ func TestTranslationChatKeepsToolAndCSRoutes(t *testing.T) {
 		{"customer-agent", func(in *publicAIChatCompletionRequest, r *http.Request) {
 			r.Header.Set("X-Harmonika-Client", "customer-agent")
 		}},
+		{"internal-agent", func(in *publicAIChatCompletionRequest, r *http.Request) {
+			r.Header.Set("X-Harmonika-Client", "internal-agent")
+		}},
 		{"cs-system", func(in *publicAIChatCompletionRequest, r *http.Request) {
 			in.Messages[0].Content = "You are a customer service assistant."
 		}},
@@ -123,10 +126,10 @@ func TestTranslationChatCompletionUsesWorkerAndVerifiedActor(t *testing.T) {
 			Target      string `json:"target"`
 		} `json:"harmonika_translation"`
 	}
-	if w.Code != 200 || json.Unmarshal(w.Body.Bytes(), &out) != nil || out.Object != "chat.completion" || len(out.Choices) != 1 || out.Choices[0].Message.Content != "OpenAI lan Google 123" || out.Choices[0].Message.Role != "assistant" || out.Choices[0].FinishReason != "stop" || !out.Metadata.NeedsReview || out.Metadata.Target != "jv" {
+	if w.Code != 200 || json.Unmarshal(w.Body.Bytes(), &out) != nil || out.Object != "chat.completion" || len(out.Choices) != 1 || out.Choices[0].Message.Content != "OpenAI lan Google 123\n\nCatatan: terjemahan ini perlu ditinjau, terutama dialek dan tingkat tutur." || out.Choices[0].Message.Role != "assistant" || out.Choices[0].FinishReason != "stop" || !out.Metadata.NeedsReview || out.Metadata.Target != "jv" {
 		t.Fatalf("invalid completion: %d %s", w.Code, w.Body.String())
 	}
-	if calls.Load() != 1 || w.Header().Get("Cache-Control") != "no-store" {
+	if calls.Load() != 1 || w.Header().Get("Cache-Control") != "no-store" || w.Header().Get("X-Harmonika-Translation") != "v1" {
 		t.Fatal("dispatch repeated or result cacheable")
 	}
 }
@@ -140,7 +143,7 @@ func TestTranslationChatSSEContainsCompletionChunksAndReview(t *testing.T) {
 	if !serveTranslationChat(gateway, w, httptest.NewRequest("POST", "/v1/chat/completions", nil), publicAIToken{ID: 42}, translationChatTestInput(true)) {
 		t.Fatal("not handled")
 	}
-	if w.Code != 200 || !strings.HasPrefix(w.Header().Get("Content-Type"), "text/event-stream") || !strings.HasSuffix(w.Body.String(), "data: [DONE]\n\n") || !w.Flushed {
+	if w.Code != 200 || !strings.HasPrefix(w.Header().Get("Content-Type"), "text/event-stream") || !strings.HasSuffix(w.Body.String(), "data: [DONE]\n\n") || !w.Flushed || w.Header().Get("X-Harmonika-Translation") != "v1" {
 		t.Fatal("invalid SSE transport")
 	}
 	var content, id string
@@ -172,7 +175,7 @@ func TestTranslationChatSSEContainsCompletionChunksAndReview(t *testing.T) {
 		}
 		chunks++
 	}
-	if chunks != 2 || content != "OpenAI lan Google 123\nSugeng enjing 👋" {
+	if chunks != 2 || content != "OpenAI lan Google 123\nSugeng enjing 👋\n\nCatatan: terjemahan ini perlu ditinjau, terutama dialek dan tingkat tutur." {
 		t.Fatal("SSE text changed")
 	}
 }
@@ -213,6 +216,24 @@ func TestTranslationChatRequiresAdmittedToken(t *testing.T) {
 	w := httptest.NewRecorder()
 	if !serveTranslationChat(gateway, w, httptest.NewRequest("POST", "/v1/chat/completions", nil), publicAIToken{}, translationChatTestInput(false)) || w.Code != 401 || calls.Load() != 0 {
 		t.Fatal("unverified actor admitted")
+	}
+}
+
+func TestTranslationChatDoesNotAddReviewNoteWhenNotNeeded(t *testing.T) {
+	gateway := translationTestWorker(t, func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = io.WriteString(w, `{"ok":true,"text":"Hello OpenAI","source":"auto","target":"en","needs_review":false,"quality":"model_self_estimated"}`)
+	})
+	w := httptest.NewRecorder()
+	serveTranslationChat(gateway, w, httptest.NewRequest("POST", "/v1/chat/completions", nil), publicAIToken{ID: 42}, translationChatTestInput(false))
+	var result struct {
+		Choices  []struct{ Message struct{ Content string } }
+		Metadata struct {
+			NeedsReview bool `json:"needs_review"`
+		} `json:"harmonika_translation"`
+	}
+	if w.Code != 200 || json.Unmarshal(w.Body.Bytes(), &result) != nil || len(result.Choices) != 1 || result.Choices[0].Message.Content != "Hello OpenAI" || result.Metadata.NeedsReview {
+		t.Fatalf("unexpected review warning: %d %s", w.Code, w.Body.String())
 	}
 }
 

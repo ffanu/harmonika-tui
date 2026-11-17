@@ -74,6 +74,36 @@ Health `inference_verified` becomes true only after a valid actual inference
 response since worker startup. Catalog reads and passthrough do not set it.
 The timestamp is historical connectivity evidence, not a live provider probe or
 language quality qualification; `language_quality_qualified` remains false.
+`active_requests` is a live admission count for safe operations. When inference
+returns the exact source unchanged, `translated` is false, `needs_review` is true,
+and `review_reasons` contains `output_matches_source`. This can be legitimate for
+proper names, but it never proves successful translation into another language.
+
+Public endpoints on `https://chat.harmonika.id`:
+
+```sh
+curl --fail-with-body https://chat.harmonika.id/v1/translation/translate \
+  -H "Authorization: Bearer $HARMONIKA_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --data '{"text":"Selamat pagi","source":"id","target":"jv","register":"krama"}'
+```
+
+Existing device binding, license checks and per-key quota apply. The same prefix
+exposes `/detect`, `/batch`, `/languages`, `/health` and `/invoke`. Use the
+`X-Harmonika-Device-ID` header if your existing token is device-bound. Never put
+keys in URL queries or frontend source. Native MCP exposes `translate_text`,
+`detect_language`, `translate_batch`, and `translation_languages`; API clients may
+also use imperative text such as `Terjemahkan ke bahasa Jawa: Selamat pagi` via
+normal OpenAI-compatible chat/SSE. The worker remains loopback-only.
+
+The current 197-entry catalog includes 14 Indonesian regional language options:
+Acehnese, Balinese, Batak Toba/Simalungun/Karo, Betawi, Banjar, Buginese, Gorontalo,
+Javanese, Madurese, Makassarese, Minangkabau and Sundanese. These are experimental
+model capabilities, not universal or independently verified fluency. Live samples
+on 17 November 2026 found an empty Simalungun result and unchanged Indonesian for
+one Gorontalo request; those outcomes must be reported, never presented as proof
+of a correct translation. No paid Google credentials or separate model downloads
+are needed for this existing Harmonika inference adapter.
 
 SQLite WAL audit stores only timestamp, skill ID, error enum, latency and optional
 actor HMAC, capped at 1,000 rows. No translation text, glossary, raw exception,
