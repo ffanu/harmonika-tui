@@ -50,6 +50,9 @@
   "disabled_providers": [
     "opencode"
   ],
+  "enabled_providers": [
+    "harmonika"
+  ],
   "agents": {
     "plan": {
       "description": "Rencana bertahap sebelum menulis kode",

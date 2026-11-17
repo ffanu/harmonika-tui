@@ -57,6 +57,7 @@ def _find_node():
 
 NODE = _find_node()
 CATALOG = 'https://chat.harmonika.id/assets/harmonika-terminal/stable.json'
+ENGINE_MANIFEST = 'https://chat.harmonika.id/assets/harmonika-terminal/engine/update.json'
 RELEASE_RE = re.compile(r'^[0-9]{4}\.[0-9]{2}\.[0-9]{2}\.[0-9]+$')
 VERIFY_JS = """const fs=require('fs'),crypto=require('crypto');const e=JSON.parse(fs.readFileSync(0,'utf8'));const p=Buffer.from(e.payload,'base64');if(!crypto.verify(null,p,fs.readFileSync(process.argv[1]),Buffer.from(e.signature,'base64')))process.exit(3);process.stdout.write(p);"""
 
@@ -149,8 +150,23 @@ def active(root=ROOT):
     plat_sha_file=selected/'binary.sha256'
     if 'binary_hashes' not in manifest and os.name=='nt' and plat_sha_file.is_file():
         expected_sha=plat_sha_file.read_text(encoding='utf-8').strip()
-    if binary.is_symlink() or digest(binary)!=expected_sha:raise ValueError('binary_checksum_mismatch')
+    if binary.is_symlink() or digest(binary)!=expected_sha:
+        # Engine boleh mendahului paket: terima bila binary cocok dengan rilis
+        # engine bertanda tangan, selain itu tetap ditolak.
+        if binary.is_symlink() or not engine_binary_approved(root,binary):
+            raise ValueError('binary_checksum_mismatch')
     return selected,manifest
+
+def engine_binary_approved(root,bpath):
+    """Binary yang lebih dulu dari paket tetap sah bila cocok dengan rilis engine
+    bertanda tangan (kanal `harmonika upgrade`)."""
+    try:
+        with urllib.request.build_opener(SameOrigin()).open(ENGINE_MANIFEST,timeout=10) as response:
+            manifest=verify_envelope(response.read(1024*1024),root)
+        entry=(manifest.get('binaries') or {}).get(platform_id())
+        return bool(entry) and entry.get('sha256')==digest(bpath)
+    except Exception:
+        return False
 
 def verify_files(directory,manifest):
     for name,info in manifest['files'].items():
@@ -181,7 +197,9 @@ def preflight(directory,manifest):
     verify_files(directory,manifest)
     bpath=directory/bin_name()
     if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'
-    if 'binary_hashes' in manifest and digest(bpath)!=expected_binary_sha(manifest):raise ValueError('binary_checksum_mismatch')
+    if 'binary_hashes' in manifest and digest(bpath)!=expected_binary_sha(manifest):
+        if not engine_binary_approved(ROOT,bpath):
+            raise ValueError('binary_checksum_mismatch')
     result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,timeout=10)
     # Binary TUI boleh berasal dari lini mana pun (engine Harmonika berbasis opencode
     # v1.0.x maupun rilis lama v0.98.1): cukup pastikan itu binary Harmonika dan
