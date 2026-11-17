@@ -3,7 +3,8 @@
 
 Python packages use exact version locks; npm packages are fetched without npm,
 validated against the signed lock's sha512 hashes and extracted without scripts.
-Chromium is installed by that verified Playwright CLI. No OS package manager runs.
+Chromium is installed by that verified Playwright CLI. Linux root installs may
+provision missing Chromium system libraries via its bounded install-deps command.
 """
 import argparse
 import base64
@@ -382,28 +383,66 @@ finally{if(browser)await browser.close();}})();
 """
 
 
+def _browser_probe(node, module, env):
+    probe = _run([node, '-e', BROWSER_PROBE, module], timeout=60, env=env)
+    try: result = json.loads(probe.stdout)
+    except (ValueError, UnicodeDecodeError): result = {'ok': False}
+    return probe.returncode == 0 and result.get('ok') is True, result
+
+
+def _install_browser_system_dependencies(node, module, env):
+    """Only verified missing libraries authorize an unprivileged/root decision.
+
+    No sudo, package upgrades, global apt configuration or service operations.
+    An opted-out/nonroot/unsupported installation stays explicitly degraded.
+    """
+    choice = os.environ.get('HARMONIKA_INSTALL_SYSTEM_DEPS', 'auto')
+    if choice == '0': return False
+    privileged = platform.system() == 'Linux' and getattr(os, 'geteuid', lambda: -1)() == 0
+    if not privileged:
+        if choice == '1': raise SetupError('browser_system_dependencies_privilege_required')
+        return False
+    if not shutil.which('apt-get'):
+        if choice == '1': raise SetupError('browser_system_dependencies_manager_unavailable')
+        return False
+    # Playwright uses apt-get install. This per-command configuration forbids
+    # upgrades of already installed packages, without touching /etc/apt files.
+    with tempfile.TemporaryDirectory(prefix='harmonika-browser-deps-') as temporary:
+        config = Path(temporary)/'apt.conf'
+        config.write_text('APT::Get::Upgrade "false";\nAcquire::Retries "1";\nAcquire::http::Timeout "20";\nAcquire::https::Timeout "20";\n', encoding='utf-8')
+        child_env = dict(env, APT_CONFIG=str(config), DEBIAN_FRONTEND='noninteractive',
+                         NEEDRESTART_MODE='l', NEEDRESTART_SUSPEND='1')
+        installed = _run([node, module/'cli.js', 'install-deps', 'chromium'], timeout=600, env=child_env)
+    if installed.returncode: raise SetupError('browser_system_dependencies_install_failed', True)
+    return True
+
+
 def setup_browser(root, directory):
     browser = _private_directory(root/'browser-runtime')
     node, managed = browser_node(browser)
     module, lock_hash = setup_npm(browser, directory)
     cache = _private_directory(browser/'browsers');env = _environment()
     env.update(PLAYWRIGHT_BROWSERS_PATH=str(cache), PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT='20000')
-    probe = _run([node, '-e', BROWSER_PROBE, module], timeout=60, env=env)
-    try: result = json.loads(probe.stdout)
-    except (ValueError, UnicodeDecodeError): result = {'ok': False}
-    if probe.returncode or result.get('ok') is not True:
-        installed = _run([node, module/'cli.js', 'install', 'chromium'], timeout=420, env=env)
-        if installed.returncode: raise SetupError('chromium_download_unavailable', True)
-        probe = _run([node, '-e', BROWSER_PROBE, module], timeout=60, env=env)
-        try: result = json.loads(probe.stdout)
-        except (ValueError, UnicodeDecodeError): result = {'ok': False}
-        if probe.returncode or result.get('ok') is not True:
+    ready, result = _browser_probe(node, module, env)
+    system_dependencies_installed = False
+    if not ready:
+        # A real missing-library failure already proves Chromium was downloaded.
+        # Avoid repeating that download before satisfying its OS dependencies.
+        if result.get('code') != 'browser_system_libraries_missing':
+            installed = _run([node, module/'cli.js', 'install', 'chromium'], timeout=420, env=env)
+            if installed.returncode: raise SetupError('chromium_download_unavailable', True)
+            ready, result = _browser_probe(node, module, env)
+        if not ready and result.get('code') == 'browser_system_libraries_missing':
+            system_dependencies_installed = _install_browser_system_dependencies(node, module, env)
+            if system_dependencies_installed: ready, result = _browser_probe(node, module, env)
+        if not ready:
             code = result.get('code', 'browser_launch_failed')
             if code not in ['browser_system_libraries_missing', 'browser_launch_failed']: code = 'browser_launch_failed'
             raise SetupError(code)
     return {'status': 'ready', 'ready': True, 'retryable': False, 'module': str(module),
             'browsers_path': str(cache), 'browser_node': node, 'node': node, 'managed_node': managed,
-            'lock_sha256': lock_hash, 'screenshot_verified': True}
+            'lock_sha256': lock_hash, 'screenshot_verified': True,
+            'system_dependencies_installed': system_dependencies_installed}
 
 
 def _failure(exception):
@@ -411,7 +450,10 @@ def _failure(exception):
     retryable = exception.retryable if isinstance(exception, SetupError) else False
     remedies = {'python_venv_unavailable': 'Install Python venv/ensurepip support, then rerun harmonika features setup.',
                 'python_dependencies_unavailable': 'Check HTTPS access and supported Python wheels, then rerun harmonika features setup.',
-                'browser_system_libraries_missing': 'Install the Chromium system libraries recommended by Playwright for this OS, then rerun harmonika features setup.',
+                'browser_system_libraries_missing': 'Install the Chromium system libraries recommended by Playwright for this OS, then rerun harmonika features setup. Linux root with apt-get can install them automatically unless HARMONIKA_INSTALL_SYSTEM_DEPS=0.',
+                'browser_system_dependencies_privilege_required': 'HARMONIKA_INSTALL_SYSTEM_DEPS=1 requires Linux root; ask the OS administrator to install Chromium system libraries.',
+                'browser_system_dependencies_manager_unavailable': 'Automatic Chromium system dependencies require apt-get; install the OS libraries manually.',
+                'browser_system_dependencies_install_failed': 'Check apt-get network, package availability and locks; rerun harmonika features setup. No installed-package upgrades are permitted.',
                 'download_unavailable': 'Check HTTPS connectivity, then rerun harmonika features setup.',
                 'chromium_download_unavailable': 'Check HTTPS access to the Playwright browser CDN, then rerun harmonika features setup.'}
     return {'status': 'degraded', 'ready': False, 'code': code, 'retryable': retryable,
