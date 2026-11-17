@@ -107,7 +107,7 @@ def failure(code, phase):
 
 def main():
     try:
-        request = parse_request(sys.stdin)
+        request = parse_request(sys.stdin.buffer)
     except (ValueError, TypeError, RecursionError):
         print(json.dumps(invalid_request()))
         return 2

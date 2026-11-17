@@ -293,7 +293,7 @@ def main():
   config=load_config();print(json.dumps({'schema_version':1,'ok':True,'targets':[{'target':key,'platform':t.get('platform','posix'),'operations':['ssh.connect']+(['ssh.exec']if t.get('allowed_executables') or t.get('allowed_routeros_paths') else[])+(['ssh.upload']if t.get('allow_upload')else[])+(['ssh.download']if t.get('allow_download')else[])}for key,t in config['targets'].items()]}));return
  raw=sys.stdin.buffer.read(32769);require(len(raw)<=32768,'input_too_large');payload=json.loads(raw)
  require(type(payload) is dict and set(payload)=={'skill_id','input'},'invalid_input')
- print(json.dumps(invoke(payload['skill_id'],payload['input']),ensure_ascii=False))
+ print(json.dumps(invoke(payload['skill_id'],payload['input']),ensure_ascii=True))
 if __name__=='__main__':
  try:main()
  except Exception as exc:

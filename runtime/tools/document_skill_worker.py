@@ -41,7 +41,7 @@ if __name__=='__main__':
             elif action=='create':result=documents.create(Path(payload['output_path']),payload['content'])
             elif action=='edit':result=documents.edit(Path(payload['path']),Path(payload['output_path']),payload['changes'],root)
             else:raise ValueError('unsupported_operation')
-            encoder=json.JSONEncoder(ensure_ascii=False,allow_nan=False,default=str)
+            encoder=json.JSONEncoder(ensure_ascii=True,allow_nan=False,default=str)
             for piece in encoder.iterencode({'ok':True,'result':result}):sys.stdout.write(piece)
     except Exception as error:
         # No payload, document text, file path or raw parser traceback in stderr.

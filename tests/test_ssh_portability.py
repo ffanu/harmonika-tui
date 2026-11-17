@@ -72,6 +72,11 @@ class WindowsACLPolicy(unittest.TestCase):
         with patch.object(Path,'lstat',return_value=Stat()):
             self.assertTrue(files.is_linklike('synthetic'))
 
+def acl_mechanics(value):
+    roles={'S-1-5-18':'system','S-1-5-32-544':'administrators','S-1-1-0':'everyone','S-1-5-32-545':'users','S-1-5-11':'authenticated_users',value.get('current_user'):'current_user'}
+    return {'owner_role':roles.get(value.get('owner'),'other'),'dacl_present':value.get('dacl_present'),
+            'entries':[{k:e.get(k) for k in ('type','flags','mask')} | {'role':roles.get(e.get('sid'),'other')} for e in value.get('entries',[])]}
+
 class NativePrivateFiles(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory()
@@ -90,6 +95,7 @@ class NativePrivateFiles(unittest.TestCase):
 
     def test_private_file_and_isolated_subprocess(self):
         before=files.windows_security(self.file) if os.name=='nt' else self.file.stat().st_mode
+        if os.name=='nt':self.assertTrue(files.acl_is_private(before),json.dumps(acl_mechanics(before)))
         self.assertEqual(files.private_file(self.file),self.file)
         script='import importlib.util,sys;s=importlib.util.spec_from_file_location("p",sys.argv[1]);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);print(m.private_file(sys.argv[2]).name)'
         result=subprocess.run([sys.executable,'-I','-c',script,str(ROOT/'runtime/tools/private_files.py'),str(self.file)],capture_output=True,text=True,timeout=10)
@@ -108,6 +114,9 @@ class NativePrivateFiles(unittest.TestCase):
         if os.name=='nt':self.icacls('/grant','*S-1-1-0:R')
         else:self.file.chmod(0o644)
         with self.assertRaises(files.UnsafeFile):files.private_file(self.file)
+        if os.name=='nt':
+            value=files.windows_security(self.file)
+            self.assertTrue(files.acl_is_private(value,private=False),json.dumps(acl_mechanics(value)))
         self.assertEqual(files.private_file(self.file,private=False),self.file)
 
     def test_public_writable_known_hosts_rejected(self):

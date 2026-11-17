@@ -187,7 +187,7 @@ def invoke(skill,args):
 def main():
     raw=__import__('sys').stdin.buffer.read(32769);ssh.require(len(raw)<=32768,'input_too_large');p=json.loads(raw)
     ssh.require(type(p) is dict and set(p)=={'skill_id','input'},'invalid_input')
-    print(json.dumps(invoke(p['skill_id'],p['input']),ensure_ascii=False))
+    print(json.dumps(invoke(p['skill_id'],p['input']),ensure_ascii=True))
 if __name__=='__main__':
     for name in ('paramiko','vncdotool','twisted'):logging.getLogger(name).addHandler(logging.NullHandler());logging.getLogger(name).propagate=False
     try:main()
