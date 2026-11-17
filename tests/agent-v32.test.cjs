@@ -219,11 +219,17 @@ test("checkpoint and memory contain mechanics, not task/commands/outputs", async
   const raw = fs.readFileSync(f.agent.store.file(r.session_id), "utf8");
   assert.ok(!raw.includes(sentinel));
   assert.ok(!raw.includes("printf"));
-  assert.equal(
-    fs.statSync(f.agent.store.file(r.session_id)).mode & 0o777,
-    0o600,
-  );
-  assert.equal(fs.statSync(f.agent.store.root).mode & 0o777, 0o700);
+  if (process.platform === 'win32') {
+    const platform = require('../tools/agent-platform.cjs');
+    const code = 'import importlib.util,json,sys;s=importlib.util.spec_from_file_location("p",sys.argv[1]);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);print(json.dumps([m.acl_is_private(m.windows_security(p)) for p in sys.argv[2:]]))';
+    const checked = require('node:child_process').spawnSync(platform.pythonCommand(), ['-I','-c',code,
+      path.resolve(__dirname,'../runtime/tools/private_files.py'),f.agent.store.root,f.agent.store.file(r.session_id)], {encoding:'utf8',timeout:10000});
+    assert.equal(checked.status,0,checked.stderr);
+    assert.deepEqual(JSON.parse(checked.stdout),[true,true]);
+  } else {
+    assert.equal(fs.statSync(f.agent.store.file(r.session_id)).mode & 0o777,0o600);
+    assert.equal(fs.statSync(f.agent.store.root).mode & 0o777,0o700);
+  }
 });
 test("checkpoint authentication rejects tampering", async (t) => {
   const f = fixture(t, { model: sequence([answer("not executed")]) });
