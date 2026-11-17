@@ -42,7 +42,7 @@ rl.on('line', (line) => {
   try {
     const msg = JSON.parse(line);
     if (msg.method === 'initialize') {
-      respond(msg.id, { protocolVersion: '1.0', capabilities: { tools: {} }, serverInfo: { name: 'harmonika-ssh-local', version: '1.0.0' } });
+      respond(msg.id, { protocolVersion: '2024-11-05', capabilities: { tools: {} }, serverInfo: { name: 'harmonika-ssh-local', version: '1.0.0' } });
     } else if (msg.method === 'tools/list') {
       respond(msg.id, { tools: [
         { name: 'ssh_run', description: 'Execute SSH command on a registered target', inputSchema: { type: 'object', properties: { alias: { type: 'string', description: 'Target alias from ssh-targets.json' }, command: { type: 'string', description: 'Shell command to execute' } }, required: ['alias', 'command'] } },

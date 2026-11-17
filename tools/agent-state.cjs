@@ -153,6 +153,10 @@ class StateStore {
       workspace: state.workspace,
       task: state.task,
       policy: state.policy,
+      ...(state.turn ? { turn: state.turn } : {}),
+      ...(state.pending_question
+        ? { pending_question: state.pending_question }
+        : {}),
       status: state.status,
       updated: Date.now(),
       steps,
