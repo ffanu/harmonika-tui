@@ -1,3 +1,16 @@
+# Lisensi komponen upstream
+
+Peta komponen → lisensi:
+
+| Komponen | Upstream | Lisensi |
+|---|---|---|
+| Engine TUI yang didistribusikan (sejak paket 2026.11.17.2) | [opencode](https://github.com/anomalyco/opencode) | **MIT** (teks di bagian bawah dokumen ini) |
+| Komponen TUI lama v0.98.1 (tidak lagi default) | Charmbracelet, Inc. | FSL-1.1-MIT (teks di bawah) |
+
+Perubahan merek tidak menghapus lisensi atau atribusi komponen tersebut.
+
+---
+
 # Functional Source License, Version 1.1, MIT Future License
 
 ## Abbreviation
@@ -132,3 +145,35 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+# MIT License — opencode (engine TUI yang didistribusikan)
+
+```
+MIT License
+
+Copyright (c) 2025 opencode
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+Source: https://github.com/anomalyco/opencode (base commit `db1d7b9120`).
+Patch rebrand Harmonika: `engine/patches/0001..0006`, dipublikasikan di repositori ini.
+

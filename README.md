@@ -10,7 +10,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 ![Terminal baru Harmonika](docs/assets/harmonika-workbench.gif)
 
-**Terminal baru v1.0.0** — tanya apa saja · `ctrl+p` perintah · `shift+tab` agent · MCP terpasang
+**Terminal baru v1.0.1** (engine opencode rebrand) — tanya apa saja · `ctrl+p` perintah · `shift+tab` agent · MCP terpasang
 
 [![Demo MP4](https://img.shields.io/badge/▶_Demo-video%20MP4-17a2b8?style=flat-square)](docs/assets/harmonika-demo.mp4)
 [![Screenshot](https://img.shields.io/badge/Screenshot-terminal-6f42c1?style=flat-square)](docs/assets/harmonika-terminal.png)
@@ -88,7 +88,7 @@ Instalasi Windows memakai folder pengguna dan tidak mengubah Defender atau Syste
 
 ---
 
-## 🖥️ Terminal Baru (v1.0.0)
+## 🖥️ Terminal Baru (engine 1.0.1)
 
 Ruang kerja terminal generasi baru Harmonika — tampilan di GIF atas:
 
@@ -101,9 +101,32 @@ Ruang kerja terminal generasi baru Harmonika — tampilan di GIF atas:
 
 Berjalan lokal lewat `harmonika --standalone` (server privat) atau terhubung ke background service — sesi, MCP, dan integrasi tetap tersambung.
 
-### Workbench TUI (rilis 2026.10.28.2)
+### Engine: rebrand opencode (MIT)
 
-Untuk alur kerja panjang: `F2` metrik · `F3` kejadian teredaksi · `F4` file/kode · `F5` diff · `F7` shell proyek · `F8` durasi respons · `Ctrl+P` chat native · LSP otomatis saat file dibaca. Tanpa auto-update diam-diam. [Shortcut & pengujian →](docs/TUI-WORKBENCH.md)
+Binary TUI yang dipasang installer adalah **engine Harmonika 1.0.1** — build ulang dari
+[opencode](https://github.com/anomalyco/opencode) (lisensi MIT) pada base `db1d7b9120`
+(upstream terbaru), dipatch lewat `engine/patches/0001..0006` dan dapat direproduksi:
+
+```bash
+engine/scripts/verify-patches.sh                  # tree patch == harmonika/main
+engine/scripts/smoke-engine.sh engine/bin/harmonika-darwin-arm64
+```
+
+Yang berubah hanya lapisan brand: wordmark **HARMONIKA**, provider/model Harmonika
+(`harmonika-ai`, `-codex` → *Harmonika Ai Pro*, `-google`), direktori config `harmonika-terminal`,
+dan seluruh jalur update/distribusi upstream dimatikan (hanya manifest
+`chat.harmonika.id/.../engine/update.json`). Layout TUI — prompt bar, `ctrl+p`, `shift+tab`,
+`F10` — identik dengan upstream opencode. TUI dibuka **mode penuh tanpa wrapper**.
+Atribusi & lisensi: [NOTICE.md](NOTICE.md) · [UPSTREAM-LICENSE.md](UPSTREAM-LICENSE.md).
+
+### Workbench TUI (opsional)
+
+Paket saat ini **tidak menyertakan** `tools/workbench.py`, sehingga `harmonika` membuka TUI
+engine secara penuh. Bila workbench dipasang (tersedia di source), alur kerja panjang bisa
+dipakai: `F2` metrik · `F3` kejadian teredaksi · `F4` file/kode · `F5` diff · `F7` shell
+proyek · `F8` durasi respons · `Ctrl+P` chat native · LSP otomatis saat file dibaca.
+`HARMONIKA_WORKBENCH=0` (atau `--no-workbench`) memaksa mode penuh.
+[Shortcut & pengujian →](docs/TUI-WORKBENCH.md)
 
 ---
 
