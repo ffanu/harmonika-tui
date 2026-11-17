@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "scope": "GitHub curl installer license onboarding and Harmonika provider",
+  "code_commit": "3f8139c",
+  "runtime_release": "2026.11.17.9",
+  "native_engine_version": "1.0.2",
+  "public_installers": {
+    "github": "https://raw.githubusercontent.com/ffanu/harmonika-tui/main/scripts/install.sh",
+    "hosted": "https://chat.harmonika.id/assets/harmonika-terminal/install.sh",
+    "matching_sha256": "ca605b5f51673475651e87376ee6e577aeb8a95d24eba06b74cad7b9db29396d"
+  },
+  "signed_package_sha256": "96aa0203077b993484fb66c79f90f6a2f4eb03629556d2d7b2be7e0059333d9c",
+  "root_causes": [
+    "curl pipe owns stdin so old installer skipped license prompt",
+    "existing shared native server retained upstream provider catalog",
+    "modern provider omitted device headers required by license binding"
+  ],
+  "changes": [
+    "use controlling terminal for private key input before interactive installation",
+    "validate license before entering an agent",
+    "select supported private server policy without stopping an existing server",
+    "pass modern configuration path and device headers",
+    "open terminal after successful interactive installation",
+    "stop esbuild service before temporary dependency cleanup on Windows"
+  ],
+  "verification": {
+    "local_regression_tests": 50,
+    "macos_arm64_native_installer_smoke": "passed",
+    "linux_public_github_install": "passed",
+    "linux_fresh_hosted_curl_license_prompt": "passed",
+    "linux_invalid_license_rejected_before_runtime_or_agent": "passed",
+    "linux_private_key_not_echoed": "passed",
+    "linux_signed_runtime_and_binary_doctor": "passed",
+    "linux_mcp_protocol": "passed",
+    "linux_default_model": "harmonika/harmonika-ai-codex",
+    "linux_models": [
+      "harmonika/harmonika-ai",
+      "harmonika/harmonika-ai-codex",
+      "harmonika/harmonika-ai-google"
+    ],
+    "linux_real_tui_provider": "Harmonika Ai Pro / Harmonika Ai",
+    "linux_real_chat_response": "HARMONIKA_PROVIDER_OK",
+    "linux_source_worktree_clean": true,
+    "existing_user_daemon_preserved": true,
+    "github_interactive_auto_launch": {
+      "passed": true,
+      "installer_completed": true,
+      "harmonika_provider_visible": true,
+      "mcp_connected": true,
+      "test_terminal_closed_normally": true,
+      "exit_code": 0
+    },
+    "ci_matrix": {
+      "run_url": "https://github.com/ffanu/harmonika-tui/actions/runs/44103166417",
+      "passed": [
+        "windows-x64 / Node 22",
+        "linux-x64 / Node 22",
+        "linux-x64 / Node 18",
+        "linux-arm64 / Node 22",
+        "darwin-x64 / Node 22"
+      ],
+      "queued": [
+        "darwin-arm64 / Node 22"
+      ],
+      "darwin_arm64_final_source_native_smoke_on_mac": "passed",
+      "failures": []
+    },
+    "linux_source_commit": "3f8139c",
+    "macos_arm64_final_source_smoke_seconds": 67.38
+  },
+  "boundaries": {
+    "no_installed_linux_source_patched": true,
+    "no_credentials_in_report": true,
+    "no_device_binding_cloned": true,
+    "no_user_session_stopped": true,
+    "optional_document_and_browser_dependencies_not_installed_or_verified": true
+  },
+  "checkpoint": {
+    "question": "Does fresh interactive curl installation require license before the agent?",
+    "answer": "Yes, private controlling-terminal prompt and invalid-license rejection were reproduced on Linux. Noninteractive automation installs only; agent execution still requires a valid license."
+  }
+}
