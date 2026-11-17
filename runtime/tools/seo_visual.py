@@ -10,7 +10,7 @@ import shutil
 import subprocess
 
 def browser_capabilities():
-    node=os.environ.get('HARMONIKA_NODE') or shutil.which('node')
+    node=os.environ.get('HARMONIKA_BROWSER_NODE') or os.environ.get('HARMONIKA_NODE') or shutil.which('node')
     if not node:return False
     try:
         result=subprocess.run([node,str(Path(__file__).with_suffix('.cjs')),'--capabilities'],capture_output=True,timeout=5)
@@ -18,7 +18,7 @@ def browser_capabilities():
     except Exception:return False
 
 def _capture_staged(payload,fetcher):
-    node=os.environ.get('HARMONIKA_NODE') or shutil.which('node')
+    node=os.environ.get('HARMONIKA_BROWSER_NODE') or os.environ.get('HARMONIKA_NODE') or shutil.which('node')
     if not node or not browser_capabilities():return {'status':'unavailable','reason':'browser_runtime_missing'}
     out=Path(payload['output_dir']);cache={}
     proc=subprocess.Popen([node,str(Path(__file__).with_suffix('.cjs'))],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,text=True)
@@ -63,6 +63,10 @@ def _capture_staged(payload,fetcher):
 
 def publish_directory(source,target):
     """Atomic directory publication without replacing even an existing empty directory."""
+    if os.name == 'nt':
+        # Windows rename refuses an existing destination atomically.
+        os.rename(source, target)
+        return
     libc=ctypes.CDLL(None,use_errno=True)
     if hasattr(libc,'renamex_np'):
         fn=libc.renamex_np;fn.argtypes=[ctypes.c_char_p,ctypes.c_char_p,ctypes.c_uint];fn.restype=ctypes.c_int

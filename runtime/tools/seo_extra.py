@@ -124,6 +124,9 @@ def google_settings(principal):
     raw=os.environ.get('HARMONIKA_SEO_GOOGLE_CONFIG','')
     if not raw:return None,'google_credentials_not_configured'
     file=Path(raw)
+    # POSIX uid/mode checks do not establish a private Windows ACL. Fail closed.
+    if not hasattr(os, 'getuid'):
+        return None,'google_config_permissions_unavailable'
     try:
         if not file.is_absolute() or file.is_symlink() or file.stat().st_size>65536 or file.stat().st_mode&0o077 or file.stat().st_uid!=os.getuid():return None,'google_config_permissions_invalid'
         data=json.loads(file.read_text())

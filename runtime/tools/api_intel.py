@@ -218,7 +218,7 @@ def discover(args):
     if not url:
         return {'ok': False, 'error': 'url required'}
     node_script = _discover_script_path()
-    node_bin = os.environ.get('HARMONIKA_NODE') or shutil.which('node') or 'node'
+    node_bin = os.environ.get('HARMONIKA_BROWSER_NODE') or os.environ.get('HARMONIKA_NODE') or shutil.which('node') or 'node'
     if not os.path.exists(node_bin):
         node_bin = 'node'
     # Reuse site_cloner session profile if exists (scan behind login)
@@ -539,7 +539,7 @@ def monitor_start(args):
     url=_safe_url(args.get('url','https://example.com'))
     script=os.path.join(RUNTIME_DIR,'monitor_engine.cjs')
     with open(script,'w',encoding='utf-8') as stream:stream.write(MONITOR_ENGINE_JS)
-    node=os.environ.get('HARMONIKA_NODE') or shutil.which('node')
+    node=os.environ.get('HARMONIKA_BROWSER_NODE') or os.environ.get('HARMONIKA_NODE') or shutil.which('node')
     if not node:return {'ok':False,'error':'node_runtime_unavailable'}
     run_id=uuid.uuid4().hex
     capture=os.path.join(RUNTIME_DIR,'monitor_capture.json');stop=os.path.join(RUNTIME_DIR,'monitor_stop.json')

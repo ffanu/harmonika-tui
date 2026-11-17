@@ -2,7 +2,10 @@
 import json
 import os
 from pathlib import Path
-import resource
+try:
+    import resource
+except ImportError:  # Windows uses the owning executor deadline.
+    resource = None
 import signal
 import sys
 
@@ -12,9 +15,13 @@ class WorkerAbort(BaseException):
 def abort(signum,frame):
     raise WorkerAbort('stopped' if signum==signal.SIGTERM else 'resource_limit')
 
-signal.signal(signal.SIGTERM,abort)
-signal.signal(signal.SIGXCPU,abort)
-resource.setrlimit(resource.RLIMIT_CPU,(18,20))
+def configure_limits():
+    for name in ("SIGTERM", "SIGXCPU"):
+        value = getattr(signal, name, None)
+        if value is not None:
+            signal.signal(value, abort)
+    if resource is not None:
+        resource.setrlimit(resource.RLIMIT_CPU, (18, 20))
 # Browser workers have multiple owned processes; executor gives the job its own session.
 # Chromium reserves large virtual address spaces; do not inherit an AS cap into browser jobs.
 TOOLS=Path(__file__).resolve().parent;sys.path.insert(0,str(TOOLS))
@@ -35,20 +42,21 @@ def capabilities(principal=None):
     operations['seo.performance']={'status':'degraded','reason':'live_pagespeed_provider_quota_and_network_required'}
     browser_ready=browser_capabilities()
     operations['seo.visual']={'status':'available' if browser_ready else 'unavailable','reason':'javascript_disabled_render_only' if browser_ready else 'browser_runtime_missing'}
-    _,reason=google_config(principal or 'local:'+str(os.getuid()))
+    _,reason=google_config(principal or 'local:'+str(getattr(os, 'getuid', lambda: 'windows')()))
     for name in ('search_console','ga4'):
         operations['seo.'+name]={'status':'unavailable' if reason else 'degraded','reason':reason or 'configured_connection_not_verified'}
     return {'schema_version':1,'operations':operations}
 
 if __name__=='__main__':
     try:
+        configure_limits()
         if sys.argv[1:]==['--capabilities']:
             print(json.dumps(capabilities()));sys.exit(0)
         raw=sys.stdin.buffer.read(1048577)
         if len(raw)>1048576:raise ValueError('input_too_large')
         body=json.loads(raw);name=body['skill_id'];payload=body['input'];registry=Registry();registry.validate_input(name,payload)
         item=registry.get(name);root=Path(body['project_root']).resolve()
-        if sys.platform.startswith('linux') and name!='seo.visual':resource.setrlimit(resource.RLIMIT_AS,(1024*1024*1024,1024*1024*1024))
+        if resource is not None and sys.platform.startswith('linux') and name!='seo.visual':resource.setrlimit(resource.RLIMIT_AS,(1024*1024*1024,1024*1024*1024))
         for field in item.get('path_fields',[]):scoped(root,payload[field])
         if 'url' in payload:payload['url']=validate_url(payload['url'])
         fetcher=SafeFetcher(max_requests=20 if name=='seo.visual' else 8,max_bytes=8388608 if name=='seo.performance' else 2097152,budget_seconds=62 if name=='seo.performance' else 22,timeout_seconds=55 if name=='seo.performance' else 8)

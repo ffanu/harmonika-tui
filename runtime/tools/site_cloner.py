@@ -335,7 +335,7 @@ def clone_site(args):
 
     # If authenticated profile exists → use Playwright over CDP with that profile
     node_script = _clone_script_path()
-    node_bin = os.environ.get('HARMONIKA_NODE') or shutil.which('node') or 'node'
+    node_bin = os.environ.get('HARMONIKA_BROWSER_NODE') or os.environ.get('HARMONIKA_NODE') or shutil.which('node') or 'node'
     if not os.path.exists(node_bin):
         node_bin = 'node'
     payload = {

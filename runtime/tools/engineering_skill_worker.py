@@ -1,7 +1,10 @@
 """Read-only engineering evidence worker, independent of model provider."""
 import json
 from pathlib import Path
-import resource
+try:
+    import resource
+except ImportError:  # Windows has no POSIX resource module.
+    resource = None
 import sys
 
 TOOLS = Path(__file__).resolve().parent
@@ -25,8 +28,9 @@ def main():
     try:
         if sys.argv[1:] == ['--capabilities']:
             print(json.dumps(capabilities()));return 0
-        resource.setrlimit(resource.RLIMIT_CPU,(8,10))
-        if sys.platform.startswith('linux'):
+        if resource is not None:
+            resource.setrlimit(resource.RLIMIT_CPU,(8,10))
+        if resource is not None and sys.platform.startswith('linux'):
             resource.setrlimit(resource.RLIMIT_AS,(512*1024*1024,512*1024*1024))
         raw=sys.stdin.buffer.read(262145)
         if len(raw)>262144:raise ValueError('input_too_large')
