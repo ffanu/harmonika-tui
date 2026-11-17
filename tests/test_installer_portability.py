@@ -45,6 +45,43 @@ class InstallerPortability(unittest.TestCase):
             self.assertFalse((system/'System32/harmonika.cmd').exists())
             self.assertTrue((root/'node.path').is_file())
 
+    @unittest.skipUnless(os.name=='posix','POSIX launcher discovery')
+    def test_root_linux_command_resolves_without_user_bin_on_path(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);system=root/'system bin';system.mkdir()
+            wrapper=root/'private bin/harmonika';wrapper.parent.mkdir();wrapper.write_text('#!/bin/sh\nprintf "launcher-ok\\n"\n');wrapper.chmod(0o755)
+            env=dict(os.environ,PATH=str(system)+':/usr/bin:/bin',HARMONIKA_BIN_DIR='')
+            with patch.object(installer.platform,'system',return_value='Linux'),patch.object(installer.os,'geteuid',return_value=0,create=True),patch.object(installer,'SYSTEM_BIN_DIR',system),patch.dict(os.environ,env):
+                self.assertTrue(installer.ensure_linux_command(wrapper))
+                self.assertTrue(installer.ensure_linux_command(wrapper))
+                run=subprocess.run(['sh','-c','harmonika'],env=env,capture_output=True,text=True,timeout=5)
+                self.assertEqual(run.returncode,0);self.assertEqual(run.stdout,'launcher-ok\n')
+
+    def test_root_linux_preserves_existing_unrelated_command(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);existing=root/'harmonika';existing.write_text('existing command')
+            with patch.object(installer.platform,'system',return_value='Linux'),patch.object(installer.os,'geteuid',return_value=0,create=True),patch.object(installer,'SYSTEM_BIN_DIR',root),patch.dict(os.environ,{'PATH':str(root),'HARMONIKA_BIN_DIR':''}):
+                self.assertFalse(installer.ensure_linux_command(root/'private/harmonika'))
+            self.assertEqual(existing.read_text(),'existing command')
+
+    def test_user_and_isolated_installs_do_not_create_system_launcher(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);system=root/'not-created'
+            for uid,bindir in [(1000,''),(0,str(root/'isolated bin'))]:
+                with patch.object(installer.platform,'system',return_value='Linux'),patch.object(installer.os,'geteuid',return_value=uid,create=True),patch.object(installer,'SYSTEM_BIN_DIR',system),patch.dict(os.environ,{'PATH':str(system),'HARMONIKA_BIN_DIR':bindir}):
+                    self.assertFalse(installer.ensure_linux_command(root/'private/harmonika'))
+            self.assertFalse(system.exists())
+
+    @unittest.skipUnless(os.name=='posix','POSIX launcher repair')
+    def test_reinstall_repairs_missing_launcher_without_reinstalling_runtime(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home=Path(temp);root=home/'terminal';root.mkdir();system=home/'system bin';system.mkdir()
+            with patch.object(installer,'ROOT',root),patch.object(installer,'SYSTEM_BIN_DIR',system),patch.object(Path,'home',return_value=home),patch.dict(os.environ,{'PATH':str(system)+':/usr/bin:/bin','HARMONIKA_BIN_DIR':''}),patch.object(installer.platform,'system',return_value='Linux'),patch.object(installer.os,'geteuid',return_value=0,create=True),patch.object(installer.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'22\n','')),patch.object(installer.m,'active',return_value=(root/'current',{})),patch.object(installer,'_needs_binary_rebrand',return_value=False),patch.object(installer,'ensure_default_config'),patch.object(installer.m,'check_update',return_value={}),patch.object(installer.m,'doctor',return_value={'ok':True}),patch.object(installer,'fetch_remote_bootstrap') as fetch:
+                installer.main()
+                fetch.assert_not_called()
+                self.assertTrue((home/'.local/bin/harmonika').is_file())
+                self.assertEqual((system/'harmonika').resolve(),(home/'.local/bin/harmonika').resolve())
+
     @unittest.skipUnless(os.name=='posix' and shutil.which('node') and shutil.which('git'),'POSIX bootstrap fixture')
     def test_bootstrap_preserves_existing_non_repository_directory(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -61,7 +61,7 @@ cd harmonika-tui
 python3 runtime/install.py
 ```
 
-Buka `harmonika` setelah instalasi. Jika `~/.local/bin` belum ada di PATH macOS/Linux:
+Pada Linux sebagai root, installer menautkan launcher ke `/usr/local/bin` bila folder itu ada di PATH dan nama perintah belum dipakai. Instalasi ulang juga memperbaiki launcher yang hilang. Untuk pengguna biasa/macOS, jika `~/.local/bin` belum ada di PATH shell saat ini:
 
 ```sh
 export PATH="$HOME/.local/bin:$PATH"

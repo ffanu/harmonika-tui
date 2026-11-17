@@ -212,6 +212,40 @@ def write_windows_wrappers(root=ROOT):
     )
     atomic_text(bin_dir/'harmonika.cmd',cmd_wrapper,0o755)
 
+
+# Root Linux shells commonly omit ~/.local/bin. Keep the private wrapper and
+# expose it through a standard PATH directory without replacing other commands.
+SYSTEM_BIN_DIR=Path('/usr/local/bin')
+
+def ensure_linux_command(wrapper):
+    if (platform.system()!='Linux' or not hasattr(os,'geteuid') or os.geteuid()!=0
+            or os.environ.get('HARMONIKA_BIN_DIR')):
+        return False
+    path_dirs=[Path(p).absolute() for p in os.get_exec_path() if p]
+    if SYSTEM_BIN_DIR not in path_dirs:
+        return False
+    destination=SYSTEM_BIN_DIR/'harmonika'
+    try:
+        SYSTEM_BIN_DIR.mkdir(parents=True,exist_ok=True)
+        # symlink creation is atomic and fails if another command already exists.
+        destination.symlink_to(wrapper.absolute())
+        return True
+    except FileExistsError:
+        return destination.is_symlink() and destination.resolve()==wrapper.resolve()
+    except OSError:
+        return False
+
+def write_posix_wrappers(root=ROOT):
+    wrapper='#!/bin/sh\nexec '+shlex.quote(sys.executable)+' -I '+shlex.quote(str(root/'launcher.py'))+' "$@"\n'
+    primary=Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))/'harmonika'
+    locations=[primary]
+    if not os.environ.get('HARMONIKA_BIN_DIR'):locations.append(Path.home()/'.local/node/bin/harmonika')
+    for file in locations:
+        file.parent.mkdir(parents=True,exist_ok=True)
+        atomic_text(file,wrapper,0o755)
+    ensure_linux_command(primary)
+
+
 def _needs_binary_rebrand(selected):
     try:
         bpath=selected/m.bin_name()
@@ -244,6 +278,7 @@ def main(package=None):
         ensure_default_config(ROOT)
         atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text(encoding='utf-8'))
         if os.name=='nt':write_windows_wrappers(ROOT)
+        else:write_posix_wrappers(ROOT)
         try:
             chk=m.check_update(ROOT)
             if chk.get('update_available') and chk.get('package_url'):
@@ -347,13 +382,7 @@ def activate(stage,manifest):
     if os.name == 'nt':
         write_windows_wrappers(ROOT)
     else:
-        wrapper='#!/bin/sh\nexec '+shlex.quote(sys.executable)+' -I '+shlex.quote(str(ROOT/'launcher.py'))+' "$@"\n'
-        locations=[Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))/'harmonika']
-        if not os.environ.get('HARMONIKA_BIN_DIR'):locations.append(Path.home()/'.local/node/bin/harmonika')
-        for file in locations:
-            file.parent.mkdir(parents=True,exist_ok=True)
-            # Replace the symlink itself atomically, never the npm target or live binary.
-            atomic_text(file,wrapper,0o755)
+        write_posix_wrappers(ROOT)
     print(json.dumps(m.doctor(),indent=2))
 
 if __name__=='__main__':

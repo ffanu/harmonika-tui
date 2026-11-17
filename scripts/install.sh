@@ -33,5 +33,14 @@ if [ ! -f "${HARMONIKA_GLOBAL_CONFIG:-$HOME/.config/harmonika}/harmonika-api-key
 fi
 
 echo ""
-echo "Instalasi selesai! Pastikan ~/.local/bin ada di PATH Anda, lalu jalankan:"
-echo "  harmonika"
+if command -v harmonika >/dev/null 2>&1; then
+  echo "Instalasi selesai! Jalankan: harmonika"
+else
+  echo 'Instalasi selesai. Untuk shell saat ini, jalankan:'
+  python3 - <<'PYTHON'
+import os, pathlib, shlex
+p = os.environ.get("HARMONIKA_BIN_DIR") or str(pathlib.Path.home()/".local/bin")
+print("export PATH=" + shlex.quote(p) + ':"$PATH"')
+PYTHON
+  echo '  harmonika'
+fi
