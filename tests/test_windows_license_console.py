@@ -94,6 +94,12 @@ class NativeConsole:
                                                          ctypes.sizeof(w.HANDLE), None, None))
             startup = STARTUPINFOEX()
             startup.StartupInfo.cb = ctypes.sizeof(startup)
+            # Match Windows Terminal's ConptyConnection::_LaunchAttachedClient:
+            # without this flag, CreateProcess duplicates redirected runner
+            # stdin/stdout even with bInheritHandles=False, bypassing ConPTY.
+            # Explicit NULL std handles are replaced by real console handles.
+            # https://github.com/microsoft/terminal/discussions/15814
+            startup.StartupInfo.dwFlags = 0x00000100  # STARTF_USESTDHANDLES
             startup.lpAttributeList = ctypes.cast(self.attr, w.LPVOID)
             environment = ctypes.create_unicode_buffer('\0'.join(k + '=' + v for k, v in sorted(env.items(), key=lambda x: x[0].upper())) + '\0\0')
             line = ctypes.create_unicode_buffer(subprocess.list2cmdline(command))
