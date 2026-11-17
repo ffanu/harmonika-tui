@@ -273,7 +273,10 @@ def _call(name, args):
         payload = _validate(name, args)
         method, path = {"translate_text": ("POST", "/translate"), "detect_language": ("POST", "/detect"),
                         "translation_languages": ("GET", "/languages"), "translate_batch": ("POST", "/batch")}[name]
-        return _result(name, _request(method, path, payload))
+        result = _result(name, _request(method, path, payload))
+        if name == "translate_batch":
+            require(len(result["items"]) == len(payload["items"]), "gateway_invalid_response")
+        return result
     except Exception as failure:
         code = str(failure)
         return {"ok": False, "error": code if isinstance(failure, ValueError) and code in SAFE_ERRORS else "translation_client_failed"}

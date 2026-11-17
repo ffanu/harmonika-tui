@@ -65,6 +65,8 @@ class NativeTranslationTests(unittest.TestCase):
         with patch.object(client, "_request", return_value=output) as request:
             self.assertEqual(client.translate_batch(args), output)
             request.assert_called_once_with("POST", "/batch", args)
+        with patch.object(client, "_request", return_value={**output, "items": output["items"][:1]}):
+            self.assertEqual(client.translate_batch(args), {"ok": False, "error": "gateway_invalid_response"})
 
     def test_bad_arguments_are_rejected_before_network_effects(self):
         cases = [

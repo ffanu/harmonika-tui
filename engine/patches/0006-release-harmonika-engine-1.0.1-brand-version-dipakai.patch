@@ -1,0 +1,23 @@
+From c48161bdae9a1587d25c7b34d6ca22bcf69e345d Mon Sep 17 00:00:00 2001
+From: ffanu <bontotfahri01@gmail.com>
+Date: Tue, 17 Nov 2026 15:30:23 +0700
+Subject: [PATCH 6/6] release: harmonika engine 1.0.1 (brand version dipakai
+ OPENCODE_VERSION)
+
+---
+ packages/util/src/brand.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packages/util/src/brand.ts b/packages/util/src/brand.ts
+index a13371d8a9..db9367f33d 100644
+--- a/packages/util/src/brand.ts
++++ b/packages/util/src/brand.ts
+@@ -14,7 +14,7 @@ export const Brand = {
+   product: "Harmonika AI",
+   vendor: "Harmonika ID",
+   cliName: "harmonika",
+-  version: "1.0.0",
++  version: "1.0.1",
+   channel: "stable",
+   artifact: "cli",
+   website: "https://harmonika.id",

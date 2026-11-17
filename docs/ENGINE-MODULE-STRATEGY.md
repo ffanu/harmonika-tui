@@ -210,3 +210,15 @@ engine/scripts/verify-patches.sh                       # tree patch == harmonika
 engine/scripts/smoke-engine.sh engine/bin/harmonika-darwin-arm64
 curl -s https://chat.harmonika.id/assets/harmonika-terminal/engine/update.json | python3 -m json.tool
 ```
+
+## 14. Rebase ke upstream terbaru + engine 1.0.1 (2026-11-17)
+
+| Item | Hasil terukur |
+| --- | --- |
+| **C1** Clone penuh | `harmonika-tui-src` di-`unshallow`: 52 → **21.898 commit**, `.git` 660 MB → 849 MB. |
+| **C2** Rebase 906 commit | `harmonika/main` dipindahkan ke `upstream/dev` **`db1d7b9120`** (906 commit lebih baru dari base lama `67139d6`). Konflik hanya di `package.json` (header brand), `upgrade.ts`, `updater.ts`, dan 2 berkas test (jalur brand) — semua diselesaikan dengan mempertahankan sisi Harmonika; blok `session.step.started` di `noninteractive.ts` dipulihkan manual setelah resolusi otomatis memotong fungsi upstream. |
+| **C3** Patch series 6 | `engine/patches/0001..0006`; `verify-patches.sh` membuktikan keenam patch mereproduksi tree `harmonika/main` (`f253ded9867e`) dari base `db1d7b9120`. |
+| **C4** Versi engine 1.0.1 | `packages/util/src/brand.ts` → `version: "1.0.1"` (dipakai `OPENCODE_VERSION` di `packages/cli/script/build.ts`) dan `package.json` root; manifest rilis 1.0.1 memuat 5 platform. |
+| **C5** Model default Pro | `engine/config/harmonika.json`: `model = harmonika/harmonika-ai-codex` (label **Harmonika Ai Pro**), `small_model` tetap `harmonika-ai`. Ketiga model terverifikasi ada di `GET https://chat.harmonika.id/v1/models`. |
+
+Catatan operasional setelah rebase: `node_modules` di clone sumber harus di-`bun install` ulang (bun.lock berubah), dan `engine/patches/*` menjadi sumber kebenaran rebrand.

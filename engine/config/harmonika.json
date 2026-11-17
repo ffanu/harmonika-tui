@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "harmonika/harmonika-ai",
+  "model": "harmonika/harmonika-ai-codex",
   "small_model": "harmonika/harmonika-ai",
   "share": "disabled",
   "snapshots": true,

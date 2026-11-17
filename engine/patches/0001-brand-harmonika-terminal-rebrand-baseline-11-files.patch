@@ -1,7 +1,7 @@
-From bfc3805e58d571459a122c323e7fbefb3319cb99 Mon Sep 17 00:00:00 2001
+From 3729b6c8a42631e7bcec447848be51c5b42eec14 Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:33:58 +0700
-Subject: [PATCH 1/5] brand: harmonika terminal rebrand baseline (11 files)
+Subject: [PATCH 1/6] brand: harmonika terminal rebrand baseline (11 files)
 
 ---
  package.json                          |  8 +++----
@@ -18,7 +18,7 @@ Subject: [PATCH 1/5] brand: harmonika terminal rebrand baseline (11 files)
  11 files changed, 58 insertions(+), 35 deletions(-)
 
 diff --git a/package.json b/package.json
-index 02e5cc8..ecc8711 100644
+index d50d0bd6ee..5418e75876 100644
 --- a/package.json
 +++ b/package.json
 @@ -1,8 +1,8 @@
@@ -26,25 +26,25 @@ index 02e5cc8..ecc8711 100644
    "$schema": "https://json.schemastore.org/package.json",
 -  "name": "opencode",
 -  "description": "AI-powered development tool",
--  "version": "2.2.5",
+-  "version": "2.3.0",
 +  "name": "harmonika-tui",
 +  "description": "Harmonika AI Terminal Workspace",
-+  "version": "1.0.0",
++  "version": "1.0.1",
    "private": true,
    "type": "module",
    "packageManager": "bun@1.4.4",
-@@ -184,4 +184,4 @@
-     "@pierre/trees@1.0.0-beta.6": "patches/@pierre%2Ftrees@1.0.0-beta.6.patch",
-     "@brendonovich/vite-plugin-opencode@0.1.3": "patches/@brendonovich%2Fvite-plugin-opencode@0.1.3.patch"
+@@ -177,4 +177,4 @@
+     "@modelcontextprotocol/client@2.4.0": "patches/@modelcontextprotocol%2Fclient@2.4.0.patch",
+     "@kobalte/core@0.13.13": "patches/@kobalte%2Fcore@0.13.13.patch"
    }
 -}
 +}
 \ No newline at end of file
 diff --git a/packages/cli/script/build.ts b/packages/cli/script/build.ts
-index 80a67fe..f5f18c5 100755
+index a9ae9e6069..abc91330cb 100755
 --- a/packages/cli/script/build.ts
 +++ b/packages/cli/script/build.ts
-@@ -185,7 +185,7 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
+@@ -198,7 +198,7 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
        outfile: path.join(outdir, name, "bin", binary),
        execArgv: [
          "--smol",
@@ -53,7 +53,7 @@ index 80a67fe..f5f18c5 100755
          "--use-system-ca",
          "--no-warnings",
          "--",
-@@ -193,9 +193,9 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
+@@ -206,9 +206,9 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
        windows: {},
      },
      define: {
@@ -67,7 +67,7 @@ index 80a67fe..f5f18c5 100755
        ...(highlights ? { OPENCODE_RELEASE_HIGHLIGHTS: JSON.stringify(highlights) } : {}),
        OPENCODE_LIBC: item.os === "linux" ? `'${item.abi ?? "glibc"}'` : "undefined",
 diff --git a/packages/cli/src/commands/commands.ts b/packages/cli/src/commands/commands.ts
-index f49959e..5939e56 100644
+index 5ca37aa794..7391feaf1f 100644
 --- a/packages/cli/src/commands/commands.ts
 +++ b/packages/cli/src/commands/commands.ts
 @@ -46,13 +46,13 @@ const PermissionParams = {
@@ -115,10 +115,10 @@ index f49959e..5939e56 100644
        params: {
          message: Argument.String("message").pipe(
 diff --git a/packages/core/src/app.ts b/packages/core/src/app.ts
-index 2b3df29..2843bc7 100644
+index cc4aff8733..f17fa7d655 100644
 --- a/packages/core/src/app.ts
 +++ b/packages/core/src/app.ts
-@@ -15,7 +15,7 @@ export const Metadata = Context.Reference<Info>("@opencode/App", {
+@@ -13,7 +13,7 @@ export class Service extends Context.Service<Service, Info>()("@opencode/App") {
  
  export function make(input: Partial<Info> = {}): Info {
    return {
@@ -128,7 +128,7 @@ index 2b3df29..2843bc7 100644
      channel: input.channel ?? "unknown",
    }
 diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
-index e7fa005..7476344 100644
+index e7fa005bba..7476344452 100644
 --- a/packages/core/src/config/discovery.ts
 +++ b/packages/core/src/config/discovery.ts
 @@ -9,7 +9,7 @@ import { Location } from "../location.js"
@@ -150,7 +150,7 @@ index e7fa005..7476344 100644
  }
  
 diff --git a/packages/core/src/project.ts b/packages/core/src/project.ts
-index 63a523b..83f6116 100644
+index 5a6356926e..ada60877db 100644
 --- a/packages/core/src/project.ts
 +++ b/packages/core/src/project.ts
 @@ -307,7 +307,7 @@ const layer = Layer.effect(
@@ -160,10 +160,10 @@ index 63a523b..83f6116 100644
 -      return yield* fs.readFileString(path.join(dir, "opencode")).pipe(
 +      return yield* fs.readFileString(path.join(dir, "harmonika")).pipe(
          Effect.map((value) => value.trim()),
-         Effect.map((value) => (value ? ID.make(value) : undefined)),
+         Effect.map((value) => (value && !/[\u0000-\u001f\u007f]/.test(value) ? ID.make(value) : undefined)),
          Effect.orElseSucceed(() => undefined),
 diff --git a/packages/tui/package.json b/packages/tui/package.json
-index ca223b7..942bc54 100644
+index 7bbccc0273..c56ed6a65b 100644
 --- a/packages/tui/package.json
 +++ b/packages/tui/package.json
 @@ -76,4 +76,4 @@
@@ -174,7 +174,7 @@ index ca223b7..942bc54 100644
 +}
 \ No newline at end of file
 diff --git a/packages/tui/src/component/logo.tsx b/packages/tui/src/component/logo.tsx
-index 2c3abc3..6fb07a3 100644
+index 2c3abc3cb0..6fb07a3df1 100644
 --- a/packages/tui/src/component/logo.tsx
 +++ b/packages/tui/src/component/logo.tsx
 @@ -8,6 +8,7 @@ import { go, logo } from "../logo"
@@ -213,7 +213,7 @@ index 2c3abc3..6fb07a3 100644
            )}
          </For>
 diff --git a/packages/tui/src/logo.ts b/packages/tui/src/logo.ts
-index 8c570fb..0340db4 100644
+index 8c570fb934..0340db4bb4 100644
 --- a/packages/tui/src/logo.ts
 +++ b/packages/tui/src/logo.ts
 @@ -1,9 +1,31 @@
@@ -253,7 +253,7 @@ index 8c570fb..0340db4 100644
 +
 +
 diff --git a/packages/tui/src/util/presentation.ts b/packages/tui/src/util/presentation.ts
-index d6416a0..17db950 100644
+index d6416a02f1..17db950fc0 100644
 --- a/packages/tui/src/util/presentation.ts
 +++ b/packages/tui/src/util/presentation.ts
 @@ -17,8 +17,8 @@ function wordmark(pad = "") {
@@ -281,7 +281,7 @@ index d6416a0..17db950 100644
    ].join("\n")
  }
 diff --git a/packages/util/src/global.ts b/packages/util/src/global.ts
-index 5fe51f8..f6c95ec 100644
+index 5fe51f8281..f6c95ec8e1 100644
 --- a/packages/util/src/global.ts
 +++ b/packages/util/src/global.ts
 @@ -9,12 +9,12 @@ import { roots } from "#global-roots"

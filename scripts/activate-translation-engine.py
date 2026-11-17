@@ -62,7 +62,7 @@ def activate(stage):
     for name in targets:
         p = API/name
         assert (sha(p) if p.exists() else None) == baseline[name], 'baseline_changed'
-        run('node','--check',str(targets[name]))
+        subprocess.run(['node','--check'],input=targets[name].read_bytes(),capture_output=True,check=True)
     assert not (BASE/'translation_engine').exists() and not UNIT.exists(), 'translation_already_installed'
     report = json.loads((stage/'planner-verified.json').read_text())
     assert report['translation_passed'] == 3 and report['translation_failed'] == 0, 'planner_tests_required'

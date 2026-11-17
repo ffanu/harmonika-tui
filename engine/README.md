@@ -30,7 +30,7 @@ berikutnya tetap sederhana.
 # 1) clone upstream pada base commit patch series (lihat "From <sha>" di engine/patches/0001)
 git clone https://github.com/anomalyco/opencode.git harmonika-tui-src
 cd harmonika-tui-src
-git checkout 67139d6
+git checkout db1d7b9120
 
 # 2) terapkan seluruh patch rebrand Harmonika, berurutan
 for p in /path/to/harmonika-tui/engine/patches/*.patch; do git apply --index "$p"; done

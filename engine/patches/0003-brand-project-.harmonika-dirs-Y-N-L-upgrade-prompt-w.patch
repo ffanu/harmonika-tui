@@ -1,7 +1,7 @@
-From c4db12fe8ccae9ed3475d04401580489a1cb43fa Mon Sep 17 00:00:00 2001
+From 4da0798318e618b234a14208567e780364ac67da Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:54:59 +0700
-Subject: [PATCH 3/5] brand: project .harmonika dirs, Y/N/L upgrade prompt with
+Subject: [PATCH 3/6] brand: project .harmonika dirs, Y/N/L upgrade prompt with
  changelog
 
 - config/discovery.ts reads Brand.projectDirs (.harmonika then .opencode) for project
@@ -23,7 +23,7 @@ Subject: [PATCH 3/5] brand: project .harmonika dirs, Y/N/L upgrade prompt with
  7 files changed, 95 insertions(+), 12 deletions(-)
 
 diff --git a/packages/cli/src/commands/handlers/default.ts b/packages/cli/src/commands/handlers/default.ts
-index d7c36fe..cc700fb 100644
+index d7c36feaa7..cc700fb2ad 100644
 --- a/packages/cli/src/commands/handlers/default.ts
 +++ b/packages/cli/src/commands/handlers/default.ts
 @@ -15,6 +15,8 @@ import { Service } from "@opencode/client/effect/service"
@@ -63,7 +63,7 @@ index d7c36fe..cc700fb 100644
 +  }
 +}
 diff --git a/packages/cli/src/commands/handlers/mcp/add.ts b/packages/cli/src/commands/handlers/mcp/add.ts
-index 9e8a708..c52fbe3 100644
+index 9e8a7087d3..c52fbe3ccd 100644
 --- a/packages/cli/src/commands/handlers/mcp/add.ts
 +++ b/packages/cli/src/commands/handlers/mcp/add.ts
 @@ -6,6 +6,7 @@ import { applyEdits, modify } from "jsonc-parser"
@@ -91,7 +91,7 @@ index 9e8a708..c52fbe3 100644
    for (const candidate of candidates) {
      if (
 diff --git a/packages/cli/src/commands/handlers/upgrade.ts b/packages/cli/src/commands/handlers/upgrade.ts
-index 80897a1..caff7af 100644
+index 80897a1da7..caff7afe48 100644
 --- a/packages/cli/src/commands/handlers/upgrade.ts
 +++ b/packages/cli/src/commands/handlers/upgrade.ts
 @@ -1,4 +1,4 @@
@@ -176,7 +176,7 @@ index 80897a1..caff7af 100644
 +  return answer === "yes" || answer === "later" ? (answer as "yes" | "later") : ("no" as const)
 +})
 diff --git a/packages/cli/src/services/retained-image.ts b/packages/cli/src/services/retained-image.ts
-index ef1521a..6914b66 100644
+index ef1521ac3a..6914b663c6 100644
 --- a/packages/cli/src/services/retained-image.ts
 +++ b/packages/cli/src/services/retained-image.ts
 @@ -3,6 +3,7 @@ export * as RetainedImage from "./retained-image"
@@ -198,10 +198,10 @@ index ef1521a..6914b66 100644
  }
  
 diff --git a/packages/cli/src/services/updater.ts b/packages/cli/src/services/updater.ts
-index bb31b34..df1153d 100644
+index 4cf7ee9747..2e5d576f46 100644
 --- a/packages/cli/src/services/updater.ts
 +++ b/packages/cli/src/services/updater.ts
-@@ -190,9 +190,9 @@ const make = Effect.gen(function* () {
+@@ -230,9 +230,9 @@ const make = Effect.gen(function* () {
  
    const curlPath = path.resolve(
      global.home,
@@ -214,7 +214,7 @@ index bb31b34..df1153d 100644
    const curlBinary = yield* fs.realPath(curlPath).pipe(Effect.orElseSucceed(() => curlPath))
  
 diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
-index 24bcd84..f8a8c42 100644
+index 24bcd84d80..f8a8c426ff 100644
 --- a/packages/core/src/config/discovery.ts
 +++ b/packages/core/src/config/discovery.ts
 @@ -12,6 +12,9 @@ import type { Options } from "../config.js"
@@ -249,7 +249,7 @@ index 24bcd84..f8a8c42 100644
          entry.missing
            ? Effect.succeed({ path: entry.item, present: false })
 diff --git a/packages/core/src/plugin/plan.ts b/packages/core/src/plugin/plan.ts
-index 63939de..df1c6d7 100644
+index 63939deffa..df1c6d7e35 100644
 --- a/packages/core/src/plugin/plan.ts
 +++ b/packages/core/src/plugin/plan.ts
 @@ -6,8 +6,10 @@ import { Agent } from "@opencode/schema/agent"

@@ -1,7 +1,7 @@
-From e747c3e3c437963a0a36600a535a3ebb5bb5cd3a Mon Sep 17 00:00:00 2001
+From a991250b037509bfe5acbda54e2706795c526bac Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:40:59 +0700
-Subject: [PATCH 2/5] brand: single brand layer, env compat shim, upstream-free
+Subject: [PATCH 2/6] brand: single brand layer, env compat shim, upstream-free
  distribution
 
 - packages/util/src/brand.ts is the only place product identity lives; config dir,
@@ -20,16 +20,16 @@ Subject: [PATCH 2/5] brand: single brand layer, env compat shim, upstream-free
  packages/cli/src/commands/handlers/default.ts |   5 +-
  packages/cli/src/commands/handlers/pair.ts    |   8 +
  packages/cli/src/commands/handlers/stats.ts   |   7 +-
- packages/cli/src/commands/handlers/upgrade.ts | 171 +++++++++++-------
+ packages/cli/src/commands/handlers/upgrade.ts | 172 +++++++++++-------
  packages/cli/src/services/updater.ts          |  26 ++-
  packages/core/src/config/discovery.ts         |   5 +-
  packages/util/src/brand.ts                    |  48 +++++
  packages/util/src/global.ts                   |   7 +-
- 9 files changed, 200 insertions(+), 86 deletions(-)
+ 9 files changed, 200 insertions(+), 87 deletions(-)
  create mode 100644 packages/util/src/brand.ts
 
 diff --git a/packages/cli/script/build.ts b/packages/cli/script/build.ts
-index f5f18c5..f13f57c 100755
+index abc91330cb..c7060bf393 100755
 --- a/packages/cli/script/build.ts
 +++ b/packages/cli/script/build.ts
 @@ -15,6 +15,7 @@ import { verifyArtifact, verifySimulationGraph } from "./verify-artifact"
@@ -40,7 +40,7 @@ index f5f18c5..f13f57c 100755
  
  const dir = path.resolve(import.meta.dirname, "..")
  const binary = "opencode"
-@@ -193,10 +194,10 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
+@@ -206,10 +207,10 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
        windows: {},
      },
      define: {
@@ -56,7 +56,7 @@ index f5f18c5..f13f57c 100755
        OPENCODE_LIBC: item.os === "linux" ? `'${item.abi ?? "glibc"}'` : "undefined",
        // FFF_LIBC selects the fff native lib variant: "musl" or "gnu".
 diff --git a/packages/cli/src/commands/handlers/default.ts b/packages/cli/src/commands/handlers/default.ts
-index c23e2be..d7c36fe 100644
+index c23e2be273..d7c36feaa7 100644
 --- a/packages/cli/src/commands/handlers/default.ts
 +++ b/packages/cli/src/commands/handlers/default.ts
 @@ -66,7 +66,10 @@ export default Runtime.handler(Commands, (input) =>
@@ -72,7 +72,7 @@ index c23e2be..d7c36fe 100644
          installing = version
          installListeners.forEach((notify) => notify(version))
 diff --git a/packages/cli/src/commands/handlers/pair.ts b/packages/cli/src/commands/handlers/pair.ts
-index d1bee74..f4ca2a7 100644
+index d1bee74100..f4ca2a79f4 100644
 --- a/packages/cli/src/commands/handlers/pair.ts
 +++ b/packages/cli/src/commands/handlers/pair.ts
 @@ -17,6 +17,14 @@ export default Runtime.handler(
@@ -91,7 +91,7 @@ index d1bee74..f4ca2a7 100644
        return yield* Effect.fail(new Error("--remote cannot be combined with --url"))
      if (input.remote && config.remote === undefined) {
 diff --git a/packages/cli/src/commands/handlers/stats.ts b/packages/cli/src/commands/handlers/stats.ts
-index b6507ab..a6b10b8 100644
+index b6507ab494..a6b10b8ed1 100644
 --- a/packages/cli/src/commands/handlers/stats.ts
 +++ b/packages/cli/src/commands/handlers/stats.ts
 @@ -8,6 +8,7 @@ import { Commands } from "../commands"
@@ -130,10 +130,10 @@ index b6507ab..a6b10b8 100644
  
    if (options.cost) lines.push(...(lines.length > 0 ? [""] : []), ...renderCost(stats))
 diff --git a/packages/cli/src/commands/handlers/upgrade.ts b/packages/cli/src/commands/handlers/upgrade.ts
-index af7c221..80897a1 100644
+index b29b59302d..80897a1da7 100644
 --- a/packages/cli/src/commands/handlers/upgrade.ts
 +++ b/packages/cli/src/commands/handlers/upgrade.ts
-@@ -1,81 +1,114 @@
+@@ -1,82 +1,114 @@
 -import { intro, log, outro, spinner } from "@clack/prompts"
 +import { log } from "@clack/prompts"
  import { Effect, Option } from "effect"
@@ -157,7 +157,8 @@ index af7c221..80897a1 100644
 -      const method = Option.getOrUndefined(input.method) ?? (yield* updater.method())
 -      if (!method)
 -        return yield* Effect.fail(
--          new Error("Could not detect the installation method. Pass --method to choose how to upgrade OpenCode."),
+-          (yield* updater.managed(Option.getOrUndefined(input.target))) ??
+-            new Error("Could not detect the installation method. Pass --method to choose how to upgrade OpenCode."),
 -        )
 +/**
 + * Engine upgrade for Harmonika AI.
@@ -318,7 +319,7 @@ index af7c221..80897a1 100644
 +  }),
 +)
 diff --git a/packages/cli/src/services/updater.ts b/packages/cli/src/services/updater.ts
-index d08e929..bb31b34 100644
+index 0c38bab220..4cf7ee9747 100644
 --- a/packages/cli/src/services/updater.ts
 +++ b/packages/cli/src/services/updater.ts
 @@ -10,6 +10,7 @@ import { stripVTControlCharacters } from "node:util"
@@ -329,7 +330,7 @@ index d08e929..bb31b34 100644
  
  export const methods = ["curl", "npm", "pnpm", "bun", "yarn", "vp", "brew", "winget"] as const
  
-@@ -46,7 +47,7 @@ const decodeVpPackages = Schema.decodeUnknownOption(
+@@ -49,7 +50,7 @@ const decodeManifestVersion = Schema.decodeUnknownOption(
  )
  
  const installNames: Record<Method, string> = {
@@ -338,7 +339,7 @@ index d08e929..bb31b34 100644
    npm: "npm",
    pnpm: "pnpm",
    bun: "Bun",
-@@ -273,6 +274,15 @@ const make = Effect.gen(function* () {
+@@ -313,6 +314,15 @@ const make = Effect.gen(function* () {
    }
  
    const release = Effect.fnUntraced(function* (method?: Method) {
@@ -354,7 +355,7 @@ index d08e929..bb31b34 100644
      const distribution = method === "brew" ? "homebrew" : "npm"
      // Homebrew Core builds its formula on its own schedule, so the tap release does not describe it.
      const core = method === "brew" && installedFormula === "opencode"
-@@ -281,7 +291,7 @@ const make = Effect.gen(function* () {
+@@ -321,7 +331,7 @@ const make = Effect.gen(function* () {
          fetch(
            core
              ? "https://formulae.brew.sh/api/formula/opencode.json"
@@ -363,7 +364,7 @@ index d08e929..bb31b34 100644
            {
              signal: AbortSignal.any([signal, AbortSignal.timeout(10_000)]),
            },
-@@ -423,6 +433,14 @@ const make = Effect.gen(function* () {
+@@ -481,6 +491,14 @@ const make = Effect.gen(function* () {
    }
  
    const upgrade = Effect.fnUntraced(function* (method: Method, input: string) {
@@ -378,7 +379,7 @@ index d08e929..bb31b34 100644
      if (!parseReleaseVersion(input)) return yield* Effect.fail(new Error(`Invalid version: ${input}`))
      const version = input.trim().replace(/^v/, "")
      const packageName =
-@@ -480,8 +498,8 @@ const make = Effect.gen(function* () {
+@@ -539,8 +557,8 @@ const make = Effect.gen(function* () {
            const installer = path.join(directory, "install")
            yield* runUpgrade({
              method,
@@ -390,7 +391,7 @@ index d08e929..bb31b34 100644
              retry: "Check your network, then run opencode upgrade again.",
            })
 diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
-index 7476344..24bcd84 100644
+index 7476344452..24bcd84d80 100644
 --- a/packages/core/src/config/discovery.ts
 +++ b/packages/core/src/config/discovery.ts
 @@ -7,9 +7,10 @@ import { FSUtil } from "@opencode/util/fs-util"
@@ -416,7 +417,7 @@ index 7476344..24bcd84 100644
  
 diff --git a/packages/util/src/brand.ts b/packages/util/src/brand.ts
 new file mode 100644
-index 0000000..a13371d
+index 0000000000..a13371d8a9
 --- /dev/null
 +++ b/packages/util/src/brand.ts
 @@ -0,0 +1,48 @@
@@ -470,7 +471,7 @@ index 0000000..a13371d
 +export const EngineInstallerUrl = `${Brand.assetsBase}/engine/install.sh`
 \ No newline at end of file
 diff --git a/packages/util/src/global.ts b/packages/util/src/global.ts
-index f6c95ec..06c02d7 100644
+index f6c95ec8e1..06c02d7182 100644
 --- a/packages/util/src/global.ts
 +++ b/packages/util/src/global.ts
 @@ -8,13 +8,14 @@ import { Context, Effect, Layer } from "effect"
