@@ -23,6 +23,7 @@ import time
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, build_opener
 import zipfile
+from native_receipt_smoke import run_native_receipt_smoke
 
 SOURCE = Path(__file__).resolve().parents[1]
 ASSETS = 'https://chat.harmonika.id/assets/harmonika-terminal'
@@ -304,6 +305,9 @@ def smoke(workspace, report, expected_platform=None):
     except (ValueError,UnicodeError):raise SmokeFailure('native_plugins_invalid_response') from None
     require(isinstance(agents,list) and any(x.get('id')=='build' for x in agents),'native_plugins_not_loaded')
     report['native_plugins_load']=True
+    native_receipts=run_native_receipt_smoke(binary,terminal/'current/tools/plugins/context-capacity',workspace,env)
+    report['native_tool_receipts']=native_receipts
+    require(native_receipts.get('passed'),'native_receipt_metadata_missing')
     if env.get('HARMONIKA_INSTALL_FEATURES')!='0':
         deps=features.get('dependencies',{})
         report['feature_setup']=deps

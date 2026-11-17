@@ -8,6 +8,7 @@ on:
       - 'skills/**'
       - 'backend/**'
       - 'tests/installer_platform_smoke.py'
+      - 'tests/native_receipt_smoke.py'
       - 'tests/test_bootstrap.py'
       - 'tests/test_releases.py'
       - 'tests/test_platform_release_integrity.py'
@@ -21,6 +22,10 @@ on:
       - 'tests/test_feature_setup.py'
       - 'tests/test_portable_owner_mcp.py'
       - 'tests/*parity*.test.cjs'
+      - 'tests/native-*.test.cjs'
+      - 'tests/*receipts*.test.cjs'
+      - 'tests/decision-diagnostics.test.cjs'
+      - 'tests/native-test-receipts.test.cjs'
       - 'tests/agent-v32*.test.cjs'
       - '.github/workflows/installer-platforms.yml'
   pull_request:
@@ -30,6 +35,7 @@ on:
       - 'skills/**'
       - 'backend/**'
       - 'tests/installer_platform_smoke.py'
+      - 'tests/native_receipt_smoke.py'
       - 'tests/test_bootstrap.py'
       - 'tests/test_releases.py'
       - 'tests/test_platform_release_integrity.py'
@@ -43,6 +49,10 @@ on:
       - 'tests/test_feature_setup.py'
       - 'tests/test_portable_owner_mcp.py'
       - 'tests/*parity*.test.cjs'
+      - 'tests/native-*.test.cjs'
+      - 'tests/*receipts*.test.cjs'
+      - 'tests/decision-diagnostics.test.cjs'
+      - 'tests/native-test-receipts.test.cjs'
       - 'tests/agent-v32*.test.cjs'
       - '.github/workflows/installer-platforms.yml'
   workflow_dispatch:
@@ -123,7 +133,11 @@ jobs:
           python -m unittest discover -s tests -p test_worker_stdio.py
           python -m unittest discover -s tests -p test_launcher_stdio.py
           python -m unittest discover -s tests -p test_windows_path.py
-          node --test tests/agent-v32.test.cjs tests/agent-v32-portability.test.cjs tests/portable-plugin-parity.test.cjs tests/native-video-companion.test.cjs tests/native-system-update.test.cjs
+          node --test tests/agent-v32.test.cjs tests/agent-v32-portability.test.cjs tests/portable-plugin-parity.test.cjs tests/native-video-companion.test.cjs tests/native-system-update.test.cjs tests/native-tool-receipts.test.cjs
+      - name: Backend receipt validation regressions
+        if: runner.os != 'Windows'
+        shell: bash
+        run: node --test tests/agent-native-receipts.test.cjs tests/native-test-receipts.test.cjs tests/decision-diagnostics.test.cjs tests/task-continuity.test.cjs tests/verification-scope.test.cjs
       - name: Build current source and install without npm
         shell: bash
         run: python tests/installer_platform_smoke.py --work-root "$RUNNER_TEMP" --expected-platform "${{ matrix.platform }}" --output "installer-smoke-${{ matrix.platform }}-node${{ matrix.node }}.json"
