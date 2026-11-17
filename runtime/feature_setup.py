@@ -135,7 +135,8 @@ def _resource(directory, name):
 
 def _locks(directory):
     docs = _resource(directory, 'documents-requirements.lock')
-    ssh = _resource(directory, 'ssh-requirements.lock')
+    intel_mac=platform.system()=='Darwin' and platform.machine().lower() in ('x86_64','amd64')
+    ssh = _resource(directory, 'ssh-requirements-darwin-x64.lock' if intel_mac else 'ssh-requirements.lock')
     versions = {}
     for file in (docs, ssh):
         if file.stat().st_size > 65536: raise SetupError('invalid_feature_lock')

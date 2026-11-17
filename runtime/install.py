@@ -56,7 +56,8 @@ def ensure_dependencies(root=ROOT):
             raise ValueError('legacy_package_requires_npm: jalankan ulang installer terbaru yang membawa dependensi MCP')
 
 def ensure_ssh_dependencies(directory,root=ROOT):
-    lock=directory/'tools/ssh-requirements.lock'
+    name='ssh-requirements-darwin-x64.lock' if detect_platform()=='darwin-x64' and (directory/'tools/ssh-requirements-darwin-x64.lock').is_file() else 'ssh-requirements.lock'
+    lock=directory/'tools'/name
     if not lock.is_file():return False
     runtime=root/'ssh-runtime'
     python=runtime/('Scripts/python.exe' if os.name=='nt' else 'bin/python')

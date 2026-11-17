@@ -70,7 +70,7 @@ def build(release):
         shutil.copytree(SOURCE/'runtime'/name,tools/'plugins'/name,
                         ignore=shutil.ignore_patterns('__pycache__','*.pyc','projection-state.json'))
     shutil.copytree(SOURCE/'runtime/video-control',tools/'video-control',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
-    for name in ('agent_features.py','feature_setup.py','AGENT-INSTRUCTIONS.md','browser-package.json','browser-package-lock.json','documents-requirements.lock'):
+    for name in ('agent_features.py','feature_setup.py','AGENT-INSTRUCTIONS.md','browser-package.json','browser-package-lock.json','documents-requirements.lock','ssh-requirements-darwin-x64.lock'):
         shutil.copy2(SOURCE/'runtime'/name,tools/name)
     shutil.copy2(SOURCE/'runtime/license.py',agent/'license.py')
     skill_names=sorted(p.parent.name for p in (SOURCE/'skills').glob('*/SKILL.md'))

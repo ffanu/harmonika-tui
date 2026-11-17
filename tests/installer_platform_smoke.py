@@ -306,6 +306,7 @@ def smoke(workspace, report, expected_platform=None):
     report['native_plugins_load']=True
     if env.get('HARMONIKA_INSTALL_FEATURES')!='0':
         deps=features.get('dependencies',{})
+        report['feature_setup']=deps
         require(deps.get('features',{}).get('documents') and deps.get('features',{}).get('ssh'),'python_feature_runtime_not_ready')
         require(deps.get('features',{}).get('browser'),'browser_feature_runtime_not_ready')
     report.update(agent_profile_registered=True,skill_count=features['skill_count'],native_control_registered=True,

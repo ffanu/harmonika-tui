@@ -28,6 +28,15 @@ def tar_fixture(file, entries):
 
 
 class FeatureSetup(unittest.TestCase):
+    def test_intel_mac_uses_compatible_pinned_crypto_wheel(self):
+        with patch.object(m.platform,'system',return_value='Darwin'),patch.object(m.platform,'machine',return_value='x86_64'):
+            _,lock,versions=m._locks(SOURCE/'runtime')
+            self.assertEqual(lock.name,'ssh-requirements-darwin-x64.lock')
+            self.assertEqual(versions['cryptography'],'48.0.1')
+        with patch.object(m.platform,'system',return_value='Windows'),patch.object(m.platform,'machine',return_value='AMD64'):
+            _,_,versions=m._locks(SOURCE/'runtime')
+            self.assertEqual(versions['cryptography'],'50.0.2')
+
     def test_signed_package_resources_are_preferred(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp);(root/'tools').mkdir();lock=root/'tools/documents-requirements.lock';lock.write_text('synthetic==1.0\n')
