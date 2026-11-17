@@ -2,6 +2,23 @@
 
 Status terbaru dicatat di awal; entri berikut menyimpan hasil audit historis.
 
+## Perintah Windows setelah PowerShell dibuka ulang — 18 November 2026
+
+- Runtime signed `2026.11.18.2`; installer GitHub dan aset publik diverifikasi
+  cocok dengan source. Native binary dan brand tetap `1.0.2`.
+- Lokasi launcher mengikuti profil Python. PATH pengguna mempertahankan nilai
+  dan jenis ekspansi registry; shim terkelola pada folder pengguna yang sudah
+  ada di PATH membantu terminal yang mewarisi lingkungan lama.
+- Lima tes PowerShell/CMD baru dan 15 tes helper PATH lulus di Windows. Lima tes
+  lisensi tetap lulus. Instalasi fresh beserta 36 skill, MCP dan dependensi fitur
+  juga lulus. Tes tidak menulis HKCU Environment atau System32 pengguna.
+- Installer memeriksa file launcher dan `--version`, lalu menampilkan pesan
+  instalasi selesai sebelum membuka TUI. Verifikasi lisensi tidak lagi disebut
+  sebagai pembukaan TUI sebelum runtime siap.
+- Registry PATH sistem, profil PowerShell, sesi pengguna dan lisensi tidak
+  dipindahkan atau dihapus. PC pengguna belum diverifikasi langsung.
+- [Bukti, cakupan dan batas](WINDOWS-COMMAND-PATH-AUDIT-20261118.json).
+
 ## Instalasi dan paste lisensi Windows — 18 November 2026
 
 - Runtime signed `2026.11.18.1`; installer GitHub dan aset publik sudah cocok

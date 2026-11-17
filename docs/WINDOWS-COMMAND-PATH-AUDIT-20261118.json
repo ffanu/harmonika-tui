@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "release": "2026.11.18.2",
+  "source_commit": "b2ee66096b1a7aa18da0cab0c537b13da6900250",
+  "problem": "A reopened PowerShell can inherit the Windows Terminal parent's old PATH and fail to locate the installed command.",
+  "changes": [
+    "Derive launcher location from the installing Python profile.",
+    "Preserve raw existing user PATH entries and REG_SZ/REG_EXPAND_SZ type.",
+    "Install a managed shim only into recognized per-user directories already on the original PATH.",
+    "Preserve unknown commands and reject reparse/system-directory alias candidates.",
+    "Use direct CMD tail dispatch with literal percent escaping and delayed expansion disabled.",
+    "Verify the launcher exists, is discoverable and runs --version before displaying installation success.",
+    "Display installation success before opening TUI, and distinguish license verification from installation completion."
+  ],
+  "windows_path_console": {
+    "run_id": 44156186773,
+    "job_id": 134297440251,
+    "url": "https://github.com/ffanu/harmonika-tui/actions/runs/44156186773",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "cases": [
+      "PowerShell and CMD newly launched with stale original PATH resolve the managed alias.",
+      "Canonical command lookup with a normal Unicode/spaces profile.",
+      "Managed shim retains arguments without CALL re-expansion.",
+      "Unknown user alias is preserved.",
+      "System-directory candidate is refused."
+    ],
+    "registry_integration_store": "in-memory fixture; actual HKCU Environment untouched by tests",
+    "real_license_or_provider_called": false
+  },
+  "path_unit_tests": {
+    "passed": 15,
+    "failed": 0,
+    "scope": "raw PATH preservation/type, idempotence, canonical names, aliases, conflicts and failure reporting"
+  },
+  "license_console_regressions": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "visible key paste, PowerShell onboarding, cancellation, EOF, Python fallback"
+  },
+  "windows_fresh_install": {
+    "passed": true,
+    "platform": "windows-x64",
+    "duration_seconds": 112.45,
+    "native_binary_runs": true,
+    "native_binary_sha256": "35f63c9fd49eb7b5eae74ecb4922363a30155c56288e242b7f4cf9fcaaf765ff",
+    "fresh_install_without_npm": true,
+    "installed_wrapper_works": true,
+    "native_plugins_load": true,
+    "agent_profile_registered": true,
+    "skill_count": 36,
+    "feature_dependencies": {
+      "browser": true,
+      "documents": true,
+      "ssh": true
+    },
+    "tampered_content_refused": true,
+    "invalid_signature_refused": true,
+    "failed_updates_preserve_config_and_pointer": true,
+    "license_or_provider_api_called": false,
+    "synthetic_fixture_only": true
+  },
+  "ci_jobs": [
+    {
+      "name": "linux-x64 / Node 18",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "darwin-x64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "linux-arm64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "linux-x64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "darwin-arm64 / Node 22",
+      "status": "queued",
+      "conclusion": null
+    },
+    {
+      "name": "windows-x64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "initial_test_scope_correction": {
+    "run_id": 44155479097,
+    "passed": 3,
+    "failed": 1,
+    "reason": "The additional direct canonical PowerShell invocation used a literal environment-variable expression in the directory name. That is a separate legacy CMD dispatch limitation; the stale PATH alias assertions had already succeeded.",
+    "correction": "Keep the difficult percent-containing alias/argument tests and use a separate ordinary Unicode/spaces canonical-path fixture.",
+    "weakened_runtime_or_security_checks": false
+  },
+  "scope": {
+    "physical_user_windows_machine_verified": false,
+    "machine_path_changed": false,
+    "powershell_profile_changed": false,
+    "defender_or_execution_policy_changed": false,
+    "backend_services_restarted": false,
+    "user_sessions_stopped": false,
+    "license_file_moved_or_removed": false,
+    "native_binary_or_brand_changed": false
+  },
+  "limitations": [
+    "An existing unrelated command is preserved; a shadowing user command may still require manual environment review.",
+    "Literal percent-variable expressions in a canonical CMD filename are not universally supported by PowerShell 5 direct invocation; managed-shim dispatch is tested separately.",
+    "Custom isolated installs do not persist PATH unless explicitly opted in.",
+    "A license-success message alone is not installation completion; wait for the installation-success message."
+  ],
+  "verified_at": "2026-11-17T19:17:44.259568+00:00",
+  "signed_package": {
+    "release": "2026.11.18.2",
+    "tested_source_commit": "b2ee66096b1a7aa18da0cab0c537b13da6900250",
+    "zip_sha256": "000b36c002a61e0a2fdf5ebeb60cc429f9468f918f4323244fc3dde8be58909d",
+    "zip_bytes": 1598863,
+    "signed_files": 223,
+    "signature_verified": true,
+    "all_file_hashes_verified": true,
+    "windows_path_helper_included": true,
+    "current_license_entrypoint_included": true,
+    "native_binary_preserved": "1.0.2"
+  },
+  "public_verification": {
+    "github_installer": {
+      "sha256": "2e71a5f41b1559af0c841cd72dac4d12453c27ce0a704a1f40f8f3feb2079db2",
+      "matches_reviewed_source": true
+    },
+    "public_installer": {
+      "sha256": "2e71a5f41b1559af0c841cd72dac4d12453c27ce0a704a1f40f8f3feb2079db2",
+      "matches_reviewed_source": true
+    },
+    "public_catalog": {
+      "signature_verified": true,
+      "release": "2026.11.18.2"
+    },
+    "public_package": {
+      "sha256": "000b36c002a61e0a2fdf5ebeb60cc429f9468f918f4323244fc3dde8be58909d",
+      "matches_reviewed_source": true
+    }
+  }
+}
