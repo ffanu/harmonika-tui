@@ -100,6 +100,10 @@ Dependensi dokumen dan SSH dipasang otomatis dalam Python venv privat pada platf
 Kegagalan dependensi fitur terlihat di `harmonika features`; pemasangan ulang melanjutkan setup.
 `HARMONIKA_INSTALL_FEATURES=0` secara eksplisit memilih core saja. Pada paket legacy,
 `HARMONIKA_INSTALL_SSH=1` mewajibkan setup SSH terpisah dan `HARMONIKA_INSTALL_SSH=0` melewatinya.
+Pada Linux dengan `apt-get`, installer yang sudah berjalan sebagai root dapat memasang
+library sistem Chromium jika probe nyata membuktikannya belum tersedia. Tidak memakai
+`sudo`, upgrade paket yang sudah ada, restart layanan, atau perubahan firewall.
+Gunakan `HARMONIKA_INSTALL_SYSTEM_DEPS=0` untuk melewati langkah sistem tersebut.
 Instalasi Windows memakai folder pengguna dan tidak mengubah Defender atau System32.
 
 ---
