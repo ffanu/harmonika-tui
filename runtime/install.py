@@ -48,7 +48,7 @@ def ensure_dependencies(root=ROOT):
         if Path(npm).exists() or shutil.which('npm'):
             tools_dir.mkdir(parents=True,exist_ok=True)
             pkg={'name':'harmonika-tools','private':True,'dependencies':{'@modelcontextprotocol/sdk':'1.32.1','ajv':'^8.17.1'}}
-            (tools_dir/'package.json').write_text(json.dumps(pkg,indent=2))
+            (tools_dir/'package.json').write_text(json.dumps(pkg,indent=2), encoding='utf-8')
             subprocess.run([npm,'install','--no-audit','--no-fund'],cwd=str(tools_dir),check=True,timeout=180,shell=(os.name=='nt'))
         else:
             raise ValueError('legacy_package_requires_npm: jalankan ulang installer terbaru yang membawa dependensi MCP')
@@ -84,10 +84,10 @@ def ensure_default_config(root=ROOT):
         'ansi_bright_black':'#6e7681','ansi_bright_red':'#ffa198','ansi_bright_green':'#7ee787','ansi_bright_yellow':'#ffdf5d',
         'ansi_bright_blue':'#79c0ff','ansi_bright_magenta':'#e2c5ff','ansi_bright_cyan':'#56d4dd','ansi_bright_white':'#ffffff'
     }
-    (themes_dir/'harmonika-dark.json').write_text(json.dumps(orange_dark_theme,indent=2)+'\n')
+    (themes_dir/'harmonika-dark.json').write_text(json.dumps(orange_dark_theme,indent=2)+'\n', encoding='utf-8')
     share_dir=m.data_directory()
     share_dir.mkdir(parents=True,exist_ok=True)
-    (share_dir/'crush.json').write_text('{"options":{"tui":{"transparent":false,"active_theme":"harmonika-dark"}}}\n')
+    (share_dir/'crush.json').write_text('{"options":{"tui":{"transparent":false,"active_theme":"harmonika-dark"}}}\n', encoding='utf-8')
     cfg_file=cfg_dir/'harmonika.json'
     key_file=cfg_dir/'harmonika-api-key'
     key_cmd='$(cat '+shlex.quote(str(key_file))+')' if os.name!='nt' else '$HARMONIKA_API_KEY'
@@ -109,10 +109,10 @@ def ensure_default_config(root=ROOT):
             'hooks':{'PreToolUse':[{'name':'Harmonika project file guard','matcher':'^(view|ls|glob|grep|write|edit|multiedit|bash|lsp_diagnostics|lsp_references|lsp_symbols|lsp_definition|lsp_implementation|lsp_call_hierarchy)$','command':f'{m.NODE} {root}/current/tools/project-file-guard.cjs','timeout':5}]},
             'mcp':{'harmonika':{'type':'stdio','command':m.NODE,'args':[str(root/'current/tools/mcp-server.cjs')],'timeout':240}}
         }
-        cfg_file.write_text(json.dumps(default_cfg,indent=2)+'\n')
+        cfg_file.write_text(json.dumps(default_cfg,indent=2)+'\n', encoding='utf-8')
     else:
         try:
-            existing_cfg=json.loads(cfg_file.read_text())
+            existing_cfg=json.loads(cfg_file.read_text(encoding='utf-8'))
             prov=existing_cfg.setdefault('providers',{}).setdefault('harmonika',{})
             prov['base_url']='https://chat.harmonika.id/v1'
             for model in prov.get('models',[]):
@@ -122,10 +122,10 @@ def ensure_default_config(root=ROOT):
             eh['X-Harmonika-Device-ID']=dev_id
             eh['X-Harmonika-Device-Name']=dev_nm
             if os.name=='nt' and key_file.is_file():
-                kval=key_file.read_text().strip()
+                kval=key_file.read_text(encoding='utf-8').strip()
                 if kval:prov['api_key']=kval
             existing_cfg.setdefault('options',{}).setdefault('tui',{})['active_theme']='harmonika-dark'
-            cfg_file.write_text(json.dumps(existing_cfg,indent=2)+'\n')
+            cfg_file.write_text(json.dumps(existing_cfg,indent=2)+'\n', encoding='utf-8')
         except Exception:pass
     crush_alias=cfg_dir/'crush.json'
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
@@ -194,7 +194,7 @@ def _prepare(package,stage):
         bname=m.bin_name() if BINARY.name.endswith('.exe') else 'harmonika'
         shutil.copy2(BINARY,stage/bname);os.chmod(stage/bname,0o755)
         if os.name=='nt':
-            (stage/'binary.sha256').write_text(m.digest(stage/bname))
+            (stage/'binary.sha256').write_text(m.digest(stage/bname), encoding='utf-8')
         if (stage/'tools/mcp-server.cjs').is_file() and not (stage/'tools/vendor/sdk/client/index.js').is_file():
             m.verify_files(stage,manifest)
             ensure_dependencies(ROOT)
@@ -202,7 +202,7 @@ def _prepare(package,stage):
 
 def write_windows_wrappers(root=ROOT):
     node_path=m._find_node()
-    (root/'node.path').write_text(node_path)
+    (root/'node.path').write_text(node_path, encoding='utf-8')
     bin_dir=Path(os.environ.get('HARMONIKA_BIN_DIR') or str(Path.home()/'.local/bin'))
     bin_dir.mkdir(parents=True,exist_ok=True)
     cmd_wrapper=(
@@ -242,7 +242,7 @@ def main(package=None):
         if package is not None:
             raise ValueError('already_installed_use_manual_update')
         ensure_default_config(ROOT)
-        atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
+        atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text(encoding='utf-8'))
         if os.name=='nt':write_windows_wrappers(ROOT)
         try:
             chk=m.check_update(ROOT)
@@ -288,7 +288,7 @@ def activate(stage,manifest):
     release=manifest['release']
     configfile=m.config_directory()/'harmonika.json'
     if configfile.exists():configfile=configfile.resolve()
-    config=json.loads(configfile.read_text())
+    config=json.loads(configfile.read_text(encoding='utf-8'))
     config['options']['disable_provider_auto_update']=True
     config['options']['data_directory']='.harmonika'
     incompatible=['built-in-browser','chrome-browser','computer-use','crush-config','crush-hooks','harmonika-config','harmonika-hooks','deep-research','docs','docx','google-workspace','import-memory','jq','learn','morning','pdf','pptx','setup-writing-style','skill-creator','theme-factory','xlsx']
@@ -334,12 +334,12 @@ def activate(stage,manifest):
         if (stage/bname).is_file():
             shutil.copy2(stage/bname,target/bname)
         if os.name=='nt' and (target/bname).is_file():
-            (target/'binary.sha256').write_text(m.digest(target/bname))
+            (target/'binary.sha256').write_text(m.digest(target/bname), encoding='utf-8')
         m.preflight(target,manifest)
     else:stage.rename(target)
     if not (ROOT/'config-before.json').exists():
         shutil.copy2(configfile,ROOT/'config-before.json');os.chmod(ROOT/'config-before.json',0o600)
-    atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text())
+    atomic_text(ROOT/'launcher.py',(SOURCE/'runtime/harmonika.py').read_text(encoding='utf-8'))
     atomic_text(ROOT/'node.path',str(m.NODE))
     m.switch(release,ROOT)
     atomic_text(configfile,encoded)

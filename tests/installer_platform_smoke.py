@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -31,9 +32,33 @@ SIGN_JS = "const f=require('fs'),c=require('crypto'),p=f.readFileSync(0);process
 
 
 class SmokeFailure(Exception):
-    def __init__(self, code, exit_code=None):
+    def __init__(self, code, exit_code=None, diagnostics=None):
         super().__init__(code)
         self.code, self.exit_code = code, exit_code
+        self.diagnostics = diagnostics
+
+
+def safe_diagnostics(stdout, stderr):
+    """Extract mechanics, never arbitrary output, paths, prompts, or key material."""
+    stdout, stderr = stdout or b'', stderr or b''
+    if isinstance(stdout, str):
+        stdout = stdout.encode('utf-8', errors='replace')
+    if isinstance(stderr, str):
+        stderr = stderr.encode('utf-8', errors='replace')
+    text = stderr.decode('utf-8', errors='replace')[-65536:]
+    exception_names = r'(?:UnicodeDecodeError|UnicodeEncodeError|FileNotFoundError|PermissionError|ValueError|TypeError|OSError|RuntimeError|ModuleNotFoundError|ImportError|CalledProcessError|TimeoutExpired)'
+    frames = re.findall(r'File "([^"\r\n]+)", line (\d+)', text)
+    return {
+        'stdout_bytes': len(stdout), 'stderr_bytes': len(stderr),
+        'stderr_sha256': hashlib.sha256(stderr).hexdigest(),
+        'python_frames': [{'file': re.split(r'[/\\]', name)[-1] if name.endswith(('.py', '.js', '.cjs')) else '<non-source>',
+                           'line': int(line)} for name, line in frames[-12:]],
+        'exception_types': sorted(set(re.findall(r'\b(' + exception_names + r')\b', text))),
+        'error_codes': sorted(set(re.findall(r'\b(?:E[A-Z][A-Z0-9_]{1,40}|ERR_[A-Z0-9_]{1,40})\b', text))),
+        'windows_error_numbers': sorted(set(re.findall(r'\[WinError (\d+)\]', text))),
+        'codec_names': sorted(set(re.findall(r"['\"](cp\d+|charmap|utf-?8|ascii)['\"] codec", text))),
+        'runtime_error_signatures': sorted(set(re.findall(r'^ValueError: ([a-z][a-z_]{2,100})$', text, re.MULTILINE))),
+    }
 
 
 def require(ok, code):
@@ -92,12 +117,12 @@ def run(command, *, env, cwd=None, timeout=120, input_bytes=None, check=True, st
         options['input'] = input_bytes
     try:
         result = subprocess.run(command, **options)
-    except subprocess.TimeoutExpired:
-        raise SmokeFailure(step + '_timeout') from None
-    except OSError:
-        raise SmokeFailure(step + '_unavailable') from None
+    except subprocess.TimeoutExpired as error:
+        raise SmokeFailure(step + '_timeout', diagnostics=safe_diagnostics(error.stdout, error.stderr)) from None
+    except OSError as error:
+        raise SmokeFailure(step + '_unavailable', diagnostics={'os_error': error.errno, 'windows_error': getattr(error, 'winerror', None)}) from None
     if check and result.returncode:
-        raise SmokeFailure(step + '_failed', result.returncode)
+        raise SmokeFailure(step + '_failed', result.returncode, safe_diagnostics(result.stdout, result.stderr))
     return result
 
 
@@ -286,6 +311,8 @@ def main():
             smoke(Path(temp), report, args.expected_platform)
     except SmokeFailure as error:
         report.update(passed=False, error=error.code, exit_code=error.exit_code)
+        if error.diagnostics is not None:
+            report['diagnostics'] = error.diagnostics
     except Exception as error:
         report.update(passed=False, error='smoke_exception', error_type=type(error).__name__)
     report['duration_seconds'] = round(time.monotonic()-began, 2)

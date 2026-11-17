@@ -58,8 +58,7 @@ def build(release):
     copy_config_transaction_tools(tools)
     copy_browser_macro_tools(tools)
     copy_zimbra_tools(tools)
-    guard=(SOURCE/'runtime/tools/project-file-guard.cjs').read_text()
-    (tools/'project-file-guard.cjs').write_text(guard)
+    shutil.copy2(SOURCE/'runtime/tools/project-file-guard.cjs',tools/'project-file-guard.cjs')
     shutil.copy2(SOURCE/'runtime/protocol-check.cjs',tools/'protocol-check.cjs')
     shutil.copy2(SOURCE/'runtime/harmonika.py',tools/'harmonika.py')
     shutil.copy2(SOURCE/'runtime/license.py',tools/'license.py')
@@ -76,7 +75,7 @@ def build(release):
     spec=importlib.util.spec_from_file_location('runtime_dependencies',SOURCE/'runtime/bundle-dependencies.py')
     dependencies=importlib.util.module_from_spec(spec);spec.loader.exec_module(dependencies)
     dependencies.bundle(tools/'vendor')
-    files={str(p.relative_to(destination)):{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+    files={p.relative_to(destination).as_posix():{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
     if len(files)+1>512 or sum((destination/n).stat().st_size for n in files)>20*1024*1024:
         raise ValueError('release_exceeds_installer_limits')
     notes_env=os.environ.get('HARMONIKA_RELEASE_NOTES','')

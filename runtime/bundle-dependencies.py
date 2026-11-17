@@ -63,15 +63,15 @@ fs.writeFileSync(path.join(out,'THIRD-PARTY-NOTICES.txt'),notices.join('\n\n')+'
 """
     subprocess.run([node, '-e', script, str(dependency_root), str(destination.resolve()), json.dumps(ENTRIES)],
                    check=True, timeout=180)
-    (destination/'sdk/package.json').write_text('{"type":"commonjs"}\n')
-    packages={name: json.loads((dependency_root/'node_modules'/name/'package.json').read_text())['version']
+    (destination/'sdk/package.json').write_text('{"type":"commonjs"}\n', encoding='utf-8')
+    packages={name: json.loads((dependency_root/'node_modules'/name/'package.json').read_text(encoding='utf-8'))['version']
               for name in ('@modelcontextprotocol/sdk', 'ajv')}
     lock=SOURCE/'dependencies/package-lock.json'
     (destination/'dependencies.json').write_text(json.dumps({
         'packages':packages, 'node_minimum':18,
         'lock_sha256':hashlib.sha256(lock.read_bytes()).hexdigest(),
         'bundled':True, 'build_tools_included':False,
-    }, indent=2)+'\n')
+    }, indent=2)+'\n', encoding='utf-8')
     return packages
 
 if __name__ == '__main__':

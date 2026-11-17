@@ -36,7 +36,7 @@ def _find_node():
     saved = ROOT / 'node.path'
     if saved.is_file():
         try:
-            p = saved.read_text().strip()
+            p = saved.read_text(encoding='utf-8').strip()
             if p and Path(p).is_file():
                 return p
         except Exception:
@@ -66,7 +66,7 @@ def digest(file):
         for chunk in iter(lambda:stream.read(1024*1024),b''):h.update(chunk)
     return h.hexdigest()
 
-def read_json(file):return json.loads(Path(file).read_text())
+def read_json(file):return json.loads(Path(file).read_text(encoding='utf-8'))
 
 def atomic_state(file,text):
     pending=file.with_name(file.name+'.next-'+uuid4().hex)
@@ -91,14 +91,14 @@ def device_id(cfg_dir=None):
     id_file=cdir/'device-id'
     try:
         if id_file.is_file():
-            saved=id_file.read_text().strip()
+            saved=id_file.read_text(encoding='utf-8').strip()
             if re.fullmatch(r'dev_[a-f0-9]{32}',saved):return saved
     except Exception:pass
     raw=f"{platform.node()}|{platform.system()}|{platform.machine()}|{_uuid.getnode()}"
     computed='dev_'+hashlib.sha256(raw.encode('utf-8')).hexdigest()[:32]
     try:
         cdir.mkdir(parents=True,exist_ok=True)
-        id_file.write_text(computed+'\n')
+        id_file.write_text(computed+'\n', encoding='utf-8')
     except Exception:pass
     return computed
 
@@ -129,13 +129,13 @@ def active(root=ROOT):
     selected=None
     ver_file=root/'current.version'
     if os.name=='nt' and ver_file.is_file():
-        rel_name=ver_file.read_text().strip()
+        rel_name=ver_file.read_text(encoding='utf-8').strip()
         if RELEASE_RE.fullmatch(rel_name) and (root/'versions'/rel_name).is_dir():
             selected=(root/'versions'/rel_name).resolve(strict=True)
     if selected is None:
         cur=root/'current'
         if os.name=='nt' and cur.is_file() and not cur.is_symlink():
-            rel_name=cur.read_text().strip()
+            rel_name=cur.read_text(encoding='utf-8').strip()
             if RELEASE_RE.fullmatch(rel_name) and (root/'versions'/rel_name).is_dir():
                 selected=(root/'versions'/rel_name).resolve(strict=True)
         if selected is None:
@@ -148,7 +148,7 @@ def active(root=ROOT):
     expected_sha=expected_binary_sha(manifest)
     plat_sha_file=selected/'binary.sha256'
     if 'binary_hashes' not in manifest and os.name=='nt' and plat_sha_file.is_file():
-        expected_sha=plat_sha_file.read_text().strip()
+        expected_sha=plat_sha_file.read_text(encoding='utf-8').strip()
     if binary.is_symlink() or digest(binary)!=expected_sha:raise ValueError('binary_checksum_mismatch')
     return selected,manifest
 
@@ -259,7 +259,7 @@ def _install_package(package,root=ROOT,*,binary_source=None):
             shutil.copy2(binary_source or current/bname,stage/bname)
             os.chmod(stage/bname,0o755)
             if os.name=='nt':
-                (stage/'binary.sha256').write_text(digest(stage/bname))
+                (stage/'binary.sha256').write_text(digest(stage/bname), encoding='utf-8')
             preflight(stage,manifest)
             stage.rename(target)
             atomic_state(root/'previous',current.name)
@@ -273,7 +273,7 @@ def rollback(root=ROOT):
 
 def _rollback(root=ROOT):
     current,_=active(root)
-    release=(root/'previous').read_text().strip()
+    release=(root/'previous').read_text(encoding='utf-8').strip()
     if not RELEASE_RE.fullmatch(release) or release==current.name:raise ValueError('no_previous_release')
     target=root/'versions'/release
     manifest=verify_envelope((target/'release.json').read_bytes(),root)
@@ -373,7 +373,7 @@ def ensure_themes(cfg_dir=None,data_dir=None):
     themes_dir=cdir/'themes'
     themes_dir.mkdir(parents=True,exist_ok=True)
     for tname,tval in HARMONIKA_THEMES.items():
-        (themes_dir/(tname+'.json')).write_text(json.dumps(tval,indent=2)+'\n')
+        (themes_dir/(tname+'.json')).write_text(json.dumps(tval,indent=2)+'\n', encoding='utf-8')
     ddir.mkdir(parents=True,exist_ok=True)
     return themes_dir
 
@@ -389,7 +389,7 @@ def switch_theme(args,cfg_dir=None,data_dir=None):
     d_cfg_path=ddir/'crush.json'
     cur_theme='harmonika-dark'
     if h_cfg_path.is_file():
-        try:cur_theme=json.loads(h_cfg_path.read_text()).get('options',{}).get('tui',{}).get('active_theme','harmonika-dark')
+        try:cur_theme=json.loads(h_cfg_path.read_text(encoding='utf-8')).get('options',{}).get('tui',{}).get('active_theme','harmonika-dark')
         except Exception:pass
     O='\033[38;2;255;123;0m';B='\033[1m';G='\033[38;2;63;185;80m';C='\033[38;2;0;229;255m';M='\033[38;2;250;179;135m';R='\033[0m'
     if not args:
@@ -412,19 +412,19 @@ def switch_theme(args,cfg_dir=None,data_dir=None):
     for p in (h_cfg_path,c_cfg_path):
         if p.is_file():
             try:
-                obj=json.loads(p.read_text())
+                obj=json.loads(p.read_text(encoding='utf-8'))
                 tui=obj.setdefault('options',{}).setdefault('tui',{})
                 tui['active_theme']=chosen
                 tui['compact_mode']=False
-                p.write_text(json.dumps(obj,indent=2)+'\n')
+                p.write_text(json.dumps(obj,indent=2)+'\n', encoding='utf-8')
             except Exception:pass
     try:
-        d_obj=json.loads(d_cfg_path.read_text()) if d_cfg_path.is_file() else {}
+        d_obj=json.loads(d_cfg_path.read_text(encoding='utf-8')) if d_cfg_path.is_file() else {}
         d_tui=d_obj.setdefault('options',{}).setdefault('tui',{})
         d_tui['active_theme']=chosen
         d_tui['transparent']=False
         d_tui['compact_mode']=False
-        d_cfg_path.write_text(json.dumps(d_obj,indent=2)+'\n')
+        d_cfg_path.write_text(json.dumps(d_obj,indent=2)+'\n', encoding='utf-8')
     except Exception:pass
     print(f"{G}✓ Tema Harmonika TUI berhasil diubah ke:{R} {B}{chosen}{R}")
     return {'ok':True,'active_theme':chosen}
@@ -442,7 +442,7 @@ def ensure_harmonika_downloads(cfg_dir=None):
             real_str=str(folder.resolve())
             rec_file=access_dir/(hashlib.sha256(real_str.encode('utf-8')).hexdigest()+'.json')
             if not rec_file.exists():
-                rec_file.write_text(json.dumps({'root':real_str}))
+                rec_file.write_text(json.dumps({'root':real_str}), encoding='utf-8')
         guide_file=cdir/'HARMONIKA.md'
         dl_abs=str(dl_root.resolve())
         gambar_abs=str((dl_root/'gambar').resolve())
@@ -547,7 +547,7 @@ def prompt_startup_update(root=ROOT,force_output=False):
                     install_package(tmp_pkg,root)
                 new_dir,_=active(root)
                 if (new_dir/'tools/harmonika.py').is_file():
-                    atomic_state(root/'launcher.py',(new_dir/'tools/harmonika.py').read_text())
+                    atomic_state(root/'launcher.py',(new_dir/'tools/harmonika.py').read_text(encoding='utf-8'))
                 print(f"{G}✓ Berhasil diperbarui ke Harmonika AI v{release}!{R}\n")
                 return {'ok':True,'updated':True,'release':release,'previous':cur_ver}
             finally:
@@ -703,7 +703,7 @@ def show_status(root=ROOT,as_json=False):
             if not lic_mod_path.exists():lic_mod_path=Path(__file__).resolve().parent/'license.py'
             spec=importlib.util.spec_from_file_location('harmonika_lic',lic_mod_path)
             lic_mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(lic_mod)
-            lic_info=lic_mod.check(key_file.read_text().strip())
+            lic_info=lic_mod.check(key_file.read_text(encoding='utf-8').strip())
         except Exception as e:
             lic_info={'valid':False,'status':str(e)}
     folder_stats={}
@@ -886,7 +886,7 @@ def main():
                 verify_files(directory,manifest)
         api_key_val=''
         if key_file.is_file():
-            try:api_key_val=key_file.read_text().strip()
+            try:api_key_val=key_file.read_text(encoding='utf-8').strip()
             except Exception:pass
         dev_id=device_id(cfg_dir)
         dev_nm=device_name()
@@ -899,12 +899,12 @@ def main():
             active_theme='harmonika-dark'
             if data_crush.is_file():
                 try:
-                    d_obj=json.loads(data_crush.read_text())
+                    d_obj=json.loads(data_crush.read_text(encoding='utf-8'))
                     t_cand=d_obj.get('options',{}).get('tui',{}).get('active_theme','')
                     if t_cand in HARMONIKA_THEMES:active_theme=t_cand
                 except Exception:pass
             if h_cfg_path.is_file():
-                cfg_obj=json.loads(h_cfg_path.read_text())
+                cfg_obj=json.loads(h_cfg_path.read_text(encoding='utf-8'))
                 workbench_module=directory/'tools/workbench.py'
                 if workbench_module.is_file():
                     spec=importlib.util.spec_from_file_location('harmonika_workbench_preferences',workbench_module)
@@ -925,10 +925,10 @@ def main():
                 tui_opts['compact_mode']=False
                 tui_opts['scrollbar']='always'
                 rendered_cfg=json.dumps(cfg_obj,indent=2)+'\n'
-                h_cfg_path.write_text(rendered_cfg)
-                c_cfg_path.write_text(rendered_cfg)
+                h_cfg_path.write_text(rendered_cfg, encoding='utf-8')
+                c_cfg_path.write_text(rendered_cfg, encoding='utf-8')
             if not data_crush.is_file():
-                data_crush.write_text(json.dumps({'options':{'tui':{'transparent':False,'compact_mode':False,'active_theme':active_theme}}})+'\n')
+                data_crush.write_text(json.dumps({'options':{'tui':{'transparent':False,'compact_mode':False,'active_theme':active_theme}}})+'\n', encoding='utf-8')
         except Exception:
             pass
         env=dict(os.environ,

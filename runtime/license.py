@@ -31,14 +31,14 @@ def device_id():
     id_file=CONFIG/'device-id'
     try:
         if id_file.is_file():
-            saved=id_file.read_text().strip()
+            saved=id_file.read_text(encoding='utf-8').strip()
             if re.fullmatch(r'dev_[a-f0-9]{32}',saved):return saved
     except Exception:pass
     raw=f"{platform.node()}|{platform.system()}|{platform.machine()}|{uuid.getnode()}"
     computed='dev_'+hashlib.sha256(raw.encode('utf-8')).hexdigest()[:32]
     try:
         CONFIG.mkdir(parents=True,exist_ok=True)
-        id_file.write_text(computed+'\n')
+        id_file.write_text(computed+'\n', encoding='utf-8')
     except Exception:pass
     return computed
 
@@ -177,7 +177,7 @@ def main(args):
     if args==['check']:
         file=CONFIG/'harmonika-api-key'
         if not file.is_file() or file.is_symlink():raise LicenseError('license_key_not_configured')
-        result=check(file.read_text().strip())
+        result=check(file.read_text(encoding='utf-8').strip())
     elif len(args)==2 and args[0]=='activate':
         result=activate(clean_key_input(args[1]),CONFIG)
     elif args==['activate']:
