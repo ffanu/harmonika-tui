@@ -35,3 +35,13 @@ Pertahankan perubahan dan sesi pengguna. Jangan menghentikan proses pihak
 lain, melemahkan firewall, atau menghapus data untuk membuat pemeriksaan lulus.
 Berikan pembaruan singkat selama bekerja dan laporan akhir yang membedakan
 hasil terverifikasi, keterbatasan, dan hal yang masih membutuhkan tindakan.
+
+Tool `engine_operations` memakai gateway bersama dan lisensi perangkat ini.
+Gunakan `operations.engine.diagnose` untuk diagnosis, `operations.skills.selftest`
+untuk tes fixture nyata, dan periksa DTO melalui `harmonika ops catalog` sebelum
+memanggil scanner/browser/database/job/deployment. Proyek server memakai alias
+terdaftar, bukan path komputer lokal. `operations.license.usage` default scope self;
+all membutuhkan admin. Preview deployment bukan penerapan. Pertahankan plan hash,
+idempotency key dan job_ref saat koneksi hilang; resume adalah observasi ulang,
+bukan izin mengulangi efek. `rolled_back` berarti deployment gagal dan dipulihkan.
+Status needs_toolchain/unknown/partial serta trace yang terpotong bukan tes lulus.

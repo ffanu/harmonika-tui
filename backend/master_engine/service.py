@@ -210,7 +210,7 @@ def make_app(secret,skills=None,dispatcher=None,sandbox=None,mobile_enabled=True
    finally:active.discard(actor)
   task=asyncio.create_task(perform())
   task.add_done_callback(lambda t:t.exception() if not t.cancelled() else None)
-  try:result=await asyncio.wait_for(asyncio.shield(task),20 if shared else 40 if id=='workflow.browser' else 15)
+  try:result=await asyncio.wait_for(asyncio.shield(task),45 if shared and id.startswith('operations.') else 20 if shared else 40 if id=='workflow.browser' else 15)
   except asyncio.TimeoutError:
    # The bounded worker keeps its slot until it really exits; timeout is not cancellation.
    task.add_done_callback(lambda t:t.exception() if not t.cancelled() else None)

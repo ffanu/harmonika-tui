@@ -70,7 +70,7 @@ Snapshot maksimum 512 file, 4 MiB per file dan 32 MiB total. Nama privat/hidden,
 credentials, logs, uploads, node_modules dan vendor dikecualikan; symlink,
 reparse point, special file, perubahan saat copy dan traversal ditolak.
 Tidak ada source yang diimport/dieksekusi host. Temuan dan coverage tidak
-mengandung full stdout/stderr. Output child maksimum 4 MiB dan 75 detik.
+mengandung full stdout/stderr. Output child maksimum 4 MiB dan 25 detik.
 Target tidak didukung/hasil parsial tidak diberi klaim `passed: true`.
 Berkas jar/binary/dependency vendor tidak termasuk snapshot; scan bukan SBOM
 seluruh host atau sertifikasi bahwa aplikasi bebas kerentanan.
@@ -99,7 +99,7 @@ interception HTTP/WebSocket, service-worker blocking dan context baru mencegah
 akses situs/sesi luar; popup dan download dibatalkan. Browser berjalan dengan
 sandbox Chromium, tanpa profil login lama. Ini bukan sandbox jaringan OS bagi
 aplikasi/server arbitrer: service/container deployment tetap milik operator.
-Server dibatasi 256 request/64 MiB respons. Deadline worker 70 detik, stdout
+Server dibatasi 256 request/64 MiB respons. Deadline worker 25 detik, stdout
 128 KiB, artifact watcher 32 MiB; screenshot hanya viewport.
 
 DTO hanya langkah/index/status/count dan metadata artifact. Screenshot/trace

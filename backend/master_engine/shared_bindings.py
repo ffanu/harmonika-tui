@@ -11,7 +11,13 @@ class Bindings:
    if not stat.S_ISREG(st.st_mode) or st.st_uid!=os.getuid() or st.st_mode&0o022 or st.st_size>131072:return {}
    data=json.loads(self.path.read_text());return data if type(data) is dict and data.get('schema_version')==1 else {}
   except (OSError,ValueError):return {}
- def supports(self,sid):return self.config().get('seo_enabled') is True and sid in SEO_IDS|CONTROL_IDS
+ def supports(self,sid):
+  cfg=self.config()
+  if cfg.get('operations_enabled') is True:
+   try:from operations_engine.catalog import IDS
+   except ModuleNotFoundError:from backend.operations_engine.catalog import IDS
+   if sid in IDS:return True
+  return cfg.get('seo_enabled') is True and sid in SEO_IDS|CONTROL_IDS
  def rows(self,base):
   cfg=self.config();rows=copy.deepcopy(base);by={x['id']:x for x in rows}
   if cfg.get('seo_enabled') is True:
@@ -34,8 +40,17 @@ class Bindings:
    if row is None:row={'id':sid,'input_schema':{'type':'object'}};rows.append(row)
    row.update(status='context_required',reason='authenticated_owner_terminal_required',execution_target='owner_terminal_rpc',audience='internal_owner',available_in_owner_tui=True,public_invocation_enabled=False)
    row['qualified_duration_seconds']=descriptor.get('qualified_duration_seconds',[])
+  if cfg.get('operations_enabled') is True:
+   try:from operations_engine.catalog import descriptors
+   except ModuleNotFoundError:from backend.operations_engine.catalog import descriptors
+   for descriptor in descriptors():
+    if descriptor['id'] not in by:rows.append(descriptor)
   return sorted(rows,key=lambda x:x['id'])
  def invoke(self,principal,sid,value):
+  if self.config().get('operations_enabled') is True and sid.startswith('operations.'):
+   try:from operations_engine.binding import invoke
+   except ModuleNotFoundError:from backend.operations_engine.binding import invoke
+   return invoke(principal,sid,value)
   if not self.supports(sid):return {'ok':False,'error':{'code':'engine_context_required'}}
   if type(value) is not dict:return {'ok':False,'error':{'code':'invalid_request'}}
   if sid=='seo.job.status':

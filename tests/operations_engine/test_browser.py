@@ -29,6 +29,7 @@ class Browser(unittest.TestCase):
  def test_actual_browser_assertions_private_trace_and_24h_ttl(self):
   self.runtime();result=browser.run(self.config,{'path':'index.html','steps':self.steps,'viewport':{'width':390,'height':844}})
   self.assertEqual(result['status'],'passed',result);self.assertTrue(result['execution_performed']);self.assertEqual(result['assertions_requested'],1);self.assertEqual(len(result['artifacts']),2)
+  out=self.artifacts/result['artifacts'][0]['id'].split('/')[0];self.assertEqual({f.name for f in out.iterdir()},{'trace.zip','screenshot.png','retention.json'})
   for artifact in result['artifacts']:
    file=self.artifacts/artifact['id'];self.assertTrue(file.is_file());self.assertGreater(artifact['bytes'],0);self.assertTrue(artifact['private'])
    retention=json.loads((file.parent/'retention.json').read_text(encoding='utf-8'));self.assertEqual(retention['expires_at']-retention['created_at'],86400)

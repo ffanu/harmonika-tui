@@ -1,0 +1,29 @@
+[Unit]
+Description=Harmonika scoped operations engine
+After=network.target
+[Service]
+Type=simple
+User=harmonika_ops
+Group=harmonika_ops
+WorkingDirectory=/var/lib/harmonika-operations
+Environment=PYTHONPATH=/opt/harmonika-operations/current
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/var/lib/harmonika-operations
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/harmonika-operations/browsers
+ExecStart=/usr/bin/python3 -m operations_engine.service --config /etc/harmonika-operations/config.json
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/harmonika-operations
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+MemoryMax=1G
+CPUQuota=100%
+TasksMax=128
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=45
+[Install]
+WantedBy=multi-user.target

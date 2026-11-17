@@ -11,3 +11,11 @@ class BindingsTests(unittest.TestCase):
   self.assertFalse(self.bindings.supports('shell.exec'));self.assertTrue(self.bindings.supports('seo.page_audit'));self.path.chmod(0o666);self.assertFalse(self.bindings.supports('seo.page_audit'))
  def test_request_ids_required_before_transport(self):
   self.assertEqual(self.bindings.invoke('api-token:1','seo.page_audit',{'url':'https://example.com'})['error']['code'],'seo_request_id_required')
+
+class OperationsBindingsTests(unittest.TestCase):
+ def test_operations_flag_adds_exact_namespaced_ids_without_changing_builder_or_seo(self):
+  from backend.operations_engine.catalog import IDS
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'binding.json';p.write_text(json.dumps({'schema_version':1,'operations_enabled':True,'seo_enabled':True}));p.chmod(0o600);b=Bindings(p)
+   self.assertTrue(b.supports('operations.engine.diagnose'));self.assertFalse(b.supports('operations.exec.shell'));self.assertFalse(b.supports('deploy.rollback'));self.assertTrue(b.supports('seo.page_audit'))
+   rows=b.rows([{'id':'deploy.rollback','status':'context_required'}]);self.assertEqual(len([r for r in rows if r['id'] in IDS]),len(IDS));self.assertEqual(next(r for r in rows if r['id']=='deploy.rollback')['status'],'context_required')

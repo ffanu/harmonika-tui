@@ -101,6 +101,11 @@ function executorMetrics(name,args,body,content){
  });
  return results.length?{count:results.every(r=>r.count!==null)?results.reduce((n,r)=>n+r.count,0):null,passed:results.every(r=>r.passed),failed:results.some(r=>r.failed)}:{count:null,passed:false,failed:false};
 }
+function operationsMetrics(body){
+ const value=body?.result,checks=value?.checks,n=value?.test_count;
+ const valid=Number.isInteger(n)&&n>0&&n<=64&&Array.isArray(checks)&&checks.length===n&&checks.every(x=>x&&typeof x.passed==='boolean');
+ return {count:valid?n:null,passed:valid&&body.ok===true&&value.status==='passed'&&value.passed===n&&value.failed===0&&checks.every(x=>x.passed===true),failed:body?.ok===false||value?.status==='failed'||valid&&checks.some(x=>!x.passed)};
+}
 function inspect(name,args,content,{received=content!==null&&content!==undefined}={}){
  const body=object(content),sources=[body,body?.metadata].filter(Boolean);
  const states=sources.flatMap(v=>[v.status,v.state]).filter(v=>typeof v==='string').map(v=>v.trim().toLowerCase());
@@ -111,9 +116,11 @@ function inspect(name,args,content,{received=content!==null&&content!==undefined
  const native=nativeShellNames.has(name),commands=commandsFor(name,args);
  const commandTest=commands.some(native?nativeTestCommand:isTestCommand);
  const readOnlyCommand=(name==='run_commands'||native)&&commands.length>0&&commands.every(value=>{if(typeof value!=='string')return false;const command=strippedCommand(value);return !/[;&|<>$`\n]/.test(command)&&/^(?:pwd\b|ls\b|stat\b|ps\b|git\s+(?:status|diff)\b|systemctl\s+(?:show|status|is-active)\b)/.test(command);});
- const test=testNames.has(name)||commandTest;
- const metrics=test?(native?nativeMetrics(args,body):executorMetrics(name,args,body,content)):{count:null,passed:false,failed:false};
+ const opsSelftest=name==='engine_operations'&&args?.skill_id==='operations.skills.selftest'&&body?.skill_id===args.skill_id&&body?.result?.execution_scope==='isolated_synthetic_fixture';
+ const test=testNames.has(name)||commandTest||opsSelftest;
+ const metrics=test?(opsSelftest?operationsMetrics(body):native?nativeMetrics(args,body):executorMetrics(name,args,body,content)):{count:null,passed:false,failed:false};
  const scope=verificationScope.inspect(native?'run_commands':name,native?{...args,commands}:args,body,{write,read,test,status,operation:submitNames.has(name)||name==='run_commands'||native&&!test});
+ if(opsSelftest)scope.isolated_check=true;
  const outcome=receiptOutcome.inspect(body,{received,write,read:read||readOnlyCommand,test,status,operation:submitNames.has(name),execution:name==='run_commands'||native});
  const diagnostic=name==='run_commands'&&args?.commands?.length>0&&args.commands.every(isDiagnosticCommand);
  const details={write,read:read||readOnlyCommand,status,test,diagnostic,diagnostic_output:diagnostic&&sources.some(v=>['result','stdout','stderr','output'].some(k=>typeof v[k]==='string'&&v[k].trim())),mutating:write||submitNames.has(name)||(name==='run_commands'||native)&&!readOnlyCommand,

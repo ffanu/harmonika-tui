@@ -49,6 +49,8 @@ def project(config, selected='.'):
 def artifact_root(config):
     root = Path(config.get('artifacts_root', ''))
     if not root.is_absolute() or len(root.parts)<3 or root in (Path.home(), Path.home().parent): raise ValueError('invalid_artifact_root')
+    project_root=Path(config.get('project_root','/nonexistent')).absolute()
+    if root==project_root or project_root in root.parents:raise ValueError('artifacts_inside_project_denied')
     if root.exists(): checked(root, directory=True)
     else:
         checked(root.parent, directory=True)

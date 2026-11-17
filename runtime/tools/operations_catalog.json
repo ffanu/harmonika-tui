@@ -1,0 +1,746 @@
+{
+  "schema_version": 1,
+  "skills": [
+    {
+      "id": "operations.engine.diagnose",
+      "description": "Registered service and graphics connectivity; mechanical results only.",
+      "engine": "operations",
+      "status": "available",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "requires_registered_project": false,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.skills.selftest",
+      "description": "Execute isolated synthetic checks; positive counts and explicit missing tools.",
+      "engine": "operations",
+      "status": "available",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "suite": {
+            "type": "string",
+            "enum": [
+              "core",
+              "security",
+              "browser"
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "requires_registered_project": false,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.security.scan",
+      "description": "Run configured Semgrep or Trivy against a registered project.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "scanner": {
+            "type": "string",
+            "enum": [
+              "semgrep",
+              "trivy"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "vuln",
+              "misconfig",
+              "secret"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "scanner",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.browser.regression",
+      "description": "Run real browser assertions and private traces on registered static HTML.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 24,
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "click",
+                    "fill",
+                    "check",
+                    "select",
+                    "assert_visible",
+                    "assert_text",
+                    "assert_count",
+                    "assert_value"
+                  ]
+                },
+                "selector": {
+                  "type": "object",
+                  "properties": {
+                    "by": {
+                      "type": "string",
+                      "enum": [
+                        "css",
+                        "test_id",
+                        "role"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "maxLength": 200
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 200
+                    }
+                  },
+                  "required": [
+                    "by",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000
+                }
+              },
+              "required": [
+                "action",
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "viewport": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "minimum": 320,
+                "maximum": 1920
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 320,
+                "maximum": 1080
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "path",
+          "steps",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.database.audit",
+      "description": "Read-only registered database schema, indexes and named query plans.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "database": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "database",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.license.usage",
+      "description": "Own license aggregates; all licenses require administrator role.",
+      "engine": "operations",
+      "status": "available",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "self",
+              "all"
+            ]
+          },
+          "days": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 90
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "requires_registered_project": false,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.prepare",
+      "description": "Persist operation identity before effects. Does not execute anything.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "tool.execution",
+              "browser.audit",
+              "code.audit",
+              "diagnostic",
+              "selftest"
+            ]
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "request_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "kind",
+          "idempotency_key",
+          "request_digest",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.status",
+      "description": "Read an existing owned job.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "job_ref",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.resume",
+      "description": "Resume observation of the same job without replaying effects.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "job_ref",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.reconcile",
+      "description": "Observe the same durable job; caller evidence cannot certify unknown effects.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "job_ref",
+          "expected_version",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.preview",
+      "description": "Prepare and hash a registered deployment plan without applying it.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "artifact": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "expected_artifact_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "artifact",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.apply",
+      "description": "Apply the reviewed plan and verify actual health with guarded recovery.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "artifact": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "expected_plan_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ack": {
+            "type": "boolean"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "artifact",
+          "expected_plan_sha256",
+          "ack",
+          "idempotency_key",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.reconcile",
+      "description": "Reconcile an unknown deployment using actual pointer and registered HTTP health.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "job_ref",
+          "expected_version",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.rollback_preview",
+      "description": "Preview a rollback bound to the current release and original owned job.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "job_ref",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.artifact.read",
+      "description": "Read a bounded chunk of an owned unexpired browser artifact.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65536
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "artifact_id",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.rollback",
+      "description": "Restore the registered previous release only with current-release CAS.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_plan_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ack": {
+            "type": "boolean"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "job_ref",
+          "expected_plan_sha256",
+          "ack",
+          "idempotency_key",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    }
+  ]
+}

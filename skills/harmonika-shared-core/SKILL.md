@@ -52,3 +52,17 @@ printf '%s' '{"scope":"project.demo","key":"language"}' | harmonika core invoke 
 
 Kemampuan yang unavailable tetap ditolak. Penjadwalan, akses secret/env host,
 process kill, outbound messaging dan koneksi eksternal tidak diaktifkan otomatis.
+
+## Operations engine
+
+Use `engine_operations` or `harmonika ops invoke <skill_id>` with JSON stdin.
+Inspect `harmonika ops catalog` first. Public IDs use `operations.` to preserve
+existing core/builder IDs. Shared service identity is bound to the authenticated
+API key; callers never select actor or server credential/configuration paths.
+Health/selftests and own license aggregates need no project. Security, browser,
+database and deployment inputs select an operator-registered project alias.
+Toolchain readiness and project authorization are checked at invocation. Browser
+traces are private, bounded and expire; do not upload them to a public viewer.
+Deployment requires authorized scope and a reviewed plan SHA, plus actual health
+verification. Never call restored/unknown/partial work successful or replay a
+mutation after timeout. Reconcile the same original job identity.

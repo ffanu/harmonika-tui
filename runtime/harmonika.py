@@ -899,6 +899,10 @@ def main():
         directory,manifest=active();verify_files(directory,manifest)
         run_exec([sys.executable,'-I',str(directory/'tools/erp_cli.py'),*args[1:]])
         return
+    elif args and args[0]=='ops':
+        directory,manifest=active();verify_files(directory,manifest)
+        run_exec([sys.executable,'-I',str(directory/'tools/operations_cli.py'),*args[1:]])
+        return
     elif args and args[0]=='catalog':
         directory,manifest=active();verify_files(directory,manifest)
         command=[sys.executable,'-I',str(directory/'tools/master_cli.py'),*args[1:]]

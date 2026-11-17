@@ -509,3 +509,23 @@
   Ini temuan yang diterima dari klien, bukan bukti worker berhenti atau tes lulus.
   Pertahankan maksud perbaikan walau muncul sesudah kata audit/periksa. Jangan
   memakai jalur laporan untuk menghapus pekerjaan koreksi yang diminta pengguna.
+
+## Shared operations engine
+- Backend `operations_engine` uses the existing authenticated master gateway;
+  preserve token/device/quota and exact `operations.*` names without overriding
+  existing builder/core IDs. Principals come only from the trusted master header.
+- Project-required handlers must reject missing/null aliases before grant checks.
+  Database aliases are project-local; never inherit global connectors. Own-key
+  license summaries are default; all-key aggregates require explicit admin.
+- Public job reconciliation observes durable state only. Never accept caller
+  evidence as a verified effect. Deployment checks actual pointer/hash/HTTP and
+  keeps physical-worker locks, CAS, idempotency and unknown-state replay barriers.
+- Isolated engine selftests never certify edits in a user project. Passing counts
+  require actual matching checks; partial, rolled-back and unknown outcomes are
+  not successful completion. Operator signed proof still requires its own checks.
+- Bound the whole gateway deadline chain. Keep temporary raw browser traces apart
+  from private final artifacts; 24-hour cleanup must be tested on actual output.
+- No raw source/chat/SQL/commands/credentials in jobs or technical telemetry. Run
+  external scanners/browser only on registered snapshots with fixed toolchains.
+- Service and production activation use hash baselines, backup/CAS, real canaries
+  and permission-aware idle restarts. Never signal unrelated/user processes.

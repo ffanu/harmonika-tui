@@ -84,6 +84,7 @@ function inspect(name,args,body,{write=false,read=false,test=false,status=false,
 function compatible(a,b){return !a?.invalid&&!b?.invalid&&!a?.conflict&&!b?.conflict&&!identityConflict(a,b);}
 function combine(a,b){return !a?b:!b?a:{...a,...b,ids:{...a.ids,...b.ids}};}
 function covers(check,write){
+ if(check?.isolated_check)return false; // Engine fixture checks never verify a user project's edits.
  if(!compatible(check,write)||check?.ambiguous||write?.ambiguous)return false;
  if(check?.pinned_ref&&['ref','commit_sha','revision'].some(f=>check.ids[f]?.length&&!write?.ids?.[f]?.length))return false;
  if(write?.expected_content_hash&&check?.read_receipt&&write.expected_content_hash!==check.content_hash)return false;

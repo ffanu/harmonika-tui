@@ -25,7 +25,7 @@ def _version(config,name):
     if not binary:return None,'scanner_executable_missing'
     try:
         with tempfile.TemporaryDirectory(prefix='harmonika-scanner-probe-') as temporary:
-            code,raw=execute([binary,'--version'],cwd=HERE,timeout=10,env=environment(Path(temporary)),maximum=16384)
+            code,raw=execute([binary,'--version'],cwd=HERE,timeout=5,env=environment(Path(temporary)),maximum=16384)
         match=re.search(rb'(?<![0-9])([0-9]+\.[0-9]+\.[0-9]+)(?![0-9])',raw)
         version=match.group(1).decode('ascii') if code==0 and match else None
         expected=config.get('tools',{}).get('versions',{}).get(name,PINS[name])
@@ -123,10 +123,10 @@ def scan(config,payload):
         else:
             settings=work/'trivy.yaml';settings.write_text('{}\n',encoding='utf-8');ignore=work/'ignore';ignore.write_text('',encoding='utf-8')
             cache=database or work/'cache';cache.mkdir(mode=0o700,exist_ok=True)
-            argv=[binary,'fs','--config',str(settings),'--ignorefile',str(ignore),'--secret-config','','--scanners',mode,'--format','json','--exit-code','0','--timeout','60s','--disable-telemetry','--skip-version-check','--skip-db-update','--skip-java-db-update','--skip-check-update','--offline-scan','--cache-backend','memory','--cache-dir',str(cache),'--list-all-pkgs=false','--quiet']
+            argv=[binary,'fs','--config',str(settings),'--ignorefile',str(ignore),'--secret-config','','--scanners',mode,'--format','json','--exit-code','0','--timeout','20s','--disable-telemetry','--skip-version-check','--skip-db-update','--skip-java-db-update','--skip-check-update','--offline-scan','--cache-backend','memory','--cache-dir',str(cache),'--list-all-pkgs=false','--quiet']
             if mode=='misconfig':argv+=['--config-check',str(_rule('docker-root.rego')),'--namespaces','harmonika']
             argv+=['--',str(stage)]
-        code,raw=execute(argv,cwd=work,timeout=75,env=environment(home),maximum=4*1024*1024)
+        code,raw=execute(argv,cwd=work,timeout=25,env=environment(home),maximum=4*1024*1024)
         if code!=0:raise ValueError('scanner_execution_failed')
         try:data=json.loads(raw.decode('utf-8'))
         except (ValueError,UnicodeError):raise ValueError('invalid_scanner_report') from None

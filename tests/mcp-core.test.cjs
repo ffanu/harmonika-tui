@@ -94,12 +94,13 @@ test('structured provider error remains explicit and degraded', async () => {
 
 /* ---------------- tool registry ---------------- */
 
-test('listTools exposes 11 tools including project creation with closed schemas', () => {
+test('listTools exposes 12 tools including project creation with closed schemas', () => {
   const core = createCore({ callerCwd: mkProject('registry') });
   const tools = core.listTools();
   assert.deepEqual(
     tools.map((t) => t.name),
     [
+      'engine_operations',
       'create_directory',
       'capabilities',
       'web_search',
@@ -667,10 +668,11 @@ test('mcp-server.cjs speaks MCP: initialize + tools/list over stdio, stdout prot
     assert.deepEqual(ping, {});
 
     const listed = await request('tools/list', {});
-    assert.equal(listed.tools.length, 11);
+    assert.equal(listed.tools.length, 12);
     assert.deepEqual(
       listed.tools.map((t) => t.name),
       [
+        'engine_operations',
         'create_directory',
         'capabilities',
         'web_search',

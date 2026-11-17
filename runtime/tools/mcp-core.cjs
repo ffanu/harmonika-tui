@@ -12,6 +12,7 @@ const path = require('path');
 const { spawn } = require('child_process');
 const projectAccess = require('./project-access.cjs');
 const runtimePaths = require('./paths.cjs');
+const operationsTools = require('./operations-tools.cjs');
 
 const LIMITS = Object.freeze({
   PROMPT_MAX_CHARS: 3000,
@@ -599,6 +600,11 @@ const ARG_SPECS = Object.freeze({
 });
 
 function validateArgs(toolName, args) {
+  if(toolName==='engine_operations'){
+    if(!args||typeof args!=='object'||Array.isArray(args)||Object.keys(args).some(k=>!['skill_id','input'].includes(k))||typeof args.skill_id!=='string'||!operationsTools.definitions[0].inputSchema.properties.skill_id.enum.includes(args.skill_id)||!args.input||typeof args.input!=='object'||Array.isArray(args.input))throw new ToolError('invalid_operations_request');
+    try{if(Buffer.byteLength(JSON.stringify(args))>1048576)throw Error()}catch{throw new ToolError('invalid_operations_request')}
+    return {skill_id:args.skill_id,input:args.input};
+  }
   const spec = ARG_SPECS[toolName];
   if (!args || typeof args !== 'object' || Array.isArray(args)) throw new ToolError('arguments_must_be_object');
   const out = {};
@@ -661,6 +667,7 @@ const objSchema = (properties, required) => ({
 });
 
 const TOOL_DEFS = Object.freeze([
+  ...operationsTools.definitions,
   {
     name: 'create_directory',
     description: 'Create/select a project folder using an absolute directory inside your Downloads or Projects. Works from Home. Then use returned absolute paths with file tools and working_dir with bash; no manual mkdir needed.',
@@ -813,6 +820,7 @@ function createCore(overrides) {
   }
 
   const ops = {
+    async engine_operations(args){return await (deps.operations||operationsTools.invoke)(args.skill_id,args.input);},
     async media_capabilities(){return backendResult(await deps.rpc({operation:'media_capabilities'}),['features','browser_scope','speech_public_status']);},
     async browse_page(args){return backendResult(await deps.rpc({operation:'browse_page',url:args.url}),['pages','page_text','read_only','existing_profile_used','warnings']);},
     async upscale_image(args){

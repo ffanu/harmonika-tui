@@ -1,0 +1,21 @@
+[Unit]
+Description=Refresh Harmonika verified Trivy vulnerability database
+After=network-online.target
+[Service]
+Type=oneshot
+User=harmonika_ops
+Group=harmonika_ops
+WorkingDirectory=/var/lib/harmonika-operations
+Environment=HOME=/var/lib/harmonika-operations
+Environment=XDG_CONFIG_HOME=/var/lib/harmonika-operations/config
+Environment=XDG_CACHE_HOME=/var/lib/harmonika-operations/cache
+ExecStart=/opt/harmonika-operations/bin/trivy image --download-db-only --cache-dir /var/lib/harmonika-operations/trivy --disable-telemetry --skip-version-check
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/harmonika-operations
+UMask=0077
+TimeoutStartSec=180
+MemoryMax=512M
+CPUQuota=50%

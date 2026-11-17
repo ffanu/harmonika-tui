@@ -22,7 +22,7 @@ def _runtime(config):
     try:
         module=str(Path(module).resolve(strict=True))
         checked(module,directory=True)
-        code,raw=execute([node,str(WORKER),'--capabilities'],cwd=WORKER.parent,data={'playwright_module':module},timeout=10,env=environment(),maximum=16384)
+        code,raw=execute([node,str(WORKER),'--capabilities'],cwd=WORKER.parent,data={'playwright_module':module},timeout=5,env=environment(),maximum=16384)
         result=json.loads(raw.decode('utf-8'))
         if code!=0 or result.get('available') is not True:return None
         return node,module,result.get('version')
@@ -96,12 +96,12 @@ def run(config,payload):
     artifacts=artifact_root(config);run_id='browser_'+uuid4().hex;out=artifacts/run_id;out.mkdir(mode=0o700)
     created=int(time.time());retention={'schema_version':1,'created_at':created,'expires_at':created+86400}
     (out/'retention.json').write_text(json.dumps(retention),encoding='utf-8');(out/'retention.json').chmod(0o600)
-    with tempfile.TemporaryDirectory(prefix='browser-source-',dir=artifacts) as temporary:
+    with tempfile.TemporaryDirectory(prefix='browser-source-',dir=artifacts) as temporary, tempfile.TemporaryDirectory(prefix='browser-traces-',dir=artifacts) as trace_temporary:
         stage=Path(temporary);copied=snapshot(root,selected,stage)
         if entry not in copied['files']:raise ValueError('browser_entry_excluded')
         server=_Static(stage,copied['files']);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
         try:
-            code,raw=execute([runtime[0],str(WORKER)],cwd=stage,data={'playwright_module':runtime[1],'origin':'http://127.0.0.1:'+str(server.server_port),'entry':entry,'steps':steps,'viewport':viewport,'artifacts':str(out)},timeout=70,env=environment(),maximum=131072,watch=lambda:sum(p.stat().st_size for p in out.rglob('*') if p.is_file())<=32*1024*1024)
+            code,raw=execute([runtime[0],str(WORKER)],cwd=stage,data={'playwright_module':runtime[1],'origin':'http://127.0.0.1:'+str(server.server_port),'entry':entry,'steps':steps,'viewport':viewport,'artifacts':str(out),'trace_temporary':str(trace_temporary)},timeout=25,env=environment(),maximum=131072,watch=lambda:sum(p.stat().st_size for p in out.rglob('*') if p.is_file())<=32*1024*1024)
         finally:server.shutdown();server.server_close();thread.join(timeout=2)
     if code!=0:raise ValueError('browser_execution_failed')
     try:data=json.loads(raw.decode('utf-8'))

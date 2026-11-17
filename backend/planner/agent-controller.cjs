@@ -137,7 +137,7 @@ function unsupportedClaim(value,observed,data){
  const cited=observed.results.filter(r=>value.task_state?.evidence_call_ids?.includes(r.id));
  if(observed.last?.failed||observed.last?.pending)return true;
  if(testClaim&&!cited.some(r=>!r.failed&&!r.pending&&!r.empty&&r.continuity?.test_passed&&r.continuity.test_count>0))return true;
- if(repairClaim&&!cited.some(r=>!r.failed&&!r.pending&&!r.empty&&(r.fileWrite||r.continuity?.write&&r.continuity.paths?.length||r.continuity?.test_passed&&r.continuity.test_count>0)))return true;
+ if(repairClaim&&!cited.some(r=>!r.failed&&!r.pending&&!r.empty&&(r.fileWrite||r.continuity?.write&&r.continuity.paths?.length||r.continuity?.test_passed&&r.continuity.test_count>0&&!r.continuity.scope?.isolated_check)))return true;
  if(!generalActionClaim)return false;
  const requiresExecution=claims.some(s=>/(?:tests? (?:passed|are passing)|tes (?:lulus|berhasil)|deployment (?:is )?(?:healthy|successful)|(?:sudah|berhasil) (?:di)?deploy|(?:all|semua|seluruh) (?:features?|fitur) (?:work|berfungsi))/i.test(s));
  // A read/list/search or unknown receipt never establishes a test/deploy operation.

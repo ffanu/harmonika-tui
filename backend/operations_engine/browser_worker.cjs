@@ -11,7 +11,7 @@ const send=value=>process.stdout.write(JSON.stringify(value));
  if(!/^http:\/\/127\.0\.0\.1:[0-9]+$/.test(input.origin)||!path.isAbsolute(input.artifacts))throw Error('scope');
  let browser,context,page;const rows=[];let blocked_requests=0,blocked_popups=0,blocked_downloads=0,page_errors=0,status='failed';
  try{
-  try{browser=await runtime.chromium.launch({headless:true,chromiumSandbox:true,tracesDir:input.artifacts,args:['--disable-gpu','--disable-background-networking','--disable-component-update','--no-pings','--dns-prefetch-disable','--force-webrtc-ip-handling-policy=disable_non_proxied_udp']});}
+  try{browser=await runtime.chromium.launch({headless:true,chromiumSandbox:true,tracesDir:input.trace_temporary,args:['--disable-gpu','--disable-background-networking','--disable-component-update','--no-pings','--dns-prefetch-disable','--force-webrtc-ip-handling-policy=disable_non_proxied_udp']});}
   catch{send({status:'needs_toolchain',steps:[]});return;}
   context=await browser.newContext({viewport:input.viewport,acceptDownloads:false,serviceWorkers:'block',permissions:[]});
   if(typeof context.routeWebSocket!=='function')throw Error('websocket_guard_missing');
