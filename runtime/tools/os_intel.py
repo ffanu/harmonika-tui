@@ -201,7 +201,7 @@ def _run(target, cmd, timeout=30):
     """Run command local or via SSH target."""
     if target in ('local', 'localhost', '', None):
         try:
-            r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
+            r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout, encoding='utf-8', errors='replace')
             return r.stdout + r.stderr
         except subprocess.TimeoutExpired:
             return 'TIMEOUT'
@@ -500,7 +500,7 @@ def safe_install(args):
             'installed_packages': installed_list[:20000],
             'running_services': services.split('\n')[:50],
         }
-        with open(snap_file, 'w') as f:
+        with open(snap_file, 'w', encoding='utf-8') as f:
             json.dump(snapshot, f)
         # UPDATE index quietly
         _run(target, cmds['update_index'], timeout=90)
@@ -530,7 +530,7 @@ def safe_install(args):
         if not os.path.exists(snap_path):
             return {'ok': False, 'error': f'snapshot not found: {snap_name}',
                     'available': [p.name for p in Path(SNAPSHOT_DIR).glob('*.json')][:10]}
-        snapshot = json.load(open(snap_path))
+        snapshot = json.load(open(snap_path, encoding='utf-8'))
         pkgs = snapshot.get('about_to_install', '').split()
         if not pkgs:
             return {'ok': False, 'error': 'snapshot has no install record'}

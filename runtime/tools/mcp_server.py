@@ -54,7 +54,7 @@ def save_b64(b64, prefix):
 def load_targets():
     tf = os.environ.get("HARMONIKA_NETWORK_TARGETS") or os.path.join(CONFIG_ROOT, "network-targets.json")
     if os.path.exists(tf):
-        try: return json.load(open(tf))
+        try: return json.load(open(tf, encoding='utf-8'))
         except: pass
     return {}
 
@@ -76,7 +76,7 @@ def ssh_exec(host, port, user, passwd, cmd, timeout=30, hostkey_sha256=None, key
                           "hostkey_sha256": hostkey_sha256 or "", "key_path": key_path or ""})
     try:
         proc = subprocess.run([_ssh_python(), "-I", helper], input=request,
-                              capture_output=True, text=True, timeout=timeout + 20)
+                              capture_output=True, text=True, timeout=timeout + 20, encoding='utf-8', errors='replace')
     except subprocess.TimeoutExpired:
         return {"ok": False, "error": "ssh_helper_timeout", "execution_state": "unknown",
                 "remote_process_may_still_run": True, "safe_to_retry": False}
@@ -442,7 +442,7 @@ def tool_document_studio(args):
     def run_document(argv):
         try:
             p = subprocess.run([doc_py, "-I", doc_script, *argv], capture_output=True, text=True,
-                               timeout=30 if action == "capabilities" else 60)
+                               timeout=30 if action == "capabilities" else 60, encoding='utf-8', errors='replace')
         except subprocess.TimeoutExpired:
             return {"ok": False, "error": "document_read_timeout" if action == "read" else "document_processing_timeout"}
         except OSError:
@@ -553,7 +553,7 @@ def tool_domain_engine(args):
     script_path = os.path.join(tools_dir, script_name)
     cmd_parts = [sys.executable, "-I", script_path, *cmd.split()]
     inp = json.dumps(payload) if payload is not None else None
-    p = subprocess.run(cmd_parts, input=inp, capture_output=True, text=True, timeout=120)
+    p = subprocess.run(cmd_parts, input=inp, capture_output=True, text=True, timeout=120, encoding='utf-8', errors='replace')
     out = (p.stdout or "").strip()
     if out:
         try: return json.loads(out)
@@ -569,7 +569,7 @@ def tool_trust_guard(args):
     if not os.path.exists(cli):
         return {"ok": False, "error": "trust_cli_missing"}
     p = subprocess.run([sys.executable, "-I", cli, operation], input=json.dumps(payload),
-                       capture_output=True, text=True, timeout=120)
+                       capture_output=True, text=True, timeout=120, encoding='utf-8', errors='replace')
     out = (p.stdout or "").strip()
     if not out:
         return {"ok": False, "error": "engine_operation_failed"}
@@ -706,6 +706,10 @@ def send(obj):
     sys.stdout.flush()
 
 def main():
+    # MCP JSON-RPC is UTF-8 even when the Windows console uses a legacy codepage.
+    for stream in (sys.stdin, sys.stdout):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     for line in sys.stdin:
         line = line.strip()
         if not line: continue

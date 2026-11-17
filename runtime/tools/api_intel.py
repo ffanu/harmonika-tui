@@ -243,7 +243,7 @@ def _discover_script_path():
     _ensure_state()
     p = os.path.join(RUNTIME_DIR, 'discover_engine.cjs')
     if not os.path.exists(p):
-        with open(p, 'w') as f:
+        with open(p, 'w', encoding='utf-8') as f:
             f.write(DISCOVER_ENGINE_JS)
     return p
 

@@ -122,7 +122,7 @@ profile_dir = os.path.join(runtime, 'chrome-profile')
 def write(status, **kw):
     data = {'status': status, 'url': url, 'ts': time.time()}
     data.update(kw)
-    json.dump(data, open(status_file, 'w'))
+    json.dump(data, open(status_file, 'w', encoding='utf-8'))
 
 write('starting')
 proc = subprocess.Popen([
@@ -200,7 +200,7 @@ write('timeout', note='No login detected in wait window. Browser stays open; you
 def _ensure_daemon():
     for directory in (RUNTIME_DIR,SESSION_DIR,CLONE_DIR):os.makedirs(directory,mode=0o700,exist_ok=True)
     if not os.path.exists(LOGIN_DAEMON):
-        with open(LOGIN_DAEMON, 'w') as f:
+        with open(LOGIN_DAEMON, 'w', encoding='utf-8') as f:
             f.write(_daemon_code())
     return LOGIN_DAEMON
 
@@ -238,7 +238,7 @@ def login_start(args):
         if os.path.exists(p):
             os.remove(p)
     daemon = _ensure_daemon()
-    log = open(os.path.join(rt, 'daemon.log'), 'w')
+    log = open(os.path.join(rt, 'daemon.log'), 'w', encoding='utf-8')
     proc = subprocess.Popen([sys.executable, daemon, rt, url, browser, str(CDP_PORT), str(wait)],
                             stdout=log, stderr=log, start_new_session=True)
     # Give daemon a moment to write initial status
@@ -254,7 +254,7 @@ def _read_status(rt):
     p = os.path.join(rt, 'login_status.json')
     if os.path.exists(p):
         try:
-            return json.load(open(p))
+            return json.load(open(p, encoding='utf-8'))
         except Exception:
             pass
     return {'status': 'unknown'}
@@ -274,7 +274,7 @@ def login_confirm(args):
     """User said 'sudah login' — create confirm flag so daemon finalizes immediately."""
     url = args.get('url', '')
     rt = _runtime_for(url)
-    open(os.path.join(rt, 'login_confirmed'), 'w').write('1')
+    open(os.path.join(rt, 'login_confirmed'), 'w', encoding='utf-8').write('1')
     time.sleep(2)
     st = _read_status(rt)
     return {'ok': True, 'action': 'login_confirm', 'status': st.get('status'),
@@ -299,9 +299,9 @@ def login_done(args):
         'cdp': f'http://127.0.0.1:{CDP_PORT}', 'saved_at': datetime.utcnow().isoformat() + 'Z',
         'manual_login': True, 'captcha_bypassed': False,
     }
-    json.dump(meta, open(session_file, 'w'), indent=2)
+    json.dump(meta, open(session_file, 'w', encoding='utf-8'), indent=2)
     if not keep_open:
-        open(os.path.join(rt, 'login_stop'), 'w').write('1')
+        open(os.path.join(rt, 'login_stop'), 'w', encoding='utf-8').write('1')
     return {'ok': True, 'action': 'login_done', 'session_file': session_file,
             'profile_dir': meta['profile_dir'],
             'note': 'Crawls now launch Chrome with this authenticated profile.'}
@@ -331,7 +331,7 @@ def clone_site(args):
     if use_session:
         sf = os.path.join(SESSION_DIR, f'{safe}.json')
         if os.path.exists(sf):
-            session = json.load(open(sf))
+            session = json.load(open(sf, encoding='utf-8'))
 
     # If authenticated profile exists → use Playwright over CDP with that profile
     node_script = _clone_script_path()
@@ -359,7 +359,7 @@ def _clone_script_path():
     for directory in (RUNTIME_DIR,SESSION_DIR,CLONE_DIR):os.makedirs(directory,mode=0o700,exist_ok=True)
     p = os.path.join(RUNTIME_DIR, 'clone_engine.cjs')
     if not os.path.exists(p):
-        with open(p, 'w') as f:
+        with open(p, 'w', encoding='utf-8') as f:
             f.write(CLONE_ENGINE_JS)
     return p
 
@@ -506,7 +506,7 @@ def analyze_workflow(args):
     sitemap = os.path.join(out_dir, 'SITEMAP.json')
     if not os.path.exists(sitemap):
         return {'ok': False, 'error': 'SITEMAP.json not found in clone dir'}
-    data = json.load(open(sitemap))
+    data = json.load(open(sitemap, encoding='utf-8'))
     nav, forms = data.get('nav', {}), data.get('forms', {})
 
     # Classify pages by keywords

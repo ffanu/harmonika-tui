@@ -30,7 +30,7 @@ CONFIG_BACKUP_DIR = os.path.join(CONFIG_ROOT,'config-backups')
 
 def _load_targets():
     try:
-        with open(NET_TARGETS_FILE) as f:
+        with open(NET_TARGETS_FILE, encoding='utf-8') as f:
             data = json.load(f)
         if isinstance(data, dict):
             return [{'name': k, **v} for k, v in data.items()]
@@ -67,7 +67,7 @@ def _ssh_exec(target_name, command, timeout=30):
         r = subprocess.run(
             [next((p for p in (os.environ.get('HARMONIKA_SSH_PYTHON'), os.path.join(TERMINAL_ROOT,'ssh-runtime',*(('Scripts','python.exe') if os.name=='nt' else ('bin','python'))), sys.executable) if p and os.path.isfile(p)), sys.executable), '-I', helper],
             input=json.dumps(req), capture_output=True, text=True, timeout=timeout + 10
-        )
+        , encoding='utf-8', errors='replace')
         return json.loads(r.stdout.strip() or '{}')
     except Exception as e:
         return {'ok': False, 'error': 'ssh_helper_failed'}
@@ -103,7 +103,7 @@ def server_health(args):
     if target == 'local':
         for key, cmd in cmds.items():
             try:
-                r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=10)
+                r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=10, encoding='utf-8', errors='replace')
                 results[key] = r.stdout.strip()
             except Exception as e:
                 results[key] = f'error: {e}'
@@ -238,7 +238,7 @@ def log_analysis(args):
         cmd += f' | grep -i "{query}"'
 
     if target == 'local':
-        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30, encoding='utf-8', errors='replace')
         raw = r.stdout
     else:
         r = _ssh_exec(target, cmd, timeout=35)
@@ -347,7 +347,7 @@ def process_hunter(args):
     cmd = ' ; '.join(parts)
 
     if target == 'local':
-        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=15)
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=15, encoding='utf-8', errors='replace')
         out = r.stdout
     else:
         r = _ssh_exec(target, cmd, timeout=20)
@@ -387,7 +387,7 @@ def service_manager(args):
         # List running services
         cmd = "systemctl list-units --type=service --state=running --no-legend --no-pager | head -30"
         if target == 'local':
-            r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=10)
+            r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=10, encoding='utf-8', errors='replace')
             out = r.stdout
         else:
             r = _ssh_exec(target, cmd)
@@ -413,7 +413,7 @@ def service_manager(args):
         return {'ok': False, 'error': f'unknown action: {action}. Use: {list(actions.keys())}'}
 
     if target == 'local':
-        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30, encoding='utf-8', errors='replace')
         out = r.stdout + r.stderr
     else:
         r = _ssh_exec(target, cmd, timeout=35)
@@ -424,7 +424,7 @@ def service_manager(args):
     if action in ('start', 'restart'):
         vcmd = f'systemctl is-active {service} && systemctl show {service} -p NRestarts,ActiveState,SubState --no-pager'
         if target == 'local':
-            vr = subprocess.run(vcmd, shell=True, capture_output=True, text=True, timeout=10)
+            vr = subprocess.run(vcmd, shell=True, capture_output=True, text=True, timeout=10, encoding='utf-8', errors='replace')
             verify = vr.stdout.strip()
         else:
             vr = _ssh_exec(target, vcmd)
@@ -453,14 +453,14 @@ def network_discover(args):
         gateway = ''
         try:
             r = subprocess.run("ip route 2>/dev/null | grep default | awk '{print $3}' || route -n get default 2>/dev/null | grep gateway | awk '{print $2}'",
-                             shell=True, capture_output=True, text=True)
+                             shell=True, capture_output=True, text=True, encoding='utf-8', errors='replace')
             gateway = r.stdout.strip().split('\n')[0]
         except Exception:
             pass
         try:
             if not gateway:
                 r = subprocess.run("netstat -nr 2>/dev/null | grep default | head -1 | awk '{print $2}'",
-                                 shell=True, capture_output=True, text=True)
+                                 shell=True, capture_output=True, text=True, encoding='utf-8', errors='replace')
                 gateway = r.stdout.strip()
         except Exception:
             pass
@@ -484,7 +484,7 @@ def network_discover(args):
 
     # ARP scan first (fast, no ping needed for local subnet)
     try:
-        r = subprocess.run('arp -a', shell=True, capture_output=True, text=True, timeout=15)
+        r = subprocess.run('arp -a', shell=True, capture_output=True, text=True, timeout=15, encoding='utf-8', errors='replace')
         for line in r.stdout.split('\n'):
             m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}).*?([0-9a-f]{1,2}(?::[0-9a-f]{1,2}){5})', line, re.I)
             if m and m.group(1).startswith(base):
@@ -510,7 +510,7 @@ def network_discover(args):
 
         # Re-check ARP after ping
         try:
-            r = subprocess.run('arp -a', shell=True, capture_output=True, text=True, timeout=15)
+            r = subprocess.run('arp -a', shell=True, capture_output=True, text=True, timeout=15, encoding='utf-8', errors='replace')
             seen_ips = {h['ip'] for h in hosts}
             for line in r.stdout.split('\n'):
                 m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}).*?([0-9a-f]{1,2}(?::[0-9a-f]{1,2}){5})', line, re.I)
@@ -625,7 +625,7 @@ def config_backup(args):
         ts = datetime.now().strftime('%Y%m%d-%H%M%S')
         fname = f'{target}_{ts}.rsc'
         fpath = os.path.join(CONFIG_BACKUP_DIR, fname)
-        with open(fpath, 'w') as f:
+        with open(fpath, 'w', encoding='utf-8') as f:
             f.write('# Harmonika Config Backup\n# Target: %s\n# Date: %s\n# Type: %s\n\n' % (target, datetime.now().isoformat(), dev_type))
             f.write(config_text)
         return {
@@ -648,8 +648,8 @@ def config_backup(args):
         if not (os.path.exists(p1) and os.path.exists(p2)):
             return {'ok': False, 'error': 'file not found'}
         import difflib
-        l1 = open(p1).readlines()
-        l2 = open(p2).readlines()
+        l1 = open(p1, encoding='utf-8').readlines()
+        l2 = open(p2, encoding='utf-8').readlines()
         diff = list(difflib.unified_diff(l1, l2, fromfile=file1, tofile=file2, lineterm=''))
         added = len([d for d in diff if d.startswith('+') and not d.startswith('+++')])
         removed = len([d for d in diff if d.startswith('-') and not d.startswith('---')])
@@ -700,7 +700,7 @@ def firewall_analyzer(args):
             rules.append(current)
     else:
         r = subprocess.run('iptables -L -n -v --line-numbers 2>/dev/null', shell=True,
-                         capture_output=True, text=True, timeout=15)
+                         capture_output=True, text=True, timeout=15, encoding='utf-8', errors='replace')
         raw = r.stdout
         if not raw.strip():
             return {'ok': False, 'error': 'no firewall rules found (need root or use target for SSH)'}
@@ -801,7 +801,7 @@ def code_intelligence(args):
                         continue
                     fpath = os.path.join(root, f)
                     try:
-                        tree = ast.parse(open(fpath).read())
+                        tree = ast.parse(open(fpath, encoding='utf-8').read())
                         for node in ast.walk(tree):
                             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
                                 name = node.name
@@ -830,7 +830,7 @@ def code_intelligence(args):
                 for f in files:
                     if f.endswith(exts.get(lang, ('.js',))):
                         fpath = os.path.join(root, f)
-                        for i, line in enumerate(open(fpath, errors='ignore'), 1):
+                        for i, line in enumerate(open(fpath, errors='ignore', encoding='utf-8'), 1):
                             m = re.search(pat, line)
                             if m:
                                 name = m.group(2) or m.group(3) or m.group(4) or m.group(1)
@@ -849,7 +849,7 @@ def code_intelligence(args):
                     continue
                 fpath = os.path.join(root, f)
                 try:
-                    for i, line in enumerate(open(fpath, errors='ignore'), 1):
+                    for i, line in enumerate(open(fpath, errors='ignore', encoding='utf-8'), 1):
                         if query in line and f'def {query}' not in line and f'function {query}' not in line:
                             refs.append({'file': os.path.relpath(fpath, path), 'line': i, 'code': line.strip()[:120]})
                 except Exception:
@@ -865,7 +865,7 @@ def code_intelligence(args):
                 if not f.endswith(('.py', '.js', '.ts', '.jsx', '.tsx', '.go', '.rs')):
                     continue
                 fpath = os.path.join(root, f)
-                for i, line in enumerate(open(fpath, errors='ignore'), 1):
+                for i, line in enumerate(open(fpath, errors='ignore', encoding='utf-8'), 1):
                     m = pat.search(line)
                     if m:
                         todos.append({'file': os.path.relpath(fpath, path), 'line': i,
@@ -884,7 +884,7 @@ def code_intelligence(args):
                 rel = os.path.relpath(fpath, path)
                 imports = []
                 try:
-                    tree = ast.parse(open(fpath).read())
+                    tree = ast.parse(open(fpath, encoding='utf-8').read())
                     for node in ast.walk(tree):
                         if isinstance(node, ast.Import):
                             imports.extend(a.name for a in node.names)
@@ -913,7 +913,7 @@ def test_runner(args):
         if has('pytest.ini') or has('pyproject.toml') or has('setup.py'):
             framework = 'pytest'
         elif has('package.json'):
-            pkg = json.load(open(os.path.join(path, 'package.json'))) if has('package.json') else {}
+            pkg = json.load(open(os.path.join(path, 'package.json'), encoding='utf-8')) if has('package.json') else {}
             scripts = pkg.get('scripts', {})
             if 'test' in scripts:
                 if 'jest' in scripts.get('test', ''):
@@ -939,7 +939,7 @@ def test_runner(args):
         return {'ok': False, 'error': f'unsupported framework: {framework}'}
 
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=path)
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=path, encoding='utf-8', errors='replace')
         out = r.stdout + r.stderr
     except subprocess.TimeoutExpired:
         return {'ok': False, 'error': 'tests timed out (300s)'}

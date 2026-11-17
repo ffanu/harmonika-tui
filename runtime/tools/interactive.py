@@ -43,7 +43,7 @@ MAGENTA = '\x1b[35m'; GRAY = '\x1b[90m'; BOLD = '\x1b[1m'; RESET = '\x1b[0m'
 
 def _read(f, default):
     try:
-        return json.load(open(f))
+        return json.load(open(f, encoding='utf-8'))
     except Exception:
         return default
 
@@ -141,7 +141,7 @@ def logs(args):
     if target == 'local':
         try:
             p = subprocess.run(f'timeout {duration} {base_cmd} 2>/dev/null || (gtimeout {duration} {base_cmd} 2>/dev/null) || true',
-                               shell=True, capture_output=True, text=True, timeout=duration + 10)
+                               shell=True, capture_output=True, text=True, timeout=duration + 10, encoding='utf-8', errors='replace')
             out = p.stdout
         except Exception as e:
             return {'ok': False, 'error': f'stream failed: {e} (macOS local: use target=linux-server)'}

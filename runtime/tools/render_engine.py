@@ -169,7 +169,7 @@ def _query_macos_style():
     try:
         import subprocess
         r = subprocess.run(['defaults', 'read', '-g', 'AppleInterfaceStyle'],
-                           capture_output=True, text=True, timeout=3)
+                           capture_output=True, text=True, timeout=3, encoding='utf-8', errors='replace')
         if 'Dark' in r.stdout:
             return 'dark'
         return 'light'
