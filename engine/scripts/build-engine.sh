@@ -31,6 +31,13 @@ for target in $TARGETS; do
   esac
   cp "dist/cli-$target/bin/$artifact" "$OUT/$name"
   chmod +x "$OUT/$name"
+  # macOS membunuh binary yang tanda tangannya tidak valid (SIGKILL). Build CLI
+  # menandatangani ad-hoc saat linker; menandatangani ulang setelah copy membuat
+  # hasil build selalu bisa dijalankan.
+  if [ "$(uname -s)" = "Darwin" ]; then
+    xattr -d com.apple.quarantine "$OUT/$name" 2>/dev/null || true
+    codesign -s - --force "$OUT/$name" >/dev/null 2>&1 || true
+  fi
   shasum -a 256 "$OUT/$name" | awk '{print "   sha256 " $1}'
 done
 

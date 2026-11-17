@@ -1,7 +1,7 @@
 From 4da0798318e618b234a14208567e780364ac67da Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:54:59 +0700
-Subject: [PATCH 3/6] brand: project .harmonika dirs, Y/N/L upgrade prompt with
+Subject: [PATCH 3/7] brand: project .harmonika dirs, Y/N/L upgrade prompt with
  changelog
 
 - config/discovery.ts reads Brand.projectDirs (.harmonika then .opencode) for project

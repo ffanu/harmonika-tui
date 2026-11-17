@@ -224,3 +224,24 @@ curl -s https://chat.harmonika.id/assets/harmonika-terminal/engine/update.json |
 | **C7** Test parity | `test/run/noninteractive.test.ts` dikembalikan ke versi upstream (test varian `compatibility` sudah diimplementasikan ulang oleh upstream dengan kontrak event yang sama); `test/updater-install.test.ts` dan `test/fixture/upgrade.ts` disesuaikan dengan antarmuka brand. |
 
 Catatan operasional setelah rebase: `node_modules` di clone sumber harus di-`bun install` ulang (bun.lock berubah), dan `engine/patches/*` menjadi sumber kebenaran rebrand.
+
+## 15. Bebas brand opencode di permukaan pengguna (2026-11-17)
+
+| Item | Hasil terukur |
+| --- | --- |
+| **D1** Patch ke-7 | `harmonika/main` = **7 commit brand**; `0007-brand-buang-brand-opencode-yang-terlihat…` menuntaskan sisa brand yang terlihat pengguna (`verify-patches.sh` → tree `c0bb5a47a804`). |
+| **D2** Web UI (bundled di binary) | `<title>` = *Harmonika AI*; komponen `ui/logo.tsx` memakai mark kotak-H + wordmark teks **HARMONIKA AI**; wordmark animasi About & new-session tidak lagi menggambar glyph upstream; halaman OAuth ("Harmonika AI is now authorized/connected"), `client_uri` & `logo_uri` MCP OAuth. |
+| **D3** Label & tautan | Suffix provider Console, dialog limit/upsell, link settings/docs (`harmonika.id/docs`), panel `stats` (`harmonika.id`), `usage-limits`, User-Agent webfetch, serta header `HTTP-Referer`/`X-Title` untuk gateway pihak ketiga. |
+| **D4** Skema & katalog | `$schema` tema → `…/harmonika-terminal/theme.json`; `$schema` config CLI → `…/cli.json`; sumber katalog model → `…/models.json`; ikon web → `…/harmonika-icon.png` — keempat aset dipublikasikan di `chat.harmonika.id` (HTTP 200). |
+| **D5** i18n | 64 berkas locale: **3.322 string** "OpenCode" → "Harmonika AI". |
+| **D6** Skill bawaan | `packages/core/src/plugin/skill/opencode.md` → dokumentasi engine Harmonika (identitas, docs resmi, aturan operasional). |
+| **D7** Sisa internal | Nama paket `@opencode/*`, env `OPENCODE_*`, dan provider Zen (nonaktif lewat `disabled_providers`) sengaja dibiarkan agar rebase ke upstream tetap murah; tidak ada yang tampil ke pengguna. |
+
+Verifikasi cepat setelah perubahan brand:
+
+```bash
+strings engine/bin/harmonika-darwin-arm64 | grep -c 'aria-label="OpenCode"'   # 0
+strings engine/bin/harmonika-darwin-arm64 | grep -c 'OpenCode is now'        # 0
+engine/scripts/smoke-engine.sh engine/bin/harmonika-darwin-arm64             # 8/8
+```
+
