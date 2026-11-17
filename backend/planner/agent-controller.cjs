@@ -96,7 +96,7 @@ function operatorPolicy(contract){
  if(!Array.isArray(names)||names.length>64||new Set(names).size!==names.length||names.some(n=>typeof n!=='string'||!/^[-a-zA-Z0-9_.:]{1,100}$/.test(n))){const e=Error('tool_proof_contract_invalid');e.decisionReason='proof_contract_invalid';throw e;}
  return names;
 }
-function reject(reason){const error=Error('invalid_tool_response');error.decisionReason=reason;throw error;}
+function reject(reason,detail){const error=Error('invalid_tool_response');error.decisionReason=reason;if(detail)error.decisionDetail=detail;throw error;}
 // Conservative intent classification of the actual user anchor, never a model
 // flag or instructions embedded in tool output. Ordinary prose/plans stay answers.
 function requestMode(data){
@@ -165,33 +165,33 @@ function check(value,data,readContract=proofContract.load){
   if(!s||!PHASES.includes(s.phase)||!Array.isArray(s.remaining)||s.remaining.length>8||s.remaining.some(x=>typeof x!=='string')
       ||!Array.isArray(s.evidence_call_ids)||s.evidence_call_ids.length>32||s.evidence_call_ids.some(x=>typeof x!=='string')
       ||typeof s.next_step!=='string'||s.next_step.length>2000)reject('task_contract');
-  if(s.evidence_call_ids.some(id=>!observed.ids.has(id)))reject('unverified_completion');
+  if(s.evidence_call_ids.some(id=>!observed.ids.has(id)))reject('unverified_completion','unobserved_evidence');
   if(['discover','execute','verify'].includes(s.phase)&&!calls.length)reject('task_incomplete');
-  if(s.phase==='complete'&&(calls.length||s.remaining.length||s.next_step.trim()||!s.evidence_call_ids.length||observed.last?.failed||observed.last?.pending))reject('unverified_completion');
+  if(s.phase==='complete'&&(calls.length||s.remaining.length||s.next_step.trim()||!s.evidence_call_ids.length||observed.last?.failed||observed.last?.pending))reject('unverified_completion','invalid_completion_state');
   if(s.phase==='complete'){
     const cited=observed.results.filter(r=>s.evidence_call_ids.includes(r.id));
     const lastUnfinished=observed.results.findLastIndex(r=>r.failed||r.pending);
     const freshProof=observed.results.slice(lastUnfinished+1).some(r=>s.evidence_call_ids.includes(r.id)&&!r.empty);
-    if(cited.some(r=>r.failed||r.pending)||!freshProof)reject('unverified_completion');
+    if(cited.some(r=>r.failed||r.pending)||!freshProof)reject('unverified_completion','failed_or_stale_evidence');
   }
   if(['blocked','waiting'].includes(s.phase)&&(calls.length||!s.next_step.trim()||!s.remaining.length))reject('task_incomplete');
-  if(s.phase==='waiting'&&!s.evidence_call_ids.length)reject('unverified_completion');
+  if(s.phase==='waiting'&&!s.evidence_call_ids.length)reject('unverified_completion','missing_waiting_evidence');
   if(s.phase==='answer'&&(calls.length||s.remaining.length||s.next_step.trim()))reject('task_contract');
   const actionableTools=data.tool_choice!=='none'&&(data.tools||[]).some(t=>t?.type==='function'&&t.function?.parameters?.type==='object');
   const contract=readContract(data);let proofState=null;
   if(contract){
     const policy=operatorPolicy(contract);if(policy&&calls.some(call=>!policy.includes(call.name)))throw Error('tool_scope_denied');
     const proof=proofContract.assess(contract,observed);proofState=proof;
-    if(s.phase==='answer'||(s.phase==='complete'&&!proof.complete))reject('unverified_completion');
+    if(s.phase==='answer'||(s.phase==='complete'&&!proof.complete))reject('unverified_completion','operator_proof_incomplete');
     if(['complete','blocked','waiting'].includes(s.phase))value.content=proofContract.render(proof);
     else if(calls.length){
       const mechanics=continuity.summary(observed),next=calls[0].name;
       value.content=mechanics.unresolved_operations?'Hasil operasi sebelumnya belum pasti; saya periksa operasi yang sama.':observed.last?.failed?'Pemeriksaan terakhir gagal; saya telusuri penyebabnya sebelum melanjutkan.':/test|tests/.test(next)?'Saya jalankan pemeriksaan pada revisi terbaru.':/edit|write/.test(next)?'Saya terapkan koreksi dalam lingkup tugas, lalu periksa hasilnya.':'Saya periksa sumber yang diperlukan untuk langkah berikutnya.';
     }
-  }else if(unsupportedClaim(value,observed,data))reject('unverified_completion');
+  }else if(unsupportedClaim(value,observed,data))reject('unverified_completion','unsupported_success_claim');
   if(s.phase==='answer'&&actionableTools&&requestMode(data)==='tool_action'&&!readOnlyAuditReport(value,observed,data))reject('task_incomplete');
   const continuityError=continuity.check(value,observed,requestFacts(data));
-  if(continuityError)reject(continuityError);
+  if(continuityError)reject(continuityError,continuityError==='unverified_completion'?'continuity_unverified':undefined);
   for(const call of calls){
     const key=signature(call.name,call.arguments);
     if((observed.emptyChecks.get(key)||0)>=2||(observed.emptyTotals.get(key)||0)>=6)reject('stalled_decision');

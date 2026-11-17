@@ -2,6 +2,8 @@
 // Recovery regenerates an unexecuted decision. It never invokes client tools.
 const REASONS = new Set(['result_file', 'result_json', 'decision_contract', 'arguments_json', 'empty_decision', 'task_contract', 'task_incomplete', 'unverified_completion', 'stalled_decision','output_budget']);
 const {performance} = require('node:perf_hooks');
+// Fixed mechanics only: never log an arbitrary error property or receipt value.
+const DETAILS=new Set(['unobserved_evidence','invalid_completion_state','failed_or_stale_evidence','missing_waiting_evidence','operator_proof_incomplete','unsupported_success_claim','continuity_unverified']);
 // All generations share this budget, leaving room below the 300s client header deadline.
 const REQUEST_BUDGET_MS = 240000, ATTEMPT_LIMIT_MS = 180000;
 // A latency class, never client identity, authorization or an execution timeout.
@@ -39,7 +41,7 @@ function parseResult(raw, validate, data) {
   }
 }
 function transportError(error) {
-  if (REASONS.has(error.decisionReason)) return invalid(error.decisionReason);
+  if (REASONS.has(error.decisionReason)) {const result=invalid(error.decisionReason);if(DETAILS.has(error.decisionDetail))result.decisionDetail=error.decisionDetail;return result;}
   const code = typeof error.message === 'string' && /^(?:tool_|invalid_)/.test(error.message)
     ? error.message : 'invalid_tool_response';
   const result=Error(code);
@@ -85,7 +87,7 @@ async function chooseDecision(plan, data, log = () => {}, wait = ms => new Promi
       const reason = REASONS.has(error.decisionReason) ? error.decisionReason : null;
       // Preserve terminal access/schema/firewall errors even at the deadline.
       if (now() >= deadline && (reason || ['tool_engine_unavailable','tool_engine_timeout','tool_engine_output_limit'].includes(error.message))) throw Error('tool_engine_timeout');
-      if (reason) log({event:'internal_tool_format_error', reason, attempt});
+      if (reason) log({event:'internal_tool_format_error', reason, attempt,...(DETAILS.has(error.decisionDetail)?{detail:error.decisionDetail}:{})});
       if (reason && repairs === 0 && attempt < 3) {
         repairs++; repair = reason;
         log({event:'internal_tool_format_repair', reason, attempt});
