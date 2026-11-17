@@ -93,6 +93,21 @@ def _private_directory(path):
     return path
 
 
+def feature_root(root):
+    path=Path(root).expanduser().absolute()
+    # Older Mac installations use an owner-created profile alias. Follow that
+    # one explicit root only when both link and private target belong to this
+    # user. Download/extraction directories still reject symlinks.
+    if path.is_symlink():
+        if os.name!='posix':raise SetupError('unsafe_runtime_path')
+        target=path.resolve(strict=True)
+        owner=path.lstat();info=target.stat()
+        if owner.st_uid!=os.getuid() or info.st_uid!=os.getuid() or not stat.S_ISDIR(info.st_mode) or info.st_mode&0o077:
+            raise SetupError('unsafe_runtime_path')
+        path=target
+    return _private_directory(path)
+
+
 def _atomic_json(path, value):
     pending = path.with_name('.' + path.name + '-' + uuid4().hex)
     try:
@@ -404,7 +419,7 @@ def _failure(exception):
 
 
 def ensure_features(root, release_directory=None):
-    root = _private_directory(Path(root).expanduser().absolute())
+    root = feature_root(root)
     if os.environ.get('HARMONIKA_INSTALL_FEATURES') == '0':
         return {'schema_version': 1, 'status': 'core_only', 'ready': False, 'automatic_install': False,
                 'features': {'documents': False, 'ssh': False, 'browser': False}}

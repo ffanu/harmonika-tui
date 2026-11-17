@@ -28,6 +28,24 @@ def tar_fixture(file, entries):
 
 
 class FeatureSetup(unittest.TestCase):
+    @unittest.skipUnless(os.name=='posix','Legacy POSIX profile alias')
+    def test_owned_private_legacy_profile_alias_is_supported(self):
+        with tempfile.TemporaryDirectory() as temp:
+            area=Path(temp);target=area/'old-private-profile';target.mkdir(mode=0o700)
+            alias=area/'harmonika-terminal';alias.symlink_to(target,target_is_directory=True)
+            self.assertEqual(m.feature_root(alias),target.resolve())
+            target.chmod(0o755)
+            with self.assertRaisesRegex(m.SetupError,'unsafe_runtime_path'):m.feature_root(alias)
+            self.assertEqual(target.stat().st_mode&0o777,0o755)
+
+    @unittest.skipUnless(os.name=='posix','Legacy POSIX profile alias')
+    def test_legacy_alias_does_not_permit_symlink_dependency_directories(self):
+        with tempfile.TemporaryDirectory() as temp:
+            area=Path(temp);target=area/'private';target.mkdir(mode=0o700)
+            alias=area/'profile';alias.symlink_to(target,target_is_directory=True)
+            runtime=target/'python-runtime';runtime.symlink_to(area,target_is_directory=True)
+            with self.assertRaisesRegex(m.SetupError,'unsafe_runtime_path'):m._private_directory(runtime)
+
     def test_intel_mac_uses_compatible_pinned_crypto_wheel(self):
         with patch.object(m.platform,'system',return_value='Darwin'),patch.object(m.platform,'machine',return_value='x86_64'):
             _,lock,versions=m._locks(SOURCE/'runtime')
