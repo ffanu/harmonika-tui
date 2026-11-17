@@ -128,5 +128,20 @@ class FeatureSetup(unittest.TestCase):
             root=Path(temp);(root/'documents-requirements.lock').write_text('--extra-index-url https://evil.invalid\n');(root/'ssh-requirements.lock').write_text('example>=1\n')
             with self.assertRaisesRegex(m.SetupError,'invalid_feature_lock'):m._locks(root)
 
+    def test_managed_node_checksum_failure_does_not_publish_executable(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            def download_fixture(url,target,hosts,maximum=m.MAX_ARCHIVE):
+                if str(target).endswith('SHASUMS256.txt'):
+                    target.write_text('0'*64+'  node-v'+m.NODE_VERSION+'-linux-x64.tar.gz\n')
+                else:target.write_bytes(b'untrusted fixture')
+            with patch.dict(os.environ,{'HARMONIKA_NODE':'fixture-node18'}),patch.object(m,'_node_version',return_value='18.20.8'),patch.object(m,'_node_platform',return_value='linux-x64'),patch.object(m,'download',side_effect=download_fixture):
+                with self.assertRaisesRegex(m.SetupError,'checksum_failed'):m.browser_node(root)
+            self.assertFalse((root/'node-runtime/node').exists())
+
+    def test_windows_reserved_and_stream_paths_are_refused_before_extraction(self):
+        for name in ['package/NUL','package/COM1.txt','package/name:stream','C:/node.exe','package/bad.','package/bad ']:
+            with self.subTest(name=name),self.assertRaises(m.SetupError):m._safe_name(name)
+
 
 if __name__=='__main__':unittest.main()
