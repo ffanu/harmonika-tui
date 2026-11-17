@@ -73,6 +73,14 @@ def build(release):
     shutil.copy2(SOURCE/'UPSTREAM-LICENSE.md',tools/'UPSTREAM-LICENSE.md')
     shutil.copy2(SOURCE/'runtime/ssh-requirements.lock',tools/'ssh-requirements.lock')
     shutil.copy2(SOURCE/'docs/SSH-CONNECTOR-SPEC.txt',tools/'docs/SSH-CONNECTOR-SPEC.txt')
+    # Vendored MCP/AJV dependencies: installs must succeed on any OS with
+    # only python3+node+git — npm is never required at install time.
+    npm=shutil.which('npm')
+    if not npm:raise ValueError('npm_required_to_build_package')
+    (tools/'package.json').write_text(json.dumps({'name':'harmonika-tools-vendored','private':True,'dependencies':{'@modelcontextprotocol/sdk':'1.32.1','ajv':'8.17.1'}},indent=2))
+    subprocess.run([npm,'install','--prefix',str(tools),'--no-audit','--no-fund','--omit=dev'],check=True,timeout=420)
+    for junk in tools.rglob('.package-lock.json'):junk.unlink()
+    (tools/'node_modules/.package-lock.json').unlink(missing_ok=True)
     files={str(p.relative_to(destination)):{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
     notes_env=os.environ.get('HARMONIKA_RELEASE_NOTES','')
     release_notes=[n.strip() for n in notes_env.split('|') if n.strip()] if notes_env else [

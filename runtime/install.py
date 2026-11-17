@@ -46,9 +46,14 @@ def ensure_dependencies(root=ROOT):
         npm=shutil.which('npm.cmd' if os.name=='nt' else 'npm') or shutil.which('npm') or str(Path.home()/'.local/node/bin/npm')
         if Path(npm).exists() or shutil.which('npm'):
             tools_dir.mkdir(parents=True,exist_ok=True)
-            pkg={'name':'harmonika-tools','private':True,'dependencies':{'@modelcontextprotocol/sdk':'^1.0.0','ajv':'^8.17.1'}}
+            pkg={'name':'harmonika-tools','private':True,'dependencies':{'@modelcontextprotocol/sdk':'1.32.1','ajv':'^8.17.1'}}
             (tools_dir/'package.json').write_text(json.dumps(pkg,indent=2))
             subprocess.run([npm,'install','--no-audit','--no-fund'],cwd=str(tools_dir),check=True,timeout=180,shell=(os.name=='nt'))
+        else:
+            # Packages since 2026.11.17 vendored node_modules/tools, so npm is
+            # optional. Legacy shared-dir upgrades without npm are surfaced by
+            # the preflight diagnostics instead of failing silently here.
+            print('note: npm tidak ditemukan — memakai dependensi vendored dari package (tidak masalah untuk instalasi baru).')
 
 def ensure_ssh_dependencies(directory,root=ROOT):
     lock=directory/'tools/ssh-requirements.lock'

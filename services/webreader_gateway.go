@@ -5,17 +5,15 @@ package main
 // Auth: Bearer public AI token (same as /v1/chat/completions agent path).
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 )
 
-var webReaderProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var webReaderProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_WEBREADER_URL", "127.0.0.1:17896"),
-})
+}, "webreader_unavailable")
 
 func (a *app) webReaderAPI(w http.ResponseWriter, r *http.Request) {
 	if _, ok := a.requirePublicAIToken(w, r); !ok {
@@ -31,8 +29,5 @@ func (a *app) webReaderAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	r.URL.Path = target
-	webReaderProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("webreader unavailable: %v", err)})
-	}
 	webReaderProxy.ServeHTTP(w, r)
 }

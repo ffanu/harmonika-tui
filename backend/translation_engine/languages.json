@@ -1,0 +1,2249 @@
+{
+  "schema_version": 1,
+  "description": "Language-selection catalog, not proof of local model translation quality. Regional outputs always require review.",
+  "reference_url": "https://docs.cloud.google.com/translate/docs/languages",
+  "reference_checked_at": "2026-11-17",
+  "languages": [
+    {
+      "code": "ab",
+      "name": "Abkhaz",
+      "aliases": [
+        "Abkhaz",
+        "ab"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ace",
+      "name": "Acehnese",
+      "aliases": [
+        "Acehnese",
+        "ace",
+        "aceh",
+        "bahasa aceh"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "ach",
+      "name": "Acholi",
+      "aliases": [
+        "Acholi",
+        "ach"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "af",
+      "name": "Afrikaans",
+      "aliases": [
+        "Afrikaans",
+        "af"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ak",
+      "name": "Twi (Akan)",
+      "aliases": [
+        "Twi (Akan)",
+        "ak"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "alz",
+      "name": "Alur",
+      "aliases": [
+        "Alur",
+        "alz"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "am",
+      "name": "Amharic",
+      "aliases": [
+        "Amharic",
+        "am"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ar",
+      "name": "Arabic",
+      "aliases": [
+        "Arabic",
+        "ar",
+        "arab",
+        "bahasa arab"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "as",
+      "name": "Assamese",
+      "aliases": [
+        "Assamese",
+        "as"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "awa",
+      "name": "Awadhi",
+      "aliases": [
+        "Awadhi",
+        "awa"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ay",
+      "name": "Aymara",
+      "aliases": [
+        "Aymara",
+        "ay"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "az",
+      "name": "Azerbaijani",
+      "aliases": [
+        "Azerbaijani",
+        "az"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ba",
+      "name": "Bashkir",
+      "aliases": [
+        "Bashkir",
+        "ba"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ban",
+      "name": "Balinese",
+      "aliases": [
+        "Balinese",
+        "ban",
+        "bali",
+        "bahasa bali"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "bbc",
+      "name": "Batak Toba",
+      "aliases": [
+        "Batak Toba",
+        "bbc",
+        "toba",
+        "batak toba"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "be",
+      "name": "Belarusian",
+      "aliases": [
+        "Belarusian",
+        "be"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bem",
+      "name": "Bemba",
+      "aliases": [
+        "Bemba",
+        "bem"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bew",
+      "name": "Betawi",
+      "aliases": [
+        "Betawi",
+        "bew",
+        "bahasa betawi"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "bg",
+      "name": "Bulgarian",
+      "aliases": [
+        "Bulgarian",
+        "bg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bho",
+      "name": "Bhojpuri",
+      "aliases": [
+        "Bhojpuri",
+        "bho"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bik",
+      "name": "Bikol",
+      "aliases": [
+        "Bikol",
+        "bik"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bjn",
+      "name": "Banjarese",
+      "aliases": [
+        "Banjarese",
+        "banjar",
+        "banjarese"
+      ],
+      "catalog_source": "indonesian_regional_extension",
+      "quality_status": "native_review_required",
+      "regional": true
+    },
+    {
+      "code": "bm",
+      "name": "Bambara",
+      "aliases": [
+        "Bambara",
+        "bm"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bn",
+      "name": "Bengali",
+      "aliases": [
+        "Bengali",
+        "bn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "br",
+      "name": "Breton",
+      "aliases": [
+        "Breton",
+        "br"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bs",
+      "name": "Bosnian",
+      "aliases": [
+        "Bosnian",
+        "bs"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bts",
+      "name": "Batak Simalungun",
+      "aliases": [
+        "Batak Simalungun",
+        "bts",
+        "simalungun"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "btx",
+      "name": "Batak Karo",
+      "aliases": [
+        "Batak Karo",
+        "btx",
+        "karo",
+        "bahasa karo"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "bua",
+      "name": "Buryat",
+      "aliases": [
+        "Buryat",
+        "bua"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "bug",
+      "name": "Buginese",
+      "aliases": [
+        "Buginese",
+        "bugis",
+        "buginese"
+      ],
+      "catalog_source": "indonesian_regional_extension",
+      "quality_status": "native_review_required",
+      "regional": true
+    },
+    {
+      "code": "ca",
+      "name": "Catalan",
+      "aliases": [
+        "Catalan",
+        "ca"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ceb",
+      "name": "Cebuano",
+      "aliases": [
+        "Cebuano",
+        "ceb"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "cgg",
+      "name": "Kiga",
+      "aliases": [
+        "Kiga",
+        "cgg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "chm",
+      "name": "Meadow Mari",
+      "aliases": [
+        "Meadow Mari",
+        "chm"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ckb",
+      "name": "Kurdish (Sorani)",
+      "aliases": [
+        "Kurdish (Sorani)",
+        "ckb"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "cnh",
+      "name": "Hakha Chin",
+      "aliases": [
+        "Hakha Chin",
+        "cnh"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "co",
+      "name": "Corsican",
+      "aliases": [
+        "Corsican",
+        "co"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "crh",
+      "name": "Crimean Tatar",
+      "aliases": [
+        "Crimean Tatar",
+        "crh"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "crs",
+      "name": "Seychellois Creole",
+      "aliases": [
+        "Seychellois Creole",
+        "crs"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "cs",
+      "name": "Czech",
+      "aliases": [
+        "Czech",
+        "cs"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "cv",
+      "name": "Chuvash",
+      "aliases": [
+        "Chuvash",
+        "cv"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "cy",
+      "name": "Welsh",
+      "aliases": [
+        "Welsh",
+        "cy"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "da",
+      "name": "Danish",
+      "aliases": [
+        "Danish",
+        "da"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "de",
+      "name": "German",
+      "aliases": [
+        "German",
+        "de",
+        "jerman"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "din",
+      "name": "Dinka",
+      "aliases": [
+        "Dinka",
+        "din"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "doi",
+      "name": "Dogri",
+      "aliases": [
+        "Dogri",
+        "doi"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "dov",
+      "name": "Dombe",
+      "aliases": [
+        "Dombe",
+        "dov"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "dv",
+      "name": "Divehi",
+      "aliases": [
+        "Divehi",
+        "dv"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "dz",
+      "name": "Dzongkha",
+      "aliases": [
+        "Dzongkha",
+        "dz"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ee",
+      "name": "Ewe",
+      "aliases": [
+        "Ewe",
+        "ee"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "el",
+      "name": "Greek",
+      "aliases": [
+        "Greek",
+        "el"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "en",
+      "name": "English",
+      "aliases": [
+        "English",
+        "en",
+        "inggris",
+        "english",
+        "eng",
+        "bahasa inggris"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "eo",
+      "name": "Esperanto",
+      "aliases": [
+        "Esperanto",
+        "eo"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "es",
+      "name": "Spanish",
+      "aliases": [
+        "Spanish",
+        "es",
+        "spanyol"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "et",
+      "name": "Estonian",
+      "aliases": [
+        "Estonian",
+        "et"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "eu",
+      "name": "Basque",
+      "aliases": [
+        "Basque",
+        "eu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fa",
+      "name": "Persian",
+      "aliases": [
+        "Persian",
+        "fa",
+        "persia"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ff",
+      "name": "Fulfulde",
+      "aliases": [
+        "Fulfulde",
+        "ff"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fi",
+      "name": "Finnish",
+      "aliases": [
+        "Finnish",
+        "fi"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fil",
+      "name": "Filipino (Tagalog)",
+      "aliases": [
+        "Filipino (Tagalog)",
+        "fil",
+        "tl",
+        "tagalog",
+        "filipina"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fj",
+      "name": "Fijian",
+      "aliases": [
+        "Fijian",
+        "fj"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fr",
+      "name": "French",
+      "aliases": [
+        "French",
+        "fr",
+        "prancis",
+        "perancis"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fr-CA",
+      "name": "French (Canadian)",
+      "aliases": [
+        "French (Canadian)",
+        "fr-CA"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fr-FR",
+      "name": "French (French)",
+      "aliases": [
+        "French (French)",
+        "fr-FR"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "fy",
+      "name": "Frisian",
+      "aliases": [
+        "Frisian",
+        "fy"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ga",
+      "name": "Irish",
+      "aliases": [
+        "Irish",
+        "ga"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "gaa",
+      "name": "Ga",
+      "aliases": [
+        "Ga",
+        "gaa"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "gd",
+      "name": "Scots Gaelic",
+      "aliases": [
+        "Scots Gaelic",
+        "gd"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "gl",
+      "name": "Galician",
+      "aliases": [
+        "Galician",
+        "gl"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "gn",
+      "name": "Guarani",
+      "aliases": [
+        "Guarani",
+        "gn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "gom",
+      "name": "Konkani",
+      "aliases": [
+        "Konkani",
+        "gom"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "gor",
+      "name": "Gorontalo",
+      "aliases": [
+        "Gorontalo",
+        "bahasa gorontalo"
+      ],
+      "catalog_source": "indonesian_regional_extension",
+      "quality_status": "native_review_required",
+      "regional": true
+    },
+    {
+      "code": "gu",
+      "name": "Gujarati",
+      "aliases": [
+        "Gujarati",
+        "gu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ha",
+      "name": "Hausa",
+      "aliases": [
+        "Hausa",
+        "ha"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "haw",
+      "name": "Hawaiian",
+      "aliases": [
+        "Hawaiian",
+        "haw"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "he",
+      "name": "Hebrew",
+      "aliases": [
+        "Hebrew",
+        "iw",
+        "he",
+        "ibrani"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hi",
+      "name": "Hindi",
+      "aliases": [
+        "Hindi",
+        "hi",
+        "hindi"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hil",
+      "name": "Hiligaynon",
+      "aliases": [
+        "Hiligaynon",
+        "hil"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hmn",
+      "name": "Hmong",
+      "aliases": [
+        "Hmong",
+        "hmn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hr",
+      "name": "Croatian",
+      "aliases": [
+        "Croatian",
+        "hr"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hrx",
+      "name": "Hunsrik",
+      "aliases": [
+        "Hunsrik",
+        "hrx"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ht",
+      "name": "Haitian Creole",
+      "aliases": [
+        "Haitian Creole",
+        "ht"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hu",
+      "name": "Hungarian",
+      "aliases": [
+        "Hungarian",
+        "hu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "hy",
+      "name": "Armenian",
+      "aliases": [
+        "Armenian",
+        "hy"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "id",
+      "name": "Indonesian",
+      "aliases": [
+        "Indonesian",
+        "id",
+        "indonesia",
+        "indonesian",
+        "bahasa indonesia",
+        "ind"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ig",
+      "name": "Igbo",
+      "aliases": [
+        "Igbo",
+        "ig"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ilo",
+      "name": "Iloko",
+      "aliases": [
+        "Iloko",
+        "ilo"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "is",
+      "name": "Icelandic",
+      "aliases": [
+        "Icelandic",
+        "is"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "it",
+      "name": "Italian",
+      "aliases": [
+        "Italian",
+        "it",
+        "italia"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ja",
+      "name": "Japanese",
+      "aliases": [
+        "Japanese",
+        "ja",
+        "jepang",
+        "bahasa jepang"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "jv",
+      "name": "Javanese",
+      "aliases": [
+        "Javanese",
+        "jw",
+        "jv",
+        "jawa",
+        "javanese",
+        "jav",
+        "ngoko",
+        "krama",
+        "jawa ngoko",
+        "jawa krama"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "ka",
+      "name": "Georgian",
+      "aliases": [
+        "Georgian",
+        "ka"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "kk",
+      "name": "Kazakh",
+      "aliases": [
+        "Kazakh",
+        "kk"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "km",
+      "name": "Khmer",
+      "aliases": [
+        "Khmer",
+        "km"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "kn",
+      "name": "Kannada",
+      "aliases": [
+        "Kannada",
+        "kn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ko",
+      "name": "Korean",
+      "aliases": [
+        "Korean",
+        "ko",
+        "korea",
+        "bahasa korea"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "kri",
+      "name": "Krio",
+      "aliases": [
+        "Krio",
+        "kri"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ktu",
+      "name": "Kituba",
+      "aliases": [
+        "Kituba",
+        "ktu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ku",
+      "name": "Kurdish (Kurmanji)",
+      "aliases": [
+        "Kurdish (Kurmanji)",
+        "ku"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ky",
+      "name": "Kyrgyz",
+      "aliases": [
+        "Kyrgyz",
+        "ky"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "la",
+      "name": "Latin",
+      "aliases": [
+        "Latin",
+        "la"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lb",
+      "name": "Luxembourgish",
+      "aliases": [
+        "Luxembourgish",
+        "lb"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lg",
+      "name": "Ganda (Luganda)",
+      "aliases": [
+        "Ganda (Luganda)",
+        "lg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "li",
+      "name": "Limburgan",
+      "aliases": [
+        "Limburgan",
+        "li"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lij",
+      "name": "Ligurian",
+      "aliases": [
+        "Ligurian",
+        "lij"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lmo",
+      "name": "Lombard",
+      "aliases": [
+        "Lombard",
+        "lmo"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ln",
+      "name": "Lingala",
+      "aliases": [
+        "Lingala",
+        "ln"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lo",
+      "name": "Lao",
+      "aliases": [
+        "Lao",
+        "lo"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lt",
+      "name": "Lithuanian",
+      "aliases": [
+        "Lithuanian",
+        "lt"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ltg",
+      "name": "Latgalian",
+      "aliases": [
+        "Latgalian",
+        "ltg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "luo",
+      "name": "Luo",
+      "aliases": [
+        "Luo",
+        "luo"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lus",
+      "name": "Mizo",
+      "aliases": [
+        "Mizo",
+        "lus"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "lv",
+      "name": "Latvian",
+      "aliases": [
+        "Latvian",
+        "lv"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mad",
+      "name": "Madurese",
+      "aliases": [
+        "Madurese",
+        "madura",
+        "bahasa madura"
+      ],
+      "catalog_source": "indonesian_regional_extension",
+      "quality_status": "native_review_required",
+      "regional": true
+    },
+    {
+      "code": "mai",
+      "name": "Maithili",
+      "aliases": [
+        "Maithili",
+        "mai"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mak",
+      "name": "Makassar",
+      "aliases": [
+        "Makassar",
+        "mak",
+        "makassar",
+        "makasar"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "mg",
+      "name": "Malagasy",
+      "aliases": [
+        "Malagasy",
+        "mg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mi",
+      "name": "Maori",
+      "aliases": [
+        "Maori",
+        "mi"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "min",
+      "name": "Minang",
+      "aliases": [
+        "Minang",
+        "min",
+        "minang",
+        "minangkabau",
+        "padang"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "mk",
+      "name": "Macedonian",
+      "aliases": [
+        "Macedonian",
+        "mk"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ml",
+      "name": "Malayalam",
+      "aliases": [
+        "Malayalam",
+        "ml"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mn",
+      "name": "Mongolian",
+      "aliases": [
+        "Mongolian",
+        "mn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mni-Mtei",
+      "name": "Meiteilon (Manipuri)",
+      "aliases": [
+        "Meiteilon (Manipuri)",
+        "mni-Mtei"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mr",
+      "name": "Marathi",
+      "aliases": [
+        "Marathi",
+        "mr"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ms",
+      "name": "Malay",
+      "aliases": [
+        "Malay",
+        "ms",
+        "melayu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ms-Arab",
+      "name": "Malay (Jawi)",
+      "aliases": [
+        "Malay (Jawi)",
+        "ms-Arab"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "mt",
+      "name": "Maltese",
+      "aliases": [
+        "Maltese",
+        "mt"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "my",
+      "name": "Myanmar (Burmese)",
+      "aliases": [
+        "Myanmar (Burmese)",
+        "my"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ne",
+      "name": "Nepali",
+      "aliases": [
+        "Nepali",
+        "ne"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "new",
+      "name": "Nepalbhasa (Newari)",
+      "aliases": [
+        "Nepalbhasa (Newari)",
+        "new"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "nl",
+      "name": "Dutch",
+      "aliases": [
+        "Dutch",
+        "nl",
+        "belanda"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "no",
+      "name": "Norwegian",
+      "aliases": [
+        "Norwegian",
+        "no"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "nr",
+      "name": "Ndebele (South)",
+      "aliases": [
+        "Ndebele (South)",
+        "nr"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "nso",
+      "name": "Northern Sotho (Sepedi)",
+      "aliases": [
+        "Northern Sotho (Sepedi)",
+        "nso"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "nus",
+      "name": "Nuer",
+      "aliases": [
+        "Nuer",
+        "nus"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ny",
+      "name": "Chichewa (Nyanja)",
+      "aliases": [
+        "Chichewa (Nyanja)",
+        "ny"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "oc",
+      "name": "Occitan",
+      "aliases": [
+        "Occitan",
+        "oc"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "om",
+      "name": "Oromo",
+      "aliases": [
+        "Oromo",
+        "om"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pa",
+      "name": "Punjabi",
+      "aliases": [
+        "Punjabi",
+        "pa"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pa-Arab",
+      "name": "Punjabi (Shahmukhi)",
+      "aliases": [
+        "Punjabi (Shahmukhi)",
+        "pa-Arab"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pag",
+      "name": "Pangasinan",
+      "aliases": [
+        "Pangasinan",
+        "pag"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pam",
+      "name": "Kapampangan",
+      "aliases": [
+        "Kapampangan",
+        "pam"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pap",
+      "name": "Papiamento",
+      "aliases": [
+        "Papiamento",
+        "pap"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pl",
+      "name": "Polish",
+      "aliases": [
+        "Polish",
+        "pl"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ps",
+      "name": "Pashto",
+      "aliases": [
+        "Pashto",
+        "ps"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pt",
+      "name": "Portuguese",
+      "aliases": [
+        "Portuguese",
+        "pt",
+        "portugis"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pt-BR",
+      "name": "Portuguese (Brazil)",
+      "aliases": [
+        "Portuguese (Brazil)",
+        "pt-BR"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "pt-PT",
+      "name": "Portuguese (Portugal)",
+      "aliases": [
+        "Portuguese (Portugal)",
+        "pt-PT"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "qu",
+      "name": "Quechua",
+      "aliases": [
+        "Quechua",
+        "qu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "rn",
+      "name": "Rundi",
+      "aliases": [
+        "Rundi",
+        "rn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ro",
+      "name": "Romanian",
+      "aliases": [
+        "Romanian",
+        "ro"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "rom",
+      "name": "Romani",
+      "aliases": [
+        "Romani",
+        "rom"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ru",
+      "name": "Russian",
+      "aliases": [
+        "Russian",
+        "ru",
+        "rusia"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "rw",
+      "name": "Kinyarwanda",
+      "aliases": [
+        "Kinyarwanda",
+        "rw"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sa",
+      "name": "Sanskrit",
+      "aliases": [
+        "Sanskrit",
+        "sa"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "scn",
+      "name": "Sicilian",
+      "aliases": [
+        "Sicilian",
+        "scn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sd",
+      "name": "Sindhi",
+      "aliases": [
+        "Sindhi",
+        "sd"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sg",
+      "name": "Sango",
+      "aliases": [
+        "Sango",
+        "sg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "shn",
+      "name": "Shan",
+      "aliases": [
+        "Shan",
+        "shn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "si",
+      "name": "Sinhala (Sinhalese)",
+      "aliases": [
+        "Sinhala (Sinhalese)",
+        "si"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sk",
+      "name": "Slovak",
+      "aliases": [
+        "Slovak",
+        "sk"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sl",
+      "name": "Slovenian",
+      "aliases": [
+        "Slovenian",
+        "sl"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sm",
+      "name": "Samoan",
+      "aliases": [
+        "Samoan",
+        "sm"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sn",
+      "name": "Shona",
+      "aliases": [
+        "Shona",
+        "sn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "so",
+      "name": "Somali",
+      "aliases": [
+        "Somali",
+        "so"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sq",
+      "name": "Albanian",
+      "aliases": [
+        "Albanian",
+        "sq"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sr",
+      "name": "Serbian",
+      "aliases": [
+        "Serbian",
+        "sr"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ss",
+      "name": "Swati",
+      "aliases": [
+        "Swati",
+        "ss"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "st",
+      "name": "Sesotho",
+      "aliases": [
+        "Sesotho",
+        "st"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "su",
+      "name": "Sundanese",
+      "aliases": [
+        "Sundanese",
+        "su",
+        "sunda",
+        "sundanese",
+        "sun",
+        "sunda lemes"
+      ],
+      "regional": true,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "native_review_required"
+    },
+    {
+      "code": "sv",
+      "name": "Swedish",
+      "aliases": [
+        "Swedish",
+        "sv"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "sw",
+      "name": "Swahili",
+      "aliases": [
+        "Swahili",
+        "sw"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "szl",
+      "name": "Silesian",
+      "aliases": [
+        "Silesian",
+        "szl"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ta",
+      "name": "Tamil",
+      "aliases": [
+        "Tamil",
+        "ta",
+        "tamil"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "te",
+      "name": "Telugu",
+      "aliases": [
+        "Telugu",
+        "te"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "tet",
+      "name": "Tetum",
+      "aliases": [
+        "Tetum",
+        "tet"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "tg",
+      "name": "Tajik",
+      "aliases": [
+        "Tajik",
+        "tg"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "th",
+      "name": "Thai",
+      "aliases": [
+        "Thai",
+        "th",
+        "thai",
+        "thailand"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ti",
+      "name": "Tigrinya",
+      "aliases": [
+        "Tigrinya",
+        "ti"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "tk",
+      "name": "Turkmen",
+      "aliases": [
+        "Turkmen",
+        "tk"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "tn",
+      "name": "Tswana",
+      "aliases": [
+        "Tswana",
+        "tn"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "tr",
+      "name": "Turkish",
+      "aliases": [
+        "Turkish",
+        "tr",
+        "turki"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ts",
+      "name": "Tsonga",
+      "aliases": [
+        "Tsonga",
+        "ts"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "tt",
+      "name": "Tatar",
+      "aliases": [
+        "Tatar",
+        "tt"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ug",
+      "name": "Uyghur",
+      "aliases": [
+        "Uyghur",
+        "ug"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "uk",
+      "name": "Ukrainian",
+      "aliases": [
+        "Ukrainian",
+        "uk"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "ur",
+      "name": "Urdu",
+      "aliases": [
+        "Urdu",
+        "ur"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "uz",
+      "name": "Uzbek",
+      "aliases": [
+        "Uzbek",
+        "uz"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "vi",
+      "name": "Vietnamese",
+      "aliases": [
+        "Vietnamese",
+        "vi",
+        "vietnam"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "xh",
+      "name": "Xhosa",
+      "aliases": [
+        "Xhosa",
+        "xh"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "yi",
+      "name": "Yiddish",
+      "aliases": [
+        "Yiddish",
+        "yi"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "yo",
+      "name": "Yoruba",
+      "aliases": [
+        "Yoruba",
+        "yo"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "yua",
+      "name": "Yucatec Maya",
+      "aliases": [
+        "Yucatec Maya",
+        "yua"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "yue",
+      "name": "Cantonese",
+      "aliases": [
+        "Cantonese",
+        "yue"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "zh-CN",
+      "name": "Chinese (Simplified)",
+      "aliases": [
+        "Chinese (Simplified)",
+        "zh-CN",
+        "zh",
+        "mandarin",
+        "tionghoa",
+        "cina",
+        "zh-Hans",
+        "chinese",
+        "chinese simplified"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "zh-TW",
+      "name": "Chinese (Traditional)",
+      "aliases": [
+        "Chinese (Traditional)",
+        "zh-TW",
+        "zh-Hant",
+        "traditional chinese"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    },
+    {
+      "code": "zu",
+      "name": "Zulu",
+      "aliases": [
+        "Zulu",
+        "zu"
+      ],
+      "regional": false,
+      "catalog_source": "google_cloud_nmt_reference",
+      "quality_status": "not_independently_qualified"
+    }
+  ]
+}

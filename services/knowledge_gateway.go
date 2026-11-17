@@ -6,18 +6,18 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 )
 
-var knowledgeProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var knowledgeProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_KNOWLEDGE_URL", "127.0.0.1:17898"),
-})
+}, "knowledge_unavailable")
 
 func (a *app) knowledgeToolsAPI(w http.ResponseWriter, r *http.Request) {
-	if _, ok := a.requirePublicAIToken(w, r); !ok {
+	owner, ok := a.requirePublicAIToken(w, r)
+	if !ok {
 		return
 	}
 	target := strings.TrimPrefix(r.URL.Path, "/api/tools/knowledge")
@@ -29,9 +29,15 @@ func (a *app) knowledgeToolsAPI(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	r.URL.Path = target
-	knowledgeProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("knowledge base unavailable: %v", err)})
-	}
-	knowledgeProxy.ServeHTTP(w, r)
+	forward := bindKnowledgeOwner(r, owner.ID)
+	forward.URL.Path = target
+	forward.URL.RawPath = ""
+	knowledgeProxy.ServeHTTP(w, forward)
+}
+
+// Only the gateway's authenticated token identity selects the private namespace.
+func bindKnowledgeOwner(r *http.Request, id int64) *http.Request {
+	forward := r.Clone(r.Context())
+	forward.Header.Set("X-Harmonika-KB-Owner", "token:"+fmt.Sprint(id))
+	return forward
 }

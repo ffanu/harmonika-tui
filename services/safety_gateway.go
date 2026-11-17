@@ -4,17 +4,15 @@ package main
 // content safety service on 127.0.0.1:17903.
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 )
 
-var safetyProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var safetyProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_SAFETY_URL", "127.0.0.1:17903"),
-})
+}, "safety_unavailable")
 
 func (a *app) safetyToolsAPI(w http.ResponseWriter, r *http.Request) {
 	if _, ok := a.requirePublicAIToken(w, r); !ok {
@@ -30,8 +28,5 @@ func (a *app) safetyToolsAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	r.URL.Path = target
-	safetyProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("safety unavailable: %v", err)})
-	}
 	safetyProxy.ServeHTTP(w, r)
 }

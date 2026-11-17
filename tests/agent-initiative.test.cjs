@@ -173,3 +173,27 @@ test('report-only phrasing works in Indonesian and English without erasing a req
   input.messages[0].content=prompt;assert.throws(()=>controller.check(report,input),e=>e.decisionReason==='task_incomplete');
  }
 });
+test('native run_tests can report verified results for berikan hasil without changing files',()=>{
+ const input={tools:[{type:'function',function:{name:'run_tests',parameters:{type:'object',properties:{}}}}],messages:[
+  {role:'user',content:'Jalankan pengujian proyek ini sesuai README. Jangan mengubah file. Berikan hasil singkat berdasarkan pengujian aktual.'},
+  {role:'assistant',content:null,tool_calls:[{id:'native-tests',type:'function',function:{name:'run_tests',arguments:'{}'}}]},
+  {role:'tool',tool_call_id:'native-tests',content:JSON.stringify({status:'completed',exit_code:0,truncated:false,verification_kind:'tests',verified_count:4,collected:4,passed:4,failed:0,skipped:0,output:'# tests 4\n# pass 4\n# fail 0\n'})}
+ ]};
+ const report=answer('Pengujian aktual lulus 4 tes.');report.task_state.evidence_call_ids=['native-tests'];
+ assert.doesNotThrow(()=>controller.check(report,input));
+ input.messages[0].content='Jalankan tes, jangan mengubah file, dan berikan laporan hasilnya.';
+ assert.doesNotThrow(()=>controller.check(report,input));
+});
+test('berikan hasil still requires complete correlated checks and cannot bypass a requested repair',()=>{
+ const input=executionHistory('npm test','# tests 2\n# pass 2\n# fail 0\n');
+ input.messages[0].content='Jalankan tes. Jangan mengubah file. Berikan hasil singkat.';
+ const report=answer('Tes lulus 2.');report.task_state.evidence_call_ids=['check'];
+ const original=input.messages[2].content;
+ for(const change of [{truncated:true},{status:'running'},{exit_code:1}]){
+  const values=JSON.parse(original);Object.assign(values[0],change);input.messages[2].content=JSON.stringify(values);
+  assert.throws(()=>controller.check(report,input));
+ }
+ input.messages[2].content=original;
+ input.messages[0].content='Perbaiki aplikasi lalu berikan hasil pengujian. Jangan mengubah file lain.';
+ assert.throws(()=>controller.check(report,input),e=>e.decisionReason==='task_incomplete');
+});

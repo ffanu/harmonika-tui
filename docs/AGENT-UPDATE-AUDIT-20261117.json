@@ -1,0 +1,421 @@
+{
+  "date": "2026-11-17",
+  "project": "Harmonika Terminal",
+  "scope": [
+    "agent-v32 entrypoint",
+    "native terminal MCP tools",
+    "shared HTTP transport",
+    "self-hosted Go gateway proxies",
+    "tenant-scoped knowledge worker"
+  ],
+  "status": "activated_and_verified",
+  "contributors": {
+    "Codex": "reproduction, core fixes, knowledge isolation, gateway fixes, independent review, regression and activation",
+    "OpenCode": "read-only MCP review and isolated MCP implementation reviewed and corrected by Codex",
+    "Claude": "not invoked"
+  },
+  "findings_fixed": [
+    {
+      "id": "unverified_success_narration",
+      "change": "Delay final success prose until current verification passes."
+    },
+    {
+      "id": "effect_replay_and_inspection_mutation",
+      "change": "Deduplicate effectful tools, block them in inspection mode, preserve unknown batch/job outcomes."
+    },
+    {
+      "id": "followup_stale_evidence",
+      "change": "New instructions invalidate old proof and bind checkpoint policy to explicit model/flags."
+    },
+    {
+      "id": "git_filename_shell_expansion",
+      "change": "Quote workspace-bound Git paths and retain commit hooks; require explicit commit opt-in."
+    },
+    {
+      "id": "search_secret_boundary",
+      "change": "Grep/glob exclude sensitive paths and symlinks with explicit partial results."
+    },
+    {
+      "id": "chunk_read_and_literal_edit",
+      "change": "Independent read offsets/limits and literal replacement text; verify edited artifacts."
+    },
+    {
+      "id": "model_option_and_sandbox_quoting",
+      "change": "Keep selected model separate from callback and quote commands before macOS write guard."
+    },
+    {
+      "id": "image_output_and_video_reconciliation",
+      "change": "Validate image output path before remote effect; preserve original video job ID and reconcile without resubmit."
+    },
+    {
+      "id": "mcp_malformed_arguments",
+      "change": "Return JSON-RPC errors, preserve ping liveness, validate nested arguments before effects."
+    },
+    {
+      "id": "mcp_media_payload_corruption",
+      "change": "Save validated PNG files and return paths instead of slicing base64/serialized JSON."
+    },
+    {
+      "id": "http_incomplete_body_and_utf8",
+      "change": "Apply total body deadline, byte limits and decode UTF-8 after complete byte assembly."
+    },
+    {
+      "id": "vision_upstream_route_and_host",
+      "change": "Use authenticated canonical VLM route and upstream Ollama /api paths with upstream Host."
+    },
+    {
+      "id": "proxy_shared_handler_race",
+      "change": "Configure immutable reverse-proxy error handlers once; tested with Go race detector."
+    },
+    {
+      "id": "knowledge_cross_token_access",
+      "change": "Verified token owner header is overwritten at gateway; SQLite store/search/list/delete scoped by owner; preserve rerank within same owner."
+    },
+    {
+      "id": "invalid_mutation_acknowledgement",
+      "change": "Require valid knowledge stored/id receipt; malformed/oversized/5xx mutation replies remain unknown and cannot authorize resubmit."
+    },
+    {
+      "id": "readonly_report_intent_invalid_tool_response",
+      "reproduced_http": 503,
+      "backend_error": "invalid_tool_response",
+      "change": "Recognize berikan hasil/laporan with explicit no-file-change scope; require existing complete correlated test/check receipts and retain repair, scope, pending and proof guards.",
+      "old_controller_phase_answer": "task_incomplete",
+      "candidate_phase_answer": "accepted",
+      "only_planner_source_changed": "agent-controller.cjs"
+    }
+  ],
+  "tests": {
+    "javascript_regression": {
+      "passed": 414,
+      "failed": 0,
+      "skipped": 0
+    },
+    "mcp_included_in_javascript": {
+      "passed": 26,
+      "failed": 0
+    },
+    "go_gateway_race": {
+      "passed": 63,
+      "failed": 0,
+      "skipped": 0,
+      "build_passed": true
+    },
+    "knowledge_isolation_python": {
+      "passed": 12,
+      "failed": 0
+    },
+    "local_activation_python": {
+      "passed": 5,
+      "failed": 0
+    },
+    "planner_report_remote_subset": {
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0,
+      "included_in_local_javascript": true
+    },
+    "total_regression_checks_excluding_subsets": 494
+  },
+  "activation": {
+    "agent": {
+      "active": true,
+      "version": "f7a28932efb3e988",
+      "previous_version": "1d794f04d907c6f8",
+      "prior_files_sha256": {
+        "agent-v32.js": "ab72a217141181ec69ba037595a8246675ecebd0aa45bbedfd9cffc5fe9df47f",
+        "agent-state.cjs": "3e3eae70f744b4f62598a2bd4e5e2cb70bf12035ed59b9a0d9595b2cb80813da",
+        "agent-http.cjs": "e95d775662402db0f94b59dc053e6cf8a8f26fd43fc3ad1f5d16203d6f7ca811"
+      },
+      "launcher_sha256": "550a20513bbf9449a1fedce1af1f877198356ad57ccc8aaaf81eec769cbf809e",
+      "launcher_changed": false,
+      "native_binary_changed": false,
+      "processes_signalled": false,
+      "files_sha256": {
+        "agent-v32.js": "32075bbb1299ced4292649bbcb4f7c97a645b324b86841279a777a310e342055",
+        "agent-state.cjs": "3e3eae70f744b4f62598a2bd4e5e2cb70bf12035ed59b9a0d9595b2cb80813da",
+        "agent-http.cjs": "03db5dd54b0bb82fa1394d0600ca2d23f805875fca2574c1dc67b6eea568dd28"
+      }
+    },
+    "mcp": {
+      "active": true,
+      "version": "25a3bc208d848673",
+      "files_sha256": {
+        "mcp-harmonika-tools.js": "7727dad0247028e4462bcadb7aac02e8d59d2a70d141616d5c203ec887410a38",
+        "agent-http.cjs": "03db5dd54b0bb82fa1394d0600ca2d23f805875fca2574c1dc67b6eea568dd28"
+      },
+      "prior_entry_sha256": "9cf307b5fe02bb475178a8beb25eb9c49c18be11e18c8036eb4bdfafd4b2f16a",
+      "entry_sha256": "28d218ad8a33163f40019e278bfb818745d38f6b3aa47bfbf1c017d44ad156c0",
+      "protocol_canary_passed": true,
+      "tools": 15,
+      "private_provider_config_changed": false,
+      "existing_processes_signalled": false
+    },
+    "backend": {
+      "active": true,
+      "gateway_unit": "harmonika-web-chat.service",
+      "gateway_old_pid": 2624824,
+      "gateway_new_pid": 2785154,
+      "knowledge_old_pid": 2494643,
+      "knowledge_new_pid": 2785141,
+      "binary_sha256": "83a952422404da00bd4e0612f5b4ca03a95fb0ba6a6781f487e4e232425e024d",
+      "knowledge_sha256": "a9c6fa1e930528d1132b9327dbbba1aa82582d2f01be1718eb2d99228fa75852",
+      "source_sha256": {
+        "webreader_gateway.go": "a0cf5ba854f0832c832f8adb30756bed7e95a2c59378207d279b5ad975fd4a6e",
+        "semantic_gateway.go": "7d05356a6275c0ed7632fa668e97ad66671f0e899c681cab868e001435271825",
+        "knowledge_gateway.go": "d4e67b3f7dca51aeafdd04f06ad9a736618678296e8197469eed1145b5d95ea5",
+        "rerank_gateway.go": "4123e9ced16cf21e6d94783ce763a72cca988acdfee97cf59a8f13b441dc0f4e",
+        "asr_gateway.go": "0e5f0b1fb03411c381e7ebbf9833518fd56484786f5c5c9e4b09509ddd9715d6",
+        "fileparser_gateway.go": "1507f545b87c23a2148d0631c5395b3025d1f0a1376e19a96e72389f03091159",
+        "imagegen_gateway.go": "81aea25dd168991c4d5d33e5dd524637479538b66ebca0d9bbbbda45a394d103",
+        "videogen_gateway.go": "c23533499b8baefb2fd9b9f6f5625beaeb0ac96b86b21fc63a9fce5c2b07c625",
+        "zread_gateway.go": "8d6a17c7976bc1c62db6e7f937eaf065c6e8543afb76a84f989ec1440f08969d",
+        "safety_gateway.go": "6b7b6486cde974c472e0827c702b21566f619de9b04acc8bba687874e06e2ad1",
+        "vision_gateway.go": "7f6236174f442368719f9c5109597f30a4e792400c15da8c1af1099e770273ba",
+        "self_hosted_gateway.go": "54a635394bfc2527c5faa0311c247d02189438ebf18abe3617084be5f9bd9dca"
+      },
+      "legacy_records_preserved": true,
+      "database_permission": "0600",
+      "sqlite_backup": true,
+      "health": 200,
+      "unrelated_pids_unchanged": true,
+      "idle_checks": 5,
+      "gpu_jobs_submitted": false
+    },
+    "installed_verification": {
+      "launcher_unchanged": true,
+      "native_binary_unchanged": true,
+      "agent_source_matches_installed": true,
+      "mcp_source_matches_installed": true,
+      "mcp_entry_matches": true
+    },
+    "planner": {
+      "active": true,
+      "unit": "harmonika-ai.service",
+      "old_pid": 2273052,
+      "new_pid": 2801961,
+      "controller_sha256": "ab3ec20c9148c238bbc0a659c111d92641f2e52c6fe63611351049fc6127ed71",
+      "prior_controller_sha256": "1ec5066985ceaecf9385c342cf45879134cc97e92d905987c90d5ae76f582770",
+      "dependency_files_preserved": 26,
+      "only_one_source_file_changed": true,
+      "health": 200,
+      "idle_checks": 5,
+      "no_active_cli_children_at_restart": true,
+      "unrelated_pids_unchanged": true
+    }
+  },
+  "live_endpoints": {
+    "webreader": {
+      "status": 200,
+      "ok": true,
+      "keys": [
+        "ok",
+        "service"
+      ]
+    },
+    "vision": {
+      "status": 200,
+      "ok": true,
+      "keys": [
+        "models"
+      ],
+      "model_count": 2
+    },
+    "knowledge": {
+      "status": 200,
+      "ok": true,
+      "keys": [
+        "items"
+      ],
+      "scoped_items": 0
+    },
+    "unauthenticated": {
+      "status": 401,
+      "denied": true
+    },
+    "final_tool_report_replay": {
+      "status": 200,
+      "choice_present": true,
+      "tool_calls": 0,
+      "error_type": null,
+      "latency_ms": 6031
+    }
+  },
+  "data_firewall": {
+    "no_customer_chat_exam_data": true,
+    "no_credentials_in_report": true,
+    "mechanics_only_operational_evidence": true,
+    "legacy_knowledge_rows_preserved": true,
+    "legacy_unowned_notes_hidden_until_operator_attribution": true
+  },
+  "limitations": [
+    "No GPU inference or new image/video job was submitted; live tags proves connectivity only.",
+    "No existing terminal session or MCP process was terminated; reopen terminal to load new MCP bundle.",
+    "Default native UI/brand/binary remain unchanged.",
+    "Local shell and macOS filesystem write guard do not constitute a full OS/network/secret sandbox.",
+    "Synthetic tests and one live coding canary do not prove all skills or universal semantic correctness.",
+    "Legacy knowledge notes need explicit owner attribution before scoped retrieval."
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false
+  },
+  "credential_scan": {
+    "passed": true,
+    "source_files_checked": 37,
+    "actual_credentials_detected": false,
+    "synthetic_pem_header_test": true
+  },
+  "test_runner_incidents": [
+    {
+      "kind": "new_mcp_test_fixture_shape",
+      "resolved": true,
+      "detail": "The isolated worker accidentally wrapped argument fixtures in singleton arrays. Codex corrected the new fixture and retained protocol validation; all 26 MCP tests passed."
+    },
+    {
+      "kind": "live_agent_operator_turn_cap",
+      "status": "resolved_by_resume",
+      "cap": 12,
+      "tests_passed_before_cap": 4,
+      "independent_checks_passed": 3,
+      "assertions_unchanged": true,
+      "resume_cap": 24,
+      "resume_completed": true
+    },
+    {
+      "kind": "candidate_stage_missing_reference_document",
+      "resolved": true,
+      "file": "remote-workflow.txt",
+      "detail": "Initial private candidate missed a static runtime dependency; copied exact runtime document before the successful real-model candidate canary."
+    },
+    {
+      "kind": "live_finalization_invalid_tool_response",
+      "resolved_by": "readonly_report_intent_fix",
+      "before_http_observations": [
+        {
+          "attempt": 1,
+          "status": 200,
+          "error_signatures": [],
+          "latency_ms": 6021
+        },
+        {
+          "attempt": 2,
+          "status": 200,
+          "error_signatures": [],
+          "latency_ms": 7015
+        },
+        {
+          "attempt": 3,
+          "status": 200,
+          "error_signatures": [],
+          "latency_ms": 6686
+        },
+        {
+          "attempt": 4,
+          "status": 200,
+          "error_signatures": [],
+          "latency_ms": 8412
+        },
+        {
+          "attempt": 5,
+          "status": 200,
+          "error_signatures": [],
+          "latency_ms": 4988
+        },
+        {
+          "attempt": 6,
+          "status": 503,
+          "error_signatures": [
+            "invalid_tool_response",
+            "invalid_request_error",
+            "invalid_tool_response"
+          ],
+          "latency_ms": 14405
+        },
+        {
+          "attempt": 7,
+          "status": 503,
+          "error_signatures": [
+            "invalid_tool_response",
+            "invalid_request_error",
+            "invalid_tool_response"
+          ],
+          "latency_ms": 11501
+        },
+        {
+          "attempt": 8,
+          "status": 503,
+          "error_signatures": [
+            "invalid_tool_response",
+            "invalid_request_error",
+            "invalid_tool_response"
+          ],
+          "latency_ms": 10597
+        }
+      ],
+      "minimal_model_probe": {
+        "status": 200,
+        "choice_present": true,
+        "error_type": null,
+        "latency_ms": 3990
+      },
+      "classification": "Context-specific invalid_tool_response, not general provider outage.",
+      "post_activation_cli": "completed",
+      "resolved": true
+    }
+  ],
+  "source_sha256": {
+    "tools/agent-state.cjs": "3e3eae70f744b4f62598a2bd4e5e2cb70bf12035ed59b9a0d9595b2cb80813da",
+    "tools/agent-http.cjs": "03db5dd54b0bb82fa1394d0600ca2d23f805875fca2574c1dc67b6eea568dd28",
+    "tools/agent-v32.js": "32075bbb1299ced4292649bbcb4f7c97a645b324b86841279a777a310e342055",
+    "tools/agent-client.js": "0313011c15568e50772e3201606ffbd302e5f74f7139176a385a8e6782718abb",
+    "tools/agent-v3.js": "e1527690cdda1c419a574a16816c9765f744c5c69db63232c7e0f9d5f5b4cd74",
+    "tools/agent-v2.js": "46f4dd0d224cf67627d3dc8ac4325d441b6f58d6e298b61f527b30ee339122c9",
+    "tools/mcp-ssh-local.js": "2a9cbbd074ac443fbcce00d88f1d1950378646e2bef383b98bc300f13b4aee5b",
+    "tools/mcp-harmonika-tools.js": "7727dad0247028e4462bcadb7aac02e8d59d2a70d141616d5c203ec887410a38",
+    "tools/agent-v31.js": "46a0e8541c8eb9bfd7a2fc27a9d0916b7bde8d4eb9249344445b05982617a4b3",
+    "services/knowledge.py": "a9c6fa1e930528d1132b9327dbbba1aa82582d2f01be1718eb2d99228fa75852",
+    "backend/planner/agent-controller.cjs": "ab3ec20c9148c238bbc0a659c111d92641f2e52c6fe63611351049fc6127ed71",
+    "tests/agent-initiative.test.cjs": "2c16ebea18834838d3053e58cd30bdcb2d8f3868bf0407428a8ea030265a834d"
+  },
+  "live_coding_canary": {
+    "status": "completed",
+    "success": true,
+    "independent_checks": 3,
+    "independent_checks_passed": true,
+    "project_tests_passed": true,
+    "verified_count": 4,
+    "assertions_unchanged": true,
+    "source_version": "1d794f04d907c6f8",
+    "initial_operator_turn_cap": 12,
+    "resume_operator_turn_cap": 24,
+    "tool_failures_preserved_in_evidence": true
+  },
+  "final_candidate_smoke": {
+    "source_version": "f7a28932efb3e988",
+    "status": "completed",
+    "success": true,
+    "verified_count": 4,
+    "cli_exit_code": 0,
+    "workspace_unchanged": true,
+    "independent_checks_passed": 3,
+    "all_output_lines_valid_json": true,
+    "recovered_same_session": true
+  },
+  "planner_candidate_live_canary": {
+    "status": 200,
+    "choice_present": true,
+    "tool_call_count": 0,
+    "error_type": null,
+    "candidate_sha256": "ab3ec20c9148c238bbc0a659c111d92641f2e52c6fe63611351049fc6127ed71"
+  },
+  "remaining_required_work": [],
+  "checks": {
+    "git_diff_check_passed": true,
+    "source_hashes_still_match_tests": true,
+    "actual_credentials_detected": false,
+    "existing_terminal_processes_signalled": false,
+    "git_commit_or_push_performed": false
+  },
+  "private_evidence_directory": "/Users/id/.local/state/harmonika/exams/agent-update-audit-20261117T044440Z"
+}

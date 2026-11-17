@@ -5,9 +5,7 @@ package main
 // internal worker token (agents authenticate with their public AI token).
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"os"
 	"strings"
@@ -15,10 +13,10 @@ import (
 
 const imageGenTokenPath = "/etc/harmonika-ai/imagegen.token"
 
-var imageGenProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var imageGenProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_IMAGEGEN_URL", "127.0.0.1:18284"),
-})
+}, "imagegen_unavailable")
 
 func imageGenToken() string {
 	b, err := os.ReadFile(imageGenTokenPath)
@@ -49,8 +47,5 @@ func (a *app) imageGenAPI(w http.ResponseWriter, r *http.Request) {
 	}
 	r.URL.Path = target
 	r.Header.Set("Authorization", "Bearer "+token)
-	imageGenProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("imagegen unavailable: %v", err)})
-	}
 	imageGenProxy.ServeHTTP(w, r)
 }

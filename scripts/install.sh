@@ -6,6 +6,7 @@ echo "=== Harmonika TUI Installer (macOS / Linux) ==="
 command -v python3 >/dev/null 2>&1 || { echo "Error: python3 diperlukan."; exit 1; }
 command -v node >/dev/null 2>&1 || { echo "Error: node (Node.js) diperlukan."; exit 1; }
 command -v git >/dev/null 2>&1 || { echo "Error: git diperlukan."; exit 1; }
+command -v npm >/dev/null 2>&1 || echo "Note: npm tidak ditemukan — tidak masalah, dependensi MCP sudah vendored di package."
 
 INSTALL_SRC="${HARMONIKA_SOURCE_DIR:-$HOME/.local/share/harmonika-tui-src}"
 if [ -d "$INSTALL_SRC/.git" ]; then

@@ -4,17 +4,15 @@ package main
 // self-hosted document parser on 127.0.0.1:17900.
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 )
 
-var fileParserProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var fileParserProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_FILEPARSER_URL", "127.0.0.1:17900"),
-})
+}, "fileparser_unavailable")
 
 func (a *app) fileParserAPI(w http.ResponseWriter, r *http.Request) {
 	if _, ok := a.requirePublicAIToken(w, r); !ok {
@@ -30,8 +28,5 @@ func (a *app) fileParserAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	r.URL.Path = target
-	fileParserProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("fileparser unavailable: %v", err)})
-	}
 	fileParserProxy.ServeHTTP(w, r)
 }

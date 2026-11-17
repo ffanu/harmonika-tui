@@ -4,17 +4,15 @@ package main
 // reader service on 127.0.0.1:17901.
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 )
 
-var zreadProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var zreadProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_ZREAD_URL", "127.0.0.1:17901"),
-})
+}, "zread_unavailable")
 
 func (a *app) zreadToolsAPI(w http.ResponseWriter, r *http.Request) {
 	if _, ok := a.requirePublicAIToken(w, r); !ok {
@@ -30,8 +28,5 @@ func (a *app) zreadToolsAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	r.URL.Path = target
-	zreadProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("zread unavailable: %v", err)})
-	}
 	zreadProxy.ServeHTTP(w, r)
 }

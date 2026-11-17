@@ -198,10 +198,10 @@ def preflight(directory,manifest):
         except (ValueError,KeyError,TypeError):raise ValueError('documents_preflight_failed') from None
     # Launch the real MCP protocol without invoking providers or user sessions.
     check=subprocess.run([NODE,str(directory/'tools/protocol-check.cjs'),str(directory/'tools/mcp-server.cjs')],capture_output=True,text=True,timeout=20)
-    if check.returncode:raise ValueError('mcp_preflight_failed')
+    if check.returncode:raise ValueError('mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
     if (directory/'tools/ssh-mcp.cjs').is_file():
         check=subprocess.run([NODE,str(directory/'tools/ssh-protocol-check.cjs'),str(directory/'tools/ssh-mcp.cjs')],capture_output=True,text=True,timeout=20)
-        if check.returncode:raise ValueError('ssh_mcp_preflight_failed')
+        if check.returncode:raise ValueError('ssh_mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
 
 @contextmanager
 def installation_lock(root):

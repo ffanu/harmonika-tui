@@ -146,7 +146,7 @@ function unsupportedClaim(value,observed,data){
 }
 function readOnlyAuditReport(value,observed,data){
  const request=requestText(data);
- if(!/\b(?:audit|cek|periksa|telusuri|check|diagnose|inspect|investigate|laporkan|report)\b/i.test(request)
+ if(!/\b(?:audit|cek|periksa|telusuri|check|diagnose|inspect|investigate|laporkan|report|berikan\s+(?:hasil|laporan))\b/i.test(request)
    ||!/\b(?:jangan\s+(?:di)?(?:mengubah|ubah|edit|rubah|sentuh)|tanpa\s+(?:mengubah|merubah|mengedit|menyentuh)|read[- ]only|(?:do not|don't) (?:change|modify|edit|touch)|without (?:changing|modifying|editing|touching))\b/i.test(request))return false;
  const repairIntent=request.replace(/\b(?:jangan|tanpa|do not|don't)\s+(?:di)?(?:perbaiki|benahi|bereskan|bangun|fix|repair|build|implementasikan|implement)\b/gi,'');
  if(/\b(?:perbaiki|benahi|bereskan|bangun|fix|repair|build|implementasikan|implement)\b/i.test(repairIntent))return false;

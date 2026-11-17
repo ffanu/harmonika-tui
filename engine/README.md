@@ -27,12 +27,13 @@ berikutnya tetap sederhana.
 ## 2. Build dari sumber (reproducible)
 
 ```bash
-# 1) clone upstream pada branch yang dipakai fork ini
-git clone --branch dev https://github.com/anomalyco/opencode.git harmonika-tui-src
+# 1) clone upstream pada base commit patch series (lihat "From <sha>" di engine/patches/0001)
+git clone https://github.com/anomalyco/opencode.git harmonika-tui-src
 cd harmonika-tui-src
+git checkout 67139d6
 
-# 2) terapkan patch rebrand Harmonika
-git apply /path/to/harmonika-tui/engine/patches/harmonika-rebrand.patch
+# 2) terapkan seluruh patch rebrand Harmonika, berurutan
+for p in /path/to/harmonika-tui/engine/patches/*.patch; do git apply --index "$p"; done
 
 # 3) install dependency & build binary
 bun install

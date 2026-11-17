@@ -46,6 +46,26 @@ backup and activation hashes under `~/Projects/harmonika-engine/agent-v32/backup
 Focused verification: `node --test tests/agent-v32.test.cjs` and
 `python3 -m unittest discover -s tests -p test_agent_v32_activation.py`.
 
+### Audited update (17 November 2026)
+
+`--model NAME` selects the gateway model. `--allow-commit` explicitly enables
+`git_commit`; commits use normal Git hooks. `--sandbox` on macOS restricts
+filesystem writes using sandbox-exec; it does not provide full process/network
+or secret isolation. Local shell still needs a trusted operator/workspace.
+
+`read_file` accepts independent optional line `offset`/`limit` values and reports
+partial reads. Grep/glob enforce the same sensitive-path and symlink boundaries.
+Follow-up instructions require new verification. `video_status` reconciles the
+original job after a polling timeout; do not submit the generation again.
+`--format json` emits JSONL throughout, including the final result.
+
+MCP uses `mcp-harmonika-tools.js` **and** `agent-http.cjs` in the same directory.
+Do not install the MCP script alone. A configured bootstrap may call the exported
+`main()` from a versioned two-file bundle. Existing terminal sessions keep their
+loaded MCP process; reopening the terminal loads the update without killing it.
+Malformed MCP requests return protocol errors and leave the server responsive.
+Images are saved as files and returned as paths, never truncated base64 JSON.
+
 Agent client yang properly mengirim tool definitions ke gateway untuk eksekusi lokal.
 
 ## Files

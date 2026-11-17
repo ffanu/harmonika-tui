@@ -1,7 +1,7 @@
 From c4db12fe8ccae9ed3475d04401580489a1cb43fa Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:54:59 +0700
-Subject: [PATCH 3/4] brand: project .harmonika dirs, Y/N/L upgrade prompt with
+Subject: [PATCH 3/5] brand: project .harmonika dirs, Y/N/L upgrade prompt with
  changelog
 
 - config/discovery.ts reads Brand.projectDirs (.harmonika then .opencode) for project
@@ -276,6 +276,3 @@ index 63939de..df1c6d7 100644
      const enterReminder = enter(directory)
      yield* ctx.agent.transform((editor) => {
        editor.update(plan, (item) => {
--- 
-2.54.0 (Apple Git-157)
-

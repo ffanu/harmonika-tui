@@ -5,9 +5,7 @@ package main
 // internal worker token (agents authenticate with their public AI token).
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"os"
 	"strings"
@@ -15,10 +13,10 @@ import (
 
 const videoGenTokenPath = "/etc/harmonika-ai/video-gen.token"
 
-var videoGenProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var videoGenProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_VIDEOGEN_URL", "127.0.0.1:18272"),
-})
+}, "videogen_unavailable")
 
 func videoGenToken() string {
 	b, err := os.ReadFile(videoGenTokenPath)
@@ -53,8 +51,5 @@ func (a *app) videoGenAPI(w http.ResponseWriter, r *http.Request) {
 	}
 	r.URL.Path = target
 	r.Header.Set("Authorization", "Bearer "+token)
-	videoGenProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("videogen unavailable: %v", err)})
-	}
 	videoGenProxy.ServeHTTP(w, r)
 }

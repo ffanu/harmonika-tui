@@ -25,7 +25,7 @@ async function run(outputs, options = {}) {
       const file = argv[argv.indexOf('-o') + 1];
       schemas.push(JSON.parse(fs.readFileSync(path.join(path.dirname(file), 'schema.json'))));
       if(options.hangShort){spawns++;setTimeout(()=>child.emit('close',0,null),40);return;}
-      const next = protocolFixture(outputs[spawns++]);
+      const next = options.harmonika_translation === true ? outputs[spawns++] : protocolFixture(outputs[spawns++]);
       if (next === undefined) throw Error('unexpected_generation');
       fs.writeFileSync(file, typeof next === 'string' ? next : JSON.stringify(next));
       queueMicrotask(() => child.emit('close', 0, null));
@@ -43,6 +43,7 @@ async function run(outputs, options = {}) {
       const recovery=require('../backend/planner/decision-recovery.cjs');
       return options.deadlineProbe?{...recovery,chooseDecision:(plan,data,log)=>recovery.chooseDecision(plan,data,log,async ms=>{clock+=ms;},{now:()=>clock})}:recovery;
     }
+    if (name === './translation-mode.cjs') return require('../backend/planner/translation-mode.cjs');
     if (name === './secret-firewall.cjs') return require('../backend/planner/secret-firewall.cjs');
     if (name === './agent-controller.cjs') {
       const controller=require('../backend/planner/agent-controller.cjs');
@@ -55,7 +56,7 @@ async function run(outputs, options = {}) {
     return realRequire(name);
   }, console:{log:line => logs.push(JSON.parse(line)),warn:line => logs.push(JSON.parse(line))},setTimeout:(fn,ms,...args)=>{timers.push(ms);return setTimeout(fn,options.hangShort&&ms===60000?5:ms,...args);},clearTimeout,Buffer,process:{kill(){signals++;throw Error('unexpected_signal');}}};
   vm.runInNewContext(fs.readFileSync(candidate,'utf8'), scope, {filename:base});
-  const req = {headers:{'x-harmonika-agent-secret':'synthetic-agent-secret'},socket:{remoteAddress:'127.0.0.1'}};
+  const req = {headers:{'x-harmonika-agent-secret':options.invalidInternalSecret?'invalid-secret':'synthetic-agent-secret'},socket:{remoteAddress:'127.0.0.1'}};
   const res = {writeHead(status){response.status=status;},write(text){response.chunks.push(text);},end(text){if(text)response.chunks.push(text);}};
   const data = {messages:[{role:'user',content:'Synthetic fixture: check a private reference without exposing secrets.'}], tools,parallel_tool_calls:false,stream:false,...options};
   if(options.scopeAdmissionProbe){
@@ -213,4 +214,28 @@ test('real planner keeps overflow caps after a subsequent format repair', {skip:
  }
  assert.match(out.longCalls[2].instructions,/DECISION FORMAT CORRECTION/);
  assert.match(out.longCalls[2].instructions,/OUTPUT BUDGET CORRECTION/);
+});
+
+const translationInput = {harmonika_translation:true, stream:false, tool_choice:'none', tools:[], messages:[
+  {role:'system',content:'Translate faithfully and return the requested JSON result.'},
+  {role:'user',content:JSON.stringify({text:'OpenAI, Codex and Google remain named.',target:'id'})}
+]};
+test('private translation preserves names without granting agent task or tools', {skip:!candidate}, async()=>{
+  const result=JSON.stringify({translated_text:'OpenAI, Codex dan Google tetap disebut.',detected_language:'en',needs_review:false});
+  const out=await run([{content:result,tool_calls:[]}],translationInput);
+  assert.equal(out.status,200);assert.equal(out.spawns,1);
+  assert.equal(out.json.choices[0].message.content,result);
+  assert.equal(out.schemas[0].properties.tool_calls.maxItems,0);
+  assert.ok(!out.schemas[0].required.includes('task_state'));
+  assert.ok(!out.prompts[0].includes('NEVER say you are Codex'));
+  assert.ok(!out.logs.some(e=>e.event==='agent_task_state'));
+});
+test('translation mode requires internal authentication before any inference', {skip:!candidate},async()=>{
+  const out=await run([],{...translationInput,invalidInternalSecret:true});
+  assert.equal(out.status,403);assert.equal(out.spawns,0);
+});
+test('translation cannot declare executable client tools', {skip:!candidate},async()=>{
+  const out=await run([],{...translationInput,tools});
+  assert.equal(out.status,400);assert.equal(out.spawns,0);
+  assert.equal(out.json.error.code,'translation_invalid_request');
 });

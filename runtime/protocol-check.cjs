@@ -1,7 +1,14 @@
 'use strict';
-const path=require('node:path'),os=require('node:os');
+const path=require('node:path'),os=require('node:os'),fs=require('node:fs');
 const tools=process.env.HARMONIKA_TOOLS_HOME||path.join(process.env.HARMONIKA_CONFIG_DIR||path.join(os.homedir(),'.config/harmonika'),'harmonika-tools');
-const sdk=path.join(tools,'node_modules/@modelcontextprotocol/sdk/dist/cjs');
+// Vendored deps shipped in the package win; shared dir is the fallback.
+const vendored=path.join(__dirname,'node_modules/@modelcontextprotocol/sdk/dist/cjs');
+const shared=path.join(tools,'node_modules/@modelcontextprotocol/sdk/dist/cjs');
+const sdk=fs.existsSync(vendored)?vendored:shared;
+if(!fs.existsSync(path.join(sdk,'client/index.js'))){
+ process.stderr.write('MCP SDK not found (vendored or '+tools+') — run the installer again or: npm install -g nothing needed if package intact');
+ process.exit(1);
+}
 const {Client}=require(path.join(sdk,'client/index.js'));
 const {StdioClientTransport}=require(path.join(sdk,'client/stdio.js'));
 (async()=>{

@@ -4,17 +4,15 @@ package main
 // self-hosted CrossEncoder rerank service on 127.0.0.1:17899.
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 )
 
-var rerankProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var rerankProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_RERANK_URL", "127.0.0.1:17899"),
-})
+}, "rerank_unavailable")
 
 func (a *app) rerankToolsAPI(w http.ResponseWriter, r *http.Request) {
 	if _, ok := a.requirePublicAIToken(w, r); !ok {
@@ -30,8 +28,5 @@ func (a *app) rerankToolsAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	r.URL.Path = target
-	rerankProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("rerank unavailable: %v", err)})
-	}
 	rerankProxy.ServeHTTP(w, r)
 }

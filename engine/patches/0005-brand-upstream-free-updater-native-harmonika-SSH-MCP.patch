@@ -1,0 +1,1219 @@
+From 534c3e0ac28b93e37f6b5bbd2499c850b7543c8a Mon Sep 17 00:00:00 2001
+From: ffanu <bontotfahri01@gmail.com>
+Date: Tue, 17 Nov 2026 15:18:06 +0700
+Subject: [PATCH 5/5] brand: upstream-free updater, native harmonika SSH MCP,
+ project dir discovery
+
+---
+ packages/cli/src/commands/handlers/default.ts |   1 +
+ packages/cli/src/run/noninteractive.ts        |   9 +-
+ packages/cli/src/services/updater.ts          | 304 +-------------
+ packages/cli/test/run/noninteractive.test.ts  |  39 +-
+ packages/cli/test/updater-install.test.ts     | 375 +++---------------
+ packages/core/src/config/discovery.ts         |   2 +-
+ packages/core/src/tool/mcp.ts                 |   8 +-
+ packages/core/src/tool/plugin/webfetch.ts     |   3 +
+ packages/core/test/config/config.test.ts      |  12 +-
+ packages/core/test/mcp-harmonika-ssh.test.ts  |  99 +++++
+ packages/core/test/tool-webfetch.test.ts      |  28 ++
+ 11 files changed, 255 insertions(+), 625 deletions(-)
+ create mode 100644 packages/core/test/mcp-harmonika-ssh.test.ts
+
+diff --git a/packages/cli/src/commands/handlers/default.ts b/packages/cli/src/commands/handlers/default.ts
+index cc700fb..4942fb5 100644
+--- a/packages/cli/src/commands/handlers/default.ts
++++ b/packages/cli/src/commands/handlers/default.ts
+@@ -1,3 +1,4 @@
++import { log } from "@clack/prompts"
+ import { LayerNode } from "@opencode/util/effect/layer-node"
+ import { Global } from "@opencode/util/global"
+ import { run } from "@opencode/tui"
+diff --git a/packages/cli/src/run/noninteractive.ts b/packages/cli/src/run/noninteractive.ts
+index 9062df1..115f095 100644
+--- a/packages/cli/src/run/noninteractive.ts
++++ b/packages/cli/src/run/noninteractive.ts
+@@ -189,15 +189,16 @@ export async function runNonInteractivePrompt(input: Input) {
+   }
+ 
+   const cancelForm = async (request: Pick<FormRequest, "id" | "sessionID" | "metadata">) => {
+-    // Nobody can answer a question here. Outside V1 compatibility, cancel it with a message so the
+-    // question tool fails as ordinary model-visible output and the model continues without an answer.
+-    const continuing = request.metadata?.kind === "question" && input.compatibility !== "v1"
++    // Questions and optional search-provider selection can fail as tool output, allowing
++    // the model to recover. Authentication and other blocking forms still fail the run.
++    const question = request.metadata?.kind === "question" && input.compatibility !== "v1"
++    const continuing = question || request.metadata?.kind === "websearch.provider"
+     try {
+       await input.client.session.form.cancel(
+         {
+           sessionID: request.sessionID,
+           formID: request.id,
+-          ...(continuing ? { message: QUESTION_CANCELLED_FEEDBACK } : {}),
++          ...(question ? { message: QUESTION_CANCELLED_FEEDBACK } : {}),
+         },
+         ...formRequestOptions(request.sessionID === GLOBAL_FORM_SESSION_ID ? input.location : undefined),
+       )
+diff --git a/packages/cli/src/services/updater.ts b/packages/cli/src/services/updater.ts
+index df1153d..792a1a2 100644
+--- a/packages/cli/src/services/updater.ts
++++ b/packages/cli/src/services/updater.ts
+@@ -1,7 +1,6 @@
+ import { Global } from "@opencode/util/global"
+ import { AppProcess } from "@opencode/util/process"
+-import { EffectFlock } from "@opencode/util/effect-flock"
+-import { OPENCODE_ARTIFACT, OPENCODE_CHANNEL, OPENCODE_LOCAL, OPENCODE_VERSION } from "../version"
++import { OPENCODE_CHANNEL, OPENCODE_LOCAL, OPENCODE_VERSION } from "../version"
+ import { Context, Duration, Effect, FileSystem, Layer, Option, Ref, Schema } from "effect"
+ import { ChildProcess } from "effect/process"
+ import { parse, type ParseError } from "jsonc-parser"
+@@ -9,8 +8,7 @@ import path from "node:path"
+ import { stripVTControlCharacters } from "node:util"
+ import { RetainedImage } from "./retained-image"
+ import { action, parseReleaseVersion, type Policy } from "./updater-action"
+-import { errorMessage } from "../util/error"
+-import { Brand, EngineInstallerUrl, UpdateManifestUrl } from "@opencode/util/brand"
++import { Brand, UpdateManifestUrl } from "@opencode/util/brand"
+ 
+ export const methods = ["curl", "npm", "pnpm", "bun", "yarn", "vp", "brew", "winget"] as const
+ 
+@@ -46,17 +44,6 @@ const decodeVpPackages = Schema.decodeUnknownOption(
+   Schema.fromJsonString(Schema.Array(Schema.Struct({ name: Schema.String }))),
+ )
+ 
+-const installNames: Record<Method, string> = {
+-  curl: "Installer Harmonika AI",
+-  npm: "npm",
+-  pnpm: "pnpm",
+-  bun: "Bun",
+-  yarn: "Yarn",
+-  vp: "Vite+",
+-  brew: "Homebrew",
+-  winget: "WinGet",
+-}
+-
+ const wingetPackage = "Anomaly.OpenCode"
+ const wingetArgs = [
+   "--id",
+@@ -83,21 +70,6 @@ function conciseDetail(input: string) {
+   return `${detail}\n\nOutput shortened to the last 12 lines.`
+ }
+ 
+-function errorDetail(cause: unknown): string {
+-  if (cause instanceof AppProcess.AppProcessError) {
+-    const stderr = conciseDetail(cause.stderr ?? "")
+-    if (stderr) return stderr
+-    if (cause.cause !== undefined) return errorDetail(cause.cause)
+-    return cause.message
+-  }
+-  if (cause instanceof Error) {
+-    const detail = cause.cause === undefined ? undefined : errorDetail(cause.cause)
+-    if (!detail || detail === cause.message) return cause.message
+-    return `${cause.message}: ${detail}`
+-  }
+-  return errorMessage(cause)
+-}
+-
+ function resultDetail(result: { code: number; stdout: string; stderr: string }) {
+   return (
+     conciseDetail(result.stderr) ??
+@@ -141,9 +113,7 @@ const make = Effect.gen(function* () {
+   const fs = yield* FileSystem.FileSystem
+   const global = yield* Global.Service
+   const appProcess = yield* AppProcess.Service
+-  const flock = yield* EffectFlock.Service
+   const installedVersion = yield* Ref.make(OPENCODE_VERSION)
+-  const channel = OPENCODE_CHANNEL.replace(/[^a-zA-Z0-9._-]/g, "-")
+   const executable = yield* fs.realPath(process.execPath).pipe(Effect.orElseSucceed(() => process.execPath))
+   const installedPackage = yield* Effect.gen(function* () {
+     const directory = path.dirname(path.dirname(executable))
+@@ -196,29 +166,16 @@ const make = Effect.gen(function* () {
+   )
+   const curlBinary = yield* fs.realPath(curlPath).pipe(Effect.orElseSucceed(() => curlPath))
+ 
+-  // On Windows a bare `bash` may be the WSL launcher, which cannot run the installer against Windows paths.
+-  const installerBash = Effect.fnUntraced(function* () {
+-    if (process.platform !== "win32") return "bash"
+-    if (process.env.OPENCODE_GIT_BASH_PATH) return process.env.OPENCODE_GIT_BASH_PATH
+-    const git = yield* exec(["git", "--exec-path"]).pipe(Effect.orElseSucceed(() => undefined))
+-    const bash = git?.code === 0 ? path.resolve(git.stdout.trim(), "..", "..", "..", "bin", "bash.exe") : undefined
+-    if (bash && (yield* fs.exists(bash).pipe(Effect.orElseSucceed(() => false)))) return bash
+-    return yield* Effect.fail(
+-      new UpgradeError({
+-        title: "Git Bash is required to update OpenCode",
+-        detail: "The OpenCode installer runs with Git Bash on Windows, and it was not found.",
+-        retry: "Install Git for Windows or set OPENCODE_GIT_BASH_PATH, then run opencode upgrade again.",
+-      }),
+-    )
+-  })
+-
+   const method = Effect.fnUntraced(function* () {
+     if (executable === curlBinary) return "curl"
+     if (installedFormula) return "brew"
+     if (installedWinget) return "winget"
+     if (!installedPackage) return
+ 
+-    const parts = executable.toLowerCase().split(path.sep).map((part) => part.replace(/^\./, ""))
++    const parts = executable
++      .toLowerCase()
++      .split(path.sep)
++      .map((part) => part.replace(/^\./, ""))
+     const checks: Array<{ method: Method; command: string[] }> = [
+       { method: "npm", command: ["npm", "list", "-g", "--depth=0", installedPackage] },
+       { method: "pnpm", command: ["pnpm", "list", "-g", "--depth=0", installedPackage] },
+@@ -273,9 +230,9 @@ const make = Effect.gen(function* () {
+     }
+   }
+ 
+-  const release = Effect.fnUntraced(function* (method?: Method) {
+-    // Harmonika AI distributes its own engine builds; the upstream release API is not used.
+-    return yield* Effect.fail(
++  // Legacy update entry points must never replace Harmonika with an upstream build.
++  const latest = (_selected?: Method): Effect.Effect<string, UpgradeError> =>
++    Effect.fail(
+       new UpgradeError({
+         title: `Pembaruan ${Brand.product} tidak lewat jalur ini`,
+         detail: `Jalankan \`${Brand.cliName} upgrade\` untuk memakai manifest ${UpdateManifestUrl}.`,
+@@ -283,103 +240,6 @@ const make = Effect.gen(function* () {
+       }),
+     )
+ 
+-    const distribution = method === "brew" ? "homebrew" : "npm"
+-    // Homebrew Core builds its formula on its own schedule, so the tap release does not describe it.
+-    const core = method === "brew" && installedFormula === "opencode"
+-    const response = yield* Effect.tryPromise({
+-      try: (signal) =>
+-        fetch(
+-          core
+-            ? "https://formulae.brew.sh/api/formula/opencode.json"
+-            : `${UpdateManifestUrl}?current=${encodeURIComponent(OPENCODE_VERSION)}`,
+-          {
+-            signal: AbortSignal.any([signal, AbortSignal.timeout(10_000)]),
+-          },
+-        ),
+-      catch: (cause) =>
+-        new UpgradeError(
+-          {
+-            title: "Could not check for OpenCode updates",
+-            detail: errorDetail(cause),
+-            retry: "Check your network, then run opencode upgrade again.",
+-          },
+-          { cause },
+-        ),
+-    })
+-    if (!response.ok)
+-      return yield* Effect.fail(
+-        new UpgradeError({
+-          title: "Could not check for OpenCode updates",
+-          detail: `The update service returned HTTP ${response.status}.`,
+-          retry: "Try again in a few minutes.",
+-        }),
+-      )
+-    const data: { version?: string; metadata?: { package?: string }; versions?: { stable?: string } } =
+-      yield* Effect.tryPromise({
+-        try: () => response.json(),
+-        catch: (cause) =>
+-          new UpgradeError(
+-            {
+-              title: "Could not read the OpenCode update information",
+-              detail: errorDetail(cause),
+-              retry: "Try again in a few minutes.",
+-            },
+-            { cause },
+-          ),
+-      })
+-    const version = core ? data.versions?.stable : data.version
+-    const packageName = core ? "opencode" : data.metadata?.package
+-    if (!version || !packageName)
+-      return yield* Effect.fail(
+-        new UpgradeError({
+-          title: "Could not read the OpenCode update information",
+-          detail: "The update service returned incomplete release information.",
+-          retry: "Try again in a few minutes.",
+-        }),
+-      )
+-    return { package: packageName, version }
+-  })
+-
+-  // WinGet moderates every submission, so only its own index knows which release it can install.
+-  const wingetVersion = Effect.fnUntraced(function* () {
+-    const failure = (detail: string, cause?: unknown) =>
+-      new UpgradeError(
+-        {
+-          title: "Could not check for OpenCode updates",
+-          detail,
+-          command: ["winget", "search", ...wingetArgs].join(" "),
+-          retry: "Fix the issue above, then run opencode upgrade again.",
+-        },
+-        cause === undefined ? undefined : { cause },
+-      )
+-    const result = yield* exec(["winget", "search", ...wingetArgs], "1 minute").pipe(
+-      Effect.mapError((cause) => failure(errorDetail(cause), cause)),
+-    )
+-    // Column headers are localized, but the result row always lists the identifier followed by the version.
+-    const version = result.stdout
+-      .split(/\r?\n|\r/)
+-      .map((line) => line.trim().split(/\s+/))
+-      .flatMap((tokens) => {
+-        const index = tokens.findIndex((token) => token.toLowerCase() === wingetPackage.toLowerCase())
+-        return index === -1 ? [] : tokens.slice(index + 1, index + 2)
+-      })
+-      .find((token) => parseReleaseVersion(token))
+-    if (result.code !== 0 || !version) return yield* Effect.fail(failure(resultDetail(result)))
+-    return version
+-  })
+-
+-  const latest = (selected?: Method) =>
+-    (selected ? Effect.succeed(selected) : method()).pipe(
+-      Effect.flatMap((method) =>
+-        method === "winget" ? wingetVersion() : release(method).pipe(Effect.map((data) => data.version)),
+-      ),
+-    )
+-
+-  const temporaryDirectory = (prefix: string) =>
+-    Effect.acquireRelease(fs.makeTempDirectory({ directory: global.cache, prefix }), (directory) =>
+-      fs.remove(directory, { recursive: true, force: true }).pipe(Effect.ignore),
+-    )
+-
+   // On Windows the installer must delete or replace the running binary, which only works
+   // while another link to it exists (see RetainedImage). Upgrades keep that link in the
+   // cache; uninstall has already removed the cache, so it uses the temporary directory.
+@@ -398,42 +258,8 @@ const make = Effect.gen(function* () {
+     )
+   }
+ 
+-  const runUpgrade = (input: {
+-    readonly method: Method
+-    readonly command: string[]
+-    readonly displayCommand?: string[]
+-    readonly title?: string
+-    readonly retry?: string
+-  }) => {
+-    const failure = (detail: string, cause?: unknown) =>
+-      new UpgradeError(
+-        {
+-          title: input.title ?? `${installNames[input.method]} could not install OpenCode`,
+-          detail,
+-          command: (input.displayCommand ?? input.command).join(" "),
+-          retry: input.retry ?? "Fix the issue above, then run opencode upgrade again.",
+-        },
+-        cause === undefined ? undefined : { cause },
+-      )
+-    return exec(input.command, "5 minutes").pipe(
+-      Effect.flatMap((result) =>
+-        result.code === 0 ? Effect.succeed(result) : Effect.fail(failure(resultDetail(result))),
+-      ),
+-      Effect.mapError((cause) =>
+-        cause instanceof UpgradeError
+-          ? cause
+-          : failure(
+-              cause instanceof AppProcess.AppProcessError && cause.stderr === undefined && cause.cause === undefined
+-                ? `Failed to update with ${input.method}`
+-                : errorDetail(cause),
+-              cause,
+-            ),
+-      ),
+-    )
+-  }
+-
+-  const upgrade = Effect.fnUntraced(function* (method: Method, input: string) {
+-    return yield* Effect.fail(
++  const upgrade = (method: Method, _input: string): Effect.Effect<void, UpgradeError> =>
++    Effect.fail(
+       new UpgradeError({
+         title: `Metode ${method} tidak berlaku untuk ${Brand.product}`,
+         detail: `Instalasi ${method} akan menimpa engine Harmonika dengan build lain. Engine hanya dipasang dari manifest ${UpdateManifestUrl}.`,
+@@ -441,114 +267,6 @@ const make = Effect.gen(function* () {
+       }),
+     )
+ 
+-    if (!parseReleaseVersion(input)) return yield* Effect.fail(new Error(`Invalid version: ${input}`))
+-    const version = input.trim().replace(/^v/, "")
+-    const packageName =
+-      method === "winget"
+-        ? wingetPackage
+-        : method === "brew" && installedFormula === "opencode"
+-          ? "opencode"
+-          : (yield* release(method)).package
+-    const target = `${packageName}@${version}`
+-    if (installedPackage && packageName !== installedPackage && (method === "pnpm" || method === "yarn")) {
+-      return yield* Effect.fail(new Error(`Reinstall ${target} with ${method} to migrate from ${installedPackage}.`))
+-    }
+-    const commands: Record<Exclude<Method, "bun" | "curl" | "brew" | "winget">, string[]> = {
+-      // Keep the old package: uninstalling it can unlink the replacement command.
+-      npm: [
+-        "npm",
+-        "install",
+-        "--global",
+-        `--allow-scripts=${packageName}`,
+-        ...((OPENCODE_ARTIFACT === "cli" && !installedPackage?.endsWith("/cli-node")) ||
+-        (installedPackage && packageName !== installedPackage)
+-          ? ["--force"]
+-          : []),
+-        target,
+-      ],
+-      pnpm: ["pnpm", "add", "--global", `--allow-build=${packageName}`, target],
+-      yarn: ["yarn", "global", "add", target],
+-      vp:
+-        installedPackage && packageName !== installedPackage
+-          ? ["vp", "install", "-g", "--force", target]
+-          : ["vp", "update", "-g", target],
+-    }
+-    yield* Effect.scoped(
+-      Effect.gen(function* () {
+-        // Other OpenCode processes may be installing at the same time. Wait longer than the
+-        // slowest install (curl runs two 5-minute commands).
+-        yield* flock.acquire("cli-upgrade", undefined, { timeoutMs: Duration.toMillis("15 minutes") })
+-        if (method === "bun") {
+-          // Bun does not prune old versions from its shared package cache.
+-          yield* fs.makeDirectory(global.cache, { recursive: true })
+-          const cache = yield* temporaryDirectory("update-")
+-          return yield* retaining(
+-            method,
+-            runUpgrade({
+-              method,
+-              command: ["bun", "install", "--global", "--trust", "--cache-dir", cache, target],
+-              displayCommand: ["bun", "install", "--global", "--trust", target],
+-            }),
+-          )
+-        }
+-        if (method === "curl") {
+-          const bash = yield* installerBash()
+-          yield* fs.makeDirectory(global.cache, { recursive: true })
+-          const directory = yield* temporaryDirectory("update-")
+-          const installer = path.join(directory, "install")
+-          yield* runUpgrade({
+-            method,
+-            command: ["curl", "-fsSL", "-o", installer, EngineInstallerUrl],
+-            displayCommand: ["curl", "-fsSL", EngineInstallerUrl],
+-            title: "Could not download the OpenCode installer",
+-            retry: "Check your network, then run opencode upgrade again.",
+-          })
+-          return yield* retaining(
+-            method,
+-            runUpgrade({
+-              method,
+-              command: [bash, installer, "--version", version, "--no-modify-path"],
+-              displayCommand: ["opencode", "upgrade", version, "--method", "curl"],
+-              title: "The OpenCode installer failed",
+-            }),
+-          )
+-        }
+-        if (method === "brew") return yield* runUpgrade({ method, command: ["brew", "upgrade", packageName] })
+-        if (method === "winget")
+-          return yield* retaining(
+-            method,
+-            runUpgrade({
+-              method,
+-              command: [
+-                "winget",
+-                "upgrade",
+-                ...wingetArgs,
+-                "--version",
+-                version,
+-                "--silent",
+-                "--accept-package-agreements",
+-              ],
+-            }),
+-          )
+-        return yield* retaining(method, runUpgrade({ method, command: commands[method] }))
+-      }),
+-    ).pipe(
+-      Effect.mapError((cause) =>
+-        cause instanceof UpgradeError
+-          ? cause
+-          : new UpgradeError(
+-              {
+-                title: "Could not prepare the OpenCode upgrade",
+-                detail: errorDetail(cause),
+-                retry: "Fix the issue above, then run opencode upgrade again.",
+-              },
+-              { cause },
+-            ),
+-      ),
+-      Effect.asVoid,
+-    )
+-  })
+-
+   const inspect = Effect.fnUntraced(function* () {
+     if (OPENCODE_LOCAL || ["1", "true"].includes(process.env.OPENCODE_DISABLE_AUTOUPDATE?.toLowerCase() ?? "")) {
+       yield* Effect.logInfo("update check skipped", {
+diff --git a/packages/cli/test/run/noninteractive.test.ts b/packages/cli/test/run/noninteractive.test.ts
+index 0add848..3308485 100644
+--- a/packages/cli/test/run/noninteractive.test.ts
++++ b/packages/cli/test/run/noninteractive.test.ts
+@@ -460,6 +460,35 @@ describe("runNonInteractivePrompt", () => {
+     }
+   })
+ 
++  for (const compatibility of [undefined, "v1"] as const) {
++    test(`search selection cancellation permits recovery (${compatibility ?? "v2"})`, async () => {
++      const output = await capture({
++        compatibility,
++        format: "json",
++        turn: (messageID) => [
++          formCreated({ ...form("frm_search", "ses_1"), metadata: { kind: "websearch.provider" } }),
++          ...successfulGrep(messageID),
++        ],
++      })
++      expect(output.exitCode ?? 0).toBe(0)
++      expect(output.stdout).toContain("tool_use")
++    })
++
++    test(`search cancellation preserves subsequent fatal errors (${compatibility ?? "v2"})`, async () => {
++      const output = await capture({
++        compatibility,
++        format: "json",
++        turn: (messageID) => [
++          prompted(messageID),
++          formCreated({ ...form("frm_search", "ses_1"), metadata: { kind: "websearch.provider" } }),
++          executionFailed("remote installation failed"),
++        ],
++      })
++      expect(output.exitCode).toBe(1)
++      expect(output.stdout).toContain("remote installation failed")
++    })
++  }
++
+   test("cancels session and global form blockers and exits on pre-promotion interrupt", async () => {
+     const sdk = await run({
+       pendingForms: [form("frm_pending", "ses_1"), form("frm_pending_global", "global")],
+@@ -474,7 +503,10 @@ describe("runNonInteractivePrompt", () => {
+     }
+     expect(sdk.session.form.cancel).toHaveBeenCalledWith({ sessionID: "global", formID: "frm_live" }, globalOptions)
+     expect(sdk.session.form.cancel).toHaveBeenCalledWith({ sessionID: "ses_1", formID: "frm_pending" })
+-    expect(sdk.session.form.cancel).toHaveBeenCalledWith({ sessionID: "global", formID: "frm_pending_global" }, globalOptions)
++    expect(sdk.session.form.cancel).toHaveBeenCalledWith(
++      { sessionID: "global", formID: "frm_pending_global" },
++      globalOptions,
++    )
+     expect(sdk.form.list).toHaveBeenCalledWith({
+       location: { directory: "/work tree" },
+     })
+@@ -489,7 +521,10 @@ describe("runNonInteractivePrompt", () => {
+     })
+     expect(sdk.session.form.cancel).toHaveBeenCalledWith({ sessionID: "ses_1", formID: "frm_pending" })
+     expect(sdk.form.list).not.toHaveBeenCalled()
+-    expect(sdk.session.form.cancel).not.toHaveBeenCalledWith({ sessionID: "global", formID: "frm_live" }, expect.anything())
++    expect(sdk.session.form.cancel).not.toHaveBeenCalledWith(
++      { sessionID: "global", formID: "frm_live" },
++      expect.anything(),
++    )
+     expect(sdk.session.form.cancel).not.toHaveBeenCalledWith(
+       { sessionID: "global", formID: "frm_pending_global" },
+       expect.anything(),
+diff --git a/packages/cli/test/updater-install.test.ts b/packages/cli/test/updater-install.test.ts
+index 2896846..f7b6c3b 100644
+--- a/packages/cli/test/updater-install.test.ts
++++ b/packages/cli/test/updater-install.test.ts
+@@ -1,20 +1,19 @@
++import { Brand, UpdateManifestUrl } from "@opencode/util/brand"
+ import { NodeServices } from "@effect/platform-node"
+ import { EffectFlock } from "@opencode/util/effect-flock"
+ import { LayerNode } from "@opencode/util/effect/layer-node"
+ import { Global } from "@opencode/util/global"
+ import { AppProcess } from "@opencode/util/process"
+-import { expect, spyOn, test } from "bun:test"
++import { expect, spyOn } from "bun:test"
+ import { Effect, FileSystem, Layer, PlatformError, Stream } from "effect"
+ import { ChildProcessSpawner } from "effect/process"
+-import { existsSync, readdirSync, readFileSync } from "node:fs"
++import { existsSync, readdirSync } from "node:fs"
+ import path from "node:path"
+ import { Updater } from "../src/services/updater"
+ import { testEffect } from "../../core/test/lib/effect"
+ 
+ const it = testEffect(NodeServices.layer)
+ 
+-declare const OPENCODE_CLI_NAME: string | undefined
+-
+ function fixture(
+   respond: (command: {
+     readonly command: string
+@@ -26,7 +25,10 @@ function fixture(
+   failCleanup = false,
+   releasePackage = name,
+   formula?: string,
+-  executableOverride?: (root: string, home: string) => Effect.Effect<string, PlatformError.PlatformError, FileSystem.FileSystem>,
++  executableOverride?: (
++    root: string,
++    home: string,
++  ) => Effect.Effect<string, PlatformError.PlatformError, FileSystem.FileSystem>,
+ ) {
+   return Effect.gen(function* () {
+     const fs = yield* FileSystem.FileSystem
+@@ -141,132 +143,69 @@ function fixture(
+ const windows = process.platform === "win32" ? it.live : it.live.skip
+ const unix = process.platform === "win32" ? it.live.skip : it.live
+ 
+-const installs = [
+-  {
+-    method: "npm",
+-    command: ["npm", "install", "--global", "--allow-scripts=@opencode/cli", "--force", "@opencode/cli@2.3.4-beta.1"],
+-  },
+-  {
+-    method: "pnpm",
+-    command: ["pnpm", "add", "--global", "--allow-build=@opencode/cli", "@opencode/cli@2.3.4-beta.1"],
+-  },
+-  { method: "yarn", command: ["yarn", "global", "add", "@opencode/cli@2.3.4-beta.1"] },
+-  { method: "vp", command: ["vp", "update", "-g", "@opencode/cli@2.3.4-beta.1"] },
+-] as const
+-
+-installs.forEach(({ method, command }) => {
+-  it.live(`${method} installs the explicit V2 package version without a leading v`, () =>
++// Harmonika intentionally blocks upstream installation. Protect that boundary
++// for every supported legacy method, including the former WinGet bypass.
++for (const method of Updater.methods) {
++  it.live(`${method} cannot fetch or overwrite the Harmonika engine`, () =>
+     Effect.gen(function* () {
+       const test = yield* fixture()
+-      yield* test.updater.upgrade(method, "v2.3.4-beta.1")
+-      expect(test.commands).toEqual([[...command]])
++      const latest = yield* test.updater.latest(method).pipe(Effect.flip)
++      expect(latest).toBeInstanceOf(Updater.UpgradeError)
++      expect(latest.message).toContain(UpdateManifestUrl)
++      for (const version of ["v2.3.4", "", "latest", "2.3.4; echo unsafe", "--global"]) {
++        const error = yield* test.updater.upgrade(method, version).pipe(Effect.flip)
++        expect(error).toBeInstanceOf(Updater.UpgradeError)
++        expect(error.message).toContain(UpdateManifestUrl)
++      }
++      expect(test.commands).toEqual([])
++      expect(test.requests).toEqual([])
++      expect(yield* test.fs.readFileString(test.executable)).toBe("binary")
++      expect(yield* test.fs.exists(test.global.cache)).toBe(false)
+     }),
+   )
+-})
+-
+-it.live("vp force-installs a renamed V2 package that replaces the existing binary owner", () =>
+-  Effect.gen(function* () {
+-    const test = yield* fixture(() => ({}), "@opencode/cli", false, "@opencode/cli-node")
+-    yield* test.updater.upgrade("vp", "v2.3.4-beta.1")
+-    expect(test.commands).toEqual([["vp", "install", "-g", "--force", "@opencode/cli-node@2.3.4-beta.1"]])
+-  }),
+-)
++}
+ 
+-it.live("vp removes the package from its managed global store", () =>
+-  Effect.gen(function* () {
+-    const test = yield* fixture()
+-    const removal = test.updater.removal("vp")
+-    if (!removal) return yield* Effect.die("Expected vp removal command")
+-    expect(removal.command).toEqual(["vp", "uninstall", "-g", "@opencode/cli"])
+-    yield* removal.run
+-    expect(test.commands).toEqual([["vp", "uninstall", "-g", "@opencode/cli"]])
+-  }),
+-)
+-;[0, 1].forEach((exitCode) => {
+-  it.live(`bun isolates and removes its install cache after exit ${exitCode}`, () =>
++for (const formula of ["opencode", "opencode-v2", "opencode-beta"]) {
++  it.live(`detects Homebrew ${formula} without enabling its updater`, () =>
+     Effect.gen(function* () {
+-      const test = yield* fixture((command) => {
+-        expect(command.command).toBe("bun")
+-        expect(existsSync(command.args[4])).toBe(true)
+-        return { exitCode, stderr: Buffer.from("bun install failed") }
+-      })
+-      const result = yield* test.updater.upgrade("bun", "v2.3.4-beta.1").pipe(Effect.flip, Effect.option)
+-      const cache = test.commands[0]?.[5]
+-      expect(cache).toStartWith(path.join(test.global.cache, "update-"))
+-      expect(test.commands).toEqual([
+-        ["bun", "install", "--global", "--trust", "--cache-dir", cache, "@opencode/cli@2.3.4-beta.1"],
+-      ])
+-      expect(yield* test.fs.readDirectory(test.global.cache)).toEqual([])
+-      expect(result._tag).toBe(exitCode === 0 ? "None" : "Some")
+-      if (result._tag === "Some") expect(result.value.message).toBe("bun install failed")
++      const test = yield* fixture(() => ({}), "@opencode/cli", false, "@opencode/cli", formula)
++      expect(yield* test.updater.method()).toBe("brew")
++      expect(yield* test.updater.latest().pipe(Effect.flip)).toBeInstanceOf(Updater.UpgradeError)
++      expect(test.commands).toEqual([])
++      expect(test.requests).toEqual([])
+     }),
+   )
+-})
++}
+ 
+-it.live("bun ignores install cache cleanup failures", () =>
++it.live("removal failures expose stderr instead of reporting success", () =>
+   Effect.gen(function* () {
+-    const test = yield* fixture(() => ({}), "@opencode/cli", true)
+-    yield* test.updater.upgrade("bun", "v2.3.4-beta.1")
+-    expect(test.commands).toHaveLength(1)
++    const test = yield* fixture(() => ({ exitCode: 1, stderr: Buffer.from("registry denied access") }))
++    const removal = test.updater.removal("npm")!
++    const error = yield* removal.run.pipe(Effect.flip)
++    expect(error.message).toBe("registry denied access")
+   }),
+ )
+-;["success", "download", "install"].forEach((failure) => {
+-  it.live(`curl uses the V2 installer and cleans its directory: ${failure}`, () =>
+-    Effect.gen(function* () {
+-      const test = yield* fixture((command) => {
+-        const installer = command.command === "curl" ? command.args[2] : command.args[0]
+-        expect(existsSync(path.dirname(installer))).toBe(true)
+-        return {
+-          exitCode:
+-            path.basename(command.command, ".exe") ===
+-            (failure === "download" ? "curl" : failure === "install" ? "bash" : "")
+-              ? 1
+-              : 0,
+-          stderr: Buffer.from(`${failure} failed`),
+-        }
+-      })
+-      const result = yield* test.updater.upgrade("curl", "v2.3.4-beta.1").pipe(Effect.flip, Effect.option)
+-      const installer = test.commands[0]?.[3]
+-      expect(installer).toStartWith(path.join(test.global.cache, "update-"))
+-      expect(test.commands).toEqual([
+-        ["curl", "-fsSL", "-o", installer, "https://opencode.ai/v2/install"],
+-        ...(failure === "download" ? [] : [[test.bash, installer, "--version", "2.3.4-beta.1", "--no-modify-path"]]),
+-      ])
+-      expect(yield* test.fs.readDirectory(test.global.cache)).toEqual([])
+-      expect(result._tag).toBe(failure === "success" ? "None" : "Some")
+-      if (result._tag === "Some") expect(result.value.message).toBe(`${failure} failed`)
+-    }),
+-  )
+-})
+ 
+-it.live("invalid version targets never execute a command or create a cache", () =>
++it.live("Node package detection preserves its own uninstall target", () =>
+   Effect.gen(function* () {
+-    const test = yield* fixture()
+-    yield* Effect.forEach(Updater.methods, (method) =>
+-      Effect.forEach(
+-        ["", "latest", "2.3", "01.2.3", "vv2.3.4", "2.3.4; echo unsafe", "--global", "v2.3.4\n--force"],
+-        (version) =>
+-          Effect.gen(function* () {
+-            const error = yield* test.updater.upgrade(method, version).pipe(Effect.flip)
+-            expect(error.message).toBe(`Invalid version: ${version}`)
+-          }),
+-      ),
++    const test = yield* fixture(
++      (command) => ({ stdout: Buffer.from(command.command === "npm" ? "@opencode/cli-node@2.3.4" : "") }),
++      "@opencode/cli-node",
+     )
+-    expect(test.commands).toEqual([])
+-    expect(yield* test.fs.exists(test.global.cache)).toBe(false)
++    expect(yield* test.updater.method()).toBe("npm")
++    expect(test.updater.removal("npm")?.command).toEqual(["npm", "uninstall", "--global", "@opencode/cli-node"])
++    expect(yield* test.updater.upgrade("npm", "v2.3.4").pipe(Effect.flip)).toBeInstanceOf(Updater.UpgradeError)
+   }),
+ )
+ 
+-it.live("install failures expose stderr and process errors do not report success", () =>
++it.live("vp removes the package from its managed global store", () =>
+   Effect.gen(function* () {
+-    const failed = yield* fixture(() => ({ exitCode: 1, stderr: Buffer.from("  registry denied access\n") }))
+-    const error = yield* failed.updater.upgrade("npm", "2.3.4").pipe(Effect.flip)
+-    expect(error.message).toBe("registry denied access")
+-    const missing = yield* fixture(() => ({ error: new AppProcess.AppProcessError({ command: "npm" }) }))
+-    const unavailable = yield* missing.updater.upgrade("npm", "2.3.4").pipe(Effect.flip)
+-    expect(unavailable.message).toBe("Failed to update with npm")
+-    expect(failed.commands).toHaveLength(1)
+-    expect(missing.commands).toHaveLength(1)
++    const test = yield* fixture()
++    const removal = test.updater.removal("vp")
++    if (!removal) return yield* Effect.die("Expected vp removal command")
++    expect(removal.command).toEqual(["vp", "uninstall", "-g", "@opencode/cli"])
++    yield* removal.run
++    expect(test.commands).toEqual([["vp", "uninstall", "-g", "@opencode/cli"]])
+   }),
+ )
+ ;(["npm", "pnpm", "bun", "yarn", "vp", undefined] as const).forEach((method) => {
+@@ -316,37 +255,6 @@ it.live("vp detection ignores no-match output that repeats the package name", ()
+   }),
+ )
+ 
+-it.live("Homebrew Core installs check and upgrade the Core formula", () =>
+-  Effect.gen(function* () {
+-    const test = yield* fixture(() => ({}), "@opencode/cli", false, "anomalyco/tap/opencode-v2", "opencode")
+-    expect(yield* test.updater.method()).toBe("brew")
+-    expect(yield* test.updater.latest()).toBe("2.0.21")
+-    yield* test.updater.upgrade("brew", "2.0.21")
+-    expect(test.commands).toEqual([["brew", "upgrade", "opencode"]])
+-    // An explicitly selected method keeps its own release source.
+-    expect(yield* test.updater.latest("npm")).toBe("2.3.4")
+-    expect(test.requests).toEqual([
+-      "https://formulae.brew.sh/api/formula/opencode.json",
+-      "https://opencode.ai/update/api/local/cli/npm?current=local",
+-    ])
+-  }),
+-)
+-;["opencode-v2", "opencode-beta"].forEach((formula) => {
+-  it.live(`Homebrew tap installs of ${formula} use the published tap formula`, () =>
+-    Effect.gen(function* () {
+-      const test = yield* fixture(() => ({}), "@opencode/cli", false, `anomalyco/tap/${formula}`, formula)
+-      expect(yield* test.updater.method()).toBe("brew")
+-      expect(yield* test.updater.latest()).toBe("2.3.4")
+-      yield* test.updater.upgrade("brew", "2.3.4")
+-      expect(test.commands).toEqual([["brew", "upgrade", `anomalyco/tap/${formula}`]])
+-      expect(test.requests).toEqual([
+-        "https://opencode.ai/update/api/local/cli/homebrew?current=local",
+-        "https://opencode.ai/update/api/local/cli/homebrew?current=local",
+-      ])
+-    }),
+-  )
+-})
+-
+ const winget = (search: Partial<AppProcess.RunResult>) =>
+   fixture(
+     (command) => (command.args[0] === "search" ? search : {}),
+@@ -378,85 +286,23 @@ const wingetArgs = [
+   "--disable-interactivity",
+ ]
+ 
+-it.live("WinGet installs check, upgrade, and remove the version in the WinGet index", () =>
++it.live("WinGet detection and removal do not enable upstream update checks", () =>
+   Effect.gen(function* () {
+-    const test = yield* winget({
+-      stdout: Buffer.from(
+-        "Name     Id               Version\r\n------------------------------\r\nOpenCode Anomaly.OpenCode 2.0.28\r\n",
+-      ),
+-    })
++    const test = yield* winget({})
+     expect(yield* test.updater.method()).toBe("winget")
+-    expect(yield* test.updater.latest()).toBe("2.0.28")
+-    yield* test.updater.upgrade("winget", "v2.0.28")
+-    const removal = test.updater.removal("winget")
+-    if (!removal) return yield* Effect.die("Expected winget removal command")
+-    yield* removal.run
+-    expect(test.commands).toEqual([
+-      ["winget", "search", ...wingetArgs],
+-      ["winget", "upgrade", ...wingetArgs, "--version", "2.0.28", "--silent", "--accept-package-agreements"],
+-      ["winget", "uninstall", ...wingetArgs],
+-    ])
+-    // WinGet moderates submissions, so the OpenCode release service may list a version WinGet cannot install yet.
++    expect(yield* test.updater.latest().pipe(Effect.flip)).toBeInstanceOf(Updater.UpgradeError)
++    yield* test.updater.removal("winget")!.run
++    expect(test.commands).toEqual([["winget", "uninstall", ...wingetArgs]])
+     expect(test.requests).toEqual([])
+   }),
+ )
+ 
+-it.live("WinGet update checks report a missing package instead of a version", () =>
+-  Effect.gen(function* () {
+-    const test = yield* winget({
+-      exitCode: -1978335212,
+-      stdout: Buffer.from("No package found matching input criteria.\r\n"),
+-    })
+-    const error = yield* test.updater.latest().pipe(Effect.flip)
+-    expect(error.message).toBe("No package found matching input criteria.")
+-  }),
+-)
+-
+ // Links are named opencode-upgrade-<pid>-<random>.exe; read them from inside the installer run.
+ const links = (directory: string) =>
+   existsSync(directory) ? readdirSync(directory).filter((name) => name.startsWith("opencode-")) : []
+ const upgradeLinks = (directory: string) =>
+   links(directory).filter((name) => name.startsWith(`opencode-upgrade-${process.pid}-`))
+ 
+-windows("windows keeps a second link to the running binary in the cache while the installer runs", () =>
+-  Effect.gen(function* () {
+-    const layout = { executable: "", cache: "" }
+-    const test = yield* fixture(() => {
+-      expect(readFileSync(layout.executable, "utf8")).toBe("binary")
+-      const held = upgradeLinks(layout.cache)
+-      expect(held).toHaveLength(1)
+-      expect(readFileSync(path.join(layout.cache, held[0]), "utf8")).toBe("binary")
+-      return {}
+-    })
+-    layout.executable = test.executable
+-    layout.cache = test.global.cache
+-    yield* test.fs.makeDirectory(test.global.cache, { recursive: true })
+-    // pid 999999999 does not exist; pid 4 is System, alive but not openable (EPERM).
+-    yield* test.fs.writeFileString(path.join(test.global.cache, "opencode-upgrade-999999999-dead.exe"), "exited")
+-    yield* test.fs.writeFileString(path.join(test.global.cache, "opencode-service-4-aa.exe"), "inaccessible")
+-    yield* test.updater.upgrade("bun", "2.3.4")
+-    expect(test.commands).toHaveLength(1)
+-    // The installed path never disappears; the extra link is released and only dead ones are swept.
+-    expect(yield* test.fs.readFileString(test.executable)).toBe("binary")
+-    expect(links(test.global.cache)).toEqual(["opencode-service-4-aa.exe"])
+-  }),
+-)
+-
+-windows("windows releases the link when the installer fails", () =>
+-  Effect.gen(function* () {
+-    const layout = { cache: "" }
+-    const test = yield* fixture(() => {
+-      expect(upgradeLinks(layout.cache)).toHaveLength(1)
+-      return { exitCode: 1, stderr: Buffer.from("registry denied access") }
+-    })
+-    layout.cache = test.global.cache
+-    const error = yield* test.updater.upgrade("npm", "2.3.4").pipe(Effect.flip)
+-    expect(error.message).toBe("registry denied access")
+-    expect(yield* test.fs.readFileString(test.executable)).toBe("binary")
+-    expect(links(test.global.cache)).toEqual([])
+-  }),
+-)
+-
+ windows("windows keeps the uninstall link in the temporary directory, not the removed cache", () =>
+   Effect.gen(function* () {
+     const layout = { tmp: "" }
+@@ -475,36 +321,6 @@ windows("windows keeps the uninstall link in the temporary directory, not the re
+   }),
+ )
+ 
+-windows("windows links the curl binary before the installer replaces it", () =>
+-  Effect.gen(function* () {
+-    const layout = { executable: "", cache: "" }
+-    const test = yield* fixture(
+-      (command) => {
+-        if (path.basename(command.command, ".exe") === "bash") {
+-          expect(readFileSync(layout.executable, "utf8")).toBe("binary")
+-          expect(upgradeLinks(layout.cache)).toHaveLength(1)
+-        }
+-        return {}
+-      },
+-      "@opencode/cli",
+-      false,
+-      "@opencode/cli",
+-      undefined,
+-      (_root, home) => Effect.succeed(path.join(home, ".opencode", "bin", "opencode.exe")),
+-    )
+-    layout.executable = test.executable
+-    layout.cache = test.global.cache
+-    const original = process.execPath
+-    process.execPath = layout.executable
+-    yield* Effect.addFinalizer(() => Effect.sync(() => (process.execPath = original)))
+-    expect(yield* test.updater.method()).toBe("curl")
+-    yield* test.updater.upgrade("curl", "2.3.4")
+-    expect(test.commands.map((command) => command[0])).toEqual(["curl", test.bash])
+-    expect(yield* test.fs.readFileString(layout.executable)).toBe("binary")
+-    expect(links(test.global.cache)).toEqual([])
+-  }),
+-)
+-
+ unix("curl method detection resolves symlinked home directories", () =>
+   Effect.gen(function* () {
+     const test = yield* fixture(
+@@ -517,7 +333,7 @@ unix("curl method detection resolves symlinked home directories", () =>
+         Effect.gen(function* () {
+           const fs = yield* FileSystem.FileSystem
+           const realHome = path.join(root, "real-home")
+-          const bin = path.join(realHome, ".opencode", "bin", "opencode")
++          const bin = path.join(realHome, Brand.projectDirs[0]!, "bin", Brand.cliName)
+           yield* fs.makeDirectory(path.dirname(bin), { recursive: true })
+           yield* fs.symlink(realHome, home)
+           return bin
+@@ -527,80 +343,3 @@ unix("curl method detection resolves symlinked home directories", () =>
+     expect(test.commands).toEqual([])
+   }),
+ )
+-
+-windows("windows leaves a source checkout's runtime alone", () =>
+-  Effect.gen(function* () {
+-    const layout = { cache: "" }
+-    const test = yield* fixture(() => {
+-      expect(links(layout.cache)).toEqual([])
+-      return {}
+-    }, "not-opencode")
+-    layout.cache = test.global.cache
+-    yield* test.updater.upgrade("bun", "2.3.4")
+-    expect(test.commands).toHaveLength(1)
+-  }),
+-)
+-
+-unix("other platforms never link the running binary", () =>
+-  Effect.gen(function* () {
+-    const layout = { cache: "" }
+-    const test = yield* fixture(() => {
+-      expect(links(layout.cache)).toEqual([])
+-      return {}
+-    })
+-    layout.cache = test.global.cache
+-    yield* test.updater.upgrade("bun", "2.3.4")
+-    expect(yield* test.fs.readFileString(test.executable)).toBe("binary")
+-  }),
+-)
+-
+-test("Node distribution honors the compile-time CLI name", async () => {
+-  const child = Bun.spawn(
+-    [
+-      process.execPath,
+-      "test",
+-      import.meta.path,
+-      "--define",
+-      'OPENCODE_CLI_NAME="opencode2-node"',
+-      "--test-name-pattern",
+-      "^Node distribution resolves the published npm package$",
+-    ],
+-    {
+-      cwd: path.join(import.meta.dir, ".."),
+-      stdout: "ignore",
+-      stderr: "pipe",
+-      // Bun 1.4 can reuse cached modules compiled with different --define values.
+-      env: { ...process.env, BUN_RUNTIME_TRANSPILER_CACHE_PATH: "0" },
+-    },
+-  )
+-  const [code, stderr] = await Promise.all([child.exited, new Response(child.stderr).text()])
+-  expect(code, stderr).toBe(0)
+-  expect(stderr).toContain("1 pass")
+-})
+-
+-if (typeof OPENCODE_CLI_NAME === "string" && OPENCODE_CLI_NAME === "opencode2-node") {
+-  it.live("Node distribution resolves the published npm package", () =>
+-    Effect.gen(function* () {
+-      const test = yield* fixture(
+-        (command) => ({
+-          stdout: Buffer.from(command.command === "npm" ? "@opencode/cli-node@2.3.4" : ""),
+-        }),
+-        "@opencode/cli-node",
+-      )
+-      expect(yield* test.updater.method()).toBe("npm")
+-      yield* test.updater.upgrade("npm", "v2.3.4")
+-      yield* test.updater.upgrade("pnpm", "v2.3.4")
+-      yield* test.updater.upgrade("vp", "v2.3.4")
+-      expect(test.commands).toEqual([
+-        ["npm", "list", "-g", "--depth=0", "@opencode/cli-node"],
+-        ["pnpm", "list", "-g", "--depth=0", "@opencode/cli-node"],
+-        ["bun", "pm", "ls", "-g"],
+-        ["yarn", "global", "list"],
+-        ["vp", "list", "-g", "--json", "@opencode/cli-node"],
+-        ["npm", "install", "--global", "--allow-scripts=@opencode/cli-node", "@opencode/cli-node@2.3.4"],
+-        ["pnpm", "add", "--global", "--allow-build=@opencode/cli-node", "@opencode/cli-node@2.3.4"],
+-        ["vp", "update", "-g", "@opencode/cli-node@2.3.4"],
+-      ])
+-    }),
+-  )
+-}
+diff --git a/packages/core/src/config/discovery.ts b/packages/core/src/config/discovery.ts
+index f8a8c42..f3e7d99 100644
+--- a/packages/core/src/config/discovery.ts
++++ b/packages/core/src/config/discovery.ts
+@@ -146,7 +146,7 @@ export const discover = Effect.fn("ConfigDiscovery.discover")(function* (options
+     explicit: options?.file ? AbsolutePath.make(path.resolve(options.file)) : undefined,
+     direct: visible.filter((item) => ![".agents", ".claude", ...projectDirs].includes(path.basename(item))).toReversed(),
+     project: yield* Effect.forEach(
+-      visibleEntries.filter((entry) => projectDirs.includes(path.basename(entry.item))).toReversed(),
++      visibleEntries.filter((entry) => projectDirs.some((dir) => dir === path.basename(entry.item))).toReversed(),
+       (entry) =>
+         entry.missing
+           ? Effect.succeed({ path: entry.item, present: false })
+diff --git a/packages/core/src/tool/mcp.ts b/packages/core/src/tool/mcp.ts
+index cd181b6..c99ab1e 100644
+--- a/packages/core/src/tool/mcp.ts
++++ b/packages/core/src/tool/mcp.ts
+@@ -54,7 +54,13 @@ export const layer = Layer.effect(
+             for (const tool of discovered) {
+               editor.add({
+                 name: tool.name,
+-                options: { namespace: namespace(tool.server), codemode: tool.codemode !== false },
++                options: {
++                  namespace: namespace(tool.server),
++                  // Shell scripts already contain their own quoting. Keep Harmonika SSH
++                  // native by default instead of nesting them in generated JavaScript.
++                  // An explicit server preference still takes precedence.
++                  codemode: tool.codemode ?? !(tool.server === "harmonika" && tool.name === "network_exec"),
++                },
+                 description: tool.description ?? "",
+                 input: tool.inputSchema as JsonSchema.JsonSchema,
+                 output: (tool.outputSchema ?? {}) as JsonSchema.JsonSchema,
+diff --git a/packages/core/src/tool/plugin/webfetch.ts b/packages/core/src/tool/plugin/webfetch.ts
+index 9025cd2..320889e 100644
+--- a/packages/core/src/tool/plugin/webfetch.ts
++++ b/packages/core/src/tool/plugin/webfetch.ts
+@@ -54,6 +54,9 @@ const headers = (format: Format, userAgent: string) => ({
+   "User-Agent": userAgent,
+   Accept: acceptHeader(format),
+   "Accept-Language": "en-US,en;q=0.9",
++  // Some documentation CDNs return broken compressed Markdown streams to this
++  // client. Request plain transfer encoding; body size limits still apply.
++  "Accept-Encoding": "identity",
+ })
+ 
+ const openCodeUserAgent =
+diff --git a/packages/core/test/config/config.test.ts b/packages/core/test/config/config.test.ts
+index 31e9f23..0c6bfbb 100644
+--- a/packages/core/test/config/config.test.ts
++++ b/packages/core/test/config/config.test.ts
+@@ -357,10 +357,10 @@ describe("Config", () => {
+     )
+     expect(ConfigDiscovery.systemDirectory("linux", {})).toBe(AbsolutePath.make("/etc/opencode"))
+     expect(ConfigDiscovery.systemDirectory("win32", { ProgramData: "D:\\ProgramData" })).toBe(
+-      AbsolutePath.make(path.join("D:\\ProgramData", "opencode")),
++      AbsolutePath.make(path.join("D:\\ProgramData", "harmonika-terminal")),
+     )
+     expect(ConfigDiscovery.systemDirectory("win32", {})).toBe(
+-      AbsolutePath.make(path.join("C:\\ProgramData", "opencode")),
++      AbsolutePath.make(path.join("C:\\ProgramData", "harmonika-terminal")),
+     )
+   })
+ 
+@@ -1539,7 +1539,7 @@ describe("Config", () => {
+               {
+                 type: "entries",
+                 path: tmp.path,
+-                names: [".agents", ".claude", ".opencode", "opencode.json", "opencode.jsonc"],
++                names: [".agents", ".claude", ".harmonika", ".opencode", "config.json", "harmonika.json", "opencode.json", "opencode.jsonc"],
+               },
+             ])
+           }).pipe(Effect.provide(testLayer(tmp.path, undefined, undefined, undefined, Watcher.testLayer)))
+@@ -1664,7 +1664,7 @@ describe("Config", () => {
+     }).pipe(Effect.provide(AppNodeBuilder.build(FSUtil.node))),
+   )
+ 
+-  it.live("does not load legacy config.json files", () =>
++  it.live("loads Harmonika config.json files", () =>
+     Effect.acquireDisposable(Effect.promise(() => tmpdir())).pipe(
+       Effect.flatMap((tmp) =>
+         Effect.gen(function* () {
+@@ -1676,7 +1676,7 @@ describe("Config", () => {
+             const config = yield* Config.Service
+             const documents = (yield* config.entries()).filter((entry) => entry.type === "document")
+ 
+-            expect(documents).toHaveLength(0)
++            expect(documents.map((document) => document.info.$schema)).toEqual(["legacy"])
+           }).pipe(Effect.provide(testLayer(tmp.path)))
+         }),
+       ),
+@@ -2125,7 +2125,7 @@ describe("Config", () => {
+             expect(yield* watcher.subscriptions()).toContainEqual({
+               path: tmp.path,
+               type: "entries",
+-              names: [".agents", ".claude", ".opencode", "opencode.json", "opencode.jsonc"],
++              names: [".agents", ".claude", ".harmonika", ".opencode", "config.json", "harmonika.json", "opencode.json", "opencode.jsonc"],
+             })
+           }).pipe(Effect.provide(testLayer(tmp.path)))
+         }),
+diff --git a/packages/core/test/mcp-harmonika-ssh.test.ts b/packages/core/test/mcp-harmonika-ssh.test.ts
+new file mode 100644
+index 0000000..5002ed7
+--- /dev/null
++++ b/packages/core/test/mcp-harmonika-ssh.test.ts
+@@ -0,0 +1,99 @@
++import { expect } from "bun:test"
++import { Effect, Exit, Layer, Stream } from "effect"
++import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
++import { LayerNode } from "@opencode/util/effect/layer-node"
++import { Bus } from "@opencode/core/bus"
++import { Mcp } from "@opencode/core/mcp/index"
++import { Permission } from "@opencode/core/permission"
++import { Session } from "@opencode/core/session"
++import { Tool } from "@opencode/core/tool"
++import { McpTool } from "@opencode/core/tool/mcp"
++import { testEffect } from "./lib/effect"
++import { codeModeListings, toolIdentity } from "./lib/tool"
++
++for (const { preference, blocked } of [undefined, true, false].flatMap((preference) =>
++  [false, true].map((blocked) => ({ preference, blocked })),
++)) {
++  const calls: Parameters<Mcp.Interface["callTool"]>[0][] = []
++  const permissions: Permission.AssertInput[] = []
++  const source = (server: string, name: string): Mcp.Tool => ({
++    server: Mcp.ServerName.make(server),
++    name,
++    ...(server === "harmonika" ? { codemode: preference } : {}),
++    description: "Run fixture command",
++    inputSchema: { type: "object", properties: { command: { type: "string" } }, required: ["command"] },
++  })
++  const it = testEffect(
++    AppNodeBuilder.build(LayerNode.group([Tool.node, McpTool.node]), [
++      Mcp.node.replace(
++        Layer.mock(Mcp.Service, {
++          awaitStartup: () => Effect.void,
++          tools: () => Effect.succeed(sources),
++          callTool: (input) =>
++            Effect.sync(() => {
++              calls.push(input)
++              return { isError: false, content: [{ type: "text" as const, text: "done" }] }
++            }),
++        }),
++      ),
++      Permission.node.replace(
++        Layer.mock(Permission.Service, {
++          assert: (input) =>
++            Effect.gen(function* () {
++              permissions.push(input)
++              if (blocked)
++                return yield* new Permission.BlockedError({
++                  rules: [],
++                  permission: input.action,
++                  resources: ["*"],
++                  reason: "SSH disabled",
++                })
++            }),
++        }),
++      ),
++      Bus.node.replace(Layer.mock(Bus.Service, { subscribe: () => Stream.never })),
++    ]),
++  )
++  const sources = [
++    source("harmonika", "network_exec"),
++    source("harmonika", "image_generate"),
++    source("other", "network_exec"),
++  ]
++
++  it.effect(`SSH command quoting survives native tool routing (codemode=${preference}, blocked=${blocked})`, () =>
++    Effect.gen(function* () {
++      const registry = yield* Tool.Service
++      yield* (yield* McpTool.Service).flush
++      const snapshot = yield* registry.snapshot()
++      const names = snapshot.definitions.map((tool) => tool.name)
++      expect(names.includes("harmonika_network_exec")).toBe(preference !== true)
++      expect(names.includes("harmonika_image_generate")).toBe(preference === false)
++      expect(names).not.toContain("other_network_exec")
++      const catalog = codeModeListings(snapshot.codeModeCatalog!).map((entry) => entry.path)
++      expect(catalog.includes("harmonika.network_exec")).toBe(preference === true)
++      expect(catalog).toContain("other.network_exec")
++      const command =
++        "python3 - <<'PY'\nimport re\nassert re.fullmatch(r'\\d+', '123')\nprint(\"it's $HOME `literal` ${value}\")\nPY"
++      const input = { command }
++      const call =
++        preference === true
++          ? { name: "execute", input: { code: `return await tools.harmonika.network_exec(${JSON.stringify(input)})` } }
++          : { name: "harmonika_network_exec", input }
++      const sessionID = Session.ID.make("ses_ssh_quoting")
++      const result = yield* snapshot
++        .execute({ sessionID, ...toolIdentity, call: { type: "tool-call", id: "ssh_fixture", ...call } })
++        .pipe(Effect.exit)
++      if (blocked) {
++        expect(calls).toEqual([])
++        if (preference === true) {
++          expect(Exit.isSuccess(result) && result.value.output).toMatchObject({ toolCalls: [{ status: "error" }] })
++        } else expect(Exit.isFailure(result)).toBe(true)
++      } else {
++        expect(Exit.isSuccess(result)).toBe(true)
++        expect(calls).toEqual([{ server: "harmonika", name: "network_exec", args: input, sessionID }])
++      }
++      expect(permissions).toHaveLength(1)
++      expect(permissions[0].action).toBe("harmonika_network_exec")
++    }),
++  )
++}
+diff --git a/packages/core/test/tool-webfetch.test.ts b/packages/core/test/tool-webfetch.test.ts
+index 1b6cbe8..63d6a4f 100644
+--- a/packages/core/test/tool-webfetch.test.ts
++++ b/packages/core/test/tool-webfetch.test.ts
+@@ -425,6 +425,34 @@ describe("WebFetchTool helpers", () => {
+ })
+ 
+ describe("WebFetchTool registration", () => {
++  live.live("reads documentation behind a redirect when the compressed variant is broken", () =>
++    Effect.gen(function* () {
++      reset()
++      const server = Bun.serve({
++        hostname: "127.0.0.1",
++        port: 0,
++        fetch(request) {
++          if (new URL(request.url).pathname === "/start")
++            return new Response(null, { status: 302, headers: { location: "/docs" } })
++          if (request.headers.get("accept-encoding") !== "identity")
++            return new Response("invalid gzip stream", {
++              headers: { "content-type": "text/markdown", "content-encoding": "gzip" },
++            })
++          return new Response("# Install\n\nVerified documentation", {
++            headers: { "content-type": "text/markdown" },
++          })
++        },
++      })
++      yield* Effect.addFinalizer(() => Effect.sync(() => server.stop(true)))
++      const registry = yield* Tool.Service
++      expect(yield* executeTool(registry, call({ url: `${server.url}start`, format: "markdown" }))).toMatchObject({
++        status: "completed",
++        content: [{ type: "text", text: "# Install\n\nVerified documentation" }],
++      })
++      expect(checks).toMatchObject([{ resources: [`${server.url}docs`] }])
++    }).pipe(Effect.scoped),
++  )
++
+   it.effect("registers and fetches an ordinary hostname HTTP URL without rewriting it", () =>
+     Effect.gen(function* () {
+       reset()

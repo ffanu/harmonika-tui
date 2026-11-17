@@ -18,6 +18,7 @@ Terminal-first AI capabilities, fully self-hosted (no external API keys).
 - `/api/tools/embedding/embed` `/similarity` — POST
 - `/api/tools/knowledge/store` `/search` — POST (`rerank: true` optional), `/list` — GET
 - `/api/tools/rerank/rerank` — POST
+- `/api/tools/vlm/generate` — POST; `/api/tools/vlm/tags` — GET (RTX Ollama)
 - `/api/tools/video/generate` — POST `{"prompt"}`; `/status/<id>` GET; `/file/<id>` GET (mp4)
 
 Gateway Go handlers: `*_gateway.go` (deployed at `/srv/harmonika-web-chat/current/`).
@@ -29,7 +30,25 @@ Gateway Go handlers: `*_gateway.go` (deployed at `/srv/harmonika-web-chat/curren
 - `video_generate(prompt)` — async submit + poll (~5 min)
 - `batch_run(commands[])` — parallel local commands (max 8)
 
-Verification modes: `web_read`, `kb_search`, `video_generate` count as inspection evidence (`--verification inspection`).
+Verification: `web_read` and `kb_search` may provide inspection evidence.
+`video_generate` mutates state and is blocked in inspection mode. Use
+`video_status` to reconcile an existing job after a timeout; a pending job never
+proves completion.
+
+## Isolation and proxy update (17 November 2026)
+
+Knowledge reads, writes, searches and deletes are scoped to the verified public
+token database ID. The gateway overwrites `X-Harmonika-KB-Owner`; caller-supplied
+ownership is not trusted. The loopback worker rejects requests missing that
+header. Deploy the updated gateway and worker together. The additive SQLite
+migration preserves legacy rows without assigning them to an arbitrary token;
+legacy unowned notes require explicit operator attribution before they become
+visible. Optional reranking sees only candidates from the requesting owner.
+
+Vision maps the gateway route to Ollama `/api/generate` and `/api/tags`, with the
+correct upstream Host. Proxy error handlers are configured once at construction
+to avoid request races. License and device checks remain enforced. A successful
+tags probe demonstrates connectivity, not image-analysis quality or GPU inference.
 
 ## Notes
 

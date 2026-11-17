@@ -192,6 +192,17 @@ Sisa pekerjaan yang **belum** dikerjakan dan alasannya:
 | **A4** Binary semua platform | `darwin-arm64` 230 MB, `darwin-x64` 244 MB, `linux-x64` 257 MB, `linux-arm64` 252 MB, `windows-x64.exe` 264 MB. Manifest memuat 5 platform; sha256 tiap binary diverifikasi cocok antara lokal dan server. |
 | **A1** Rebase 47 commit upstream | `git rebase origin/dev` ke `67139d6` **tanpa konflik**; patch series diperbarui jadi 3 commit dan `verify-patches.sh` membuktikan reproduksi tree. Seluruh binary A4 dibangun dari source yang sudah ter-rebase. |
 
+## 13. Refresh patch series (2026-11-17)
+
+| Item | Hasil terukur |
+| --- | --- |
+| **B1** Patch series 5 | `harmonika/main` = **5 commit brand** di atas base `67139d6`. Commit baru: `brand: upstream-free updater, native harmonika SSH MCP, project dir discovery`. `engine/scripts/verify-patches.sh` membuktikan kelima patch (`0001..0005`) mereproduksi tree `harmonika/main` (`b3215c92ab06`) tanpa konflik. |
+| **B2** Distribusi tanpa jalur upstream | `updater.ts` membuang `installNames` (curl/npm/pnpm/bun/yarn/vp/brew/winget) dan `EngineInstallerUrl`; hanya manifest `chat.harmonika.id/.../engine/update.json` yang tersisa. Tersedia test regresi: `updater-install.test.ts`, `noninteractive.test.ts`. |
+| **B3** MCP SSH native | `packages/core/src/tool/mcp.ts`: tool `harmonika.network_exec` tidak lagi `codemode` (skrip shell tidak dibungkus JavaScript), preferensi server tetap menang. Test: `mcp-harmonika-ssh.test.ts`. |
+| **B4** Discovery `.harmonika/` | `packages/core/src/config/discovery.ts` membandingkan `projectDirs` dengan `.some()` sehingga `.harmonika/` **dan** `.opencode/` sama-sama terdeteksi; `webfetch.ts` mengikuti. Test: `config.test.ts`, `tool-webfetch.test.ts`. |
+| **B5** Limit konteks di template | `engine/config/harmonika.json`: `harmonika-ai` dan `harmonika-ai-codex` memakai `limit.context = 872000`, `limit.output = 4096` (selaras kuota server 872k). |
+| **B6** Build ulang 5 platform | `engine/scripts/build-engine.sh darwin-arm64 darwin-x64 linux-x64 linux-arm64 windows-x64` dari source `534c3e0`; sha256 dicatat per binary di log build dan diverifikasi `smoke-engine.sh`. |
+
 Verifikasi cepat:
 
 ```bash

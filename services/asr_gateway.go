@@ -5,9 +5,7 @@ package main
 // worker token (agents authenticate with their public AI token).
 
 import (
-	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"os"
 	"strings"
@@ -15,10 +13,10 @@ import (
 
 const asrTokenPath = "/etc/harmonika-ai/asr.token"
 
-var asrProxy = httputil.NewSingleHostReverseProxy(&url.URL{
+var asrProxy = newSelfHostedToolsProxy(&url.URL{
 	Scheme: "http",
 	Host:   getenv("HARMONIKA_ASR_URL", "127.0.0.1:18282"),
-})
+}, "asr_unavailable")
 
 func asrToken() string {
 	b, err := os.ReadFile(asrTokenPath)
@@ -49,8 +47,5 @@ func (a *app) asrToolsAPI(w http.ResponseWriter, r *http.Request) {
 	}
 	r.URL.Path = target
 	r.Header.Set("Authorization", "Bearer "+token)
-	asrProxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
-		jsonOut(w, http.StatusBadGateway, map[string]any{"ok": false, "error": fmt.Sprintf("asr unavailable: %v", err)})
-	}
 	asrProxy.ServeHTTP(w, r)
 }

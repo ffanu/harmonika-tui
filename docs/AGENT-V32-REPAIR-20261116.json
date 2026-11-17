@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "completed_utc": "2026-11-16T10:56:02.318935+00:00",
+  "version": "3.2.1",
+  "status": "implemented_tested_active",
+  "git_base": "2e6c9b4",
+  "git_commit_created": false,
+  "activation": {
+    "mac_entrypoint": "harmonika agent-v32",
+    "bundle": "728e5a92d702a501",
+    "default_native_tui_binary_unchanged": true,
+    "native_sha256": "a86e58276b4f5859d091e6a58d4575cae89ca4f0eb44728779e4f2190ffeb45f",
+    "gateway_service": "harmonika-web-chat-live.service",
+    "gateway_binary_sha256": "374a023f74ea16f0e76e744ab1db6ceaef9aae5f2e3ea435a597672c6bce66f6",
+    "gateway_health_http": 200,
+    "planner_and_discovery_pids_unchanged": true,
+    "discovery_module_hash": "cb57a083c9c34343e35ce1c4ea6475e4e4bde3c738ae09b2f16fbe10bcd3941e",
+    "discovery_hash_verified": 1,
+    "discovery_error_code": "OK",
+    "native_delegate_skill_updated": true
+  },
+  "changes": [
+    "Completion requires positive fresh verification; failed or invalid tools invalidate earlier proof",
+    "Persisted intent, task/workspace/policy HMAC binding, no replay of uncertain effects",
+    "Async authenticated owner-bound delegation with durable IDs, status reconciliation, duplicate admission prevention",
+    "No automatic SSH, Docker prune or process signals in preflight",
+    "Private mechanics/error counters, no raw chat/task/commands/customer data in checkpoints",
+    "Actual registry-compatible descriptor and bounded TTL/admission"
+  ],
+  "tests": {
+    "node": {
+      "passed": 365,
+      "failed": 0,
+      "skipped": 0,
+      "agent_v32_cases": 29,
+      "existing_planner_regressions": 336
+    },
+    "go_race": {
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0
+    },
+    "python": {
+      "passed": 7,
+      "failed": 0
+    },
+    "autonomous_full_service_recovery": {
+      "installed_bundle": "122540db5e0cbb7e",
+      "public_passed": 8,
+      "independent_passed": 4,
+      "protected_files_unchanged": true,
+      "passed": true
+    },
+    "autonomous_exact_final_bundle": {
+      "installed_bundle": "728e5a92d702a501",
+      "public_passed": 3,
+      "independent_passed": 2,
+      "seeded_failure_reproduced": true,
+      "original_tests_unchanged": true,
+      "passed": true
+    },
+    "physical_process_resume": {
+      "installed_version": "728e5a92d702a501",
+      "two_processes": true,
+      "first_status": "step_limit",
+      "second_status": "completed",
+      "same_session": true,
+      "effect_count": 1,
+      "passed": true
+    },
+    "live_async_delegation": {
+      "submit_http": 202,
+      "submit_seconds": 0.175,
+      "lost_ack_same_job": true,
+      "same_submit_same_job": true,
+      "changed_payload_http": 409,
+      "missing_job_http": 404,
+      "final_status": "completed",
+      "provider": "codex",
+      "output_matches": true,
+      "elapsed_seconds": 77.1,
+      "passed": true
+    },
+    "installed_client_live_status": {
+      "actual_installed_client_status": "completed",
+      "output_matches": true,
+      "same_job": true
+    },
+    "post_activation_chat_and_auth": {
+      "chat_http": 200,
+      "correct_answer": true,
+      "unauthenticated_http": 401
+    },
+    "state_ledger": {
+      "ledger_fields_only": true,
+      "ledger_authenticated": true,
+      "ledger_mode": "0o600",
+      "state_directory_mode": "0o700",
+      "task_and_output_not_present": true
+    }
+  },
+  "resolved_during_validation": [
+    "Original false success on failed executor",
+    "Node child inherited test context",
+    "Executor verification counts must be independently derived",
+    "Cross-process delegation admission requires bounded lock retry",
+    "Unsupported descriptor regex keyword replaced with bounded lengths",
+    "Busy delegation retries must reuse original request ID",
+    "Invalid arguments or failed reads invalidate old verification even within the same clock tick"
+  ],
+  "review": {
+    "codex": "implementation_and_review_complete",
+    "opencode": "attempted_but_provider_usage_limit_HTTP429",
+    "claude_invoked": false
+  },
+  "limitations": [
+    "The new execution controller is invoked explicitly via harmonika agent-v32; native UI binary and ordinary UI entrypoint remain unchanged",
+    "Host bash guards are not an OS sandbox",
+    "Delegation output is RAM-only; gateway restart reports output_unavailable and never fabricates or replays output",
+    "Uncertain workers retain slots until reconciled; terminal idempotency retention is 24 hours",
+    "Mechanical memory counters are not model training or storage of conversation content",
+    "Windows execution and new SSH executor were not physically validated in this repair; SSH boundary tests are included"
+  ],
+  "private_evidence_directory": "/Users/id/.local/state/harmonika/exams/v32-repair-20261116T105602Z",
+  "changed_files_sha256": {
+    "AGENTS.md": "ae0f1e3da0e9c9062dad79ad8f257893a9af61c7cce0284fad8f2a4cef649dbc",
+    "skills/harmonika-delegate/SKILL.md": "a67c7a517293abc4a8c1b2b3ac0e0f7f483f6e1172173f8fb7f974195c731437",
+    "tools/README.md": "2b21afad88fcfc8e46bbb6bf2081b0142b1f46f8e2bb263e13fe0228a62821a0",
+    "tools/agent-v32.js": "d189ff8b35d806a74e912607a55b949e6f8082165d19d67fe189f3b85cae9766",
+    "backend/agent_delegate/README.md": "8a2bb42215f1a64c2bbd0d4830e30b921dd682b20ccd5e9d65d361b225046fbc",
+    "backend/agent_delegate/delegate_jobs.go": "11ff336840a7c5d0b6435423701a5399f171b9a4791c17927933ae6c1699d12b",
+    "backend/agent_delegate/delegate_jobs_test.go": "dfb66bb1778750631d8b1fc9f1394da2bccd5e4b4f1cbe44ec60dbab401be5a2",
+    "backend/agent_delegate/delegate_skill.go": "f7f3e36b9fc938d7efb9c6670803a215b674166a88439f1fe49cef3d50d5ffce",
+    "backend/agent_delegate/delegate_skill_test.go": "c3472ca851a73a7e4516659d33a4831a0245730e26fe1b1f79f2cca646a836f7",
+    "backend/agent_delegate/skill.py": "cb57a083c9c34343e35ce1c4ea6475e4e4bde3c738ae09b2f16fbe10bcd3941e",
+    "scripts/activate-agent-delegate.py": "7cdfd286106b255295d71f8e7c2dea39796c1767c79d829ad7dcfa7fb5ea3bf9",
+    "scripts/activate-agent-v32.py": "a2d027e3a0fd790c263144481a61ca87e807f760c30ae03d832a32b48040587e",
+    "tests/agent-v32.test.cjs": "082435a174eafdadf2b791772acd2d7151c93125ff32e87ebe4f956fc4182dcd",
+    "tests/test_agent_delegate_activation.py": "2f549168df8f4e11b9348bda0d322a540b6599a78ad135c8a1733864991ae43d",
+    "tests/test_agent_delegate_descriptor.py": "315e095898ca91f3f46d85ed08312b91c2be7d41f7c921167c8070ab5c9e2c8b",
+    "tests/test_agent_v32_activation.py": "75ff2a4ebff56a6977b8e512ee0f92b29ea7cd643070b03d9708344705374783",
+    "tools/agent-http.cjs": "2207585496edc8f20b71b234cda3bc77a25cd8fe551ee7fe405c955d18cdc935",
+    "tools/agent-state.cjs": "58cd36084c606cd5a25a5135db233fc34d13b1dc63003720971a91a07eb24bba"
+  },
+  "evidence_sha256": {
+    "node-regression-final.txt": "3d94f32c3f8aaf7da6f366bd7e38992376e7d7f749dd48dd59e6d206c8d34648",
+    "python-final.txt": "3fcbebda6d75578c25b79b9a7fbfa4c88bdbaef7a85edb686ab6fafd019289c7",
+    "go-candidate-manifest.json": "b0fd0b652f782cb5500a3ff8d942be2cc736813503346a9a7e23c52fdc407aba",
+    "gateway-activation.json": "d0af9a4777e5e8336eebe8b0aabc06b4104bf9e7d8bb32a2f099b3b97e73d19c",
+    "local-final-activation.json": "ffd586aadc461f1b94d37780bb3d7ca7e4bfd9af03bb69ab280397e42a28f05f",
+    "delegate-live-result.json": "81492e06fd7d8d1775b6044503f4aae0cf659b828f48d4cd8cc58a11346da7cd",
+    "discovery-canary.json": "d9ce7e9295849bef113c3e68127525f57f4b9c583ae893c160536306f3875ad5",
+    "live-state-integrity.json": "572f538971d3a7f924ab93326e6839f30c85af0ba4b286f53d5e341fd07d3434",
+    "final-bundle-exam/result.json": "3924e3e699992923dd6785e1c787a892a87eea1dd7439fd3399e73a08e2fc106",
+    "final-live-2/result.json": "c0aecc6a62d40af01c45649a2ef09d7f3dac7d58a1280a5f82d62415112441cf",
+    "physical-resume-final/result.json": "3de85eadc31e6055873148261f9da3f1e3e6d7b481fdc556a2338b27b3f1d958"
+  }
+}
