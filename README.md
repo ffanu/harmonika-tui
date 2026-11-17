@@ -73,6 +73,11 @@ Atau langsung dari source GitHub:
 irm https://raw.githubusercontent.com/ffanu/harmonika-tui/main/scripts/install.ps1 | iex
 ```
 
+Rilis `2026.11.18.1` memperbaiki input lisensi Windows agar key terlihat saat
+paste, serta pemilihan Python ketika kandidat awal gagal. Alur konsol Windows
+dan instalasi lengkap diuji di CI;
+[hasil pengujian](docs/WINDOWS-LICENSE-INSTALLER-AUDIT-20261118.json).
+
 **Manual dari source:**
 
 ```sh

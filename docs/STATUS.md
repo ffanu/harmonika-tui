@@ -2,6 +2,20 @@
 
 Status terbaru dicatat di awal; entri berikut menyimpan hasil audit historis.
 
+## Instalasi dan paste lisensi Windows — 18 November 2026
+
+- Runtime signed `2026.11.18.1`; installer GitHub dan aset publik sudah cocok
+  dengan source yang diuji. Binary dan brand tetap `1.0.2`.
+- Key terlihat saat diketik/ditempel pada Windows; Ctrl+V atau Shift+Insert,
+  lalu Enter. macOS/Linux tetap memakai prompt tersembunyi.
+- Probe Python PowerShell 5 melanjutkan ke kandidat berikutnya ketika kandidat
+  awal rusak; Windows memerlukan Python 64-bit versi 3.9 atau lebih baru.
+- Lima tes konsol Windows nyata dan 20 regresi lisensi lulus. Instalasi fresh
+  Windows, MCP, 36 skill serta dependensi dokumen/SSH/browser juga lulus.
+- Tes memakai key sintetis dan fixture terisolasi. PC Windows pengguna serta
+  pesan error awal pengguna belum diverifikasi langsung; layanan tidak direstart.
+- [Bukti dan batas pengujian](WINDOWS-LICENSE-INSTALLER-AUDIT-20261118.json).
+
 ## Profil agent lintas OS — 17 November 2026
 
 - Runtime bertanda tangan `2026.11.17.13`; binary native tetap `1.0.2`.

@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "release": "2026.11.18.1",
+  "source_commit": "54f6a79c204805ffc3f469373e3fbc3336a95965",
+  "changes": [
+    "Visible editable Windows license input using cooked console line input",
+    "Fallback to the next Python candidate after a broken native executable writes stderr",
+    "Explicit Python 64-bit prerequisite for Windows",
+    "Keep hidden license input on macOS and Linux"
+  ],
+  "windows_console_tests": {
+    "run_id": 44151811980,
+    "job_id": 134281882066,
+    "url": "https://github.com/ffanu/harmonika-tui/actions/runs/44151811980",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "cases": [
+      "visible pasted key remains intact and brand is preserved",
+      "Ctrl+C cancels without activation",
+      "Ctrl+Z and Enter cancel on EOF",
+      "PowerShell 5 Invoke-Expression onboarding retains console stdin",
+      "Broken Python stderr probe permits a healthy candidate without changing caller error policy"
+    ],
+    "synthetic_keys_only": true,
+    "real_license_api_called": false
+  },
+  "license_regressions": {
+    "passed": 20,
+    "failed": 0
+  },
+  "windows_fresh_install": {
+    "passed": true,
+    "platform": "windows-x64",
+    "duration_seconds": 100.94,
+    "native_binary_runs": true,
+    "native_binary_sha256": "35f63c9fd49eb7b5eae74ecb4922363a30155c56288e242b7f4cf9fcaaf765ff",
+    "fresh_install_without_npm": true,
+    "installed_wrapper_works": true,
+    "native_plugins_load": true,
+    "agent_profile_registered": true,
+    "skill_count": 36,
+    "feature_dependencies": {
+      "browser": true,
+      "documents": true,
+      "ssh": true
+    },
+    "tampered_content_refused": true,
+    "invalid_signature_refused": true,
+    "failed_updates_preserve_config_and_pointer": true,
+    "license_or_provider_api_called": false,
+    "synthetic_fixture_only": true
+  },
+  "ci_jobs": [
+    {
+      "name": "linux-arm64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "darwin-x64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "linux-x64 / Node 18",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "linux-x64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "windows-x64 / Node 22",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "darwin-arm64 / Node 22",
+      "status": "queued",
+      "conclusion": null
+    }
+  ],
+  "initial_test_harness_failure": {
+    "run_id": 44151427463,
+    "failed": 4,
+    "passed": 1,
+    "cause": "The CI test harness inherited redirected standard handles instead of using its ConPTY.",
+    "correction": "STARTF_USESTDHANDLES with NULL standard handles; real isatty assertions remain enabled.",
+    "reference": "https://github.com/microsoft/terminal/discussions/15814"
+  },
+  "privacy": {
+    "visible_key_only_in_requested_interactive_windows_console": true,
+    "interactive_key_in_process_arguments": false,
+    "key_in_activation_json": false,
+    "private_keys_or_accounts_bundled": false
+  },
+  "scope": {
+    "user_windows_error_log_received": false,
+    "user_windows_machine_directly_verified": false,
+    "tests_executed_on_windows_runner": true,
+    "license_entitlement_and_device_policy_changed": false,
+    "backend_services_restarted": false,
+    "user_sessions_stopped": false,
+    "native_brand_or_binary_changed": false
+  },
+  "distribution": {
+    "github_installer": "https://raw.githubusercontent.com/ffanu/harmonika-tui/main/scripts/install.ps1",
+    "public_installer": "https://chat.harmonika.id/assets/harmonika-terminal/install.ps1",
+    "supported_windows": "Windows x64 / PowerShell 5.1+",
+    "user_action": "Run the updated installer in PowerShell, paste the visible license key, then press Enter."
+  },
+  "verified_at": "2026-11-17T18:52:48.536272+00:00",
+  "signed_package": {
+    "release": "2026.11.18.1",
+    "source_commit": "54f6a79c204805ffc3f469373e3fbc3336a95965",
+    "zip_sha256": "53aef2d8d9b00203d50be92b4b8fe2c7280191425670c6d55299fd3004421a4a",
+    "zip_bytes": 1595094,
+    "signed_files": 222,
+    "signature_verified": true,
+    "all_file_hashes_verified": true,
+    "both_license_entrypoints_updated": true,
+    "native_binary_preserved": "1.0.2"
+  },
+  "public_source_verification": {
+    "github_installer": {
+      "sha256": "1f0460891f80c9f515c1579b75341d6a7373125b5515a51e1842a70434981251",
+      "matches_reviewed_source": true
+    },
+    "public_installer": {
+      "sha256": "1f0460891f80c9f515c1579b75341d6a7373125b5515a51e1842a70434981251",
+      "matches_reviewed_source": true
+    },
+    "public_catalog": {
+      "signature_verified": true,
+      "release": "2026.11.18.1"
+    }
+  }
+}
