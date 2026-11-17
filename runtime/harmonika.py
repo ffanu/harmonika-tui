@@ -958,6 +958,8 @@ def main():
             CRUSH_DISABLE_PROVIDER_AUTO_UPDATE='1',
             HARMONIKA_GLOBAL_CONFIG=cfg_dir,
             CRUSH_GLOBAL_CONFIG=cfg_dir,
+            OPENCODE_CONFIG_DIR=cfg_dir,
+            HARMONIKA_OPENCODE_CONFIG_DIR=cfg_dir,
             HARMONIKA_GLOBAL_DATA=data_dir,
             CRUSH_GLOBAL_DATA=data_dir,
             HARMONIKA_DEVICE_ID=dev_id,

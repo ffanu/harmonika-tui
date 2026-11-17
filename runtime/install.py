@@ -107,11 +107,7 @@ def ensure_default_config(root=ROOT):
             },
             'permissions':{'allowed_tools':[]},
             'hooks':{'PreToolUse':[{'name':'Harmonika project file guard','matcher':'^(view|ls|glob|grep|write|edit|multiedit|bash|lsp_diagnostics|lsp_references|lsp_symbols|lsp_definition|lsp_implementation|lsp_call_hierarchy)$','command':f'{m.NODE} {root}/current/tools/project-file-guard.cjs','timeout':5}]},
-            'mcp':{'harmonika':{'type':'local','command':[m.NODE,str(root/'current/tools/mcp-server.cjs')],'args':[str(root/'current/tools/mcp-server.cjs')],'timeout':240,'enabled':True}},
-            # --- gaya engine (TUI opencode): hanya provider Harmonika yang dipakai ---
-            'provider':{'harmonika':{'npm':'@ai-sdk/openai-compatible','options':{'baseURL':'https://chat.harmonika.id/v1','apiKey':'{env:HARMONIKA_API_KEY}'},'models':{'harmonika-ai':{'name':'Harmonika Ai','attachment':False,'reasoning':False,'tool_call':True,'limit':{'context':872000,'output':4096}},'harmonika-ai-codex':{'name':'Harmonika Ai Pro','attachment':False,'reasoning':False,'tool_call':True,'limit':{'context':872000,'output':4096}},'harmonika-ai-google':{'name':'Harmonika Ai Fast','attachment':False,'reasoning':False,'tool_call':True}}}},
-            'model':'harmonika/harmonika-ai-codex','small_model':'harmonika/harmonika-ai',
-            'enabled_providers':['harmonika'],'disabled_providers':['opencode'],'share':'disabled','snapshots':True
+            'mcp':{'harmonika':{'type':'stdio','command':m.NODE,'args':[str(root/'current/tools/mcp-server.cjs')],'timeout':240}}
         }
         cfg_file.write_text(json.dumps(default_cfg,indent=2)+'\n', encoding='utf-8')
     else:
@@ -129,19 +125,31 @@ def ensure_default_config(root=ROOT):
                 kval=key_file.read_text(encoding='utf-8').strip()
                 if kval:prov['api_key']=kval
             existing_cfg.setdefault('options',{}).setdefault('tui',{})['active_theme']='harmonika-dark'
-            # Migrasi config lama ke gaya engine supaya TUI opencode mengenali
-            # provider Harmonika, dan menutup provider lain (enabled_providers).
-            harm=existing_cfg.setdefault('provider',{}).setdefault('harmonika',{'npm':'@ai-sdk/openai-compatible','options':{},'models':{}})
-            harm.setdefault('npm','@ai-sdk/openai-compatible')
-            eopts=harm.setdefault('options',{});eopts['baseURL']='https://chat.harmonika.id/v1';eopts.setdefault('apiKey','{env:HARMONIKA_API_KEY}')
-            for mid,label in (('harmonika-ai','Harmonika Ai'),('harmonika-ai-codex','Harmonika Ai Pro'),('harmonika-ai-google','Harmonika Ai Fast')):
-                entry=harm.setdefault('models',{}).setdefault(mid,{'name':label,'attachment':False,'reasoning':False,'tool_call':True})
-                entry.setdefault('limit',{'context':872000,'output':4096})
-            existing_cfg.setdefault('model','harmonika/harmonika-ai-codex');existing_cfg.setdefault('small_model','harmonika/harmonika-ai')
-            existing_cfg['enabled_providers']=['harmonika'];existing_cfg.setdefault('disabled_providers',['opencode']);existing_cfg.setdefault('share','disabled')
-            existing_cfg.setdefault('mcp',{}).setdefault('harmonika',{'type':'local','command':[m.NODE,str(root/'current/tools/mcp-server.cjs')],'enabled':True})
             cfg_file.write_text(json.dumps(existing_cfg,indent=2)+'\n', encoding='utf-8')
         except Exception:pass
+    # Config gaya engine (TUI opencode) ditulis sebagai file terpisah supaya skema
+    # gaya lama di harmonika.json tetap valid. Hanya provider Harmonika yang dipakai;
+    # provider lain ditutup lewat enabled_providers (deny-all + allow harmonika).
+    engine_cfg_file=cfg_dir/'opencode.json'
+    try:
+        engine_cfg=json.loads(engine_cfg_file.read_text(encoding='utf-8')) if engine_cfg_file.exists() else {}
+        if not isinstance(engine_cfg,dict):engine_cfg={}
+    except Exception:engine_cfg={}
+    engine_models={}
+    for mid,label in (('harmonika-ai','Harmonika Ai'),('harmonika-ai-codex','Harmonika Ai Pro'),('harmonika-ai-google','Harmonika Ai Fast')):
+        engine_models[mid]={'name':label,'attachment':False,'reasoning':False,'tool_call':True,'limit':{'context':872000,'output':4096}}
+    engine_cfg['$schema']='https://chat.harmonika.id/assets/harmonika-terminal/cli.json'
+    engine_cfg['model']='harmonika/harmonika-ai-codex'
+    engine_cfg['small_model']='harmonika/harmonika-ai'
+    engine_cfg['enabled_providers']=['harmonika']
+    engine_cfg['disabled_providers']=['opencode']
+    engine_cfg.setdefault('share','disabled')
+    engine_cfg.setdefault('snapshots',True)
+    engine_cfg['provider']=dict(engine_cfg.get('provider') or {})
+    engine_cfg['provider']['harmonika']={'npm':'@ai-sdk/openai-compatible','options':{'baseURL':'https://chat.harmonika.id/v1','apiKey':'{env:HARMONIKA_API_KEY}'},'models':engine_models}
+    engine_cfg['mcp']={'harmonika':{'type':'local','command':[m.NODE,str(root/'current/tools/mcp-server.cjs')],'enabled':True}}
+    engine_cfg.setdefault('permission',{'read':'allow','edit':'allow','glob':'allow','grep':'allow','list':'allow','bash':'allow','task':'allow','todowrite':'allow','question':'allow','webfetch':'allow','websearch':'allow','lsp':'allow','skill':'allow','external_directory':{'*':'allow'}})
+    engine_cfg_file.write_text(json.dumps(engine_cfg,indent=2)+'\n', encoding='utf-8')
     crush_alias=cfg_dir/'crush.json'
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
     m.ensure_themes(cfg_dir,share_dir)
