@@ -1,4 +1,5 @@
 import {nativeSystemUpdates} from './native_system_updates.mjs';
+import {nativeToolReceipts} from './native_tool_receipts.mjs';
 import window from './context_window.cjs';
 import {open,mkdir,rename,lstat,unlink} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
@@ -53,8 +54,8 @@ export async function recordMechanics(state,env=process.env) {
 export default {
  id:'harmonika.visual-context-guard',
  async setup(ctx){
-  const updates=nativeSystemUpdates(),hooks=[];
-  const cleanup=()=>{for(const hook of hooks)try{hook.dispose();}catch{}updates.dispose();};
+  const updates=nativeSystemUpdates(),receipts=nativeToolReceipts(),hooks=[];
+  const cleanup=()=>{for(const hook of hooks)try{hook.dispose();}catch{}updates.dispose();receipts.dispose();};
   try {
   hooks.push(await ctx.session.hook('context',event=>{updates.register(event);},{providerID:'harmonika'}));
   hooks.push(await ctx.session.hook('http.response',event=>{updates.release(event);},{providerID:'harmonika'}));
@@ -65,13 +66,15 @@ export default {
    let value;try{value=JSON.parse(raw)}catch{return}
    if(!value||!Array.isArray(value.messages)||value.messages.some(m=>!m||typeof m!=='object'||Array.isArray(m)))return;
    const restored=updates.promote(value,event);
-   const projected=window.project(restored.value,{maxChars:capacityProfile()?.transport_soft_chars});
+   const enriched=receipts.promote(restored.value,event);
+   const projected=window.project(enriched.value,{maxChars:capacityProfile()?.transport_soft_chars});
    try{await recordMechanics({...projectionMechanics(value,projected,raw.length),native_system_updates:restored.count??0});}catch{}
    if(projected===value)return;
    const headers=new Headers(request.headers);headers.delete('content-length');
    event.request=new Request(request,{headers,body:JSON.stringify(projected)});
    restored.bind(event.request);
   },{providerID:'harmonika'}));
+  hooks.push(await ctx.tool.hook('execute.after',event=>{receipts.record(event);}));
   return cleanup;
   } catch(error) {cleanup();throw error;}
  }
