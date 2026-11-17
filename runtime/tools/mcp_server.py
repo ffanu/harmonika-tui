@@ -430,7 +430,7 @@ TOOLS = [
 def tool_document_studio(args):
     import tempfile
     args = args or {}
-    doc_py = os.environ.get("HARMONIKA_DOCUMENT_PYTHON") or os.path.join(TERMINAL_ROOT, "document-runtime", *( ("Scripts", "python.exe") if os.name == "nt" else ("bin", "python") ))
+    doc_py = os.environ.get("HARMONIKA_DOCUMENTS_PYTHON") or os.environ.get("HARMONIKA_DOCUMENT_PYTHON") or os.path.join(TERMINAL_ROOT, "document-runtime", *( ("Scripts", "python.exe") if os.name == "nt" else ("bin", "python") ))
     if not os.path.exists(doc_py):
         doc_py = sys.executable
     doc_script = os.path.join(os.path.dirname(HERE), "skills", "harmonika-documents", "scripts", "documents.py")
@@ -773,6 +773,12 @@ HANDLERS.update(_project_memory.HANDLERS)
 import translation_mcp as _translation
 TOOLS.extend(_translation.TOOLS)
 HANDLERS.update(_translation.HANDLERS)
+try:
+    import portable_media as _portable_media
+except ImportError:
+    _portable_media = None
+if _portable_media is not None:
+    _portable_media.install(HANDLERS)
 HANDLERS = {name: _protect_tool(name, handler) for name, handler in HANDLERS.items()}
 
 if __name__ == "__main__":
