@@ -148,7 +148,7 @@ def vnc(port,t,args,skill):
             ssh.require(t.get('allow_capture') is True,'vnc_capture_not_authorized')
             destination=ssh.local_path(ssh.load_config(),{**args,'remote_path':'unused'})
             ssh.require(destination.suffix.lower()=='.png','invalid_input')
-            fd=os.open(destination,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+            fd=os.open(destination,os.O_WRONLY|os.O_CREAT|os.O_EXCL|getattr(os,'O_NOFOLLOW',0),0o600)
             try:
                 with os.fdopen(fd,'wb') as file:frame.screen.save(file,format='PNG')
             except BaseException:

@@ -36,7 +36,7 @@ function invoke(skill,args,signal){return new Promise(resolve=>{
  const done=value=>{if(finished)return;finished=true;clearTimeout(timer);signal?.removeEventListener('abort',abort);resolve(value);};
  const abort=()=>{child?.kill();done(failure('remote_state_unknown'));};
  try{
-  child=spawn(path.join(paths.terminal,'ssh-runtime',process.platform==='win32'?'Scripts/python.exe':'bin/python'),['-I',path.join(__dirname,skill.startsWith('ssh.')?'ssh_connector.py':'remote_connector.py'),'invoke'],{stdio:['pipe','pipe','ignore'],windowsHide:true});
+  child=spawn(process.env.HARMONIKA_SSH_PYTHON||process.env.HARMONIKA_PYTHON||path.join(paths.terminal,'ssh-runtime',process.platform==='win32'?'Scripts/python.exe':'bin/python'),['-I',path.join(__dirname,skill.startsWith('ssh.')?'ssh_connector.py':'remote_connector.py'),'invoke'],{stdio:['pipe','pipe','ignore'],windowsHide:true});
   timer=setTimeout(()=>{child.kill();done(failure('ssh_worker_timeout'));},180000);
   child.on('error',()=>done({ok:false,status:'error',error:{code:'ssh_runtime_unavailable',retry_safe:true}}));
   child.stdin.on('error',()=>{});

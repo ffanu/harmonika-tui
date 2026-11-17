@@ -1,7 +1,11 @@
 """Registered local SSH/SFTP connector. Never use a shell to launch an SSH client."""
-import argparse, base64, hashlib, json, logging, os, re, shlex, socket, sqlite3, stat, sys, time
+import argparse, base64, hashlib, importlib.util, json, logging, os, re, shlex, socket, sqlite3, stat, sys, time
 from pathlib import Path, PurePosixPath
 from contextlib import contextmanager
+
+_source = Path(__file__).with_name('private_files.py')
+_spec = importlib.util.spec_from_file_location('harmonika_private_files', _source)
+private_files = importlib.util.module_from_spec(_spec);_spec.loader.exec_module(private_files)
 
 LIMIT = 10 * 1024 * 1024
 OUTPUT_LIMIT = 65536
@@ -27,17 +31,13 @@ def require(value, code):
  if not value: raise SSHError(code)
 
 def private_file(path, private=True):
- require(os.name == 'posix', 'ssh_platform_not_supported')
- p = Path(path)
- require(p.is_absolute() and not any(x.is_symlink() for x in (p, *p.parents)), 'unsafe_config_file')
- info = p.stat()
- require(stat.S_ISREG(info.st_mode) and info.st_uid == os.getuid() and not info.st_mode & (0o077 if private else 0o022), 'unsafe_config_file')
- require(info.st_size <= 1024 * 1024, 'unsafe_config_file')
- return p
+ try:return private_files.private_file(path, private)
+ except FileNotFoundError:raise
+ except (ValueError, OSError):raise SSHError('unsafe_config_file') from None
 
 def load_config(path=None):
  require(os.environ.get('SSH_ENABLED','true').lower() not in ('false','0','no'), 'ssh_disabled')
- try:p = private_file(path or os.environ.get('HARMONIKA_SSH_CONFIG', str(Path.home()/'.config/harmonika/ssh-targets.json')))
+ try:p = private_file(path or os.environ.get('HARMONIKA_SSH_CONFIG', str(Path(os.environ.get('HARMONIKA_GLOBAL_CONFIG') or os.environ.get('HARMONIKA_CONFIG_DIR') or str(Path.home()/'.config/harmonika'))/'ssh-targets.json')))
  except FileNotFoundError:raise SSHError('connector_not_configured') from None
  try: config = json.loads(p.read_text())
  except (ValueError, UnicodeError): raise SSHError('invalid_config') from None
@@ -109,12 +109,12 @@ def relative(value):
 
 def local_path(config, args):
  project = Path(args['project_root'])
- require(project.is_absolute() and '..' not in project.parts and not any(x.startswith('.') for x in project.parts) and project.is_dir() and not any(x.is_symlink() for x in (project,*project.parents)), 'path_denied')
+ require(project.is_absolute() and '..' not in project.parts and not any(x.startswith('.') for x in project.parts) and project.is_dir() and not any(private_files.is_linklike(x) for x in (project,*project.parents)), 'path_denied')
  project = project.resolve()
  roots = [Path(x).resolve() for x in config['local_roots'] if type(x) is str]
  require(any(project != root and project.is_relative_to(root) for root in roots), 'path_denied')
  p = project / str(relative(args['local_path']))
- require(p.parent.is_dir() and not any(x.is_symlink() for x in (p,*p.parents)), 'path_denied')
+ require(p.parent.is_dir() and not any(private_files.is_linklike(x) for x in (p,*p.parents)), 'path_denied')
  require(p.parent.resolve().is_relative_to(project), 'path_denied')
  return p
 
@@ -190,7 +190,7 @@ def transfer(client, config, t, skill, args):
  try:
   remote=remote_path(sftp,t,args['remote_path']); digest=hashlib.sha256(); size=0
   if upload:
-   fd=os.open(local,os.O_RDONLY|os.O_NOFOLLOW)
+   fd=os.open(local,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0))
    with os.fdopen(fd,'rb') as source:
     require(stat.S_ISREG(os.fstat(source.fileno()).st_mode) and os.fstat(source.fileno()).st_nlink == 1, 'path_denied');require(os.fstat(source.fileno()).st_size<=LIMIT,'file_too_large')
     try: dest=sftp.open(remote,'wx')
@@ -215,7 +215,7 @@ def transfer(client, config, t, skill, args):
    require(read_size==size and verification.digest()==digest.digest(),'ssh_integrity_failed')
   else:
    info=sftp.lstat(remote);require(stat.S_ISREG(info.st_mode),'path_denied');require(info.st_size<=LIMIT,'file_too_large')
-   try:fd=os.open(local,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+   try:fd=os.open(local,os.O_WRONLY|os.O_CREAT|os.O_EXCL|getattr(os,'O_NOFOLLOW',0),0o600)
    except FileExistsError:raise SSHError('destination_exists') from None
    created=True
    with os.fdopen(fd,'wb') as dest, sftp.open(remote,'rb') as source:
@@ -236,9 +236,12 @@ def transfer(client, config, t, skill, args):
 
 def audit(skill,status,error,latency):
  base=Path(os.environ.get('HARMONIKA_SSH_STATE_DIR',str(Path.home()/'.local/state/harmonika/ssh')))
- require(base.is_absolute() and not any(p.is_symlink() for p in (base,*base.parents)),'unsafe_state')
- base.mkdir(mode=0o700,parents=True,exist_ok=True);os.chmod(base,0o700);path=base/'audit.sqlite'
- require(not path.is_symlink(),'unsafe_state');fd=os.open(path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600);os.close(fd)
+ require(base.is_absolute() and not any(private_files.is_linklike(p) for p in (base,*base.parents)),'unsafe_state')
+ base.mkdir(mode=0o700,parents=True,exist_ok=True)
+ if os.name=='nt':require(private_files.acl_is_private(private_files.windows_security(base)),'unsafe_state')
+ else:os.chmod(base,0o700)
+ path=base/'audit.sqlite'
+ require(not private_files.is_linklike(path),'unsafe_state');fd=os.open(path,os.O_CREAT|os.O_RDWR|getattr(os,'O_NOFOLLOW',0),0o600);os.close(fd)
  with sqlite3.connect(path,timeout=2) as db:
   db.execute('PRAGMA journal_mode=WAL')
   db.execute('CREATE TABLE IF NOT EXISTS events(timestamp REAL NOT NULL,skill_id TEXT NOT NULL,status TEXT NOT NULL,error_type TEXT NOT NULL,latency_ms INTEGER NOT NULL)')
