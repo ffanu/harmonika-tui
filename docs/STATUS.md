@@ -3,6 +3,27 @@
 Status terbaru dicatat di awal; entri berikut menyimpan hasil audit historis.
 
 
+## Shared operations backend — 18 November 2026
+
+- Delapan area tools dibangun dengan 16 ID `operations.*`; MCP `engine_operations`
+  dan `harmonika ops` memakai kontrak gateway yang sama tanpa mengganti brand/provider.
+- Service Linux baru aktif saat boot sebagai user terpisah. Semgrep, Trivy dengan
+  database segar dan Chromium sandbox sudah diuji nyata; timer database per jam aktif.
+- 61 tes operasi dan 140 tes planner lulus tanpa skip di server staging. Selftest
+  service 5/5, browser, scanner, DB baca saja, idempotensi, penolakan akses lintas
+  pengguna, hash artefak dan penghapusan setelah 24 jam sudah diuji lewat HTTP.
+- Kandidat registry membaca status RTX `online` dan berhasil meneruskan operasi.
+  Registry/planner produksi masih menunggu izin restart dua layanan saat idle.
+  Web, billing, core jaringan dan sesi pengguna tidak dihentikan.
+- Paket signed `2026.11.18.4` siap, 227 berkas cocok dengan hash/signature; belum
+  diterbitkan. CI terbaru: run `44170824095`, seluruh enam job lulus (Windows, Linux x64/ARM,
+  macOS Intel/ARM dan kombinasi Node 18/22). Instalasi terisolasi MacBook juga lulus.
+- Konektor proyek, database dan deployment perlu alias serta izin operator.
+  Selftest internal bukan bukti perubahan aplikasi sudah dites. Deployment diuji
+  pada release tree sintetis, bukan aplikasi produksi.
+- Detail: [audit operasi](OPERATIONS-ENGINE-AUDIT-20261118.json) dan
+  [panduan tools](../backend/operations_engine/README.md).
+
 ## Receipt tool dan tes Windows — 18 November 2026
 
 - Runtime signed `2026.11.18.3` sudah diterbitkan; 224 berkas diverifikasi terhadap

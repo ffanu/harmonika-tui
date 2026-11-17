@@ -1,0 +1,1160 @@
+{
+  "date": "2026-11-18",
+  "project": "Harmonika Terminal and shared backend",
+  "source_commit": "f2508ced983d5e0cf711760385fcdef3a0d3ef93",
+  "requested_areas": [
+    "diagnostics",
+    "isolated_selftests",
+    "durable_jobs",
+    "semgrep_trivy",
+    "playwright_assertions_private_traces",
+    "read_only_database_audit",
+    "reviewed_release_tree_deployment_rollback",
+    "own_admin_license_usage"
+  ],
+  "public_skill_ids": [
+    {
+      "id": "operations.engine.diagnose",
+      "description": "Registered service and graphics connectivity; mechanical results only.",
+      "engine": "operations",
+      "status": "available",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "requires_registered_project": false,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.skills.selftest",
+      "description": "Execute isolated synthetic checks; positive counts and explicit missing tools.",
+      "engine": "operations",
+      "status": "available",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "suite": {
+            "type": "string",
+            "enum": [
+              "core",
+              "security",
+              "browser"
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "requires_registered_project": false,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.security.scan",
+      "description": "Run configured Semgrep or Trivy against a registered project.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "scanner": {
+            "type": "string",
+            "enum": [
+              "semgrep",
+              "trivy"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "vuln",
+              "misconfig",
+              "secret"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "scanner",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.browser.regression",
+      "description": "Run real browser assertions and private traces on registered static HTML.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 24,
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "click",
+                    "fill",
+                    "check",
+                    "select",
+                    "assert_visible",
+                    "assert_text",
+                    "assert_count",
+                    "assert_value"
+                  ]
+                },
+                "selector": {
+                  "type": "object",
+                  "properties": {
+                    "by": {
+                      "type": "string",
+                      "enum": [
+                        "css",
+                        "test_id",
+                        "role"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "maxLength": 200
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 200
+                    }
+                  },
+                  "required": [
+                    "by",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000
+                }
+              },
+              "required": [
+                "action",
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "viewport": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "minimum": 320,
+                "maximum": 1920
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 320,
+                "maximum": 1080
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "path",
+          "steps",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.database.audit",
+      "description": "Read-only registered database schema, indexes and named query plans.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "database": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "database",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.license.usage",
+      "description": "Own license aggregates; all licenses require administrator role.",
+      "engine": "operations",
+      "status": "available",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "self",
+              "all"
+            ]
+          },
+          "days": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 90
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "requires_registered_project": false,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.prepare",
+      "description": "Persist operation identity before effects. Does not execute anything.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "tool.execution",
+              "browser.audit",
+              "code.audit",
+              "diagnostic",
+              "selftest"
+            ]
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "request_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "kind",
+          "idempotency_key",
+          "request_digest",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.status",
+      "description": "Read an existing owned job.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "job_ref",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.resume",
+      "description": "Resume observation of the same job without replaying effects.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "job_ref",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.job.reconcile",
+      "description": "Observe the same durable job; caller evidence cannot certify unknown effects.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "job_ref",
+          "expected_version",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.preview",
+      "description": "Prepare and hash a registered deployment plan without applying it.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "artifact": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "expected_artifact_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "artifact",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.apply",
+      "description": "Apply the reviewed plan and verify actual health with guarded recovery.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "artifact": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "expected_plan_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ack": {
+            "type": "boolean"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "artifact",
+          "expected_plan_sha256",
+          "ack",
+          "idempotency_key",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.reconcile",
+      "description": "Reconcile an unknown deployment using actual pointer and registered HTTP health.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "job_ref",
+          "expected_version",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.rollback_preview",
+      "description": "Preview a rollback bound to the current release and original owned job.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "job_ref",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.artifact.read",
+      "description": "Read a bounded chunk of an owned unexpired browser artifact.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65536
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "artifact_id",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": false,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    },
+    {
+      "id": "operations.deploy.rollback",
+      "description": "Restore the registered previous release only with current-release CAS.",
+      "engine": "operations",
+      "status": "context_required",
+      "execution_target": "shared_operations_backend",
+      "access": [
+        "api",
+        "tui"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "job_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_plan_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ack": {
+            "type": "boolean"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "project": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "alias",
+          "job_ref",
+          "expected_plan_sha256",
+          "ack",
+          "idempotency_key",
+          "project"
+        ],
+        "additionalProperties": false
+      },
+      "requires_registered_project": true,
+      "requires_deploy_permission": true,
+      "limitations": [
+        "Toolchain, project access and actual verification are checked at invocation."
+      ]
+    }
+  ],
+  "backend": {
+    "service_active": true,
+    "boot_enabled": true,
+    "unprivileged_user": true,
+    "loopback_only": true,
+    "loopback_port": 18280,
+    "memory_peak_bytes": 193617920,
+    "memory_limit_bytes": 1073741824,
+    "hourly_vulnerability_db_refresh_last_result": "success",
+    "production_master_and_planner_activation": "pending_explicit_idle_restart_permission",
+    "existing_user_sessions_signaled": false,
+    "billing_or_network_core_modified": false
+  },
+  "verification": {
+    "backend_operations": {
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0,
+      "location": "Linux production host, staged source, dedicated operations UID"
+    },
+    "planner": {
+      "passed": 140,
+      "failed": 0,
+      "skipped": 0,
+      "location": "production host staging, existing private planner dependencies"
+    },
+    "master_actual_http_deadline": {
+      "passed": 1,
+      "old_twenty_second_timeout_regression": true
+    },
+    "shared_bindings": {
+      "passed": 4
+    },
+    "portable_client": {
+      "passed": 3
+    },
+    "mcp_regressions": {
+      "passed": 66,
+      "failed": 0,
+      "skipped": 0
+    },
+    "actual_service_canaries": {
+      "actual_systemd_service": true,
+      "dedicated_unprivileged_uid": true,
+      "browser_sandbox": true,
+      "rows": [
+        {
+          "skill": "engine.diagnose",
+          "suite": null,
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "passed": null,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "skills.selftest",
+          "suite": "core",
+          "http": 200,
+          "ok": true,
+          "status": "passed",
+          "tests": 5,
+          "passed": 5,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "skills.selftest",
+          "suite": "browser",
+          "http": 200,
+          "ok": true,
+          "status": "passed",
+          "tests": 1,
+          "passed": 1,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "skills.selftest",
+          "suite": "security",
+          "http": 200,
+          "ok": true,
+          "status": "passed",
+          "tests": 1,
+          "passed": 1,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "license.usage",
+          "suite": null,
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "passed": null,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "security.scan",
+          "suite": null,
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "passed": false,
+          "findings": 1,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "security.scan",
+          "suite": null,
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "passed": false,
+          "findings": 49,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "database.audit",
+          "suite": null,
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "passed": null,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "browser.regression",
+          "suite": null,
+          "http": 200,
+          "ok": true,
+          "status": "passed",
+          "tests": null,
+          "passed": null,
+          "findings": null,
+          "reason": null,
+          "error": null
+        },
+        {
+          "skill": "artifact.read",
+          "artifact_kind": "trace.zip",
+          "hash_verified": true,
+          "http": 200
+        },
+        {
+          "skill": "artifact.read",
+          "artifact_kind": "screenshot.png",
+          "hash_verified": true,
+          "http": 200
+        },
+        {
+          "skill": "artifact.retention",
+          "expired_http": 410,
+          "removed_actual_run": true,
+          "pruner": {
+            "examined": 6,
+            "removed": 2,
+            "errors": 0,
+            "limit_reached": false
+          }
+        },
+        {
+          "skill": "license.usage",
+          "ungranted_actor_denied": true,
+          "http": 403
+        },
+        {
+          "skill": "database.audit",
+          "ungranted_actor_denied": true,
+          "http": 403
+        },
+        {
+          "skill": "job.lifecycle",
+          "same_job": true,
+          "resume_state": "prepared",
+          "observation_only": true,
+          "mutation_replayed": false
+        }
+      ]
+    },
+    "actual_candidate_master_http": {
+      "actual_candidate_master_http": true,
+      "existing_gateway_untouched": true,
+      "rows": [
+        {
+          "skill": "skills.selftest",
+          "http": 200,
+          "ok": true,
+          "status": "passed",
+          "tests": 5,
+          "graphics_status": null,
+          "evidence_source": "server_executed",
+          "error": null
+        },
+        {
+          "skill": "database.audit",
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "graphics_status": null,
+          "evidence_source": "server_executed",
+          "error": null
+        },
+        {
+          "skill": "license.usage",
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "graphics_status": null,
+          "evidence_source": "server_executed",
+          "error": null
+        },
+        {
+          "skill": "engine.diagnose",
+          "http": 200,
+          "ok": true,
+          "status": "completed",
+          "tests": null,
+          "graphics_status": "online",
+          "evidence_source": "server_executed",
+          "error": null
+        }
+      ]
+    },
+    "linux_ci_operations": {
+      "tests_run": 61,
+      "skipped_browser_without_registered_toolchain": 4,
+      "remaining_tests_passed": 57,
+      "failed": 0,
+      "note": "All 61 passed without skips under the actual backend UID with registered Chromium."
+    },
+    "windows_ci": {
+      "passed": true,
+      "fresh_install": true,
+      "operations_client_tests_passed": 3,
+      "operations_mcp_tests_passed": 3,
+      "native_receipt_canary": true,
+      "license_or_provider_api_called": false,
+      "skill_count": 36
+    },
+    "mac_arm_actual_fresh_install": {
+      "passed": true,
+      "platform": "darwin-arm64",
+      "duration_seconds": 88.89,
+      "fresh_install_without_npm": true,
+      "bundled_mcp_healthy": true,
+      "native_binary_runs": true,
+      "native_plugins_load": true,
+      "native_tool_receipts": {
+        "isolated_session": true,
+        "latency_seconds": 1.34,
+        "native_error_count": 0,
+        "native_exit_code": 0,
+        "passed": true,
+        "real_provider_called": false,
+        "requests": [
+          {
+            "declared_shell": false,
+            "has_result": false
+          },
+          {
+            "declared_shell": true,
+            "has_result": false
+          },
+          {
+            "declared_shell": true,
+            "exit_code": 0,
+            "has_result": true,
+            "output_has_two_tests": true,
+            "status": "completed",
+            "truncated": false
+          }
+        ]
+      },
+      "skill_count": 36,
+      "invalid_signature_refused": true,
+      "tampered_content_refused": true,
+      "failed_updates_preserve_config_and_pointer": true,
+      "license_or_provider_api_called": false,
+      "user_home_overridden": false
+    },
+    "actual_secret_scan": {
+      "mode": "secret",
+      "actual_service_http": true,
+      "status": "completed",
+      "findings": 2,
+      "synthetic_nonfunctional_token_only": true,
+      "synthetic_value_not_returned": true
+    }
+  },
+  "runtime_release": {
+    "operations_tools_match_current_source": true,
+    "operations_catalog_size": 16,
+    "release": "2026.11.18.4",
+    "source_commit": "f2508ced983d5e0cf711760385fcdef3a0d3ef93",
+    "signature_verified": true,
+    "signed_file_count": 227,
+    "all_file_hashes_verified": true,
+    "new_receipt_bridge_matches_source": true,
+    "zip_sha256": "c72e55203129342b38093153d23eb91a355a69280b9f5689f01f93fda9013891",
+    "zip_size_bytes": 1609205,
+    "public_key_pin_verified": true,
+    "catalog_verified": true,
+    "native_binary_version": "1.0.2",
+    "new_binary_generated": false,
+    "distribution_state": "signed_and_verified_not_yet_published"
+  },
+  "github": {
+    "source_pushed": true,
+    "latest_code_run": 44170824095,
+    "prior_run": 44170468803,
+    "matrix_completion": "success",
+    "jobs": [
+      {
+        "id": 134349121117,
+        "name": "linux-x64 / Node 18",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134349121553,
+        "name": "linux-arm64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134349121832,
+        "name": "windows-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134349121858,
+        "name": "darwin-arm64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134349122063,
+        "name": "linux-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 134349122421,
+        "name": "darwin-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "run_url": "https://github.com/ffanu/harmonika-tui/actions/runs/44170824095"
+  },
+  "bugs_fixed": [
+    "missing_or_null_project_scope",
+    "global_database_connector_inheritance",
+    "raw_browser_trace_cleanup",
+    "master_operations_timeout",
+    "isolated_selftest_wrongly_eligible_as_application_verification",
+    "missing_artifact_returns_structured_404",
+    "truncated_schema_or_plan_marks_partial",
+    "non_ascii_auth_returns_uniform_403",
+    "preexisting_port_collision_avoided",
+    "graphics_uses_actual_discovery_diagnostics"
+  ],
+  "privacy": {
+    "telemetry": "fixed mechanics only, scoped HMAC references, no chat, credentials, source, commands, SQL or scanner stdout",
+    "artifacts": "private browser fixture traces and screenshots, 24h expiry, real deletion verified",
+    "license_query": "aggregate status/time and device counts, no key hashes or names/contacts"
+  },
+  "limits": [
+    "Project/database/deployment connectors require explicit private registration and grants.",
+    "Core selftest is five isolated checks; it does not certify all skills.",
+    "Semgrep runs three pinned local rules; Trivy scans bounded project snapshots with a fresh vulnerability database.",
+    "Browser assertions run on owned static snapshots; no arbitrary site, customer browser session or dev-server execution.",
+    "Deployment adapter switches reviewed local release trees only; no production application deployed in these tests.",
+    "A timeout or unknown effect is not retried or certified from caller-provided facts.",
+    "Windows/Linux/macOS clients call the Linux operations backend; no claim that POSIX deployment executes natively on Windows.",
+    "Trivy keeps its built-in rule allowlists (including example-path exclusions); private credential filenames are excluded before snapshotting. A clean or incomplete scan is not certification."
+  ],
+  "contributions": {
+    "codex": "integration, independent implementation workers, code review, fixes, tests, deployment preparation",
+    "opencode": "read-only review attempted but failed with provider APIError; not counted as completed review",
+    "claude": "not invoked"
+  }
+}
