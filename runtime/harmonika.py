@@ -72,7 +72,7 @@ def read_json(file):return json.loads(Path(file).read_text(encoding='utf-8'))
 def atomic_state(file,text):
     pending=file.with_name(file.name+'.next-'+uuid4().hex)
     try:
-        with open(pending,'x') as out:out.write(text)
+        with open(pending,'x',encoding='utf-8') as out:out.write(text)
         os.chmod(pending,0o600)
         os.replace(pending,file)
     finally:
@@ -219,7 +219,7 @@ def preflight(directory,manifest):
     if 'binary_hashes' in manifest and digest(bpath)!=expected_binary_sha(manifest):
         if not engine_binary_approved(ROOT,bpath):
             raise ValueError('binary_checksum_mismatch')
-    result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,timeout=10)
+    result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=10)
     # Binary TUI boleh berasal dari lini mana pun (engine Harmonika berbasis opencode
     # v1.0.x maupun rilis lama v0.98.1): cukup pastikan itu binary Harmonika dan
     # melaporkan versi semantik yang valid.
@@ -237,23 +237,23 @@ def preflight(directory,manifest):
         if result.returncode:raise ValueError('python_preflight_failed')
     documents=directory/'skills/harmonika-documents/scripts/documents.py'
     if documents.is_file():
-        result=subprocess.run([sys.executable,'-I',str(documents),'capabilities','--detailed'],capture_output=True,text=True,timeout=20)
+        result=subprocess.run([sys.executable,'-I',str(documents),'capabilities','--detailed'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=20)
         if result.returncode:raise ValueError('documents_preflight_failed')
         try:
             probe=json.loads(result.stdout)
             if probe['schema_version']!=1 or not probe['formats']:raise ValueError()
         except (ValueError,KeyError,TypeError):raise ValueError('documents_preflight_failed') from None
     # Launch the real MCP protocol without invoking providers or user sessions.
-    check=subprocess.run([NODE,str(directory/'tools/protocol-check.cjs'),str(directory/'tools/mcp-server.cjs')],capture_output=True,text=True,timeout=20)
+    check=subprocess.run([NODE,str(directory/'tools/protocol-check.cjs'),str(directory/'tools/mcp-server.cjs')],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=20)
     if check.returncode:raise ValueError('mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
     if (directory/'tools/ssh-mcp.cjs').is_file():
-        check=subprocess.run([NODE,str(directory/'tools/ssh-protocol-check.cjs'),str(directory/'tools/ssh-mcp.cjs')],capture_output=True,text=True,timeout=20)
+        check=subprocess.run([NODE,str(directory/'tools/ssh-protocol-check.cjs'),str(directory/'tools/ssh-mcp.cjs')],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=20)
         if check.returncode:raise ValueError('ssh_mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
     if manifest.get('feature_profile'):
         # Discover the real portable companion without invoking any provider,
         # account, browser session or remotely executing a tool.
         probe='\n'.join(json.dumps({'jsonrpc':'2.0','id':i,'method':method,'params':{}}) for i,method in ((1,'initialize'),(2,'tools/list')))+'\n'
-        run=subprocess.run([sys.executable,'-I',str(directory/'tools/mcp-python-entry.py')],input=probe,capture_output=True,text=True,timeout=20)
+        run=subprocess.run([sys.executable,'-I',str(directory/'tools/mcp-python-entry.py')],input=probe,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=20)
         try:
             listing=next(json.loads(line)['result']['tools'] for line in run.stdout.splitlines() if json.loads(line).get('id')==2)
             names={row['name'] for row in listing}
@@ -263,7 +263,7 @@ def preflight(directory,manifest):
 
 @contextmanager
 def installation_lock(root):
-    with open(root/'update.lock','a') as lock:
+    with open(root/'update.lock','a',encoding='utf-8') as lock:
         if fcntl is not None:
             try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
             except BlockingIOError:raise ValueError('update_in_progress')
@@ -370,11 +370,11 @@ def doctor(root=ROOT):
     assert config['options']['disable_provider_auto_update'] is True,'provider_auto_update_must_be_disabled'
     assert not config['permissions'].get('allowed_tools'),'global_auto_approvals_detected'
     assert 'harmonika' in config.get('mcp',{}),'mcp_missing'
-    documents=subprocess.run([feature_python(root),'-I',str(directory/'skills/harmonika-documents/scripts/documents.py'),'capabilities'],capture_output=True,text=True,timeout=20)
+    documents=subprocess.run([feature_python(root),'-I',str(directory/'skills/harmonika-documents/scripts/documents.py'),'capabilities'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=20)
     if documents.returncode:raise ValueError('documents_probe_failed')
     document_features=json.loads(documents.stdout)
     browser_env=browser_environment(root)
-    browser=subprocess.run([browser_env['HARMONIKA_BROWSER_NODE'],'-e',"const fs=require('fs'),p=require(process.argv[1]);process.stdout.write(JSON.stringify({chromium:fs.existsSync(p.chromium.executablePath())}));",browser_env['HARMONIKA_PLAYWRIGHT_MODULE']],env=dict(os.environ,**browser_env),capture_output=True,text=True,timeout=10)
+    browser=subprocess.run([browser_env['HARMONIKA_BROWSER_NODE'],'-e',"const fs=require('fs'),p=require(process.argv[1]);process.stdout.write(JSON.stringify({chromium:fs.existsSync(p.chromium.executablePath())}));",browser_env['HARMONIKA_PLAYWRIGHT_MODULE']],env=dict(os.environ,**browser_env),capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=10)
     browser_features=json.loads(browser.stdout) if browser.returncode==0 else {}
     ssh_runtime=Path(feature_python(root)) if (root/'python-runtime').is_dir() else root/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
     ssh_available=False
@@ -1054,7 +1054,7 @@ def main():
             os.execve(sys.executable,command,env)
         os.execve(str(bpath),['harmonika',*args],env)
         return
-    print(json.dumps(result,ensure_ascii=False,indent=2))
+    print(json.dumps(result,ensure_ascii=True,indent=2))
 
 if __name__=='__main__':
     try:main()
