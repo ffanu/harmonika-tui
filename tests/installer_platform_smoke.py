@@ -58,6 +58,11 @@ def safe_diagnostics(stdout, stderr):
         'windows_error_numbers': sorted(set(re.findall(r'\[WinError (\d+)\]', text))),
         'codec_names': sorted(set(re.findall(r"['\"](cp\d+|charmap|utf-?8|ascii)['\"] codec", text))),
         'runtime_error_signatures': sorted(set(re.findall(r'^ValueError: ([a-z][a-z_]{2,100})$', text, re.MULTILINE))),
+        'shell_error_signatures': [name for name, message in {
+            'windows_network_path_not_found': 'The network path was not found.',
+            'windows_path_not_found': 'The system cannot find the path specified.',
+            'windows_command_not_found': 'is not recognized as an internal or external command',
+        }.items() if message in text],
     }
 
 
@@ -183,9 +188,13 @@ def without_npm(env, workspace, node):
 
 def wrapper_command(wrapper, args):
     if os.name == 'nt':
-        # /s strips exactly the outer quotes; preserve the quoted batch path.
-        command = '"' + subprocess.list2cmdline([str(wrapper), *args]) + '"'
-        return [os.environ.get('ComSpec', 'cmd.exe'), '/d', '/s', '/c', command]
+        # Pass the completed Windows command line directly to CreateProcess.
+        # A list would escape the /c payload's quotes as \" for the MSVCRT
+        # parser, but CMD uses different quoting and would retain those slashes.
+        # /s strips the outer pair while preserving the quoted batch path.
+        comspec = subprocess.list2cmdline([os.environ.get('ComSpec', 'cmd.exe')])
+        payload = subprocess.list2cmdline([str(wrapper), *args])
+        return comspec + ' /d /s /c "' + payload + '"'
     return [str(wrapper), *args]
 
 
