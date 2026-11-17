@@ -707,7 +707,7 @@ def send(obj):
 
 def main():
     # MCP JSON-RPC is UTF-8 even when the Windows console uses a legacy codepage.
-    for stream in (sys.stdin, sys.stdout):
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")
     for line in sys.stdin:

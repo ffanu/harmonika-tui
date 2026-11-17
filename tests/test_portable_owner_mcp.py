@@ -43,9 +43,13 @@ class PortableOwnerMCP(unittest.TestCase):
             env=dict(os.environ,HARMONIKA_GLOBAL_CONFIG=tmp,HARMONIKA_DOWNLOADS_DIR=tmp,HARMONIKA_API_KEY='')
             bootstrap='import runpy,sys;sys.stdin.reconfigure(encoding="cp1252");sys.stdout.reconfigure(encoding="cp1252");runpy.run_path(sys.argv[1],run_name="__main__")'
             frame={'jsonrpc':'2.0','id':1,'method':'tools/call','params':{'name':'render','arguments':{'action':'measure','text':'漢字'}}}
-            run=subprocess.run([sys.executable,'-I','-c',bootstrap,str(TOOLS/'mcp_server.py')],input=json.dumps(frame,ensure_ascii=False)+'\n',capture_output=True,text=True,encoding='utf-8',env=env,timeout=20)
-            self.assertEqual(run.returncode,0,run.stderr)
-            self.assertEqual(json.loads(json.loads(run.stdout)['result']['content'][0]['text'])['display_width'],4)
+            for entry in ('mcp_server.py', 'mcp-python-entry.py'):
+                with self.subTest(entry=entry):
+                    run=subprocess.run([sys.executable,'-I','-c',bootstrap,str(TOOLS/entry)],input=json.dumps(frame,ensure_ascii=False)+'\n',capture_output=True,text=True,encoding='utf-8',env=env,timeout=20)
+                    self.assertEqual(run.returncode,0,run.stderr)
+                    result=json.loads(json.loads(run.stdout)['result']['content'][0]['text'])
+                    self.assertEqual(result['display_width'],4)
+                    self.assertEqual(result['text'],'漢字')
 
     def test_generated_browser_scripts_ignore_cp1252_default_encoding(self):
         native_open=builtins.open
