@@ -228,6 +228,17 @@ class InstallerAgentParity(unittest.TestCase):
         self.configure(isolated)
         self.assertFalse((isolated / 'private-connectors.json').exists())
 
+    @unittest.skipIf(os.name=='nt','Legacy POSIX settings migration')
+    def test_local_target_migration_preserves_existing_targets(self):
+        source=self.home/'.config/harmonika-terminal/network-targets.json'
+        self.write(source,{'lab':{'host':'192.0.2.10'}})
+        source.chmod(0o600)
+        self.assertTrue(features.migrate_local_targets(self.config))
+        self.assertEqual(self.read(self.config/'network-targets.json'),{'lab':{'host':'192.0.2.10'}})
+        self.write(source,{'other':{'host':'192.0.2.20'}})
+        self.assertFalse(features.migrate_local_targets(self.config))
+        self.assertIn('lab',self.read(self.config/'network-targets.json'))
+
     def test_manifest_install_and_dependency_readiness_do_not_claim_service_activation(self):
         installed = features.status(self.root, self.config)
         self.assertTrue(installed['installed'])

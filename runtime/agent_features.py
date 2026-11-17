@@ -44,6 +44,19 @@ def read_object(file):
     return value
 
 
+def migrate_local_targets(config):
+    """Move this user's legacy target settings only within the same device."""
+    config=Path(config)
+    target=config/'network-targets.json'
+    source=Path.home()/'.config/harmonika-terminal/network-targets.json'
+    if target.exists() or target.is_symlink() or source==target or not source.is_file() or source.is_symlink():return False
+    info=source.stat()
+    if info.st_size>1048576 or os.name=='nt' or info.st_uid!=os.getuid() or info.st_mode&0o077:return False
+    value=read_object(source)
+    atomic(target,value)
+    return True
+
+
 def atomic(file, value):
     file.parent.mkdir(parents=True, exist_ok=True)
     if file.is_symlink():
@@ -86,6 +99,7 @@ def configure(root, config, python, node):
     home=Path.home()
     if root==home/'.config/harmonika-terminal' and config in (home/'.config/harmonika',home/'.config/harmonika-terminal'):
         migrate_local_connectors(config)
+        migrate_local_targets(config)
     modern = read_object(config / 'opencode.json')
     skills = modern.get('skills', [])
     if isinstance(skills, dict):
