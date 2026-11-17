@@ -1,7 +1,7 @@
 From 0f7ebd07e20cc738d042e2daffabc3993ab39ffa Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 21:08:08 +0700
-Subject: [PATCH 4/4] upgrade: detect an interactive terminal via stdin or
+Subject: [PATCH 4/5] upgrade: detect an interactive terminal via stdin or
  stdout
 
 Bun does not always report stdin as a TTY even inside a real terminal, so the
@@ -27,6 +27,3 @@ index caff7af..62bd4b7 100644
    const answer = yield* Effect.promise(() =>
      select<string>({
        message: `Pembaruan ${Brand.product} ${OPENCODE_VERSION} → ${target}. Pilih tindakan:`,
--- 
-2.54.0 (Apple Git-157)
-

@@ -1,7 +1,7 @@
 From bfc3805e58d571459a122c323e7fbefb3319cb99 Mon Sep 17 00:00:00 2001
 From: Harmonika AI <dev@harmonika.id>
 Date: Mon, 2 Nov 2026 20:33:58 +0700
-Subject: [PATCH 1/4] brand: harmonika terminal rebrand baseline (11 files)
+Subject: [PATCH 1/5] brand: harmonika terminal rebrand baseline (11 files)
 
 ---
  package.json                          |  8 +++----
@@ -308,6 +308,3 @@ index 5fe51f8..f6c95ec 100644
  )
  
  export const node = makeGlobalNode({ service: Service, layer: layer, deps: [] })
--- 
-2.54.0 (Apple Git-157)
-

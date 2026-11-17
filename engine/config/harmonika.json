@@ -22,13 +22,21 @@
           "name": "Harmonika Ai",
           "attachment": false,
           "reasoning": false,
-          "tool_call": true
+          "tool_call": true,
+          "limit": {
+            "context": 872000,
+            "output": 4096
+          }
         },
         "harmonika-ai-codex": {
           "name": "Harmonika Ai Pro",
           "attachment": false,
           "reasoning": false,
-          "tool_call": true
+          "tool_call": true,
+          "limit": {
+            "context": 872000,
+            "output": 4096
+          }
         },
         "harmonika-ai-google": {
           "name": "Harmonika Ai Fast",
