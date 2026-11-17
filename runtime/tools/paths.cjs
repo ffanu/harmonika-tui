@@ -13,6 +13,6 @@ const downloadFolders=Object.freeze({
 });
 // Vendored-first: dependencies shipped inside the package work without npm
 // on any OS; the shared harmonika-tools dir remains the fallback/upgrade path.
-const vendoredSdk=path.join(__dirname,'node_modules/@modelcontextprotocol/sdk/dist/cjs');
+const vendoredSdk=path.join(__dirname,'vendor/sdk');
 const sharedSdk=path.join(tools,'node_modules/@modelcontextprotocol/sdk/dist/cjs');
 module.exports={home,config,tools,terminal,downloads,downloadFolders,sdk:fs.existsSync(vendoredSdk)?vendoredSdk:sharedSdk};

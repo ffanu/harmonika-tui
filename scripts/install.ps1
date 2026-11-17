@@ -1,131 +1,59 @@
-# Harmonika TUI Installer for Windows PowerShell (Auto-Detect Paths & Antivirus Safe)
-$ErrorActionPreference = "Stop"
+# Harmonika Terminal installer — Windows x64 / PowerShell 5.1+
+$ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Write-Host '=== Harmonika Terminal Installer (Windows x64) ===' -ForegroundColor Cyan
 
-Write-Host "=== Harmonika TUI Installer (Windows x64) ===" -ForegroundColor Cyan
-
-# 1. Auto-discover Python, Node.js, and Git on Windows even if PATH was reset
-$ExtraPaths = @(
-    "$HOME\.local\bin",
-    "$env:ProgramFiles\nodejs",
-    "${env:ProgramFiles(x86)}\nodejs",
-    "$env:LOCALAPPDATA\Programs\nodejs",
-    "$env:APPDATA\npm",
-    "$env:ProgramFiles\Git\cmd",
-    "$env:ProgramFiles\Git\bin",
-    "${env:ProgramFiles(x86)}\Git\cmd",
-    "$env:LOCALAPPDATA\Programs\Git\cmd"
-)
+$ExtraPaths = @("$HOME\.local\bin", "$env:ProgramFiles\nodejs", "${env:ProgramFiles(x86)}\nodejs", "$env:LOCALAPPDATA\Programs\nodejs", "$env:APPDATA\npm", "$env:ProgramFiles\Git\cmd", "$env:LOCALAPPDATA\Programs\Git\cmd")
 if (Test-Path "$env:LOCALAPPDATA\Programs\Python") {
-    Get-ChildItem -Path "$env:LOCALAPPDATA\Programs\Python" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-        $ExtraPaths += $_.FullName
-        $ExtraPaths += Join-Path $_.FullName "Scripts"
-    }
+    Get-ChildItem "$env:LOCALAPPDATA\Programs\Python" -Directory | ForEach-Object { $ExtraPaths += $_.FullName }
 }
-if (Test-Path "C:\Python*") {
-    Get-ChildItem -Path "C:\Python*" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-        $ExtraPaths += $_.FullName
-        $ExtraPaths += Join-Path $_.FullName "Scripts"
-    }
+foreach ($dir in $ExtraPaths) {
+    if ($dir -and (Test-Path $dir) -and (($env:Path -split ';') -notcontains $dir)) { $env:Path = "$dir;$env:Path" }
 }
-
-foreach ($p in $ExtraPaths) {
-    if ($p -and (Test-Path $p) -and ($env:Path -notlike "*$p*")) {
-        $env:Path = "$p;$env:Path"
-    }
+$PyCmd = $null
+$PyArgs = @()
+foreach ($name in @('python', 'python3', 'py')) {
+    $candidate = Get-Command $name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+    if (-not $candidate) { continue }
+    $prefix = @()
+    if ($name -eq 'py') { $prefix = @('-3') }
+    & $candidate.Source @prefix -c 'import sys; sys.exit(0 if sys.version_info >= (3,9) else 1)' 2>$null
+    if ($LASTEXITCODE -eq 0) { $PyCmd = $candidate; $PyArgs = $prefix; break }
 }
-
-$PyCmd = Get-Command python -ErrorAction SilentlyContinue
-if (-not $PyCmd) { throw "Python 3 tidak ditemukan. Pastikan Python 3 sudah terinstall." }
-$NodeCmd = Get-Command node -ErrorAction SilentlyContinue
-if (-not $NodeCmd) { throw "Node.js tidak ditemukan. Pastikan Node.js sudah terinstall." }
-$GitCmd = Get-Command git -ErrorAction SilentlyContinue
-if (-not $GitCmd) { throw "Git tidak ditemukan. Pastikan Git sudah terinstall." }
-
-$PyDir = Split-Path -Parent $PyCmd.Source
-$NodeDir = Split-Path -Parent $NodeCmd.Source
-$GitDir = Split-Path -Parent $GitCmd.Source
-$BinDir = Join-Path $HOME ".local\bin"
-New-Item -ItemType Directory -Force -Path $BinDir | Out-Null
-
-# 2. Add exclusions to Windows Defender if running as Administrator so Antivirus never blocks harmonika.exe
-$HarmonikaConfig = Join-Path $HOME ".config\harmonika"
-$HarmonikaTerm = Join-Path $HOME ".config\harmonika-terminal"
-$InstallSrc = Join-Path $HOME ".local\share\harmonika-tui-src"
-try {
-    Add-MpPreference -ExclusionPath $HarmonikaConfig, $HarmonikaTerm, $InstallSrc, $BinDir -ErrorAction SilentlyContinue
-} catch {}
-
-# 3. Clone or update source repository
-if (Test-Path (Join-Path $InstallSrc ".git")) {
-    git -C $InstallSrc fetch origin main
-    git -C $InstallSrc reset --hard origin/main
-} else {
-    if (Test-Path $InstallSrc) { Remove-Item -Recurse -Force $InstallSrc }
-    git clone https://github.com/ffanu/harmonika-tui.git $InstallSrc
-}
-
-# 4. Run Python installer with pinned Node path
+if (-not $PyCmd) { throw 'Python 3.9 atau lebih baru diperlukan. Instal Python lalu jalankan ulang.' }
+$NodeCmd = Get-Command node -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+if (-not $NodeCmd) { throw 'Node.js 18 atau lebih baru diperlukan.' }
+& $NodeCmd.Source -e 'if(parseInt(process.versions.node,10)<18)process.exit(1)'
+if ($LASTEXITCODE -ne 0) { throw 'Node.js 18 atau lebih baru diperlukan.' }
+$GitCmd = Get-Command git -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+if (-not $GitCmd) { throw 'Git diperlukan.' }
 $env:HARMONIKA_NODE = $NodeCmd.Source
-& $PyCmd.Source (Join-Path $InstallSrc "runtime\install.py")
-
-# 5. Unblock downloaded files so Windows SmartScreen / Defender does not block execution
-Get-ChildItem -Path $HarmonikaTerm -Recurse -ErrorAction SilentlyContinue | Unblock-File -ErrorAction SilentlyContinue
-
-# 6. Persist Python, Node, Git, and Harmonika bin directory permanently in Windows User PATH & PowerShell $PROFILE
-$UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
-if (-not $UserPath) { $UserPath = "" }
-foreach ($dir in @($BinDir, $PyDir, $NodeDir, $GitDir)) {
-    if ($dir -and (Test-Path $dir) -and ($UserPath -notlike "*$dir*")) {
-        $UserPath = if ($UserPath) { "$dir;$UserPath" } else { $dir }
+$InstallSrc = if ($env:HARMONIKA_SOURCE_DIR) { $env:HARMONIKA_SOURCE_DIR } else { Join-Path $HOME '.local\share\harmonika-tui-src' }
+$BinDir = if ($env:HARMONIKA_BIN_DIR) { $env:HARMONIKA_BIN_DIR } else { Join-Path $HOME '.local\bin' }
+$ConfigDir = if ($env:HARMONIKA_GLOBAL_CONFIG) { $env:HARMONIKA_GLOBAL_CONFIG } else { Join-Path $HOME '.config\harmonika' }
+if (Test-Path (Join-Path $InstallSrc '.git')) {
+    & $GitCmd.Source -C $InstallSrc pull --ff-only
+    if ($LASTEXITCODE -ne 0) { throw 'Pembaruan source gagal. Perubahan lokal tetap dipertahankan.' }
+} else {
+    if (Test-Path $InstallSrc) { throw "Folder sumber sudah ada dan bukan repository Git: $InstallSrc" }
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $InstallSrc) | Out-Null
+    & $GitCmd.Source clone https://github.com/ffanu/harmonika-tui.git $InstallSrc
+    if ($LASTEXITCODE -ne 0) { throw 'Clone source gagal.' }
+}
+& $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\install.py')
+if ($LASTEXITCODE -ne 0) { throw 'Instalasi Harmonika gagal; lihat diagnostik di atas.' }
+# Per-user PATH only. Do not alter Defender settings, System32 or shell profiles.
+$env:Path = "$BinDir;$env:Path"
+if (-not $env:HARMONIKA_BIN_DIR) {
+    $UserPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+    if (($UserPath -split ';') -notcontains $BinDir) {
+        [Environment]::SetEnvironmentVariable('Path', "$BinDir;$UserPath", 'User')
     }
 }
-[Environment]::SetEnvironmentVariable("Path", $UserPath, "User")
-
-# Also write to PowerShell $PROFILE so every new PowerShell window always has python, node, git, and harmonika
-$ProfilePaths = @($PROFILE)
-$WinPSProfile = Join-Path $HOME "Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-$PSCoreProfile = Join-Path $HOME "Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-foreach ($prof in (@($ProfilePaths + $WinPSProfile + $PSCoreProfile) | Select-Object -Unique)) {
-    if ($prof) {
-        try {
-            $profDir = Split-Path -Parent $prof
-            if (-not (Test-Path $profDir)) { New-Item -ItemType Directory -Force -Path $profDir | Out-Null }
-            $marker = "# >>> Harmonika TUI >>>"
-            $existing = if (Test-Path $prof) { Get-Content $prof -Raw -ErrorAction SilentlyContinue } else { "" }
-            if ($existing -notlike "*$marker*") {
-                $block = @"
-
-# >>> Harmonika TUI >>>
-`$env:HARMONIKA_NODE = "$($NodeCmd.Source)"
-foreach (`$d in @("$BinDir", "$PyDir", "$NodeDir", "$GitDir")) {
-    if (`$d -and (Test-Path `$d) -and (`$env:Path -notlike "*`$d*")) { `$env:Path = "`$d;`$env:Path" }
+$KeyFile = Join-Path $ConfigDir 'harmonika-api-key'
+if ($env:HARMONIKA_NONINTERACTIVE -ne '1' -and -not [Console]::IsInputRedirected -and -not (Test-Path $KeyFile)) {
+    # The key is entered privately inside Python, never passed in process arguments.
+    & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\license.py') activate
+    if ($LASTEXITCODE -ne 0) { throw 'Aktivasi belum selesai. Jalankan harmonika activate untuk mencoba kembali.' }
 }
-function harmonika { & "$($PyCmd.Source)" -I "$HarmonikaTerm\launcher.py" @args }
-# <<< Harmonika TUI <<<
-"@
-                Add-Content -Path $prof -Value $block -Encoding UTF8
-            }
-        } catch {}
-    }
-}
-
-# Define harmonika function in current PowerShell session immediately
-Set-Item -Path Function:\global:harmonika -Value ([scriptblock]::Create("& `"$($PyCmd.Source)`" -I `"$HarmonikaTerm\launcher.py`" @args"))
-
-# 7. Activate license if not yet configured
-$KeyFile = Join-Path $HOME ".config\harmonika\harmonika-api-key"
-if (-not (Test-Path $KeyFile)) {
-    Write-Host ""
-    $InputKey = Read-Host "Masukkan / Paste API Key Lisensi Harmonika Anda (hai_live_...)"
-    if ($InputKey) {
-        & $PyCmd.Source (Join-Path $InstallSrc "runtime\license.py") activate $InputKey.Trim()
-    } else {
-        & $PyCmd.Source (Join-Path $InstallSrc "runtime\license.py") activate
-    }
-}
-
-Write-Host "`nInstalasi & konfigurasi PATH permanen selesai! Ketik perintah berikut untuk membuka Harmonika TUI:" -ForegroundColor Green
-Write-Host "  harmonika" -ForegroundColor Yellow
-
-
+Write-Host 'Instalasi selesai. Jalankan harmonika, atau harmonika activate untuk aktivasi lisensi.' -ForegroundColor Green

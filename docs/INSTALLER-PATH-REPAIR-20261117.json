@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "cause": "Root Linux PATH omitted ~/.local/bin although installation and doctor succeeded",
+  "changes": [
+    "Expose the private root Linux wrapper through /usr/local/bin when that directory is in PATH",
+    "Never overwrite an unrelated command; isolated/non-root installs do not create global launchers",
+    "Repair missing POSIX launchers on reinstall without downloading the runtime again",
+    "Print a correctly quoted export command when the current shell needs PATH setup"
+  ],
+  "source_commit": "a40283dc720dd67f7602107ba5fe0aa807c1e311",
+  "unit_tests_passed": 32,
+  "ci_url": "https://github.com/ffanu/harmonika-tui/actions/runs/44040413297",
+  "actual_linux_server_verification": {
+    "command": "/usr/local/bin/harmonika",
+    "command_found_without_export": true,
+    "doctor_exit": 0,
+    "ok": true,
+    "release": "2026.11.17.1",
+    "binary_verified": true,
+    "runtime_verified": true,
+    "mcp_protocol": "ok"
+  },
+  "public_runtime_package_unchanged": true,
+  "existing_config_credentials_and_sessions_unchanged": true,
+  "ci_jobs_passed": 6
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "scope": "cross-platform terminal installer; no provider, license or media calls",
+  "root_cause": "legacy runtime omitted MCP dependencies and silently skipped npm installation when npm was unavailable",
+  "runtime_release": "2026.11.17.1",
+  "runtime_source_commit": "9f60e5d53d49432e9f097d5d01d1dba15a3b7798",
+  "ci_test_commit": "947240c2f2951edb425537ff7bd32deb411472ce",
+  "ci_url": "https://github.com/ffanu/harmonika-tui/actions/runs/44038569904",
+  "fixes": [
+    "bundled platform-neutral MCP SDK and AJV from integrity-pinned npm lock",
+    "Python3.9+ and Node18+ prerequisite validation",
+    "UTF8 path and configuration files; POSIX manifest names on Windows builds",
+    "per-user Windows installation and private license prompt",
+    "real MCP preflight retained; signed hashes checked before execution"
+  ],
+  "verification": {
+    "unit_tests_passed": 28,
+    "linux_node18_without_npm": true,
+    "mac_arm64_native_smoke": true,
+    "signature_tampering_refused": true,
+    "content_tampering_refused": true,
+    "failed_updates_preserve_current_config": true,
+    "source_worktree_edits_preserved": true,
+    "platform_jobs": [
+      {
+        "name": "darwin-x64 / Node 22",
+        "result": "success"
+      },
+      {
+        "name": "darwin-arm64 / Node 22",
+        "result": "success"
+      },
+      {
+        "name": "linux-arm64 / Node 22",
+        "result": "success"
+      },
+      {
+        "name": "linux-x64 / Node 22",
+        "result": "success"
+      },
+      {
+        "name": "linux-x64 / Node 18",
+        "result": "success"
+      },
+      {
+        "name": "windows-x64 / Node 22",
+        "result": "success"
+      }
+    ],
+    "ci_jobs_passed": 6
+  },
+  "limits": [
+    "Supported targets are macOS arm64/x64, Linux arm64/x64 and Windows x64, not every OS or architecture",
+    "Optional local SSH execution requires its own dependencies and remains POSIX-only",
+    "Browser, document and media feature dependencies are separate",
+    "CI smoke uses disposable test signatures after validating production binary catalog; final public Linux installation is tested separately"
+  ],
+  "signed_package": {
+    "package_sha256": "b6e6d329f56e7c040e8545daa85802e073eed908198aa5d34119e413d434da3d",
+    "release": "2026.11.17.1",
+    "files": 154,
+    "uncompressed": 7377226,
+    "source_bound": true
+  },
+  "public_assets": {
+    "public_https_verified": true,
+    "release": "2026.11.17.1",
+    "hashes": {
+      "install.sh": "daf9192e0dbd6efc917de71734df737fc4b97572dc24ee4485491de603685346",
+      "install.ps1": "bd5bd24dd66ba11bedd3d639bf32b72416ca8516cc3d17f4477989272c41ec10",
+      "stable.json": "b8e0f87be94a7871b3c02c235b3fd836c5edee592bed100ec63355ea85d2523c",
+      "harmonika-terminal-2026.11.17.1.zip": "b6e6d329f56e7c040e8545daa85802e073eed908198aa5d34119e413d434da3d"
+    }
+  },
+  "activation": "active",
+  "public_linux_install": {
+    "expected_commit": "947240c2f2951edb425537ff7bd32deb411472ce",
+    "cloned_commit": "947240c2f2951edb425537ff7bd32deb411472ce",
+    "installed_release": "2026.11.17.1",
+    "node_version": "v18.19.1",
+    "npm_found": false,
+    "curl_exit": 0,
+    "installer_exit": 0,
+    "duration_seconds": 87.23,
+    "paths_have_spaces_and_unicode": true,
+    "home_overridden": false,
+    "signed_binary_pin_matches": true,
+    "shared_sdk_directory_created": false,
+    "license_file_created": false,
+    "all_passed": true,
+    "doctor": {
+      "exit": 0,
+      "ok": true,
+      "release": "2026.11.17.1",
+      "mcp_protocol": "ok",
+      "binary_verified": true,
+      "runtime_verified": true
+    },
+    "protocol_checks": [
+      {
+        "probe": "protocol-check.cjs",
+        "exit": 0,
+        "ok": true,
+        "tool_count": 11
+      },
+      {
+        "probe": "ssh-protocol-check.cjs",
+        "exit": 0,
+        "ok": true,
+        "tool_count": 7
+      }
+    ]
+  }
+}

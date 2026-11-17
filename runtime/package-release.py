@@ -58,8 +58,7 @@ def build(release):
     copy_config_transaction_tools(tools)
     copy_browser_macro_tools(tools)
     copy_zimbra_tools(tools)
-    guard=(SOURCE/'runtime/tools/project-file-guard.cjs').read_text()
-    (tools/'project-file-guard.cjs').write_text(guard)
+    shutil.copy2(SOURCE/'runtime/tools/project-file-guard.cjs',tools/'project-file-guard.cjs')
     shutil.copy2(SOURCE/'runtime/protocol-check.cjs',tools/'protocol-check.cjs')
     shutil.copy2(SOURCE/'runtime/harmonika.py',tools/'harmonika.py')
     shutil.copy2(SOURCE/'runtime/license.py',tools/'license.py')
@@ -73,15 +72,12 @@ def build(release):
     shutil.copy2(SOURCE/'UPSTREAM-LICENSE.md',tools/'UPSTREAM-LICENSE.md')
     shutil.copy2(SOURCE/'runtime/ssh-requirements.lock',tools/'ssh-requirements.lock')
     shutil.copy2(SOURCE/'docs/SSH-CONNECTOR-SPEC.txt',tools/'docs/SSH-CONNECTOR-SPEC.txt')
-    # Vendored MCP/AJV dependencies: installs must succeed on any OS with
-    # only python3+node+git — npm is never required at install time.
-    npm=shutil.which('npm')
-    if not npm:raise ValueError('npm_required_to_build_package')
-    (tools/'package.json').write_text(json.dumps({'name':'harmonika-tools-vendored','private':True,'dependencies':{'@modelcontextprotocol/sdk':'1.32.1','ajv':'8.17.1'}},indent=2))
-    subprocess.run([npm,'install','--prefix',str(tools),'--no-audit','--no-fund','--omit=dev'],check=True,timeout=420)
-    for junk in tools.rglob('.package-lock.json'):junk.unlink()
-    (tools/'node_modules/.package-lock.json').unlink(missing_ok=True)
-    files={str(p.relative_to(destination)):{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+    spec=importlib.util.spec_from_file_location('runtime_dependencies',SOURCE/'runtime/bundle-dependencies.py')
+    dependencies=importlib.util.module_from_spec(spec);spec.loader.exec_module(dependencies)
+    dependencies.bundle(tools/'vendor')
+    files={p.relative_to(destination).as_posix():{'sha256':sha(p)} for p in destination.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+    if len(files)+1>512 or sum((destination/n).stat().st_size for n in files)>20*1024*1024:
+        raise ValueError('release_exceeds_installer_limits')
     notes_env=os.environ.get('HARMONIKA_RELEASE_NOTES','')
     release_notes=[n.strip() for n in notes_env.split('|') if n.strip()] if notes_env else [
         'Auto-Update Standby interaktif [Y] Yes / [N] No / [L] Later dengan Changelog',
@@ -89,7 +85,7 @@ def build(release):
         'Perintah harmonika zip untuk auto-bundle proyek ke Downloads/harmonika-ai/zip'
     ]
     manifest={'release':release,'product':'Harmonika Terminal','upstream_version':'0.98.1','platform':'darwin-arm64',
-      'binary_sha256':sha(BINARY),'files':files,'automatic_update':False,'binary_included':False,'release_notes':release_notes}
+      'files':files,'automatic_update':False,'binary_included':False,'release_notes':release_notes}
     platform_manifest=os.environ.get('HARMONIKA_PLATFORM_MANIFEST')
     if platform_manifest:
         # Public cross-platform releases bind their hashes to both signatures:
@@ -101,7 +97,10 @@ def build(release):
         required={'darwin-arm64','darwin-x64','linux-x64','linux-arm64','windows-x64'}
         if not isinstance(entries,dict) or set(entries)!=required:raise ValueError('incomplete_platform_catalog')
         manifest['binary_hashes']={key:verifier.expected_binary_sha({'binary_sha256':entries[key].get('sha256')}) for key in sorted(required)}
-        if manifest['binary_hashes']['darwin-arm64']!=manifest['binary_sha256']:raise ValueError('platform_catalog_mismatch')
+        manifest['binary_sha256']=manifest['binary_hashes']['darwin-arm64']
+        manifest['platform']='multi-platform'
+    else:
+        manifest['binary_sha256']=sha(BINARY)
     (destination/'release.json').write_bytes(sign(manifest))
     package=SOURCE/'dist'/('harmonika-terminal-'+release+'.zip')
     with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED) as archive:
