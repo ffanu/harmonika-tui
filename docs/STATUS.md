@@ -1,6 +1,24 @@
 # Status distribusi
 
-Source preview Harmonika TUI, 25 Oktober 2026.
+Status terbaru dicatat di awal; entri berikut menyimpan hasil audit historis.
+
+## Profil agent lintas OS — 17 November 2026
+
+- Runtime bertanda tangan `2026.11.17.13`; binary native tetap `1.0.2`.
+- 36 panduan skill, agent v3.2, empat MCP dan plugin kontrol/context terpasang
+  otomatis. Dependensi dokumen, SSH dan browser disiapkan dalam runtime privat.
+- CI instalasi lulus pada Windows x64, Linux x64/ARM64, Node18 dan macOS Intel.
+  Runner CI Apple Silicon masih mengantre; instalasi publik dan agent nyata pada
+  MacBook Apple Silicon sudah lulus. Server Linux juga memakai installer publik.
+- 156 tes Python: 155 lulus, satu khusus Windows dilewati di Mac. 101 tes Node
+  lulus. Canary berlisensi Mac/Linux menjalankan tool lalu memberikan jawaban akhir.
+- Bug `invalid_tool_response` setelah pembaruan konteks native diperbaiki dengan
+  provenance sementara di RAM; tag pengguna tidak menjadi instruksi sistem dan
+  validator bukti backend dipertahankan.
+- Lisensi, akun, cookie, memori dan riwayat pribadi pengembang tidak dibundel.
+  Sesi pengguna dan layanan backend tidak dihentikan. Instalasi lama diperbarui
+  dengan menjalankan ulang installer; pembaruan tanpa pengawasan tidak diaktifkan.
+- [Daftar skill, bukti dan batas pengujian](INSTALLER-AGENT-PARITY-AUDIT-20261117.json).
 
 ## Sinkronisasi modul Zimbra/Mailjet — 12 November 2026
 

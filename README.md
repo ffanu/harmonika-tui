@@ -157,6 +157,9 @@ browser/CDP atau target remote yang dikonfigurasi. Perintah administrasi POSIX
 lokal dan Xvfb tidak dipaksakan berjalan di Windows. Sandbox v3.2 berbasis
 `sandbox-exec` khusus macOS; platform lain menolak flag tersebut secara eksplisit.
 
+Daftar skill dan bukti pengujian pemasangan tersedia di
+[audit profil agent lintas OS](docs/INSTALLER-AGENT-PARITY-AUDIT-20261117.json).
+
 ---
 
 ## 🖥️ Terminal Baru (engine 1.0.2)

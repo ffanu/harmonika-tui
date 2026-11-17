@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-11-17T16:38:03.354346+00:00",
+  "release": "2026.11.17.13",
+  "runtime_source_commit": "c8be531721b016a3da3b106f06147a3620edf6e0",
+  "native_binary": "1.0.2",
+  "portable_agent_runtime": "3.2.1",
+  "package": {
+    "release": "2026.11.17.13",
+    "source_commit": "c8be531721b016a3da3b106f06147a3620edf6e0",
+    "zip_sha256": "684ddd660242430a118c0a218a730aa28e3be9a87e3d4eb0a4796adff6fd8252",
+    "zip_bytes": 1594542,
+    "signed_files": 222,
+    "signature_verified": true,
+    "all_file_hashes_verified": true,
+    "native_update_helper_included": true,
+    "private_values_excluded": true,
+    "skill_count": 36,
+    "native_binary_preserved": "1.0.2"
+  },
+  "supported_targets": [
+    "darwin-arm64",
+    "darwin-x64",
+    "linux-x64",
+    "linux-arm64",
+    "windows-x64"
+  ],
+  "skills": [
+    "harmonika-ai-integration",
+    "harmonika-async-concurrency",
+    "harmonika-browser-qa",
+    "harmonika-cf",
+    "harmonika-coding",
+    "harmonika-config-transaction",
+    "harmonika-debug",
+    "harmonika-debug-scanner",
+    "harmonika-delegate",
+    "harmonika-desktop",
+    "harmonika-desktop-macro",
+    "harmonika-documents",
+    "harmonika-engineering",
+    "harmonika-erp",
+    "harmonika-git",
+    "harmonika-legal",
+    "harmonika-mobile-builder",
+    "harmonika-ocr",
+    "harmonika-play-console",
+    "harmonika-project-context",
+    "harmonika-quality-audit",
+    "harmonika-release",
+    "harmonika-seo",
+    "harmonika-shared-core",
+    "harmonika-skill-index",
+    "harmonika-ssh",
+    "harmonika-state-persistence",
+    "harmonika-terminal-qa",
+    "harmonika-translation",
+    "harmonika-trust-shield",
+    "harmonika-tui-dev",
+    "harmonika-ui",
+    "harmonika-video",
+    "harmonika-visual-design",
+    "harmonika-web-builder",
+    "harmonika-zimbra"
+  ],
+  "registered_mcp_servers": [
+    "harmonika",
+    "harmonika_agent",
+    "harmonika_video",
+    "harmonika_ssh"
+  ],
+  "automatic_private_dependencies": [
+    "documents_python_venv",
+    "ssh_python_venv",
+    "verified_playwright_chromium",
+    "managed_node_when_required"
+  ],
+  "tests": {
+    "python": {
+      "tests": 156,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": true
+    },
+    "node": {
+      "tests": 101,
+      "passed": 101,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ci": {
+      "run": 44126318682,
+      "source_commit": "c8be531721b016a3da3b106f06147a3620edf6e0",
+      "url": "https://github.com/ffanu/harmonika-tui/actions/runs/44126318682",
+      "jobs": [
+        {
+          "name": "darwin-arm64 / Node 22",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "name": "linux-x64 / Node 22",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "linux-arm64 / Node 22",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "linux-x64 / Node 18",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "windows-x64 / Node 22",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "darwin-x64 / Node 22",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "actual_public_installer": {
+      "mac": {
+        "passed": true,
+        "release": "2026.11.17.13",
+        "platform": "darwin-arm64",
+        "installer": "public_github_curl",
+        "upstream": "1.0.2",
+        "skills": 36,
+        "features_ready": {
+          "browser": true,
+          "documents": true,
+          "ssh": true
+        },
+        "mcp_servers": {
+          "harmonika": true,
+          "harmonika_agent": true,
+          "harmonika_video": true,
+          "harmonika_ssh": true
+        },
+        "native_plugins_loaded": true,
+        "browser_screenshot_verified": true,
+        "license_and_device_preserved": true,
+        "active_sessions_stopped": false
+      },
+      "linux": {
+        "release": "2026.11.17.13",
+        "platform": "linux-x64",
+        "installer": "public_github_curl",
+        "passed": true,
+        "skill_count": 36,
+        "mcp_servers": {
+          "harmonika": true,
+          "harmonika_agent": true,
+          "harmonika_video": true,
+          "harmonika_ssh": true
+        },
+        "features_ready": {
+          "browser": true,
+          "documents": true,
+          "ssh": true
+        },
+        "browser_screenshot_verified": true,
+        "native_plugins_loaded": true,
+        "license_and_device_preserved": true,
+        "licensed_agent_response": true,
+        "actual_tool_calls": 1,
+        "successful_marker_tool_calls": 1,
+        "canary_model": "harmonika/harmonika-ai-codex",
+        "isolated_session_storage": true,
+        "tool_errors": false,
+        "source_modified_directly": false,
+        "sessions_stopped": false
+      }
+    },
+    "actual_licensed_native_agent": {
+      "mac": {
+        "passed": true,
+        "release": "2026.11.17.13",
+        "platform": "darwin-arm64",
+        "model": "configured_default",
+        "exit_code": 0,
+        "latency_seconds": 11.26,
+        "actual_tool_calls": 1,
+        "successful_marker_tool_calls": 1,
+        "error_count": 0,
+        "error_codes": [],
+        "isolated_session_storage": true,
+        "active_sessions_stopped": false
+      },
+      "linux": {
+        "passed": true,
+        "successful_marker_tool_calls": 1,
+        "isolated_session_storage": true,
+        "tool_errors": false
+      }
+    }
+  },
+  "fixed_bugs": [
+    "optional_feature_runtime_missing_on_other_os",
+    "windows_utf8_stdio_and_private_file_ownership",
+    "mac_intel_cryptography_wheel_selection",
+    "mac_existing_private_profile_symlink",
+    "linux_missing_chromium_libraries",
+    "native_chronological_system_update_resetting_tool_receipt_anchor"
+  ],
+  "native_update_security": {
+    "typed_native_system_provenance_required": true,
+    "random_nonce_in_ram_only": true,
+    "user_wrapper_tags_never_promoted": true,
+    "user_task_boundaries_preserved": true,
+    "retryable_response_provenance_preserved": true,
+    "backend_proof_validator_unchanged": true
+  },
+  "privacy": {
+    "private_keys_or_credentials_in_package": false,
+    "developer_browser_accounts_or_cookies_in_package": false,
+    "developer_chat_or_memory_history_in_package": false,
+    "system_update_text_logged": false,
+    "runtime_update_registry": "bounded_ram_only"
+  },
+  "operational_scope": {
+    "binary_or_ascii_redesigned": false,
+    "services_restarted": false,
+    "user_sessions_stopped": false,
+    "production_network_core_changed": false,
+    "lab_source_patched_instead_of_public_install": false
+  },
+  "limits": [
+    "Python 3.9+, Node 18+, Git and HTTPS are prerequisites.",
+    "Existing installations update by rerunning the installer; no unattended updater enabled.",
+    "Each device still needs its own license and private server/browser configuration.",
+    "Remote media/OCR require a ready authorized backend or RTX worker.",
+    "macOS-specific desktop controls and sandbox-exec are not Windows/Linux capabilities.",
+    "Platforms outside the five listed targets are rejected explicitly.",
+    "CI runner queue state is recorded separately from actual MacBook verification."
+  ]
+}
