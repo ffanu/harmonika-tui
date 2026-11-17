@@ -37,8 +37,20 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         raise ControlError('redirect_refused')
 
 
+def config_directory():
+    return Path(os.environ.get('HARMONIKA_GLOBAL_CONFIG') or os.environ.get('HARMONIKA_CONFIG_DIR') or Path.home()/'.config/harmonika')
+
+
 def private_key():
-    path = Path.home()/'.config/harmonika/harmonika-api-key'
+    configured = os.environ.get('HARMONIKA_API_KEY', '').strip()
+    if configured:
+        if not re.fullmatch(r'hai_[A-Za-z0-9_-]{16,240}', configured):
+            raise ControlError('invalid_key_file')
+        return configured
+    directory = config_directory()
+    path = directory/'harmonika-api-key'
+    if directory.is_symlink() or path.is_symlink():
+        raise ControlError('unsafe_key_file')
     try:
         fd = os.open(path, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0))
         with os.fdopen(fd) as stream:
@@ -48,7 +60,7 @@ def private_key():
             key = stream.read(257).strip()
     except OSError:
         raise ControlError('key_not_configured') from None
-    if not re.fullmatch(r'hai_[A-Za-z0-9_-]{16,196}', key):
+    if not re.fullmatch(r'hai_[A-Za-z0-9_-]{16,240}', key):
         raise ControlError('invalid_key_file')
     return key
 
@@ -74,6 +86,19 @@ def request(method, route, payload=None, idem=None, *, timeout=3):
     key = private_key()
     mutation = method == 'POST' and not (route == '/v1/core/invoke' and type(payload) is dict and payload.get('skill_id') in ('memory.get', 'memory.search'))
     headers = {'Authorization': 'Bearer '+key, 'Content-Type': 'application/json'}
+    # Share the identity created by license activation, never mint a different
+    # device binding from the plugin. Do not expose it in output or argv.
+    device = os.environ.get('HARMONIKA_DEVICE_ID', '')
+    if not device:
+        try:
+            device = (config_directory()/'device-id').read_text(encoding='utf-8').strip()
+        except OSError:
+            pass
+    if re.fullmatch(r'dev_[a-f0-9]{32}', device):
+        headers['X-Harmonika-Device-ID'] = device
+    name = os.environ.get('HARMONIKA_DEVICE_NAME', '')
+    if name and len(name) <= 72 and all(32 <= ord(c) <= 126 for c in name):
+        headers['X-Harmonika-Device-Name'] = name
     if idem is not None:
         if type(idem) is not str or not re.fullmatch(r'[A-Za-z0-9_-]{8,128}', idem):
             raise ControlError('idempotency_required')
@@ -239,12 +264,12 @@ def audit_local():
         from tui_config_audit import audit_config
     except ModuleNotFoundError:
         import importlib.util
-        spec = importlib.util.spec_from_file_location('tui_control_config_audit', Path(__file__).resolve().parents[2]/'tools/tui_config_audit.py')
+        spec = importlib.util.spec_from_file_location('tui_control_config_audit', Path(__file__).resolve().with_name('tui_config_audit.py'))
         module = importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         audit_config = module.audit_config
-    root = Path(os.environ.get('HARMONIKA_CONFIG_DIR', str(Path.home()/'.config/harmonika-terminal')))
+    root = config_directory()
     reports = []
-    for name in ('harmonika.json', 'cli.json'):
+    for name in ('harmonika.json', 'opencode.json', 'cli.json'):
         path = root/name
         if not path.exists():
             continue

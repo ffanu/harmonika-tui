@@ -1,7 +1,9 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {decideRetry,mechanics,retryAdvice}=require('../runtime/tui-control/retry.mjs');
-const {createMonitor}=require('../runtime/tui-control/model.mjs');
+let {decideRetry,mechanics,retryAdvice}={};
+test.before(async()=>({decideRetry,mechanics,retryAdvice}=await import('../runtime/tui-control/retry.mjs')));
+let {createMonitor}={};
+test.before(async()=>({createMonitor}=await import('../runtime/tui-control/model.mjs')));
 const cause=(code,status=503)=>({type:'provider.internal',status,response:{body:JSON.stringify({error:{code,message:'PRIVATE_SENTINEL'}})},get message(){throw Error('private error message accessed')}});
 test('wrapped policy and schema failures stop immediately even behind HTTP 503',()=>{
  for(const code of ['tool_secret_reference_required','invalid_tools','invalid_tool_arguments','invalid_tool_response','invalid_tool_history'])

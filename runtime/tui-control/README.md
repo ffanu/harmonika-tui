@@ -90,3 +90,27 @@ Snapshot server belum tersedia pada halaman awal tanpa sesi. Selector memakai
 guard objek sebelum membaca metadata snapshot; dua ID kosong tidak dianggap
 sebagai snapshot sesi yang valid. Smoke native memeriksa halaman awal, /plugins,
 panel tanpa sesi dan panel sesi yang sudah memiliki metadata.
+
+## Paket portabel (2026-11-17.1)
+
+Paket utama harus menyertakan seluruh direktori ini, termasuk `launch.mjs` dan
+`helper/tui_config_audit.py`. Helper audit tidak lagi bergantung pada checkout
+source Mac. Native server memuat `runtime.mjs` melalui `opencode.json.plugins`,
+sedangkan halaman dan keybinding TUI memuat `tui.tsx` melalui `cli.json.plugins`:
+
+```json
+{"plugins": [{"package": "/installed/tools/plugins/tui-control", "options": {"python": "/absolute/path/to/python"}}]}
+```
+
+Installer mengisi path Python dari interpreter yang dipakai instalasi; helper
+dijalankan sebagai `[python, "-I", helper]`, tanpa shell atau argumen rahasia.
+Di Windows path dengan spasi tetap satu argumen. Bila opsi belum ada, helper
+memakai `HARMONIKA_PYTHON`, kemudian `HARMONIKA_PYTHON_EXECUTABLE`, lalu
+`python` (Windows) atau `python3` (macOS/Linux). Konfigurasi/key mengikuti
+`HARMONIKA_GLOBAL_CONFIG`, kemudian `HARMONIKA_CONFIG_DIR`, dengan fallback
+`~/.config/harmonika`. Key dari environment diverifikasi formatnya dan tidak
+disalin ke konfigurasi. Header perangkat memakai identitas hasil aktivasi lisensi.
+
+Pastikan `HARMONIKA_CONFIG_DIR` dan `OPENCODE_CONFIG_DIR` menunjuk direktori
+konfigurasi native yang sama. `HARMONIKA_CONFIG_DIR` mendapat prioritas pada
+engine native. Paket ini tidak mengubah ASCII, tema, composer, atau preferensi tab.

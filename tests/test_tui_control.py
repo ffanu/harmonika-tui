@@ -1,6 +1,7 @@
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -14,6 +15,32 @@ PID = 'tui-'+'a'*40
 
 
 class TuiControl(unittest.TestCase):
+    def test_interpreter_config_key_source_and_license_device_identity(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {'HARMONIKA_API_KEY':'','HARMONIKA_GLOBAL_CONFIG':tmp,'HARMONIKA_DEVICE_ID':'','HARMONIKA_DEVICE_NAME':'fixture-device'}):
+            root=Path(tmp);key='hai_synthetic_'+('a'*200);file=root/'harmonika-api-key';file.write_text(key);file.chmod(0o600)
+            (root/'device-id').write_text('dev_'+'a'*32)
+            self.assertEqual(control.private_key(),key)
+            response=Mock();response.__enter__=Mock(return_value=response);response.__exit__=Mock(return_value=False);response.read.return_value=b'{}'
+            opener=Mock();opener.open.return_value=response
+            with patch.object(control.urllib.request,'build_opener',return_value=opener):control.request('GET','/v1/core/capabilities')
+            request=opener.open.call_args.args[0]
+            self.assertEqual(request.get_header('X-harmonika-device-id'),'dev_'+'a'*32)
+            self.assertEqual(request.get_header('X-harmonika-device-name'),'fixture-device')
+            with patch.dict(os.environ,{'HARMONIKA_API_KEY':'hai_environment_'+('b'*32)}):self.assertEqual(control.private_key(),'hai_environment_'+('b'*32))
+            with patch.dict(os.environ,{'HARMONIKA_API_KEY':'bad'}):
+                with self.assertRaisesRegex(control.ControlError,'invalid_key_file'):control.private_key()
+
+    def test_isolated_packaged_audit_helper_has_no_external_source_dependency(self):
+        import shutil,subprocess,sys
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);package=root/'plugin/helper';package.mkdir(parents=True);config=root/'config';config.mkdir()
+            for name in ('tui_control.py','tui_config_audit.py'):shutil.copyfile(Path(control.__file__).with_name(name),package/name)
+            file=config/'opencode.json';file.write_text('{}');file.chmod(0o600)
+            env=dict(os.environ,HARMONIKA_GLOBAL_CONFIG=str(config),HARMONIKA_API_KEY='')
+            run=subprocess.run([sys.executable,'-I',str(package/'tui_control.py')],env=env,input='{"action":"audit_config"}',capture_output=True,text=True,timeout=10)
+            self.assertEqual(run.returncode,0)
+            result=json.loads(run.stdout);self.assertTrue(result['ok']);self.assertEqual(result['reports'][0]['source'],'opencode.json')
+
     def test_allowlist_refuses_arbitrary_hosts_create_and_execution_routes(self):
         for method, route in [('POST','/v1/media/jobs'),('POST','/v1/coding/jobs'),('GET','https://evil.invalid/'),('GET','/v1/core/sessions'),('GET','/v1/coding/jobs/a?token=private'),('POST','/v1/media/jobs/job_a/recover')]:
             self.assertFalse(control.route_allowed(method,route))
@@ -40,7 +67,7 @@ class TuiControl(unittest.TestCase):
             self.assertNotIn('PRIVATE_SENTINEL',one.path.read_bytes().decode('latin1'))
             with patch.object(control,'private_key',return_value='hai_synthetic_two_1234567890'):
                 other=control.Jobs(root);self.assertEqual(other.list(PID),[])
-            self.assertEqual(one.path.stat().st_mode&0o777,0o600)
+            if os.name == 'posix':self.assertEqual(one.path.stat().st_mode&0o777,0o600)
 
     def test_cache_symlink_refused(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(control,'private_key',return_value='hai_synthetic_one_1234567890'):

@@ -6,6 +6,7 @@ import {realpathSync} from 'node:fs'
 import {createMonitor, classifyConnection, backoff, actionRows, labels, text, phaseLabels} from './model.mjs'
 import {retryAdvice} from './retry.mjs'
 import {RPC} from './runtime.mjs'
+import {helperCommand} from './launch.mjs'
 const helper = fileURLToPath(new URL('./helper/tui_control.py', import.meta.url))
 const names = {engine:'Engine',jobs:'Pekerjaan',memory:'Memori proyek',connection:'Koneksi'} as const
 type Tab = keyof typeof names
@@ -72,7 +73,7 @@ export default Plugin.define({
       let child:ReturnType<typeof Bun.spawn>|undefined,timer:ReturnType<typeof setTimeout>|undefined
       const failure=()=>({ok:false,error:payload.action==='memory'&&['set','clear'].includes(payload.operation)?'submission_unknown':'control_unavailable'})
       try {
-        child=Bun.spawn([String(context.options.python ?? (process.platform==='win32'?'python':'python3')),helper],{stdin:'pipe',stdout:'pipe',stderr:'ignore'})
+        child=Bun.spawn([...helperCommand(context.options,process.env,process.platform),helper],{stdin:'pipe',stdout:'pipe',stderr:'ignore'})
         processes.add(child)
         timer=setTimeout(()=>child?.kill(),payload.action==='memory'?12000:8000)
         child.stdin.write(JSON.stringify(payload));child.stdin.end()

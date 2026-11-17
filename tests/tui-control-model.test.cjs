@@ -1,7 +1,8 @@
 'use strict';
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {createMonitor,classifyConnection,backoff,actionRows,text}=require('../runtime/tui-control/model.mjs');
+let {createMonitor,classifyConnection,backoff,actionRows,text}={};
+test.before(async()=>({createMonitor,classifyConnection,backoff,actionRows,text}=await import('../runtime/tui-control/model.mjs')));
 const event=(type,data={})=>({type,data:Object.defineProperties({sessionID:'ses_synthetic'},Object.getOwnPropertyDescriptors(data))});
 test('observes actual session and tool transitions without inventing completed steps',()=>{
  const m=createMonitor(()=>100);

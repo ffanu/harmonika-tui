@@ -1,7 +1,13 @@
 {
   "name": "harmonika-control",
-  "version": "2026.11.12.4",
+  "version": "2026.11.17.1",
   "type": "module",
-  "exports": {".": "./runtime.mjs", "./tui": "./tui.tsx"},
-  "harmonika": {"api": "harmonika-tui-plugin-v2", "nativeBinary": "preserve"}
+  "exports": {
+    ".": "./runtime.mjs",
+    "./tui": "./tui.tsx"
+  },
+  "harmonika": {
+    "api": "harmonika-tui-plugin-v2",
+    "nativeBinary": "preserve"
+  }
 }

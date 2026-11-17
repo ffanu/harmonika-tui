@@ -1,6 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {createMonitor,toolPhase}=require('../runtime/tui-control/model.mjs');
+let {createMonitor,toolPhase}={};
+test.before(async()=>({createMonitor,toolPhase}=await import('../runtime/tui-control/model.mjs')));
 const ev=(type,data={})=>({type,data:Object.defineProperties({sessionID:'ses_1'},Object.getOwnPropertyDescriptors(data))});
 test('phase inference uses tool names; opaque execute/shell stay unknown',()=>{
  assert.equal(toolPhase('write'),'write');assert.equal(toolPhase('pkg.install'),'install');assert.equal(toolPhase('build.run'),'build');assert.equal(toolPhase('test.run'),'test');
