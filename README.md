@@ -211,7 +211,7 @@ Teruji pada **Mac Apple Silicon**: tool MCP, pembatasan path, branding, dokumen,
 - PDF: baca/buat/merge/rotasi/watermark; ekstraksi **20 hlm / 30.000 karakter / 10 MiB**; scan/OCR PDF belum didukung
 - Audio: **120 detik pertama** · Video: **6 frame sampel**
 - Dokumen Office: konten dasar (bukan pelestarian layout kompleks/makro)
-- Windows/Linux & instalasi perangkat baru: **belum diverifikasi**
+- Instalasi baru, wrapper `doctor`, discovery MCP, serta penolakan paket rusak: **lulus di macOS arm64/x64, Linux arm64/x64, dan Windows x64** ([CI](https://github.com/ffanu/harmonika-tui/actions/runs/44038269383)). Linux juga diuji dengan Node 18 tanpa npm. Fitur opsional mempunyai dependensi dan pengujian terpisah.
 
 [Status terperinci & penghalang publik →](docs/STATUS.md)
 
