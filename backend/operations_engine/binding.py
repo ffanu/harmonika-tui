@@ -27,7 +27,7 @@ def graphics(principal):
  states={'online','offline','busy','vram_full','warming','timeout','auth_failed','recovery_required','unavailable','unknown'}
  try:
   secret=private_path('/etc/harmonika-ai/master-engine.token').read_text().strip()
-  req=urllib.request.Request('http://127.0.0.1:18193/capabilities',headers={'X-Harmonika-Master-Secret':secret,'X-Harmonika-Principal':principal},method='GET')
+  req=urllib.request.Request('http://127.0.0.1:18193/skills/discovery',headers={'X-Harmonika-Master-Secret':secret,'X-Harmonika-Principal':principal},method='GET')
   with urllib.request.build_opener(urllib.request.ProxyHandler({}),NoRedirect()).open(req,timeout=3) as response:raw=response.read(1048577)
   if len(raw)>1048576:raise ValueError()
   value=json.loads(raw).get('diagnostics',{}).get('graphics',{})
