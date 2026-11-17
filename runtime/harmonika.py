@@ -183,7 +183,11 @@ def preflight(directory,manifest):
     if not bpath.exists() and (directory/'harmonika').exists():bpath=directory/'harmonika'
     if 'binary_hashes' in manifest and digest(bpath)!=expected_binary_sha(manifest):raise ValueError('binary_checksum_mismatch')
     result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,timeout=10)
-    if result.returncode or 'v0.98.1' not in result.stdout:raise ValueError('binary_preflight_failed')
+    # Binary TUI boleh berasal dari lini mana pun (engine Harmonika berbasis opencode
+    # v1.0.x maupun rilis lama v0.98.1): cukup pastikan itu binary Harmonika dan
+    # melaporkan versi semantik yang valid.
+    if result.returncode or 'harmonika' not in result.stdout.lower() or not re.search(r'v\d+\.\d+\.\d+',result.stdout):
+        raise ValueError('binary_preflight_failed')
     for name in manifest['files']:
         if name.endswith(('.cjs','.js')):
             result=subprocess.run([NODE,'--check',str(directory/name)],capture_output=True,timeout=10)
@@ -317,7 +321,7 @@ def doctor(root=ROOT):
         try:ssh_available=subprocess.run([str(ssh_runtime),'-I','-c','import paramiko'],capture_output=True,timeout=10).returncode==0
         except (OSError,subprocess.SubprocessError):pass
     ssh_features={'configured':'harmonika-ssh' in config.get('mcp',{}),'runtime_available':ssh_available,'platform_supported':os.name=='posix','tools':7 if (directory/'tools/remote_connector.py').is_file() else (4 if (directory/'tools/ssh-mcp.cjs').is_file() else 0)}
-    return {'ok':True,'release':manifest['release'],'upstream':'0.98.1','binary_verified':True,
+    return {'ok':True,'release':manifest['release'],'upstream':manifest.get('upstream_version') or 'unknown','binary_verified':True,
         'runtime_verified':True,'mcp_protocol':'ok','skills':len(list((directory/'skills').glob('*/SKILL.md'))),
         'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,'ssh':ssh_features,
         'automatic_update':False,'active_sessions_untouched':True}
@@ -730,7 +734,7 @@ def show_status(root=ROOT,as_json=False):
     print(f"\n{O}╭──────────────────────────────────────────────────────────────────────────╮{R}")
     print(f"{O}│{R}  {B}{O}HARMONIKA AI — STATUS TERMINAL & LISENSI{R}                                {O}│{R}")
     print(f"{O}├──────────────────────────────────────────────────────────────────────────┤{R}")
-    print(f"{O}│{R}  Versi Rilis    : {C}{manifest['release']}{R} (Engine v0.98.1 • {skills_count} Skills Aktif)")
+    print(f"{O}│{R}  Versi Rilis    : {C}{manifest['release']}{R} (Engine v{manifest.get('upstream_version') or '1.0.x'} • {skills_count} Skills Aktif)")
     print(f"{O}│{R}  Perangkat      : {B}{dev_nm}{R}")
     print(f"{O}│{R}  Device ID      : {C}{dev_id}{R} (1 Key = 1 Device)")
     print(f"{O}│{R}  Status Lisensi : {lic_badge} • Kuota: {B}{quota_str}{R}")

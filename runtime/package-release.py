@@ -84,7 +84,8 @@ def build(release):
         'Perintah harmonika status untuk cek lisensi 1-Device, engine, & folder auto-save',
         'Perintah harmonika zip untuk auto-bundle proyek ke Downloads/harmonika-ai/zip'
     ]
-    manifest={'release':release,'product':'Harmonika Terminal','upstream_version':'0.98.1','platform':'darwin-arm64',
+    upstream_version=os.environ.get('HARMONIKA_UPSTREAM_VERSION','0.98.1')
+    manifest={'release':release,'product':'Harmonika Terminal','upstream_version':upstream_version,'platform':'darwin-arm64',
       'files':files,'automatic_update':False,'binary_included':False,'release_notes':release_notes}
     platform_manifest=os.environ.get('HARMONIKA_PLATFORM_MANIFEST')
     if platform_manifest:
@@ -107,7 +108,7 @@ def build(release):
         for name in [*files,'release.json']:archive.write(destination/name,name)
     catalog={'release':release,'product':'Harmonika Terminal','automatic_update':False,'binary_included':False,
       'package_url':'https://chat.harmonika.id/assets/harmonika-terminal/'+package.name,'package_sha256':sha(package),
-      'package_size':package.stat().st_size,'upstream_version':'0.98.1','release_notes':release_notes}
+      'package_size':package.stat().st_size,'upstream_version':upstream_version,'release_notes':release_notes}
     (SOURCE/'dist/stable.json').write_bytes(sign(catalog))
     print(json.dumps({'package':str(package),'manifest':str(destination/'release.json'),'files':len(files),'release':release}))
 

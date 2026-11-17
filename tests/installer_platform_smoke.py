@@ -248,7 +248,8 @@ def smoke(workspace, report, expected_platform=None):
     require(sha(binary) == entry['sha256'], 'native_binary_checksum_mismatch')
     binary.chmod(0o700)
     version = run([str(binary), '--version'], env=env, step='native_binary_version')
-    require(b'v0.98.1' in version.stdout, 'native_binary_version_mismatch')
+    require(re.search(rb'v\d+\.\d+\.\d+', version.stdout) and b'harmonika' in version.stdout.lower(),
+            'native_binary_version_mismatch')
     report.update(public_catalog_verified=True, native_binary_sha256=entry['sha256'], native_binary_runs=True)
     source = workspace/'source'
     snapshot_source(source)

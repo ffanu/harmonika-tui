@@ -282,14 +282,37 @@ def main(package=None):
         try:
             chk=m.check_update(ROOT)
             if chk.get('update_available') and chk.get('package_url'):
+                _,cur_manifest=m.active(ROOT)
                 tmp_pkg=ROOT/('update-'+chk['latest']+'.zip')
+                tmp_bin=None
                 try:
                     with urllib.request.build_opener(m.SameOrigin()).open(chk['package_url'],timeout=120) as r, open(tmp_pkg,'wb') as out:
                         shutil.copyfileobj(r,out)
-                    m.install_package(tmp_pkg,ROOT)
+                    with zipfile.ZipFile(tmp_pkg) as archive:
+                        pkg_manifest=m.verify_envelope(archive.read('release.json'),ROOT)
+                    if m.expected_binary_sha(pkg_manifest)!=m.expected_binary_sha(cur_manifest):
+                        # Rilis ini mengganti binary TUI (mis. engine Harmonika berbasis
+                        # opencode). Ambil binary platform dari katalog bertanda tangan,
+                        # verifikasi sha256-nya, lalu pasang bersama paket.
+                        with urllib.request.build_opener(m.SameOrigin()).open(ASSETS_BASE+'/binaries.json',timeout=30) as br:
+                            catalog=m.verify_envelope(br.read(1024*1024),ROOT)
+                        info=catalog.get('platforms',{}).get(detect_platform())
+                        if not info or info.get('sha256')!=m.expected_binary_sha(pkg_manifest):
+                            raise ValueError('platform_catalog_mismatch')
+                        tmp_bin=ROOT/('update-bin-'+m.bin_name())
+                        with urllib.request.build_opener(m.SameOrigin()).open(info['url'],timeout=300) as br, open(tmp_bin,'wb') as bout:
+                            shutil.copyfileobj(br,bout)
+                        if m.digest(tmp_bin)!=info['sha256']:
+                            raise ValueError('platform_binary_checksum_mismatch')
+                        os.chmod(tmp_bin,0o755)
+                        m.install_package(tmp_pkg,ROOT,binary_source=tmp_bin)
+                    else:
+                        m.install_package(tmp_pkg,ROOT)
                     ensure_default_config(ROOT)
                 finally:
                     tmp_pkg.unlink(missing_ok=True)
+                    if tmp_bin is not None:
+                        tmp_bin.unlink(missing_ok=True)
         except Exception:
             pass
         print(json.dumps(m.doctor(),indent=2))
