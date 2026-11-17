@@ -375,13 +375,13 @@ def setup_browser(root, directory):
     probe = _run([node, '-e', BROWSER_PROBE, module], timeout=60, env=env)
     try: result = json.loads(probe.stdout)
     except (ValueError, UnicodeDecodeError): result = {'ok': False}
-    if result.get('ok') is not True:
+    if probe.returncode or result.get('ok') is not True:
         installed = _run([node, module/'cli.js', 'install', 'chromium'], timeout=420, env=env)
         if installed.returncode: raise SetupError('chromium_download_unavailable', True)
         probe = _run([node, '-e', BROWSER_PROBE, module], timeout=60, env=env)
         try: result = json.loads(probe.stdout)
         except (ValueError, UnicodeDecodeError): result = {'ok': False}
-        if result.get('ok') is not True:
+        if probe.returncode or result.get('ok') is not True:
             code = result.get('code', 'browser_launch_failed')
             if code not in ['browser_system_libraries_missing', 'browser_launch_failed']: code = 'browser_launch_failed'
             raise SetupError(code)
