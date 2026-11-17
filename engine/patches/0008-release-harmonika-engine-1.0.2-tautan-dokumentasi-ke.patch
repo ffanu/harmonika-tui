@@ -1,0 +1,196 @@
+From eba543eb194d24e121f5521d6f08734e0bd2229d Mon Sep 17 00:00:00 2001
+From: ffanu <bontotfahri01@gmail.com>
+Date: Tue, 17 Nov 2026 20:02:51 +0700
+Subject: [PATCH 8/8] release: harmonika engine 1.0.2 + tautan dokumentasi ke
+ aset resmi
+
+---
+ package.json                                                | 2 +-
+ packages/app/src/session/composer/free-limit-panel.tsx      | 2 +-
+ packages/app/src/session/composer/go-limit-tray.tsx         | 2 +-
+ packages/app/src/session/usage-exceeded-dialogs.tsx         | 2 +-
+ packages/app/src/settings/appearance/appearance.tsx         | 2 +-
+ packages/app/src/settings/providers/extensions.tsx          | 2 +-
+ packages/app/src/settings/workspaces/project-extensions.tsx | 2 +-
+ packages/app/src/shell/commands/desktop-menu.ts             | 2 +-
+ packages/core/src/plugin/skill/opencode.md                  | 2 +-
+ packages/tui/src/app.tsx                                    | 2 +-
+ packages/tui/src/component/dialog-go-upsell.tsx             | 2 +-
+ packages/tui/src/util/usage-limits.ts                       | 2 +-
+ packages/util/src/brand.ts                                  | 4 ++--
+ 13 files changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/package.json b/package.json
+index 5418e75876..0c44ba80ef 100644
+--- a/package.json
++++ b/package.json
+@@ -2,7 +2,7 @@
+   "$schema": "https://json.schemastore.org/package.json",
+   "name": "harmonika-tui",
+   "description": "Harmonika AI Terminal Workspace",
+-  "version": "1.0.1",
++  "version": "1.0.2",
+   "private": true,
+   "type": "module",
+   "packageManager": "bun@1.4.4",
+diff --git a/packages/app/src/session/composer/free-limit-panel.tsx b/packages/app/src/session/composer/free-limit-panel.tsx
+index 1f0d0312ab..b3bd2a13cd 100644
+--- a/packages/app/src/session/composer/free-limit-panel.tsx
++++ b/packages/app/src/session/composer/free-limit-panel.tsx
+@@ -10,7 +10,7 @@ import { useWorkspaceLocation } from "@/workspaces/location"
+ import type { ModelSelection } from "@/providers/models/selection"
+ import { limitResetAt } from "../usage-exceeded-dialogs"
+ 
+-const GO_URL = "https://harmonika.id/docs"
++const GO_URL = "https://chat.harmonika.id/assets/harmonika-terminal/docs/"
+ 
+ // OpenCode Zen always says when free usage resets; this covers a refusal that doesn't, or a delay out of range.
+ const FALLBACK_RESET_MS = 3_600_000
+diff --git a/packages/app/src/session/composer/go-limit-tray.tsx b/packages/app/src/session/composer/go-limit-tray.tsx
+index be75d0e02f..74167da9fe 100644
+--- a/packages/app/src/session/composer/go-limit-tray.tsx
++++ b/packages/app/src/session/composer/go-limit-tray.tsx
+@@ -31,7 +31,7 @@ function goLimit(locale: string, event: SessionStepFailed): GoLimit {
+     name: metadata?.limitName,
+     reset: formatLimitReset(locale, event.created, event.data.error.retryAfterMs),
+     // The Go page is where the workspace turns on Extra Usage to keep going on its balance.
+-    link: workspace ? `https://harmonika.id/docs` : "https://harmonika.id",
++    link: workspace ? `https://chat.harmonika.id/assets/harmonika-terminal/docs/` : "https://harmonika.id",
+   }
+ }
+ 
+diff --git a/packages/app/src/session/usage-exceeded-dialogs.tsx b/packages/app/src/session/usage-exceeded-dialogs.tsx
+index 2f7bf02eef..980ae750af 100644
+--- a/packages/app/src/session/usage-exceeded-dialogs.tsx
++++ b/packages/app/src/session/usage-exceeded-dialogs.tsx
+@@ -16,7 +16,7 @@ const GO_UPSELL_FREE_TIER_DONT_SHOW = "go_upsell_dont_show"
+ 
+ const GO_UPSELL_WINDOW = 86_400_000 // 24 hrs
+ 
+-const GO_URL = "https://harmonika.id/docs"
++const GO_URL = "https://chat.harmonika.id/assets/harmonika-terminal/docs/"
+ 
+ const MAX_RETRY_AFTER_MS = 45 * 86_400_000
+ 
+diff --git a/packages/app/src/settings/appearance/appearance.tsx b/packages/app/src/settings/appearance/appearance.tsx
+index 374c902351..caedb0fab4 100644
+--- a/packages/app/src/settings/appearance/appearance.tsx
++++ b/packages/app/src/settings/appearance/appearance.tsx
+@@ -113,7 +113,7 @@ export const SettingsAppearance: Component = () => {
+               description={
+                 <>
+                   {language.t("settings.general.row.theme.description")}{" "}
+-                  <ExternalLink class="settings-link" href="https://harmonika.id/docs">
++                  <ExternalLink class="settings-link" href="https://chat.harmonika.id/assets/harmonika-terminal/docs/">
+                     {language.t("common.learnMore")}
+                   </ExternalLink>
+                 </>
+diff --git a/packages/app/src/settings/providers/extensions.tsx b/packages/app/src/settings/providers/extensions.tsx
+index 3a98e5835e..b750e041e3 100644
+--- a/packages/app/src/settings/providers/extensions.tsx
++++ b/packages/app/src/settings/providers/extensions.tsx
+@@ -274,7 +274,7 @@ export const SettingsExtensions: Component<{
+                 <span class="settings-extension-heading text-13-medium">
+                   {language.t("settings.extensions.availableAll")}
+                 </span>
+-                <ExternalLink class="settings-extension-link text-13-regular" href="https://harmonika.id/docs">
++                <ExternalLink class="settings-extension-link text-13-regular" href="https://chat.harmonika.id/assets/harmonika-terminal/docs/">
+                   {language.t("settings.extensions.addSkills")}
+                 </ExternalLink>
+               </div>
+diff --git a/packages/app/src/settings/workspaces/project-extensions.tsx b/packages/app/src/settings/workspaces/project-extensions.tsx
+index 1ddfd9a44a..a29a47871e 100644
+--- a/packages/app/src/settings/workspaces/project-extensions.tsx
++++ b/packages/app/src/settings/workspaces/project-extensions.tsx
+@@ -510,7 +510,7 @@ export const ProjectSettingsExtensions: Component<{
+                 kind="skills"
+                 empty={projectSkills().length === 0}
+                 action={
+-                  <ExternalLink class="settings-extension-link" href="https://harmonika.id/docs">
++                  <ExternalLink class="settings-extension-link" href="https://chat.harmonika.id/assets/harmonika-terminal/docs/">
+                     {language.t("settings.extensions.addSkills")}
+                   </ExternalLink>
+                 }
+diff --git a/packages/app/src/shell/commands/desktop-menu.ts b/packages/app/src/shell/commands/desktop-menu.ts
+index 64b5191c38..08250f43e7 100644
+--- a/packages/app/src/shell/commands/desktop-menu.ts
++++ b/packages/app/src/shell/commands/desktop-menu.ts
+@@ -272,7 +272,7 @@ export const DESKTOP_MENU: DesktopMenu[] = [
+     id: "help",
+     labelKey: "desktop.menu.help",
+     items: [
+-      { type: "item", labelKey: "desktop.menu.documentation", href: "https://harmonika.id/docs" },
++      { type: "item", labelKey: "desktop.menu.documentation", href: "https://chat.harmonika.id/assets/harmonika-terminal/docs/" },
+       { type: "item", labelKey: "desktop.menu.supportForum", href: "https://discord.com/invite/opencode" },
+       { type: "item", labelKey: "desktop.menu.exportLogs", command: "logs.export" },
+       { type: "separator" },
+diff --git a/packages/core/src/plugin/skill/opencode.md b/packages/core/src/plugin/skill/opencode.md
+index 4308f50f82..b8dc2b59cf 100644
+--- a/packages/core/src/plugin/skill/opencode.md
++++ b/packages/core/src/plugin/skill/opencode.md
+@@ -14,7 +14,7 @@ Kamu adalah **Harmonika AI** dari **Harmonika ID** (harmonika.id).
+ 
+ ## Dokumentasi
+ 
+-Dokumentasi resmi: <https://harmonika.id/docs>. Situs: <https://harmonika.id>.
++Dokumentasi resmi: <https://chat.harmonika.id/assets/harmonika-terminal/docs/>. Situs: <https://harmonika.id>.
+ Gunakan dokumentasi Harmonika sebagai sumber kebenaran untuk pertanyaan produk.
+ 
+ ## Operasional
+diff --git a/packages/tui/src/app.tsx b/packages/tui/src/app.tsx
+index 574b75c473..23d62c7214 100644
+--- a/packages/tui/src/app.tsx
++++ b/packages/tui/src/app.tsx
+@@ -1169,7 +1169,7 @@ function App() {
+         name: "docs.open",
+         title: "Open docs",
+         run: () => {
+-          openUrl("https://harmonika.id/docs").catch(() => {})
++          openUrl("https://chat.harmonika.id/assets/harmonika-terminal/docs/").catch(() => {})
+           dialog.clear()
+         },
+         category: "System",
+diff --git a/packages/tui/src/component/dialog-go-upsell.tsx b/packages/tui/src/component/dialog-go-upsell.tsx
+index b61a713f26..c7b1864197 100644
+--- a/packages/tui/src/component/dialog-go-upsell.tsx
++++ b/packages/tui/src/component/dialog-go-upsell.tsx
+@@ -20,7 +20,7 @@ import { credentialConnections } from "./dialog-integration"
+ import { DialogModel } from "./dialog-model"
+ import "./go-upsell-art"
+ 
+-export const GO_URL = "https://harmonika.id/docs"
++export const GO_URL = "https://chat.harmonika.id/assets/harmonika-terminal/docs/"
+ const ACTIONS = ["don't show again", "dismiss", "subscribe"] as const
+ type Action = (typeof ACTIONS)[number]
+ type IntegrationAttempt = IntegrationOauthConnectOutput["data"]
+diff --git a/packages/tui/src/util/usage-limits.ts b/packages/tui/src/util/usage-limits.ts
+index 6b6e1ca3ec..1522d0246b 100644
+--- a/packages/tui/src/util/usage-limits.ts
++++ b/packages/tui/src/util/usage-limits.ts
+@@ -113,7 +113,7 @@ export function goLimitName(error: { readonly response?: { readonly body: string
+ /** The OpenCode Console Go page for the workspace a Go usage limit names, where it can turn on Extra Usage. */
+ export function goLimitLink(error: { readonly response?: { readonly body: string } } | undefined) {
+   const workspace = /"workspace"\s*:\s*"((?:org|wrk)_[\w-]+)"/.exec(error?.response?.body ?? "")?.[1]
+-  return workspace ? `https://harmonika.id/docs` : "https://harmonika.id"
++  return workspace ? `https://chat.harmonika.id/assets/harmonika-terminal/docs/` : "https://harmonika.id"
+ }
+ 
+ /**
+diff --git a/packages/util/src/brand.ts b/packages/util/src/brand.ts
+index db9367f33d..3c42dc66d5 100644
+--- a/packages/util/src/brand.ts
++++ b/packages/util/src/brand.ts
+@@ -14,11 +14,11 @@ export const Brand = {
+   product: "Harmonika AI",
+   vendor: "Harmonika ID",
+   cliName: "harmonika",
+-  version: "1.0.1",
++  version: "1.0.2",
+   channel: "stable",
+   artifact: "cli",
+   website: "https://harmonika.id",
+-  docs: "https://harmonika.id/docs",
++  docs: "https://chat.harmonika.id/assets/harmonika-terminal/docs/",
+   apiBase: "https://chat.harmonika.id/v1",
+   assetsBase: "https://chat.harmonika.id/assets/harmonika-terminal",
+   /** Directory name under XDG config/data/state. */

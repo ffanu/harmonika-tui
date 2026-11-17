@@ -229,13 +229,14 @@ Catatan operasional setelah rebase: `node_modules` di clone sumber harus di-`bun
 
 | Item | Hasil terukur |
 | --- | --- |
-| **D1** Patch ke-7 | `harmonika/main` = **7 commit brand**; `0007-brand-buang-brand-opencode-yang-terlihat…` menuntaskan sisa brand yang terlihat pengguna (`verify-patches.sh` → tree `c0bb5a47a804`). |
+| **D1** Patch ke-7 | `harmonika/main` = **8 commit brand**; `0007-brand-buang-brand-opencode-yang-terlihat…` menuntaskan sisa brand yang terlihat pengguna, lalu `0008-release-harmonika-engine-1.0.2-tautan-dokumentasi…` (`verify-patches.sh` → tree `f943f703bb59`). |
 | **D2** Web UI (bundled di binary) | `<title>` = *Harmonika AI*; komponen `ui/logo.tsx` memakai mark kotak-H + wordmark teks **HARMONIKA AI**; wordmark animasi About & new-session tidak lagi menggambar glyph upstream; halaman OAuth ("Harmonika AI is now authorized/connected"), `client_uri` & `logo_uri` MCP OAuth. |
-| **D3** Label & tautan | Suffix provider Console, dialog limit/upsell, link settings/docs (`harmonika.id/docs`), panel `stats` (`harmonika.id`), `usage-limits`, User-Agent webfetch, serta header `HTTP-Referer`/`X-Title` untuk gateway pihak ketiga. |
+| **D3** Label & tautan | Suffix provider Console, dialog limit/upsell, link settings/docs (`…/harmonika-terminal/docs/`), panel `stats` (`harmonika.id`), `usage-limits`, User-Agent webfetch, serta header `HTTP-Referer`/`X-Title` untuk gateway pihak ketiga. |
 | **D4** Skema & katalog | `$schema` tema → `…/harmonika-terminal/theme.json`; `$schema` config CLI → `…/cli.json`; sumber katalog model → `…/models.json`; ikon web → `…/harmonika-icon.png` — keempat aset dipublikasikan di `chat.harmonika.id` (HTTP 200). |
 | **D5** i18n | 64 berkas locale: **3.322 string** "OpenCode" → "Harmonika AI". |
 | **D6** Skill bawaan | `packages/core/src/plugin/skill/opencode.md` → dokumentasi engine Harmonika (identitas, docs resmi, aturan operasional). |
 | **D7** Sisa internal | Nama paket `@opencode/*`, env `OPENCODE_*`, dan provider Zen (nonaktif lewat `disabled_providers`) sengaja dibiarkan agar rebase ke upstream tetap murah; tidak ada yang tampil ke pengguna. |
+| **D8** Engine 1.0.2 + halaman dokumentasi | Versi engine dinaikkan ke **1.0.2** (`packages/util/src/brand.ts` + `package.json`) sehingga kanal `harmonika upgrade` juga menawarkan build brand-bersih. Halaman dokumentasi benar-benar tayang di `https://chat.harmonika.id/assets/harmonika-terminal/docs/` (hosting statis di aset resmi: instalasi, kunci API, model, MCP, pembaruan, verifikasi, troubleshooting) dan seluruh tautan bantuan produk diarahkan ke sana. |
 
 Verifikasi cepat setelah perubahan brand:
 
