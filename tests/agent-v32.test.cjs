@@ -500,7 +500,7 @@ test("SSH requires an explicit alias and a lost connection stays unknown", async
   assert.equal(result.status, "outcome_unknown");
   assert.equal(result.success, false);
   assert.ok(commands[0].includes("StrictHostKeyChecking=yes"));
-  assert.ok(commands[0].includes("'operator-lab'"));
+  assert.ok(commands[0].includes(require("../tools/agent-platform.cjs").shellQuote("operator-lab")));
 });
 
 test("SSH service names cannot inject another command", async (t) => {

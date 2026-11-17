@@ -1,4 +1,5 @@
 "use strict";
+const { configDirectory } = require("./agent-platform.cjs");
 const https = require("node:https"),
   http = require("node:http");
 function deviceHeaders(hostname) {
@@ -8,10 +9,7 @@ function deviceHeaders(hostname) {
     try {
       id = require("node:fs")
         .readFileSync(
-          require("node:path").join(
-            require("node:os").homedir(),
-            ".config/harmonika/device-id",
-          ),
+          require("node:path").join(configDirectory(), "device-id"),
           "utf8",
         )
         .trim();

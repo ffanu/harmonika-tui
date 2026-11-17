@@ -3,21 +3,8 @@
 const fs = require("node:fs"),
   path = require("node:path"),
   crypto = require("node:crypto"),
-  cp = require("node:child_process");
+  { processBirth: birth, protectStateDirectory, openRegular } = require("./agent-platform.cjs");
 const sha = (x) => crypto.createHash("sha256").update(x).digest("hex");
-function birth(pid) {
-  try {
-    return cp
-      .execFileSync("/bin/ps", ["-p", String(pid), "-o", "lstart="], {
-        encoding: "utf8",
-        env: { ...process.env, TZ: "UTC", LC_ALL: "C" },
-        stdio: ["ignore", "pipe", "ignore"],
-      })
-      .trim();
-  } catch (error) {
-    return error.status === 1 ? "" : null;
-  }
-}
 function atomic(file, value) {
   const tmp = file + "." + crypto.randomUUID() + ".tmp";
   try {
@@ -29,11 +16,11 @@ function atomic(file, value) {
       fs.closeSync(fd);
     }
     fs.renameSync(tmp, file);
-    const d = fs.openSync(path.dirname(file), "r");
-    try {
-      fs.fsyncSync(d);
-    } finally {
-      fs.closeSync(d);
+    // Windows cannot open/fsync a directory. The file is flushed before the
+    // atomic replace on every platform. POSIX additionally flushes the parent.
+    if (process.platform !== "win32") {
+      const d = fs.openSync(path.dirname(file), "r");
+      try { fs.fsyncSync(d); } finally { fs.closeSync(d); }
     }
   } finally {
     try {
@@ -47,8 +34,10 @@ class StateStore {
     fs.mkdirSync(this.root, { recursive: true, mode: 0o700 });
     if (fs.lstatSync(this.root).isSymbolicLink())
       throw Error("state_symlink_denied");
-    fs.chmodSync(this.root, 0o700);
     const key = path.join(this.root, ".key");
+    if (fs.existsSync(key) && (fs.lstatSync(key).isSymbolicLink() || !fs.lstatSync(key).isFile()))
+      throw Error("state_symlink_denied");
+    protectStateDirectory(this.root);
     try {
       fs.writeFileSync(key, crypto.randomBytes(32), {
         flag: "wx",
@@ -57,12 +46,10 @@ class StateStore {
     } catch (e) {
       if (e.code !== "EEXIST") throw e;
     }
-    const fd = fs.openSync(
-      key,
-      fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW,
-    );
+    const fd = openRegular(key, fs.constants.O_RDONLY);
     try {
-      if (fs.fstatSync(fd).mode & 0o077) throw Error("state_key_permissions");
+      if (process.platform !== "win32" && (fs.fstatSync(fd).mode & 0o077))
+        throw Error("state_key_permissions");
       this.key = fs.readFileSync(fd);
       if (this.key.length !== 32) throw Error("state_key_invalid");
     } finally {
@@ -167,10 +154,7 @@ class StateStore {
     atomic(this.file(state.id), { payload, mac: this.digest(payload) });
   }
   load(id) {
-    const fd = fs.openSync(
-      this.file(id),
-      fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW,
-    );
+    const fd = openRegular(this.file(id), fs.constants.O_RDONLY);
     let value;
     try {
       if (fs.fstatSync(fd).size > 2 * 1024 * 1024)
