@@ -106,6 +106,7 @@ jobs:
           python -m unittest discover -s tests -p test_ssh_portability.py
           python -m unittest discover -s tests -p test_portable_skill_workers.py
           python -m unittest discover -s tests -p test_worker_stdio.py
+          python -m unittest discover -s tests -p test_launcher_stdio.py
           node --test tests/agent-v32.test.cjs tests/agent-v32-portability.test.cjs tests/portable-plugin-parity.test.cjs tests/native-video-companion.test.cjs
       - name: Build current source and install without npm
         shell: bash
