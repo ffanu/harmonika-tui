@@ -4,7 +4,8 @@
 The public binary catalog is authenticated with the production public-key pin.
 The current source is then packaged with disposable fixture signing keys. This
 does not publish a release, activate a license, or prove all optional features.
-No HOME/USERPROFILE override, user configuration, browser, or provider API is used.
+No HOME/USERPROFILE override, user configuration, account browser or provider API
+is used. The feature probe launches its own empty Chromium page.
 """
 import argparse
 import base64
@@ -141,6 +142,9 @@ def snapshot_source(destination):
     ignored = shutil.ignore_patterns('.git', 'dist', 'node_modules', '__pycache__', '.venv', '*.pyc', '.env*', '*.pem', '*.key')
     for name in ('runtime', 'backend', 'skills'):
         shutil.copytree(SOURCE/name, destination/name, ignore=ignored)
+    (destination/'tools').mkdir()
+    for name in ('agent-v32.js','agent-state.cjs','agent-http.cjs','agent-platform.cjs','agent-platform.py'):
+        shutil.copy2(SOURCE/'tools'/name,destination/'tools'/name)
     (destination/'docs').mkdir()
     for item in (SOURCE/'docs').iterdir():
         if item.is_file() and item.suffix in ('.md', '.txt', '.json'):
@@ -272,7 +276,7 @@ def smoke(workspace, report, expected_platform=None):
         report['package_file_count'] = len(archive.namelist())
     restricted = without_npm(env, workspace, node)
     run([sys.executable, str(source/'runtime/install.py'), str(package)], env=restricted, cwd=source,
-        timeout=240, step='fresh_install_without_npm')
+        timeout=900, step='fresh_install_without_npm')
     require(not Path(env['HARMONIKA_TOOLS_HOME']).exists(), 'shared_sdk_fallback_used')
     require((terminal/'current/tools/mcp-server.cjs').is_file(), 'runtime_pointer_unusable')
     for checker, server in [('protocol-check.cjs', 'mcp-server.cjs'), ('ssh-protocol-check.cjs', 'ssh-mcp.cjs')]:
@@ -289,6 +293,23 @@ def smoke(workspace, report, expected_platform=None):
             'doctor_not_healthy')
     report.update(fresh_install_without_npm=True, bundled_mcp_healthy=True, installed_wrapper_works=True,
                   ssh_mcp_discovery_healthy=True, shared_sdk_used=False, license_or_provider_api_called=False)
+    features=status.get('agent_features',{})
+    require(features.get('verified_agent_entrypoint') and features.get('skills_registered') and features.get('native_control_registered'),'agent_profile_not_registered')
+    require(features.get('skill_count',0)>=36,'agent_skills_missing')
+    require(features.get('mcp_servers_registered',{}).get('harmonika_agent') and features.get('mcp_servers_registered',{}).get('harmonika_video'),'agent_companion_not_registered')
+    require(features.get('mcp_servers_registered',{}).get('harmonika_ssh'),'ssh_companion_not_registered')
+    run(wrapper_command(wrapper,['agent-v32','--help']),env=restricted,timeout=45,step='verified_agent_entrypoint')
+    loaded=run(wrapper_command(wrapper,['debug','agents']),env=restricted,cwd=workspace,timeout=120,step='native_plugins_load')
+    try:agents=json.loads(loaded.stdout)
+    except (ValueError,UnicodeError):raise SmokeFailure('native_plugins_invalid_response') from None
+    require(isinstance(agents,list) and any(x.get('id')=='build' for x in agents),'native_plugins_not_loaded')
+    report['native_plugins_load']=True
+    if env.get('HARMONIKA_INSTALL_FEATURES')!='0':
+        deps=features.get('dependencies',{})
+        require(deps.get('features',{}).get('documents') and deps.get('features',{}).get('ssh'),'python_feature_runtime_not_ready')
+        require(deps.get('features',{}).get('browser'),'browser_feature_runtime_not_ready')
+    report.update(agent_profile_registered=True,skill_count=features['skill_count'],native_control_registered=True,
+                  verified_agent_entrypoint=True,feature_dependencies=features.get('dependencies',{}).get('features',{}))
     before = state_snapshot(terminal, config)
     negative = tampered_updates(package, workspace, terminal, node, restricted)
     for tampered, expected in zip(negative, (b'invalid_release_signature', b'runtime_checksum_mismatch')):

@@ -173,6 +173,25 @@ def verify_files(directory,manifest):
         file=directory/name
         if file.is_symlink() or not file.is_file() or digest(file)!=info['sha256']:raise ValueError('runtime_checksum_mismatch:'+name)
 
+def feature_module(directory):
+    script=directory/'tools/agent_features.py'
+    if not script.is_file():return None
+    spec=importlib.util.spec_from_file_location('harmonika_agent_features',script)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module
+
+def feature_python(root=ROOT):
+    candidate=root/'python-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+    return str(candidate) if candidate.is_file() else sys.executable
+
+def browser_environment(root=ROOT):
+    settings=read_json(root/'feature-setup-status.json') if (root/'feature-setup-status.json').is_file() else {}
+    node=settings.get('browser_node') or settings.get('browser',{}).get('browser_node') or NODE
+    return {'HARMONIKA_BROWSER_NODE':str(node),
+            'HARMONIKA_BROWSER_RUNTIME':str(root/'browser-runtime'),
+            'HARMONIKA_PLAYWRIGHT_MODULE':str(root/'browser-runtime/node_modules/playwright'),
+            'PLAYWRIGHT_BROWSERS_PATH':str(root/'browser-runtime/browsers')}
+
 def switch(release,root=ROOT):
     if not RELEASE_RE.fullmatch(release):raise ValueError('invalid_release')
     if os.name=='nt':
@@ -207,7 +226,7 @@ def preflight(directory,manifest):
     if result.returncode or 'harmonika' not in result.stdout.lower() or not re.search(r'v\d+\.\d+\.\d+',result.stdout):
         raise ValueError('binary_preflight_failed')
     for name in manifest['files']:
-        if name.endswith(('.cjs','.js')):
+        if name.endswith(('.cjs','.js','.mjs')):
             result=subprocess.run([NODE,'--check',str(directory/name)],capture_output=True,timeout=10)
             if result.returncode:raise ValueError('javascript_preflight_failed:'+name)
     python_files=[str(directory/name) for name in manifest['files'] if name.endswith('.py')]
@@ -230,6 +249,17 @@ def preflight(directory,manifest):
     if (directory/'tools/ssh-mcp.cjs').is_file():
         check=subprocess.run([NODE,str(directory/'tools/ssh-protocol-check.cjs'),str(directory/'tools/ssh-mcp.cjs')],capture_output=True,text=True,timeout=20)
         if check.returncode:raise ValueError('ssh_mcp_preflight_failed:'+((check.stderr or check.stdout or '').strip().splitlines()[-1:] or ['no diagnostics'])[-1][:200])
+    if manifest.get('feature_profile'):
+        # Discover the real portable companion without invoking any provider,
+        # account, browser session or remotely executing a tool.
+        probe='\n'.join(json.dumps({'jsonrpc':'2.0','id':i,'method':method,'params':{}}) for i,method in ((1,'initialize'),(2,'tools/list')))+'\n'
+        run=subprocess.run([sys.executable,'-I',str(directory/'tools/mcp-python-entry.py')],input=probe,capture_output=True,text=True,timeout=20)
+        try:
+            listing=next(json.loads(line)['result']['tools'] for line in run.stdout.splitlines() if json.loads(line).get('id')==2)
+            names={row['name'] for row in listing}
+            expected={'server_health','code_intelligence','test_runner','os_intelligence','safe_install','site_cloner','api_intelligence','render','interactive','viz','project_memory','translate_text','ocr_document','desktop_browser'}
+            if run.returncode or not expected<=names:raise ValueError()
+        except (ValueError,KeyError,TypeError,StopIteration):raise ValueError('agent_mcp_preflight_failed') from None
 
 @contextmanager
 def installation_lock(root):
@@ -243,7 +273,14 @@ def installation_lock(root):
             yield
 
 def install_package(package,root=ROOT,*,binary_source=None):
-    with installation_lock(root):return _install_package(package,root,binary_source=binary_source)
+    with installation_lock(root):
+        result=_install_package(package,root,binary_source=binary_source)
+        directory,_=active(root)
+        features=feature_module(directory)
+        if features:
+            result['features']=features.setup(root,directory)
+            features.configure(root,config_directory(),feature_python(root),NODE)
+        return result
 
 def _install_package(package,root=ROOT,*,binary_source=None):
     package=Path(package)
@@ -303,7 +340,12 @@ def _rollback(root=ROOT):
     bname=bin_name() if (target/bin_name()).exists() else 'harmonika'
     if digest(target/bname)!=expected_binary_sha(manifest):raise ValueError('binary_checksum_mismatch')
     preflight(target,manifest)
+    current_features=feature_module(current)
+    if current_features and not manifest.get('feature_profile'):
+        current_features.remove_managed_companions(root,config_directory())
     switch(release,root)
+    target_features=feature_module(target)
+    if target_features:target_features.configure(root,config_directory(),feature_python(root),NODE)
     atomic_state(root/'previous',current.name)
     return {'ok':True,'release':release,'restart_required':True}
 
@@ -328,21 +370,26 @@ def doctor(root=ROOT):
     assert config['options']['disable_provider_auto_update'] is True,'provider_auto_update_must_be_disabled'
     assert not config['permissions'].get('allowed_tools'),'global_auto_approvals_detected'
     assert 'harmonika' in config.get('mcp',{}),'mcp_missing'
-    documents=subprocess.run([sys.executable,'-I',str(directory/'skills/harmonika-documents/scripts/documents.py'),'capabilities'],capture_output=True,text=True,timeout=20)
+    documents=subprocess.run([feature_python(root),'-I',str(directory/'skills/harmonika-documents/scripts/documents.py'),'capabilities'],capture_output=True,text=True,timeout=20)
     if documents.returncode:raise ValueError('documents_probe_failed')
     document_features=json.loads(documents.stdout)
-    browser=subprocess.run([NODE,'-e',"const fs=require('fs'),p=require(process.argv[1]);process.stdout.write(JSON.stringify({chromium:fs.existsSync(p.chromium.executablePath())}));",str(root/'browser-runtime/node_modules/playwright')],capture_output=True,text=True,timeout=10)
+    browser_env=browser_environment(root)
+    browser=subprocess.run([browser_env['HARMONIKA_BROWSER_NODE'],'-e',"const fs=require('fs'),p=require(process.argv[1]);process.stdout.write(JSON.stringify({chromium:fs.existsSync(p.chromium.executablePath())}));",browser_env['HARMONIKA_PLAYWRIGHT_MODULE']],env=dict(os.environ,**browser_env),capture_output=True,text=True,timeout=10)
     browser_features=json.loads(browser.stdout) if browser.returncode==0 else {}
-    ssh_runtime=root/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+    ssh_runtime=Path(feature_python(root)) if (root/'python-runtime').is_dir() else root/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
     ssh_available=False
     if ssh_runtime.is_file():
         try:ssh_available=subprocess.run([str(ssh_runtime),'-I','-c','import paramiko'],capture_output=True,timeout=10).returncode==0
         except (OSError,subprocess.SubprocessError):pass
-    ssh_features={'configured':'harmonika-ssh' in config.get('mcp',{}),'runtime_available':ssh_available,'platform_supported':os.name=='posix','tools':7 if (directory/'tools/remote_connector.py').is_file() else (4 if (directory/'tools/ssh-mcp.cjs').is_file() else 0)}
-    return {'ok':True,'release':manifest['release'],'upstream':manifest.get('upstream_version') or 'unknown','binary_verified':True,
+    modern=read_json(config_directory()/'opencode.json') if (config_directory()/'opencode.json').is_file() else {}
+    ssh_features={'configured':'harmonika-ssh' in config.get('mcp',{}) or modern.get('mcp',{}).get('harmonika_ssh',{}).get('enabled') is True,'runtime_available':ssh_available,'platform_supported':os.name in ('posix','nt'),'tools':7 if (directory/'tools/remote_connector.py').is_file() else (4 if (directory/'tools/ssh-mcp.cjs').is_file() else 0)}
+    result={'ok':True,'release':manifest['release'],'upstream':manifest.get('upstream_version') or 'unknown','binary_verified':True,
         'runtime_verified':True,'mcp_protocol':'ok','skills':len(list((directory/'skills').glob('*/SKILL.md'))),
         'lsp':sorted(config.get('lsp',{})),'documents':document_features,'browser':browser_features,'ssh':ssh_features,
         'automatic_update':False,'active_sessions_untouched':True}
+    features=feature_module(directory)
+    if features:result['agent_features']=features.status(root,config_directory())
+    return result
 
 HARMONIKA_THEMES = {
     'harmonika-dark': {
@@ -780,6 +827,24 @@ def main():
         args=[arg for arg in args if arg!='--no-workbench'];workbench_enabled=False
     ensure_harmonika_downloads(os.environ.get('HARMONIKA_GLOBAL_CONFIG',str(Path.home()/'.config/harmonika')))
     if args==['doctor']:result=doctor()
+    elif args in (['features'],['features','setup']):
+        directory,manifest=active();verify_files(directory,manifest)
+        features=feature_module(directory)
+        if args==['features','setup'] and features:
+            features.setup(ROOT,directory)
+            features.configure(ROOT,config_directory(),feature_python(),NODE)
+        result=features.status(ROOT,config_directory()) if features else {'installed':False,'status':'legacy_runtime'}
+    elif args and args[0]=='agent-v32':
+        directory,manifest=active();verify_files(directory,manifest)
+        entry=directory/'tools/agent-v32/agent-v32.js'
+        if not entry.is_file():raise ValueError('agent_runtime_not_installed')
+        if not any(a in ('--help','-h') for a in args[1:]):
+            checked=subprocess.run([sys.executable,'-I',str(directory/'tools/license.py'),'ensure'])
+            if checked.returncode:sys.exit(checked.returncode)
+        config=str(config_directory())
+        env=dict(os.environ,HARMONIKA_GLOBAL_CONFIG=config,HARMONIKA_CONFIG_DIR=config,HARMONIKA_PYTHON=feature_python(),HARMONIKA_DEVICE_ID=device_id(config),HARMONIKA_DEVICE_NAME=device_name())
+        run_exec([NODE,str(entry),*args[1:]],env)
+        return
     elif args==['activate']:
         directory,manifest=active();verify_files(directory,manifest)
         run_exec([sys.executable,'-I',str(directory/'tools/license.py'),'activate'])
@@ -811,7 +876,7 @@ def main():
         return
     elif args and args[0]=='ssh':
         directory,manifest=active();verify_files(directory,manifest)
-        python=ROOT/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+        python=Path(feature_python()) if (ROOT/'python-runtime').is_dir() else ROOT/'ssh-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
         if not python.is_file():raise ValueError('ssh_runtime_unavailable')
         run_exec([str(python),'-I',str(directory/'tools/ssh_connector.py'),*args[1:]])
         return
@@ -868,7 +933,7 @@ def main():
     elif args and args[0]=='skill':
         helpers={
             'browser':(NODE,'harmonika-browser-qa/scripts/smoke.cjs'),
-            'documents':(sys.executable,'harmonika-documents/scripts/documents.py'),
+            'documents':(feature_python(),'harmonika-documents/scripts/documents.py'),
             'terminal-qa':(sys.executable,'harmonika-terminal-qa/scripts/terminal_qa.py'),
             'async-concurrency':(sys.executable,'harmonika-async-concurrency/scripts/async_runtime.py'),
             'ai-integration':(sys.executable,'harmonika-ai-integration/scripts/stream_protocol.py'),
@@ -958,6 +1023,7 @@ def main():
             HARMONIKA_DISABLE_PROVIDER_AUTO_UPDATE='1',
             CRUSH_DISABLE_PROVIDER_AUTO_UPDATE='1',
             HARMONIKA_GLOBAL_CONFIG=cfg_dir,
+            HARMONIKA_CONFIG_DIR=cfg_dir,
             CRUSH_GLOBAL_CONFIG=cfg_dir,
             OPENCODE_CONFIG_DIR=cfg_dir,
             OPENCODE_CONFIG=str(Path(cfg_dir)/'opencode.json'),
@@ -966,6 +1032,10 @@ def main():
             CRUSH_GLOBAL_DATA=data_dir,
             HARMONIKA_DEVICE_ID=dev_id,
             HARMONIKA_DEVICE_NAME=dev_nm,
+            HARMONIKA_PYTHON=feature_python(),
+            HARMONIKA_SSH_PYTHON=feature_python(),
+            HARMONIKA_DOCUMENTS_PYTHON=feature_python(),
+            **browser_environment(),
             HARMONIKA_DOWNLOADS_DIR=str(dl_root),
             HARMONIKA_IMAGES_DIR=str(dl_root/'gambar'),
             HARMONIKA_DOCUMENTS_DIR=str(dl_root/'document'),

@@ -3,11 +3,14 @@ import sys
 from pathlib import Path
 import json
 import os
-import resource
+try:
+    import resource
+except ImportError:
+    resource=None  # Windows subprocess deadlines/limits are enforced by caller.
 import tempfile
 
-resource.setrlimit(resource.RLIMIT_CPU,(20,20))
-if sys.platform.startswith('linux'):resource.setrlimit(resource.RLIMIT_AS,(512*1024*1024,512*1024*1024))
+if resource is not None:resource.setrlimit(resource.RLIMIT_CPU,(20,20))
+if resource is not None and sys.platform.startswith('linux'):resource.setrlimit(resource.RLIMIT_AS,(512*1024*1024,512*1024*1024))
 TOOLS=Path(__file__).resolve().parent
 sys.path.insert(0,str(TOOLS))
 BASE=TOOLS.parent.parent if TOOLS.parent.name=='runtime' else TOOLS.parent

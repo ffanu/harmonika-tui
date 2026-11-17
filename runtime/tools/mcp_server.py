@@ -5,6 +5,9 @@ Image generation, vision, audio, video editing, network engineering.
 import base64, contextlib, hashlib, io, json, mimetypes, os, re, shutil, socket, subprocess, sys, time, urllib.request, urllib.error, uuid
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0,HERE)
+from connector_settings import load as _load_connector_settings
+_load_connector_settings()
 CONFIG_ROOT = os.environ.get("HARMONIKA_GLOBAL_CONFIG") or os.environ.get("HARMONIKA_CONFIG_DIR") or os.path.expanduser("~/.config/harmonika")
 TERMINAL_ROOT = os.environ.get("HARMONIKA_TERMINAL_HOME") or os.path.expanduser("~/.config/harmonika-terminal")
 sys.path.insert(0, HERE)  # Verified local release modules also work under python -I.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
-const EXPECTED='db31bf846ddd1e313383dc2780874ddce44736e30af634173817bd34806e45a8';
+const EXPECTED='d3a7ca499d3267dc3a53f3b26814b562ff0947b5434c6af2b8540472b0ed4e44';
 const DESCRIPTION='Harmonika Ai video generation and image animation. For a rendering prompt, translate the user intent into concise English with concrete visible object details; preserve names, quoted text, requested duration and reference image. Answer the user in their own language. For exact product appearance or landmarks prefer the supplied reference rather than inventing it. First action=capabilities reads actual qualified model, resolution, frame rate and availability. New requests use the backend high-quality profile when activated (native 1280x720); never infer quality from an old preview limitation. action=generate uses prompt and requested duration_seconds; action=animate preserves reference_file and requested duration. Submit ONCE, retain request_id/job_id, then action=status on the same handle respecting poll_after_seconds. Without a wait tool, stop after three checks and report pending. Never submit again after an uncertain response. action=download saves a completed SHA-256-verified MP4 to Downloads; return its real path and actual model/resolution/duration/audio metadata. Queued or running is not completed. Longer requests may contain sequential reference-conditioned segments; seamless continuity is not guaranteed. Backend errors or missing qualified models must remain explicit: never substitute a smaller preview or shorten the request. Raw generated video is silent. High-quality jobs with ID prefix d04a use Studio after download/upload for narration; existing legacy jobs support action=narrate. Four existing voice presets remain available through compatible audio/Studio tools. Never claim audio, exact landmarks, or a saved file without tool evidence.';
 
 function createAdapter(legacy,options={}){
@@ -24,10 +24,10 @@ function createAdapter(legacy,options={}){
 }
 
 async function main(){
- const adapter=path.join(os.homedir(),'.config/harmonika-terminal/current/tools/video-mcp.cjs');
- if(crypto.createHash('sha256').update(fs.readFileSync(adapter)).digest('hex')!==EXPECTED)
+ const adapter=path.join(__dirname,'..','video-mcp.cjs');
+ if(crypto.createHash('sha256').update(fs.readFileSync(adapter,'utf8').replace(/\r\n/g,'\n')).digest('hex')!==EXPECTED)
   throw Error('verified_base_adapter_required');
- const sdk=path.join(os.homedir(),'.config/harmonika/harmonika-tools/node_modules/@modelcontextprotocol/sdk/dist/cjs');
+ const sdk=require('../paths.cjs').sdk;
  const {Server}=require(path.join(sdk,'server/index.js'));
  const {StdioServerTransport}=require(path.join(sdk,'server/stdio.js'));
  const {ListToolsRequestSchema,CallToolRequestSchema}=require(path.join(sdk,'types.js'));

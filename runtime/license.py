@@ -165,9 +165,7 @@ def interactive_tui_box(config=CONFIG):
     while True:
         try:
             if os.name == 'nt':
-                sys.stderr.write(f"  {orange}🔑 Paste API Key Lisensi Harmonika (hai_live_...) lalu tekan Enter:{reset}\n  > ")
-                sys.stderr.flush()
-                entered = sys.stdin.readline().strip()
+                entered = getpass.getpass(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}").strip()
             else:
                 entered = getpass.getpass(f"  {orange}🔑 Masukkan API Key Lisensi Harmonika (hai_live_...) : {reset}").strip()
                 if not entered:

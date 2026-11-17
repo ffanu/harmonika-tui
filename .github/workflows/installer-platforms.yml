@@ -14,6 +14,11 @@ on:
       - 'tests/test_installer_portability.py'
       - 'tests/test_license.py'
       - 'tests/test_installer_onboarding.py'
+      - 'tests/test_installer_agent_parity.py'
+      - 'tests/test_feature_setup.py'
+      - 'tests/test_portable_owner_mcp.py'
+      - 'tests/*parity*.test.cjs'
+      - 'tests/agent-v32*.test.cjs'
       - '.github/workflows/installer-platforms.yml'
   pull_request:
     paths:
@@ -28,6 +33,11 @@ on:
       - 'tests/test_installer_portability.py'
       - 'tests/test_license.py'
       - 'tests/test_installer_onboarding.py'
+      - 'tests/test_installer_agent_parity.py'
+      - 'tests/test_feature_setup.py'
+      - 'tests/test_portable_owner_mcp.py'
+      - 'tests/*parity*.test.cjs'
+      - 'tests/agent-v32*.test.cjs'
       - '.github/workflows/installer-platforms.yml'
   workflow_dispatch:
 
@@ -86,6 +96,16 @@ jobs:
         run: |
           python -m unittest discover -s tests -p test_license.py
           python -m unittest discover -s tests -p test_installer_onboarding.py
+      - name: Verify portable agent and plugin regressions
+        shell: bash
+        run: |
+          set -e
+          python -m unittest discover -s tests -p test_installer_agent_parity.py
+          python -m unittest discover -s tests -p test_feature_setup.py
+          python -m unittest discover -s tests -p test_portable_owner_mcp.py
+          python -m unittest discover -s tests -p test_ssh_portability.py
+          python -m unittest discover -s tests -p test_portable_skill_workers.py
+          node --test tests/agent-v32.test.cjs tests/agent-v32-portability.test.cjs tests/portable-plugin-parity.test.cjs tests/native-video-companion.test.cjs
       - name: Build current source and install without npm
         shell: bash
         run: python tests/installer_platform_smoke.py --work-root "$RUNNER_TEMP" --expected-platform "${{ matrix.platform }}" --output "installer-smoke-${{ matrix.platform }}-node${{ matrix.node }}.json"

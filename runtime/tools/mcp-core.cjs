@@ -256,9 +256,10 @@ function validatePdfHeader(canonical) {
 /* ---------------- default backend RPC (fixed SSH spawn) ---------------- */
 
 function readLicensedKey() {
+  if(process.env.HARMONIKA_API_KEY)return /^hai_[A-Za-z0-9_]{16,240}$/.test(process.env.HARMONIKA_API_KEY.trim())?process.env.HARMONIKA_API_KEY.trim():null;
   let fd;
   try {
-    const keyFile = path.join(os.homedir(), '.config/harmonika/harmonika-api-key');
+    const keyFile = path.join(process.env.HARMONIKA_GLOBAL_CONFIG||process.env.HARMONIKA_CONFIG_DIR||path.join(os.homedir(),'.config/harmonika'),'harmonika-api-key');
     fd = fs.openSync(keyFile, fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW || 0) | (fs.constants.O_NONBLOCK || 0));
     const st = fs.fstatSync(fd);
     if (!st.isFile() || (process.platform !== 'win32' && ((st.mode & 0o077) || (typeof process.getuid === 'function' && st.uid !== process.getuid())))) {
@@ -280,7 +281,7 @@ function readDeviceId() {
     return process.env.HARMONIKA_DEVICE_ID;
   }
   try {
-    const devFile = path.join(os.homedir(), '.config/harmonika/device-id');
+    const devFile = path.join(process.env.HARMONIKA_GLOBAL_CONFIG||process.env.HARMONIKA_CONFIG_DIR||path.join(os.homedir(),'.config/harmonika'),'device-id');
     const val = fs.readFileSync(devFile, 'utf8').trim();
     if (/^dev_[a-f0-9]{32}$/.test(val)) return val;
   } catch {}

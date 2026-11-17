@@ -3,13 +3,13 @@
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const BASE='https://chat.harmonika.id/v1/media';
 class MediaError extends Error{constructor(code,uncertain=false){super(code);this.code=code;this.uncertain=uncertain;}}
-function privateKey(){let fd;try{fd=fs.openSync(path.join(os.homedir(),'.config/harmonika/harmonika-api-key'),fs.constants.O_RDONLY|(fs.constants.O_NOFOLLOW||0)|(fs.constants.O_NONBLOCK||0));const s=fs.fstatSync(fd);if(!s.isFile()||(process.platform!=='win32'&&((s.mode&0o077)||(typeof process.getuid==='function'&&s.uid!==process.getuid()))))throw new Error();const k=fs.readFileSync(fd,'utf8').trim();if(!/^hai_[A-Za-z0-9_]{16,240}$/.test(k))throw new Error();return k;}catch{throw new MediaError('media_key_unavailable');}finally{if(fd!==undefined)fs.closeSync(fd);}}
+function privateKey(){if(process.env.HARMONIKA_API_KEY){const k=process.env.HARMONIKA_API_KEY.trim();if(!/^hai_[A-Za-z0-9_]{16,240}$/.test(k))throw new MediaError('media_key_unavailable');return k;}let fd;try{fd=fs.openSync(path.join(process.env.HARMONIKA_GLOBAL_CONFIG||process.env.HARMONIKA_CONFIG_DIR||path.join(os.homedir(),'.config/harmonika'),'harmonika-api-key'),fs.constants.O_RDONLY|(fs.constants.O_NOFOLLOW||0)|(fs.constants.O_NONBLOCK||0));const s=fs.fstatSync(fd);if(!s.isFile()||(process.platform!=='win32'&&((s.mode&0o077)||(typeof process.getuid==='function'&&s.uid!==process.getuid()))))throw new Error();const k=fs.readFileSync(fd,'utf8').trim();if(!/^hai_[A-Za-z0-9_]{16,240}$/.test(k))throw new Error();return k;}catch{throw new MediaError('media_key_unavailable');}finally{if(fd!==undefined)fs.closeSync(fd);}}
 function readDeviceHeaders(){
  const out={};
  let devId=process.env.HARMONIKA_DEVICE_ID||'';
  if(!/^dev_[a-f0-9]{32}$/.test(devId)){
   try{
-   const v=fs.readFileSync(path.join(os.homedir(),'.config/harmonika/device-id'),'utf8').trim();
+   const v=fs.readFileSync(path.join(process.env.HARMONIKA_GLOBAL_CONFIG||process.env.HARMONIKA_CONFIG_DIR||path.join(os.homedir(),'.config/harmonika'),'device-id'),'utf8').trim();
    if(/^dev_[a-f0-9]{32}$/.test(v))devId=v;
   }catch{}
  }

@@ -40,6 +40,11 @@ if (Test-Path (Join-Path $InstallSrc '.git')) {
     & $GitCmd.Source clone https://github.com/ffanu/harmonika-tui.git $InstallSrc
     if ($LASTEXITCODE -ne 0) { throw 'Clone source gagal.' }
 }
+$Interactive = $env:HARMONIKA_NONINTERACTIVE -ne '1' -and -not [Console]::IsInputRedirected
+if ($Interactive) {
+    & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\license.py') ensure
+    if ($LASTEXITCODE -ne 0) { throw 'Aktivasi lisensi belum selesai.' }
+}
 & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\install.py')
 if ($LASTEXITCODE -ne 0) { throw 'Instalasi Harmonika gagal; lihat diagnostik di atas.' }
 # Per-user PATH only. Do not alter Defender settings, System32 or shell profiles.
@@ -51,9 +56,8 @@ if (-not $env:HARMONIKA_BIN_DIR) {
     }
 }
 $KeyFile = Join-Path $ConfigDir 'harmonika-api-key'
-if ($env:HARMONIKA_NONINTERACTIVE -ne '1' -and -not [Console]::IsInputRedirected -and -not (Test-Path $KeyFile)) {
-    # The key is entered privately inside Python, never passed in process arguments.
-    & $PyCmd.Source @PyArgs (Join-Path $InstallSrc 'runtime\license.py') activate
-    if ($LASTEXITCODE -ne 0) { throw 'Aktivasi belum selesai. Jalankan harmonika activate untuk mencoba kembali.' }
+if ($Interactive -and $env:HARMONIKA_LAUNCH_AFTER_INSTALL -ne '0') {
+    & (Join-Path $BinDir 'harmonika.cmd')
+    if ($LASTEXITCODE -ne 0) { throw 'Terminal belum berhasil dibuka; jalankan harmonika doctor.' }
 }
 Write-Host 'Instalasi selesai. Jalankan harmonika, atau harmonika activate untuk aktivasi lisensi.' -ForegroundColor Green

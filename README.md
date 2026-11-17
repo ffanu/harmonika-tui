@@ -10,7 +10,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 ![Terminal baru Harmonika](docs/assets/harmonika-workbench.gif)
 
-**Terminal baru v1.0.1** (engine opencode rebrand) — tanya apa saja · `ctrl+p` perintah · `shift+tab` agent · MCP terpasang
+**Terminal baru v1.0.2** (engine opencode rebrand) — tanya apa saja · `ctrl+p` perintah · `shift+tab` agent · MCP terpasang
 
 [![Demo MP4](https://img.shields.io/badge/▶_Demo-video%20MP4-17a2b8?style=flat-square)](docs/assets/harmonika-demo.mp4)
 [![Screenshot](https://img.shields.io/badge/Screenshot-terminal-6f42c1?style=flat-square)](docs/assets/harmonika-terminal.png)
@@ -18,7 +18,7 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 [![Status rilis](https://img.shields.io/badge/status-rilis-blue?style=flat-square)](docs/STATUS.md)
 
 ![Engine](https://img.shields.io/badge/context-872.000%20token-8ec07c?style=flat-square)
-![Skills](https://img.shields.io/badge/skills-25%20resmi-fabd2f?style=flat-square)
+![Skills](https://img.shields.io/badge/skills-36%20terkemas-fabd2f?style=flat-square)
 ![Update](https://img.shields.io/badge/update-Ed25519%20signed-83a598?style=flat-square)
 ![Key](https://img.shields.io/badge/lisensi-1%20key%201%20perangkat-d3869b?style=flat-square)
 
@@ -96,14 +96,61 @@ Key diperoleh dari [@hmsapi_bot](https://t.me/hmsapi_bot); kebijakan 1 key = 1 p
 
 `mcp_preflight_failed` pada paket lama bisa disebabkan SDK tidak terpasang ketika npm tidak tersedia.
 Installer baru memakai bundle bertanda tangan dan tetap menolak signature, checksum, atau protokol yang rusak.
-Komponen SSH lokal di macOS/Linux membutuhkan Python venv/pip; kegagalan komponen opsional ini
-terlihat di `doctor` dan tidak menggagalkan core terminal. `HARMONIKA_INSTALL_SSH=1` mewajibkan
-komponen SSH; `HARMONIKA_INSTALL_SSH=0` melewatinya. Browser/dokumen memiliki dependensi fitur terpisah.
+Dependensi dokumen dan SSH dipasang otomatis dalam Python venv privat pada platform yang didukung.
+Kegagalan dependensi fitur terlihat di `harmonika features`; pemasangan ulang melanjutkan setup.
+`HARMONIKA_INSTALL_FEATURES=0` secara eksplisit memilih core saja. Pada paket legacy,
+`HARMONIKA_INSTALL_SSH=1` mewajibkan setup SSH terpisah dan `HARMONIKA_INSTALL_SSH=0` melewatinya.
 Instalasi Windows memakai folder pengguna dan tidak mengubah Defender atau System32.
 
 ---
 
-## 🖥️ Terminal Baru (engine 1.0.1)
+## Profil agent portabel
+
+Installer memasang profil agent yang sama untuk macOS arm64/x64, Linux
+arm64/x64, dan Windows x64. Binary native, ASCII, brand, dan riwayat sesi
+pengguna dipertahankan. Platform/arsitektur di luar tabel dukungan ditolak
+secara jelas; tidak ada klaim semua OS dapat menjalankan kontrol OS yang sama.
+
+| Komponen | Pemasangan dan batas |
+|---|---|
+| Skill panduan | 36 folder dipasang dan didaftarkan ke `skills` native |
+| Agent v3.2 | Checkpoint, rekonsiliasi job dan verifikasi hasil; `harmonika agent-v32 --help` |
+| Kontrol native | F8 pekerjaan, F9 memori, F10 engine, Shift+F10 koneksi |
+| Context guard | Batas transport dan pasangan tool/result; bukan klaim model 1M |
+| MCP Mac yang portabel | Operasi kode/tes/OS, visualisasi, browser, network, memori dan terjemahan |
+| Dokumen/SSH/browser | Dependensi otomatis di runtime privat per pengguna, tanpa pip/npm global |
+| Media/OCR/video | Konektor gateway Harmonika; keberhasilan tetap bergantung pada layanan/model dan lisensi |
+
+Tidak diperlukan npm untuk instalasi. Runtime browser memakai dependensi
+Playwright terkunci dan Node privat bila Node sistem terlalu lama; browser
+Chromium diunduh dari distribusi resminya. Runtime dokumen/SSH memakai venv
+terpisah. Internet, ruang disk dan library OS yang dibutuhkan tetap diperlukan.
+Jika layanan eksternal atau library sistem belum siap, hasilnya **degraded**
+dengan diagnostik; tersedianya nama tool tidak dianggap bukti berhasil.
+
+Cek hasil pemasangan:
+
+```sh
+harmonika doctor
+harmonika features
+harmonika agent-v32 --help
+```
+
+`HARMONIKA_INSTALL_FEATURES=0` adalah pilihan eksplisit untuk instalasi core
+saja; default memasang dependensi fitur. Installer ulang dapat melanjutkan
+penyiapan yang belum selesai. SSH dan akun browser memakai konfigurasi masing-
+masing perangkat. Akses server, cookie, API key, memori pribadi dan riwayat chat
+MacBook pengembang **tidak masuk paket GitHub**. Migrasi konektor lama hanya
+berlaku lokal pada perangkat pemilik dan tetap disimpan privat.
+
+Kontrol Chrome macOS memakai mekanisme macOS; Linux/Windows memakai runtime
+browser/CDP atau target remote yang dikonfigurasi. Perintah administrasi POSIX
+lokal dan Xvfb tidak dipaksakan berjalan di Windows. Sandbox v3.2 berbasis
+`sandbox-exec` khusus macOS; platform lain menolak flag tersebut secara eksplisit.
+
+---
+
+## 🖥️ Terminal Baru (engine 1.0.2)
 
 Ruang kerja terminal generasi baru Harmonika — tampilan di GIF atas:
 
@@ -250,7 +297,7 @@ Teruji pada **Mac Apple Silicon**: tool MCP, pembatasan path, branding, dokumen,
 - PDF: baca/buat/merge/rotasi/watermark; ekstraksi **20 hlm / 30.000 karakter / 10 MiB**; scan/OCR PDF belum didukung
 - Audio: **120 detik pertama** · Video: **6 frame sampel**
 - Dokumen Office: konten dasar (bukan pelestarian layout kompleks/makro)
-- Instalasi baru, wrapper `doctor`, discovery MCP, serta penolakan paket rusak: **lulus di macOS arm64/x64, Linux arm64/x64, dan Windows x64** ([CI](https://github.com/ffanu/harmonika-tui/actions/runs/44038269383)). Linux juga diuji dengan Node 18 tanpa npm. Fitur opsional mempunyai dependensi dan pengujian terpisah.
+- Baseline core: instalasi baru, wrapper `doctor`, discovery MCP, dan penolakan paket rusak lulus pada lima platform ([CI baseline](https://github.com/ffanu/harmonika-tui/actions/runs/44038269383)). Profil agent lengkap menambahkan pengujian dependensi, pemuatan plugin native, dan ACL Windows dalam [matrix CI terbaru](https://github.com/ffanu/harmonika-tui/actions/workflows/installer-platforms.yml); hasil baseline bukan bukti fitur baru telah lulus di semua platform.
 
 [Status terperinci & penghalang publik →](docs/STATUS.md)
 

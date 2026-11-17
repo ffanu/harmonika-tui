@@ -58,6 +58,25 @@ def build(release):
     copy_config_transaction_tools(tools)
     copy_browser_macro_tools(tools)
     copy_zimbra_tools(tools)
+    # Public source only: never package an installed owner's configuration,
+    # checkpoint, account, browser profile, projection state or credentials.
+    for source in (SOURCE/'runtime/tools').iterdir():
+        if source.is_file() and source.suffix in {'.py','.js','.cjs','.json'}:
+            shutil.copy2(source,tools/source.name)
+    agent=tools/'agent-v32';agent.mkdir()
+    for name in ('agent-v32.js','agent-state.cjs','agent-http.cjs','agent-platform.cjs','agent-platform.py'):
+        shutil.copy2(SOURCE/'tools'/name,agent/name)
+    for name in ('tui-control','context-capacity'):
+        shutil.copytree(SOURCE/'runtime'/name,tools/'plugins'/name,
+                        ignore=shutil.ignore_patterns('__pycache__','*.pyc','projection-state.json'))
+    shutil.copytree(SOURCE/'runtime/video-control',tools/'video-control',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+    for name in ('agent_features.py','feature_setup.py','AGENT-INSTRUCTIONS.md','browser-package.json','browser-package-lock.json','documents-requirements.lock'):
+        shutil.copy2(SOURCE/'runtime'/name,tools/name)
+    shutil.copy2(SOURCE/'runtime/license.py',agent/'license.py')
+    skill_names=sorted(p.parent.name for p in (SOURCE/'skills').glob('*/SKILL.md'))
+    (tools/'feature-manifest.json').write_text(json.dumps({'schema_version':1,'profile':'agent-parity-v1',
+        'agent_runtime':'3.2.1','skills':skill_names,'plugins':['tui-control','context-capacity'],
+        'mcp':['harmonika','harmonika_agent','harmonika_video','harmonika_ssh'],'private_configuration_included':False},indent=2)+'\n')
     shutil.copy2(SOURCE/'runtime/tools/project-file-guard.cjs',tools/'project-file-guard.cjs')
     shutil.copy2(SOURCE/'runtime/protocol-check.cjs',tools/'protocol-check.cjs')
     shutil.copy2(SOURCE/'runtime/harmonika.py',tools/'harmonika.py')
@@ -85,7 +104,7 @@ def build(release):
         'Perintah harmonika zip untuk auto-bundle proyek ke Downloads/harmonika-ai/zip'
     ]
     upstream_version=os.environ.get('HARMONIKA_UPSTREAM_VERSION','0.98.1')
-    manifest={'release':release,'product':'Harmonika Terminal','upstream_version':upstream_version,'platform':'darwin-arm64',
+    manifest={'release':release,'product':'Harmonika Terminal','upstream_version':upstream_version,'platform':'darwin-arm64','feature_profile':'agent-parity-v1',
       'files':files,'automatic_update':False,'binary_included':False,'release_notes':release_notes}
     platform_manifest=os.environ.get('HARMONIKA_PLATFORM_MANIFEST')
     if platform_manifest:

@@ -20,11 +20,14 @@ def wait_for_discovery(fetch,timeout=30.0,clock=time.monotonic,sleep=time.sleep)
 
 def request(method,path,body=None,idempotency_key=None,*,base=BASE,timeout=65):
  if base not in (BASE,"https://chat.harmonika.id/v1/mobile-builder","https://chat.harmonika.id/v1/core"):raise ValueError("unsupported_endpoint")
- fd=os.open(Path.home()/'.config/harmonika/harmonika-api-key',os.O_RDONLY|getattr(os,'O_NOFOLLOW',0)|getattr(os,'O_NONBLOCK',0))
- with os.fdopen(fd) as f:
-  s=os.fstat(f.fileno())
-  if not stat.S_ISREG(s.st_mode) or (os.name!='nt' and (s.st_uid!=os.getuid() or s.st_mode&0o077)):raise ValueError('unsafe_key_file')
-  key=f.read(256).strip()
+ config=Path(os.environ.get('HARMONIKA_GLOBAL_CONFIG') or os.environ.get('HARMONIKA_CONFIG_DIR') or str(Path.home()/'.config/harmonika'))
+ key=os.environ.get('HARMONIKA_API_KEY','').strip()
+ if not key:
+  fd=os.open(config/'harmonika-api-key',os.O_RDONLY|getattr(os,'O_NOFOLLOW',0)|getattr(os,'O_NONBLOCK',0))
+  with os.fdopen(fd) as f:
+   s=os.fstat(f.fileno())
+   if not stat.S_ISREG(s.st_mode) or (os.name!='nt' and (s.st_uid!=os.getuid() or s.st_mode&0o077)):raise ValueError('unsafe_key_file')
+   key=f.read(256).strip()
  if not key.startswith('hai_') or len(key)>200:raise ValueError('invalid_key_file')
  if method=='POST' and path=='/invoke' and base==BASE and body is not None and not body.get('context'):
   # Retry only read-only status checks. Never retry a POST/tool execution.
@@ -32,6 +35,8 @@ def request(method,path,body=None,idempotency_key=None,*,base=BASE,timeout=65):
  payload=json.dumps(body,ensure_ascii=False).encode() if body is not None else None
  if payload and len(payload)>1048576:raise ValueError('input_too_large')
  headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'}
+ device=os.environ.get('HARMONIKA_DEVICE_ID','').strip()
+ if device.startswith('dev_') and len(device)==36:headers['X-Harmonika-Device-ID']=device
  if method=='POST':
   from uuid import uuid4
   headers['Idempotency-Key']=idempotency_key or str(uuid4())

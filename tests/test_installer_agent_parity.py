@@ -134,6 +134,23 @@ class InstallerAgentParity(unittest.TestCase):
         self.assertEqual(first, {name: (self.config / name).read_bytes() for name in first})
         self.assertEqual(self.read(self.config / 'opencode.json')['skills'], ['custom-skills', 'https://example.invalid/skills', str(self.root / 'current' / 'skills')])
 
+    def test_stale_native_server_cannot_shadow_managed_companion(self):
+        operator={'command':['operator-server'],'disabled':False}
+        self.write(self.config/'opencode.json',{'mcp':{'servers':{
+            'harmonika_agent':{'command':['old-missing-python'],'disabled':True},
+            'harmonika_video':{'command':['old-video'],'disabled':True},'operator':operator}}})
+        self.configure()
+        mcp=self.read(self.config/'opencode.json')['mcp']
+        self.assertEqual(mcp['servers'],{'operator':operator})
+        self.assertTrue(mcp['harmonika_agent']['enabled'])
+
+    def test_bundled_ssh_companion_is_registered_and_removed_on_legacy_rollback(self):
+        (self.tools/'ssh-mcp.cjs').write_text('// fixture\n')
+        self.configure()
+        self.assertTrue(features.status(self.root,self.config)['mcp_servers_registered']['harmonika_ssh'])
+        features.remove_managed_companions(self.root,self.config)
+        self.assertNotIn('harmonika_ssh',self.read(self.config/'opencode.json')['mcp'])
+
     def test_configuration_file_symlink_is_rejected_without_touching_destination(self):
         outside = self.home / 'operator.json'
         outside.write_bytes(b'{"operator":"preserve"}')
@@ -142,6 +159,18 @@ class InstallerAgentParity(unittest.TestCase):
             self.configure()
         self.assertEqual(outside.read_bytes(), b'{"operator":"preserve"}')
         self.assertTrue((self.config / 'opencode.json').is_symlink())
+
+    def test_legacy_rollback_removes_only_managed_companions(self):
+        custom={'package':'operator-plugin','options':{'keep':True}}
+        self.write(self.config/'opencode.json',{'plugins':[custom],'mcp':{'operator':{'command':['custom']}}})
+        self.write(self.config/'cli.json',{'plugins':[custom]})
+        self.configure()
+        features.remove_managed_companions(self.root,self.config)
+        native=self.read(self.config/'opencode.json')
+        self.assertEqual(native['plugins'],[custom])
+        self.assertEqual(native['mcp'],{'operator':{'command':['custom']}})
+        self.assertEqual(self.read(self.config/'cli.json')['plugins'],[custom])
+        self.assertIn(str(self.root/'current'/'skills'),native['skills'])
 
     def test_cli_symlink_is_rejected_before_writing_native_configuration(self):
         outside = self.home / 'operator-cli.json'

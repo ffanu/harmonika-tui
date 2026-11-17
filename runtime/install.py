@@ -18,6 +18,8 @@ import zipfile
 SOURCE=Path(__file__).resolve().parent.parent
 spec=importlib.util.spec_from_file_location('launcher',SOURCE/'runtime/harmonika.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 ROOT=m.ROOT
+feature_spec=importlib.util.spec_from_file_location('installer_agent_features',SOURCE/'runtime/agent_features.py')
+agent_features=importlib.util.module_from_spec(feature_spec);feature_spec.loader.exec_module(agent_features)
 BINARY=Path(os.environ.get('HARMONIKA_BINARY_SOURCE',str(ROOT/'current'/m.bin_name())))
 ASSETS_BASE='https://chat.harmonika.id/assets/harmonika-terminal'
 PUBLIC_KEY_SHA256='0d07aa02cdde89cb447713c6879747ba0d80bd2b69b7a12d8c618f325a62bea5'
@@ -147,7 +149,7 @@ def ensure_default_config(root=ROOT):
     engine_cfg.setdefault('snapshots',True)
     engine_cfg['provider']=dict(engine_cfg.get('provider') or {})
     engine_cfg['provider']['harmonika']={'name':'Harmonika Ai','npm':'@ai-sdk/openai-compatible','options':{'baseURL':'https://chat.harmonika.id/v1','apiKey':'{env:HARMONIKA_API_KEY}','headers':{'X-Harmonika-Device-ID':dev_id,'X-Harmonika-Device-Name':dev_nm}},'models':engine_models}
-    engine_cfg['mcp']={'harmonika':{'type':'local','command':[m.NODE,str(root/'current/tools/mcp-server.cjs')],'enabled':True}}
+    engine_cfg.setdefault('mcp',{})['harmonika']={'type':'local','command':[m.NODE,str(root/'current/tools/mcp-server.cjs')],'enabled':True}
     engine_cfg.setdefault('permission',{'read':'allow','edit':'allow','glob':'allow','grep':'allow','list':'allow','bash':'allow','task':'allow','todowrite':'allow','question':'allow','webfetch':'allow','websearch':'allow','lsp':'allow','skill':'allow','external_directory':{'*':'allow'}})
     engine_cfg_file.write_text(json.dumps(engine_cfg,indent=2)+'\n', encoding='utf-8')
     # A previously started shared server can retain upstream providers even
@@ -165,6 +167,8 @@ def ensure_default_config(root=ROOT):
     if cfg_file.exists():shutil.copy2(cfg_file,crush_alias)
     m.ensure_themes(cfg_dir,share_dir)
     m.ensure_harmonika_downloads(cfg_dir)
+    python=root/'python-runtime'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+    agent_features.configure(root,cfg_dir,str(python) if python.is_file() else sys.executable,m.NODE)
 
 def fetch_remote_bootstrap(root=ROOT):
     ensure_public_key(root)
@@ -282,6 +286,9 @@ def write_posix_wrappers(root=ROOT):
 
 def _needs_binary_rebrand(selected):
     try:
+        manifest=m.verify_envelope((selected/'release.json').read_bytes(),ROOT)
+        if manifest.get('upstream_version','').startswith('1.') and 'binary_hashes' in manifest:
+            return False  # active() already validated the signed native checksum.
         bpath=selected/m.bin_name()
         if not bpath.exists() and (selected/'harmonika').exists():bpath=selected/'harmonika'
         if not bpath.is_file():return True
@@ -348,7 +355,9 @@ def main(package=None):
                     if tmp_bin is not None:
                         tmp_bin.unlink(missing_ok=True)
         except Exception:
-            pass
+            raise ValueError('runtime_update_failed') from None
+        agent_features.setup(ROOT)
+        ensure_default_config(ROOT)
         print(json.dumps(m.doctor(),indent=2))
         return
     # Clean up any broken partial 'current' pointer before fresh bootstrap
@@ -370,6 +379,8 @@ def main(package=None):
         try:
             ensure_default_config(ROOT)
             activate(stage,manifest)
+            agent_features.setup(ROOT)
+            ensure_default_config(ROOT)
         finally:
             if stage.exists():shutil.rmtree(stage)
     finally:
@@ -407,7 +418,7 @@ def activate(stage,manifest):
     js="const fs=require('fs'),{Ajv2020}=require(process.argv[2]);const v=new Ajv2020({strict:false,validateFormats:false}).compile(JSON.parse(fs.readFileSync(process.argv[1])));if(!v(JSON.parse(fs.readFileSync(0,'utf8'))))process.exit(1);"
     if os.name == 'posix' and (stage/'tools/ssh-mcp.cjs').is_file() and os.environ.get('HARMONIKA_INSTALL_SSH','auto')!='0':
         try:
-            if ensure_ssh_dependencies(stage):
+            if (manifest.get('feature_profile') and os.environ.get('HARMONIKA_INSTALL_FEATURES')!='0') or ensure_ssh_dependencies(stage):
                 config.setdefault('mcp',{})['harmonika-ssh']={'type':'stdio','command':str(m.NODE),'args':[str(ROOT/'current/tools/ssh-mcp.cjs')],'timeout':190}
         except (OSError,subprocess.SubprocessError):
             if os.environ.get('HARMONIKA_INSTALL_SSH')=='1':raise
