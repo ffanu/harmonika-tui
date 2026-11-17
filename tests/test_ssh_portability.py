@@ -88,6 +88,14 @@ class NativePrivateFiles(unittest.TestCase):
         if os.name=='nt':
             self.user=files.windows_security(self.file)['current_user']
             self.icacls('/inheritance:r', '/grant:r', '*'+self.user+':F', '*S-1-5-18:F', '*S-1-5-32-544:F')
+            # Temp files can retain an explicit logon/default-DACL ACE even
+            # after inheritance is removed. Restrict only this synthetic file.
+            trusted=files.TRUSTED_SYSTEM_SIDS | {self.user}
+            untrusted={entry['sid'] for entry in files.windows_security(self.file)['entries']
+                       if entry['type']=='allow' and entry['sid'] not in trusted}
+            for sid in sorted(untrusted):self.icacls('/remove:g','*'+sid)
+            actual=files.windows_security(self.file)
+            self.assertTrue(files.acl_is_private(actual),json.dumps(acl_mechanics(actual)))
 
     def icacls(self, *args):
         result=subprocess.run(['icacls.exe', str(self.file), *args],capture_output=True,timeout=10)
