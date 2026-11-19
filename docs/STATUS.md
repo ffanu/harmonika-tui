@@ -3,6 +3,25 @@
 Status terbaru dicatat di awal; entri berikut menyimpan hasil audit historis.
 
 
+## Kebijakan agent bersama — 19 November 2026
+
+- Empat diagnostic membedakan izin, referensi privat, kesiapan tool dan scope.
+  Diagnosis tidak memberikan izin; firewall, scope bertanda tangan dan bukti
+  penyelesaian tetap berlaku. Mutasi unknown tidak boleh diulang.
+- Panduan hot-read aktif di backend tanpa restart; PID layanan tetap. Adapter
+  HTTP terstruktur sudah lulus 201 tes tanpa gagal/skip pada staging backend,
+  tetapi masih menunggu izin restart hanya `harmonika-ai.service`.
+- TUI Mac sudah memakai signed `2026.11.19.2`: 229 berkas terverifikasi,
+  doctor/MCP/Chromium sehat, lisensi dan permission executor tidak berubah.
+  Sesi yang berjalan tidak dihentikan; proses TUI berikutnya memakai runtime baru.
+- Dua Q&A gateway aktual menjawab perbedaan unavailable/denied serta batas izin
+  restart dengan benar. Review menemukan dan memperbaiki alias izin berstatus
+  503 serta panduan SSH yang tidak sesuai kemampuan/izin konektor.
+- Fresh install lokal gagal dua kali pada unduhan Chromium; binary/plugin/MCP
+  dan receipt native tetap lulus. Ini bukan klaim fresh-install penuh lulus.
+  Seluruh enam job CI Windows/Linux/macOS lulus; rilis publik belum diterbitkan.
+- [Panduan](AGENT-POLICY.md), [bukti dan batas](AGENT-POLICY-AUDIT-20261119.json).
+
 ## Shared operations backend — 18 November 2026
 
 - Delapan area tools dibangun dengan 16 ID `operations.*`; MCP `engine_operations`

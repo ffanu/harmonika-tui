@@ -1,0 +1,225 @@
+{
+  "date": "2026-11-19",
+  "source_commit": "f8a890f1be644dc2190559b101c077fd9acb4273",
+  "policy_schema_version": "1",
+  "canonical_contract": "runtime/tools/agent-policy.json",
+  "categories": [
+    "permission_required",
+    "credential_missing",
+    "tool_unavailable",
+    "scope_denied"
+  ],
+  "authority": "diagnostic_only",
+  "executor_permissions_changed": false,
+  "new_approval_ledger": false,
+  "firewall_and_signed_scope_preserved": true,
+  "user_processes_signaled": false,
+  "activation": {
+    "hot_guidance": {
+      "hot_guidance_active": true,
+      "version": "1",
+      "bytes": 11998,
+      "hash": "1e58d55dffda3ab3594f884da05325c24c331cf334d29af522896e2352668abd",
+      "backup": "/var/backups/harmonika-agent-policy/20261119T133750Z",
+      "all_service_pids_unchanged": true,
+      "services_restarted": false,
+      "private_credentials_exposed": false,
+      "structured_http_adapter_active": false
+    },
+    "http_error_adapter": "staged_pending_explicit_single_service_restart",
+    "local_tui": {
+      "installed": true,
+      "release": "2026.11.19.2",
+      "doctor": {
+        "ok": true,
+        "release": "2026.11.19.2",
+        "binary_verified": true,
+        "runtime_verified": true,
+        "mcp_protocol": "ok",
+        "skills": 36,
+        "browser": {
+          "chromium": true
+        }
+      },
+      "executor_permissions_unchanged": true,
+      "license_key_unchanged": true,
+      "user_processes_signaled": false,
+      "new_sessions_use_new_runtime": true,
+      "existing_sessions_need_no_forced_restart": true,
+      "public_release_published": false
+    },
+    "public_signed_release": "not_published"
+  },
+  "verification": {
+    "backend_staged": {
+      "passed": 201,
+      "failed": 0,
+      "skipped": 0,
+      "private_dependencies_used": true,
+      "actual_credentials_or_model_calls_in_unit_tests": false
+    },
+    "tui_worker": {
+      "passed": 69,
+      "failed": 0,
+      "skipped": 0
+    },
+    "integrated_policy_tui_receipt": {
+      "passed": 105,
+      "failed": 0,
+      "skipped": 0
+    },
+    "live_gateway_synthetic_q_and_a": {
+      "synthetic_q_and_a_only": true,
+      "actual_live_gateway": true,
+      "rows": [
+        {
+          "case": "availability",
+          "http": 200,
+          "tool_calls": 0,
+          "answer": "`tool_engine_unavailable` berarti alat atau mesin eksekusinya tidak tersedia, sehingga tindakan tidak bisa dijalankan melalui alat tersebut.\n\nTindakan dilarang karena scope berarti tindakan berada di luar batas izin yang berlaku, meskipun alatnya tersedia.\n\nJadi, **tool tidak tersedia tidak otomatis berarti pengguna tidak memberi izin**. Ketersediaan alat dan izin tindakan adalah dua hal berbeda; izin juga tidak otomatis membuat alat tersedia.",
+          "error": null,
+          "latency_ms": 6201
+        },
+        {
+          "case": "scoped_approval",
+          "http": 200,
+          "tool_calls": 0,
+          "answer": "Tidak, izin restart layanan portal-uji hanya berlaku untuk layanan tersebut. Menghentikan terminal pengguna atau me-restart layanan lain memerlukan izin terpisah yang jelas.",
+          "error": null,
+          "latency_ms": 5978
+        }
+      ]
+    },
+    "installed_mcp_canary": {
+      "actual_installed_runtime": true,
+      "release": "2026.11.19.2",
+      "rows": [
+        {
+          "code": "permission_required",
+          "category": "permission_required",
+          "grants_permission": false,
+          "retry_safe": false,
+          "recovery": "observe_existing_job",
+          "is_error": true
+        },
+        {
+          "code": "credential_missing",
+          "category": "credential_missing",
+          "grants_permission": false,
+          "retry_safe": false,
+          "recovery": "observe_existing_job",
+          "is_error": true
+        },
+        {
+          "code": "tool_engine_unavailable",
+          "category": "tool_unavailable",
+          "grants_permission": false,
+          "retry_safe": false,
+          "recovery": "observe_existing_job",
+          "is_error": true
+        },
+        {
+          "code": "scope_denied",
+          "category": "scope_denied",
+          "grants_permission": false,
+          "retry_safe": false,
+          "recovery": "observe_existing_job",
+          "is_error": true
+        }
+      ]
+    },
+    "signed_runtime": {
+      "shared_policy_matches_current_source": true,
+      "operations_tools_match_current_source": true,
+      "operations_catalog_size": 16,
+      "release": "2026.11.19.2",
+      "source_commit": "f8a890f1be644dc2190559b101c077fd9acb4273",
+      "signature_verified": true,
+      "signed_file_count": 229,
+      "all_file_hashes_verified": true,
+      "new_receipt_bridge_matches_source": true,
+      "zip_sha256": "e5a74eafb0ca3cd9cd9d6a3eed172299e202c084a6928dad85e3a0b9593d33b9",
+      "zip_size_bytes": 1614414,
+      "public_key_pin_verified": true,
+      "catalog_verified": true,
+      "native_binary_version": "1.0.2",
+      "new_binary_generated": false
+    },
+    "fresh_mac_installer_attempts": [
+      {
+        "passed": false,
+        "error": "browser_feature_runtime_not_ready",
+        "browser_detail": "chromium_download_unavailable",
+        "native_binary_plugins_mcp_receipts_passed": true
+      },
+      {
+        "passed": false,
+        "error": "browser_feature_runtime_not_ready",
+        "browser_detail": "chromium_download_unavailable",
+        "native_binary_plugins_mcp_receipts_passed": true
+      }
+    ],
+    "fresh_mac_limit": "Fresh-install browser dependency download did not complete in either local attempt. No TLS relaxation or copied cache was used to claim a fresh pass. Existing installed Chromium and post-update doctor remain healthy."
+  },
+  "qa": {
+    "availability_vs_authorization": "Codex reviewed the actual reply: correctly distinguishes tool outage from scope denial.",
+    "scope_of_approval": "Codex reviewed actual reply: one named service approval does not cover terminals or other services.",
+    "limit": "Two synthetic conversations are not universal natural-language authorization verification."
+  },
+  "review_findings_fixed": [
+    "canonical permission/scope aliases no longer return retryable HTTP503 in the staged adapter",
+    "shared SSH guidance follows registered connector/local policy rather than assuming one authentication method everywhere",
+    "local Mac SSH instructions aligned with user-provided key-only policy",
+    "raw exception strings cannot enter new error envelope or technical logs",
+    "unknown mutation state retains existing identity/retry flags and observe-only recovery"
+  ],
+  "github": {
+    "code_pushed": true,
+    "run_id": 44535643074,
+    "matrix_state": "success",
+    "url": "https://github.com/ffanu/harmonika-tui/actions/runs/44535643074",
+    "jobs": [
+      {
+        "id": 135600193253,
+        "name": "darwin-arm64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 135600193797,
+        "name": "darwin-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 135600193904,
+        "name": "windows-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 135600193924,
+        "name": "linux-x64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 135600194053,
+        "name": "linux-arm64 / Node 22",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 135600194100,
+        "name": "linux-x64 / Node 18",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "contributions": {
+    "codex": "backend, TUI worker, tests, two independent code review findings, integration and hot guidance/local runtime activation",
+    "opencode": "read-only review attempted; provider APIError, not counted as completed review",
+    "claude": "not invoked"
+  }
+}
