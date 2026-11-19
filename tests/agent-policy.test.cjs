@@ -59,3 +59,20 @@ test('hot workflow update preserves all unrelated rules and stays inside the act
 test('hot policy rejects a workflow too large without truncating its protected clauses',()=>{
  const value='REMOTE ENGINEERING WORKFLOW vfixture\n'+'x'.repeat(12000)+previous.GUIDE;assert.throws(()=>upgrade.upgradeInstructions(value),/workflow_budget_exceeded/);
 });
+
+test('canonical and alias permission/reference/scope blockers cannot masquerade as retryable HTTP outages',()=>{
+ for(const [category,group] of Object.entries(policy.contract.blockers))for(const code of group.codes){
+  const value=errors.response(code);assert.equal(value.body.diagnostic.category,category);
+  assert.equal(value.status,category==='tool_unavailable'?503:category==='credential_missing'?400:403);
+  if(category==='scope_denied'||category==='permission_required')assert.equal(value.body.error.type,'permission_error');
+  assert.equal(value.body.diagnostic.retry_mutation,false);
+ }
+});
+
+test('previous operator footer upgrades by exact hash without imposing an unsupported global SSH authentication claim',()=>{
+ const prior=policy.hotInstructions().replace('SSH uses registered aliases.','SSH uses key aliases.')+'\n';
+ const prefix='REMOTE ENGINEERING WORKFLOW vfixture\nKeep every preceding operator rule.\n';
+ assert.equal(upgrade.upgradeInstructions(prefix+prior),prefix+policy.hotInstructions()+'\n');
+ assert.throws(()=>upgrade.upgradeInstructions(prefix+prior.replace('SSH uses','SSH always uses')));
+ assert.match(policy.instructions(),/configured and permitted by the connector and local policy/);
+});
