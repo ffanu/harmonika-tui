@@ -28,6 +28,8 @@ on:
       - 'tests/native-test-receipts.test.cjs'
       - 'tests/agent-v32*.test.cjs'
       - 'tests/operations*'
+      - 'tests/agent-policy.test.cjs'
+      - 'tests/policy-tui.test.cjs'
       - 'tests/test_operations*'
       - 'tests/operations_engine/**'
       - 'tests/test_shared_bindings.py'
@@ -59,6 +61,8 @@ on:
       - 'tests/native-test-receipts.test.cjs'
       - 'tests/agent-v32*.test.cjs'
       - 'tests/operations*'
+      - 'tests/agent-policy.test.cjs'
+      - 'tests/policy-tui.test.cjs'
       - 'tests/test_operations*'
       - 'tests/operations_engine/**'
       - 'tests/test_shared_bindings.py'
@@ -147,7 +151,7 @@ jobs:
         run: |
           set -e
           python -m unittest discover -s tests -p test_operations_client.py -v
-          node --test tests/operations-tools.test.cjs
+          node --test tests/operations-tools.test.cjs tests/policy-tui.test.cjs
       - name: Linux operations backend regressions
         if: matrix.platform == 'linux-x64' && matrix.node == '22'
         shell: bash
@@ -160,7 +164,7 @@ jobs:
       - name: Backend receipt validation regressions
         if: runner.os != 'Windows'
         shell: bash
-        run: node --test tests/agent-native-receipts.test.cjs tests/native-test-receipts.test.cjs tests/decision-diagnostics.test.cjs tests/task-continuity.test.cjs tests/verification-scope.test.cjs tests/operations-receipts.test.cjs
+        run: node --test tests/agent-native-receipts.test.cjs tests/native-test-receipts.test.cjs tests/decision-diagnostics.test.cjs tests/task-continuity.test.cjs tests/verification-scope.test.cjs tests/operations-receipts.test.cjs tests/agent-policy.test.cjs
       - name: Build current source and install without npm
         shell: bash
         run: python tests/installer_platform_smoke.py --work-root "$RUNNER_TEMP" --expected-platform "${{ matrix.platform }}" --output "installer-smoke-${{ matrix.platform }}-node${{ matrix.node }}.json"

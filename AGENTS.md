@@ -529,3 +529,13 @@
   external scanners/browser only on registered snapshots with fixed toolchains.
 - Service and production activation use hash baselines, backup/CAS, real canaries
   and permission-aware idle restarts. Never signal unrelated/user processes.
+
+## Shared agent boundary diagnostics
+- Canonical policy is runtime/tools/agent-policy.json and its CJS reader. Diagnostics
+  never authorize tools, broaden operator scope or certify execution/completion.
+- Preserve legacy error/status/retry evidence; classify only exact registered codes.
+  Never infer an authorization refusal from unavailable tooling or customer text.
+- Reuse approval only within its task/owner/target/action. Unknown effects always
+  require observation of the same job, never mutation replay or identity switching.
+- Hot guidance updates must preserve all unrelated operator rules, enforce the
+  actual byte budget, CAS/backup/readback and record loaded-vs-staged code honestly.

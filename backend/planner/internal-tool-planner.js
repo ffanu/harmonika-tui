@@ -11,6 +11,7 @@ const decisionRecovery=require('./decision-recovery.cjs');
 const longDecision=require('./long-decision.cjs');
 const agentController=require('./agent-controller.cjs');
 const translationMode=require('./translation-mode.cjs');
+const policyErrors=require('./policy-errors.cjs');
 let active=0;
 
 function sanitizeIdentity(text){
@@ -150,6 +151,6 @@ async function handle(req,res,data){
   }
   if(message.tool_calls)send({tool_calls:message.tool_calls.map((c,index)=>({index,...c}))},null);
   send({},reason);res.end('data: [DONE]\n\n');
- }catch(e){const code=e.message,proofInvalid=code==='tool_proof_contract_invalid';console.warn(JSON.stringify({event:'internal_tool_decision',status:'error',code,duration_ms:Date.now()-began}));emit(code==='tool_scope_denied'?403:proofInvalid||code==='translation_invalid_request'?400:code==='tool_input_too_large'?413:code==='tool_secret_reference_required'||code==='invalid_tool_history'?400:code==='tool_engine_busy'?429:503,{error:{code:proofInvalid?'invalid_tool_history':code==='tool_input_too_large'?'context_length_exceeded':code,message:code==='tool_scope_denied'?'The requested tool is outside the operator-authorized task scope.':proofInvalid?'Operator task proof is invalid or expired; refresh its signed contract before continuing.':code==='tool_input_too_large'?'Conversation exceeds the supported context capacity.':code==='tool_secret_reference_required'?'Use a configured private credential reference; raw secrets and secret-file reads are not allowed.':code==='invalid_tool_history'?'Tool history is incomplete; recover original tool results before continuing.':'Tool decision engine unavailable or returned invalid output.',type:code==='tool_scope_denied'?'permission_error':code==='tool_input_too_large'?'invalid_request_error':'server_error'}});}
+ }catch(e){const failure=policyErrors.response(e&&e.message);console.warn(JSON.stringify({event:'internal_tool_decision',status:'error',code:failure.code,duration_ms:Date.now()-began}));emit(failure.status,failure.body);}
 }
 module.exports={handle,validateDecision};

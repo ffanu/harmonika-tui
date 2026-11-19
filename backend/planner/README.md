@@ -291,3 +291,11 @@ Aktivasi memakai hash baseline aktual, backup dan idle guard. 161 tes lokal,
 coaching dan fixture; tidak membuktikan training bobot model, physical IME,
 failover antarhost atau produksi ERP. BGP/core/VyOS JKT tidak menjadi target.
 [Bukti, kegagalan awal dan koreksi](../../docs/LEVEL12-AGENT-EXAM-20261115.json).
+
+## Kejelasan batas kerja agent
+
+`agent-policy.cjs` memakai kontrak canonical runtime. `policy-errors.cjs` memberi
+alasan terstruktur tanpa mengubah firewall, scope operator atau pembuktian hasil.
+Kode rahasia/reference, unavailable dan scope tidak disamakan. Unknown effects
+tetap menghalangi replay mutasi. `policy-workflow.cjs` menjaga footer hot-read
+dalam batas 12.000 byte. Detail: [kebijakan bersama](../../docs/AGENT-POLICY.md).

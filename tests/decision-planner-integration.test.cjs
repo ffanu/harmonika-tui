@@ -43,6 +43,7 @@ async function run(outputs, options = {}) {
       const recovery=require('../backend/planner/decision-recovery.cjs');
       return options.deadlineProbe?{...recovery,chooseDecision:(plan,data,log)=>recovery.chooseDecision(plan,data,log,async ms=>{clock+=ms;},{now:()=>clock})}:recovery;
     }
+    if (name === './policy-errors.cjs') return require('../backend/planner/policy-errors.cjs');
     if (name === './translation-mode.cjs') return require('../backend/planner/translation-mode.cjs');
     if (name === './secret-firewall.cjs') return require('../backend/planner/secret-firewall.cjs');
     if (name === './agent-controller.cjs') {
@@ -60,10 +61,10 @@ async function run(outputs, options = {}) {
   const res = {writeHead(status){response.status=status;},write(text){response.chunks.push(text);},end(text){if(text)response.chunks.push(text);}};
   const data = {messages:[{role:'user',content:'Synthetic fixture: check a private reference without exposing secrets.'}], tools,parallel_tool_calls:false,stream:false,...options};
   if(options.scopeAdmissionProbe){
-    const statuses=[];
-    for(let i=0;i<12;i++){await module.exports.handle(req,res,data);statuses.push(response.status);}
+    const statuses=[];let denied=null;
+    for(let i=0;i<12;i++){await module.exports.handle(req,res,data);statuses.push(response.status);if(i===0)denied=JSON.parse(response.chunks.join(''));}
     options.rejectScope=false;response.chunks=[];await module.exports.handle(req,res,data);
-    return {statuses,status:response.status,spawns};
+    return {statuses,status:response.status,spawns,denied};
   }
   if(options.admissionProbe){
     async function invoke(){let status,body='';await module.exports.handle(req,{writeHead(s){status=s;},write(s){body+=s;},end(s){if(s)body+=s;}},data);return {status,json:JSON.parse(body)};}
@@ -238,4 +239,11 @@ test('translation cannot declare executable client tools', {skip:!candidate},asy
   const out=await run([],{...translationInput,tools});
   assert.equal(out.status,400);assert.equal(out.spawns,0);
   assert.equal(out.json.error.code,'translation_invalid_request');
+});
+
+test('real firewall and scope failures carry precise shared diagnostics without widening authorization', {skip:!candidate},async()=>{
+ const secret=await run([{content:'',tool_calls:[call('cat /etc/shadow')]}]);
+ assert.equal(secret.status,400);assert.equal(secret.json.error.code,'tool_secret_reference_required');assert.equal(secret.json.diagnostic.category,'credential_missing');assert.equal(secret.json.diagnostic.grants_permission,false);assert.equal(secret.spawns,1);
+ const scope=await run([{content:'A normal answer.',tool_calls:[]}],{scopeAdmissionProbe:true,rejectScope:true});
+ assert.deepEqual(scope.statuses,Array(12).fill(403));assert.equal(scope.spawns,1);assert.equal(scope.denied.diagnostic.category,'scope_denied');assert.equal(scope.denied.diagnostic.grants_permission,false);
 });

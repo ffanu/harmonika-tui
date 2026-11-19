@@ -5,6 +5,7 @@ const debugWorkflow=require('./debug-workflow.cjs');
 const jobLifecycle=require('./job-lifecycle.cjs');
 const proofContract=require('./proof-contract.cjs');
 const continuity=require('./task-continuity.cjs');
+const agentPolicy=require('./agent-policy.cjs');
 const PHASES=['answer','discover','execute','verify','complete','waiting','blocked'];
 const preparedRequests=new WeakMap();
 const hash=x=>createHash('sha256').update(x).digest('hex');
@@ -227,6 +228,6 @@ Completion evidence selection: failed baselines, lost acknowledgements and pendi
 Receipt evidence map (mechanics only): ${JSON.stringify(evidenceMap(data))}
 Operator proof checks (when registered): ${proof?JSON.stringify({verified:proof.verified,missing:proof.missing}):'none; legacy client-reported history only'}.
 Observed mechanics only: completed_tool_results=${state.results.length}; unchanged_result_streak=${state.repeats}; max_empty_check_repeats=${Math.max(0,...state.emptyChecks.values())}; max_empty_check_total=${Math.max(0,...state.emptyTotals.values())}; last_result_empty=${!!state.last?.empty}. These counts do not prove task completion.
-`+debugWorkflow.instructions()+jobLifecycle.instructions()+continuity.instructions(state);
+`+agentPolicy.instructions()+debugWorkflow.instructions()+jobLifecycle.instructions()+continuity.instructions(state);
 }
 module.exports={bindPrepared,unsupportedClaim,observe,extendSchema,check,instructions,signature,evidenceMap,requestMode};

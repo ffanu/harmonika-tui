@@ -26,6 +26,13 @@ Coding, dokumen, analisis media, dan pengujian browser dalam alur kerja terminal
 
 ---
 
+## Kejelasan izin agent
+
+Harmonika membedakan izin yang belum diberikan, referensi kredensial privat,
+tool yang tidak tersedia, dan scope yang ditolak. Agent melanjutkan pekerjaan
+aman dalam tugas yang diizinkan; restart/deploy produksi tetap mengikuti izin
+target dan tindakan. [Kebijakan bersama backend/TUI](docs/AGENT-POLICY.md).
+
 ## Tools operasi backend
 
 `harmonika ops catalog` menampilkan tools diagnosis, selftest, scanner Semgrep/Trivy,
