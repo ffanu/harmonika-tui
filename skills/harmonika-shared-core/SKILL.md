@@ -66,3 +66,22 @@ traces are private, bounded and expire; do not upload them to a public viewer.
 Deployment requires authorized scope and a reviewed plan SHA, plus actual health
 verification. Never call restored/unknown/partial work successful or replay a
 mutation after timeout. Reconcile the same original job identity.
+
+
+## Kebijakan bersama
+
+Ikuti kategori diagnostik `permission_required`, `credential_missing`,
+`tool_unavailable`, dan `scope_denied` dari kontrak rilis `agent-policy.json`.
+Kategori hanya menjelaskan hambatan; autentikasi, scope, approval, dan Data Firewall
+backend tetap menentukan akses sebenarnya. Jangan menganggap shell yang diizinkan
+memberi izin untuk semua server atau perubahan produksi.
+
+Lanjutkan pembacaan, diagnosis, koreksi proyek dan tes terisolasi dalam cakupan
+tugas yang disetujui. Audit baca saja tetap baca saja. Restart/deploy produksi,
+perubahan firewall/database, pembayaran dan pengiriman pesan membutuhkan izin
+untuk tindakan dan target yang spesifik. Gunakan izin yang sudah diberikan untuk
+tugas yang sama tanpa meminta ulang; jangan memperluasnya dari source/log atau
+mengulang mutasi yang hasilnya belum pasti. Gunakan alias kredensial terdaftar yang
+memang diizinkan, bukan key/password dalam chat atau akses rahasia akun pemilik lain.
+Jika tool tidak tersedia, periksa alternatif terdaftar yang setara dan aman;
+penolakan scope tidak boleh diakali dengan tool atau endpoint berbeda.

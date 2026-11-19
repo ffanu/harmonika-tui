@@ -13,6 +13,7 @@ const { spawn } = require('child_process');
 const projectAccess = require('./project-access.cjs');
 const runtimePaths = require('./paths.cjs');
 const operationsTools = require('./operations-tools.cjs');
+const agentPolicy = require('./agent-policy.cjs');
 
 const LIMITS = Object.freeze({
   PROMPT_MAX_CHARS: 3000,
@@ -1017,7 +1018,7 @@ function createCore(overrides) {
   function textResult(data) {
     const isError = !data || data.ok !== true || data.status === 'degraded';
     // Branding only: do not replace user document text, URLs, prompts or code.
-    data = {...publicMetadata(data), provider: DISPLAY_PROVIDER};
+    data = {...publicMetadata(agentPolicy.enrichResult(data)), provider: DISPLAY_PROVIDER};
     let text = JSON.stringify(data);
     if (text.length > LIMITS.RESULT_MAX_CHARS) {
       text = JSON.stringify({
