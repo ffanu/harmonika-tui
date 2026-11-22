@@ -95,6 +95,12 @@ keys in URL queries or frontend source. Native MCP exposes `translate_text`,
 `detect_language`, `translate_batch`, and `translation_languages`; API clients may
 also use imperative text such as `Terjemahkan ke bahasa Jawa: Selamat pagi` via
 normal OpenAI-compatible chat/SSE. The worker remains loopback-only.
+Explicit member-web text translation routes to this worker even when the chat
+is in Google mode. It omits unrelated roadmap enrichment and preserves literal
+names in trusted worker responses. Owner-scoped `translation_message_receipts`
+records only message ID, user ID and timestamp so normal chat history can retain
+those translations faithfully after reload; it does not copy the message text.
+Only a saved assistant message with a verified core response may receive a receipt.
 
 The current 197-entry catalog includes 14 Indonesian regional language options:
 Acehnese, Balinese, Batak Toba/Simalungun/Karo, Betawi, Banjar, Buginese, Gorontalo,

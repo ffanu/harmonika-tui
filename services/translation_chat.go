@@ -112,6 +112,7 @@ func serveTranslationChat(gateway *translationWorkerGateway, w http.ResponseWrit
 	if !ok {
 		return false
 	}
+	translationNoCapture(r)
 	if tok.ID <= 0 {
 		translationChatFailure(w, http.StatusUnauthorized, "unauthorized")
 		return true

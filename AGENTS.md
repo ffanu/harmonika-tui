@@ -539,3 +539,19 @@
   require observation of the same job, never mutation replay or identity switching.
 - Hot guidance updates must preserve all unrelated operator rules, enforce the
   actual byte budget, CAS/backup/readback and record loaded-vs-staged code honestly.
+
+## Gateway dan bot lisensi Telegram (17 November 2026)
+- Layanan kanonis aktif/boot adalah `harmonika-web-chat.service` pada port3210.
+  `harmonika-web-chat-live.service` adalah unit duplikat lama yang dinonaktifkan;
+  jangan menghidupkan keduanya atau mengganti unit berdasarkan nama saja.
+- Kredensial bot dibaca melalui drop-in `telegram.conf` dan EnvironmentFile
+  privat `/etc/harmonika-ai/telegram-bot.env` (0600). Pertahankan ketiga variabel
+  PUBLIC_AI_TELEGRAM_BOT_TOKEN, PUBLIC_AI_TELEGRAM_WEBHOOK_SECRET, dan
+  PUBLIC_AI_TELEGRAM_CHAT_ID tanpa mencetak nilai atau menyalinnya ke repository.
+- Sebelum mengganti unit layanan, bandingkan konfigurasi efektif dan drop-in
+  seluruh fitur secara privat. Sukses `/healthz` tidak membuktikan webhook siap.
+  Webhook tanpa secret harus401; 503 berarti konfigurasi belum dimuat.
+- Uji callback/key dengan HTTP Telegram dan DB sintetis terisolasi. Jangan kirim
+  pesan percobaan atau menerbitkan key nyata ke grup pelanggan tanpa instruksi.
+  Tes regresi: `services/telegram_bot_recovery_test.go`; repair hanya konfigurasi,
+  bukan rotasi token, perubahan scopes, atau pelemahan pembatasan grup/device.

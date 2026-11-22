@@ -371,8 +371,8 @@ def main(package=None):
                     tmp_pkg.unlink(missing_ok=True)
                     if tmp_bin is not None:
                         tmp_bin.unlink(missing_ok=True)
-        except Exception:
-            raise ValueError('runtime_update_failed') from None
+        except Exception as e:
+            raise ValueError('runtime_update_failed:'+str(e)[:180]) from None
         agent_features.setup(ROOT)
         ensure_default_config(ROOT)
         print(json.dumps(m.doctor(),indent=2))

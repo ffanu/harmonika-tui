@@ -222,8 +222,10 @@ def preflight(directory,manifest):
     result=subprocess.run([str(bpath),'--version'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=10)
     # Binary TUI boleh berasal dari lini mana pun (engine Harmonika berbasis opencode
     # v1.0.x maupun rilis lama v0.98.1): cukup pastikan itu binary Harmonika dan
-    # melaporkan versi semantik yang valid.
-    if result.returncode or 'harmonika' not in result.stdout.lower() or not re.search(r'v\d+\.\d+\.\d+',result.stdout):
+    # melaporkan versi semantik yang valid. Beberapa build v1.0.x selalu memancarkan
+    # kode warna ANSI walau stdout bukan TTY — buang dulu agar regex tetap cocok.
+    version_out=re.sub(r'\x1b\[[0-9;]*[A-Za-z]','',result.stdout or '')
+    if result.returncode or 'harmonika' not in version_out.lower() or not re.search(r'v\d+\.\d+\.\d+',version_out):
         raise ValueError('binary_preflight_failed')
     for name in manifest['files']:
         if name.endswith(('.cjs','.js','.mjs')):

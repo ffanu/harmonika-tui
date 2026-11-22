@@ -245,7 +245,7 @@ function translationInput(a, detect=false) {
       if(!a.glossary||typeof a.glossary!=="object"||Array.isArray(a.glossary))throw Error("invalid_argument_type:glossary");
       const entries=Object.entries(a.glossary);
       if(entries.length>64)throw Error("argument_too_many_items:glossary");
-      for(const [k,v] of entries)if(!k||k.length>128||typeof v!=="string"||!v||v.length>128||["__proto__","constructor","prototype"].includes(k))throw Error("invalid_argument_format:glossary");
+      for(const [k,v] of entries)if(!k||k.length>160||typeof v!=="string"||!v||v.length>160||["__proto__","constructor","prototype"].includes(k))throw Error("invalid_argument_format:glossary");
     }
   }
   return a;
